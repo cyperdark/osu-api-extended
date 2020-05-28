@@ -1,6 +1,6 @@
-const fs = require("fs");
-const path = require("path");
 const axios = require("axios");
+const path = require("path");
+const fs = require("fs");
 
 let codes = {
   1: 'NF',
@@ -38,7 +38,6 @@ let codes = {
 
 function mods(m) {
   const enabled = [];
-
   let values = Object.keys(codes).map(a => Number(a));
   for (let i = values.length - 1; i >= 0; i--) {
     if (m >= values[i]) {
@@ -47,52 +46,19 @@ function mods(m) {
     };
   };
   let modsText = "";
-  enabled.forEach((mod, ind) => modsText += mod);
-  switch (modsText) {
-    case "FLHD": modsText = "HDFL"; break;
-    case "DTHDEZ": modsText = "EZHDDT"; break;
-    case "DTEZ": modsText = "EZDT"; break;
-    case "DTHD": modsText = "HDDT"; break;
-    case "HDTD": modsText = "TDHD"; break;
-    case "NCHD": modsText = "HDNC"; break;
-    case "NCHRHD": modsText = "HDNCHR"; break;
-    case "SDHRHDTD": modsText = "TDHDHRSD"; break;
-    case "HRHDTD": modsText = "TDHDHR"; break;
-    case "HRHD": modsText = "HDHR"; break;
-    case "DTHRHD": modsText = "HDDTHR"; break;
-    case "FLHRHD": modsText = "HDHRFL"; break;
-    case "DTHRHDNF": modsText = "NFHDDTHR"; break;
-    case "DTHDTD": modsText = "TDHDDT"; break;
-    case "SDHRHD": modsText = "HDHRSD"; break;
-    case "SDHD": modsText = "HDSD"; break;
-    case "PFHD": modsText = "HDPF"; break;
-    case "FLDTTD": modsText = "TDDTFL"; break;
-    case "FLNCHRHD": modsText = "HDNCHRFL"; break;
-    case "FLDTHR": modsText = "DTHRFL"; break;
-    case "FLTD": modsText = "TDFL"; break;
-    case "FLDTHRHD": modsText = "HDDTHRFL"; break;
-    case "FLNCHR": modsText = "NCHRFL"; break;
-    case "PFDTHD": modsText = "HDDTPF"; break;
-    case "FLEZ": modsText = "EZFL"; break;
-    case "FLDTHDEZ": modsText = "EZHDDTFL"; break;
-    case "FLDTHD": modsText = "HDDTFL"; break;
-    case "FLNC": modsText = "NCFL"; break;
-    case "FLNCHD": modsText = "NCHDFL"; break;
-    case "TDEZ": modsText = "EZTD"; break;
-    case "HDNF": modsText = "NFHD"; break;
-    case "NCHDTD": modsText = "TDHDNC"; break;
-
-    default: modsText;
-      enw(m, modsText);
-      break;
+  enabled.forEach((mod) => modsText += mod);
+  let Mods = JSON.parse(fs.readFileSync(path.join(__dirname, 'mods.json'), "utf-8"));
+  let convert = Mods.find(m => m.bad == modsText);
+  if (convert) return convert.good;
+  else {
+    (enabled.length > 1) ? notFound(m, modsText) : '';
+    return (m == 0) ? 'NoMod' : modsText;
   };
-  return modsText;
 };
 
-async function enw(id, txt) {
+async function notFound(id, txt) {
   try {
-    let axi = await axios.get(`https://new-mods-osu.glitch.me/add?id=${id}&txt=${txt}`);
-    console.log(axi.data.status);
+    await axios.get(`https://new-mods-osu.glitch.me/add?id=${id}&txt=${txt}`);
   } catch (err) { console.log("m/enw", err); };
 };
 
