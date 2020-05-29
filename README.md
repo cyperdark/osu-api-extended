@@ -73,6 +73,12 @@ osu.pp_calc({
 ## Calc funcs
 ```
 osu.accuracy(hit300, hit100, hit50, Miss, Geki, Katu, GameMode).then(data => console.log(data));
+
+osu.mods(id or name).then(data => console.log(data));
+
+Example:
+osu.mods(72).then(data => console.log(data)); // return HDDT
+osu.mods("HDDT").then(data => console.log(data)); // return 72
 ```
 
 ## Not Supported

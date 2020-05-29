@@ -1,5 +1,5 @@
 const axios = require("axios");
-const Mods = require("./src/mods");
+const mods = require("./src/mods");
 const Country = require("./src/country");
 
 class Api {
@@ -289,7 +289,7 @@ class Api {
               },
               mods: {
                 id: parseInt(d.enabled_mods),
-                name: Mods(d.enabled_mods)
+                name: await this.mods(d.enabled_mods)
               },
               accuracy: await this.accuracy(d.count300, d.count100, d.count50, d.countmiss, d.countgeki, d.countkatu, (obj.m) ? obj.m : 0),
               pp: d.pp,
@@ -333,7 +333,7 @@ class Api {
               },
               mods: {
                 id: parseInt(d.enabled_mods),
-                name: Mods(d.enabled_mods)
+                name: await this.mods(d.enabled_mods)
               },
               accuracy: await this.accuracy(d.count300, d.count100, d.count50, d.countmiss, d.countgeki, d.countkatu, (obj.m) ? obj.m : 0),
               pp: d.pp,
@@ -376,7 +376,7 @@ class Api {
               },
               mods: {
                 id: parseInt(d.enabled_mods),
-                name: Mods(d.enabled_mods)
+                name: await this.mods(d.enabled_mods)
               },
             });
           };
@@ -399,6 +399,15 @@ class Api {
       } catch (err) { console.log(`\n\nosu-api-ex | accuracy`, err, '\n\n') };
     });
   };
+
+  async mods(m) {
+    return new Promise(async ex => {
+      try {
+        if(isNaN(m)) ex(mods.name(m));
+        else ex(mods.id(parseInt(m)));
+      } catch (err) { console.log(`\n\nosu-api-ex | mods`, err, '\n\n') };
+    });
+  }; 
 
   async pp_calc(obj) {
     return new Promise(async ex => {
