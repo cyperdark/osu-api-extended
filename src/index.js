@@ -1,6 +1,6 @@
 const axios = require("axios");
-const mods = require("./mods");
-const Country = require("./country");
+const mods = require("./mods.js");
+const Country = require("./country.js");
 
 class Api {
   constructor() {
@@ -403,11 +403,11 @@ class Api {
   async mods(m) {
     return new Promise(async ex => {
       try {
-        if(isNaN(m)) ex(mods.name(m));
+        if (isNaN(m)) ex(mods.name(m));
         else ex(mods.id(parseInt(m)));
       } catch (err) { console.log(`\n\nosu-api-ex | mods`, err, '\n\n') };
     });
-  }; 
+  };
 
   async pp_calc(obj) {
     return new Promise(async ex => {

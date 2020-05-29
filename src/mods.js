@@ -21,7 +21,7 @@ module.exports = {
     };
     let modsText = "";
     enabled.forEach((mod) => modsText += mod);
-    let Mods = JSON.parse(fs.readFileSync(path.join(__dirname, 'mods.json'), "utf-8"));
+    let Mods = JSON.parse(fs.readFileSync(path.join(__dirname, 'mod.json'), "utf-8"));
     let convert = Mods.find(m => m.bad == modsText);
     if (convert) return convert.good;
     else {
