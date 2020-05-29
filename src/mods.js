@@ -34,7 +34,7 @@ module.exports = {
     let num = 0;
     let values = Object.keys(names).map(a => a);
     for (let i = 0; i < name.length; i++) {
-      let find = values.filter(v => v == name[i]);
+      let find = values.filter(v => v.toLowerCase() == name[i].toLowerCase());
       num += parseInt(names[find]);
     };
     return num;
