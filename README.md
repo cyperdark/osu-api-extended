@@ -72,7 +72,7 @@ osu.pp_calc({
 
 ## Calc funcs
 ```
-osu.accuracy(400, 20, 1, 2, 0, 0, 0).then(data => console.log(data));
+osu.accuracy(hit300, hit100, hit50, Miss, Geki, Katu, GameMode).then(data => console.log(data));
 ```
 
 ## Not Supported
