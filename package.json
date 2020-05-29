@@ -1,12 +1,9 @@
 {
   "name": "osu-api-extended",
   "version": "0.0.2-alpha",
+  "description": "",
   "main": "index.js",
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cyperdark/osu-api-extended.git"
-  },
+  "scripts": {},
   "keywords": [
     "osu",
     "osu-api",
@@ -14,11 +11,14 @@
   ],
   "author": "cyperdark",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyperdark/osu-api-extended.git"
+  },
   "bugs": {
     "url": "https://github.com/cyperdark/osu-api-extended/issues"
   },
   "homepage": "https://github.com/cyperdark/osu-api-extended#readme",
-  "description": "",
   "dependencies": {
     "axios": "^0.19.2"
   }
