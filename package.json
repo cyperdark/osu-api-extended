@@ -1,6 +1,6 @@
 {
   "name": "osu-api-extended",
-  "version": "0.0.2",
+  "version": "0.0.2-alpha",
   "main": "index.js",
   "devDependencies": {},
   "repository": {
