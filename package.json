@@ -1,13 +1,15 @@
 {
   "name": "osu-api-extended",
-  "version": "0.0.25",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Package for advanced work with 'osu' api",
   "main": "index.js",
   "scripts": {},
   "keywords": [
     "osu",
     "osu-api",
-    "extended"
+    "extended",
+    "node",
+    "js"
   ],
   "author": "cyperdark",
   "license": "MIT",

@@ -1,6 +1,10 @@
+![npm](https://img.shields.io/npm/v/osu-api-extended?style=for-the-badge)
+![npm bundle size](https://img.shields.io/bundlephobia/min/osu-api-extended?color=green&label=size&style=for-the-badge)
+![npm](https://img.shields.io/npm/dw/osu-api-extended?style=for-the-badge)
+![NPM](https://img.shields.io/npm/l/osu-api-extended?style=for-the-badge)
 # osu-api-extended
 
-osu api
+Package for advanced work with "osu" api
 
 ## Installation
 
