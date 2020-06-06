@@ -10,7 +10,7 @@ npm package:
 ## Usage
 ```
 const osuApi = require('osu-api-extended'), osu = new osuApi();
-osu.key = "a220d93669497e124f73324a8a32a1018ddf32f2";
+osu.key = "key here";
 
 // USE:
 
