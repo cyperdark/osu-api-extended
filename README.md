@@ -1,6 +1,6 @@
-![npm](https://img.shields.io/npm/v/osu-api-extended?style=for-the-badge)
-![npm bundle size](https://img.shields.io/bundlephobia/min/osu-api-extended?color=green&label=size&style=for-the-badge)
-![npm](https://img.shields.io/npm/dw/osu-api-extended?style=for-the-badge)
+[![npm](https://img.shields.io/npm/v/osu-api-extended?style=for-the-badge)](https://www.npmjs.org/package/osu-api-extended)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/osu-api-extended?color=green&label=size&style=for-the-badge)](https://www.npmjs.org/package/osu-api-extended)
+[![npm](https://img.shields.io/npm/dw/osu-api-extended?style=for-the-badge)](http://npm-stat.com/charts.html?package=osu-api-extended)
 ![NPM](https://img.shields.io/npm/l/osu-api-extended?style=for-the-badge)
 # osu-api-extended
 

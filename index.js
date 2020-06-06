@@ -184,7 +184,7 @@ class Api {
             });
           };
           ex(info);
-        } else ex(`api return 0 nothing`);
+        } else ex({});
       } catch (err) { console.log(`\n\nosu-api-ex | beatmap => ${JSON.stringify(obj)}`, err, '\n\n') };
     });
   };
@@ -251,7 +251,7 @@ class Api {
             events
           };
           ex(info);
-        } else ex(`api return 0 nothing`);
+        } else ex({});
       } catch (err) { console.log(`\n\nosu-api-ex | user => ${JSON.stringify(obj)}`, err, '\n\n') };
     });
   };
@@ -297,7 +297,7 @@ class Api {
             });
           };
           ex(info);
-        } else ex(`api return nothing`);
+        } else ex({});
       } catch (err) { console.log(`\n\nosu-api-ex | scores => ${JSON.stringify(obj)}`, err, '\n\n') };
     });
   };
@@ -341,7 +341,7 @@ class Api {
             });
           };
           ex(info);
-        } else ex(`api return 0 nothing`);
+        } else ex({});
       } catch (err) { console.log(`\n\nosu-api-ex | best => ${JSON.stringify(obj)}`, err, '\n\n') };
     });
   };
@@ -381,7 +381,7 @@ class Api {
             });
           };
           ex(info.reverse());
-        } else ex(`api return 0 nothing`);
+        } else ex({});
       } catch (err) { console.log(`\n\nosu-api-ex | recent => ${JSON.stringify(obj)}`, err, '\n\n') };
     });
   };
