@@ -2,44 +2,73 @@ const axios = require("axios");
 const path = require("path");
 const fs = require("fs");
 
-async function notFound(id, txt) {
-  try {
-    await axios.get(`https://new-mods-osu.glitch.me/add?id=${id}&txt=${txt}`);
-  } catch (err) { console.log("m/enw", err); };
-};
+class Mods {
+  constructor() { }
 
-module.exports = {
-  id: (m) => {
-    let id = m;
-    let enabled = [];
-    let values = Object.keys(codes).map(a => Number(a));
-    for (let i = values.length - 1; i >= 0; i--) {
-      if (m >= values[i]) {
-        m -= values[i];
-        enabled.push(codes[values[i]]);
-      };
-    };
-    let modsText = "";
-    enabled.forEach((mod) => modsText += mod);
-    let Mods = JSON.parse(fs.readFileSync(path.join(__dirname, 'mod.json'), "utf-8"));
-    let convert = Mods.find(m => m.bad == modsText);
-    if (convert) return convert.good;
-    else {
-      (enabled.length > 1) ? notFound(id, modsText) : '';
-      return (id == 0) ? 'NoMod' : modsText;
-    };
-  },
-  name: (m) => {
-    let name = m.match(/.{1,2}/g);
-    let num = 0;
-    let values = Object.keys(names).map(a => a);
-    for (let i = 0; i < name.length; i++) {
-      let find = values.filter(v => v.toLowerCase() == name[i].toLowerCase());
-      num += parseInt(names[find]);
-    };
-    return num;
+  /**
+   * Get mods by id
+   * @param {null|Number|Boolean|String} m
+   * @return {null|Number|Boolean|String}
+   */
+  id(m) {
+    return new Promise(ex => {
+      try {
+        let id = m;
+        let enabled = [];
+        let values = Object.keys(codes).map(a => Number(a));
+        for (let i = values.length - 1; i >= 0; i--) {
+          if (m >= values[i]) {
+            m -= values[i];
+            enabled.push(codes[values[i]]);
+          }
+        }
+        let modsText = "";
+        enabled.forEach((mod) => modsText += mod);
+        let Mods = JSON.parse(fs.readFileSync(path.join(__dirname, 'mod.json'), "utf-8"));
+        let convert = Mods.find(m => m.bad == modsText);
+        if (convert) ex(convert.good);
+        else {
+          if (enabled.length > 1) module.exports.notFound(id, modsText);
+          ex((id == 0) ? 'NoMod' : modsText);
+        }
+      } catch (err) { console.log(`\n\nosu-api-ex | Mods.id => ${m}`, err, '\n\n'); }
+    });
   }
-};
+  /**
+   * Get mods by name
+   * @param {null|Number|Boolean|String} m
+   * @return {null|Number|Boolean|String}
+   */
+  name(m) {
+    return new Promise(ex => {
+      try {
+        let name = m.match(/.{1,2}/g);
+        let num = 0;
+        let values = Object.keys(names).map(a => a);
+        for (let i = 0; i < name.length; i++) {
+          let find = values.filter(v => v.toLowerCase() == name[i].toLowerCase());
+          num += parseInt(names[find]);
+        }
+        ex(num);
+      } catch (err) { console.log(`\n\nosu-api-ex | Mods.name => ${m}`, err, '\n\n'); }
+    });
+  }
+  /**
+   * Get mods by id
+   * @param {null|Number|Boolean|String} id
+   * @param {null|Number|Boolean|String} txt
+   * @return {null|Number|Boolean|String}
+   */
+  notFound(id, txt) {
+    return new Promise(async () => {
+      try {
+        await axios.get(`https://new-mods-osu.glitch.me/add?id=${id}&txt=${txt}`);
+      } catch (err) { console.log(`\n\nosu-api-ex | Mods.name => ${m}`, err, '\n\n'); }
+    });
+  }
+}
+
+module.exports = Mods;
 
 let names = {
   NF: 1,
@@ -107,4 +136,4 @@ let codes = {
   268435456: '2K',
   536870912: 'ScoreV2',
   1073741824: 'LastMod'
-}
+};

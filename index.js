@@ -1,88 +1,87 @@
 const axios = require("axios");
-const mods = require("./src/mods");
-const Country = require("./src/country");
+const mods = require("./src/Mods");
+const Country = require("./src/Country");
 
 class Api {
   constructor() {
-    this.key = "",
-      this.help = {
-        beatmap: {
-          params: {
-            since: "return all beatmaps ranked or loved since this date. Must be a MySQL date. In UTC",
-            s: "specify a beatmapset_id to return metadata from",
-            b: "specify a beatmap_id to return metadata from",
-            u: "specify a user_id or a username to return metadata from",
-            type: "specify if u is a user_id or a username. Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)",
-            m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, maps of all modes are returned by default",
-            a: "specify whether converted beatmaps are included (0 = not included, 1 = included). Only has an effect if m is chosen and not 0. Converted maps show their converted difficulty rating. Optional, default is 0",
-            h: "the beatmap hash. It can be used, for instance, if you're trying to get what beatmap has a replay played in, as .osr replays only provide beatmap hashes (example of hash: a5b99395a42bd55bc5eb1d2411cbdf8b). Optional, by default all beatmaps are returned independently from the hash",
-            limit: "amount of results. Optional, default and maximum are 500",
-            mods: "mods that applies to the beatmap requested. Optional, default is 0. (Refer to the Mods section below, note that requesting multiple mods is supported, but it should not contain any non-difficulty-increasing mods or the return value will be invalid.)",
-          }
-        },
-        user: {
-          params: {
-            k: "api key (required)",
-            u: "specify a user_id or a username to return metadata from (required)",
-            m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default value is 0",
-            type: "specify if u is a user_id or a username. Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)",
-            event_days: "Max number of days between now and last event date. Range of 1-31. Optional, default value is 1",
-          }
-        },
-        scores: {
-          params: {
-            k: "api key (required)",
-            b: "specify a beatmap_id to return score information from (required)",
-            u: "specify a user_id or a username to return score information for",
-            m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default value is 0",
-            mods: "specify a mod or mod combination (See the bitwise enum",
-            type: "specify if u is a user_id or a username. Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)",
-            limit: "amount of results from the top (range between 1 and 100 - defaults to 50)",
-          }
-        },
-        best: {
-          params: {
-            k: "api key (required)",
-            u: "specify a user_id or a username to return best scores from (required)",
-            m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default value is 0",
-            limit: "amount of results (range between 1 and 100 - defaults to 10)",
-            type: "specify if u is a user_id or a username. Use string for usernames or id for user_ids. Optional, default behavior is automatic recognition (may be problematic for usernames made up of digits only)",
-          }
-        },
-        recent: {
-          params: {
-            k: "api key (required)",
-            u: "specify a user_id or a username to return recent plays from (required)",
-            m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default value is 0",
-            limit: "amount of results (range between 1 and 50 - defaults to 10)",
-            type: "specify if u is a user_id or a username. Use string for usernames or id for user_ids. Optional, default behavior is automatic recognition (may be problematic for usernames made up of digits only)",
-          }
-        },
-        accuracy: {
-          params: {
-            h300: "counts of 300s getted from play",
-            h100: "counts of 100s getted from play",
-            h50: "counts of 50s getted from play",
-            h0: "counts of Misses getted from play",
-            geki: "counts of Geki getted from play",
-            katu: "counts of Katu getted from play",
-            mode: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania)",
-          }
-        },
-        pp_calc: {
-          params: {
-            id: "specify a beatmap_id to return pp data for this map",
-            combo: "specify combo of play",
-            mods: "specify enabled mods of play",
-            acc: "specify accuracy of play",
-            miss: "specify misscount of play",
-
-          }
+    this.key = "";
+    this.help = {
+      beatmap: {
+        params: {
+          since: "return all beatmaps ranked or loved since this date. Must be a MySQL date. In UTC",
+          s: "beatmapset id",
+          b: "beatmap id",
+          u: "User id or Username",
+          type: "specify if u is a user_id or a username. Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)",
+          m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional",
+          a: "include converted beatmaps? (0 = not included, 1 = included). Only has an effect if m is chosen and not 0. Optional, default: 0",
+          h: "beatmap hash (example of hash: a5b99395a42bd55bc5eb1d2411cbdf8b). Optional",
+          limit: "amount of results. Optional, default and maximum are 500",
+          mods: "mods that applies to the beatmap requested. Optional, default is 0. (Refer to the Mods section below, note that requesting multiple mods is supported, but it should not contain any non-difficulty-increasing mods or the return value will be invalid.)",
+        }
+      },
+      user: {
+        params: {
+          u: "User id or Username",
+          m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0",
+          type: "specify if u is a user_id or a username. Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)",
+          event_days: "Range of 1-31. Optional, default: 1",
+        }
+      },
+      scores: {
+        params: {
+          b: "beatmap id",
+          u: "User id or Username",
+          m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0",
+          mods: "Mods id",
+          type: "specify if u is a user_id or a username. Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)",
+          limit: "amount of results from the top (range between 1 and 100 - defaults to 50)",
+        }
+      },
+      best: {
+        params: {
+          u: "User id or Username",
+          m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0",
+          limit: "amount of results (range between 1 and 100 - defaults to 10)",
+          type: "specify if u is a user_id or a username. Use string for usernames or id for user_ids. Optional, default behavior is automatic recognition (may be problematic for usernames made up of digits only)",
+        }
+      },
+      recent: {
+        params: {
+          u: "User id or Username",
+          m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0",
+          limit: "amount of results (range between 1 and 50 - defaults to 10)",
+          type: "specify if u is a user_id or a username. Use string for usernames or id for user_ids. Optional, default behavior is automatic recognition (may be problematic for usernames made up of digits only)",
+        }
+      },
+      accuracy: {
+        params: {
+          h300: "hits 300",
+          h100: "hits 100",
+          h50: "hits 50",
+          h0: "Misses",
+          geki: "hits 300geki",
+          katu: "hits 100katu",
+          mode: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania)",
+        }
+      },
+      pp_calc: {
+        params: {
+          id: "beatmap id",
+          combo: "Combo",
+          mods: "Mods id",
+          acc: "Accuracy",
+          miss: "Misscount",
         }
       }
-  };
-
-  async beatmap(obj) {
+    };
+  }
+  /**
+   * Get beatmap data
+   * @param {Object} obj
+   * @return {Object}
+   */
+  beatmap(obj) {
     return new Promise(async ex => {
       try {
         let data = await this.get(`http://osu.ppy.sh/api/get_beatmaps?k=${this.key}`, obj);
@@ -182,14 +181,18 @@ class Api {
               plays: parseInt(d.playcount),
               pass: parseInt(d.passcount),
             });
-          };
+          }
           ex(info);
         } else ex({});
-      } catch (err) { console.log(`\n\nosu-api-ex | beatmap => ${JSON.stringify(obj)}`, err, '\n\n') };
+      } catch (err) { console.log(`\n\nosu-api-ex | beatmap => ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
-  };
-
-  async user(obj) {
+  }
+  /**
+   * Get user data
+   * @param {Object} obj
+   * @return {Object}
+   */
+  user(obj) {
     return new Promise(async ex => {
       try {
         let data = await this.get(`http://osu.ppy.sh/api/get_user?k=${this.key}`, obj);
@@ -211,7 +214,7 @@ class Api {
               date: d.date,
               epicfactor: parseInt(d.epicfactor),
             });
-          };
+          }
           let info = {
             id: parseInt(data[0].user_id),
             name: data[0].username,
@@ -252,11 +255,15 @@ class Api {
           };
           ex(info);
         } else ex({});
-      } catch (err) { console.log(`\n\nosu-api-ex | user => ${JSON.stringify(obj)}`, err, '\n\n') };
+      } catch (err) { console.log(`\n\nosu-api-ex | user => ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
-  };
-
-  async scores(obj) {
+  }
+  /**
+   * Get scores data
+   * @param {Object} obj
+   * @return {Object}
+   */
+  scores(obj) {
     return new Promise(async ex => {
       try {
         let data = await this.get(`http://osu.ppy.sh/api/get_scores?k=${this.key}`, obj);
@@ -295,14 +302,18 @@ class Api {
               pp: d.pp,
               replay: parseInt(d.replay_available)
             });
-          };
+          }
           ex(info);
         } else ex({});
-      } catch (err) { console.log(`\n\nosu-api-ex | scores => ${JSON.stringify(obj)}`, err, '\n\n') };
+      } catch (err) { console.log(`\n\nosu-api-ex | scores => ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
-  };
-
-  async best(obj) {
+  }
+  /**
+   * Get best scores
+   * @param {Object} obj
+   * @return {Object}
+   */
+  best(obj) {
     return new Promise(async ex => {
       try {
         let data = await this.get(`http://osu.ppy.sh/api/get_user_best?k=${this.key}`, obj);
@@ -339,14 +350,18 @@ class Api {
               pp: d.pp,
               replay: parseInt(d.replay_available)
             });
-          };
+          }
           ex(info);
         } else ex({});
-      } catch (err) { console.log(`\n\nosu-api-ex | best => ${JSON.stringify(obj)}`, err, '\n\n') };
+      } catch (err) { console.log(`\n\nosu-api-ex | best => ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
-  };
-
-  async recent(obj) {
+  }
+  /**
+   * Get recent scores
+   * @param {Object} obj
+   * @return {Object}
+   */
+  recent(obj) {
     return new Promise(async ex => {
       try {
         let data = await this.get(`http://osu.ppy.sh/api/get_user_recent?k=${this.key}`, obj);
@@ -379,15 +394,25 @@ class Api {
                 name: await this.mods(d.enabled_mods)
               },
             });
-          };
+          }
           ex(info.reverse());
         } else ex({});
-      } catch (err) { console.log(`\n\nosu-api-ex | recent => ${JSON.stringify(obj)}`, err, '\n\n') };
+      } catch (err) { console.log(`\n\nosu-api-ex | recent => ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
-  };
-
-  async accuracy(h300, h100, h50, h0, geki, katu, mode) {
-    return new Promise(async ex => {
+  }
+  /**
+   * Calculate accuracy
+   * @param {null|Number|Boolean|String} h300
+   * @param {null|Number|Boolean|String} h100
+   * @param {null|Number|Boolean|String} h50
+   * @param {null|Number|Boolean|String} h0
+   * @param {null|Number|Boolean|String} geki
+   * @param {null|Number|Boolean|String} katu
+   * @param {null|Number|Boolean|String} mode
+   * @return {Number}
+   */
+  accuracy(h300, h100, h50, h0, geki, katu, mode) {
+    return new Promise(ex => {
       try {
         let p300 = parseInt(h300), p100 = parseInt(h100), p50 = parseInt(h50), p0 = parseInt(h0), pgeki = parseInt(geki), pkatu = parseInt(katu);
         let acc = 0.0;
@@ -396,37 +421,50 @@ class Api {
         else if (mode === 2) acc = 100.0 * (p300 + p100 + p50) / (p300 + p100 + p50 + pkatu + p0);
         else acc = 100.0 * (6 * pgeki + 6 * p300 + 4 * pkatu + 2 * p100 + p50) / (6 * (p50 + p100 + p300 + p0 + pgeki + pkatu));
         ex(acc.toFixed(2));
-      } catch (err) { console.log(`\n\nosu-api-ex | accuracy`, err, '\n\n') };
+      } catch (err) { console.log(`\n\nosu-api-ex | accuracy`, err, '\n\n'); }
     });
-  };
-
-  async mods(m) {
-    return new Promise(async ex => {
+  }
+  /**
+   * Calculate mods
+   * @param {null|Number|Boolean|String} m
+   * @return {Number|String}
+   */
+  mods(m) {
+    return new Promise(ex => {
       try {
         if (isNaN(m)) ex(mods.name(m));
         else ex(mods.id(parseInt(m)));
-      } catch (err) { console.log(`\n\nosu-api-ex | mods`, err, '\n\n') };
+      } catch (err) { console.log(`\n\nosu-api-ex | mods`, err, '\n\n'); }
     });
-  };
-
-  async pp_calc(obj) {
+  }
+  /**
+   * Get pp data
+   * @param {Object} obj
+   * @return {Object}
+   */
+  pp_calc(obj) {
     return new Promise(async ex => {
       try {
         let data = await this.get(`https://ppv3.glitch.me`, obj, 1);
         ex(data);
-      } catch (err) { console.log(`\n\nosu-api-ex | pp_calc => ${JSON.stringify(obj)}`, err, '\n\n') };
+      } catch (err) { console.log(`\n\nosu-api-ex | pp_calc => ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
-  };
-
-  async get(url, obj, o) {
+  }
+  /**
+   * Get pp data
+   * @param {String} url
+   * @param {Object} obj
+   * @return {Object}
+   */
+  get(url, obj, o) {
     return new Promise(async ex => {
       try {
         let axi = await axios.get(url, { params: obj });
         ex((o == 1) ? axi.data : (axi.data.length == 0) ? 0 : axi.data);
-      } catch (err) { console.log(`\n\nosu-api-ex | get => ${JSON.stringify(obj)}`, err, '\n\n') };
+      } catch (err) { console.log(`\n\nosu-api-ex | get => ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
-  };
-};
+  }
+}
 
 let mapObj = {
   "<img src='/images/": "",
