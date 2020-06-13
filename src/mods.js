@@ -8,7 +8,6 @@ class Mods {
   /**
    * Get mods by id
    * @param {null|Number|Boolean|String} m
-   * @return {null|Number|Boolean|String}
    */
   id(m) {
     return new Promise(ex => {
@@ -28,16 +27,15 @@ class Mods {
         let convert = Mods.find(m => m.bad == modsText);
         if (convert) ex(convert.good);
         else {
-          if (enabled.length > 1) module.exports.notFound(id, modsText);
+          if (enabled.length > 1) this.notFound(id, modsText);
           ex((id == 0) ? 'NoMod' : modsText);
-        }
+        };
       } catch (err) { console.log(`\n\nosu-api-ex | Mods.id => ${m}`, err, '\n\n'); }
     });
   }
   /**
    * Get mods by name
    * @param {null|Number|Boolean|String} m
-   * @return {null|Number|Boolean|String}
    */
   name(m) {
     return new Promise(ex => {
@@ -57,7 +55,6 @@ class Mods {
    * Get mods by id
    * @param {null|Number|Boolean|String} id
    * @param {null|Number|Boolean|String} txt
-   * @return {null|Number|Boolean|String}
    */
   notFound(id, txt) {
     return new Promise(async () => {

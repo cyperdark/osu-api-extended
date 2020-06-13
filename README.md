@@ -34,18 +34,6 @@ async function name() {
 // Work for every calls!
 ```
 
-## Help
-```
-osu.help.(name).then(data => console.log(data));
-```
-### Name:
-* beatmap
-* user
-* scores
-* best
-* recent
-* pp_calc
-
 ## Calls
 ```
 osu.beatmap({
@@ -72,6 +60,17 @@ osu.recent({
 osu.pp_calc({
   id: 4504101
 }).then(data => console.log(data));
+
+osu.match({
+  m: 62504057
+}).then(data => console.log(data));
+
+osu.replay({
+  b: 2097898,
+  u: WhiteCat,
+  mods: 88
+}, './replays' <= path to folder. Optional, path will look: ./replays/2097898-WhiteCat.osr
+).then(data => console.log(data));
 ```
 
 ## Calc funcs
@@ -87,5 +86,5 @@ osu.mods("HDDT").then(data => console.log(data)); // return 72
 
 ## Not Supported
 
-* /api/get_match
-* /api/get_replay
+* ~~/api/get_match~~
+* ~~/api/get_replay~~

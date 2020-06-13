@@ -1,6 +1,6 @@
 {
   "name": "osu-api-extended",
-  "version": "0.1.2",
+  "version": "0.3.0",
   "description": "Package for advanced work with 'osu' api",
   "main": "index.js",
   "scripts": {},
@@ -22,6 +22,10 @@
   },
   "homepage": "https://github.com/cyperdark/osu-api-extended#readme",
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "node-osr": "^1.2.1"
+  },
+  "publishConfig": {
+    "name": "@cyperdark/osu-api-extended"
   }
 }

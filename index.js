@@ -1,6 +1,9 @@
-const axios = require("axios");
 const Country = require("./src/Country");
 const Mods = require("./src/Mods");
+const osr = require('node-osr');
+const axios = require("axios");
+const lzma = require('lzma');
+const fs = require('fs');
 
 class Api {
   constructor() {
@@ -9,21 +12,26 @@ class Api {
 
   /**
    * Get beatmap data
-   * @param {Object} obj
-   * @description `
-    return all beatmaps ranked or loved since this date. Must be a MySQL date. In UTC"
-    --Object params--
-    s: "beatmapset id",
-    b: "beatmap id",
-    u: "User id or Username",
-    type: "specify if u is a user_id or a username. Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)",
-    m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional",
-    a: "include converted beatmaps? (0 = not included, 1 = included). Only has an effect if m is chosen and not 0. Optional, default: 0",
-    h: "beatmap hash (example of hash: a5b99395a42bd55bc5eb1d2411cbdf8b). Optional",
-    limit: "amount of results. Optional, default and maximum are 500",
-    mods: "mods that applies to the beatmap requested. Optional, default is 0. (Refer to the Mods section below, note that requesting multiple mods is supported, but it should not contain any non-difficulty-increasing mods or the return value will be invalid.)",
-   * `
-   * @return {Object}
+   * @param {Object} obj {\
+   * s: "beatmapset id",\
+   * b: "beatmap id",\
+   * u: "User id or name",\
+   * m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0",\
+   * a: "0 = not included, 1 = included",\
+   * h: "beatmap hash",\
+   * mods: "mods id",\
+   * since: "return all beatmaps ranked or loved since this date. Must be a MySQL date. In UTC",\
+   * type: "specify if u is a user_id or a username",\
+   * limit: "0-500",
+   * }
+   * @description \
+   * a: "include converted beatmaps? Only has an effect if m is chosen and not 0. Optional, default: 0"\
+   * \
+   * h: "example of hash: a5b99395a42bd55bc5eb1d2411cbdf8b" \
+   * \
+   * mods: "mods that applies to the beatmap requested. Optional, default is 0. (Refer to the Mods section below, note that requesting multiple mods is supported, but it should not contain any non-difficulty-increasing mods or the return value will be invalid.)""\
+   * \
+   * type: "Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)"
    */
   beatmap(obj) {
     return new Promise(async ex => {
@@ -36,23 +44,22 @@ class Api {
           switch (statusId) {
             case -2:
               return 'graveyard';
-              case -1:
-                return 'WIP';
-              case 0:
-                return 'pending';
-              case 1:
-                return 'ranked';
-              case 2:
-                return 'approved';
-              case 3:
-                return 'qualified';
-              case 4:
-                return 'loved';
+            case -1:
+              return 'WIP';
+            case 0:
+              return 'pending';
+            case 1:
+              return 'ranked';
+            case 2:
+              return 'approved';
+            case 3:
+              return 'qualified';
+            case 4:
+              return 'loved';
             default:
               return;
           }
         };
-
         if (data) {
           let info = {
             id: { set: +data[0].beatmapset_id },
@@ -87,36 +94,34 @@ class Api {
             },
             diff: [],
             other: {
-              download_unavailable: !!data.download_unavailable,
-              audio_unavailable: !!data.audio_unavailable,
-              storyboard: !!data.storyboard,
-              video: !!data.video,
-              packs: data.packs,
+              download_unavailable: !!data[0].download_unavailable,
+              audio_unavailable: !!data[0].audio_unavailable,
+              storyboard: !!data[0].storyboard,
+              video: !!data[0].video,
+              packs: data[0].packs,
               bg: {
                 slim: {
-                  1: `https://assets.ppy.sh/beatmaps/${data.beatmapset_id}/covers/slimcover.jpg`,
-                  2: `https://assets.ppy.sh/beatmaps/${data.beatmapset_id}/covers/slimcover@2x.jpg`,
+                  1: `https://assets.ppy.sh/beatmaps/${data[0].beatmapset_id}/covers/slimcover.jpg`,
+                  2: `https://assets.ppy.sh/beatmaps/${data[0].beatmapset_id}/covers/slimcover@2x.jpg`,
                 },
                 cover: {
-                  1: `https://assets.ppy.sh/beatmaps/${data.beatmapset_id}/covers/cover.jpg`,
-                  2: `https://assets.ppy.sh/beatmaps/${data.beatmapset_id}/covers/cover@2x.jpg`,
+                  1: `https://assets.ppy.sh/beatmaps/${data[0].beatmapset_id}/covers/cover.jpg`,
+                  2: `https://assets.ppy.sh/beatmaps/${data[0].beatmapset_id}/covers/cover@2x.jpg`,
                 },
                 card: {
-                  1: `https://assets.ppy.sh/beatmaps/${data.beatmapset_id}/covers/card.jpg`,
-                  2: `https://assets.ppy.sh/beatmaps/${data.beatmapset_id}/covers/card@2x.jpg`,
+                  1: `https://assets.ppy.sh/beatmaps/${data[0].beatmapset_id}/covers/card.jpg`,
+                  2: `https://assets.ppy.sh/beatmaps/${data[0].beatmapset_id}/covers/card@2x.jpg`,
                 },
                 list: {
-                  1: `https://assets.ppy.sh/beatmaps/${data.beatmapset_id}/covers/list.jpg`,
-                  2: `https://assets.ppy.sh/beatmaps/${data.beatmapset_id}/covers/list@2x.jpg`,
+                  1: `https://assets.ppy.sh/beatmaps/${data[0].beatmapset_id}/covers/list.jpg`,
+                  2: `https://assets.ppy.sh/beatmaps/${data[0].beatmapset_id}/covers/list@2x.jpg`,
                 },
               }
             }
           };
-
-          if (data.length == 1) 
-            info.id.diff = +data.beatmap_id;
-
-          data.forEach(d => {
+          if (data.length == 1) info.id.diff = +data[0].beatmap_id;
+          for (let i = 0; i < data.length; i++) {
+            let d = data[i];
             info.diff.push({
               id: +d.beatmap_id,
               diff: d.version,
@@ -138,8 +143,8 @@ class Api {
                 bpm: +d.bpm,
                 combo: +d.max_combo,
                 time: {
-                  full: parseInt(d.total_length),
-                  drain: parseInt(d.hit_length),
+                  full: +d.total_length,
+                  drain: +d.hit_length,
                 },
                 objects: {
                   all: +d.count_normal + d.count_slider + d.count_spinner,
@@ -151,26 +156,23 @@ class Api {
               plays: +d.playcount,
               pass: +d.passcount,
             });
-          })
+          };
           ex(info);
         } else ex({});
       } catch (err) { console.log(`\n\nosu-api-ex | beatmap => ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
-
-    this.user
   }
   /**
-   * Get user data
-   * @param {Object} obj
-   * @return {Object}
-   * @description `
-    --Object params--
-    u: "User id or Username",
-    m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0",
-    type: "specify if u is a user_id or a username. Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)",
-    event_days: "Range of 1-31. Optional, default: 1",
-   * `
-   */
+  * Get user data
+  * @param {Object} obj {\
+  * u: "User id or name",\
+  * m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0",\
+  * type: "specify if u is a user_id or a username",\
+  * event_days: "1-31. Default: 1",\
+  * }
+  * @description \
+  * type: "Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)"
+  */
   user(obj) {
     return new Promise(async ex => {
       try {
@@ -202,11 +204,11 @@ class Api {
             country: {
               flag: `https://osu.ppy.sh/images/flags/${data.country}.png`,
               short: data.country,
-              full: await new Country(data.country),
+              full: Country(data.country),
             },
             play: {
               count: +data.playcount,
-              time: parseInt(data.total_seconds_played),
+              time: +data.total_seconds_played,
             },
             hits: {
               300: +data.count300,
@@ -236,24 +238,20 @@ class Api {
     });
   }
   /**
-   * Get scores data
-   * @param {Object} obj
-   * @return {Object}
-   * @description `
-    --Object params--
-    b: "beatmap id",
-    u: "User id or Username",
-    m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0",
-    mods: "Mods id",
-    type: "specify if u is a user_id or a username. Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)",
-    limit: "amount of results from the top (range between 1 and 100 - defaults to 50)",
-   * `
-   */
+  * Get scores data
+  * @param {Object} obj {\
+  * b: "beatmap id", \
+  * u: "User id or name", \
+  * m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0", \
+  * mods: "Mods id", \
+  * type: "specify if u is a user_id or a username",\
+  * limit: "range between 1 and 100 - defaults to 50", \
+  * }
+  * @description \
+  * type: "Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)"
+  */
   scores(obj) {
-    let {
-      accuracy,
-      mods
-    } = this;
+    let { accuracy, mods } = this;
 
     return new Promise(async ex => {
       try {
@@ -298,28 +296,24 @@ class Api {
     });
   }
   /**
-   * Get best scores
-   * @param {Object} obj
-   * @return {Object}
-   * @description `
-    --Object params--
-    u: "User id or Username",
-    m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0",
-    limit: "amount of results (range between 1 and 100 - defaults to 10)",
-    type: "specify if u is a user_id or a username. Use string for usernames or id for user_ids. Optional, default behavior is automatic recognition (may be problematic for usernames made up of digits only)",
-   * `
-   */
+  * Get best scores
+  * @param {Object} obj {\
+  * u: "User id or name",\
+  * m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0",\
+  * limit: "range between 1 and 100 - defaults to 10",\
+  * type: "specify if u is a user_id or a username",\
+  * }
+  * @description \
+  * type: "Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)"
+  */
   best(obj) {
-    let {
-      accuracy,
-      mods
-    } = this;
+    let { accuracy, mods } = this;
 
     return new Promise(async ex => {
       try {
         let data = await this.get(`http://osu.ppy.sh/api/get_user_best?k=${this.key}`, obj);
         if (data) {
-          Promise.all(data.map(async d => {
+          let info = await Promise.all(data.map(async d => {
             return {
               date: d.date,
               rank: d.rank,
@@ -356,20 +350,18 @@ class Api {
     });
   }
   /**
-   * Get recent scores
-   * @param {Object} obj
-   * @return {Object}
-   * @description `
-    --Object params--
-    u: "User id or Username",
-    m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0",
-    limit: "amount of results (range between 1 and 50 - defaults to 10)",
-    type: "specify if u is a user_id or a username. Use string for usernames or id for user_ids. Optional, default behavior is automatic recognition (may be problematic for usernames made up of digits only)",
-   * `
-   */
+  * Get recent scores
+  * @param {Object} obj {\
+  * u: "User id or name",\
+  * m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0",\
+  * limit: "range between 1 and 100 - defaults to 10",\
+  * type: "specify if u is a user_id or a username",\
+  * }
+  * @description \
+  * type: "Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)"
+  */
   recent(obj) {
-    let { mods } = this;
-
+    let { accuracy, mods } = this;
     return new Promise(async ex => {
       try {
         let data = await this.get(`http://osu.ppy.sh/api/get_user_recent?k=${this.key}`, obj);
@@ -399,6 +391,7 @@ class Api {
                 id: +d.enabled_mods,
                 name: await mods(d.enabled_mods)
               },
+              accuracy: accuracy(d.count300, d.count100, d.count50, d.countmiss, d.countgeki, d.countkatu, (obj.m) ? obj.m : 0),
             };
           }));
           ex(info.reverse());
@@ -407,48 +400,174 @@ class Api {
     });
   }
   /**
-   * Calculate accuracy
-   * @param {null|Number|Boolean|String} h300
-   * @param {null|Number|Boolean|String} h100
-   * @param {null|Number|Boolean|String} h50
-   * @param {null|Number|Boolean|String} h0
-   * @param {null|Number|Boolean|String} geki
-   * @param {null|Number|Boolean|String} katu
-   * @param {null|Number|Boolean|String} mode
-   * @return {Number}
-   * @description `
-    h300: "hits 300",
-    h100: "hits 100",
-    h50: "hits 50",
-    h0: "Misses",
-    geki: "hits 300geki",
-    katu: "hits 100katu",
-    mode: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania)",
-   * `
-   */
+  * Get match data
+  * @param {Object} obj {\
+  * mp: "match id to get information from (required).",\
+  * }
+  */
+  match(obj) {
+    let { mods } = this;
+    return new Promise(async ex => {
+      try {
+        let data = await this.get(`http://osu.ppy.sh/api/get_match?k=${this.key}`, obj);
+        const modes = ['std', 'taiko', 'ctb', 'mania'];
+        const scoring = ['Score', 'Accuracy', 'Combo', 'Score v2'];
+        const team = ['Head to head', 'Tag Co-op', 'Team vs', 'Tag Team vs'];
+        const teams = ['no team', 'blue', 'red'];
+        if (data != 0) {
+          let info = {
+            match: {
+              id: +data.match.match_id,
+              name: data.match.name,
+              time: {
+                start: data.match.start_time,
+                end: data.match.end_time,
+              }
+            },
+            games: []
+          };
+          for (let i = 0; i < data.games.length; i++) {
+            let g = data.games[i];
+            let obj = {
+              id: +g.game_id,
+              time: {
+                start: g.start_time,
+                end: g.end_time,
+              },
+              beatmap_id: +g.beatmap_id,
+              mode: {
+                id: +g.play_mode,
+                name: modes[+g.play_mode],
+              },
+              types: {
+                match: g.match_type,
+                scoring: {
+                  id: +g.scoring_type,
+                  name: scoring[+g.scoring_type],
+                },
+                team: {
+                  id: +g.team_type,
+                  name: team[+g.team_type],
+                }
+              },
+              mods: {
+                id: +g.mods,
+                name: await this.mods(g.mods)
+              },
+              scores: []
+            };
+            for (let ss = 0; ss < g.scores.length; ss++) {
+              let s = g.scores[ss];
+              let sobj = {
+                team: {
+                  id: +s.team,
+                  id: teams[+s.team],
+                },
+                slot: +s.slot,
+                user: {
+                  id: +s.user_id
+                },
+                score: +s.score,
+                combo: {
+                  max: +s.maxcombo,
+                  perfect: +s.perfect
+                },
+                hits: {
+                  300: +s.count300,
+                  geki: +s.countgeki,
+                  100: +s.count100,
+                  katu: +s.countkatu,
+                  50: +s.count50,
+                  0: +s.countmiss,
+                },
+                mods: {
+                  id: +s.enabled_mods,
+                  name: await mods(s.enabled_mods)
+                },
+                rank: g.rank,
+                pass: g.pass,
+              };
+              obj.scores.push(sobj);
+            };
+            info.games.push(obj);
+          };
+          ex(info);
+        } else ex({});
+      } catch (err) { console.log(`\n\nosu-api-ex | match => ${JSON.stringify(obj)}`, err, '\n\n'); }
+    });
+  }
+  /**
+  * Get replay
+  * @param {Object} obj {\
+  * b: "beatmap id",\
+  * u: "User id or Username",\
+  * m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional",\
+  * mods: "mods id",\
+  * type: "specify if u is a user_id or a username",\
+  * }
+  * @param {String} path path to folder. Optional, example: './replays'
+  * @description \
+  * mods: "mods that applies to the beatmap requested. Optional, default is 0. (Refer to the Mods section below, note that requesting multiple mods is supported, but it should not contain any non-difficulty-increasing mods or the return value will be invalid.)""\
+  * \
+  * type: "Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)"
+  */
+  replay(obj, path) {
+    return new Promise(async ex => {
+      try {
+        if (obj.b == null || obj.u == null || obj.mods == null) return ex('Missing parameters. Required: b (beatmap id), u (user id or name), mods (mods id)');
+        let data = await this.get(`http://osu.ppy.sh/api/get_replay?k=${this.key}`, obj);
+        if (data != 0) {
+          let dec = Buffer.from(data.content, data.encoding);
+          let replay = new osr.Replay();
+          replay.replay_data = lzma.decompress(dec);
+          let map = await this.beatmap({ b: obj.b });
+          let score = await this.scores({ b: obj.b, u: obj.u, mods: obj.mods });
+          replay.beatmapMD5 = map.diff.filter(m => parseInt(m.id) == parseInt(obj.b))[0].file_md5;
+          replay.playerName = obj.u;
+          replay.number_300s = score[0].hits[300];
+          replay.number_100s = score[0].hits[100];
+          replay.number_50s = score[0].hits[50];
+          replay.gekis = score[0].hits['geki'];
+          replay.katus = score[0].hits['katu'];
+          replay.misses = score[0].hits[0];
+          replay.score = score[0].score.total;
+          replay.max_combo = score[0].combo.max;
+          replay.perfect_combo = score[0].combo.full;
+          replay.mods = obj.mods;
+          replay.timestamp = new Date(score[0].date);
+          let replayFile = replay.serializeSync();
+          fs.writeFileSync(path != undefined ? `${path}/${obj.b}-${obj.u}.osr` : `${obj.b}-${obj.u}.osr`, replayFile);
+          ex(replay);
+        } else ex({});
+      } catch (err) { console.log(`\n\nosu-api-ex | replay => ${JSON.stringify(obj)}`, err, '\n\n'); }
+    });
+  }
+  /**
+  * Calculate accuracy
+  * @param {null|Number|Boolean|String} h300 hits 300
+  * @param {null|Number|Boolean|String} h100 hits 100
+  * @param {null|Number|Boolean|String} h50 hits 50
+  * @param {null|Number|Boolean|String} h0 Misses
+  * @param {null|Number|Boolean|String} geki hits 300geki
+  * @param {null|Number|Boolean|String} katu hits 100katu
+  * @param {null|Number|Boolean|String} mode mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania)
+  */
   accuracy(h300, h100, h50, h0, geki, katu, mode) {
     try {
-      let 
-        p300  = +h300, 
-        p100  = +h100, 
-        p50   = +h50, 
-        p0    = +h0, 
-        pgeki = +geki, 
-        pkatu = +katu,
-        acc   = 0.0;
+      let acc = 0.0;
 
       switch (mode) {
         case 1:
-          acc = 100.0 * (2 * p300 + p100) / (2 * (p300 + p100 + p0));
+          acc = 100.0 * (2 * +h300 + +h100) / (2 * (+h300 + +h100 + +h0));
           break;
         case 2:
-          acc = 100.0 * (p300 + p100 + p50) / (p300 + p100 + p50 + pkatu + p0);
+          acc = 100.0 * (+h300 + +h100 + +h50) / (+h300 + +h100 + +h50 + +katu + +h0);
           break;
         case 3:
-          acc = 100.0 * (6 * pgeki + 6 * p300 + 4 * pkatu + 2 * p100 + p50) / (6 * (p50 + p100 + p300 + p0 + pgeki + pkatu));
+          acc = 100.0 * (6 * +geki + 6 * +h300 + 4 * +katu + 2 * +h100 + +h50) / (6 * (+h50 + +h100 + +h300 + +h0 + +geki + +katu));
           break;
         default:
-          acc = 100.0 * (6 * p300 + 2 * p100 + p50) / (6 * (p50 + p100 + p300 + p0));
+          acc = 100.0 * (6 * +h300 + 2 * +h100 + +h50) / (6 * (+h50 + +h100 + +h300 + +h0));
           break;
       }
 
@@ -456,32 +575,26 @@ class Api {
     } catch (err) { console.log(`\n\nosu-api-ex | accuracy`, err, '\n\n'); }
   }
   /**
-   * Calculate mods
-   * @param {null|Number|Boolean|String} m
-   * @return {Number|String}
-   */
+  * Calculate mods
+  * @param {null|Number|Boolean|String} m Mods id or name
+  */
   mods(m) {
     try {
       let mods = new Mods();
-      if (!m) 
-        return mods.name(m);
-      else 
-        return mods.id(parseInt(m));
+      if (isNaN(m)) return mods.name(m);
+      else return mods.id(+m);
     } catch (err) { console.log(`\n\nosu-api-ex | mods`, err, '\n\n'); }
   }
   /**
-   * Get pp data
-   * @param {Object} obj
-   * @return {Object}
-   * @description `
-    --Object params--
-    id: "beatmap id",
-    combo: "Combo",
-    mods: "Mods id",
-    acc: "Accuracy",
-    miss: "Misscount",e. Use string for usernames or id for user_ids. Optional, default behavior is automatic recognition (may be problematic for usernames made up of digits only)",
-   * `
-   */
+  * Get pp data
+  * @param {Object} obj {\
+  * id: "beatmap id",\
+  * combo: "Combo",\
+  * mods: "Mods id",\
+  * acc: "Accuracy",\
+  * miss: "Misscount",\
+  * }
+  */
   pp_calc(obj) {
     return new Promise(async ex => {
       try {
@@ -491,17 +604,16 @@ class Api {
     });
   }
   /**
-   * Get pp data
-   * @param {String} url
-   * @param {Object} obj
-   * @return {Object}
-   */
+  * Get pp data
+  * @param {String} url
+  * @param {Object} obj
+  */
   get(url, obj, o) {
     return new Promise(async ex => {
       try {
         let { data } = await axios.get(url, { params: obj });
-        ex((o == 1) ? data : (data.length == 0) ? 0 : data);
-      } catch (err) { console.log(`\n\nosu-api-ex | get => ${JSON.stringify(obj)}`, err, '\n\n'); }
+        ex((o == 1) ? data : data.length == 0 ? 0 : data);
+      } catch (err) { console.log(`\n\nosu-api-ex | get => ${url}} ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
   }
 }
