@@ -7,6 +7,7 @@
   "keywords": [
     "osu",
     "osu-api",
+    "replay",
     "extended",
     "node",
     "js"
@@ -24,8 +25,5 @@
   "dependencies": {
     "axios": "^0.19.2",
     "node-osr": "^1.2.1"
-  },
-  "publishConfig": {
-    "name": "@cyperdark/osu-api-extended"
   }
 }
