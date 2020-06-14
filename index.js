@@ -100,6 +100,8 @@ class Api {
               video: !!data[0].video,
               packs: data[0].packs,
               bg: {
+                full: `https://assets.ppy.sh/beatmaps/${data[0].beatmapset_id}/covers/fullsize.jpg`,
+                raw: `https://assets.ppy.sh/beatmaps/${data[0].beatmapset_id}/covers/raw.jpg`,
                 slim: {
                   1: `https://assets.ppy.sh/beatmaps/${data[0].beatmapset_id}/covers/slimcover.jpg`,
                   2: `https://assets.ppy.sh/beatmaps/${data[0].beatmapset_id}/covers/slimcover@2x.jpg`,
@@ -540,6 +542,20 @@ class Api {
           ex(replay);
         } else ex({});
       } catch (err) { console.log(`\n\nosu-api-ex | replay => ${JSON.stringify(obj)}`, err, '\n\n'); }
+    });
+  }
+  /**
+  * Get replay
+  * @param {Object} b diff id
+  * @param {String} path path to folder. Optional, example: './diffs'
+  */
+  diffFile(b, path) {
+    return new Promise(async ex => {
+      try {
+        let diff = await this.get(`https://osu.ppy.sh/osu/${b}`);
+        fs.writeFileSync(path != undefined ? `${path}/${b}.osu` : `${b}.osu`, diff, 'utf-8');
+        ex('done');
+      } catch (err) { console.log(`\n\nosu-api-ex | diffFile => ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
   }
   /**
