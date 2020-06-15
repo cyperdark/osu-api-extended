@@ -71,6 +71,9 @@ osu.replay({
   mods: 88
 }, './replays' <= path to folder. Optional, path will look: ./replays/2097898-WhiteCat.osr
 ).then(data => console.log(data));
+
+osu.diffFile(2097898, './maps' <= path to folder. Optional, path will look: ./maps/2097898.osu
+).then(data => console.log(data));
 ```
 
 ## Calc funcs
@@ -85,6 +88,8 @@ osu.mods("HDDT").then(data => console.log(data)); // return 72
 ```
 
 ## Not Supported
+
+Request me functions here: cyperdark#6890
 
 * ~~/api/get_match~~
 * ~~/api/get_replay~~

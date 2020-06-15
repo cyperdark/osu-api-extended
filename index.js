@@ -1,5 +1,5 @@
-const Country = require("./src/Country");
-const Mods = require("./src/Mods");
+const Country = require("./src/country");
+const Mods = require("./src/mods");
 const osr = require('node-osr');
 const axios = require("axios");
 const lzma = require('lzma');

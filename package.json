@@ -1,6 +1,6 @@
 {
   "name": "osu-api-extended",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Package for advanced work with 'osu' api",
   "main": "index.js",
   "scripts": {},
