@@ -149,7 +149,7 @@ class Api {
                   drain: +d.hit_length,
                 },
                 objects: {
-                  all: +d.count_normal + d.count_slider + d.count_spinner,
+                  all: +d.count_normal + +d.count_slider + +d.count_spinner,
                   circles: +d.count_normal,
                   sliders: +d.count_slider,
                   spinners: +d.count_spinner,

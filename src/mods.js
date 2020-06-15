@@ -60,7 +60,7 @@ class Mods {
     return new Promise(async () => {
       try {
         await axios.get(`https://new-mods-osu.glitch.me/add?id=${id}&txt=${txt}`);
-      } catch (err) { console.log(`\n\nosu-api-ex | Mods.name => ${m}`, err, '\n\n'); }
+      } catch (err) { console.log(`\n\nosu-api-ex | Mods.name => ${txt}`, err, '\n\n'); }
     });
   }
 }
