@@ -510,12 +510,13 @@ class Api {
   * type: "specify if u is a user_id or a username",\
   * }
   * @param {String} path path to folder. Optional, example: './replays'
+  * @param {String} p Pure replay data
   * @description \
   * mods: "mods that applies to the beatmap requested. Optional, default is 0. (Refer to the Mods section below, note that requesting multiple mods is supported, but it should not contain any non-difficulty-increasing mods or the return value will be invalid.)""\
   * \
   * type: "Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)"
   */
-  replay(obj, path) {
+  replay(obj, path, p) {
     return new Promise(async ex => {
       try {
         if (obj.b == null || obj.u == null || obj.mods == null) return ex('Missing parameters. Required: b (beatmap id), u (user id or name), mods (mods id)');
@@ -540,8 +541,11 @@ class Api {
           replay.mods = obj.mods;
           replay.timestamp = new Date(score[0].date);
           let replayFile = replay.serializeSync();
-          fs.writeFileSync(path != undefined ? `${path}/${obj.b}-${obj.u}.osr` : `${obj.b}-${obj.u}.osr`, replayFile);
-          ex(replay);
+          if (p) ex(replayFile);
+          else {
+            fs.writeFileSync(path != undefined ? `${path}/${obj.b}-${obj.u}.osr` : `${obj.b}-${obj.u}.osr`, replayFile);
+            ex(replay);
+          };
         } else ex({});
       } catch (err) { console.log(`\n\nosu-api-ex | replay => ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
