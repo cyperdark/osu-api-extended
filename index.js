@@ -142,7 +142,9 @@ class Api {
                 od: Number(d.diff_overall).toFixed(2),
                 cs: Number(d.diff_size).toFixed(2),
                 hp: Number(d.diff_drain).toFixed(2),
-                bpm: +d.bpm,
+                bpm: {
+                  api: +d.bpm,
+                },
                 combo: +d.max_combo,
                 time: {
                   full: +d.total_length,
