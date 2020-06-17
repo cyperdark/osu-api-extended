@@ -519,9 +519,8 @@ class Api {
     return new Promise(async ex => {
       try {
         if (obj.b == null || obj.u == null || obj.mods == null) return ex('Missing parameters. Required: b (beatmap id), u (user id or name), mods (mods id)');
-        if (fs.existsSync(path != undefined ? `${path}/${obj.b}-${obj.u}.osr` : `${obj.b}-${obj.u}.osr`)) {
-          ex('have');
-        } else {
+        if (fs.existsSync(path != undefined ? `${path}/${obj.b}-${obj.u}.osr` : `${obj.b}-${obj.u}.osr`)) ex('have');
+        else {
           let data = await this.get(`http://osu.ppy.sh/api/get_replay?k=${this.key}`, obj);
           if (data != 0) {
             let dec = Buffer.from(data.content, data.encoding);
@@ -558,9 +557,12 @@ class Api {
   diffFile(b, path) {
     return new Promise(async ex => {
       try {
-        let diff = await this.get(`https://osu.ppy.sh/osu/${b}`);
-        fs.writeFileSync(path != undefined ? `${path}/${b}.osu` : `${b}.osu`, diff, 'utf-8');
-        ex('done');
+        if (fs.existsSync(path != undefined ? `${path}/${b}.osu` : `${b}.osu`)) ex('have');
+        else {
+          let diff = await this.get(`https://osu.ppy.sh/osu/${b}`);
+          fs.writeFileSync(path != undefined ? `${path}/${b}.osu` : `${b}.osu`, diff, 'utf-8');
+          ex('done');
+        };
       } catch (err) { console.log(`\n\nosu-api-ex | diffFile => ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
   }
