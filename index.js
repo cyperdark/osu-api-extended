@@ -510,43 +510,43 @@ class Api {
   * type: "specify if u is a user_id or a username",\
   * }
   * @param {String} path path to folder. Optional, example: './replays'
-  * @param {String} p Pure replay data
   * @description \
   * mods: "mods that applies to the beatmap requested. Optional, default is 0. (Refer to the Mods section below, note that requesting multiple mods is supported, but it should not contain any non-difficulty-increasing mods or the return value will be invalid.)""\
   * \
   * type: "Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)"
   */
-  replay(obj, path, p) {
+  replay(obj, path) {
     return new Promise(async ex => {
       try {
         if (obj.b == null || obj.u == null || obj.mods == null) return ex('Missing parameters. Required: b (beatmap id), u (user id or name), mods (mods id)');
-        let data = await this.get(`http://osu.ppy.sh/api/get_replay?k=${this.key}`, obj);
-        if (data != 0) {
-          let dec = Buffer.from(data.content, data.encoding);
-          let replay = new osr.Replay();
-          replay.replay_data = lzma.decompress(dec);
-          let map = await this.beatmap({ b: obj.b });
-          let score = await this.scores({ b: obj.b, u: obj.u, mods: obj.mods });
-          replay.beatmapMD5 = map.diff.filter(m => parseInt(m.id) == parseInt(obj.b))[0].file_md5;
-          replay.playerName = obj.u;
-          replay.number_300s = score[0].hits[300];
-          replay.number_100s = score[0].hits[100];
-          replay.number_50s = score[0].hits[50];
-          replay.gekis = score[0].hits['geki'];
-          replay.katus = score[0].hits['katu'];
-          replay.misses = score[0].hits[0];
-          replay.score = score[0].score.total;
-          replay.max_combo = score[0].combo.max;
-          replay.perfect_combo = score[0].combo.full;
-          replay.mods = obj.mods;
-          replay.timestamp = new Date(score[0].date);
-          let replayFile = replay.serializeSync();
-          if (p) ex(replayFile);
-          else {
+        if (fs.existsSync(path != undefined ? `${path}/${obj.b}-${obj.u}.osr` : `${obj.b}-${obj.u}.osr`)) {
+          ex('have');
+        } else {
+          let data = await this.get(`http://osu.ppy.sh/api/get_replay?k=${this.key}`, obj);
+          if (data != 0) {
+            let dec = Buffer.from(data.content, data.encoding);
+            let replay = new osr.Replay();
+            replay.replay_data = lzma.decompress(dec);
+            let map = await this.beatmap({ b: obj.b });
+            let score = await this.scores({ b: obj.b, u: obj.u, mods: obj.mods });
+            replay.beatmapMD5 = map.diff.filter(m => parseInt(m.id) == parseInt(obj.b))[0].file_md5;
+            replay.playerName = obj.u;
+            replay.number_300s = score[0].hits[300];
+            replay.number_100s = score[0].hits[100];
+            replay.number_50s = score[0].hits[50];
+            replay.gekis = score[0].hits['geki'];
+            replay.katus = score[0].hits['katu'];
+            replay.misses = score[0].hits[0];
+            replay.score = score[0].score.total;
+            replay.max_combo = score[0].combo.max;
+            replay.perfect_combo = score[0].combo.full;
+            replay.mods = obj.mods;
+            replay.timestamp = new Date(score[0].date);
+            let replayFile = replay.serializeSync();
             fs.writeFileSync(path != undefined ? `${path}/${obj.b}-${obj.u}.osr` : `${obj.b}-${obj.u}.osr`, replayFile);
-            ex(replay);
-          };
-        } else ex({});
+            ex(replayFile);
+          } else ex({});
+        };
       } catch (err) { console.log(`\n\nosu-api-ex | replay => ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
   }
