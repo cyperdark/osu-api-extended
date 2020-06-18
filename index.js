@@ -528,8 +528,9 @@ class Api {
             replay.replay_data = lzma.decompress(dec);
             let map = await this.beatmap({ b: obj.b });
             let score = await this.scores({ b: obj.b, u: obj.u, mods: obj.mods });
+            if (score) if (score[0].replay == 0) return ex('replay not available');
             replay.beatmapMD5 = map.diff.filter(m => parseInt(m.id) == parseInt(obj.b))[0].file_md5;
-            replay.playerName = obj.u;
+            replay.playerName = score[0].user.name;
             replay.number_300s = score[0].hits[300];
             replay.number_100s = score[0].hits[100];
             replay.number_50s = score[0].hits[50];
