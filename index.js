@@ -623,7 +623,7 @@ class Api {
   pp_calc(obj) {
     return new Promise(async ex => {
       try {
-        let data = await this.get(`https://ppv3.glitch.me`, obj, 1);
+        let data = await this.get(`https://pp.osuck.net`, obj, 1);
         ex(data);
       } catch (err) { console.log(`\n\nosu-api-ex | pp_calc => ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
