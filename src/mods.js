@@ -46,7 +46,7 @@ class Mods {
         for (let i = 0; i < name.length; i++) {
           let find = values.filter(v => v.toLowerCase() == name[i].toLowerCase());
           num += parseInt(names[find]);
-        }
+        };
         ex(num);
       } catch (err) { console.log(`\n\nosu-api-ex | Mods.name => ${m}`, err, '\n\n'); }
     });

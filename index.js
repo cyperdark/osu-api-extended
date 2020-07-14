@@ -569,13 +569,13 @@ class Api {
   }
   /**
   * Calculate accuracy
-  * @param {null|Number|Boolean|String} h300 hits 300
-  * @param {null|Number|Boolean|String} h100 hits 100
-  * @param {null|Number|Boolean|String} h50 hits 50
-  * @param {null|Number|Boolean|String} h0 Misses
-  * @param {null|Number|Boolean|String} geki hits 300geki
-  * @param {null|Number|Boolean|String} katu hits 100katu
-  * @param {null|Number|Boolean|String} mode mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania)
+  * @param {Number} h300 hits 300
+  * @param {Number} h100 hits 100
+  * @param {Number} h50 hits 50
+  * @param {Number} h0 Misses
+  * @param {Number} geki hits 300geki
+  * @param {Number} katu hits 100katu
+  * @param {Number} mode mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania)
   */
   accuracy(h300, h100, h50, h0, geki, katu, mode) {
     try {
@@ -601,7 +601,7 @@ class Api {
   }
   /**
   * Calculate mods
-  * @param {null|Number|Boolean|String} m Mods id or name
+  * @param {Number|String} m Mods id or name
   */
   mods(m) {
     try {
@@ -609,6 +609,82 @@ class Api {
       if (isNaN(m)) return mods.name(m);
       else return mods.id(+m);
     } catch (err) { console.log(`\n\nosu-api-ex | mods`, err, '\n\n'); }
+  }
+  /**
+  * Calculate mods
+  * @param {Object} hits { geki, katu, 300, 100, 50, 0 }
+  * @param {Number|String} m Mods id or name
+  * @param {Number} mode Mode id
+  */
+  rank(hits, m, mode) {
+    return new Promise(async ex => {
+      try {
+        let hdfl = isNaN(m) ? m.toLowerCase().indexOf('hd') > -1 ? true : m.toLowerCase().indexOf('fl') > -1 ? true : false : (await this.mods(m)).toLowerCase().indexOf('hd') > -1 ? true : (await this.mods(m)).toLowerCase().indexOf('fl') > -1 ? true : false;
+        let params = {
+          totalHits: 0,
+          acc: 0.0,
+          ratio300: 0,
+          ratio50: 0,
+          rank: ''
+        };
+        switch (mode) {
+          case 0:
+            params.totalHits = +hits[50] + +hits[100] + +hits[300] + +hits[0];
+            params.acc = params.totalHits > 0 ? (+hits[50] * 50 + +hits[100] * 100 + +hits[300] * 300) / (params.totalHits * 300) : 1;
+            params.ratio300 = +hits[300] / params.totalHits, params.ratio50 = +hits[50] / params.totalHits;
+
+            if (params.ratio300 == 1) params.rank = hdfl == true ? 'XH' : 'X';
+            else if (params.ratio300 > 0.9 && params.ratio50 <= 0.01 && hits[0] == 0) params.rank = hdfl == true ? 'SH' : 'S';
+            else if ((params.ratio300 > 0.8 && hits[0] == 0) || params.ratio300 > 0.9) params.rank = 'A';
+            else if ((params.ratio300 > 0.7 && hits[0] == 0) || params.ratio300 > 0.8) params.rank = 'B';
+            else if (params.ratio300 > 0.6) params.rank = 'C';
+            else params.rank = 'D';
+
+            break;
+
+          case 1:
+            params.totalHits = +hits[50] + +hits[100] + +hits[300] + +hits[0];
+            params.acc = params.totalHits > 0 ? (+hits[100] * 150 + +hits[300] * 300) / (params.totalHits * 300) : 1;
+            params.ratio300 = +hits[300] / params.totalHits, params.ratio50 = +hits[50] / params.totalHits;
+
+            if (params.ratio300 == 1) params.rank = hdfl == true ? 'XH' : 'X';
+            else if (params.ratio300 > 0.9 && params.ratio50 <= 0.01 && hits[0] == 0) params.rank = hdfl == true ? 'SH' : 'S';
+            else if ((params.ratio300 > 0.8 && hits[0] == 0) || params.ratio300 > 0.9) params.rank = 'A';
+            else if ((params.ratio300 > 0.7 && hits[0] == 0) || params.ratio300 > 0.8) params.rank = 'B';
+            else if (params.ratio300 > 0.6) params.rank = 'C';
+            else params.rank = 'D';
+
+            break;
+
+          case 2:
+            params.totalHits = +hits[50] + +hits[100] + +hits[300] + +hits[0] + +hits.katu;
+            params.acc = params.totalHits > 0 ? (+hits[50] + +hits[100] + +hits[300]) / params.totalHits : 1;
+
+            if (params.acc == 1) params.rank = hdfl == true ? 'XH' : 'X';
+            else if (params.acc > 0.98) params.rank = hdfl == true ? 'SH' : 'S';
+            else if (params.acc > 0.94) params.rank = 'A';
+            else if (params.acc > 0.9) params.rank = 'B';
+            else if (params.acc > 0.85) params.rank = 'C';
+            else params.rank = 'D';
+
+            break;
+
+          case 3:
+            params.totalHits = +hits[50] + +hits[100] + +hits[300] + +hits[0] + +hits.geki + +hits.katu;
+            params.acc = params.totalHits > 0 ? (+hits[50] * 50 + +hits[100] * 100 + +hits.kati * 200 + (+hits[300] + hits.geki) * 300) / (params.totalHits * 300) : 1;
+
+            if (params.acc == 1) params.rank = hdfl == true ? 'XH' : 'X';
+            else if (params.acc > 0.95) params.rank = hdfl == true ? 'SH' : 'S';
+            else if (params.acc > 0.9) params.rank = 'A';
+            else if (params.acc > 0.8) params.rank = 'B';
+            else if (params.acc > 0.7) params.rank = 'C';
+            else params.rank = 'D';
+
+            break;
+        };
+        ex(params.rank)
+      } catch (err) { console.log(`\n\nosu-api-ex | rank`, err, '\n\n'); };
+    });
   }
   /**
   * Get pp data

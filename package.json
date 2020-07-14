@@ -1,14 +1,19 @@
 {
   "name": "osu-api-extended",
-  "version": "0.4.1",
+  "version": "0.4.5",
   "description": "Package for advanced work with 'osu' api",
   "main": "index.js",
   "scripts": {},
   "keywords": [
     "osu",
     "osu-api",
-    "replay",
+    "difficulty",
+    "accuracy",
     "extended",
+    "replay",
+    "diff",
+    "file",
+    "rank",
     "node",
     "js"
   ],

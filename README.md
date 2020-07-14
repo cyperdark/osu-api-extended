@@ -82,9 +82,26 @@ osu.accuracy(hit300, hit100, hit50, Miss, Geki, Katu, GameMode).then(data => con
 
 osu.mods(id or name).then(data => console.log(data));
 
+osu.rank({
+  geki: 0,
+  katu: 0,
+  300: 0,
+  100: 0,
+  50: 0,
+  0: 0,
+}, mods, mode).then(data => console.log(data));
+
 Example:
 osu.mods(72).then(data => console.log(data)); // return HDDT
 osu.mods("HDDT").then(data => console.log(data)); // return 72
+osu.rank({
+  geki: 0,
+  katu: 0,
+  300: 1519,
+  100: 221,
+  50: 42,
+  0: 127,
+}, 0, 0).then(data => console.log(data)); // return C
 ```
 
 ## Not Supported
