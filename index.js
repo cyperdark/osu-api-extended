@@ -295,7 +295,7 @@ class Api {
             };
           }));
           ex(info);
-        } else ex({});
+        } else ex([]);
       } catch (err) { console.log(`\n\nosu-api-ex | scores => ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
   }
@@ -349,7 +349,7 @@ class Api {
             };
           }));
           ex(info);
-        } else ex({});
+        } else ex([]);
       } catch (err) { console.log(`\n\nosu-api-ex | best => ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
   }
@@ -399,7 +399,7 @@ class Api {
             };
           }));
           ex(info.reverse());
-        } else ex({});
+        } else ex([]);
       } catch (err) { console.log(`\n\nosu-api-ex | recent => ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
   }
@@ -418,7 +418,7 @@ class Api {
         const scoring = ['Score', 'Accuracy', 'Combo', 'Score v2'];
         const team = ['Head to head', 'Tag Co-op', 'Team vs', 'Tag Team vs'];
         const teams = ['no team', 'blue', 'red'];
-        if (data != 0) {
+        if (data) {
           let info = {
             match: {
               id: +data.match.match_id,
@@ -496,7 +496,7 @@ class Api {
             info.games.push(obj);
           };
           ex(info);
-        } else ex({});
+        } else ex([]);
       } catch (err) { console.log(`\n\nosu-api-ex | match => ${JSON.stringify(obj)}`, err, '\n\n'); }
     });
   }
