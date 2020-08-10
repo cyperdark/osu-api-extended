@@ -48,7 +48,10 @@ class Mods {
           num += parseInt(names[find]);
         };
         ex(num);
-      } catch (err) { console.log(`\n\nosu-api-ex | Mods.name => ${m}`, err, '\n\n'); }
+      } catch (err) {
+        if (err.message.indexOf('status code 429') > -1) console.log(`\n\nosu-api-ex | Mods.name => ${m}: Can't send new mod to api`, '\n\n')
+        else console.log(`\n\nosu-api-ex | Mods.name => ${m}`, err, '\n\n');
+      }
     });
   }
   /**
