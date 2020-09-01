@@ -4,6 +4,7 @@ const osr = require('node-osr');
 const axios = require("axios");
 const lzma = require('lzma');
 const fs = require('fs');
+const { Interface } = require("readline");
 
 class Api {
   constructor() {

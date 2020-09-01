@@ -27,7 +27,7 @@ class Mods {
         let convert = Mods.find(m => m.bad == modsText);
         if (convert) ex(convert.good);
         else {
-          if (enabled.length > 1) this.notFound(id, modsText);
+          // if (enabled.length > 1) this.notFound(id, modsText);
           ex((id == 0) ? 'NoMod' : modsText);
         };
       } catch (err) { console.log(`\n\nosu-api-ex | Mods.id => ${m}`, err, '\n\n'); }
