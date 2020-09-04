@@ -70,8 +70,14 @@ class Api {
               update: data[0].last_update,
             },
             data: {
-              artist: data[0].artist,
-              title: data[0].title,
+              artist: {
+                original: data[0].artist,
+                unicode: data[0].artist_unicode,
+              },
+              title: {
+                original: data[0].title,
+                unicode: data[0].title_unicode,
+              },
               creator: {
                 id: +data[0].creator_id,
                 name: data[0].creator,
