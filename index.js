@@ -565,7 +565,7 @@ class Api {
           fs.writeFileSync(path != undefined ? `${path}/${b}.osu` : `${b}.osu`, diff, 'utf-8');
           ex('done');
         };
-      } catch (err) { console.log(`\n\nosu-api-ex | diffFile => ${JSON.stringify(obj)}`, err, '\n\n'); }
+      } catch (err) { console.log(`\n\nosu-api-ex | diffFile => ${b}`, err, '\n\n'); }
     });
   }
   /**
