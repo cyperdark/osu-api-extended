@@ -1069,5 +1069,86 @@ class V1 {
 
 // const apiV1 = new V1('asdsad');
 
+interface NewsObject {
+  news_posts: NewPosts[];
+  search: {
+    cursor: string | null;
+    limit: number;
+  };
+  cursor: {
+    published_at: string;
+    id: number;
+  };
+}
 
-export { V1 };
+interface NewPosts {
+  id: number;
+  author: string;
+  edit_url: string;
+  first_image: string;
+  published_at: string;
+  updated_at: string;
+  slug: string;
+  title: string;
+  preview: string;
+}
+
+class V2 {
+  clientId: number;
+  clientSecret: string;
+  accessToken: string;
+  api: AxiosInstance;
+  oauth: AxiosInstance;
+
+  constructor(clientId: number, clientSecret: string) {
+    this.clientId = clientId;
+    this.clientSecret = clientSecret;
+
+    this.accessToken = '';
+
+    this.api = axios.create();
+    this.oauth = axios.create({
+      baseURL: 'https://osu.ppy.sh/oauth/',
+      timeout: 7e3
+    });
+  }
+
+  login() {
+    return new Promise(async ex => {
+      try {
+        const { data: { access_token } } = await this.oauth.post('token', {
+          grant_type: "authorization_code",
+          client_id: this.clientId,
+          client_secret: this.clientSecret,
+          scope: 'public',
+          code: 'code'
+        });
+
+        this.accessToken = access_token;
+
+        this.api = axios.create({
+          baseURL: 'https://osu.ppy.sh/api/v2/',
+          headers: {
+            Authorization: `Bearer ${this.accessToken}`,
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          timeout: 7e3
+        });
+        ex(true);
+      } catch (err) { console.error(err); }
+    });
+  }
+
+  news(): Promise<NewsObject> {
+    return new Promise(async ex => {
+      try {
+        const { data } = await this.api.get(`/news`);
+        ex(data);
+      } catch (err) { console.error(err); }
+    });
+  }
+}
+
+
+export { V1, V2 };
