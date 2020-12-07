@@ -1,0 +1,20 @@
+{
+  "score_id": "7654321",
+  "score": "1234567",
+  "username": "User name",
+  "count300": "300",
+  "count100": "50",
+  "count50": "10",
+  "countmiss": "1",
+  "maxcombo": "421",
+  "countkatu": "10",
+  "countgeki": "50",
+  "perfect": "0", // 1 = maximum combo of map reached, 0 otherwise
+  "enabled_mods": "76", // bitwise flag representation of mods used. see reference
+  "user_id": "1",
+  "date": "2013-06-22 9:11:16", // in UTC
+  "rank": "SH",
+  "pp": "1.3019", //Float value , 4 decimals
+  "replay_available": "1" // 1 = replay is available for download, 0 = replay is unavailable
+}
+// get_scores

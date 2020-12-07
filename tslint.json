@@ -1,0 +1,10 @@
+{
+   "extends": ["tslint:recommended", "tslint-config-prettier"],
+   "rules": {
+      "semicolon": true,
+      "no-console": false,
+      "max-classes-per-file": false,
+      "one-variable-per-declaration": false,
+      "prefer-for-of": false
+   }
+}
