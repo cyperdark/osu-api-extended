@@ -1,0 +1,144 @@
+{
+  "news_posts": [
+    {
+      "id": 875,
+      "author": "pishifat",
+      "edit_url": "https://github.com/ppy/osu-wiki/tree/master/news/2020-12-05-new-featured-artist-myukke.md",
+      "first_image": "https://assets.ppy.sh/artists/121/header.jpg",
+      "published_at": "2020-12-05T09:00:00+00:00",
+      "updated_at": "2020-12-05T09:00:39+00:00",
+      "slug": "2020-12-05-new-featured-artist-myukke",
+      "title": "New Featured Artist: MYUKKE.",
+      "preview": "We're proud to announce MYUKKE. as our latest Featured Artist!"
+    },
+    {
+      "id": 874,
+      "author": "pishifat",
+      "edit_url": "https://github.com/ppy/osu-wiki/tree/master/news/2020-12-02-new-featured-artist-muryokup-powerless.md",
+      "first_image": "https://assets.ppy.sh/artists/120/header.jpg",
+      "published_at": "2020-12-02T10:00:00+00:00",
+      "updated_at": "2020-12-02T09:54:36+00:00",
+      "slug": "2020-12-02-new-featured-artist-muryokup-powerless",
+      "title": "New Featured Artist: MuryokuP / Powerless",
+      "preview": "MuryokuP / Powerless marches on stage as our newest featured artist!"
+    },
+    {
+      "id": 873,
+      "author": "Pachiru",
+      "edit_url": "https://github.com/ppy/osu-wiki/tree/master/news/2020-12-01-osu-mapping-olympiad-7-concludes.md",
+      "first_image": "https://osu.ppy.sh/wiki/shared/news/banners/osu_mapping_olympiad.jpg",
+      "published_at": "2020-12-01T02:30:00+00:00",
+      "updated_at": "2020-12-01T02:46:33+00:00",
+      "slug": "2020-12-01-osu-mapping-olympiad-7-concludes",
+      "title": "osu! Mapping Olympiad #7: Results (osu!mania)",
+      "preview": "Here come the results of the osu!mania Mapping Olympiad's 2nd edition, including sick surprises for sure!"
+    },
+    {
+      "id": 872,
+      "author": "pishifat",
+      "edit_url": "https://github.com/ppy/osu-wiki/tree/master/news/2020-11-30-a-labour-of-love.md",
+      "first_image": "/help/wiki/shared/news/2020-11-30-a-labour-of-love/alol_cover.jpg",
+      "published_at": "2020-11-30T09:00:00+00:00",
+      "updated_at": "2020-11-30T09:19:31+00:00",
+      "slug": "2020-11-30-a-labour-of-love",
+      "title": "A Labour of Love",
+      "preview": "Are you a mapper? A storyboarder? Or maybe a talented music producer? Show your love for an osu! community favorite in this multi-layered contest!"
+    },
+    {
+      "id": 871,
+      "author": "pishifat",
+      "edit_url": "https://github.com/ppy/osu-wiki/tree/master/news/2020-11-28-new-featured-artist-bossfight.md",
+      "first_image": "https://assets.ppy.sh/artists/119/header.jpg",
+      "published_at": "2020-11-28T10:00:00+00:00",
+      "updated_at": "2020-11-28T09:58:22+00:00",
+      "slug": "2020-11-28-new-featured-artist-bossfight",
+      "title": "New Featured Artist: Bossfight",
+      "preview": "Bossfight invades his way to our Featured Artist roster!"
+    },
+    {
+      "id": 870,
+      "author": "huu",
+      "edit_url": "https://github.com/ppy/osu-wiki/tree/master/news/2020-11-27-project-loved-november-2020.md",
+      "first_image": "/help/wiki/shared/news/banners/project-loved.jpg",
+      "published_at": "2020-11-27T08:30:00+00:00",
+      "updated_at": "2020-11-27T08:40:37+00:00",
+      "slug": "2020-11-27-project-loved-november-2020",
+      "title": "Project Loved: November 2020",
+      "preview": "Project Loved is back yet again! Take a peek at the maps we picked out for you this month and cast your vote to decide their fate!"
+    },
+    {
+      "id": 869,
+      "author": "yaspo",
+      "edit_url": "https://github.com/ppy/osu-wiki/tree/master/news/2020-11-26-community-mentorship-program-winter-2021-signups-now-open.md",
+      "first_image": "/help/wiki/shared/news/banners/community-mentorship-program.jpg",
+      "published_at": "2020-11-26T08:00:00+00:00",
+      "updated_at": "2020-11-26T07:18:54+00:00",
+      "slug": "2020-11-26-community-mentorship-program-winter-2021-signups-now-open",
+      "title": "Community Mentorship Program Winter 2021 Signups Now Open",
+      "preview": "With holiday cheer and an upcoming new year, the 17th cycle of the Community Mentorship program is on its way! If you've ever found yourself wanting to expand your current knowledge and skills or help beginner mappers get started, this program will serve as a great opportunity for you!"
+    },
+    {
+      "id": 868,
+      "author": "pishifat",
+      "edit_url": "https://github.com/ppy/osu-wiki/tree/master/news/2020-11-25-new-featured-artist-orangentle-yu-asahina.md",
+      "first_image": "https://assets.ppy.sh/artists/118/header.jpg?1",
+      "published_at": "2020-11-25T09:30:00+00:00",
+      "updated_at": "2020-11-25T10:11:59+00:00",
+      "slug": "2020-11-25-new-featured-artist-orangentle-yu-asahina",
+      "title": "New Featured Artist: orangentle / Yu_Asahina",
+      "preview": "orangentle / Yu_Asahina squeezes in as our newest Featured Artist!"
+    },
+    {
+      "id": 867,
+      "author": "Ephemeral",
+      "edit_url": "https://github.com/ppy/osu-wiki/tree/master/news/2020-11-24-winter-sports-fanart-voting.md",
+      "first_image": "https://assets.ppy.sh/contests/114/header.jpg",
+      "published_at": "2020-11-24T10:00:00+00:00",
+      "updated_at": "2020-11-24T10:16:27+00:00",
+      "slug": "2020-11-24-winter-sports-fanart-voting",
+      "title": "Winter Sports 2020 Fanart Contest Voting Open!",
+      "preview": "A flurry of 137 talented entries are front and center in our latest Fan Art contest, and we need your votes to help decide the winners!"
+    },
+    {
+      "id": 866,
+      "author": "pishifat",
+      "edit_url": "https://github.com/ppy/osu-wiki/tree/master/news/2020-11-21-new-featured-artist-i-love-you-orchestra.md",
+      "first_image": "https://assets.ppy.sh/artists/117/header.jpg",
+      "published_at": "2020-11-21T10:00:00+00:00",
+      "updated_at": "2020-11-21T10:10:44+00:00",
+      "slug": "2020-11-21-new-featured-artist-i-love-you-orchestra",
+      "title": "New Featured Artist: I love you Orchestra",
+      "preview": "Give a heavy welcome to I love you Orchestra, our latest Featured Artist!"
+    },
+    {
+      "id": 865,
+      "author": "pishifat and Noffy",
+      "edit_url": "https://github.com/ppy/osu-wiki/tree/master/news/2020-11-20-featured-artist-beatmap-updates-from-the-mappers-guild.md",
+      "first_image": "/help/wiki/shared/news/banners/mappersguild.png",
+      "published_at": "2020-11-20T06:00:00+00:00",
+      "updated_at": "2020-11-20T06:01:15+00:00",
+      "slug": "2020-11-20-featured-artist-beatmap-updates-from-the-mappers-guild",
+      "title": "Featured Artist Beatmap Updates from the Mappers' Guild",
+      "preview": "New beatmap packs! New medals! And new quests! Learn how mapping and Featured Artists collide through the Mappers' Guild."
+    },
+    {
+      "id": 864,
+      "author": "peppy",
+      "edit_url": "https://github.com/ppy/osu-wiki/tree/master/news/2020-11-19-better-protecting-players-from-abuse.md",
+      "first_image": "https://osu.ppy.sh/assets/images/news-show-default.78f23cb7.jpg",
+      "published_at": "2020-11-19T09:00:00+00:00",
+      "updated_at": "2020-11-19T10:17:26+00:00",
+      "slug": "2020-11-19-better-protecting-players-from-abuse",
+      "title": "Better protecting players from abuse",
+      "preview": "Hi everyone, peppy here. We are making some minor changes to the terms of service, so let me explain our motivation and reasoning behind them."
+    }
+  ],
+  "search": {
+    "cursor": null,
+    "limit": 12
+  },
+  "cursor": {
+    "published_at": "2020-11-19T09:00:00.000000Z",
+    "id": 864
+  }
+}

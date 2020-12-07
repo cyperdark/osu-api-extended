@@ -1,0 +1,260 @@
+{
+  "ends_at": "2020-11-02T16:00:00+00:00",
+  "backgrounds": [
+    {
+      "url": "https://assets.ppy.sh/user-contest-entries/7416/01ebdc0ec7b251bc00e4d06edbfa37f8d5ec3a374cf4f2b20fc45a564c7d1bf4_opt.jpg",
+      "user": {
+        "avatar_url": "https://a.ppy.sh/13103233?1606803048.jpeg",
+        "country_code": "ID",
+        "default_group": "default",
+        "id": 13103233,
+        "is_active": true,
+        "is_bot": false,
+        "is_online": true,
+        "is_supporter": true,
+        "last_visit": "2020-12-07T11:55:06+00:00",
+        "pm_friends_only": false,
+        "profile_colour": null,
+        "username": "Dreamxiety"
+      }
+    },
+    {
+      "url": "https://assets.ppy.sh/user-contest-entries/7495/ae38068688dc41959526f4c9d8420eb254e112cf6f6baf05b1890964e524be07_opt.jpg",
+      "user": {
+        "avatar_url": "https://a.ppy.sh/16877867?1588061983.png",
+        "country_code": "MN",
+        "default_group": "default",
+        "id": 16877867,
+        "is_active": true,
+        "is_bot": false,
+        "is_online": false,
+        "is_supporter": true,
+        "last_visit": "2020-11-23T14:16:00+00:00",
+        "pm_friends_only": true,
+        "profile_colour": null,
+        "username": "tsuqie"
+      }
+    },
+    {
+      "url": "https://assets.ppy.sh/user-contest-entries/7589/7660461536e472a9e28aec5ce3f500360f125433db2cd33e2287e83a6840d80b_opt.jpg",
+      "user": {
+        "avatar_url": "https://a.ppy.sh/12063010?1602443326.jpeg",
+        "country_code": "BR",
+        "default_group": "default",
+        "id": 12063010,
+        "is_active": true,
+        "is_bot": false,
+        "is_online": false,
+        "is_supporter": true,
+        "last_visit": "2020-12-07T02:43:24+00:00",
+        "pm_friends_only": false,
+        "profile_colour": null,
+        "username": "CupcakeCrazier"
+      }
+    },
+    {
+      "url": "https://assets.ppy.sh/user-contest-entries/7612/296caa84c85fc737e213e7cb657d5d6019379722cac8dd9d22c9c3de9088fa0a_opt.jpg",
+      "user": {
+        "avatar_url": "https://a.ppy.sh/7266506?1601888983.jpeg",
+        "country_code": "BG",
+        "default_group": "default",
+        "id": 7266506,
+        "is_active": true,
+        "is_bot": false,
+        "is_online": false,
+        "is_supporter": true,
+        "last_visit": "2020-12-06T22:37:00+00:00",
+        "pm_friends_only": false,
+        "profile_colour": null,
+        "username": "risuuna"
+      }
+    },
+    {
+      "url": "https://assets.ppy.sh/user-contest-entries/7639/4e5656dc28f715cb59a9b037b6349dc99d666bfbefc2b147a9835a56da9c3ae4_opt.jpg",
+      "user": {
+        "avatar_url": "https://a.ppy.sh/4084853?1601269583.jpeg",
+        "country_code": "MY",
+        "default_group": "default",
+        "id": 4084853,
+        "is_active": true,
+        "is_bot": false,
+        "is_online": false,
+        "is_supporter": true,
+        "last_visit": "2020-12-07T06:47:00+00:00",
+        "pm_friends_only": false,
+        "profile_colour": null,
+        "username": "xxxxxx2800"
+      }
+    },
+    {
+      "url": "https://assets.ppy.sh/user-contest-entries/7646/d5c007abe1d08e4da5465f9cfe3444af32c73c9597c5f28481829a2e7016b318_opt.jpg",
+      "user": {
+        "avatar_url": "https://a.ppy.sh/4840900?1437733825.png",
+        "country_code": "NZ",
+        "default_group": "default",
+        "id": 4840900,
+        "is_active": true,
+        "is_bot": false,
+        "is_online": false,
+        "is_supporter": true,
+        "last_visit": "2020-12-07T06:28:30+00:00",
+        "pm_friends_only": false,
+        "profile_colour": null,
+        "username": "SJPumpkin"
+      }
+    },
+    {
+      "url": "https://assets.ppy.sh/user-contest-entries/7652/4aee956714520e0dbdbf9a39df167e1afde182427f8f78d3a49d854792e857d5_opt.jpg",
+      "user": {
+        "avatar_url": "https://a.ppy.sh/17165886?1597915619.png",
+        "country_code": "PH",
+        "default_group": "default",
+        "id": 17165886,
+        "is_active": true,
+        "is_bot": false,
+        "is_online": false,
+        "is_supporter": true,
+        "last_visit": "2020-12-07T00:32:14+00:00",
+        "pm_friends_only": false,
+        "profile_colour": null,
+        "username": "RianneRyan"
+      }
+    },
+    {
+      "url": "https://assets.ppy.sh/user-contest-entries/7659/e2553246a9f264228c7fc9243ec30e93dc5c6d8ef2ebc627afca3d33d6138c22_opt.jpg",
+      "user": {
+        "avatar_url": "https://a.ppy.sh/2667849?1603807035.png",
+        "country_code": "RU",
+        "default_group": "default",
+        "id": 2667849,
+        "is_active": true,
+        "is_bot": false,
+        "is_online": false,
+        "is_supporter": true,
+        "last_visit": "2020-11-14T07:38:42+00:00",
+        "pm_friends_only": false,
+        "profile_colour": null,
+        "username": "LeeNarie"
+      }
+    },
+    {
+      "url": "https://assets.ppy.sh/user-contest-entries/7745/1cb6563a800005a4395d2839213c574c33e889d0b4b02deb24a62f6229c1b7df_opt.jpg",
+      "user": {
+        "avatar_url": "https://a.ppy.sh/7295733?1538433345.jpeg",
+        "country_code": "DE",
+        "default_group": "default",
+        "id": 7295733,
+        "is_active": true,
+        "is_bot": false,
+        "is_online": false,
+        "is_supporter": true,
+        "last_visit": null,
+        "pm_friends_only": false,
+        "profile_colour": null,
+        "username": "Sjao"
+      }
+    },
+    {
+      "url": "https://assets.ppy.sh/user-contest-entries/7782/966a64095e9940feb55874e47309c468f380a315e2a533b031dbf0fcdcb72777_opt.jpg",
+      "user": {
+        "avatar_url": "https://a.ppy.sh/7339730?1565668603.jpeg",
+        "country_code": "US",
+        "default_group": "default",
+        "id": 7339730,
+        "is_active": true,
+        "is_bot": false,
+        "is_online": false,
+        "is_supporter": true,
+        "last_visit": "2020-12-01T23:33:00+00:00",
+        "pm_friends_only": false,
+        "profile_colour": null,
+        "username": "trashvevo"
+      }
+    },
+    {
+      "url": "https://assets.ppy.sh/user-contest-entries/7809/777830f0e8654c10845bf7a7132f73beaabbe9663d227df4814603dc03e8863b_opt.jpg",
+      "user": {
+        "avatar_url": "https://a.ppy.sh/9044692?1581321965.png",
+        "country_code": "JP",
+        "default_group": "default",
+        "id": 9044692,
+        "is_active": true,
+        "is_bot": false,
+        "is_online": false,
+        "is_supporter": true,
+        "last_visit": "2020-12-07T10:04:48+00:00",
+        "pm_friends_only": false,
+        "profile_colour": null,
+        "username": "HEKUSODASU"
+      }
+    },
+    {
+      "url": "https://assets.ppy.sh/user-contest-entries/7810/7d3626399ece91b45bf39e0d3da0d557eb7af7c74a1401efc3c5aa9ee9c727d3_opt.jpg",
+      "user": {
+        "avatar_url": "https://a.ppy.sh/6841570?1583042106.png",
+        "country_code": "US",
+        "default_group": "default",
+        "id": 6841570,
+        "is_active": true,
+        "is_bot": false,
+        "is_online": false,
+        "is_supporter": true,
+        "last_visit": "2020-12-01T08:05:00+00:00",
+        "pm_friends_only": false,
+        "profile_colour": null,
+        "username": "D0tz_"
+      }
+    },
+    {
+      "url": "https://assets.ppy.sh/user-contest-entries/7850/5ea19e778f2e5ce46a3373389dbcc2ce5817361d7d603dbca3a87e2181902344_opt.jpg",
+      "user": {
+        "avatar_url": "https://a.ppy.sh/11596939?1602349850.png",
+        "country_code": "TR",
+        "default_group": "default",
+        "id": 11596939,
+        "is_active": true,
+        "is_bot": false,
+        "is_online": false,
+        "is_supporter": true,
+        "last_visit": "2020-12-07T10:48:00+00:00",
+        "pm_friends_only": false,
+        "profile_colour": null,
+        "username": "Azocat"
+      }
+    },
+    {
+      "url": "https://assets.ppy.sh/user-contest-entries/7859/f40014d357ed52b3fa888a2fe035a9922242df3cd978936f455569c62f52445f_opt.jpg",
+      "user": {
+        "avatar_url": "https://a.ppy.sh/14471273?1601262377.jpeg",
+        "country_code": "AU",
+        "default_group": "default",
+        "id": 14471273,
+        "is_active": false,
+        "is_bot": false,
+        "is_online": false,
+        "is_supporter": true,
+        "last_visit": "2020-10-17T14:01:00+00:00",
+        "pm_friends_only": false,
+        "profile_colour": null,
+        "username": "Huckle"
+      }
+    },
+    {
+      "url": "https://assets.ppy.sh/user-contest-entries/7866/45d6e0871b5a0783c6ee7ea20a3a5e37ae81b0097dadd2ff49832a3c3cc63184_opt.jpg",
+      "user": {
+        "avatar_url": "https://a.ppy.sh/12694139?1600379997.jpeg",
+        "country_code": "CA",
+        "default_group": "default",
+        "id": 12694139,
+        "is_active": true,
+        "is_bot": false,
+        "is_online": false,
+        "is_supporter": true,
+        "last_visit": "2020-12-07T05:14:56+00:00",
+        "pm_friends_only": false,
+        "profile_colour": null,
+        "username": "McFriedFries"
+      }
+    }
+  ]
+}

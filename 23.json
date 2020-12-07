@@ -1,0 +1,47 @@
+[
+  {
+    "id": 705236,
+    "action": "vote.reset",
+    "amount": -1,
+    "model": "beatmap_discussion",
+    "created_at": "2018-09-30T18:03:15+00:00",
+    "giver": null,
+    "post": {
+      "url": "https://osu.ppy.sh/beatmapsets/beatmap-discussions/532436",
+      "title": "Byoumei wa Ai Datta"
+    },
+    "details": {
+      "event": "vote"
+    }
+  },
+  {
+    "id": 695162,
+    "action": "vote.give",
+    "amount": 1,
+    "model": "beatmap_discussion",
+    "created_at": "2018-09-20T14:39:53+00:00",
+    "giver": null,
+    "post": {
+      "url": "https://osu.ppy.sh/beatmapsets/beatmap-discussions/532436",
+      "title": "Byoumei wa Ai Datta"
+    },
+    "details": {
+      "event": "vote"
+    }
+  },
+  {
+    "id": 690887,
+    "action": "vote.give",
+    "amount": 1,
+    "model": "beatmap_discussion",
+    "created_at": "2018-09-15T15:46:37+00:00",
+    "giver": null,
+    "post": {
+      "url": "https://osu.ppy.sh/beatmapsets/beatmap-discussions/532436",
+      "title": "Byoumei wa Ai Datta"
+    },
+    "details": {
+      "event": "vote"
+    }
+  }
+]
