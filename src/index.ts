@@ -1,7 +1,9 @@
-import axios, { AxiosInstance } from 'axios';
-import lzma from 'lzma-native';
-import osr from 'node-osr';
-import fs from 'fs';
+import { AxiosInstance } from "axios";
+
+const lzma = require('lzma-native');
+const osr = require('node-osr');
+const axios = require('axios');
+const fs = require('fs');
 
 interface AccObject {
   300: number;
@@ -1122,7 +1124,7 @@ class V2 {
         const {
           data: { access_token },
         } = await this.oauth.post('token', {
-          grant_type: 'authorization_code',
+          grant_type: 'client_credentials',
           client_id: this.clientId,
           client_secret: this.clientSecret,
           scope: 'public',
