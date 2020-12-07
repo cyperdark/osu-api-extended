@@ -997,7 +997,7 @@ class V1 {
 
             replay.replay_data = lzma.decompress(decode);
 
-            replay.beatmapMD5 = map?.diff.filter(m => m.id === obj.b)[0].file_md5;
+            replay.beatmapMD5 = map?.diff.filter((m) => m.id === obj.b)[0].file_md5;
             replay.playerName = score[0].user.name;
             replay.number_300s = score[0].hits[300];
             replay.number_100s = score[0].hits[100];
@@ -1024,7 +1024,7 @@ class V1 {
   }
 
   diffFile(obj: diffFile): Promise<number> {
-    return new Promise(async ex => {
+    return new Promise(async (ex) => {
       try {
         let file = '';
         if (obj.path !== undefined) file = `${obj.path}/${obj.id}.osu`;
@@ -1034,7 +1034,10 @@ class V1 {
           fs.writeFileSync(file, data, 'utf-8');
           ex(1);
         }
-      } catch (err) { console.error(err); ex(0); }
+      } catch (err) {
+        console.error(err);
+        ex(0);
+      }
     });
   }
 
@@ -1109,19 +1112,21 @@ class V2 {
     this.api = axios.create();
     this.oauth = axios.create({
       baseURL: 'https://osu.ppy.sh/oauth/',
-      timeout: 7e3
+      timeout: 7e3,
     });
   }
 
   login() {
-    return new Promise(async ex => {
+    return new Promise(async (ex) => {
       try {
-        const { data: { access_token } } = await this.oauth.post('token', {
-          grant_type: "authorization_code",
+        const {
+          data: { access_token },
+        } = await this.oauth.post('token', {
+          grant_type: 'authorization_code',
           client_id: this.clientId,
           client_secret: this.clientSecret,
           scope: 'public',
-          code: 'code'
+          code: 'code',
         });
 
         this.accessToken = access_token;
@@ -1130,25 +1135,28 @@ class V2 {
           baseURL: 'https://osu.ppy.sh/api/v2/',
           headers: {
             Authorization: `Bearer ${this.accessToken}`,
-            Accept: "application/json",
-            "Content-Type": "application/json"
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
           },
-          timeout: 7e3
+          timeout: 7e3,
         });
         ex(true);
-      } catch (err) { console.error(err); }
+      } catch (err) {
+        console.error(err);
+      }
     });
   }
 
   news(): Promise<NewsObject> {
-    return new Promise(async ex => {
+    return new Promise(async (ex) => {
       try {
         const { data } = await this.api.get(`/news`);
         ex(data);
-      } catch (err) { console.error(err); }
+      } catch (err) {
+        console.error(err);
+      }
     });
   }
 }
-
 
 export { V1, V2 };

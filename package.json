@@ -1,5 +1,5 @@
 {
-  "name": "osu-api-extended",
+  "name": "fghgfhsafsaf",
   "version": "0.6.0",
   "description": "Package for advanced work with 'osu' api",
   "main": "dist/index.js",
@@ -10,12 +10,11 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build",
     "format": "prettier --write \"./src/*.ts\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cyperdark/osu-api-extended.git"
+    "url": "git+https://github.com/cyperdark/fghgfhsafsaf.git"
   },
   "keywords": [],
   "author": "cyperdark",
