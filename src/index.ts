@@ -1424,6 +1424,81 @@ interface BeatmapsetsEventsObject {
   };
 }
 
+interface BeatmapsetsSearchObject {
+  beatmapsets: {
+    artist: string;
+    artist_unicode: string;
+    covers: BeatmapCoversObj;
+    creator: string;
+    favourite_count: number;
+    hype: null;
+    id: number;
+    play_count: number;
+    preview_url: string;
+    source: string;
+    status: string;
+    title: string;
+    title_unicode: string;
+    user_id: number;
+    video: boolean;
+    availability: {
+      download_disabled: boolean;
+      more_information: null;
+    };
+    bpm: number;
+    can_be_hyped: boolean;
+    discussion_enabled: boolean;
+    discussion_locked: boolean;
+    is_scoreable: boolean;
+    last_updated: string;
+    legacy_thread_url: string;
+    nominations_summary: {
+      current: number;
+      required: number;
+    };
+    ranked: number;
+    ranked_date: string;
+    storyboard: boolean;
+    submitted_date: string;
+    tags: string;
+    beatmaps: {
+      difficulty_rating: number;
+      id: number;
+      mode: string;
+      total_length: number;
+      version: string;
+      accuracy: number;
+      ar: number;
+      beatmapset_id: number;
+      bpm: number;
+      convert: boolean;
+      count_circles: number;
+      count_sliders: number;
+      count_spinners: number;
+      cs: number;
+      deleted_at: null | string;
+      drain: number;
+      hit_length: number;
+      is_scoreable: boolean;
+      last_updated: string;
+      mode_int: number;
+      passcount: number;
+      playcount: number;
+      ranked: number;
+      status: string;
+      url: string;
+      max_combo: number;
+    }[];
+  }[];
+  cursor: {
+    approved_date: string
+    _id: string
+  };
+  recommended_difficulty: null | number;
+  error: null | string;
+  total: number;
+}
+
 class V2 {
   clientId: number;
   clientSecret: string;
@@ -1534,7 +1609,7 @@ class V2 {
     });
   }
 
-  beatmapsets_search() {
+  beatmapsets_search(): Promise<BeatmapsetsSearchObject> {
     return new Promise(async ex => {
       const { data } = await this.api.get(`/beatmapsets/search/`);
       ex(data);

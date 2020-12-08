@@ -144,6 +144,16 @@ const userBmType = ['favourite', 'graveyard', 'loved', 'most_played', 'ranked_an
         });
       };
 
+      user(id, mode) {
+        return new Promise(async ex => {
+          try {
+            let { data } = await this.api.get(`/users/${id}${mode ? `/${mode}` : ''}`);
+            ex(data);
+          } catch (err) { console.error(err); };
+        });
+      };
+
+
 
 
 
@@ -309,15 +319,6 @@ const userBmType = ['favourite', 'graveyard', 'loved', 'most_played', 'ranked_an
         });
       };
 
-      user(id, mode) {
-        return new Promise(async ex => {
-          try {
-            let { data } = await this.api.get(`/users/${id}${mode ? `/${mode}` : ''}`);
-            ex(data);
-          } catch (err) { console.error(err); };
-        });
-      };
-
       users(id) {
         return new Promise(async ex => {
           try {
@@ -347,7 +348,7 @@ const userBmType = ['favourite', 'graveyard', 'loved', 'most_played', 'ranked_an
     // // // // let beatmaps_scores = await d.beatmaps_scores(2688100);
     // let beatmaps_lookup = await d.beatmaps_lookup();
     // // // // let beatmaps = await d.beatmaps(2688100);
-    let beatmapsets_search = await d.beatmapsets_search();
+    // // // // let beatmapsets_search = await d.beatmapsets_search();
     // let beatmapsets_lookup = await d.beatmapsets_lookup();
     // let beatmapsets_download = await d.beatmapsets_download(1295544);
     // // // // let beatmapset = await d.beatmapset(1295544);
