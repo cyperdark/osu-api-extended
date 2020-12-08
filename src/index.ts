@@ -1,4 +1,5 @@
 import { AxiosInstance } from "axios";
+import { StructuredType } from "typescript";
 
 const lzma = require('lzma-native');
 const osr = require('node-osr');
@@ -1499,6 +1500,334 @@ interface BeatmapsetsSearchObject {
   total: number;
 }
 
+interface UserObjectV2 {
+  avatar_url: string;
+  country_code: string;
+  default_group: string;
+  id: number;
+  is_active: boolean;
+  is_bot: boolean;
+  is_online: boolean;
+  is_supporter: boolean;
+  last_visit: string;
+  pm_friends_only: boolean;
+  profile_colour: null | string;
+  username: string;
+  comments_count: number;
+  cover_url: string;
+  discord: null | string;
+  has_supported: boolean;
+  interests: null | string;
+  join_date: string;
+  kudosu: {
+    total: number;
+    available: number;
+  };
+  location: null | string;
+  max_blocks: number;
+  max_friends: number;
+  occupation: null | string;
+  playmode: string;
+  playstyle: string[];
+  post_count: number;
+  profile_order: string[];
+  skype: null | string;
+  title: null | string;
+  title_url: null | string;
+  twitter: null | string;
+  website: null | string;
+  country: {
+    code: string;
+    name: string;
+  };
+  cover: {
+    custom_url: null | string;
+    url: string;
+    id: string;
+  };
+  account_history: [];
+  active_tournament_banner: [];
+  badges: {
+    awarded_at: string;
+    description: string;
+    image_url: string;
+    url: string;
+  }[];
+  beatmap_playcounts_count: number;
+  favourite_beatmapset_count: number;
+  follower_count: number;
+  graveyard_beatmapset_count: number;
+  groups: {
+    id: number;
+    identifier: string;
+    name: string;
+    short_name: string;
+    description: string;
+    colour: string;
+    playmodes: null;
+    is_probationary: boolean;
+  }[];
+  loved_beatmapset_count: number;
+  monthly_playcounts: {
+    start_date: string;
+    count: number;
+  }[];
+  page: {
+    html: string;
+    raw: string;
+  };
+  previous_usernames: string[];
+  ranked_and_approved_beatmapset_count: number;
+  replays_watched_counts: {
+    start_date: string;
+    count: number;
+  }[];
+  scores_best_count: number;
+  scores_first_count: number;
+  scores_recent_count: number;
+  statistics: {
+    level: {
+      current: number;
+      progress: number;
+    };
+    pp: number;
+    pp_rank: number;
+    ranked_score: number;
+    hit_accuracy: number;
+    play_count: number;
+    play_time: number;
+    total_score: number;
+    total_hits: number;
+    maximum_combo: number;
+    replays_watched_by_others: number;
+    is_ranked: boolean;
+    grade_counts: {
+      ss: number;
+      ssh: number;
+      s: number;
+      sh: number;
+      a: number;
+    };
+    rank: {
+      global: number;
+      country: number;
+    };
+  };
+  support_level: number;
+  unranked_beatmapset_count: number;
+  user_achievements: {
+    achieved_at: string;
+    achievement_id: number;
+  }[];
+  rankHistory: {
+    mode: string;
+    data: number[];
+  };
+  rank_history: {
+    mode: string;
+    data: number[];
+  };
+}
+
+interface UserScoresObjectV2 {
+  id: number;
+  best_id: null | number;
+  user_id: number;
+  accuracy: number;
+  mods: string[];
+  score: number;
+  max_combo: number;
+  perfect: boolean;
+  statistics: {
+    count_50: number;
+    count_100: number;
+    count_300: number;
+    count_geki: number;
+    count_katu: number;
+    count_miss: number;
+  };
+  pp: null | number;
+  rank: string;
+  created_at: string;
+  mode: string;
+  mode_int: number;
+  replay: boolean;
+  beatmap: {
+    difficulty_rating: number;
+    id: number;
+    mode: string;
+    total_length: number;
+    version: string;
+    accuracy: number;
+    ar: number;
+    beatmapset_id: number;
+    bpm: number;
+    convert: boolean;
+    count_circles: number;
+    count_sliders: number;
+    count_spinners: number;
+    cs: number;
+    deleted_at: null | string;
+    drain: number;
+    hit_length: number;
+    is_scoreable: boolean;
+    last_updated: string;
+    mode_int: number;
+    passcount: number;
+    playcount: number;
+    ranked: number;
+    status: string;
+    url: string;
+  };
+  beatmapset: {
+    artist: string;
+    artist_unicode: string;
+    covers: BeatmapCoversObj,
+    creator: string;
+    favourite_count: number;
+    hype: null,
+    id: number;
+    play_count: number;
+    preview_url: string;
+    source: string;
+    status: string;
+    title: string;
+    title_unicode: string;
+    user_id: number;
+    video: boolean;
+  };
+  user: {
+    avatar_url: string;
+    country_code: string;
+    default_group: string;
+    id: number;
+    is_active: boolean;
+    is_bot: boolean;
+    is_online: boolean;
+    is_supporter: boolean;
+    last_visit: string;
+    pm_friends_only: boolean;
+    profile_colour: null | string;
+    username: string;
+  };
+}
+
+interface UserBeatmapsObjectV2 {
+  artist: string;
+  artist_unicode: string;
+  covers: BeatmapCoversObj;
+  creator: string;
+  favourite_count: number;
+  hype: null;
+  id: number;
+  play_count: number;
+  preview_url: string;
+  source: string;
+  status: string;
+  title: string;
+  title_unicode: string;
+  user_id: number;
+  video: boolean;
+  availability: {
+    download_disabled: boolean;
+    more_information: null;
+  };
+  bpm: number;
+  can_be_hyped: boolean;
+  discussion_enabled: boolean;
+  discussion_locked: boolean;
+  is_scoreable: boolean;
+  last_updated: string;
+  legacy_thread_url: string;
+  nominations_summary: {
+    current: number;
+    required: number;
+  };
+  ranked: number;
+  ranked_date: null | string;
+  storyboard: boolean;
+  submitted_date: string;
+  tags: string;
+  beatmaps: {
+    difficulty_rating: number;
+    id: number;
+    mode: string;
+    total_length: number;
+    version: string;
+    accuracy: number;
+    ar: number;
+    beatmapset_id: number;
+    bpm: number;
+    convert: boolean;
+    count_circles: number;
+    count_sliders: number;
+    count_spinners: number;
+    cs: number;
+    deleted_at: null | string;
+    drain: number;
+    hit_length: number;
+    is_scoreable: false,
+    last_updated: string;
+    mode_int: number;
+    passcount: number;
+    playcount: number;
+    ranked: number;
+    status: string;
+    url: string;
+  }[];
+}
+
+interface UserRecentActivityObjectV2 {
+  created_at: string;
+  id: number;
+  type: string;
+  approval?: string;
+  count?: number;
+  scoreRank?: string;
+  rank?: number;
+  mode?: string;
+  achievement?: {
+    icon_url: string;
+    id: number;
+    name: string;
+    grouping: string;
+    ordering: number;
+    slug: string;
+    description: string;
+    mode: null | string;
+    instructions: null | string;
+  };
+  beatmap?: {
+    title: string;
+    url: string;
+  };
+  beatmapset?: {
+    title: string;
+    url: string;
+  };
+  user: {
+    previousUsername?: string;
+    username: string;
+    url: string;
+  };
+}
+
+interface UserKudosuObjectV2 {
+  id: number;
+  action: string;
+  amount: number;
+  model: string;
+  created_at: string;
+  giver: null | object;
+  post: {
+    url: string;
+    title: string;
+  };
+  details: {
+    event: string;
+  };
+}
+
 class V2 {
   clientId: number;
   clientSecret: string;
@@ -1519,101 +1848,110 @@ class V2 {
     });
   }
 
-  login() {
-    return new Promise(async (ex) => {
-      const {
-        data: { access_token },
-      } = await this.oauth.post('token', {
-        grant_type: 'client_credentials',
-        client_id: this.clientId,
-        client_secret: this.clientSecret,
-        scope: 'public',
-        code: 'code',
-      });
-
-      this.accessToken = access_token;
-
-      this.api = axios.create({
-        baseURL: 'https://osu.ppy.sh/api/v2/',
-        headers: {
-          Authorization: `Bearer ${this.accessToken}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        timeout: 7e3,
-      });
-      ex(true);
+  async login(): Promise<boolean> {
+    const {
+      data: { access_token },
+    } = await this.oauth.post('token', {
+      grant_type: 'client_credentials',
+      client_id: this.clientId,
+      client_secret: this.clientSecret,
+      scope: 'public',
+      code: 'code',
     });
+
+    this.accessToken = access_token;
+
+    this.api = axios.create({
+      baseURL: 'https://osu.ppy.sh/api/v2/',
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      timeout: 7e3,
+    });
+    return true;
   }
 
-  news(): Promise<NewsObject> {
-    return new Promise(async (ex) => {
-      const { data } = await this.api.get(`/news`);
-      ex(data);
-    });
+  async news(): Promise<NewsObject> {
+    const { data } = await this.api.get(`/news`);
+    return data;
   }
 
-  changelog(): Promise<ChangelogObject> {
-    return new Promise(async ex => {
-      const { data } = await this.api.get(`/changelog`);
-      ex(data);
-    });
+  async changelog(): Promise<ChangelogObject> {
+    const { data } = await this.api.get(`/changelog`);
+    return data;
   }
 
-  rankings(mode: number, type: number): Promise<RankingsObject> {
-    return new Promise(async ex => {
-      const { data } = await this.api.get(`/rankings/${modes[mode]}/${rankingType[type]}`);
-      ex(data);
-    });
+  async rankings(mode: number, type: number, obj?: {
+    country?: string;
+    cursor?: string;
+    filter?: string;
+    spotlight?: string;
+    variant?: string;
+  }): Promise<RankingsObject> {
+    const { data } = await this.api.get(`/rankings/${modes[mode]}/${rankingType[type]}`);
+    return data;
   }
 
-  spotlights(): Promise<SpotlightsObject> {
-    return new Promise(async ex => {
-      const { data } = await this.api.get(`/spotlights`);
-      ex(data);
-    });
+  async spotlights(): Promise<SpotlightsObject> {
+    const { data } = await this.api.get(`/spotlights`);
+    return data;
   }
 
-  seasonal_backgrounds(): Promise<SeasonalBackgroundsObject> {
-    return new Promise(async ex => {
-      const { data } = await this.api.get(`/seasonal-backgrounds`);
-      ex(data);
-    });
+  async seasonal_backgrounds(): Promise<SeasonalBackgroundsObject> {
+    const { data } = await this.api.get(`/seasonal-backgrounds`);
+    return data;
   }
 
-  beatmap(id: number): Promise<BeatmapObjectSet> {
-    return new Promise(async ex => {
-      const { data } = await this.api.get(`/beatmaps/${id}`);
-      ex(data);
-    });
+  async beatmap(id: number): Promise<BeatmapObjectSet> {
+    const { data } = await this.api.get(`/beatmaps/${id}`);
+    return data;
   }
 
-  beatmap_scores(id: number): Promise<BeatmapScoresObject> {
-    return new Promise(async ex => {
-      const { data } = await this.api.get(`/beatmaps/${id}/scores`);
-      ex(data);
-    });
+  async beatmap_scores(id: number): Promise<BeatmapScoresObject> {
+    const { data } = await this.api.get(`/beatmaps/${id}/scores`);
+    return data;
   }
 
-  beatmapset(id: number): Promise<BeatmapsetObject> {
-    return new Promise(async ex => {
-      const { data } = await this.api.get(`/beatmapsets/${id}`);
-      ex(data);
-    });
+  async beatmapset(id: number): Promise<BeatmapsetObject> {
+    const { data } = await this.api.get(`/beatmapsets/${id}`);
+    return data;
   }
 
-  beatmapsets_events(): Promise<BeatmapsetsEventsObject> {
-    return new Promise(async ex => {
-      const { data } = await this.api.get(`/beatmapsets/events`);
-      ex(data);
-    });
+  async beatmapsets_events(): Promise<BeatmapsetsEventsObject> {
+    const { data } = await this.api.get(`/beatmapsets/events`);
+    return data;
   }
 
-  beatmapsets_search(): Promise<BeatmapsetsSearchObject> {
-    return new Promise(async ex => {
-      const { data } = await this.api.get(`/beatmapsets/search/`);
-      ex(data);
-    });
+  async beatmapsets_search(): Promise<BeatmapsetsSearchObject> {
+    const { data } = await this.api.get(`/beatmapsets/search/`);
+    return data;
+  }
+
+  async user(id: number, mode: number): Promise<UserObjectV2> {
+    const { data } = await this.api.get(`/users/${id}${mode ? `/${mode}` : ''}`);
+    return data;
+  }
+
+  async user_recent_activity(id: number, obj: { limit: number; offset: number; }): Promise<UserRecentActivityObjectV2[]> {
+    const { data } = await this.api.get(`/users/${id}/recent_activity`, { params: obj });
+    return data;
+  }
+
+  async user_scores(id: number, type: number, obj: { include_fails: number; mode: string; limit: number; offset: number; }): Promise<UserScoresObjectV2[]> {
+    const { data } = await this.api.get(`/users/${id}/scores/${scoresType[type]}`, { params: obj });
+    return data;
+  }
+
+  async user_beatmaps(id: number, type: number, obj: { limit: number; offset: number; }): Promise<UserBeatmapsObjectV2[]> {
+    const { data } = await this.api.get(`/users/${id}/beatmapsets/${userBmType[type]}`, { params: obj });
+    return data;
+  }
+
+  async user_kudosu(id: number): Promise<UserKudosuObjectV2[]> {
+    const { data } = await this.api.get(`/users/${id}/kudosu`);
+    return data;
   }
 }
 

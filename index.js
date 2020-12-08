@@ -153,6 +153,42 @@ const userBmType = ['favourite', 'graveyard', 'loved', 'most_played', 'ranked_an
         });
       };
 
+      users_recent_activity(id, obj) {
+        return new Promise(async ex => {
+          try {
+            let { data } = await this.api.get(`/users/${id}/recent_activity`, { params: obj });
+            ex(data);
+          } catch (err) { console.error(err); };
+        });
+      };
+
+      users_scores(id, type, obj) {
+        return new Promise(async ex => {
+          try {
+            let { data } = await this.api.get(`/users/${id}/scores/${scoresType[type]}`, { params: obj });
+            ex(data);
+          } catch (err) { console.error(err); };
+        });
+      };
+
+      users_beatmaps(id, type, obj) {
+        return new Promise(async ex => {
+          try {
+            let { data } = await this.api.get(`/users/${id}/beatmapsets/${userBmType[type]}`, { params: obj });
+            ex(data);
+          } catch (err) { console.error(err); };
+        });
+      };
+
+      users_kudosu(id) {
+        return new Promise(async ex => {
+          try {
+            let { data } = await this.api.get(`/users/${id}/kudosu`);
+            ex(data);
+          } catch (err) { console.error(err); };
+        });
+      };
+
 
 
 
@@ -283,42 +319,6 @@ const userBmType = ['favourite', 'graveyard', 'loved', 'most_played', 'ranked_an
         });
       };
 
-      users_kudosu(id) {
-        return new Promise(async ex => {
-          try {
-            let { data } = await this.api.get(`/users/${id}/kudosu`);
-            ex(data);
-          } catch (err) { console.error(err); };
-        });
-      };
-
-      users_scores(id, type, obj) {
-        return new Promise(async ex => {
-          try {
-            let { data } = await this.api.get(`/users/${id}/scores/${scoresType[type]}`, { params: obj });
-            ex(data);
-          } catch (err) { console.error(err); };
-        });
-      };
-
-      users_beatmaps(id, type, obj) {
-        return new Promise(async ex => {
-          try {
-            let { data } = await this.api.get(`/users/${id}/beatmapsets/${userBmType[type]}`, { params: obj });
-            ex(data);
-          } catch (err) { console.error(err); };
-        });
-      };
-
-      users_recent_activity(id, obj) {
-        return new Promise(async ex => {
-          try {
-            let { data } = await this.api.get(`/users/${id}/recent_activity`, { params: obj });
-            ex(data);
-          } catch (err) { console.error(err); };
-        });
-      };
-
       users(id) {
         return new Promise(async ex => {
           try {
@@ -334,33 +334,33 @@ const userBmType = ['favourite', 'graveyard', 'loved', 'most_played', 'ranked_an
 
     let d = new Test();
     await d.login();
-    // let notifications = await d.notifications();
-    // // // // let rankings = await d.rankings(0, 0);
-    // // // // let spotlights = await d.spotlights();
-    // // // // let beatmapsets_events = await d.beatmapsets_events();
-    // let beatmapsets_favourites = await d.beatmapsets_favourites(1295544);
-    // let chat_presence = await d.chat_presence();
-    // // // // let changelog = await d.changelog();
-    // let reports = await d.reports();
-    // let rooms = await d.rooms();
-    // // // // let seasonal_backgrounds = await d.seasonal_backgrounds();
-    // let scores = await d.scores();
-    // // // // let beatmaps_scores = await d.beatmaps_scores(2688100);
-    // let beatmaps_lookup = await d.beatmaps_lookup();
-    // // // // let beatmaps = await d.beatmaps(2688100);
-    // // // // let beatmapsets_search = await d.beatmapsets_search();
-    // let beatmapsets_lookup = await d.beatmapsets_lookup();
-    // let beatmapsets_download = await d.beatmapsets_download(1295544);
-    // // // // let beatmapset = await d.beatmapset(1295544);
-    // let friends = await d.friends();
-    // let me_dl_quota = await d.me_dl_quota();
-    // // // // let news = await d.news();
-    // let me = await d.me();
-    let users_kudosu = await d.users_kudosu(9893708);
-    let users_scores = await d.users_scores(9893708, 0);
-    let users_beatmaps = await d.users_beatmaps(9893708, 0);
-    let users_recent_activity = await d.users_recent_activity(9893708);
-    let user = await d.user(9893708);
-    // let users = await d.users([9893708, 4504101]);
+    // // // let notifications = await d.notifications();
+    // let rankings = await d.rankings(0, 0);
+    // let spotlights = await d.spotlights();
+    // let beatmapsets_events = await d.beatmapsets_events();
+    // // // let beatmapsets_favourites = await d.beatmapsets_favourites(1295544);
+    // // // let chat_presence = await d.chat_presence();
+    // let changelog = await d.changelog();
+    // // // let reports = await d.reports();
+    // // // let rooms = await d.rooms();
+    // let seasonal_backgrounds = await d.seasonal_backgrounds();
+    // // // let scores = await d.scores();
+    // let beatmaps_scores = await d.beatmaps_scores(2688100);
+    // // // let beatmaps_lookup = await d.beatmaps_lookup();
+    // let beatmaps = await d.beatmaps(2688100);
+    // let beatmapsets_search = await d.beatmapsets_search();
+    // // // let beatmapsets_lookup = await d.beatmapsets_lookup();
+    // // // let beatmapsets_download = await d.beatmapsets_download(1295544);
+    // let beatmapset = await d.beatmapset(1295544);
+    // // // let friends = await d.friends();
+    // // // let me_dl_quota = await d.me_dl_quota();
+    // let news = await d.news();
+    // // // let me = await d.me();
+    // let users_kudosu = await d.users_kudosu(9893708);
+    // let users_scores = await d.users_scores(9893708, 0);
+    // let users_beatmaps = await d.users_beatmaps(9893708, 0);
+    // let users_recent_activity = await d.users_recent_activity(9893708);
+    // let user = await d.user(9893708);
+    // // // let users = await d.users([9893708, 4504101]);
   } catch (err) { console.error(err); };
 })();
