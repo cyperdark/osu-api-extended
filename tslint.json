@@ -5,7 +5,7 @@
    ],
    "rules": {
       "semicolon": true,
-      "no-console": false,
+      "no-console": true,
       "max-classes-per-file": false,
       "one-variable-per-declaration": false,
       "prefer-for-of": false,

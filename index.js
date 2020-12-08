@@ -1,5 +1,5 @@
-import axios from "axios";
-import fs from "fs";
+const fs = require('fs');
+const axios = require('axios');
 
 const modes = ['osu', 'taiko', 'fruits', 'mania'];
 const rankingType = ['performance', 'country', 'score', 'charts'];
@@ -8,14 +8,6 @@ const userBmType = ['favourite', 'graveyard', 'loved', 'most_played', 'ranked_an
 
 (async () => {
   try {
-    import {} from './dist/index.js';
-    // const { V2 } = require('./dist/index.js');
-    const v2 = new V2(175, 'Py36H9QIrgxuJfsinn6vcsmueyWgv2fKY65svIVt')
-    await v2.login();
-    let newsV = await v2.news();
-    console.log(newsV);
-
-    return;
     class Test {
       constructor(client_id, client_secret) {
         this.client_id = client_id;
@@ -71,16 +63,10 @@ const userBmType = ['favourite', 'graveyard', 'loved', 'most_played', 'ranked_an
         });
       };
 
-
-
-
-
-
-      notifications(max_id) {
+      changelog() {
         return new Promise(async ex => {
           try {
-            // return ex({ error: 'Invalid scope(s) provided.' });
-            let { data } = await this.api.get(`/notifications`, { params: { max_id } });
+            let { data } = await this.api.get(`/changelog`);
             ex(data);
           } catch (err) { console.error(err); };
         });
@@ -104,10 +90,74 @@ const userBmType = ['favourite', 'graveyard', 'loved', 'most_played', 'ranked_an
         });
       };
 
+      seasonal_backgrounds() {
+        return new Promise(async ex => {
+          try {
+            let { data } = await this.api.get(`/seasonal-backgrounds`);
+            ex(data);
+          } catch (err) { console.error(err); };
+        });
+      };
+
+      beatmaps(id) {
+        return new Promise(async ex => {
+          try {
+            let { data } = await this.api.get(`/beatmaps/${id}`);
+            ex(data);
+          } catch (err) { console.error(err); };
+        });
+      };
+
+      beatmapset(id) {
+        return new Promise(async ex => {
+          try {
+            let { data } = await this.api.get(`/beatmapsets/${id}`);
+            ex(data);
+          } catch (err) { console.error(err); };
+        });
+      };
+
+      beatmaps_scores(id) {
+        return new Promise(async ex => {
+          try {
+            let { data } = await this.api.get(`/beatmaps/${id}/scores`);
+            ex(data);
+          } catch (err) { console.error(err); };
+        });
+      };
+
       beatmapsets_events() {
         return new Promise(async ex => {
           try {
             let { data } = await this.api.get(`/beatmapsets/events`);
+            ex(data);
+          } catch (err) { console.error(err); };
+        });
+      };
+
+      beatmapsets_search() {
+        return new Promise(async ex => {
+          try {
+            let { data } = await this.api.get(`/beatmapsets/search/`);
+            ex(data);
+          } catch (err) { console.error(err); };
+        });
+      };
+
+
+
+
+
+
+
+
+
+
+      notifications(max_id) {
+        return new Promise(async ex => {
+          try {
+            // return ex({ error: 'Invalid scope(s) provided.' });
+            let { data } = await this.api.get(`/notifications`, { params: { max_id } });
             ex(data);
           } catch (err) { console.error(err); };
         });
@@ -133,15 +183,6 @@ const userBmType = ['favourite', 'graveyard', 'loved', 'most_played', 'ranked_an
         });
       };
 
-      changelog() {
-        return new Promise(async ex => {
-          try {
-            let { data } = await this.api.get(`/changelog`);
-            ex(data);
-          } catch (err) { console.error(err); };
-        });
-      };
-
       reports() {
         return new Promise(async ex => {
           try {
@@ -162,15 +203,6 @@ const userBmType = ['favourite', 'graveyard', 'loved', 'most_played', 'ranked_an
         });
       };
 
-      seasonal_backgrounds() {
-        return new Promise(async ex => {
-          try {
-            let { data } = await this.api.get(`/seasonal-backgrounds`);
-            ex(data);
-          } catch (err) { console.error(err); };
-        });
-      };
-
       scores() {
         return new Promise(async ex => {
           try {
@@ -181,38 +213,11 @@ const userBmType = ['favourite', 'graveyard', 'loved', 'most_played', 'ranked_an
         });
       };
 
-      beatmaps_scores(id) {
-        return new Promise(async ex => {
-          try {
-            let { data } = await this.api.get(`/beatmaps/${id}/scores`);
-            ex(data);
-          } catch (err) { console.error(err); };
-        });
-      };
-
       beatmaps_lookup() {
         return new Promise(async ex => {
           try {
             // return ex({ error: '404' });
             let { data } = await this.api.get(`/beatmaps/lookup`);
-            ex(data);
-          } catch (err) { console.error(err); };
-        });
-      };
-
-      beatmaps(id) {
-        return new Promise(async ex => {
-          try {
-            let { data } = await this.api.get(`/beatmaps/${id}`);
-            ex(data);
-          } catch (err) { console.error(err); };
-        });
-      };
-
-      beatmapsets_search() {
-        return new Promise(async ex => {
-          try {
-            let { data } = await this.api.get(`/beatmapsets/search/`);
             ex(data);
           } catch (err) { console.error(err); };
         });
@@ -233,15 +238,6 @@ const userBmType = ['favourite', 'graveyard', 'loved', 'most_played', 'ranked_an
           try {
             // return ex({ error: 'Invalid scope(s) provided.' });
             let { data } = await this.api.get(`/beatmapsets/${id}/download`);
-            ex(data);
-          } catch (err) { console.error(err); };
-        });
-      };
-
-      beatmapset(id) {
-        return new Promise(async ex => {
-          try {
-            let { data } = await this.api.get(`/beatmapsets/${id}`);
             ex(data);
           } catch (err) { console.error(err); };
         });
@@ -338,26 +334,26 @@ const userBmType = ['favourite', 'graveyard', 'loved', 'most_played', 'ranked_an
     let d = new Test();
     await d.login();
     // let notifications = await d.notifications();
-    let rankings = await d.rankings(0, 0);
-    let spotlights = await d.spotlights();
-    let beatmapsets_events = await d.beatmapsets_events();
+    // // // // let rankings = await d.rankings(0, 0);
+    // // // // let spotlights = await d.spotlights();
+    // // // // let beatmapsets_events = await d.beatmapsets_events();
     // let beatmapsets_favourites = await d.beatmapsets_favourites(1295544);
     // let chat_presence = await d.chat_presence();
-    let changelog = await d.changelog();
+    // // // // let changelog = await d.changelog();
     // let reports = await d.reports();
     // let rooms = await d.rooms();
-    let seasonal_backgrounds = await d.seasonal_backgrounds();
+    // // // // let seasonal_backgrounds = await d.seasonal_backgrounds();
     // let scores = await d.scores();
-    let beatmaps_scores = await d.beatmaps_scores(2688100);
+    // // // // let beatmaps_scores = await d.beatmaps_scores(2688100);
     // let beatmaps_lookup = await d.beatmaps_lookup();
-    let beatmaps = await d.beatmaps(2688100);
+    // // // // let beatmaps = await d.beatmaps(2688100);
     let beatmapsets_search = await d.beatmapsets_search();
     // let beatmapsets_lookup = await d.beatmapsets_lookup();
     // let beatmapsets_download = await d.beatmapsets_download(1295544);
-    let beatmapset = await d.beatmapset(1295544);
+    // // // // let beatmapset = await d.beatmapset(1295544);
     // let friends = await d.friends();
     // let me_dl_quota = await d.me_dl_quota();
-    let news = await d.news();
+    // // // // let news = await d.news();
     // let me = await d.me();
     let users_kudosu = await d.users_kudosu(9893708);
     let users_scores = await d.users_scores(9893708, 0);
@@ -365,34 +361,5 @@ const userBmType = ['favourite', 'graveyard', 'loved', 'most_played', 'ranked_an
     let users_recent_activity = await d.users_recent_activity(9893708);
     let user = await d.user(9893708);
     // let users = await d.users([9893708, 4504101]);
-
-    // fs.writeFileSync('1.json', JSON.stringify(notifications), 'utf-8');
-    // fs.writeFileSync('2.json', JSON.stringify(rankings), 'utf-8');
-    // fs.writeFileSync('3.json', JSON.stringify(spotlights), 'utf-8');
-    // fs.writeFileSync('4.json', JSON.stringify(beatmapsets_events), 'utf-8');
-    // fs.writeFileSync('5.json', JSON.stringify(beatmapsets_favourites), 'utf-8');
-    // fs.writeFileSync('6.json', JSON.stringify(chat_presence), 'utf-8');
-    // fs.writeFileSync('7.json', JSON.stringify(changelog), 'utf-8');
-    // fs.writeFileSync('8.json', JSON.stringify(reports), 'utf-8');
-    // fs.writeFileSync('9.json', JSON.stringify(rooms), 'utf-8');
-    // fs.writeFileSync('10.json', JSON.stringify(seasonal_backgrounds), 'utf-8');
-    // fs.writeFileSync('11.json', JSON.stringify(scores), 'utf-8');
-    // fs.writeFileSync('12.json', JSON.stringify(beatmaps_scores), 'utf-8');
-    // fs.writeFileSync('13.json', JSON.stringify(beatmaps_lookup), 'utf-8');
-    // fs.writeFileSync('14.json', JSON.stringify(beatmaps), 'utf-8');
-    // fs.writeFileSync('15.json', JSON.stringify(beatmapsets_search), 'utf-8');
-    // fs.writeFileSync('16.json', JSON.stringify(beatmapsets_lookup), 'utf-8');
-    // fs.writeFileSync('17.json', JSON.stringify(beatmapsets_download), 'utf-8');
-    // fs.writeFileSync('18.json', JSON.stringify(beatmapset), 'utf-8');
-    // fs.writeFileSync('19.json', JSON.stringify(friends), 'utf-8');
-    // fs.writeFileSync('20.json', JSON.stringify(me_dl_quota), 'utf-8');
-    fs.writeFileSync('21.json', JSON.stringify(news), 'utf-8');
-    // fs.writeFileSync('22.json', JSON.stringify(me), 'utf-8');
-    // fs.writeFileSync('23.json', JSON.stringify(users_kudosu), 'utf-8');
-    // fs.writeFileSync('24.json', JSON.stringify(users_scores), 'utf-8');
-    // fs.writeFileSync('25.json', JSON.stringify(users_beatmaps), 'utf-8');
-    // fs.writeFileSync('26.json', JSON.stringify(users_recent_activity), 'utf-8');
-    // fs.writeFileSync('27.json', JSON.stringify(user), 'utf-8');
-    // fs.writeFileSync('28.json', JSON.stringify(users), 'utf-8');
   } catch (err) { console.error(err); };
 })();
