@@ -1,7 +1,7 @@
 {
-  "name": "fghgfhsafsaf",
-  "version": "0.6.7",
-  "description": "",
+  "name": "osu-api-extended",
+  "version": "1.0.0",
+  "description": "Package for advanced work with 'osu' api",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -15,14 +15,28 @@
     "type": "git",
     "url": "git+https://github.com/cyperdark/fghgfhsafsaf.git"
   },
-  "keywords": [],
+  "keywords": [
+    "osu",
+    "api",
+    "v1",
+    "v2",
+    "osu-api",
+    "difficulty",
+    "accuracy",
+    "extended",
+    "replay",
+    "diff",
+    "file",
+    "rank",
+    "node",
+    "js"
+  ],
   "author": "cyperdark",
   "license": "MIT",
   "dependencies": {
     "@types/lzma-native": "^4.0.0",
     "@types/node": "^14.14.10",
     "axios": "^0.21.0",
-    "lzma": "^2.3.2",
     "lzma-native": "^6.0.1",
     "node-osr": "^1.2.1",
     "tslint": "^6.1.3"

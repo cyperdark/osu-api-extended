@@ -457,6 +457,109 @@ interface RankingObjectCountry {
   };
 }
 
+interface PpCalcObject {
+  id: {
+    set: number;
+    diff: number;
+  };
+  mods: IdNamed;
+  status: IdNamed;
+  stats: {
+    star: {
+      pure: number;
+      aim: number;
+      speed: number;
+    };
+    ar: number;
+    od: number;
+    cs: number;
+    hp: number;
+    bpm: {
+      api: number;
+      min: number;
+      max: number;
+    };
+    combo: number;
+    time: {
+      full: number;
+      drain: number;
+    };
+  };
+  pp: {
+    current: number;
+    fc: number;
+    acc: {
+      80: number;
+      81: number;
+      82: number;
+      83: number;
+      84: number;
+      85: number;
+      86: number;
+      87: number;
+      88: number;
+      89: number;
+      90: number;
+      91: number;
+      92: number;
+      93: number;
+      94: number;
+      95: number;
+      96: number;
+      97: number;
+      98: number;
+      99: number;
+      100: number;
+    };
+  };
+  data: {
+    artist: string;
+    title: string;
+    creator: IdNamed;
+    favs: number;
+    rating: number;
+    source: string;
+    genre_id: IdNamed;
+    language_id: IdNamed;
+    tags: string;
+    diff: string;
+  };
+  other: {
+    download_unavailable: boolean;
+    audio_unavailable: boolean;
+    storyboard: boolean;
+    video: boolean;
+    packs: string;
+    bg: {
+      full: string;
+      raw: string;
+      slim: {
+        1: string;
+        2: string;
+      };
+      cover: {
+        1: string;
+        2: string;
+      };
+      card: {
+        1: string;
+        2: string;
+      };
+      list: {
+        1: string;
+        2: string;
+      };
+    };
+  };
+  req: {
+    id: number;
+    combo: number;
+    mods: number;
+    acc: number;
+    miss: number;
+  };
+}
+
 /**
  * ---- ==== V1 api
  */
@@ -974,114 +1077,84 @@ interface V2UserKudosuObject {
   };
 }
 
-class Tools {
-  country(id: string): string {
-    const countrys: { flag: string; country: string }[] = JSON.parse(fs.readFileSync('./flags.json', 'utf-8'));
-    const find = countrys.filter((r) => r.flag === id);
-
-    if (find.length > 0) return find[0].country;
-    else return `This country is not supported`;
-  }
-
-  accuracy(obj: AccObject, mode?: number): number {
-    let acc = 0.0;
-
-    switch (mode) {
-      case 1:
-        acc = (100.0 * (2 * obj[300] + obj[100])) / (2 * (obj[300] + obj[100] + obj[0]));
-        break;
-      case 2:
-        acc = (100.0 * (obj[300] + obj[100] + obj[50])) / (obj[300] + obj[100] + obj[50] + obj.katu + obj[0]);
-        break;
-      case 3:
-        acc =
-          (100.0 * (6 * obj.geki + 6 * obj[300] + 4 * obj.katu + 2 * obj[100] + obj[50])) /
-          (6 * (obj[50] + obj[100] + obj[300] + obj[0] + obj.geki + obj.katu));
-        break;
-      default:
-        acc = (100.0 * (6 * obj[300] + 2 * obj[100] + obj[50])) / (6 * (obj[50] + obj[100] + obj[300] + obj[0]));
-        break;
-    }
-
-    return parseFloat(acc.toFixed(2));
-  }
-
-  async diffFile(obj: DiffFile): Promise<boolean> {
-    let file = '';
-    if (obj.path !== undefined) file = `${obj.path}/${obj.id}.osu`;
-    if (fs.existsSync(file)) return false;
-    else {
-      const { data } = await axios.get(`https://osu.ppy.sh/osu/${obj.id}`);
-      fs.writeFileSync(file, data, 'utf-8');
-      return true;
-    }
-  }
-
-  async calc(obj: PpCalc): Promise<> | undefined {
-    const { data } = await axios.get('https://pp.osuck.net/pp', { params: obj });
-    if (data.id !== undefined) {
-      const info = {
-
-      };
-
-      return info;
-    } else return undefined
-  }
-}
-
 class Mods {
+  /**
+   * @param mod Number of the mods
+   * @description Return mods name
+   */
   id(mod: number): string {
     const codes: { [key: string]: string } = {
-      '1': 'NF',
-      '2': 'EZ',
-      '4': 'TD',
-      '8': 'HD',
-      '16': 'HR',
-      '32': 'SD',
-      '64': 'DT',
-      '128': 'RX',
-      '256': 'HT',
-      '576': 'NC',
-      '1024': 'FL',
-      '2048': 'AT',
-      '4096': 'SO',
-      '8192': 'AP',
-      '16416': 'PF',
-      '32768': '4K',
-      '65536': '5K',
-      '131072': '6K',
-      '262144': '7K',
-      '524288': '8K',
-      '1048576': 'Fl',
-      '2097152': 'RD',
-      '4194304': 'LM',
-      '8388608': 'Target',
-      '16777216': '9K',
-      '33554432': 'KeyCoop',
-      '67108864': '1K',
-      '134217728': '3K',
-      '268435456': '2K',
-      '536870912': 'ScoreV2',
-      '1073741824': 'LastMod',
-    };
+        1: 'NF',
+        2: 'EZ',
+        4: 'TD',
+        8: 'HD',
+        16: 'HR',
+        32: 'SD',
+        64: 'DT',
+        128: 'RX',
+        256: 'HT',
+        576: 'NC',
+        1024: 'FL',
+        2048: 'AT',
+        4096: 'SO',
+        8192: 'AP',
+        16416: 'PF',
+        32768: '4K',
+        65536: '5K',
+        131072: '6K',
+        262144: '7K',
+        524288: '8K',
+        1048576: 'Fl',
+        2097152: 'RD',
+        4194304: 'LM',
+        8388608: 'Target',
+        16777216: '9K',
+        33554432: 'KeyCoop',
+        67108864: '1K',
+        134217728: '3K',
+        268435456: '2K',
+        536870912: 'ScoreV2',
+        1073741824: 'LastMod',
+      },
+      allMods: { [key: string]: number } = {
+        ez: 0,
+        hd: 1,
+        dt: 2,
+        nc: 2,
+        ht: 2,
+        hr: 3,
+        so: 4,
+        sd: 5,
+        pf: 5,
+        fl: 6,
+        nf: 7,
+      };
+
+    let enabled = [];
     let cache = mod;
-    const enabled = [];
     let text = '';
 
     const values = Object.keys(codes).map((a) => Number(a));
 
     for (let i = values.length - 1; i >= 0; i--) {
-      if (cache >= values[i]) {
-        cache -= values[i];
-        enabled.push(codes[values[i]]);
+      const v = values[i];
+      if (cache >= v) {
+        const mode = codes[v];
+        enabled.push({ i: allMods[mode.toLowerCase()], n: mode });
+        cache -= v;
       }
     }
-    enabled.forEach((m) => (text += m));
+    enabled = enabled.sort((a, b) => (a.i > b.i ? 1 : b.i > a.i ? -1 : 0));
+    enabled.filter((r) => (text += r.n));
 
     if (text === '') text = 'NM';
     return text;
   }
 
+  /**
+   * @param mod Name of the mods
+   * @description Return mods number
+   */
   name(mod: string): number | undefined {
     let modNumber = 0;
 
@@ -1130,9 +1203,182 @@ class Mods {
     return modNumber;
   }
 }
-
-const tools = new Tools();
 const mods = new Mods();
+
+class Tools {
+  /**
+   * @param id Country code
+   * @description Return country name from country code
+   */
+  country(id: string): string {
+    const countrys: { flag: string; country: string }[] = JSON.parse(fs.readFileSync('./flags.json', 'utf-8'));
+    const find = countrys.filter((r) => r.flag === id);
+
+    if (find.length > 0) return find[0].country;
+    else return `This country is not supported`;
+  }
+
+  /**
+   * @param obj 300: Hit 300\
+   * geki: Hit Geku\
+   * 100: Hit 100\
+   * katu: Hit Katu\
+   * 50: Hit 50\
+   * 0: Hit 0
+   * @param mode 0 = osu!\
+   * 1 = Taiko\
+   * 2 = CtB\
+   * 3 = osu!mania
+   * @description Calculating accuracy from hits array
+   */
+  accuracy(obj: AccObject, mode?: number): number {
+    let acc = 0.0;
+
+    switch (mode) {
+      case 1:
+        acc = (100.0 * (2 * obj[300] + obj[100])) / (2 * (obj[300] + obj[100] + obj[0]));
+        break;
+      case 2:
+        acc = (100.0 * (obj[300] + obj[100] + obj[50])) / (obj[300] + obj[100] + obj[50] + obj.katu + obj[0]);
+        break;
+      case 3:
+        acc =
+          (100.0 * (6 * obj.geki + 6 * obj[300] + 4 * obj.katu + 2 * obj[100] + obj[50])) /
+          (6 * (obj[50] + obj[100] + obj[300] + obj[0] + obj.geki + obj.katu));
+        break;
+      default:
+        acc = (100.0 * (6 * obj[300] + 2 * obj[100] + obj[50])) / (6 * (obj[50] + obj[100] + obj[300] + obj[0]));
+        break;
+    }
+
+    return parseFloat(acc.toFixed(2));
+  }
+
+  /**
+   * @param obj id: beatmap id\
+   * path: Path to replays folder
+   * @description Download .osu file of beatmap by id
+   */
+  async diffFile(obj: DiffFile): Promise<boolean> {
+    let file = '';
+    if (obj.path !== undefined) file = `${obj.path}/${obj.id}.osu`;
+    if (fs.existsSync(file)) return false;
+    else {
+      const { data } = await axios.get(`https://osu.ppy.sh/osu/${obj.id}`);
+      fs.writeFileSync(file, data, 'utf-8');
+      return true;
+    }
+  }
+
+  /**
+   * @param id beatmap id
+   * @param mods Number of the mods
+   * @param combo Max combo of the play
+   * @param miss Misses of the play
+   * @param acc Accuracy of the play
+   * @description Rest api for caclculating pp & beatmap stats
+   */
+  async calc(obj: PpCalc): Promise<PpCalcObject> | undefined {
+    const { data } = await axios.get('https://pp.osuck.net/pp', { params: obj });
+    if (data.id !== undefined) return data;
+    else return undefined;
+  }
+
+  /**
+   * Calculate mods
+   * @param {Object} hits { geki, katu, 300, 100, 50, 0 }
+   * @param {Number|String} m Mods name
+   * @param mode 0 = osu!\
+   * 1 = Taiko\
+   * 2 = CtB\
+   * 3 = osu!mania
+   */
+  rank(
+    hits: {
+      300: number;
+      geki: number;
+      100: number;
+      katu: number;
+      50: number;
+      0: number;
+    },
+    m: string,
+    mode: number,
+  ): string {
+    const hdfl = m.toLowerCase().indexOf('hd') > -1 ? true : m.toLowerCase().indexOf('fl') > -1 ? true : false;
+    const params = {
+      totalHits: 0,
+      acc: 0.0,
+      ratio300: 0,
+      ratio50: 0,
+      rank: '',
+    };
+    switch (mode) {
+      case 0:
+        params.totalHits = +hits[50] + +hits[100] + +hits[300] + +hits[0];
+        params.acc =
+          params.totalHits > 0 ? (+hits[50] * 50 + +hits[100] * 100 + +hits[300] * 300) / (params.totalHits * 300) : 1;
+        (params.ratio300 = +hits[300] / params.totalHits), (params.ratio50 = +hits[50] / params.totalHits);
+
+        if (params.ratio300 === 1) params.rank = hdfl === true ? 'XH' : 'X';
+        else if (params.ratio300 > 0.9 && params.ratio50 <= 0.01 && hits[0] === 0)
+          params.rank = hdfl === true ? 'SH' : 'S';
+        else if ((params.ratio300 > 0.8 && hits[0] === 0) || params.ratio300 > 0.9) params.rank = 'A';
+        else if ((params.ratio300 > 0.7 && hits[0] === 0) || params.ratio300 > 0.8) params.rank = 'B';
+        else if (params.ratio300 > 0.6) params.rank = 'C';
+        else params.rank = 'D';
+
+        break;
+
+      case 1:
+        params.totalHits = +hits[50] + +hits[100] + +hits[300] + +hits[0];
+        params.acc = params.totalHits > 0 ? (+hits[100] * 150 + +hits[300] * 300) / (params.totalHits * 300) : 1;
+        (params.ratio300 = +hits[300] / params.totalHits), (params.ratio50 = +hits[50] / params.totalHits);
+
+        if (params.ratio300 === 1) params.rank = hdfl === true ? 'XH' : 'X';
+        else if (params.ratio300 > 0.9 && params.ratio50 <= 0.01 && hits[0] === 0)
+          params.rank = hdfl === true ? 'SH' : 'S';
+        else if ((params.ratio300 > 0.8 && hits[0] === 0) || params.ratio300 > 0.9) params.rank = 'A';
+        else if ((params.ratio300 > 0.7 && hits[0] === 0) || params.ratio300 > 0.8) params.rank = 'B';
+        else if (params.ratio300 > 0.6) params.rank = 'C';
+        else params.rank = 'D';
+
+        break;
+
+      case 2:
+        params.totalHits = +hits[50] + +hits[100] + +hits[300] + +hits[0] + +hits.katu;
+        params.acc = params.totalHits > 0 ? (+hits[50] + +hits[100] + +hits[300]) / params.totalHits : 1;
+
+        if (params.acc === 1) params.rank = hdfl === true ? 'XH' : 'X';
+        else if (params.acc > 0.98) params.rank = hdfl === true ? 'SH' : 'S';
+        else if (params.acc > 0.94) params.rank = 'A';
+        else if (params.acc > 0.9) params.rank = 'B';
+        else if (params.acc > 0.85) params.rank = 'C';
+        else params.rank = 'D';
+
+        break;
+
+      case 3:
+        params.totalHits = +hits[50] + +hits[100] + +hits[300] + +hits[0] + +hits.geki + +hits.katu;
+        params.acc =
+          params.totalHits > 0
+            ? (+hits[50] * 50 + +hits[100] * 100 + +hits.katu * 200 + (+hits[300] + hits.geki) * 300) /
+              (params.totalHits * 300)
+            : 1;
+
+        if (params.acc === 1) params.rank = hdfl === true ? 'XH' : 'X';
+        else if (params.acc > 0.95) params.rank = hdfl === true ? 'SH' : 'S';
+        else if (params.acc > 0.9) params.rank = 'A';
+        else if (params.acc > 0.8) params.rank = 'B';
+        else if (params.acc > 0.7) params.rank = 'C';
+        else params.rank = 'D';
+
+        break;
+    }
+    return params.rank;
+  }
+}
+const tools = new Tools();
 
 class V1 {
   key: string;
@@ -1150,6 +1396,29 @@ class V1 {
     });
   }
 
+  /**
+   * Get beatmap data
+   * @param {Object} obj {\
+   * s: "beatmapset id",\
+   * b: "beatmap id",\
+   * u: "User id or name",\
+   * m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0",\
+   * a: "0 = not included, 1 = included",\
+   * h: "beatmap hash",\
+   * mods: "mods id",\
+   * since: "return all beatmaps ranked or loved since this date. Must be a MySQL date. In UTC",\
+   * type: "specify if u is a user_id or a username",\
+   * limit: "0-500",
+   * }
+   * @description \
+   * a: "include converted beatmaps? Only has an effect if m is chosen and not 0. Optional, default: 0"\
+   * \
+   * h: "example of hash: a5b99395a42bd55bc5eb1d2411cbdf8b" \
+   * \
+   * mods: "mods that applies to the beatmap requested. Optional, default is 0. (Refer to the Mods section below, note that requesting multiple mods is supported, but it should not contain any non-difficulty-increasing mods or the return value will be invalid.)""\
+   * \
+   * type: "Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)"
+   */
   async beatmap(obj: Bm): Promise<V1BeatmapObject> | null {
     const { data } = await this.api.get('/get_beatmaps', { params: obj });
     if (data.length > 0) {
@@ -1201,7 +1470,7 @@ class V1 {
         }
       };
 
-      const info: BmObject = {
+      const info: V1BeatmapObject = {
         id: {
           set: +data[0].beatmapset_id,
           diff: +data[0].beatmap_id,
@@ -1315,6 +1584,17 @@ class V1 {
     } else return null;
   }
 
+  /**
+   * Get user data
+   * @param {Object} obj {\
+   * u: "User id or name",\
+   * m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0",\
+   * type: "specify if u is a user_id or a username",\
+   * event_days: "1-31. Default: 1",\
+   * }
+   * @description \
+   * type: "Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)"
+   */
   async user(obj: User): Promise<V1UserObject> | null {
     const { data } = await this.api.get('/get_user', { params: obj });
     if (data.length > 0) {
@@ -1332,7 +1612,7 @@ class V1 {
           epicfactor: +d.epicfactor,
         };
       });
-      const info: UserObject = {
+      const info: V1UserObject = {
         id: +data.user_id,
         name: data.username,
         pp: data.pp_raw,
@@ -1374,6 +1654,19 @@ class V1 {
     } else return null;
   }
 
+  /**
+   * Get scores data
+   * @param {Object} obj {\
+   * b: "beatmap id", \
+   * u: "User id or name", \
+   * m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0", \
+   * mods: "Mods id", \
+   * type: "specify if u is a user_id or a username",\
+   * limit: "range between 1 and 100 - defaults to 50", \
+   * }
+   * @description \
+   * type: "Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)"
+   */
   async scores(obj: Scores): Promise<V1ScoresObject[]> {
     const { data } = await this.api.get('/get_scores', { params: obj });
     if (data.length > 0) {
@@ -1388,7 +1681,7 @@ class V1 {
           50: +d.count50,
           0: +d.countmiss,
         };
-        const score: ScoresObject = {
+        const score: V1ScoresObject = {
           date: d.date,
           rank: d.rank,
           user: {
@@ -1419,6 +1712,17 @@ class V1 {
     } else return [];
   }
 
+  /**
+   * Get best scores
+   * @param {Object} obj {\
+   * u: "User id or name",\
+   * m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0",\
+   * limit: "range between 1 and 100 - defaults to 10",\
+   * type: "specify if u is a user_id or a username",\
+   * }
+   * @description \
+   * type: "Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)"
+   */
   async best(obj: Best): Promise<V1ScoresBestObject[]> {
     const { data } = await this.api.get('/get_user_best', { params: obj });
     if (data.length > 0) {
@@ -1433,7 +1737,7 @@ class V1 {
           50: +d.count50,
           0: +d.countmiss,
         };
-        const score: ScoresBestObject = {
+        const score: V1ScoresBestObject = {
           date: d.date,
           beatmap: +d.beatmap_id,
           rank: d.rank,
@@ -1464,6 +1768,17 @@ class V1 {
     } else return [];
   }
 
+  /**
+   * Get recent scores
+   * @param {Object} obj {\
+   * u: "User id or name",\
+   * m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional, default: 0",\
+   * limit: "range between 1 and 100 - defaults to 10",\
+   * type: "specify if u is a user_id or a username",\
+   * }
+   * @description \
+   * type: "Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)"
+   */
   async recent(obj: Recent): Promise<V1ScoresRecentObject[]> {
     const { data } = await this.api.get('/get_user_recent', { params: obj });
     if (data.length > 0) {
@@ -1478,7 +1793,7 @@ class V1 {
           50: +d.count50,
           0: +d.countmiss,
         };
-        const score: ScoresRecentObject = {
+        const score: V1ScoresRecentObject = {
           date: d.date,
           beatmap: +d.beatmap_id,
           rank: d.rank,
@@ -1506,6 +1821,12 @@ class V1 {
     } else return [];
   }
 
+  /**
+   * Get match data
+   * @param {Object} obj {\
+   * mp: "match id to get information from (required).",\
+   * }
+   */
   async match(obj: Match): Promise<V1MatchObject> | null {
     const { data } = await this.api.get('/get_match', { params: obj });
     if (data.length > 0) {
@@ -1514,7 +1835,7 @@ class V1 {
       const team = ['Head to head', 'Tag Co-op', 'Team vs', 'Tag Team vs'];
       const teams = ['no team', 'blue', 'red'];
 
-      const match: MatchObject = {
+      const match: V1MatchObject = {
         match: {
           id: +data.match.match_id,
           name: data.match.name,
@@ -1598,6 +1919,21 @@ class V1 {
     } else return null;
   }
 
+  /**
+   * Get replay
+   * @param {Object} obj {\
+   * b: "beatmap id",\
+   * u: "User id or Username",\
+   * m: "mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania). Optional",\
+   * mods: "mods id",\
+   * type: "specify if u is a user_id or a username",\
+   * }
+   * @param {String} path path to folder. Optional, example: './replays'
+   * @description \
+   * mods: "mods that applies to the beatmap requested. Optional, default is 0. (Refer to the Mods section below, note that requesting multiple mods is supported, but it should not contain any non-difficulty-increasing mods or the return value will be invalid.)""\
+   * \
+   * type: "Use string for usernames or id for user_ids. Optional, default behaviour is automatic recognition (may be problematic for usernames made up of digits only)"
+   */
   async replay(obj: Replay): Promise<string> {
     let file = '';
     if (obj.path !== undefined) file = `${obj.path}/${obj.b}-${obj.u}_${obj.mods}.osr`;
@@ -1704,6 +2040,21 @@ class V2 {
     return data;
   }
 
+  /**
+   * @param mode 0 - 'osu'\
+   * 1 - 'taiko'\
+   * 2 - 'fruits'\
+   * 3 - 'mania'
+   * @param type 0 - 'performance'\
+   * 1 - 'country'\
+   * 2 - 'score'\
+   * 3 - 'charts'
+   * @param obj country - Filter ranking by country code. Only available for type of performance\
+   * filter - Either all (default) or friends\
+   * cursor - null\
+   * spotlight - The id of the spotlight if type is charts. Ranking for latest spotlight will be returned if not specified\
+   * variant - Filter ranking to specified mode variant. For mode of mania, it's either 4k or 7k. Only available for type of performance.
+   */
   async rankings(
     mode: number,
     type: number,
@@ -1729,16 +2080,25 @@ class V2 {
     return data;
   }
 
+  /**
+   * @param id beatmap id
+   */
   async beatmap(id: number): Promise<V2BeatmapObject> {
     const { data } = await this.api.get(`/beatmaps/${id}`);
     return data;
   }
 
+  /**
+   * @param id beatmap id
+   */
   async beatmap_scores(id: number): Promise<V2BeatmapScoresObject> {
     const { data } = await this.api.get(`/beatmaps/${id}/scores`);
     return data;
   }
 
+  /**
+   * @param id beatmapset id
+   */
   async beatmapset(id: number): Promise<V2BeatmapSetObject> {
     const { data } = await this.api.get(`/beatmapsets/${id}`);
     return data;
@@ -1754,11 +2114,23 @@ class V2 {
     return data;
   }
 
+  /**
+   * @param id User id
+   * @param mode 0 - 'osu'\
+   * 1 - 'taiko'\
+   * 2 - 'fruits'\
+   * 3 - 'mania'
+   */
   async user(id: number, mode: number): Promise<V2UserObject> {
     const { data } = await this.api.get(`/users/${id}${mode ? `/${modesType[mode]}` : ''}`);
     return data;
   }
 
+  /**
+   * @param id User id
+   * @param obj limit - Maximum number of results\
+   * offset - Result offset for pagination
+   */
   async user_recent_activity(
     id: number,
     obj: { limit: number; offset: number },
@@ -1767,6 +2139,16 @@ class V2 {
     return data;
   }
 
+  /**
+   * @param id User id
+   * @param type 0 - 'best'\
+   * 1 - 'firsts'\
+   * 2 - 'recent'
+   * @param obj include_fails - Only for recent scores, include scores of failed plays. Set to 1 to include them. Defaults to 0\
+   * mode - GameMode (osu, fruits, mania, taiko) of the scores to be returned. Defaults to the specified user's mode\
+   * limit - Maximum number of results\
+   * offset - Result offset for pagination\
+   */
   async user_scores(
     id: number,
     type: number,
@@ -1776,6 +2158,17 @@ class V2 {
     return data;
   }
 
+  /**
+   * @param id User id
+   * @param type 0 - 'favourite'\
+   * 1 - 'graveyard'\
+   * 2 - 'loved'\
+   * 3 - 'most_played'\
+   * 4 - 'ranked_and_approved'\
+   * 5 - 'unranked'
+   * @param obj limit - Maximum number of results\
+   * offset - Result offset for pagination\
+   */
   async user_beatmaps(
     id: number,
     type: number,
@@ -1785,10 +2178,13 @@ class V2 {
     return data;
   }
 
+  /**
+   * @param id User id
+   */
   async user_kudosu(id: number): Promise<V2UserKudosuObject[]> {
     const { data } = await this.api.get(`/users/${id}/kudosu`);
     return data;
   }
 }
 
-export { V1, V2 };
+export { V1, V2, mods, tools };

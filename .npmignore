@@ -1,5 +1,6 @@
 test
 src
+index.js
 tsconfig.json
 tslint.json
 .prettierrc
