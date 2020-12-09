@@ -1,4 +1,4 @@
-import { AxiosInstance } from "axios";
+import { AxiosInstance } from 'axios';
 
 const lzma = require('lzma-native');
 const osr = require('node-osr');
@@ -1044,13 +1044,13 @@ interface RanksGrades {
 
 interface BeatmapCoversObj {
   cover: string;
-  "cover@2x": string;
+  'cover@2x': string;
   card: string;
-  "card@2x": string;
+  'card@2x': string;
   list: string;
-  "list@2x": string;
+  'list@2x': string;
   slimcover: string;
-  "slimcover@2x": string;
+  'slimcover@2x': string;
 }
 
 interface NewsPosts {
@@ -1080,7 +1080,7 @@ interface StreamsObject {
       id: number;
       name: string;
       display_name: string;
-      is_featured: boolean
+      is_featured: boolean;
     };
   };
   user_count: number;
@@ -1117,11 +1117,15 @@ interface ChangelogEntries {
     id: number;
     display_name: string;
     github_url: string;
-    osu_username: null,
-    user_id: null,
-    user_url: null
+    osu_username: null;
+    user_id: null;
+    user_url: null;
   };
 }
+
+/**
+ * ---- ==== User
+ */
 
 interface UserSmall {
   avatar_url: string;
@@ -1162,16 +1166,115 @@ interface UserShort {
   };
 }
 
+/**
+ * ---- ==== Beatmap
+ */
+
+interface BmSetShort {
+  artist: string;
+  artist_unicode: string;
+  covers: BeatmapCoversObj;
+  creator: string;
+  favourite_count: number;
+  hype: null;
+  id: number;
+  play_count: number;
+  preview_url: string;
+  source: string;
+  status: string;
+  title: string;
+  title_unicode: string;
+  user_id: number;
+  video: boolean;
+}
+interface BmSetShortUser extends BmSetShort {
+  user: UserSmall;
+}
+
+interface BmSetFull {
+  artist: string;
+  artist_unicode: string;
+  covers: BeatmapCoversObj;
+  creator: string;
+  favourite_count: number;
+  hype: null;
+  id: number;
+  play_count: number;
+  preview_url: string;
+  source: string;
+  status: string;
+  title: string;
+  title_unicode: string;
+  user_id: number;
+  video: boolean;
+  availability: {
+    download_disabled: boolean;
+    more_information: null;
+  };
+  bpm: number;
+  can_be_hyped: boolean;
+  discussion_enabled: boolean;
+  discussion_locked: boolean;
+  is_scoreable: boolean;
+  last_updated: string;
+  legacy_thread_url: string;
+  nominations_summary: {
+    current: number;
+    required: number;
+  };
+  ranked: number;
+  ranked_date: null | string;
+  storyboard: boolean;
+  submitted_date: string;
+  tags: string;
+}
+interface BmSetFullRatings extends BmSetFull {
+  ratings: number[];
+}
+interface BmSetFullBm extends BmSetFull {
+  beatmaps: BmShort[];
+}
+
+interface BmShort {
+  difficulty_rating: number;
+  id: number;
+  mode: string;
+  total_length: number;
+  version: string;
+  accuracy: number;
+  ar: number;
+  beatmapset_id: number;
+  bpm: number;
+  convert: boolean;
+  count_circles: number;
+  count_sliders: number;
+  count_spinners: number;
+  cs: number;
+  deleted_at: null | string;
+  drain: number;
+  hit_length: number;
+  is_scoreable: boolean;
+  last_updated: string;
+  mode_int: number;
+  passcount: number;
+  playcount: number;
+  ranked: number;
+  status: string;
+  url: string;
+}
+interface BmShortCombo extends BmShort {
+  max_combo: number;
+}
+interface BmShortComboFails extends BmShort {
+  failtimes: {
+    fail: number[];
+    exit: number[];
+  };
+  max_combo: number;
+}
 
 /**
  * ---- ==== Special END
- */
-
-
-
-
-/**
- * ---- ==== News
  */
 
 interface V2NewsObject {
@@ -1186,102 +1289,20 @@ interface V2NewsObject {
   };
 }
 
-/**
- * ---- ==== News END
- */
-
-
-
-/**
- * ---- ==== Changelog
- */
-
 interface V2ChangelogObject {
   streams: StreamsObject[];
   builds: BuildsObject[];
   search: {
-    stream: null,
-    from: null,
-    to: null,
-    max_id: null,
-    limit: number
+    stream: null;
+    from: null;
+    to: null;
+    max_id: null;
+    limit: number;
   };
 }
 
-/**
- * ---- ==== Changelog END
- */
-
-
-
-/**
- * ---- ==== rankings 
- */
 interface V2RankingsObject {
-  beatmapsets?: {
-    artist: string;
-    artist_unicode: string;
-    covers: BeatmapCoversObj;
-    creator: string;
-    favourite_count: number;
-    hype: null;
-    id: number;
-    play_count: number;
-    preview_url: string;
-    source: string;
-    status: string;
-    title: string;
-    title_unicode: string;
-    user_id: number;
-    video: boolean;
-    availability: {
-      download_disabled: boolean;
-      more_information: null;
-    },
-    bpm: number;
-    can_be_hyped: boolean;
-    discussion_enabled: boolean;
-    discussion_locked: boolean;
-    is_scoreable: boolean;
-    last_updated: string;
-    legacy_thread_url: string;
-    nominations_summary: {
-      current: number;
-      required: number;
-    },
-    ranked: number;
-    ranked_date: string;
-    storyboard: boolean;
-    submitted_date: string;
-    tags: string;
-    beatmaps: {
-      difficulty_rating: number;
-      id: number;
-      mode: string;
-      total_length: number;
-      version: string;
-      accuracy: number;
-      ar: number;
-      beatmapset_id: number;
-      bpm: number;
-      convert: boolean;
-      count_circles: number;
-      count_sliders: number;
-      count_spinners: number;
-      cs: number;
-      deleted_at: null | string;
-      drain: number;
-      hit_length: number;
-      is_scoreable: boolean;
-      last_updated: string;
-      mode_int: number;
-      passcount: number;
-      playcount: number;
-      ranked: number;
-      status: string;
-      url: string;
-    }[];
-  };
+  beatmapsets?: BmSetFullBm;
   cursor?: {
     page: number;
   };
@@ -1321,16 +1342,6 @@ interface RankingObjectCountry {
   };
 }
 
-/**
- * ---- ==== rankings END
- */
-
-
-
-/**
- * ---- ==== spotlights
- */
-
 interface V2SpotlightsObject {
   spotlights: {
     id: boolean;
@@ -1342,16 +1353,6 @@ interface V2SpotlightsObject {
   }[];
 }
 
-/**
- * ---- ==== spotlights END
- */
-
-
-
-/**
- * ---- ==== seasonal_backgrounds
- */
-
 interface V2SeasonalBackgroundsObject {
   ends_at: string;
   backgrounds: {
@@ -1360,96 +1361,9 @@ interface V2SeasonalBackgroundsObject {
   }[];
 }
 
-/**
- * ---- ==== seasonal_backgrounds END
- */
-
-
-
-/**
- * ---- ==== beatmap
- */
-
-interface V2BeatmapObject {
-  difficulty_rating: number;
-  id: number;
-  mode: string;
-  total_length: number;
-  version: string;
-  accuracy: number;
-  ar: number;
-  beatmapset_id: number;
-  bpm: number;
-  convert: boolean;
-  count_circles: number;
-  count_sliders: number;
-  count_spinners: number;
-  cs: number;
-  deleted_at: null | string;
-  drain: number;
-  hit_length: number;
-  is_scoreable: boolean;
-  last_updated: string;
-  mode_int: number;
-  passcount: number;
-  playcount: number;
-  ranked: number;
-  status: string;
-  url: string;
-  beatmapset: {
-    artist: string;
-    artist_unicode: string;
-    covers: BeatmapCoversObj;
-    creator: string;
-    favourite_count: number;
-    hype: null;
-    id: number;
-    play_count: number;
-    preview_url: string;
-    source: string;
-    status: string;
-    title: string;
-    title_unicode: string;
-    user_id: number;
-    video: boolean;
-    availability: {
-      download_disabled: boolean;
-      more_information: null | string;
-    };
-    bpm: number;
-    can_be_hyped: boolean;
-    discussion_enabled: boolean;
-    discussion_locked: boolean;
-    is_scoreable: boolean;
-    last_updated: string;
-    legacy_thread_url: string;
-    nominations_summary: {
-      current: number;
-      required: number;
-    };
-    ranked: number;
-    ranked_date: string;
-    storyboard: boolean;
-    submitted_date: string;
-    tags: string;
-    ratings: number[];
-  };
-  failtimes: {
-    fail: number[];
-    exit: number[];
-  };
-  max_combo: number;
+interface V2BeatmapObject extends BmShortComboFails {
+  beatmapset: BmSetFullRatings;
 }
-
-/**
- * ---- ==== beatmap END
- */
-
-
-
-/**
- * ---- ==== 
- */
 
 interface V2BeatmapScoresObject {
   id: number;
@@ -1474,178 +1388,22 @@ interface V2BeatmapScoresObject {
   mode: string;
   mode_int: number;
   replay: boolean;
-  beatmap: {
-    difficulty_rating: number;
-    id: number;
-    mode: string;
-    total_length: number;
-    version: string;
-    accuracy: number;
-    ar: number;
-    beatmapset_id: number;
-    bpm: number;
-    convert: boolean;
-    count_circles: number;
-    count_sliders: number;
-    count_spinners: number;
-    cs: number;
-    deleted_at: null | string;
-    drain: number;
-    hit_length: number;
-    is_scoreable: boolean;
-    last_updated: string;
-    mode_int: number;
-    passcount: number;
-    playcount: number;
-    ranked: number;
-    status: string;
-    url: string;
-  };
+  beatmap: BmShort;
   user: UserShort;
 }
 
-/**
- * ---- ====  END
- */
-
-
-
-/**
- * ---- ==== beatmapSet
- */
-
-interface V2BeatmapSetObject {
-  artist: string;
-  artist_unicode: string;
-  covers: BeatmapCoversObj;
-  creator: string;
-  favourite_count: number;
-  hype: null;
-  id: number;
-  play_count: number;
-  preview_url: string;
-  source: string;
-  status: string;
-  title: string;
-  title_unicode: string;
-  user_id: number;
-  video: boolean;
-  availability: {
-    download_disabled: boolean;
-    more_information: null
-  };
-  bpm: number;
-  can_be_hyped: boolean;
-  discussion_enabled: boolean;
-  discussion_locked: boolean;
-  is_scoreable: boolean;
-  last_updated: string;
-  legacy_thread_url: string;
-  nominations_summary: {
-    current: number;
-    required: number;
-  };
-  ranked: number;
-  ranked_date: string;
-  storyboard: boolean;
-  submitted_date: string;
-  tags: string;
-  beatmaps: {
-    difficulty_rating: number;
-    id: number;
-    mode: string;
-    total_length: number;
-    version: string;
-    accuracy: number;
-    ar: number;
-    beatmapset_id: number;
-    bpm: number;
-    convert: boolean;
-    count_circles: number;
-    count_sliders: number;
-    count_spinners: number;
-    cs: number;
-    deleted_at: null | string;
-    drain: number;
-    hit_length: number;
-    is_scoreable: boolean;
-    last_updated: string;
-    mode_int: number;
-    passcount: number;
-    playcount: number;
-    ranked: number;
-    status: string;
-    url: string;
-    failtimes: {
-      fail: number[];
-      exit: number[];
-    };
-    max_combo: number;
-  }[];
-  converts: {
-    difficulty_rating: number;
-    id: number;
-    mode: string;
-    total_length: number;
-    version: string;
-    accuracy: number;
-    ar: number;
-    beatmapset_id: number;
-    bpm: number;
-    convert: boolean;
-    count_circles: number;
-    count_sliders: number;
-    count_spinners: number;
-    cs: number;
-    deleted_at: null | string;
-    drain: number;
-    hit_length: number;
-    is_scoreable: boolean;
-    last_updated: string;
-    mode_int: number;
-    passcount: number;
-    playcount: number;
-    ranked: number;
-    status: string;
-    url: string;
-    failtimes: {
-      fail: number[];
-      exit: number[];
-    };
-    max_combo: number;
-  }[];
+interface V2BeatmapSetObject extends BmSetFull {
+  beatmaps: BmShortComboFails[];
+  converts: BmShortComboFails[];
   description: {
     description: string;
   };
   genre: IdNamed;
   language: IdNamed;
   ratings: number[];
-  recent_favourites: {
-    avatar_url: string;
-    country_code: string;
-    default_group: string;
-    id: number;
-    is_active: boolean;
-    is_bot: boolean;
-    is_online: boolean;
-    is_supporter: boolean;
-    last_visit: string;
-    pm_friends_only: boolean;
-    profile_colour: null | string;
-    username: string;
-  }[];
+  recent_favourites: UserSmall[];
   user: UserSmall;
 }
-
-/**
- * ---- ==== beatmapSet END
- */
-
-
-
-/**
- * ---- ==== beatmapsEvents
- */
 
 interface V2BeatmapsEventsObject {
   id: number;
@@ -1656,7 +1414,7 @@ interface V2BeatmapsEventsObject {
     new_vote: {
       user_id: number;
       score: number;
-    },
+    };
     votes: {
       user_id: number;
       score: number;
@@ -1664,27 +1422,7 @@ interface V2BeatmapsEventsObject {
   };
   created_at: string;
   user_id: number;
-  beatmapset: {
-    artist: string;
-    artist_unicode: string;
-    covers: BeatmapCoversObj,
-    creator: string;
-    favourite_count: number;
-    hype: {
-      current: number;
-      required: number;
-    },
-    id: number;
-    play_count: number;
-    preview_url: string;
-    source: string;
-    status: string;
-    title: string;
-    title_unicode: string;
-    user_id: number;
-    video: boolean;
-    user: UserSmall;
-  };
+  beatmapset: BmSetShortUser;
   discussion?: {
     id: number;
     beatmapset_id: number;
@@ -1713,95 +1451,13 @@ interface V2BeatmapsEventsObject {
       created_at: string;
       updated_at: string;
       deleted_at: NulledString;
-    }
+    };
   };
 }
 
-/**
- * ---- ==== beatmapsEvents END
- */
-
-
-
-/**
- * ---- ==== beatmapsSearch
- */
-
-interface V2BeatmapsSearchObject {
-  artist: string;
-  artist_unicode: string;
-  covers: BeatmapCoversObj;
-  creator: string;
-  favourite_count: number;
-  hype: null;
-  id: number;
-  play_count: number;
-  preview_url: string;
-  source: string;
-  status: string;
-  title: string;
-  title_unicode: string;
-  user_id: number;
-  video: boolean;
-  availability: {
-    download_disabled: boolean;
-    more_information: NulledString;
-  };
-  bpm: number;
-  can_be_hyped: boolean;
-  discussion_enabled: boolean;
-  discussion_locked: boolean;
-  is_scoreable: boolean;
-  last_updated: string;
-  legacy_thread_url: string;
-  nominations_summary: {
-    current: number;
-    required: number;
-  };
-  ranked: number;
-  ranked_date: string;
-  storyboard: boolean;
-  submitted_date: string;
-  tags: string;
-  beatmaps: {
-    difficulty_rating: number;
-    id: number;
-    mode: string;
-    total_length: number;
-    version: string;
-    accuracy: number;
-    ar: number;
-    beatmapset_id: number;
-    bpm: number;
-    convert: boolean;
-    count_circles: number;
-    count_sliders: number;
-    count_spinners: number;
-    cs: number;
-    deleted_at: null | string;
-    drain: number;
-    hit_length: number;
-    is_scoreable: boolean;
-    last_updated: string;
-    mode_int: number;
-    passcount: number;
-    playcount: number;
-    ranked: number;
-    status: string;
-    url: string;
-    max_combo: number;
-  }[];
+interface V2BeatmapsSearchObject extends BmSetFull {
+  beatmaps: BmShortCombo[];
 }
-
-/**
- * ---- ==== beatmapsSearch END
- */
-
-
-
-/**
- * ---- ==== user
- */
 
 interface V2UserObject {
   avatar_url: string;
@@ -1933,16 +1589,6 @@ interface V2UserObject {
   };
 }
 
-/**
- * ---- ==== user END
- */
-
-
-
-/**
- * ---- ==== userRecentActivity
- */
-
 interface V2UserRecentActivityObject {
   created_at: string;
   id: number;
@@ -1978,16 +1624,6 @@ interface V2UserRecentActivityObject {
   };
 }
 
-/**
- * ---- ==== userRecentActivity END
- */
-
-
-
-/**
- * ---- ==== UserScores
- */
-
 interface V2UserScoresObject {
   id: number;
   best_id: null | number;
@@ -2011,50 +1647,8 @@ interface V2UserScoresObject {
   mode: string;
   mode_int: number;
   replay: boolean;
-  beatmap: {
-    difficulty_rating: number;
-    id: number;
-    mode: string;
-    total_length: number;
-    version: string;
-    accuracy: number;
-    ar: number;
-    beatmapset_id: number;
-    bpm: number;
-    convert: boolean;
-    count_circles: number;
-    count_sliders: number;
-    count_spinners: number;
-    cs: number;
-    deleted_at: null | string;
-    drain: number;
-    hit_length: number;
-    is_scoreable: boolean;
-    last_updated: string;
-    mode_int: number;
-    passcount: number;
-    playcount: number;
-    ranked: number;
-    status: string;
-    url: string;
-  };
-  beatmapset: {
-    artist: string;
-    artist_unicode: string;
-    covers: BeatmapCoversObj,
-    creator: string;
-    favourite_count: number;
-    hype: null,
-    id: number;
-    play_count: number;
-    preview_url: string;
-    source: string;
-    status: string;
-    title: string;
-    title_unicode: string;
-    user_id: number;
-    video: boolean;
-  };
+  beatmap: BmShort;
+  beatmapset: BmSetShort;
   weight?: {
     percentage: number;
     pp: number;
@@ -2062,90 +1656,9 @@ interface V2UserScoresObject {
   user: UserSmall;
 }
 
-/**
- * ---- ==== UserScores END
- */
-
-
-
-/**
- * ---- ==== UserBeatmaps
- */
-
-interface V2UserBeatmapsObject {
-  artist: string;
-  artist_unicode: string;
-  covers: BeatmapCoversObj;
-  creator: string;
-  favourite_count: number;
-  hype: null;
-  id: number;
-  play_count: number;
-  preview_url: string;
-  source: string;
-  status: string;
-  title: string;
-  title_unicode: string;
-  user_id: number;
-  video: boolean;
-  availability: {
-    download_disabled: boolean;
-    more_information: null;
-  };
-  bpm: number;
-  can_be_hyped: boolean;
-  discussion_enabled: boolean;
-  discussion_locked: boolean;
-  is_scoreable: boolean;
-  last_updated: string;
-  legacy_thread_url: string;
-  nominations_summary: {
-    current: number;
-    required: number;
-  };
-  ranked: number;
-  ranked_date: null | string;
-  storyboard: boolean;
-  submitted_date: string;
-  tags: string;
-  beatmaps: {
-    difficulty_rating: number;
-    id: number;
-    mode: string;
-    total_length: number;
-    version: string;
-    accuracy: number;
-    ar: number;
-    beatmapset_id: number;
-    bpm: number;
-    convert: boolean;
-    count_circles: number;
-    count_sliders: number;
-    count_spinners: number;
-    cs: number;
-    deleted_at: null | string;
-    drain: number;
-    hit_length: number;
-    is_scoreable: false,
-    last_updated: string;
-    mode_int: number;
-    passcount: number;
-    playcount: number;
-    ranked: number;
-    status: string;
-    url: string;
-  }[];
+interface V2UserBeatmapsObject extends BmSetFull {
+  beatmaps: BmShort[];
 }
-
-/**
- * ---- ==== UserBeatmaps END
- */
-
-
-
-/**
- * ---- ==== UserKudosu
- */
 
 interface V2UserKudosuObject {
   id: number;
@@ -2162,12 +1675,6 @@ interface V2UserKudosuObject {
     event: string;
   };
 }
-
-/**
- * ---- ==== UserKudosu END
- */
-
-
 
 class V2 {
   clientId: number;
@@ -2224,13 +1731,17 @@ class V2 {
     return data;
   }
 
-  async rankings(mode: number, type: number, obj?: {
-    country?: string;
-    cursor?: string;
-    filter?: string;
-    spotlight?: string;
-    variant?: string;
-  }): Promise<V2RankingsObject> {
+  async rankings(
+    mode: number,
+    type: number,
+    obj?: {
+      country?: string;
+      cursor?: string;
+      filter?: string;
+      spotlight?: string;
+      variant?: string;
+    },
+  ): Promise<V2RankingsObject> {
     const { data } = await this.api.get(`/rankings/${modesType[mode]}/${rankingType[type]}`);
     return data;
   }
@@ -2275,17 +1786,28 @@ class V2 {
     return data;
   }
 
-  async user_recent_activity(id: number, obj: { limit: number; offset: number; }): Promise<V2UserRecentActivityObject[]> {
+  async user_recent_activity(
+    id: number,
+    obj: { limit: number; offset: number },
+  ): Promise<V2UserRecentActivityObject[]> {
     const { data } = await this.api.get(`/users/${id}/recent_activity`, { params: obj });
     return data;
   }
 
-  async user_scores(id: number, type: number, obj: { include_fails: number; mode: string; limit: number; offset: number; }): Promise<V2UserScoresObject[]> {
+  async user_scores(
+    id: number,
+    type: number,
+    obj: { include_fails: number; mode: string; limit: number; offset: number },
+  ): Promise<V2UserScoresObject[]> {
     const { data } = await this.api.get(`/users/${id}/scores/${scoresType[type]}`, { params: obj });
     return data;
   }
 
-  async user_beatmaps(id: number, type: number, obj: { limit: number; offset: number; }): Promise<V2UserBeatmapsObject[]> {
+  async user_beatmaps(
+    id: number,
+    type: number,
+    obj: { limit: number; offset: number },
+  ): Promise<V2UserBeatmapsObject[]> {
     const { data } = await this.api.get(`/users/${id}/beatmapsets/${userBmType[type]}`, { params: obj });
     return data;
   }
