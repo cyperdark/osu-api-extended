@@ -1,5 +1,4 @@
 import { AxiosInstance } from "axios";
-import { StructuredType } from "typescript";
 
 const lzma = require('lzma-native');
 const osr = require('node-osr');
@@ -1020,21 +1019,41 @@ class V1 {
   // }
 }
 
-// const apiV1 = new V1('asdsad');
+/**
+ * ---- ==== V2 API
+ */
 
-interface NewsObject {
-  news_posts: NewPosts[];
-  search: {
-    cursor: string | null;
-    limit: number;
-  };
-  cursor: {
-    published_at: string;
-    id: number;
-  };
+const modesType: string[] = ['osu', 'taiko', 'fruits', 'mania'];
+const rankingType: string[] = ['performance', 'country', 'score', 'charts'];
+const scoresType: string[] = ['best', 'firsts', 'recent'];
+const userBmType: string[] = ['favourite', 'graveyard', 'loved', 'most_played', 'ranked_and_approved', 'unranked'];
+
+type NulledString = string | null;
+
+/**
+ * ---- ==== Special
+ */
+
+interface RanksGrades {
+  ssh: number;
+  ss: number;
+  sh: number;
+  s: number;
+  a: number;
 }
 
-interface NewPosts {
+interface BeatmapCoversObj {
+  cover: string;
+  "cover@2x": string;
+  card: string;
+  "card@2x": string;
+  list: string;
+  "list@2x": string;
+  slimcover: string;
+  "slimcover@2x": string;
+}
+
+interface NewsPosts {
   id: number;
   author: string;
   edit_url: string;
@@ -1044,18 +1063,6 @@ interface NewPosts {
   slug: string;
   title: string;
   preview: string;
-}
-
-interface ChangelogObject {
-  streams: StreamsObject[];
-  builds: BuildsObject[];
-  search: {
-    stream: null,
-    from: null,
-    to: null,
-    max_id: null,
-    limit: number
-  };
 }
 
 interface StreamsObject {
@@ -1116,46 +1123,7 @@ interface ChangelogEntries {
   };
 }
 
-const modes: string[] = ['osu', 'taiko', 'fruits', 'mania'];
-const rankingType: string[] = ['performance', 'country', 'score', 'charts'];
-const scoresType: string[] = ['best', 'firsts', 'recent'];
-const userBmType: string[] = ['favourite', 'graveyard', 'loved', 'most_played', 'ranked_and_approved', 'unranked'];
-
-interface RankingsObject {
-  cursor: {
-    page: number;
-  };
-  ranking: RankingObject[];
-  total: number;
-}
-
-interface RankingObject {
-  level: {
-    current: number;
-    progress: number;
-  };
-  pp: number;
-  pp_rank: number;
-  ranked_score: number;
-  hit_accuracy: number;
-  play_count: number;
-  play_time: number;
-  total_score: number;
-  total_hits: number;
-  maximum_combo: number;
-  replays_watched_by_others: number;
-  is_ranked: boolean;
-  grade_counts: {
-    ss: number;
-    ssh: number;
-    s: number;
-    sh: number;
-    a: number;
-  };
-  user: UserRankingObject;
-}
-
-interface UserRankingObject {
+interface UserSmall {
   avatar_url: string;
   country_code: string;
   default_group: string;
@@ -1166,20 +1134,143 @@ interface UserRankingObject {
   is_supporter: boolean;
   last_visit: string;
   pm_friends_only: boolean;
-  profile_colour: null | string;
+  profile_colour: NulledString;
+  username: string;
+}
+
+interface UserShort {
+  avatar_url: string;
+  country_code: string;
+  default_group: string;
+  id: number;
+  is_active: boolean;
+  is_bot: boolean;
+  is_online: boolean;
+  is_supporter: boolean;
+  last_visit: string;
+  pm_friends_only: boolean;
+  profile_colour: NulledString;
   username: string;
   country: {
     code: string;
     name: string;
   };
   cover: {
-    custom_url: null | string;
+    custom_url: string;
     url: string;
-    id: string;
+    id: null | number;
   };
 }
 
-interface SpotlightsObject {
+
+/**
+ * ---- ==== Special END
+ */
+
+
+
+
+/**
+ * ---- ==== News
+ */
+
+interface V2NewsObject {
+  news_posts: NewsPosts[];
+  search: {
+    cursor: string | null;
+    limit: number;
+  };
+  cursor: {
+    published_at: string;
+    id: number;
+  };
+}
+
+/**
+ * ---- ==== News END
+ */
+
+
+
+/**
+ * ---- ==== Changelog
+ */
+
+interface V2ChangelogObject {
+  streams: StreamsObject[];
+  builds: BuildsObject[];
+  search: {
+    stream: null,
+    from: null,
+    to: null,
+    max_id: null,
+    limit: number
+  };
+}
+
+/**
+ * ---- ==== Changelog END
+ */
+
+
+
+/**
+ * ---- ==== rankings 
+ */
+interface V2RankingsObject {
+  beatmapsets?: {
+    // asdadasdsadsaddsadad
+  };
+  cursor?: {
+    page: number;
+  };
+  ranking: RankingObject[] | RankingObjectCountry;
+  total?: number;
+}
+
+interface RankingObject {
+  level: {
+    current: number;
+    progress: number;
+  };
+  pp: null | number;
+  pp_rank: null | number;
+  ranked_score: number;
+  hit_accuracy: number;
+  play_count: number;
+  play_time: null | number;
+  total_score: number;
+  total_hits: number;
+  maximum_combo: number;
+  replays_watched_by_others: number;
+  is_ranked: boolean;
+  grade_counts: RanksGrades;
+  user: UserShort;
+}
+
+interface RankingObjectCountry {
+  code: string;
+  active_users: number;
+  play_count: number;
+  ranked_score: number;
+  performance: number;
+  country: {
+    code: string;
+    name: string;
+  };
+}
+
+/**
+ * ---- ==== rankings END
+ */
+
+
+
+/**
+ * ---- ==== spotlights
+ */
+
+interface V2SpotlightsObject {
   spotlights: {
     id: boolean;
     name: string;
@@ -1190,30 +1281,35 @@ interface SpotlightsObject {
   }[];
 }
 
-interface SeasonalBackgroundsObject {
+/**
+ * ---- ==== spotlights END
+ */
+
+
+
+/**
+ * ---- ==== seasonal_backgrounds
+ */
+
+interface V2SeasonalBackgroundsObject {
   ends_at: string;
   backgrounds: {
     url: string;
-    user: ShortUser;
+    user: UserSmall;
   }[];
 }
 
-interface ShortUser {
-  avatar_url: string;
-  country_code: string;
-  default_group: string;
-  id: number;
-  is_active: boolean;
-  is_bot: boolean;
-  is_online: boolean;
-  is_supporter: boolean;
-  last_visit: string;
-  pm_friends_only: boolean;
-  profile_colour: null | string;
-  username: string;
-}
+/**
+ * ---- ==== seasonal_backgrounds END
+ */
 
-interface BeatmapObject {
+
+
+/**
+ * ---- ==== beatmap
+ */
+
+interface V2BeatmapObject {
   difficulty_rating: number;
   id: number;
   mode: string;
@@ -1239,10 +1335,44 @@ interface BeatmapObject {
   ranked: number;
   status: string;
   url: string;
-}
-
-interface BeatmapObjectSet extends BeatmapObject {
-  beatmapset: BeatmapsetObjCovers;
+  beatmapset: {
+    artist: string;
+    artist_unicode: string;
+    covers: BeatmapCoversObj;
+    creator: string;
+    favourite_count: number;
+    hype: null;
+    id: number;
+    play_count: number;
+    preview_url: string;
+    source: string;
+    status: string;
+    title: string;
+    title_unicode: string;
+    user_id: number;
+    video: boolean;
+    availability: {
+      download_disabled: boolean;
+      more_information: null | string;
+    };
+    bpm: number;
+    can_be_hyped: boolean;
+    discussion_enabled: boolean;
+    discussion_locked: boolean;
+    is_scoreable: boolean;
+    last_updated: string;
+    legacy_thread_url: string;
+    nominations_summary: {
+      current: number;
+      required: number;
+    };
+    ranked: number;
+    ranked_date: string;
+    storyboard: boolean;
+    submitted_date: string;
+    tags: string;
+    ratings: number[];
+  };
   failtimes: {
     fail: number[];
     exit: number[];
@@ -1250,60 +1380,80 @@ interface BeatmapObjectSet extends BeatmapObject {
   max_combo: number;
 }
 
-interface BeatmapsetObj {
-  artist: string;
-  artist_unicode: string;
-  creator: string;
-  favourite_count: number;
-  hype: null;
+/**
+ * ---- ==== beatmap END
+ */
+
+
+
+/**
+ * ---- ==== 
+ */
+
+interface V2BeatmapScoresObject {
   id: number;
-  play_count: number;
-  preview_url: string;
-  source: string;
-  status: string;
-  title: string;
-  title_unicode: string;
+  best_id: number;
   user_id: number;
-  video: boolean;
-  availability: {
-    download_disabled: boolean;
-    more_information: null | string;
+  accuracy: number;
+  mods: string[];
+  score: number;
+  max_combo: number;
+  perfect: boolean;
+  statistics: {
+    count_50: number;
+    count_100: number;
+    count_300: number;
+    count_geki: number;
+    count_katu: number;
+    count_miss: number;
   };
-  bpm: number;
-  can_be_hyped: boolean;
-  discussion_enabled: boolean;
-  discussion_locked: boolean;
-  is_scoreable: boolean;
-  last_updated: string;
-  legacy_thread_url: string;
-  nominations_summary: {
-    current: number;
-    required: number;
+  pp: number;
+  rank: string;
+  created_at: string;
+  mode: string;
+  mode_int: number;
+  replay: boolean;
+  beatmap: {
+    difficulty_rating: number;
+    id: number;
+    mode: string;
+    total_length: number;
+    version: string;
+    accuracy: number;
+    ar: number;
+    beatmapset_id: number;
+    bpm: number;
+    convert: boolean;
+    count_circles: number;
+    count_sliders: number;
+    count_spinners: number;
+    cs: number;
+    deleted_at: null | string;
+    drain: number;
+    hit_length: number;
+    is_scoreable: boolean;
+    last_updated: string;
+    mode_int: number;
+    passcount: number;
+    playcount: number;
+    ranked: number;
+    status: string;
+    url: string;
   };
-  ranked: number;
-  ranked_date: string;
-  storyboard: boolean;
-  submitted_date: string;
-  tags: string;
-  ratings: number[];
+  user: UserShort;
 }
 
-interface BeatmapsetObjCovers extends BeatmapsetObj {
-  covers: BeatmapCoversObj;
-}
+/**
+ * ---- ====  END
+ */
 
-interface BeatmapCoversObj {
-  cover: string;
-  "cover@2x": string;
-  card: string;
-  "card@2x": string;
-  list: string;
-  "list@2x": string;
-  slimcover: string;
-  "slimcover@2x": string;
-}
 
-interface BeatmapsetObject {
+
+/**
+ * ---- ==== beatmapSet
+ */
+
+interface V2BeatmapSetObject {
   artist: string;
   artist_unicode: string;
   covers: BeatmapCoversObj;
@@ -1339,53 +1489,117 @@ interface BeatmapsetObject {
   storyboard: boolean;
   submitted_date: string;
   tags: string;
-  beatmaps: BeatmapsetObj[];
-  converts: BeatmapsetObj[];
+  beatmaps: {
+    difficulty_rating: number;
+    id: number;
+    mode: string;
+    total_length: number;
+    version: string;
+    accuracy: number;
+    ar: number;
+    beatmapset_id: number;
+    bpm: number;
+    convert: boolean;
+    count_circles: number;
+    count_sliders: number;
+    count_spinners: number;
+    cs: number;
+    deleted_at: null | string;
+    drain: number;
+    hit_length: number;
+    is_scoreable: boolean;
+    last_updated: string;
+    mode_int: number;
+    passcount: number;
+    playcount: number;
+    ranked: number;
+    status: string;
+    url: string;
+    failtimes: {
+      fail: number[];
+      exit: number[];
+    };
+    max_combo: number;
+  }[];
+  converts: {
+    difficulty_rating: number;
+    id: number;
+    mode: string;
+    total_length: number;
+    version: string;
+    accuracy: number;
+    ar: number;
+    beatmapset_id: number;
+    bpm: number;
+    convert: boolean;
+    count_circles: number;
+    count_sliders: number;
+    count_spinners: number;
+    cs: number;
+    deleted_at: null | string;
+    drain: number;
+    hit_length: number;
+    is_scoreable: boolean;
+    last_updated: string;
+    mode_int: number;
+    passcount: number;
+    playcount: number;
+    ranked: number;
+    status: string;
+    url: string;
+    failtimes: {
+      fail: number[];
+      exit: number[];
+    };
+    max_combo: number;
+  }[];
   description: {
     description: string;
   };
   genre: IdNamed;
   language: IdNamed;
   ratings: number[];
-  recent_favourites: ShortUser[];
-  user: ShortUser;
+  recent_favourites: {
+    avatar_url: string;
+    country_code: string;
+    default_group: string;
+    id: number;
+    is_active: boolean;
+    is_bot: boolean;
+    is_online: boolean;
+    is_supporter: boolean;
+    last_visit: string;
+    pm_friends_only: boolean;
+    profile_colour: null | string;
+    username: string;
+  }[];
+  user: UserSmall;
 }
 
-interface BeatmapScoresObject {
-  id: number;
-  best_id: number;
-  user_id: number;
-  accuracy: number;
-  mods: string[];
-  score: number;
-  max_combo: number;
-  perfect: boolean;
-  statistics: {
-    count_50: number;
-    count_100: number;
-    count_300: number;
-    count_geki: number;
-    count_katu: number;
-    count_miss: number;
-  };
-  pp: number;
-  rank: string;
-  created_at: string;
-  mode: string;
-  mode_int: number;
-  replay: boolean;
-  beatmap: BeatmapObject;
-  user: UserRankingObject;
-}
+/**
+ * ---- ==== beatmapSet END
+ */
 
-interface BeatmapsetsEventsObject {
+
+
+/**
+ * ---- ==== beatmapsEvents
+ */
+
+interface V2BeatmapsEventsObject {
   id: number;
   type: string;
   comment: {
-    beatmap_discussion_id: null | number;
+    beatmap_discussion_id: number;
     beatmap_discussion_post_id: null | number;
-    old: string;
-    new: string;
+    new_vote: {
+      user_id: number;
+      score: number;
+    },
+    votes: {
+      user_id: number;
+      score: number;
+    }[];
   };
   created_at: string;
   user_id: number;
@@ -1408,99 +1622,127 @@ interface BeatmapsetsEventsObject {
     title_unicode: string;
     user_id: number;
     video: boolean;
-    user: {
-      avatar_url: string;
-      country_code: string;
-      default_group: string;
+    user: UserSmall;
+  };
+  discussion?: {
+    id: number;
+    beatmapset_id: number;
+    beatmap_id: null | number;
+    user_id: number;
+    deleted_by_id: null | number;
+    message_type: string;
+    parent_id: null | number;
+    timestamp: NulledString;
+    resolved: boolean;
+    can_be_resolved: boolean;
+    can_grant_kudosu: boolean;
+    created_at: string;
+    updated_at: string;
+    deleted_at: NulledString;
+    last_post_at: string;
+    kudosu_denied: boolean;
+    starting_post: {
       id: number;
-      is_active: boolean;
-      is_bot: boolean;
-      is_online: boolean;
-      is_supporter: boolean;
-      last_visit: string;
-      pm_friends_only: boolean;
-      profile_colour: null | string;
-      username: string;
+      beatmap_discussion_id: number;
+      user_id: number;
+      last_editor_id: number;
+      deleted_by_id: null | number;
+      system: boolean;
+      message: string;
+      created_at: string;
+      updated_at: string;
+      deleted_at: NulledString;
     }
   };
 }
 
-interface BeatmapsetsSearchObject {
-  beatmapsets: {
-    artist: string;
-    artist_unicode: string;
-    covers: BeatmapCoversObj;
-    creator: string;
-    favourite_count: number;
-    hype: null;
+/**
+ * ---- ==== beatmapsEvents END
+ */
+
+
+
+/**
+ * ---- ==== beatmapsSearch
+ */
+
+interface V2BeatmapsSearchObject {
+  artist: string;
+  artist_unicode: string;
+  covers: BeatmapCoversObj;
+  creator: string;
+  favourite_count: number;
+  hype: null;
+  id: number;
+  play_count: number;
+  preview_url: string;
+  source: string;
+  status: string;
+  title: string;
+  title_unicode: string;
+  user_id: number;
+  video: boolean;
+  availability: {
+    download_disabled: boolean;
+    more_information: NulledString;
+  };
+  bpm: number;
+  can_be_hyped: boolean;
+  discussion_enabled: boolean;
+  discussion_locked: boolean;
+  is_scoreable: boolean;
+  last_updated: string;
+  legacy_thread_url: string;
+  nominations_summary: {
+    current: number;
+    required: number;
+  };
+  ranked: number;
+  ranked_date: string;
+  storyboard: boolean;
+  submitted_date: string;
+  tags: string;
+  beatmaps: {
+    difficulty_rating: number;
     id: number;
-    play_count: number;
-    preview_url: string;
-    source: string;
-    status: string;
-    title: string;
-    title_unicode: string;
-    user_id: number;
-    video: boolean;
-    availability: {
-      download_disabled: boolean;
-      more_information: null;
-    };
+    mode: string;
+    total_length: number;
+    version: string;
+    accuracy: number;
+    ar: number;
+    beatmapset_id: number;
     bpm: number;
-    can_be_hyped: boolean;
-    discussion_enabled: boolean;
-    discussion_locked: boolean;
+    convert: boolean;
+    count_circles: number;
+    count_sliders: number;
+    count_spinners: number;
+    cs: number;
+    deleted_at: null | string;
+    drain: number;
+    hit_length: number;
     is_scoreable: boolean;
     last_updated: string;
-    legacy_thread_url: string;
-    nominations_summary: {
-      current: number;
-      required: number;
-    };
+    mode_int: number;
+    passcount: number;
+    playcount: number;
     ranked: number;
-    ranked_date: string;
-    storyboard: boolean;
-    submitted_date: string;
-    tags: string;
-    beatmaps: {
-      difficulty_rating: number;
-      id: number;
-      mode: string;
-      total_length: number;
-      version: string;
-      accuracy: number;
-      ar: number;
-      beatmapset_id: number;
-      bpm: number;
-      convert: boolean;
-      count_circles: number;
-      count_sliders: number;
-      count_spinners: number;
-      cs: number;
-      deleted_at: null | string;
-      drain: number;
-      hit_length: number;
-      is_scoreable: boolean;
-      last_updated: string;
-      mode_int: number;
-      passcount: number;
-      playcount: number;
-      ranked: number;
-      status: string;
-      url: string;
-      max_combo: number;
-    }[];
+    status: string;
+    url: string;
+    max_combo: number;
   }[];
-  cursor: {
-    approved_date: string
-    _id: string
-  };
-  recommended_difficulty: null | number;
-  error: null | string;
-  total: number;
 }
 
-interface UserObjectV2 {
+/**
+ * ---- ==== beatmapsSearch END
+ */
+
+
+
+/**
+ * ---- ==== user
+ */
+
+interface V2UserObject {
   avatar_url: string;
   country_code: string;
   default_group: string;
@@ -1601,17 +1843,18 @@ interface UserObjectV2 {
     maximum_combo: number;
     replays_watched_by_others: number;
     is_ranked: boolean;
-    grade_counts: {
-      ss: number;
-      ssh: number;
-      s: number;
-      sh: number;
-      a: number;
-    };
+    grade_counts: RanksGrades;
     rank: {
       global: number;
       country: number;
     };
+    variants?: {
+      mode: string;
+      variant: string;
+      country_rank: number;
+      global_rank: number;
+      pp: number;
+    }[];
   };
   support_level: number;
   unranked_beatmapset_count: number;
@@ -1629,7 +1872,62 @@ interface UserObjectV2 {
   };
 }
 
-interface UserScoresObjectV2 {
+/**
+ * ---- ==== user END
+ */
+
+
+
+/**
+ * ---- ==== userRecentActivity
+ */
+
+interface V2UserRecentActivityObject {
+  created_at: string;
+  id: number;
+  type: string;
+  approval?: string;
+  count?: number;
+  scoreRank?: string;
+  rank?: number;
+  mode?: string;
+  achievement?: {
+    icon_url: string;
+    id: number;
+    name: string;
+    grouping: string;
+    ordering: number;
+    slug: string;
+    description: string;
+    mode: null | string;
+    instructions: null | string;
+  };
+  beatmap?: {
+    title: string;
+    url: string;
+  };
+  beatmapset?: {
+    title: string;
+    url: string;
+  };
+  user: {
+    previousUsername?: string;
+    username: string;
+    url: string;
+  };
+}
+
+/**
+ * ---- ==== userRecentActivity END
+ */
+
+
+
+/**
+ * ---- ==== UserScores
+ */
+
+interface V2UserScoresObject {
   id: number;
   best_id: null | number;
   user_id: number;
@@ -1696,23 +1994,24 @@ interface UserScoresObjectV2 {
     user_id: number;
     video: boolean;
   };
-  user: {
-    avatar_url: string;
-    country_code: string;
-    default_group: string;
-    id: number;
-    is_active: boolean;
-    is_bot: boolean;
-    is_online: boolean;
-    is_supporter: boolean;
-    last_visit: string;
-    pm_friends_only: boolean;
-    profile_colour: null | string;
-    username: string;
+  weight?: {
+    percentage: number;
+    pp: number;
   };
+  user: UserSmall;
 }
 
-interface UserBeatmapsObjectV2 {
+/**
+ * ---- ==== UserScores END
+ */
+
+
+
+/**
+ * ---- ==== UserBeatmaps
+ */
+
+interface V2UserBeatmapsObject {
   artist: string;
   artist_unicode: string;
   covers: BeatmapCoversObj;
@@ -1777,42 +2076,17 @@ interface UserBeatmapsObjectV2 {
   }[];
 }
 
-interface UserRecentActivityObjectV2 {
-  created_at: string;
-  id: number;
-  type: string;
-  approval?: string;
-  count?: number;
-  scoreRank?: string;
-  rank?: number;
-  mode?: string;
-  achievement?: {
-    icon_url: string;
-    id: number;
-    name: string;
-    grouping: string;
-    ordering: number;
-    slug: string;
-    description: string;
-    mode: null | string;
-    instructions: null | string;
-  };
-  beatmap?: {
-    title: string;
-    url: string;
-  };
-  beatmapset?: {
-    title: string;
-    url: string;
-  };
-  user: {
-    previousUsername?: string;
-    username: string;
-    url: string;
-  };
-}
+/**
+ * ---- ==== UserBeatmaps END
+ */
 
-interface UserKudosuObjectV2 {
+
+
+/**
+ * ---- ==== UserKudosu
+ */
+
+interface V2UserKudosuObject {
   id: number;
   action: string;
   amount: number;
@@ -1827,6 +2101,12 @@ interface UserKudosuObjectV2 {
     event: string;
   };
 }
+
+/**
+ * ---- ==== UserKudosu END
+ */
+
+
 
 class V2 {
   clientId: number;
@@ -1873,12 +2153,12 @@ class V2 {
     return true;
   }
 
-  async news(): Promise<NewsObject> {
+  async news(): Promise<V2NewsObject> {
     const { data } = await this.api.get(`/news`);
     return data;
   }
 
-  async changelog(): Promise<ChangelogObject> {
+  async changelog(): Promise<V2ChangelogObject> {
     const { data } = await this.api.get(`/changelog`);
     return data;
   }
@@ -1889,67 +2169,67 @@ class V2 {
     filter?: string;
     spotlight?: string;
     variant?: string;
-  }): Promise<RankingsObject> {
-    const { data } = await this.api.get(`/rankings/${modes[mode]}/${rankingType[type]}`);
+  }): Promise<V2RankingsObject> {
+    const { data } = await this.api.get(`/rankings/${modesType[mode]}/${rankingType[type]}`);
     return data;
   }
 
-  async spotlights(): Promise<SpotlightsObject> {
+  async spotlights(): Promise<V2SpotlightsObject> {
     const { data } = await this.api.get(`/spotlights`);
     return data;
   }
 
-  async seasonal_backgrounds(): Promise<SeasonalBackgroundsObject> {
+  async seasonal_backgrounds(): Promise<V2SeasonalBackgroundsObject> {
     const { data } = await this.api.get(`/seasonal-backgrounds`);
     return data;
   }
 
-  async beatmap(id: number): Promise<BeatmapObjectSet> {
+  async beatmap(id: number): Promise<V2BeatmapObject> {
     const { data } = await this.api.get(`/beatmaps/${id}`);
     return data;
   }
 
-  async beatmap_scores(id: number): Promise<BeatmapScoresObject> {
+  async beatmap_scores(id: number): Promise<V2BeatmapScoresObject> {
     const { data } = await this.api.get(`/beatmaps/${id}/scores`);
     return data;
   }
 
-  async beatmapset(id: number): Promise<BeatmapsetObject> {
+  async beatmapset(id: number): Promise<V2BeatmapSetObject> {
     const { data } = await this.api.get(`/beatmapsets/${id}`);
     return data;
   }
 
-  async beatmapsets_events(): Promise<BeatmapsetsEventsObject> {
+  async beatmaps_events(): Promise<V2BeatmapsEventsObject> {
     const { data } = await this.api.get(`/beatmapsets/events`);
     return data;
   }
 
-  async beatmapsets_search(): Promise<BeatmapsetsSearchObject> {
+  async beatmaps_search(): Promise<V2BeatmapsSearchObject> {
     const { data } = await this.api.get(`/beatmapsets/search/`);
     return data;
   }
 
-  async user(id: number, mode: number): Promise<UserObjectV2> {
-    const { data } = await this.api.get(`/users/${id}${mode ? `/${mode}` : ''}`);
+  async user(id: number, mode: number): Promise<V2UserObject> {
+    const { data } = await this.api.get(`/users/${id}${mode ? `/${modesType[mode]}` : ''}`);
     return data;
   }
 
-  async user_recent_activity(id: number, obj: { limit: number; offset: number; }): Promise<UserRecentActivityObjectV2[]> {
+  async user_recent_activity(id: number, obj: { limit: number; offset: number; }): Promise<V2UserRecentActivityObject[]> {
     const { data } = await this.api.get(`/users/${id}/recent_activity`, { params: obj });
     return data;
   }
 
-  async user_scores(id: number, type: number, obj: { include_fails: number; mode: string; limit: number; offset: number; }): Promise<UserScoresObjectV2[]> {
+  async user_scores(id: number, type: number, obj: { include_fails: number; mode: string; limit: number; offset: number; }): Promise<V2UserScoresObject[]> {
     const { data } = await this.api.get(`/users/${id}/scores/${scoresType[type]}`, { params: obj });
     return data;
   }
 
-  async user_beatmaps(id: number, type: number, obj: { limit: number; offset: number; }): Promise<UserBeatmapsObjectV2[]> {
+  async user_beatmaps(id: number, type: number, obj: { limit: number; offset: number; }): Promise<V2UserBeatmapsObject[]> {
     const { data } = await this.api.get(`/users/${id}/beatmapsets/${userBmType[type]}`, { params: obj });
     return data;
   }
 
-  async user_kudosu(id: number): Promise<UserKudosuObjectV2[]> {
+  async user_kudosu(id: number): Promise<V2UserKudosuObject[]> {
     const { data } = await this.api.get(`/users/${id}/kudosu`);
     return data;
   }
