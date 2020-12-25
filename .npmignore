@@ -1,5 +1,6 @@
-test
-src
+/src
+/test
+/node_modules
 .prettierrc
 index.js
 package-lock.json
