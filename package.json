@@ -1,6 +1,6 @@
 {
   "name": "osu-api-extended",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Package for advanced work with 'osu' api",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cyperdark/fghgfhsafsaf.git"
+    "url": "git+https://github.com/cyperdark/osu-api-extended.git"
   },
   "keywords": [
     "osu",
