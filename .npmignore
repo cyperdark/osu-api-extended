@@ -1,6 +1,7 @@
 test
 src
+.prettierrc
 index.js
+package-lock.json
 tsconfig.json
 tslint.json
-.prettierrc
