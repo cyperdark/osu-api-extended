@@ -26,14 +26,14 @@ export const request = (url: string | URL, { method = "GET", headers, data, para
   // console.log(url, method, headers, data, params);
 
   const req = https.request(url + (o(params) ? '?' + o(params) : ''), { method, headers }, r => {
-    console.log(url + (o(params) ? '?' + o(params) : ''));
+    // console.log(url + (o(params) ? '?' + o(params) : ''));
 
     // console.log(url + (params ? (Array.isArray(params) && params.length > 0 ? '?' + q([params[0], ...params.slice(1)]) : '?' + q(params)) : ""));
 
     let data = '';
 
     // data chunks
-    r.on('data', chunk => data += chunk);
+    r.on('data', (chunk: any) => data += chunk);
 
     // Sends response on end of request
     r.on('end', () => {
