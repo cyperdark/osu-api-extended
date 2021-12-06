@@ -701,7 +701,7 @@ export interface _beatmap {
   get(id: number): Promise<beatmaps_short_2_object>;
   search(obj: { diff_id?: string, checksum?: string, filename?: string }): Promise<beatmaps_short_2_object>;
   scores: {
-    all(beatmap: number, obj: { mode?: 'osu' | 'fruits' | 'mania' | 'taiko', mods?: string }): Promise<beatmap_scores_all>;
+    all(beatmap: number, obj: { mode?: 'osu' | 'fruits' | 'mania' | 'taiko', mods?: string }): Promise<{ scores: beatmap_scores_all[] }>;
     user(beatmap: number, user: number, obj: { mode?: 'osu' | 'fruits' | 'mania' | 'taiko', mods?: Array<string> }): Promise<beatmap_scores_user>;
   };
 };
