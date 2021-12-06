@@ -54,7 +54,7 @@ const diff_file = async (diff_id: number, path: string, name: string | number): 
   if (path !== undefined) file = `${path}/${name}.osu`;
   else file = `${name}.osu`;
 
-  if (fs.existsSync(file)) return file;
+  // if (fs.existsSync(file)) return file;
 
   const { data } = await request(`https://osu.ppy.sh/osu/${diff_id}`);
   fs.writeFileSync(file, data, 'utf-8');
