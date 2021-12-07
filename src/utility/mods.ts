@@ -93,8 +93,8 @@ const id = (mods: string | number): number | undefined => {
 
   const values: string[] = Object.keys(num_codes).map((a) => a);
   for (let i = 0; i < name.length; i++) {
-    const find: any = values.find((v) => (name != null ? v.toLowerCase() === name[i].toLowerCase() : false));
-    _mods += parseInt(num_codes[find]);
+    const find = values.find((v) => num_codes[v].toLowerCase() === name[i].toLowerCase());
+    _mods += parseInt(find);
   };
 
   return _mods;
