@@ -98,6 +98,8 @@ main()
 
 ### API V2
 
+#### `v2.isLogin()`
+
 #### `v2.news()`
 
 <details>
