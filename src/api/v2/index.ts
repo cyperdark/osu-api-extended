@@ -14,6 +14,7 @@ const oauth: RequestNamepsace = namespace('https://osu.ppy.sh/oauth/');
 let cache_token: string = '';
 
 export const isLogin = () => cache_token != '' ? true : false;
+export const set_token = (token: string) => cache_token = token;
 
 // Auth calls
 export const login = async (clientId: number, clientSecret: string): Promise<string> => {
