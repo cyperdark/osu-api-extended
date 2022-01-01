@@ -28,7 +28,14 @@ const country = (flag: string): string => {
  * @param mode osu | fruits | taiko | mania
  * @returns {number} Accuracy number
  */
-const accuracy = (h300: number, h100: number, h50: number, h0: number, geki: number, katu: number, mode: 'osu' | 'fruits' | 'taiko' | 'mania'): number => {
+const accuracy = (h300: any, h100: any, h50: any, h0: any, geki: any, katu: any, mode: 'osu' | 'fruits' | 'taiko' | 'mania'): number => {
+  h300 = parseInt(h300);
+  h100 = parseInt(h100);
+  h50 = parseInt(h50);
+  h0 = parseInt(h0);
+  geki = parseInt(geki);
+  katu = parseInt(katu);
+  
   let acc = 0.0;
 
   switch (mode) {
