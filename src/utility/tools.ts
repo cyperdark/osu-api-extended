@@ -110,7 +110,7 @@ const rank = (h300: number, h100: number, h50: number, h0: number, geki: number,
 
   switch (mode) {
     case 'osu':
-      total = +h300 + +h100 + +h300 + +h0;
+      total = +h300 + +h100 + +h50 + +h0;
       acc = total > 0 ? (+h50 * 50 + +h100 * 100 + +h300 * 300) / (total * 300) : 1;
 
       r300 = +h300 / total;
@@ -126,7 +126,7 @@ const rank = (h300: number, h100: number, h50: number, h0: number, geki: number,
       break;
 
     case 'taiko':
-      total = +h300 + +h100 + +h300 + +h0;
+      total = +h300 + +h100 + +h50 + +h0;
       acc = total > 0 ? (+h100 * 150 + +h300 * 300) / (total * 300) : 1;
 
       r300 = +h300 / total;
@@ -142,7 +142,7 @@ const rank = (h300: number, h100: number, h50: number, h0: number, geki: number,
       break;
 
     case 'fruits':
-      total = +h300 + +h100 + +h300 + +h0 + +katu;
+      total = +h300 + +h100 + +h50 + +h0 + +katu;
       acc = total > 0 ? (+h50 + +h100 + +h300) / total : 1;
 
       r300 = +h300 / total;
@@ -158,7 +158,7 @@ const rank = (h300: number, h100: number, h50: number, h0: number, geki: number,
       break;
 
     case 'mania':
-      total = +h300 + +h100 + +h300 + +h0 + +geki + +katu;
+      total = +h300 + +h100 + +h50 + +h0 + +geki + +katu;
       acc = total > 0 ? (+h50 * 50 + +h100 * 100 + +katu * 200 + (+h300 + +geki) * 300) / (total * 300) : 1;
 
       r300 = +h300 / total;
