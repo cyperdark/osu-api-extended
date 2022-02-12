@@ -97,7 +97,7 @@ const pp_calc = async (id: number, mods?: number, combo?: number, miss?: number,
  * @returns {string} Rank letter
  */
 const rank = (h300: number, h100: number, h50: number, h0: number, geki: number, katu: number, mods: any, mode: 'osu' | 'fruits' | 'taiko' | 'mania'): string => {
-  if (isNaN(mods)) mods = mods_name(mods);
+  if (!isNaN(mods)) mods = mods_name(mods);
   const silver = mods.toLowerCase().indexOf('hd') > -1 ? true : mods.toLowerCase().indexOf('fl') > -1 ? true : false;
 
   let total = 0;
