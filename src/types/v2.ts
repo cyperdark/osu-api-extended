@@ -175,7 +175,7 @@ export interface user_friends extends user_short {
   support_level: number;
 };
 
-export interface user_data extends user_friends {
+export interface user_data {
   cover_url: string;
   discord: string;
   has_supported: boolean;
@@ -231,6 +231,35 @@ export interface user_data extends user_friends {
   scores_best_count: number;
   scores_first_count: number;
   scores_recent_count: number;
+  statistics: {
+    level: {
+      current: number,
+      progress: number,
+    },
+    global_rank: number,
+    pp: number,
+    ranked_score: number,
+    hit_accuracy: number,
+    play_count: number,
+    play_time: number,
+    total_score: number,
+    total_hits: number,
+    maximum_combo: number,
+    replays_watched_by_others: number,
+    is_ranked: boolean,
+    grade_counts: {
+      ss: number,
+      ssh: number,
+      s: number,
+      sh: number,
+      a: number,
+    },
+    country_rank: number,
+    rank: {
+      country: number,
+    }
+  };
+  support_level: number;
   user_achievements: {
     achieved_at: string;
     achievement_id: number;
