@@ -5,92 +5,31 @@ import {
 import { namespace, download } from "../../utility/request";
 import { RequestNamepsace } from "../../types/request";
 
-const readln = require('readline');
-const open = require('open');
+import * as Auth from "../../utility/auth";
 
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
-const oauth: RequestNamepsace = namespace('https://osu.ppy.sh/oauth/');
 
-let cache_token: string = '';
+/**
+ * @deprecated Since version 1.0. Will be deleted in version 3.0. Use bar instead.
+ */
+export const login_lazer = () => {
+  throw console.error("Calling deprecated function!");
+}
 
-export const isLogin = () => cache_token != '' ? true : false;
-export const set_token = (token: string) => cache_token = token;
+/**
+ * @deprecated Since version 1.0. Will be deleted in version 3.0. Use bar instead.
+ */
+export const login = () => {
+  throw console.error("Calling deprecated function!");
+}
 
-// Auth calls
-export const login = async (clientId: number, clientSecret: string): Promise<string> => {
-  if (cache_token) return;
+/**
+ * @deprecated Since version 1.0. Will be deleted in version 3.0. Use bar instead.
+ */
+export const authorize = () => {
+  throw console.error("Calling deprecated function!");
+}
 
-  const { access_token } = await oauth('token', {
-    method: 'POST',
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify({
-      grant_type: 'client_credentials',
-      client_id: clientId,
-      client_secret: clientSecret,
-      scope: 'public',
-      code: 'code',
-    })
-  });
-
-  cache_token = access_token;
-
-  return access_token;
-};
-export const login_lazer = async (username: string, password: string): Promise<string> => {
-  if (cache_token) return;
-
-  const { access_token } = await oauth('token', {
-    method: 'POST',
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify({
-      username,
-      password,
-      grant_type: "password",
-      client_id: 5,
-      client_secret: 'FGc9GAtyHzeQDshWP5Ah7dega8hJACAJpQtw6OXk',
-      scope: "*"
-    })
-  });
-
-  cache_token = access_token;
-
-  return access_token;
-};
-export const authorize = async (clientId: number, clientSecret: string, redirect_uri: string, scope?: string, state?: string): Promise<string> => {
-  if (cache_token) return;
-
-  const cl = readln.createInterface(process.stdin, process.stdout);
-  const question = (q: string) => new Promise((res, rej) => cl.question(q + ': ', (answer: string) => res(answer)));
-
-  await open(`https://osu.ppy.sh/oauth/authorize?client_id=${clientId}&redirect_uri=${redirect_uri}&response_type=code&scope=friends.read%20identify%20public`);
-
-  const code = await question('Paste code here');
-  const { access_token } = await oauth('token', {
-    method: 'POST',
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify({
-      grant_type: 'authorization_code',
-      client_id: clientId,
-      client_secret: clientSecret,
-      redirect_uri,
-      code,
-    })
-  });
-
-
-  cache_token = access_token;
-
-  return access_token;
-};
 
 
 // News
@@ -98,7 +37,7 @@ export const news: _news = async (obj = {}) => {
   const data = await request(`news`, {
     method: 'GET',
     headers: {
-      Authorization: `Bearer ${cache_token}`,
+      Authorization: `Bearer ${Auth.cache_token}`,
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
@@ -119,7 +58,7 @@ export const changelogs: _changelogs = {
     const data = await request(`changelog`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -132,7 +71,7 @@ export const changelogs: _changelogs = {
     const data = await request(`changelog/${stream}/${build}`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       }
@@ -144,7 +83,7 @@ export const changelogs: _changelogs = {
     const data = await request(`changelog/${changelog}`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -160,7 +99,7 @@ export const seasonal_backgrounds: _seasonal = async () => {
   const data = await request(`seasonal-backgrounds`, {
     method: 'GET',
     headers: {
-      Authorization: `Bearer ${cache_token}`,
+      Authorization: `Bearer ${Auth.cache_token}`,
       Accept: 'application/json',
       'Content-Type': 'application/json',
     }
@@ -174,7 +113,7 @@ export const wiki: _wiki = async (language, path) => {
   const data = await request(`wiki/${language}/${path}`, {
     method: 'GET',
     headers: {
-      Authorization: `Bearer ${cache_token}`,
+      Authorization: `Bearer ${Auth.cache_token}`,
       Accept: 'application/json',
       'Content-Type': 'application/json',
     }
@@ -188,7 +127,7 @@ export const search: _search = async (obj = {}) => {
   const data = await request(`search`, {
     method: 'GET',
     headers: {
-      Authorization: `Bearer ${cache_token}`,
+      Authorization: `Bearer ${Auth.cache_token}`,
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
@@ -205,7 +144,7 @@ export const beatmaps: _beatmaps = {
     const data = await request(`beatmapsets/${id}`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -217,7 +156,7 @@ export const beatmaps: _beatmaps = {
     const data = await request(`beatmapsets/events`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -243,7 +182,7 @@ export const beatmaps: _beatmaps = {
     const data = await request(`beatmapsets/search`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -260,7 +199,7 @@ export const beatmap: _beatmap = {
     const data = await request(`beatmaps/${id}`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -272,7 +211,7 @@ export const beatmap: _beatmap = {
     const data = await request('beatmaps/lookup', {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -290,7 +229,7 @@ export const beatmap: _beatmap = {
       const data = await request(`beatmaps/${beatmap}/scores`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${cache_token}`,
+          Authorization: `Bearer ${Auth.cache_token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
@@ -303,7 +242,7 @@ export const beatmap: _beatmap = {
       const data = await request(`beatmaps/${beatmap}/scores/users/${user}`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${cache_token}`,
+          Authorization: `Bearer ${Auth.cache_token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
@@ -316,7 +255,7 @@ export const beatmap: _beatmap = {
       const data = await request(`beatmaps/${beatmap}/scores/users/${user}/all`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${cache_token}`,
+          Authorization: `Bearer ${Auth.cache_token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
@@ -334,7 +273,7 @@ export const discussions: _discussions = {
     const data = await request(`beatmapsets/discussions`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -347,7 +286,7 @@ export const discussions: _discussions = {
     const data = await request(`beatmapsets/discussions/posts`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -360,7 +299,7 @@ export const discussions: _discussions = {
     const data = await request(`beatmapsets/discussions/votes`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -379,7 +318,7 @@ export const scores: _scores = {
       const data = await request(`users/${user}/scores/recent`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${cache_token}`,
+          Authorization: `Bearer ${Auth.cache_token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
@@ -392,7 +331,7 @@ export const scores: _scores = {
       const data = await request(`users/${user}/scores/best`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${cache_token}`,
+          Authorization: `Bearer ${Auth.cache_token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
@@ -405,7 +344,7 @@ export const scores: _scores = {
       const data = await request(`users/${user}/scores/firsts`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${cache_token}`,
+          Authorization: `Bearer ${Auth.cache_token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
@@ -420,7 +359,7 @@ export const scores: _scores = {
       const data = await request(`scores/${mode}/${score_id}`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${cache_token}`,
+          Authorization: `Bearer ${Auth.cache_token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         }
@@ -431,7 +370,7 @@ export const scores: _scores = {
     download: async (mode, score_id, file_path) => {
       const data = await download(`https://osu.ppy.sh/api/v2/scores/${mode}/${score_id}/download`, file_path, {
         headers: {
-          Authorization: `Bearer ${cache_token}`,
+          Authorization: `Bearer ${Auth.cache_token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         }
@@ -449,7 +388,7 @@ export const comments: _comments = {
     const data = await request(`comments`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -462,7 +401,7 @@ export const comments: _comments = {
     const data = await request(`comments/${comment}`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       }
@@ -479,7 +418,7 @@ export const me: _me = {
     const data = await request(`me/${mode}`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       }
@@ -493,7 +432,7 @@ export const me: _me = {
     const data = await request(`me/download-quota-check`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       }
@@ -505,7 +444,7 @@ export const me: _me = {
     const data = await request(`friends`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       }
@@ -521,7 +460,7 @@ export const users: _users = async (ids = []) => {
   const data = await request(`users`, {
     method: 'GET',
     headers: {
-      Authorization: `Bearer ${cache_token}`,
+      Authorization: `Bearer ${Auth.cache_token}`,
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
@@ -536,7 +475,7 @@ export const user: _user = {
     const data = await request(`users/${user}/${mode}`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -549,7 +488,7 @@ export const user: _user = {
     const data = await request(`users/${user}/recent_activity`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -562,7 +501,7 @@ export const user: _user = {
     const data = await request(`users/${user}/kudosu`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -576,7 +515,7 @@ export const user: _user = {
       const data = await request(`users/${user}/beatmapsets/loved`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${cache_token}`,
+          Authorization: `Bearer ${Auth.cache_token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
@@ -589,7 +528,7 @@ export const user: _user = {
       const data = await request(`users/${user}/beatmapsets/ranked`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${cache_token}`,
+          Authorization: `Bearer ${Auth.cache_token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
@@ -602,7 +541,7 @@ export const user: _user = {
       const data = await request(`users/${user}/beatmapsets/pending`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${cache_token}`,
+          Authorization: `Bearer ${Auth.cache_token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
@@ -615,7 +554,7 @@ export const user: _user = {
       const data = await request(`users/${user}/beatmapsets/graveyard`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${cache_token}`,
+          Authorization: `Bearer ${Auth.cache_token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
@@ -628,7 +567,7 @@ export const user: _user = {
       const data = await request(`users/${user}/beatmapsets/favourite`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${cache_token}`,
+          Authorization: `Bearer ${Auth.cache_token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
@@ -641,7 +580,7 @@ export const user: _user = {
       const data = await request(`users/${user}/beatmapsets/most_played`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${cache_token}`,
+          Authorization: `Bearer ${Auth.cache_token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
@@ -661,7 +600,7 @@ export const forum: _forum = {
       const data = await request(`forums/topics/${topic}`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${cache_token}`,
+          Authorization: `Bearer ${Auth.cache_token}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
@@ -680,7 +619,7 @@ export const notifications: _notifications = {
     const data = await request(`notifications`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -698,7 +637,7 @@ export const matches: _matches = {
     const data = await request(`matches`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       }
@@ -710,7 +649,7 @@ export const matches: _matches = {
     const data = await request(`matches/${match}`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       }
@@ -727,7 +666,7 @@ export const rooms: _rooms = {
     const data = await request(`rooms`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       }
@@ -739,7 +678,7 @@ export const rooms: _rooms = {
     const data = await request(`rooms/${room_id}`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       }
@@ -751,7 +690,7 @@ export const rooms: _rooms = {
     const data = await request(`rooms/${room_id}/leaderboard`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${cache_token}`,
+        Authorization: `Bearer ${Auth.cache_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       }

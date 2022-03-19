@@ -1,7 +1,7 @@
 import { RequestParams, RequestNamepsace } from "../types/request";
+import * as auth from "../utility/auth";
 import https from 'https'
 import fs from "fs";
-
 
 const o = (obj: any) => {
   let params = '';
@@ -19,37 +19,30 @@ const o = (obj: any) => {
 
 /**
  * Executes an HTTP request
- * @param {string | URL} url The url
+ * @param {string} url The url
  * @returns {Promise<any>} The response
  */
-export const request = (url: string | URL, { method = "GET", headers, data, params }: RequestParams = {}): Promise<any> => new Promise((res, rej) => {
-  // console.log(url, method, headers, data, params);
+export const request = (url: string, { method = "GET", headers, data, params }: RequestParams = {}): Promise<any> => new Promise(async (res, rej) => {
 
+  if (url.includes('https://osu.ppy.sh/api/v2')) {
+    const check = await auth.expired();
+    if (!check) headers.Authorization = `Bearer ${auth.cache_token}`;
+  };
+
+  // console.log('\n', url, method, headers, data, params, '\n'); // debug too
   const req = https.request(url + (o(params) ? '?' + o(params) : ''), { method, headers }, r => {
-    // console.log(url + (o(params) ? '?' + o(params) : ''));
-
-    // console.log(url + (params ? (Array.isArray(params) && params.length > 0 ? '?' + q([params[0], ...params.slice(1)]) : '?' + q(params)) : ""));
-
     let data = '';
 
-    // data chunks
     r.on('data', (chunk: any) => data += chunk);
-
-    // Sends response on end of request
     r.on('end', () => {
-      // If the format was JSON, parse(with test) and return
       if (/^application\/json/.test(r.headers['content-type']))
         try { return res(JSON.parse(data)) } catch (err) { console.log(`JSON Parse on content of type ${r.headers['content-type']} failed.\nError: ${err}\nData: ${data}`) }
 
-      // Sends raw data as response if no json
       res(data)
     })
   }).on('error', rej);
 
-  // If there is data to be sent, send it
   if (data) req.write(data);
-
-  // Sends the request
   req.end();
 });
 
@@ -87,7 +80,5 @@ export const download = (url: string | URL, dest: string, { headers, data, param
  * @returns {(params: string, { query: string }) => Promise<any>} The function that does the reqs
  */
 export const namespace = (url: string, { query }: { query?: { [key: string]: string }, headers?: Record<string, string> } = {}): RequestNamepsace => {
-
-  // Returns a function that does the reqs
   return (path: string, params) => request(url + path, params)
 };
