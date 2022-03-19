@@ -703,6 +703,35 @@ export interface beatmap_scores_user {
   score: beatmap_scores_all;
 };
 
+export interface beatmap_scores_user_all {
+  scores: {
+    id: number,
+    user_id: number,
+    accuracy: number,
+    mods: object,
+    score: number,
+    max_combo: number,
+    passed: boolean,
+    perfect: boolean,
+    statistics: {
+      count_50: number,
+      count_100: number,
+      count_300: number,
+      count_geki: number,
+      count_katu: number,
+      count_miss: number
+    },
+    rank: string,
+    created_at: string,
+    best_id: number,
+    pp: number,
+    mode: string,
+    mode_int: number,
+    replay: boolean,
+    current_user_attributes: { pin: null }
+  }[]
+}
+
 
 
 export interface _beatmaps {
@@ -732,6 +761,7 @@ export interface _beatmap {
   scores: {
     all(beatmap: number, obj: { mode?: 'osu' | 'fruits' | 'mania' | 'taiko', mods?: string }): Promise<{ scores: beatmap_scores_all[] }>;
     user(beatmap: number, user: number, obj: { mode?: 'osu' | 'fruits' | 'mania' | 'taiko', mods?: Array<string> }): Promise<beatmap_scores_user>;
+    user_all(beatmap: number, user: number, mode?: 'osu' | 'fruits' | 'mania' | 'taiko'): Promise<beatmap_scores_user_all>;
   };
 };
 
