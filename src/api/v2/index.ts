@@ -13,21 +13,21 @@ const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
  * @deprecated Since version 1.0. Will be deleted in version 3.0. Use bar instead.
  */
 export const login_lazer = () => {
-  throw console.error("Calling deprecated function!");
-}
+  throw new Error("New authorization method\nhttps://github.com/cyperdark/osu-api-extended/blob/master/changes/2.1.2.md\n\n");
+  }
 
 /**
  * @deprecated Since version 1.0. Will be deleted in version 3.0. Use bar instead.
  */
 export const login = () => {
-  throw console.error("Calling deprecated function!");
+  throw new Error("New authorization method\nhttps://github.com/cyperdark/osu-api-extended/blob/master/changes/2.1.2.md\n\n");
 }
 
 /**
  * @deprecated Since version 1.0. Will be deleted in version 3.0. Use bar instead.
  */
 export const authorize = () => {
-  throw console.error("Calling deprecated function!");
+  throw new Error("New authorization method\nhttps://github.com/cyperdark/osu-api-extended/blob/master/changes/2.1.2.md\n\n");
 }
 
 
