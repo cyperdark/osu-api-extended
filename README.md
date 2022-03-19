@@ -30,17 +30,17 @@ main()
 You can [create your client here](https://osu.ppy.sh/home/account/edit#oauth 'https://osu.ppy.sh/home/account/edit#oauth')
 
 ```javascript
-const { v2 } = require('osu-api-extended')
+const { v2, auth } = require('osu-api-extended')
 
 const main = async () => {
   // Auth via client
-  await v2.login('CLIENT_ID', 'CLIENT_SECRET')
+  await auth.login('CLIENT_ID', 'CLIENT_SECRET')
 
   // Auth via lazer credentials
-  await v2.login_lazer('YOUR_LOGIN', 'YOUR_PASSWORD')
+  await auth.login_lazer('YOUR_LOGIN', 'YOUR_PASSWORD')
 
   // Auth via oauth2
-  await v2.authorize('CLIENT_ID', 'CLIENT_SECRET', 'CALLBACK_URL')
+  await auth.authorize('CLIENT_ID', 'CLIENT_SECRET', 'CALLBACK_URL')
 
   const data = await v2.beatmap.get(2379651)
   console.log(data)
