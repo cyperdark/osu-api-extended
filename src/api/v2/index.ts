@@ -311,7 +311,20 @@ export const beatmap: _beatmap = {
       });
 
       return data;
-    }
+    },
+    user_all: async (beatmap, user, mode) => {
+      const data = await request(`beatmaps/${beatmap}/scores/users/${user}/all`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${cache_token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        params: { mode }
+      });
+
+      return data;
+    },
   },
 };
 
