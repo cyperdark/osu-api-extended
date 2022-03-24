@@ -42,11 +42,16 @@ const save_credentials = (type: number, obj: any) => {
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 
-export const isLogin = () => cache_token != '' && expired() ? true : false;
+export const isLogin = async () => {
+  const xpire = await expired();
+
+  if (cache_token != '' && xpire) return true;
+  return false;
+};
+
 const isInitial = () => cache_token != '' ? true : false;
 
 export const set_expire = (v: number) => expire = v;
-
 export const set_token = (v: string) => cache_token = v;
 
 export const expired = async (): Promise<boolean> => {
@@ -57,7 +62,7 @@ export const expired = async (): Promise<boolean> => {
 
   if ((expire > 0 && unix < expire)) return true;
 
-  // await sleep(1000);
+  await sleep(1000);
   await re_login();
   return false;
 }
@@ -74,7 +79,6 @@ const re_login = async () => {
 
 export const login_lazer = async (username: string, password: string): Promise<_login> => {
   if (!isInitial()) save_credentials(1, { username, password });
-  if (isLogin() == true) return;
 
   const { access_token, expires_in } = await request('https://osu.ppy.sh/oauth/token', {
     method: 'POST',
@@ -95,14 +99,13 @@ export const login_lazer = async (username: string, password: string): Promise<_
   const date = new Date();
 
   cache_token = access_token;
-  set_expire(Math.floor(parseFloat(date.setSeconds(date.getSeconds() + expires_in).toString())));
+  set_expire(Math.floor((date.getTime() + expires_in) / 1000));
 
   return { access_token, expires_in };
 };
 
-export const login = async (clientId: number, clientSecret: string): Promise<_login> => { 
+export const login = async (clientId: number, clientSecret: string): Promise<_login> => {
   if (!isInitial()) save_credentials(2, { clientId, clientSecret });
-  if (isLogin()) return;
 
   const { access_token, expires_in } = await request('https://osu.ppy.sh/oauth/token', {
     method: 'POST',
@@ -122,14 +125,13 @@ export const login = async (clientId: number, clientSecret: string): Promise<_lo
   const date = new Date();
 
   cache_token = access_token;
-  set_expire(Math.floor(parseFloat(date.setSeconds(date.getSeconds() + expires_in).toString())));
+  set_expire(Math.floor((date.getTime() + expires_in) / 1000));
 
   return { access_token, expires_in };
 };
 
 export const authorize = async (clientId: number, clientSecret: string, redirect_uri: string, scope?: string, state?: string): Promise<_login> => {
   if (!isInitial()) save_credentials(3, { clientId, clientSecret, redirect_uri });
-  if (isLogin()) return;
 
   const cl = readln.createInterface(process.stdin, process.stdout);
   const question = (q: string) => new Promise((res, rej) => cl.question(q + ': ', (answer: string) => res(answer)));
@@ -152,10 +154,11 @@ export const authorize = async (clientId: number, clientSecret: string, redirect
     })
   });
 
+
   const date = new Date();
 
   cache_token = access_token;
-  set_expire(Math.floor(parseFloat(date.setSeconds(date.getSeconds() + expires_in).toString())));
+  set_expire(Math.floor((date.getTime() + expires_in) / 1000));
 
   return { access_token, expires_in };
 };
