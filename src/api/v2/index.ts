@@ -353,6 +353,19 @@ export const scores: _scores = {
 
       return data;
     },
+    pinned: async (user, obj = {}) => {
+      const data = await request(`users/${user}/scores/pinned`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${Auth.cache_token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        params: obj,
+      });
+
+      return data;
+    },
   },
   score: {
     get: async (mode, score_id) => {

@@ -822,6 +822,11 @@ export interface _scores {
       limit?: number,
       offset?: number,
     }): Promise<user_scores_object[]>
+    pinned(user: number, obj: {
+      mode?: 'osu' | 'fruits' | 'mania' | 'taiko',
+      limit?: number,
+      offset?: number,
+    }): Promise<user_scores_object[]>
   };
   score: {
     get(mode: 'osu' | 'fruits' | 'mania' | 'taiko', score_id: number): Promise<user_scores_object>;
