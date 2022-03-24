@@ -1083,6 +1083,8 @@ export interface beatmap_scores_user {
 
 #### `v2.scores.users.firsts();`
 
+#### `v2.scores.users.pinned();`
+
 #### `v2.scores.score.get();`
 
 <details>
