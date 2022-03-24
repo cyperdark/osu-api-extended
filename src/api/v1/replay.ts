@@ -28,9 +28,6 @@ const format = (data: any, map: any, score: any, id: any, mods: any, file: strin
   const replayFile = replay.serializeSync();
   fs.writeFileSync(file, replayFile, data.encoding);
 
-  console.log(file);
-  
-
   return file;
 };
 
