@@ -24,9 +24,9 @@ const o = (obj: any) => {
  */
 export const request = (url: string, { method = "GET", headers, data, params }: RequestParams = {}): Promise<any> => new Promise(async (res, rej) => {
 
-  if (url.includes('https://osu.ppy.sh/api/v2')) {
-    const check = await auth.expired();
-    if (!check) headers.Authorization = `Bearer ${auth.cache_token}`;
+  if (url.includes('https://osu.ppy.sh/api/v2')) {  
+    await auth.expired();
+    headers.Authorization = `Bearer ${auth.cache_token}`;
   };
 
   // console.log('\n', url, method, headers, data, params, '\n'); // debug too
