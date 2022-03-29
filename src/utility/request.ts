@@ -29,7 +29,7 @@ export const request = (url: string, { method = "GET", headers, data, params }: 
     headers.Authorization = `Bearer ${auth.cache_token}`;
   };
 
-  console.log('\n', url, method, headers, data, params, '\n'); // debug too
+  // console.log('\n', url, method, headers, data, params, '\n'); // debug too
   const req = https.request(url + (o(params) ? '?' + o(params) : ''), { method, headers }, r => {
     let data: any = '';
 
