@@ -24,19 +24,32 @@ const o = (obj: any) => {
  */
 export const request = (url: string, { method = "GET", headers, data, params }: RequestParams = {}): Promise<any> => new Promise(async (res, rej) => {
 
-  if (url.includes('https://osu.ppy.sh/api/v2')) {  
+  if (url.includes('https://osu.ppy.sh/api/v2')) {
     await auth.expired();
     headers.Authorization = `Bearer ${auth.cache_token}`;
   };
 
-  // console.log('\n', url, method, headers, data, params, '\n'); // debug too
+  console.log('\n', url, method, headers, data, params, '\n'); // debug too
   const req = https.request(url + (o(params) ? '?' + o(params) : ''), { method, headers }, r => {
-    let data = '';
+    let data: any = '';
 
     r.on('data', (chunk: any) => data += chunk);
-    r.on('end', () => {
+    r.on('end', async () => {
       if (/^application\/json/.test(r.headers['content-type']))
-        try { return res(JSON.parse(data)) } catch (err) { console.log(`JSON Parse on content of type ${r.headers['content-type']} failed.\nError: ${err}\nData: ${data}`) }
+        try {
+          const prs = JSON.parse(data);
+          if (prs.authentication == 'basic') {
+            auth.set_expire(0);
+            auth.set_token('');
+
+            const again = await request(url, { method, headers, data, params });
+
+            return res(again);
+          };
+
+          return res(prs)
+        } catch (err) { console.log(`JSON Parse on content of type ${r.headers['content-type']} failed.\nError: ${err}\nData: ${data}`) }
+
 
       res(data)
     })
