@@ -56,9 +56,10 @@ export const set_token = (v: string) => cache_token = v;
 
 export const expired = async (): Promise<boolean> => {
   const date = new Date();
+  const date2 = new Date(expire * 1000);
   const unix = Math.floor(date.getTime() / 1000);
 
-  // console.log(10000, 'expired', credentials.type, (expire > 0 && unix < expire), date, unix, expire); // debug thing
+  // console.log(10000, 'expired', credentials.type, (expire > 0 && unix < expire), unix, expire, date.toISOString().slice(0, 10), date2.toISOString().slice(0, 10)); // debug thing
 
   if ((expire > 0 && unix < expire)) return true;
 
@@ -99,7 +100,7 @@ export const login_lazer = async (username: string, password: string): Promise<_
   const date = new Date();
 
   cache_token = access_token;
-  set_expire(Math.floor((date.getTime() + expires_in) / 1000));
+  set_expire(Math.floor(date.getTime() / 1000) + expires_in);
 
   return { access_token, expires_in };
 };
@@ -125,7 +126,7 @@ export const login = async (clientId: number, clientSecret: string): Promise<_lo
   const date = new Date();
 
   cache_token = access_token;
-  set_expire(Math.floor((date.getTime() + expires_in) / 1000));
+  set_expire(Math.floor(date.getTime() / 1000) + expires_in);
 
   return { access_token, expires_in };
 };
@@ -154,11 +155,10 @@ export const authorize = async (clientId: number, clientSecret: string, redirect
     })
   });
 
-
   const date = new Date();
 
   cache_token = access_token;
-  set_expire(Math.floor((date.getTime() + expires_in) / 1000));
+  set_expire(Math.floor(date.getTime() / 1000) + expires_in);
 
   return { access_token, expires_in };
 };
