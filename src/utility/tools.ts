@@ -78,7 +78,7 @@ const diff_file = async (diff_id: number, path: string, name: string | number): 
  * @returns {pp_calc_object | undefined} Json data
  */
 const pp_calc = async (id: number, mods?: number, combo?: number, miss?: number, acc?: number): Promise<pp_calc_object> | undefined => {
-  const { data } = await request('https://pp.osuck.net/pp', { method: 'GET', params: { id, mods, combo, miss, acc } });
+  const data = await request('https://pp.osuck.net/pp', { method: 'GET', params: { id, mods, combo, miss, acc } });
   if (!data.id) return null;
 
   return data;
