@@ -6,7 +6,9 @@
 
 ## Installation
 
-`npm i osu-api-extended`
+```
+npm i osu-api-extended
+```
 
 ### API V1
 
