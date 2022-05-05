@@ -7,9 +7,6 @@ interface _login {
   expires_in: number
 }
 
-export let cache_token: string = '';
-export let expire: number = 0;
-
 const credentials = {
   type: 0,
   username: '',
@@ -18,6 +15,16 @@ const credentials = {
   clientSecret: '',
   redirect_uri: '',
 };
+
+
+export let cache_v1: string = '';
+export let cache_v2: string = '';
+
+
+export const set_v1 = (v: string) => cache_v1 = v;
+export const set_v2 = (v: string) => cache_v2 = v;
+
+const isInitial = () => cache_v2 != '';
 
 const save_credentials = (type: number, obj: any) => {
   if (type == 1) {
@@ -40,43 +47,13 @@ const save_credentials = (type: number, obj: any) => {
   };
 };
 
-const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
-
-export const isLogin = async () => {
-  const xpire = await expired();
-
-  if (cache_token != '' && xpire) return true;
-  return false;
-};
-
-const isInitial = () => cache_token != '' ? true : false;
-
-export const set_expire = (v: number) => expire = v;
-export const set_token = (v: string) => cache_token = v;
-
-export const expired = async (): Promise<boolean> => {
-  const date = new Date();
-  const date2 = new Date(expire * 1000);
-  const unix = Math.floor(date.getTime() / 1000);
-
-  // console.log(10000, 'expired', credentials.type, (expire > 0 && unix < expire), unix, expire, date.toISOString().slice(0, 10), date2.toISOString().slice(0, 10)); // debug thing
-
-  if ((expire > 0 && unix < expire)) return true;
-
-  await sleep(1000);
-  await re_login();
-  return false;
-}
-
-const re_login = async () => {
+export const re_login = async () => {
   if (credentials.type == 1) await login_lazer(credentials.username, credentials.password);
   if (credentials.type == 2) await login(credentials.clientId, credentials.clientSecret);
   if (credentials.type == 3) await authorize(credentials.clientId, credentials.clientSecret, credentials.redirect_uri);
 
   return true;
 };
-
-
 
 export const login_lazer = async (username: string, password: string): Promise<_login> => {
   if (!isInitial()) save_credentials(1, { username, password });
@@ -97,10 +74,7 @@ export const login_lazer = async (username: string, password: string): Promise<_
     })
   });
 
-  const date = new Date();
-
-  cache_token = access_token;
-  set_expire(Math.floor(date.getTime() / 1000) + expires_in);
+  cache_v2 = access_token;
 
   return { access_token, expires_in };
 };
@@ -123,10 +97,7 @@ export const login = async (clientId: number, clientSecret: string): Promise<_lo
     })
   });
 
-  const date = new Date();
-
-  cache_token = access_token;
-  set_expire(Math.floor(date.getTime() / 1000) + expires_in);
+  cache_v2 = access_token;
 
   return { access_token, expires_in };
 };
@@ -155,10 +126,7 @@ export const authorize = async (clientId: number, clientSecret: string, redirect
     })
   });
 
-  const date = new Date();
-
-  cache_token = access_token;
-  set_expire(Math.floor(date.getTime() / 1000) + expires_in);
+  cache_v2 = access_token;
 
   return { access_token, expires_in };
 };
