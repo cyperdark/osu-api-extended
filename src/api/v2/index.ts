@@ -2,7 +2,7 @@ import user_activity, { types as user_activity_type } from "./routes/user/activi
 import user_details, { types as user_details_type } from "./routes/user/details";
 import user_me_details, { types as user_me_details_type } from "./routes/user/me-details";
 import user_me_friends, { types as user_me_friends_type } from "./routes/user/friends";
-// import user_me_download_quota, { types as user_me_download_quota_type } from "./routes/user-me-download-quota";
+import user_me_download_quota, { types as user_me_download_quota_type } from "./routes/user/me-download-quota";
 import user_list, { types as user_list_type } from "./routes/user/list";
 import user_scores_category, { types as user_scores_category_type } from "./routes/user/scores";
 import user_scores_beatmap, { types as user_scores_beatmap_type } from "./routes/user/scores-beatmap";
@@ -18,9 +18,9 @@ export const user: {
   me: {
     details: user_me_details_type,
     friends: user_me_friends_type,
-    // download: {
-    //   quota: user_me_download_quota_type,
-    // },
+    download: {
+      quota: user_me_download_quota_type,
+    },
   },
   list: user_list_type,
   scores: {
@@ -41,9 +41,9 @@ export const user: {
   me: {
     details: user_me_details,
     friends: user_me_friends,
-    // download: {
-    //   quota: user_me_download_quota
-    // }
+    download: {
+      quota: user_me_download_quota
+    }
   },
   list: user_list,
   scores: {
@@ -68,6 +68,8 @@ import beatmap_set, { types as beatmap_set_type } from "./routes/beatmap/set";
 import beatmap_diff, { types as beatmap_diff_type } from "./routes/beatmap/diff";
 import beatmap_search, { types as beatmap_search_type } from "./routes/beatmap/search";
 import beatmap_events, { types as beatmap_events_type } from "./routes/beatmap/events";
+import beatmap_attributes, { types as beatmap_attributes_type } from "./routes/beatmap/attributes";
+import beatmap_favourites, { types as beatmap_favourites_type } from "./routes/beatmap/favourites";
 import beatmap_lookup_set, { types as beatmap_lookup_set_type } from "./routes/beatmap/lookup/set";
 // import beatmap_lookup_diff, { types as beatmap_lookup_diff_type } from "./routes/beatmap/lookup/diff";
 import beatmap_discussions_details, { types as beatmap_discussions_details_type } from "./routes/beatmap/discussions/details";
@@ -83,6 +85,8 @@ export const beatmap: {
   diff: beatmap_diff_type,
   search: beatmap_search_type,
   events: beatmap_events_type,
+  attributes: beatmap_attributes_type,
+  favourites: beatmap_favourites_type,
   lookup: {
     set: beatmap_lookup_set_type,
     // diff: beatmap_lookup_diff_type,
@@ -100,6 +104,8 @@ export const beatmap: {
   diff: beatmap_diff,
   search: beatmap_search,
   events: beatmap_events,
+  attributes: beatmap_attributes,
+  favourites: beatmap_favourites,
   lookup: {
     set: beatmap_lookup_set,
     // diff: beatmap_lookup_diff,
@@ -271,6 +277,7 @@ export const matches: {
 // };
 
 
+import chat_new, { types as chat_new_type } from "./routes/chat/new";
 import chat_updates, { types as chat_updates_type } from "./routes/chat/updates";
 import chat_presence, { types as chat_presence_type } from "./routes/chat/presence";
 import chat_channels_list, { types as chat_channels_list_type } from "./routes/chat/channels/list";
@@ -281,27 +288,48 @@ import chat_channels_messages, { types as chat_channels_messages_type } from "./
 export const chat: {
   updates: chat_updates_type,
   list: chat_presence_type,
-  channels: {
+  channel: {
     list: chat_channels_list_type,
     details: chat_channels_details_type,
-    messages: chat_channels_messages_type,
+    messages: {
+      // readed: chat_channels_messages_type,
+      list: chat_channels_messages_type,
+      send: chat_new_type,
+    },
   },
 } = {
   updates: chat_updates,
   list: chat_presence,
-  channels: {
+  channel: {
     list: chat_channels_list,
     details: chat_channels_details,
-    messages: chat_channels_messages,
+    messages: {
+      // readed: chat_channels_messages_type,
+      list: chat_channels_messages,
+      send: chat_new,
+    },
   },
 };
 
 
 import notifications_list, { types as notifications_list_type } from "./routes/notifications/list";
+import notifications_readed, { types as notifications_readed_type } from "./routes/notifications/mark-read";
 
 
 export const notifications: {
   list: notifications_list_type,
+  readed: notifications_readed_type,
 } = {
   list: notifications_list,
+  readed: notifications_readed,
+};
+
+
+import groups_parse, { types as groups_parse_type } from "./routes/groups/parse";
+
+
+export const groups: {
+  list: groups_parse_type,
+} = {
+  list: groups_parse,
 };
