@@ -1,714 +1,307 @@
-import {
-  _news, _changelogs, _beatmaps, _beatmap, _scores, _discussions, _seasonal, _wiki, _search, _comments, _users, _me, _user, _forum, _notifications, _matches, _rooms,
-  _mode, _genre, _language
-} from "../../types/v2";
-import { namespace, download } from "../../utility/request";
-import { RequestNamepsace } from "../../types/request";
-
-import * as Auth from "../../utility/auth";
-
-const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
-
-/**
- * @deprecated Since version 1.0. Will be deleted in version 3.0. Use bar instead.
- */
-export const login_lazer = () => {
-  throw new Error("New authorization method\nhttps://github.com/cyperdark/osu-api-extended/blob/master/changes/2.1.2.md\n\n");
-  }
-
-/**
- * @deprecated Since version 1.0. Will be deleted in version 3.0. Use bar instead.
- */
-export const login = () => {
-  throw new Error("New authorization method\nhttps://github.com/cyperdark/osu-api-extended/blob/master/changes/2.1.2.md\n\n");
-}
-
-/**
- * @deprecated Since version 1.0. Will be deleted in version 3.0. Use bar instead.
- */
-export const authorize = () => {
-  throw new Error("New authorization method\nhttps://github.com/cyperdark/osu-api-extended/blob/master/changes/2.1.2.md\n\n");
-}
+import user_activity, { types as user_activity_type } from "./routes/user/activity";
+import user_details, { types as user_details_type } from "./routes/user/details";
+import user_me_details, { types as user_me_details_type } from "./routes/user/me-details";
+import user_me_friends, { types as user_me_friends_type } from "./routes/user/friends";
+// import user_me_download_quota, { types as user_me_download_quota_type } from "./routes/user-me-download-quota";
+import user_list, { types as user_list_type } from "./routes/user/list";
+import user_scores_category, { types as user_scores_category_type } from "./routes/user/scores";
+import user_scores_beatmap, { types as user_scores_beatmap_type } from "./routes/user/scores-beatmap";
+import user_scores_beatmap_all, { types as user_scores_beatmap_all_type } from "./routes/user/scores-beatmap-all";
+import user_beatmap_category, { types as user_beatmap_category_type } from "./routes/user/beatmaps-category";
+import user_beatmap_category_most, { types as user_beatmap_category_most_type } from "./routes/user/beatmaps-most-played";
+import user_beatmap_kudosu, { types as user_beatmap_kudosu_type } from "./routes/user/beatmaps-kudosu";
 
 
-
-// News
-export const news: _news = async (obj = {}) => {
-  const data = await request(`news`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${Auth.cache_token}`,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    params: {
-      limit: obj.limit,
-      year: obj.year,
-      'cursor[published_at]': obj.cursorPublished,
-      'cursor[_id]': obj.cursorId,
-    }
-  });
-
-  return data;
-};
-
-// Changelogs
-export const changelogs: _changelogs = {
-  all: async (obj = {}) => {
-    const data = await request(`changelog`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      params: obj,
-    });
-
-    return data;
+export const user: {
+  activity: user_activity_type,
+  details: user_details_type,
+  me: {
+    details: user_me_details_type,
+    friends: user_me_friends_type,
+    // download: {
+    //   quota: user_me_download_quota_type,
+    // },
   },
-  get: async (stream, build) => {
-    const data = await request(`changelog/${stream}/${build}`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }
-    });
-
-    return data;
-  },
-  lookup: async (changelog, obj = {}) => {
-    const data = await request(`changelog/${changelog}`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      params: obj,
-    });
-
-    return data;
-  },
-};
-
-// Seasonal backgrounds
-export const seasonal_backgrounds: _seasonal = async () => {
-  const data = await request(`seasonal-backgrounds`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${Auth.cache_token}`,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    }
-  });
-
-  return data;
-};
-
-// Wiki search
-export const wiki: _wiki = async (language, path) => {
-  const data = await request(`wiki/${language}/${path}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${Auth.cache_token}`,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    }
-  });
-
-  return data;
-};
-
-// Search
-export const search: _search = async (obj = {}) => {
-  const data = await request(`search`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${Auth.cache_token}`,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    params: obj,
-  });
-
-  return data;
-};
-
-
-// Beatmaps
-export const beatmaps: _beatmaps = {
-  get: async (id) => {
-    const data = await request(`beatmapsets/${id}`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    });
-
-    return data;
-  },
-  events: async (obj = {}) => {
-    const data = await request(`beatmapsets/events`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      params: obj,
-    });
-
-    return data;
-  },
-  search: async (obj = {}) => {
-    const oobj: any = {
-      q: obj.query,
-      c: obj?.general,
-      m: _mode.indexOf(obj?.mode),
-      s: obj?.section,
-      g: _genre.indexOf(obj?.genre),
-      l: _language.indexOf(obj?.language),
-      e: obj?.include,
-      r: obj?.rank,
-      nsfw: undefined,
-    };
-    if (!obj?.nfsw) oobj.nsfw = 0;
-
-    const data = await request(`beatmapsets/search`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      params: oobj,
-    });
-
-    return data;
-  },
-};
-
-// Beatmap
-export const beatmap: _beatmap = {
-  get: async (id) => {
-    const data = await request(`beatmaps/${id}`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    });
-
-    return data;
-  },
-  search: async (obj = {}) => {
-    const data = await request('beatmaps/lookup', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      params: {
-        checksum: obj.checksum,
-        filename: obj.filename,
-        id: obj.diff_id,
-      },
-    });
-
-    return data;
-  },
+  list: user_list_type,
   scores: {
-    all: async (beatmap, obj = {}) => {
-      const data = await request(`beatmaps/${beatmap}/scores`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${Auth.cache_token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        params: { mode: obj.mode, mods: obj.mods },
-      });
-
-      return data;
-    },
-    user: async (beatmap, user, obj = {}) => {
-      const data = await request(`beatmaps/${beatmap}/scores/users/${user}`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${Auth.cache_token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        params: { mode: obj.mode, mods: obj.mods }
-      });
-
-      return data;
-    },
-    user_all: async (beatmap, user, mode) => {
-      const data = await request(`beatmaps/${beatmap}/scores/users/${user}/all`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${Auth.cache_token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        params: { mode }
-      });
-
-      return data;
-    },
-  },
-};
-
-// Discussions
-export const discussions: _discussions = {
-  all: async (obj = {}) => {
-    const data = await request(`beatmapsets/discussions`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      params: obj,
-    });
-
-    return data;
-  },
-  posts: async (obj = {}) => {
-    const data = await request(`beatmapsets/discussions/posts`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      params: obj,
-    });
-
-    return data;
-  },
-  votes: async (obj = {}) => {
-    const data = await request(`beatmapsets/discussions/votes`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      params: obj,
-    });
-
-    return data;
-  },
-};
-
-
-// Scores
-export const scores: _scores = {
-  users: {
-    recent: async (user, obj = {}) => {
-      const data = await request(`users/${user}/scores/recent`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${Auth.cache_token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        params: obj,
-      });
-
-      return data;
-    },
-    best: async (user, obj = {}) => {
-      const data = await request(`users/${user}/scores/best`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${Auth.cache_token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        params: obj,
-      });
-
-      return data;
-    },
-    firsts: async (user, obj = {}) => {
-      const data = await request(`users/${user}/scores/firsts`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${Auth.cache_token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        params: obj,
-      });
-
-      return data;
-    },
-    pinned: async (user, obj = {}) => {
-      const data = await request(`users/${user}/scores/pinned`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${Auth.cache_token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        params: obj,
-      });
-
-      return data;
-    },
-  },
-  score: {
-    get: async (mode, score_id) => {
-      const data = await request(`scores/${mode}/${score_id}`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${Auth.cache_token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        }
-      });
-
-      return data;
-    },
-    download: async (mode, score_id, file_path) => {
-      const data = await download(`https://osu.ppy.sh/api/v2/scores/${mode}/${score_id}/download`, file_path, {
-        headers: {
-          Authorization: `Bearer ${Auth.cache_token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        }
-      });
-
-      return data;
-    },
-  }
-};
-
-
-// Comments
-export const comments: _comments = {
-  all: async (obj = {}) => {
-    const data = await request(`comments`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      params: obj,
-    });
-
-    return data;
-  },
-  one: async (comment) => {
-    const data = await request(`comments/${comment}`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }
-    });
-
-    return data;
-  },
-};
-
-
-// Users
-export const me: _me = {
-  data: async (mode) => {
-    const data = await request(`me/${mode}`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }
-    });
-
-    return data;
-  },
-  download_quota: async () => {
-    throw new Error("Currently unavailable");
-
-    const data = await request(`me/download-quota-check`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }
-    });
-
-    return data;
-  },
-  friends: async () => {
-    const data = await request(`friends`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }
-    });
-
-    return data;
-  }
-};
-
-export const users: _users = async (ids = []) => {
-  if (ids.length == 0) throw new Error("Add users in list");
-
-  const data = await request(`users`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${Auth.cache_token}`,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    params: { ids },
-  });
-
-  return data;
-};
-
-export const user: _user = {
-  get: async (user, mode, key?) => {
-    const data = await request(`users/${user}/${mode}`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      params: { key },
-    });
-
-    return data;
-  },
-  activity: async (user, obj = {}) => {
-    const data = await request(`users/${user}/recent_activity`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      params: obj,
-    });
-
-    return data;
-  },
-  kudosu: async (user, obj = {}) => {
-    const data = await request(`users/${user}/kudosu`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      params: obj,
-    });
-
-    return data;
+    category: user_scores_category_type,
+    beatmap: {
+      best: user_scores_beatmap_type,
+      all: user_scores_beatmap_all_type,
+    }
   },
   beatmaps: {
-    loved: async (user, obj = {}) => {
-      const data = await request(`users/${user}/beatmapsets/loved`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${Auth.cache_token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        params: obj,
-      });
-
-      return data;
-    },
-    ranked: async (user, obj = {}) => {
-      const data = await request(`users/${user}/beatmapsets/ranked`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${Auth.cache_token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        params: obj,
-      });
-
-      return data;
-    },
-    pending: async (user, obj = {}) => {
-      const data = await request(`users/${user}/beatmapsets/pending`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${Auth.cache_token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        params: obj,
-      });
-
-      return data;
-    },
-    graveyard: async (user, obj = {}) => {
-      const data = await request(`users/${user}/beatmapsets/graveyard`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${Auth.cache_token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        params: obj,
-      });
-
-      return data;
-    },
-    favourite: async (user, obj = {}) => {
-      const data = await request(`users/${user}/beatmapsets/favourite`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${Auth.cache_token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        params: obj,
-      });
-
-      return data;
-    },
-    most_played: async (user, obj = {}) => {
-      const data = await request(`users/${user}/beatmapsets/most_played`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${Auth.cache_token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        params: obj,
-      });
-
-      return data;
-    },
+    category: user_beatmap_category_type,
+    most_played: user_beatmap_category_most_type,
+    kudosu: user_beatmap_kudosu_type,
+  },
+} = {
+  activity: user_activity,
+  details: user_details,
+  me: {
+    details: user_me_details,
+    friends: user_me_friends,
+    // download: {
+    //   quota: user_me_download_quota
+    // }
+  },
+  list: user_list,
+  scores: {
+    category: user_scores_category,
+    beatmap: {
+      best: user_scores_beatmap,
+      all: user_scores_beatmap_all,
+    }
+  },
+  beatmaps: {
+    category: user_beatmap_category,
+    most_played: user_beatmap_category_most,
+    kudosu: user_beatmap_kudosu,
   }
 };
 
 
-// Forum
-export const forum: _forum = {
+import beatmap_leaderboard, { types as beatmap_leaderboard_type } from "./routes/beatmap/leaderboard";
+import beatmap_list, { types as beatmap_list_type } from "./routes/beatmap/list";
+import beatmap_download, { types as beatmap_download_type } from "./routes/beatmap/download";
+import beatmap_set, { types as beatmap_set_type } from "./routes/beatmap/set";
+import beatmap_diff, { types as beatmap_diff_type } from "./routes/beatmap/diff";
+import beatmap_search, { types as beatmap_search_type } from "./routes/beatmap/search";
+import beatmap_events, { types as beatmap_events_type } from "./routes/beatmap/events";
+import beatmap_lookup_set, { types as beatmap_lookup_set_type } from "./routes/beatmap/lookup/set";
+// import beatmap_lookup_diff, { types as beatmap_lookup_diff_type } from "./routes/beatmap/lookup/diff";
+import beatmap_discussions_details, { types as beatmap_discussions_details_type } from "./routes/beatmap/discussions/details";
+import beatmap_discussions_posts, { types as beatmap_discussions_posts_type } from "./routes/beatmap/discussions/posts";
+import beatmap_discussions_votes, { types as beatmap_discussions_votes_type } from "./routes/beatmap/discussions/votes";
+
+
+export const beatmap: {
+  leaderboard: beatmap_leaderboard_type,
+  list: beatmap_list_type,
+  download: beatmap_download_type,
+  set: beatmap_set_type,
+  diff: beatmap_diff_type,
+  search: beatmap_search_type,
+  events: beatmap_events_type,
+  lookup: {
+    set: beatmap_lookup_set_type,
+    // diff: beatmap_lookup_diff_type,
+  },
+  discussions: {
+    details: beatmap_discussions_details_type,
+    posts: beatmap_discussions_posts_type,
+    votes: beatmap_discussions_votes_type,
+  },
+} = {
+  leaderboard: beatmap_leaderboard,
+  list: beatmap_list,
+  download: beatmap_download,
+  set: beatmap_set,
+  diff: beatmap_diff,
+  search: beatmap_search,
+  events: beatmap_events,
+  lookup: {
+    set: beatmap_lookup_set,
+    // diff: beatmap_lookup_diff,
+  },
+  discussions: {
+    details: beatmap_discussions_details,
+    posts: beatmap_discussions_posts,
+    votes: beatmap_discussions_votes,
+  },
+};
+
+
+import scores_id, { types as scores_id_type } from "./routes/scores/id";
+import scores_download, { types as scores_download_type } from "./routes/scores/download";
+
+
+export const scores: {
+  id: scores_id_type,
+  download: scores_download_type,
+} = {
+  id: scores_id,
+  download: scores_download,
+};
+
+
+import forum_topics_get, { types as forum_topics_get_type } from "./routes/forum/topics/get";
+
+
+export const forum: {
   topics: {
-    all: async (topic, obj = {}) => {
-      const data = await request(`forums/topics/${topic}`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${Auth.cache_token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        params: obj,
-      });
-
-      return data;
-    },
+    get: forum_topics_get_type,
+  },
+} = {
+  topics: {
+    get: forum_topics_get,
   },
 };
 
 
-// Notifications
-export const notifications: _notifications = {
-  all: async (max_id?) => {
-    const data = await request(`notifications`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      params: { max_id },
-    });
+import site_search, { types as site_search_type } from "./routes/site/search";
+import site_wiki, { types as site_wiki_type } from "./routes/site/wiki";
+import site_spotlights, { types as site_spotlights_type } from "./routes/site/spotlights";
 
-    return data;
+
+export const site: {
+  search: site_search_type,
+  wiki: site_wiki_type,
+  spotlights: {
+    list: site_spotlights_type,
+  },
+} = {
+  search: site_search,
+  wiki: site_wiki,
+  spotlights: {
+    list: site_spotlights,
   },
 };
 
 
-// Matches
-export const matches: _matches = {
-  all: async () => {
-    const data = await request(`matches`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }
-    });
+import backgrounds_seasonal, { types as backgrounds_seasonal_type } from "./routes/backgrounds/seasonal";
 
-    return data;
-  },
-  one: async (match: string) => {
-    const data = await request(`matches/${match}`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }
-    });
 
-    return data;
-  }
+export const backgrounds: {
+  seasonal: backgrounds_seasonal_type,
+} = {
+  seasonal: backgrounds_seasonal,
 };
 
 
-// Rooms
-export const rooms: _rooms = {
-  all: async () => {
-    const data = await request(`rooms`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }
-    });
+import news_list, { types as news_list_type } from "./routes/news/list";
+import news_details, { types as news_details_type } from "./routes/news/details";
 
-    return data;
+
+export const news: {
+  list: news_list_type,
+  details: news_details_type,
+} = {
+  list: news_list,
+  details: news_details,
+};
+
+
+import comments_list, { types as comments_list_type } from "./routes/comments/list";
+import comments_details, { types as comments_details_type } from "./routes/comments/details";
+
+
+export const comments: {
+  list: comments_list_type,
+  details: comments_details_type,
+} = {
+  list: comments_list,
+  details: comments_details,
+};
+
+
+import changelogs_list, { types as changelogs_list_type } from "./routes/changelogs/list";
+import changelogs_lookup, { types as changelogs_lookup_type } from "./routes/changelogs/lookup";
+import changelogs_details, { types as changelogs_details_type } from "./routes/changelogs/details";
+
+
+export const changelogs: {
+  list: changelogs_list_type,
+  lookup: changelogs_lookup_type,
+  details: changelogs_details_type,
+} = {
+  list: changelogs_list,
+  lookup: changelogs_lookup,
+  details: changelogs_details,
+};
+
+
+import ranking_details, { types as ranking_details_type } from "./routes/ranking/details";
+
+
+export const ranking: {
+  details: ranking_details_type,
+} = {
+  details: ranking_details,
+};
+
+
+import matches_list, { types as matches_list_type } from "./routes/matches/list";
+import matches_details, { types as matches_details_type } from "./routes/matches/details";
+
+
+export const matches: {
+  list: matches_list_type,
+  details: matches_details_type,
+} = {
+  list: matches_list,
+  details: matches_details,
+};
+
+
+// import rooms_list, { types as rooms_list_type } from "./routes/rooms/list";
+// import rooms_room_details, { types as rooms_room_details_type } from "./routes/rooms/room/details";
+// import rooms_room_leaderboard, { types as rooms_room_leaderboard_type } from "./routes/rooms/room/leaderboard";
+// import rooms_room_playlist_scores_list, { types as rooms_room_playlist_scores_list_type } from "./routes/rooms/room/playlist/scores/list";
+// import rooms_room_playlist_scores_details, { types as rooms_room_playlist_scores_details_type } from "./routes/rooms/room/playlist/scores/details";
+// import rooms_room_playlist_scores_user, { types as rooms_room_playlist_scores_user_type } from "./routes/rooms/room/playlist/scores/user";
+
+
+// export const rooms: {
+//   list: rooms_list_type,
+//   room: {
+//     details: rooms_room_details_type,
+//     leaderboard: rooms_room_leaderboard_type,
+//     playlist: {
+//       scores: {
+//         list: rooms_room_playlist_scores_list_type,
+//         details: rooms_room_playlist_scores_details_type,
+//         user: rooms_room_playlist_scores_user_type,
+//       }
+//     }
+//   }
+// } = {
+//   list: rooms_list,
+//   room: {
+//     details: rooms_room_details,
+//     leaderboard: rooms_room_leaderboard,
+//     playlist: {
+//       scores: {
+//         list: rooms_room_playlist_scores_list,
+//         details: rooms_room_playlist_scores_details,
+//         user: rooms_room_playlist_scores_user,
+//       }
+//     }
+//   }
+// };
+
+
+import chat_updates, { types as chat_updates_type } from "./routes/chat/updates";
+import chat_presence, { types as chat_presence_type } from "./routes/chat/presence";
+import chat_channels_list, { types as chat_channels_list_type } from "./routes/chat/channels/list";
+import chat_channels_details, { types as chat_channels_details_type } from "./routes/chat/channels/details";
+import chat_channels_messages, { types as chat_channels_messages_type } from "./routes/chat/channels/messages";
+
+
+export const chat: {
+  updates: chat_updates_type,
+  list: chat_presence_type,
+  channels: {
+    list: chat_channels_list_type,
+    details: chat_channels_details_type,
+    messages: chat_channels_messages_type,
   },
-  one: async (room_id: number) => {
-    const data = await request(`rooms/${room_id}`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }
-    });
-
-    return data;
+} = {
+  updates: chat_updates,
+  list: chat_presence,
+  channels: {
+    list: chat_channels_list,
+    details: chat_channels_details,
+    messages: chat_channels_messages,
   },
-  leader: async (room_id: number) => {
-    const data = await request(`rooms/${room_id}/leaderboard`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${Auth.cache_token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }
-    });
+};
 
-    return data;
-  }
+
+import notifications_list, { types as notifications_list_type } from "./routes/notifications/list";
+
+
+export const notifications: {
+  list: notifications_list_type,
+} = {
+  list: notifications_list,
 };
