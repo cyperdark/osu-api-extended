@@ -1,4 +1,4 @@
-import { namespace, RequestNamepsace } from "../../../../../utility/request";
+import { namespace, RequestNamepsace } from "../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
 
