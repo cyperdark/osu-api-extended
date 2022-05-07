@@ -1,6 +1,4 @@
-import { ModsOrder, NumCodes } from "../types/mods";
-
-const num_codes: NumCodes = {
+const num_codes: { [key: string]: string } = {
   1: 'NF',
   2: 'EZ',
   4: 'TD',
@@ -34,7 +32,7 @@ const num_codes: NumCodes = {
   1073741824: 'LastMod',
 };
 
-const mods_order: ModsOrder = {
+const mods_order: { [key: string]: number } = {
   nf: 0,
   ez: 1,
   hd: 2,
