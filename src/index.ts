@@ -7,4 +7,5 @@
 export * as auth from './utility/auth'
 
 
+export * as v1 from "./api/v1/index";
 export * as v2 from "./api/v2/index";
