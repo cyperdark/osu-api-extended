@@ -33,6 +33,11 @@ const o = (obj: any) => {
  * @returns {Promise<any>} The response
  */
 export const request = (url: string, { method = "GET", headers, data, params }: RequestParams = {}): Promise<any> => new Promise(async (res, rej) => {
+  if (url.includes('https://osu.ppy.sh/api/') && !url.includes('https://osu.ppy.sh/api/v2')) {
+    if (!params) params = {};
+    params.k = auth.cache_v1;
+  };
+
   if (url.includes('https://osu.ppy.sh/api/v2')) headers = {
     Authorization: `Bearer ${auth.cache_v2}`,
     Accept: `application/json`,
