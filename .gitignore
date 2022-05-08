@@ -1,5 +1,6 @@
 /test
 /dist
+/wiki
 /node_modules
 index.js
 package-lock.json
