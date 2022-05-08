@@ -2,43 +2,56 @@ import { namespace, RequestNamepsace } from "../../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
 
+export const description: any = {
+  auth: 1,
+  title: __filename,
+  method: 'GET',
+  description: 'Return data for a score',
+  params: [
+    {
+      type: 'number',
+      name: 'score_id',
+      optional: true,
+      description: 'id of the score',
+    },
+    {
+      type: 'string',
+      name: 'mode',
+      optional: true,
+      description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
+    },
+  ],
+};
+
 export interface types {
-  (user: number, type: 'recent' | 'best' | 'firsts' | 'pinned', obj: {
-    include_fails?: string,
-    mode?: string,
-    limit?: number,
-    offset?: string,
-  }): Promise<{
-    accuracy: number;
-    best_id: number;
-    created_at: string;
-    id: number;
-    max_combo: number;
-    mode: string;
-    mode_int: number;
-    mods: string[];
-    passed: boolean;
-    perfect: boolean;
-    pp: number;
-    rank: string;
-    replay: boolean;
-    score: number;
-    statistics: {
-      count_100: number;
-      count_300: number;
-      count_50: number;
-      count_geki: number;
-      count_katu: number;
-      count_miss: number;
-    };
-    user_id: number;
-    current_user_attributes: {
-      pin: {
-        is_pinned: boolean;
-        score_id: number;
-        score_type: string;
-      };
-    };
+  (score_id: number, mode: 'osu' | 'fruits' | 'mania' | 'taiko'): Promise<response>;
+};
+
+export interface response {
+  accuracy: number;
+  best_id: number;
+  created_at: string;
+  id: number;
+  max_combo: number;
+  mode: string;
+  mode_int: number;
+  mods: string[];
+  passed: boolean;
+  perfect: boolean;
+  pp: number;
+  rank: string;
+  replay: boolean;
+  score: number;
+  statistics: {
+    count_100: number;
+    count_300: number;
+    count_50: number;
+    count_geki: number;
+    count_katu: number;
+    count_miss: number;
+  };
+  user_id: number;
+  current_user_attributes: {
     beatmap: {
       beatmapset_id: number;
       difficulty_rating: number;
@@ -66,6 +79,7 @@ export interface types {
       ranked: number;
       url: string;
       checksum: string;
+      max_combo: number;
     };
     beatmapset: {
       artist: string;
@@ -93,8 +107,8 @@ export interface types {
       title_unicode: string;
       user_id: number;
       video: boolean;
-      track_id?: number;
     };
+    rank_global: number;
     user: {
       avatar_url: string;
       country_code: string;
@@ -105,17 +119,37 @@ export interface types {
       is_deleted: boolean;
       is_online: boolean;
       is_supporter: boolean;
+      last_visit: string;
       pm_friends_only: boolean;
       username: string;
+      country: {
+        code: string;
+        name: string;
+      };
+      cover: {
+        custom_url: string;
+        url: string;
+      };
+      groups: {
+        colour: string;
+        has_listing: boolean;
+        has_playmodes: boolean;
+        id: number;
+        identifier: string;
+        is_probationary: boolean;
+        name: string;
+        short_name: string;
+        playmodes: object;
+      }[];
+      profile_colour: string;
     };
-  }[]>;
+  };
 };
 
 
-const name: types = async (user, type, obj) => {
-  const data = await request(`users/${user}/scores/${type}`, {
+const name: types = async (score_id, mode) => {
+  const data = await request(`scores/${mode}/${score_id}`, {
     method: 'GET',
-    params: obj,
   });
 
   return data;

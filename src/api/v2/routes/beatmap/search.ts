@@ -43,6 +43,70 @@ const _language = [
 ];
 
 
+export const description: any = {
+  auth: 1,
+  title: __filename,
+  method: 'GET',
+  description: 'Return list of beatmaps',
+  params: [
+    {
+      type: 'string',
+      name: 'query',
+      optional: true,
+      description: 'search query, song \`\`title\`\` / \`\`artist\`\`, \`\`stars\`\`, \`\`bpm\`\`, \`\`date\`\` and etc.',
+    },
+    {
+      type: 'string',
+      name: 'general',
+      optional: true,
+      description: '\`\`converts\`\` or \`\`follows\`\` or \`\`recommended\`\`',
+    },
+    {
+      type: 'string',
+      name: 'mode',
+      optional: true,
+      description: '\`\`osu\`\` or \`\`fruits\`\` or \`\`mania\`\` or \`\`taiko\`\`',
+    },
+    {
+      type: 'string',
+      name: 'section',
+      optional: true,
+      description: '\`\`ranked\`\` or \`\`qualified\`\` or \`\`loved\`\` or \`\`favourites\`\` or \`\`pending\`\` or \`\`graveyard\`\` or \`\`mine\`\`',
+    },
+    {
+      type: 'string',
+      name: 'genre',
+      optional: true,
+      description: '\`\`Unspecified\`\` or \`\`Video Game\`\` or \`\`Anime\`\` or \`\`Rock\`\` or \`\`Pop\`\` or \`\`Other\`\` or \`\`Novelty\`\` or \`\`Hip Hop\`\` or \`\`Electronic\`\` or \`\`Metal\`\` or \`\`Classical\`\` or \`\`Folk\`\` or \`\`Jazz\`\`',
+    },
+    {
+      type: 'string',
+      name: 'language',
+      optional: true,
+      description: '\`\`English\`\` or \`\`Chinese\`\` or \`\`French\`\` or \`\`German\`\` or \`\`Italian\`\` or \`\`Japanese\`\` or \`\`Korean\`\` or \`\`Spanish\`\` or \`\`Swedish\`\` or \`\`Russian\`\` or \`\`Polish\`\` or \`\`Instrumental\`\` or \`\`Unspecified\`\` or \`\`Other\`\`',
+    },
+    {
+      type: 'string',
+      name: 'include',
+      optional: true,
+      description: '\`\`video\`\` or \`\`storyboard\`\`',
+    },
+    {
+      type: 'string',
+      name: 'rank',
+      optional: true,
+      description: '\`\`XH\`\` or \`\`X\`\` or \`\`SH\`\` or \`\`S\`\` or \`\`A\`\` or \`\`B\`\` or \`\`C\`\` or \`\`D\`\`',
+    },
+    {
+      type: 'boolean',
+      name: 'nfsw',
+      optional: true,
+      description: '\`\`true\`\` or \`\`false\`\`',
+    },
+  ],
+};
+
+
 export interface types {
   (filters: {
     query?: string,
@@ -54,102 +118,104 @@ export interface types {
     include?: 'video' | 'storyboard',
     rank?: 'XH' | 'X' | 'SH' | 'S' | 'A' | 'B' | 'C' | 'D',
     nfsw?: boolean,
-  }): Promise<{
-    beatmapsets: {
-      artist: string;
-      artist_unicode: string;
-      covers: {
-        cover: string;
-        'cover@2x': string;
-        card: string;
-        'card@2x': string;
-        list: string;
-        'list@2x': string;
-        slimcover: string;
-        'slimcover@2x': string;
-      };
-      creator: string;
-      favourite_count: number;
+  }): Promise<response>;
+};
+
+export interface response {
+  beatmapsets: {
+    artist: string;
+    artist_unicode: string;
+    covers: {
+      cover: string;
+      'cover@2x': string;
+      card: string;
+      'card@2x': string;
+      list: string;
+      'list@2x': string;
+      slimcover: string;
+      'slimcover@2x': string;
+    };
+    creator: string;
+    favourite_count: number;
+    id: number;
+    nsfw: boolean;
+    offset: number;
+    play_count: number;
+    preview_url: string;
+    source: string;
+    status: string;
+    title: string;
+    title_unicode: string;
+    user_id: number;
+    video: boolean;
+    availability: {
+      download_disabled: boolean;
+    };
+    bpm: number;
+    can_be_hyped: boolean;
+    discussion_enabled: boolean;
+    discussion_locked: boolean;
+    is_scoreable: boolean;
+    last_updated: string;
+    legacy_thread_url: string;
+    nominations_summary: {
+      current: number;
+      required: number;
+    };
+    ranked: number;
+    ranked_date: string;
+    storyboard: boolean;
+    submitted_date: string;
+    tags: string;
+    has_favourited: boolean;
+    beatmaps: {
+      beatmapset_id: number;
+      difficulty_rating: number;
       id: number;
-      nsfw: boolean;
-      offset: number;
-      play_count: number;
-      preview_url: string;
-      source: string;
+      mode: string;
       status: string;
-      title: string;
-      title_unicode: string;
+      total_length: number;
       user_id: number;
-      video: boolean;
-      availability: {
-        download_disabled: boolean;
-      };
+      version: string;
+      accuracy: number;
+      ar: number;
       bpm: number;
-      can_be_hyped: boolean;
-      discussion_enabled: boolean;
-      discussion_locked: boolean;
+      convert: boolean;
+      count_circles: number;
+      count_sliders: number;
+      count_spinners: number;
+      cs: number;
+      deleted_at: object;
+      drain: number;
+      hit_length: number;
       is_scoreable: boolean;
       last_updated: string;
-      legacy_thread_url: string;
-      nominations_summary: {
-        current: number;
-        required: number;
-      };
+      mode_int: number;
+      passcount: number;
+      playcount: number;
       ranked: number;
-      ranked_date: string;
-      storyboard: boolean;
-      submitted_date: string;
-      tags: string;
-      has_favourited: boolean;
-      beatmaps: {
-        beatmapset_id: number;
-        difficulty_rating: number;
-        id: number;
-        mode: string;
-        status: string;
-        total_length: number;
-        user_id: number;
-        version: string;
-        accuracy: number;
-        ar: number;
-        bpm: number;
-        convert: boolean;
-        count_circles: number;
-        count_sliders: number;
-        count_spinners: number;
-        cs: number;
-        deleted_at: object;
-        drain: number;
-        hit_length: number;
-        is_scoreable: boolean;
-        last_updated: string;
-        mode_int: number;
-        passcount: number;
-        playcount: number;
-        ranked: number;
-        url: string;
-        checksum: string;
-        max_combo: number;
-      }[];
-      track_id?: number;
+      url: string;
+      checksum: string;
+      max_combo: number;
     }[];
-    search: {
-      sort: string;
-    };
-    recommended_difficulty: number;
-    total: number;
-    cursor: {
-      approved_date: string;
-      id: string;
-    };
-    cursor_string: string;
-  }>;
+    track_id?: number;
+  }[];
+  search: {
+    sort: string;
+  };
+  recommended_difficulty: number;
+  total: number;
+  cursor: {
+    approved_date: string;
+    id: string;
+  };
+  cursor_string: string;
 };
 
 
 const name: types = async (filters) => {
-  const oobj: any = {
-    q: filters.query,
+  const obj: any = {
+    q: filters?.query,
     c: filters?.general,
     m: _mode.indexOf(filters?.mode),
     s: filters?.section,
@@ -159,7 +225,7 @@ const name: types = async (filters) => {
     r: filters?.rank,
     nsfw: undefined,
   };
-  if (!filters?.nfsw) oobj.nsfw = 0;
+  if (!filters?.nfsw) obj.nsfw = 0;
   const data = await request(`beatmapsets/search/`, {
     method: 'GET',
     params: filters,

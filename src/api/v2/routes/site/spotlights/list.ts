@@ -6,32 +6,30 @@ export const description: any = {
   auth: 1,
   title: __filename,
   method: 'GET',
-  description: 'asd',
+  description: 'Return list of spotlights',
   params: [
-    {
-      type: 'number',
-      name: 'beatmap_id',
-      optional: true,
-      description: 'id of the beatmap set',
-    },
   ],
 };
 
 export interface types {
-  (beatmap_id: number): Promise<response[]>;
+  (): Promise<response>;
 };
 
 export interface response {
-  ask: 'peppy',
+  spotlights: {
+    end_date: string;
+    id: number;
+    mode_specific: boolean;
+    name: string;
+    start_date: string;
+    type: string;
+  }[];
 };
 
 
-const name: types = async (beatmap_id) => {
-  const data = await request(`beatmapsets/lookup`, {
+const name: types = async () => {
+  const data = await request(`spotlights`, {
     method: 'GET',
-    params: {
-      beatmap_id: beatmap_id,
-    },
   });
 
   return data;

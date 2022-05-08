@@ -1,32 +1,29 @@
-import { namespace, RequestNamepsace } from "../../../../../utility/request";
+import { namespace, RequestNamepsace } from "../../../../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
 
 export const description: any = {
+  type: false,
   auth: 0,
   title: __filename,
   method: 'GET',
-  description: 'Return list of channels',
+  description: 'Return user download quota number?',
   params: [
 
   ],
 };
 
 export interface types {
-  (): Promise<response[]>;
+  (): Promise<response>;
 };
 
 export interface response {
-  channel_id: number;
-  description: string;
-  moderated: boolean;
-  name: string;
-  type: string;
+  ask: 'peppy',
 }
 
 
 const name: types = async () => {
-  const data = await request(`chat/channels`, {
+  const data = await request(`me/download-quota-check`, {
     method: 'GET',
   });
 
