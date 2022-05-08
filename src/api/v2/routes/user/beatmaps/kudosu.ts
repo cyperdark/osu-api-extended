@@ -1,4 +1,4 @@
-import { namespace, RequestNamepsace } from "../../../../utility/request";
+import { namespace, RequestNamepsace } from "../../../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
 
@@ -6,7 +6,7 @@ export const description: any = {
   auth: 1,
   title: __filename,
   method: 'GET',
-  description: 'Return list of recent user activity',
+  description: 'Return list of kudosu actions',
   params: [
     {
       type: 'number',
@@ -21,7 +21,7 @@ export const description: any = {
       description: 'Maximum number of results',
     },
     {
-      type: 'string',
+      type: 'number',
       name: 'offset',
       optional: true,
       description: 'Result offset for pagination',
@@ -34,31 +34,23 @@ export interface types {
 };
 
 export interface response {
-  created_at: string;
-  createdAt: string;
   id: number;
-  type: string;
-  scoreRank?: string;
-  rank?: number;
-  mode?: string;
-  beatmap?: {
+  action: string;
+  amount: number;
+  model: string;
+  created_at: string;
+  post: {
+    url: string;
     title: string;
-    url: string;
   };
-  user: {
-    username: string;
-    url: string;
-  };
-  approval?: string;
-  beatmapset?: {
-    title: string;
-    url: string;
+  details: {
+    event: string;
   };
 }
 
 
-const name: types = async (user, obj = {}) => {
-  const data = await request(`users/${user}/recent_activity`, {
+const name: types = async (user, obj) => {
+  const data = await request(`users/${user}/kudosu`, {
     method: 'GET',
     params: obj,
   });

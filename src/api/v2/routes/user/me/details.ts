@@ -1,36 +1,24 @@
-import { namespace, RequestNamepsace } from "../../../../utility/request";
+import { namespace, RequestNamepsace } from "../../../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
 
 export const description: any = {
-  auth: 1,
+  auth: 0,
   title: __filename,
   method: 'GET',
-  description: 'Return details about user',
+  description: 'Return details about your account',
   params: [
     {
-      type: 'string/number',
-      name: 'user',
-      optional: false,
-      description: 'id of the user',
-    },
-    {
-      type: 'string/number',
+      type: 'string',
       name: 'mode',
       optional: false,
       description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
-    },
-    {
-      type: 'string/number',
-      name: 'key',
-      optional: true,
-      description: '\`\`\`id\`\`\` or \`\`\`username\`\`\`',
     },
   ],
 };
 
 export interface types {
-  (user: string | number, mode: 'osu' | 'fruits' | 'mania' | 'taiko', key?: 'id' | 'username'): Promise<response>;
+  (mode: 'osu' | 'fruits' | 'mania' | 'taiko'): Promise<response>;
 };
 
 export interface response {
@@ -59,7 +47,7 @@ export interface response {
   max_friends: number;
   occupation?: string;
   playmode: string;
-  playstyle?: string[];
+  playstyle: string[];
   post_count: number;
   profile_order: string[];
   twitter?: string;
@@ -72,7 +60,7 @@ export interface response {
     custom_url: string;
     url: string;
     id?: string;
-    account_history?: [];
+    account_history: [];
     badges: {
       awarded_at: string;
       description: string;
@@ -155,10 +143,9 @@ export interface response {
 }
 
 
-const name: types = async (user, mode, key) => {
-  const data = await request(`users/${user}/${mode}`, {
+const name: types = async (mode) => {
+  const data = await request(`me/${mode}`, {
     method: 'GET',
-    params: { key },
   });
 
   return data;

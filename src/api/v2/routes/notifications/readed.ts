@@ -7,29 +7,30 @@ export const description: any = {
   auth: 1,
   title: __filename,
   method: 'POST',
-  description: 'Return list of beatmap favourites',
+  description: 'This endpoint allows you to mark notifications read',
   params: [
     {
-      type: 'number',
-      name: 'beatmapset_id',
+      type: 'number array',
+      name: 'ids',
       optional: false,
-      description: 'id of the beatmap set',
+      description: '\`\`\`id\`\`\` of notifications to be marked as read',
     },
   ],
 };
 
 export interface types {
-  (beatmapset_id: number): Promise<response[]>;
+  (ids: number[]): Promise<response[]>;
 };
 
 export interface response {
-  ask: 'peppy';
+  ask: 'peppy',
 };
 
 
-const name: types = async (beatmapset_id) => {
-  const data = await request(`beatmapsets/${beatmapset_id}/favourites`, {
+const name: types = async (ids) => {
+  const data = await request(`notifications/mark-read`, {
     method: 'POST',
+    data: JSON.stringify({ ids })
   });
 
   return data;
