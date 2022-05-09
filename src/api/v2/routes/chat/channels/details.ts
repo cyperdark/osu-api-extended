@@ -31,7 +31,7 @@ export interface response {
     type: string;
     current_user_attributes: {
       can_message: boolean;
-      can_message_error: null;
+      can_message_error: string;
       last_read_id: number;
     };
     last_message_id: number;
@@ -48,9 +48,9 @@ export interface response {
     is_deleted: boolean;
     is_online: boolean;
     is_supporter: boolean;
-    last_visit: string;
+    last_visit?: string;
     pm_friends_only: boolean;
-    profile_colour: string;
+    profile_colour?: string;
     username: string;
   }[];
 }

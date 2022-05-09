@@ -55,7 +55,7 @@ export interface response {
     mods: string[];
     passed: boolean;
     perfect: boolean;
-    pp: number;
+    pp?: number;
     rank: string;
     replay: boolean;
     score: number;
@@ -69,32 +69,35 @@ export interface response {
     };
     user_id: number;
     current_user_attributes: {
-      user: {
-        avatar_url: string;
-        country_code: string;
-        default_group: string;
-        id: number;
-        is_active: boolean;
-        is_bot: boolean;
-        is_deleted: boolean;
-        is_online: boolean;
-        is_supporter: boolean;
-        last_visit?: string;
-        pm_friends_only: boolean;
-        username: string;
-        country: {
-          code: string;
-          name: string;
-        };
-        cover: {
-          custom_url?: string;
-          url: string;
-          id?: string;
-        };
+      pin: string;
+    };
+    user: {
+      avatar_url: string;
+      country_code: string;
+      default_group: string;
+      id: number;
+      is_active: boolean;
+      is_bot: boolean;
+      is_deleted: boolean;
+      is_online: boolean;
+      is_supporter: boolean;
+      last_visit: string;
+      pm_friends_only: boolean;
+      profile_colour: string;
+      username: string;
+      country: {
+        code: string;
+        name: string;
+      };
+      cover: {
+        custom_url: string;
+        url: string;
+        id: string;
       };
     };
-  }[]
-};
+  }[];
+}
+
 
 
 const name: types = async (beatmap, obj) => {

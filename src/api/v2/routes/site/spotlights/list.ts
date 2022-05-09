@@ -24,7 +24,8 @@ export interface response {
     start_date: string;
     type: string;
   }[];
-};
+}
+
 
 
 const name: types = async () => {

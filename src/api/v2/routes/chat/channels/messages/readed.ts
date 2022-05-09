@@ -39,8 +39,12 @@ export interface types {
   (channel: string, message: object, obj: {
     channel_id?: string,
     message_id?: string,
-  }): Promise<string>;
+  }): Promise<response>;
 };
+
+export interface response {
+}
+
 
 
 const name: types = async (channel, message, obj) => {

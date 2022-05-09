@@ -35,7 +35,8 @@ export interface response {
       username: string;
     };
   }[];
-};
+}
+
 
 
 const name: types = async () => {

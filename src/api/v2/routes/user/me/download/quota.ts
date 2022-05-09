@@ -18,7 +18,7 @@ export interface types {
 };
 
 export interface response {
-  ask: 'peppy',
+  error: string;
 }
 
 

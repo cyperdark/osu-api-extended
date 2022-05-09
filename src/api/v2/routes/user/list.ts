@@ -43,7 +43,7 @@ export interface response {
     cover: {
       custom_url: string;
       url: string;
-      id?: string;
+      id: string;
     };
     groups: {
       colour: string;
@@ -54,7 +54,7 @@ export interface response {
       is_probationary: boolean;
       name: string;
       short_name: string;
-      playmodes: object;
+      playmodes?: string;
     }[];
     statistics_rulesets: {
       osu: {
@@ -86,6 +86,7 @@ export interface response {
           current: number;
           progress: number;
         };
+        global_rank: string;
         pp: number;
         ranked_score: number;
         hit_accuracy: number;
@@ -103,13 +104,13 @@ export interface response {
           sh: number;
           a: number;
         };
-        global_rank: number;
       };
       fruits: {
         level: {
           current: number;
           progress: number;
         };
+        global_rank: string;
         pp: number;
         ranked_score: number;
         hit_accuracy: number;
@@ -127,13 +128,13 @@ export interface response {
           sh: number;
           a: number;
         };
-        global_rank: number;
       };
       mania: {
         level: {
           current: number;
           progress: number;
         };
+        global_rank: string;
         pp: number;
         ranked_score: number;
         hit_accuracy: number;
@@ -151,11 +152,11 @@ export interface response {
           sh: number;
           a: number;
         };
-        global_rank: number;
       };
     };
-  }[]
-};
+  }[];
+}
+
 
 
 const name: types = async (ids) => {

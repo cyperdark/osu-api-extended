@@ -65,7 +65,8 @@ export interface response {
     profile_colour: string;
     username: string;
   };
-};
+}
+
 
 
 const name: types = async (channel, obj) => {

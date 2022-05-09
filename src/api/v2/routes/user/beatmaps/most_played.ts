@@ -61,6 +61,7 @@ export interface response {
     };
     creator: string;
     favourite_count: number;
+    hype: string;
     id: number;
     nsfw: boolean;
     offset: number;
@@ -70,10 +71,12 @@ export interface response {
     status: string;
     title: string;
     title_unicode: string;
+    track_id: string;
     user_id: number;
     video: boolean;
   };
 }
+
 
 
 const name: types = async (user, obj) => {

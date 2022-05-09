@@ -65,8 +65,9 @@ export interface response {
         score_type: string;
       };
     };
-  }[]
+  }[];
 }
+
 
 
 const name: types = async (beatmap, user, mode) => {

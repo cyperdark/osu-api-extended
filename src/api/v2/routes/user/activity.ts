@@ -38,10 +38,10 @@ export interface response {
   createdAt: string;
   id: number;
   type: string;
-  scoreRank?: string;
-  rank?: number;
-  mode?: string;
-  beatmap?: {
+  scoreRank: string;
+  rank: number;
+  mode: string;
+  beatmap: {
     title: string;
     url: string;
   };
@@ -49,12 +49,13 @@ export interface response {
     username: string;
     url: string;
   };
-  approval?: string;
-  beatmapset?: {
+  approval: string;
+  beatmapset: {
     title: string;
     url: string;
   };
 }
+
 
 
 const name: types = async (user, obj = {}) => {

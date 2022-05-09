@@ -26,20 +26,21 @@ export interface response {
   is_deleted: boolean;
   is_online: boolean;
   is_supporter: boolean;
-  last_visit?: string;
+  last_visit: string;
   pm_friends_only: boolean;
+  profile_colour: string;
   username: string;
   country: {
     code: string;
     name: string;
   };
   cover: {
-    custom_url?: string;
+    custom_url: string;
     url: string;
-    id?: string;
+    id: string;
   };
-  groups?: {
-    colour: object;
+  groups: {
+    colour: string;
     has_listing: boolean;
     has_playmodes: boolean;
     id: number;
@@ -47,14 +48,14 @@ export interface response {
     is_probationary: boolean;
     name: string;
     short_name: string;
-    playmodes: object;
+    playmodes?: string;
   }[];
   statistics: {
     level: {
       current: number;
       progress: number;
     };
-    global_rank?: number;
+    global_rank: number;
     pp: number;
     ranked_score: number;
     hit_accuracy: number;
@@ -74,8 +75,8 @@ export interface response {
     };
   };
   support_level: number;
-  profile_colour?: string;
-};
+}
+
 
 
 const name: types = async () => {

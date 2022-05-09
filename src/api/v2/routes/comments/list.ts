@@ -63,39 +63,39 @@ export interface types {
 export interface response {
   comments: {
     id: number;
-    parent_id: number;
+    parent_id?: number;
     user_id: number;
     pinned: boolean;
     replies_count: number;
     votes_count: number;
     commentable_type: string;
     commentable_id: number;
-    legacy_name: string;
+    legacy_name?: string;
     created_at: string;
     updated_at: string;
-    deleted_at: string;
-    edited_at: string;
-    edited_by_id: number;
+    deleted_at?: string;
+    edited_at?: string;
+    edited_by_id?: string;
     message: string;
     message_html: string;
   }[];
   has_more: boolean;
-  has_more_id: number;
+  has_more_id: string;
   included_comments: {
     id: number;
-    parent_id: number;
+    parent_id?: string;
     user_id: number;
     pinned: boolean;
     replies_count: number;
     votes_count: number;
     commentable_type: string;
     commentable_id: number;
-    legacy_name: string;
+    legacy_name?: string;
     created_at: string;
     updated_at: string;
-    deleted_at: string;
-    edited_at: string;
-    edited_by_id: number;
+    deleted_at?: string;
+    edited_at?: string;
+    edited_by_id?: string;
     message: string;
     message_html: string;
   }[];
@@ -112,9 +112,9 @@ export interface response {
     is_deleted: boolean;
     is_online: boolean;
     is_supporter: boolean;
-    last_visit: string;
+    last_visit?: string;
     pm_friends_only: boolean;
-    profile_colour: string;
+    profile_colour?: string;
     username: string;
   }[];
   sort: string;
@@ -124,15 +124,16 @@ export interface response {
   };
   top_level_count: number;
   total: number;
-  commentable_meta?: {
-    id: number;
-    type: string;
+  commentable_meta: {
+    id?: number;
+    type?: string;
     title: string;
-    url: string;
-    owner_id: number;
-    owner_title: string;
+    url?: string;
+    owner_id?: number;
+    owner_title?: string;
   }[];
-};
+}
+
 
 
 const name: types = async (obj) => {

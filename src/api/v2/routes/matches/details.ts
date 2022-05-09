@@ -25,7 +25,7 @@ export interface response {
   match: {
     id: number;
     start_time: string;
-    end_time?: string | null;
+    end_time: string;
     name: string;
   };
   events: {
@@ -35,7 +35,7 @@ export interface response {
       text: string;
     };
     timestamp: string;
-    user_id: number;
+    user_id?: number;
     game: {
       id: number;
       start_time: string;
@@ -44,7 +44,7 @@ export interface response {
       mode_int: number;
       scoring_type: string;
       team_type: string;
-      mods: string[];
+      mods: [];
       beatmap: {
         beatmapset_id: number;
         difficulty_rating: number;
@@ -69,7 +69,7 @@ export interface response {
           };
           creator: string;
           favourite_count: number;
-          hype?: null;
+          hype: string;
           id: number;
           nsfw: boolean;
           offset: number;
@@ -79,12 +79,44 @@ export interface response {
           status: string;
           title: string;
           title_unicode: string;
-          track_id?: null;
+          track_id: number;
           user_id: number;
           video: boolean;
         };
       };
-      scores: [];
+      scores: {
+        accuracy: number;
+        best_id?: string;
+        created_at: string;
+        id?: string;
+        max_combo: number;
+        mode: string;
+        mode_int: number;
+        mods: string[];
+        passed: boolean;
+        perfect: number;
+        pp?: string;
+        rank: string;
+        replay: boolean;
+        score: number;
+        statistics: {
+          count_100: number;
+          count_300: number;
+          count_50: number;
+          count_geki: number;
+          count_katu: number;
+          count_miss: number;
+        };
+        user_id: number;
+        current_user_attributes: {
+          pin: string;
+        };
+        match: {
+          slot: number;
+          team: string;
+          pass: boolean;
+        };
+      }[];
     };
   }[];
   users: {
@@ -97,19 +129,20 @@ export interface response {
     is_deleted: boolean;
     is_online: boolean;
     is_supporter: boolean;
-    last_visit?: string | null;
+    last_visit: string;
     pm_friends_only: boolean;
-    profile_colour?: null;
+    profile_colour?: string;
     username: string;
     country: {
       code: string;
       name: string;
     };
-  }[];
+  };
   first_event_id: number;
   latest_event_id: number;
-  current_game_id?: number | null;
-};
+  current_game_id: string;
+}
+
 
 
 const name: types = async (match) => {

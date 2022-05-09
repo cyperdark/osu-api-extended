@@ -69,15 +69,18 @@ export interface response {
   discussions: {
     id: number;
     beatmapset_id: number;
-    beatmap_id: number;
+    beatmap_id?: number;
     user_id: number;
+    deleted_by_id?: string;
     message_type: string;
-    timestamp: number;
+    parent_id?: string;
+    timestamp?: number;
     resolved: boolean;
     can_be_resolved: boolean;
     can_grant_kudosu: boolean;
     created_at: string;
     updated_at: string;
+    deleted_at?: string;
     last_post_at: string;
     kudosu_denied: boolean;
   }[];
@@ -91,8 +94,9 @@ export interface response {
     is_deleted: boolean;
     is_online: boolean;
     is_supporter: boolean;
-    last_visit: string;
+    last_visit?: string;
     pm_friends_only: boolean;
+    profile_colour?: string;
     username: string;
     groups: {
       colour: string;
@@ -103,9 +107,8 @@ export interface response {
       is_probationary: boolean;
       name: string;
       short_name: string;
-      playmodes: object;
+      playmodes: string[];
     }[];
-    profile_colour: string;
   }[];
   votes: {
     beatmapset_discussion_id: number;
@@ -115,12 +118,10 @@ export interface response {
     updated_at: string;
     user_id: number;
   }[];
-  cursor: {
-    page: number;
-    limit: number;
-  };
+  cursor: string;
   cursor_string: string;
-};
+}
+
 
 
 const name: types = async (obj) => {
