@@ -22,8 +22,9 @@ export interface types {
 };
 
 export interface response {
-  ask: 'peppy',
-};
+  error: string;
+}
+
 
 
 const name: types = async (beatmap_id) => {

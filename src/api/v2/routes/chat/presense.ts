@@ -30,7 +30,8 @@ export interface response {
   last_message_id: number;
   last_read_id: number;
   users: number[];
-};
+}
+
 
 
 const name: types = async () => {

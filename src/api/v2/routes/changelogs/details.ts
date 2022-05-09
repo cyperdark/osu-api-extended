@@ -29,8 +29,8 @@ export interface types {
 
 export interface response {
   id: number;
-  version: string;
-  display_version: string;
+  version: number;
+  display_version: number;
   users: number;
   created_at: string;
   update_stream: {
@@ -40,32 +40,32 @@ export interface response {
     is_featured: boolean;
   };
   changelog_entries: {
-    id: number;
-    repository: string;
-    github_pull_request_id: number;
-    github_url: string;
-    url: string;
+    id?: string;
+    repository?: string;
+    github_pull_request_id?: string;
+    github_url?: string;
+    url?: string;
     type: string;
     category: string;
     title: string;
     major: boolean;
     created_at: string;
     github_user: {
-      id: number;
+      id: string;
       display_name: string;
       github_url: string;
       osu_username: string;
       user_id: number;
       user_url: string;
     };
-    message: string;
-    message_html: string;
+    message?: string;
+    message_html?: string;
   }[];
   versions: {
     previous: {
       id: number;
-      version: string;
-      display_version: string;
+      version: number;
+      display_version: number;
       users: number;
       created_at: string;
       update_stream: {
@@ -76,7 +76,8 @@ export interface response {
       };
     };
   };
-};
+}
+
 
 
 const name: types = async (stream, build) => {

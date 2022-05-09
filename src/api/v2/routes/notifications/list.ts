@@ -31,19 +31,17 @@ export interface response {
     source_user_id: number;
     is_read: boolean;
     details: {
-      type: string;
       title: string;
       username: string;
       cover_url: string;
       beatmapset_id: number;
       title_unicode: string;
+      type: string;
     };
   }[];
   stacks: {
     category: string;
-    cursor: {
-      id: number;
-    };
+    cursor?: string;
     name: string;
     object_type: string;
     object_id: number;
@@ -59,7 +57,8 @@ export interface response {
     total: number;
   }[];
   notification_endpoint: string;
-};
+}
+
 
 
 const name: types = async (max_id) => {

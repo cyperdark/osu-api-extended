@@ -23,8 +23,8 @@ export interface types {
 };
 
 export interface response {
-  ask: 'peppy',
-};
+}
+
 
 
 const name: types = async (ids) => {

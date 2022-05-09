@@ -33,10 +33,11 @@ export interface response {
   locale: string;
   markdown: string;
   path: string;
-  subtitle: null;
-  tags: string[];
+  subtitle: string;
+  tags: [];
   title: string;
 }
+
 
 
 const name: types = async (language, path) => {

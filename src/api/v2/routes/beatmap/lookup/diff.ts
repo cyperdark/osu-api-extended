@@ -50,6 +50,7 @@ export interface response {
   count_sliders: number;
   count_spinners: number;
   cs: number;
+  deleted_at: string;
   drain: number;
   hit_length: number;
   is_scoreable: boolean;
@@ -75,6 +76,10 @@ export interface response {
     };
     creator: string;
     favourite_count: number;
+    hype: {
+      current: number;
+      required: number;
+    };
     id: number;
     nsfw: boolean;
     offset: number;
@@ -89,6 +94,7 @@ export interface response {
     video: boolean;
     availability: {
       download_disabled: boolean;
+      more_information: string;
     };
     bpm: number;
     can_be_hyped: boolean;
@@ -114,7 +120,8 @@ export interface response {
     exit: number[];
   };
   max_combo: number;
-};
+}
+
 
 
 const name: types = async (obj) => {

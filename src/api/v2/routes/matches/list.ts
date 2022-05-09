@@ -23,14 +23,15 @@ export interface response {
   matches: {
     id: number;
     start_time: string;
-    end_time: string;
+    end_time?: string;
     name: string;
   }[];
   params: {
     limit: number;
     sort: string;
   };
-};
+}
+
 
 
 const name: types = async () => {

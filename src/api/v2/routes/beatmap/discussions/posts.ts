@@ -75,10 +75,7 @@ export interface response {
     };
     creator: string;
     favourite_count: number;
-    hype: {
-      current: number;
-      required: number;
-    };
+    hype?: string;
     id: number;
     nsfw: boolean;
     offset: number;
@@ -88,28 +85,35 @@ export interface response {
     status: string;
     title: string;
     title_unicode: string;
+    track_id?: string;
     user_id: number;
     video: boolean;
   }[];
   discussions: {
     id: number;
     beatmapset_id: number;
-    beatmap_id: number;
+    beatmap_id?: number;
     user_id: number;
+    deleted_by_id?: string;
     message_type: string;
-    timestamp: number;
+    parent_id?: string;
+    timestamp?: number;
     resolved: boolean;
     can_be_resolved: boolean;
     can_grant_kudosu: boolean;
     created_at: string;
     updated_at: string;
+    deleted_at?: string;
     last_post_at: string;
     kudosu_denied: boolean;
   }[];
   posts: {
     beatmapset_discussion_id: number;
     created_at: string;
+    deleted_at?: string;
+    deleted_by_id?: string;
     id: number;
+    last_editor_id?: string;
     message: string;
     system: boolean;
     updated_at: string;
@@ -127,15 +131,13 @@ export interface response {
     is_supporter: boolean;
     last_visit: string;
     pm_friends_only: boolean;
-    profile_colour: string;
+    profile_colour?: string;
     username: string;
   }[];
-  cursor: {
-    page: number;
-    limit: number;
-  };
+  cursor: string;
   cursor_string: string;
-};
+}
+
 
 
 const name: types = async (obj) => {

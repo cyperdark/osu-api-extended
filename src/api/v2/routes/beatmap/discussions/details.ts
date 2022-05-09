@@ -10,55 +10,55 @@ export const description: any = {
   params: [
     {
       type: 'number',
-      name: 'obj.beatmap_id',
+      name: 'beatmap_id',
       optional: true,
       description: 'beatmap id',
     },
     {
       type: 'number',
-      name: 'obj.beatmapset_id',
+      name: 'beatmapset_id',
       optional: true,
       description: 'beatmapset id',
     },
     {
       type: 'string',
-      name: 'obj.beatmapset_status',
+      name: 'beatmapset_status',
       optional: true,
       description: '\`\`\`all\`\`\` or \`\`\`ranked\`\`\` or \`\`\`qualified\`\`\` or \`\`\`disqualified\`\`\` or \`\`\`never_qualified\`\`\` or \`\`\`loved\`\`\`',
     },
     {
       type: 'number',
-      name: 'obj.limit',
+      name: 'limit',
       optional: true,
       description: 'Maximum number of results',
     },
     {
       type: 'string array',
-      name: 'obj.message_types',
+      name: 'message_types',
       optional: true,
       description: '\`\`\`suggestion\`\`\` or \`\`\`problem\`\`\` or \`\`\`mapper_note\`\`\` or \`\`\`praise\`\`\` or \`\`\`hype\`\`\` or \`\`\`review\`\`\` or \`\`\`all\`\`\`',
     },
     {
       type: 'boolean',
-      name: 'obj.only_unresolved',
+      name: 'only_unresolved',
       optional: true,
       description: '\`\`\`true\`\`\` or \`\`\`false\`\`\`',
     },
     {
       type: 'number',
-      name: 'obj.page',
+      name: 'page',
       optional: true,
       description: 'Search result page',
     },
     {
       type: 'string',
-      name: 'obj.sort',
+      name: 'sort',
       optional: true,
       description: '\`\`\`id_desc\`\`\` or \`\`\`id_asc\`\`\`',
     },
     {
       type: 'number',
-      name: 'obj.user',
+      name: 'user',
       optional: true,
       description: 'id of the user',
     },
@@ -99,7 +99,7 @@ export interface response {
     count_sliders: number;
     count_spinners: number;
     cs: number;
-    deleted_at: string;
+    deleted_at?: string;
     drain: number;
     hit_length: number;
     is_scoreable: boolean;
@@ -109,18 +109,23 @@ export interface response {
     playcount: number;
     ranked: number;
     url: string;
-    checksum: string;
+    checksum?: string;
   }[];
   discussions: {
     id: number;
     beatmapset_id: number;
+    beatmap_id?: string;
     user_id: number;
+    deleted_by_id?: string;
     message_type: string;
+    parent_id?: string;
+    timestamp?: string;
     resolved: boolean;
     can_be_resolved: boolean;
     can_grant_kudosu: boolean;
     created_at: string;
     updated_at: string;
+    deleted_at?: string;
     last_post_at: string;
     kudosu_denied: boolean;
     beatmapset: {
@@ -138,10 +143,7 @@ export interface response {
       };
       creator: string;
       favourite_count: number;
-      hype: {
-        current: number;
-        required: number;
-      };
+      hype: string;
       id: number;
       nsfw: boolean;
       offset: number;
@@ -151,9 +153,9 @@ export interface response {
       status: string;
       title: string;
       title_unicode: string;
+      track_id: string;
       user_id: number;
       video: boolean;
-      track_id: number;
     };
     current_user_attributes: {
       vote_score: number;
@@ -165,16 +167,82 @@ export interface response {
     starting_post: {
       beatmapset_discussion_id: number;
       created_at: string;
+      deleted_at: string;
+      deleted_by_id: string;
       id: number;
+      last_editor_id: string;
       message: string;
       system: boolean;
       updated_at: string;
       user_id: number;
     };
-    beatmap_id: number;
-    timestamp: number;
   }[];
-  included_discussions: [];
+  included_discussions: {
+    id: number;
+    beatmapset_id: number;
+    beatmap_id: string;
+    user_id: number;
+    deleted_by_id: string;
+    message_type: string;
+    parent_id: number;
+    timestamp: string;
+    resolved: boolean;
+    can_be_resolved: boolean;
+    can_grant_kudosu: boolean;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+    last_post_at: string;
+    kudosu_denied: boolean;
+    beatmapset: {
+      artist: string;
+      artist_unicode: string;
+      covers: {
+        cover: string;
+        'cover@2x': string;
+        card: string;
+        'card@2x': string;
+        list: string;
+        'list@2x': string;
+        slimcover: string;
+        'slimcover@2x': string;
+      };
+      creator: string;
+      favourite_count: number;
+      hype: string;
+      id: number;
+      nsfw: boolean;
+      offset: number;
+      play_count: number;
+      preview_url: string;
+      source: string;
+      status: string;
+      title: string;
+      title_unicode: string;
+      track_id: string;
+      user_id: number;
+      video: boolean;
+    };
+    current_user_attributes: {
+      vote_score: number;
+      can_moderate_kudosu: boolean;
+      can_resolve: boolean;
+      can_reopen: boolean;
+      can_destroy: boolean;
+    };
+    starting_post: {
+      beatmapset_discussion_id: number;
+      created_at: string;
+      deleted_at: string;
+      deleted_by_id: string;
+      id: number;
+      last_editor_id: string;
+      message: string;
+      system: boolean;
+      updated_at: string;
+      user_id: number;
+    };
+  }[];
   reviews_config: {
     max_blocks: number;
   };
@@ -188,8 +256,9 @@ export interface response {
     is_deleted: boolean;
     is_online: boolean;
     is_supporter: boolean;
+    last_visit?: string;
     pm_friends_only: boolean;
-    profile_colour: string;
+    profile_colour?: string;
     username: string;
     groups: {
       colour: string;
@@ -200,16 +269,16 @@ export interface response {
       is_probationary: boolean;
       name: string;
       short_name: string;
-      playmodes: object;
+      playmodes: string[];
     }[];
-    last_visit: string;
   }[];
   cursor: {
     page: number;
     limit: number;
   };
   cursor_string: string;
-};
+}
+
 
 
 const name: types = async (obj) => {

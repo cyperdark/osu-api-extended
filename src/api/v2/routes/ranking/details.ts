@@ -79,22 +79,22 @@ export interface response {
       current: number;
       progress: number;
     };
-    global_rank?: number | null;
-    pp?: number | null;
+    global_rank?: number;
+    pp?: number;
     ranked_score: number;
-    hit_accuracy?: number | null;
+    hit_accuracy?: number;
     play_count: number;
-    play_time?: number | null;
-    total_score?: number | null;
-    total_hits?: number | null;
-    maximum_combo?: number | null;
-    replays_watched_by_others?: number | null;
-    is_ranked?: boolean | null;
+    play_time?: number;
+    total_score?: number;
+    total_hits?: number;
+    maximum_combo?: number;
+    replays_watched_by_others?: number;
+    is_ranked?: boolean;
     grade_counts: {
       ss: number;
-      ssh?: number | null;
+      ssh: number;
       s: number;
-      sh?: number | null;
+      sh: number;
       a: number;
     };
     user: {
@@ -107,30 +107,30 @@ export interface response {
       is_deleted: boolean;
       is_online: boolean;
       is_supporter: boolean;
-      last_visit?: string | null;
+      last_visit: string;
       pm_friends_only: boolean;
-      profile_colour?: string | null;
+      profile_colour: string;
       username: string;
       country: {
         code: string;
         name: string;
       };
       cover: {
-        custom_url?: string;
+        custom_url: string;
         url: string;
-        id?: string;
+        id: number;
       };
     };
-    code?: string | null;
-    active_users?: number | null;
-    performance?: number | null;
+    code?: string;
+    active_users?: number;
+    performance?: number;
     country: {
       code: string;
       name: string;
     };
   }[];
-  total?: number | null;
-  beatmapsets?: {
+  total: number;
+  beatmapsets: {
     artist: string;
     artist_unicode: string;
     covers: {
@@ -145,7 +145,7 @@ export interface response {
     };
     creator: string;
     favourite_count: number;
-    hype?: null;
+    hype?: string;
     id: number;
     nsfw: boolean;
     offset: number;
@@ -155,12 +155,12 @@ export interface response {
     status: string;
     title: string;
     title_unicode: string;
-    track_id?: number | null;
+    track_id?: string;
     user_id: number;
     video: boolean;
     availability: {
       download_disabled: boolean;
-      more_information?: null;
+      more_information: string;
     };
     bpm: number;
     can_be_hyped: boolean;
@@ -196,7 +196,7 @@ export interface response {
       count_sliders: number;
       count_spinners: number;
       cs: number;
-      deleted_at?: null;
+      deleted_at?: string;
       drain: number;
       hit_length: number;
       is_scoreable: boolean;
@@ -209,7 +209,7 @@ export interface response {
       checksum: string;
     }[];
   }[];
-  spotlight?: {
+  spotlight: {
     end_date: string;
     id: number;
     mode_specific: boolean;
@@ -218,7 +218,8 @@ export interface response {
     type: string;
     participant_count: number;
   };
-};
+}
+
 
 
 const name: types = async (mode, type, obj) => {

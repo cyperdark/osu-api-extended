@@ -59,7 +59,7 @@ export const description: any = {
       type: 'string',
       name: 'general',
       optional: true,
-      description: '\`\`converts\`\` or \`\`follows\`\` or \`\`recommended\`\`',
+      description: '\`\`converts\`\` or \`\`follows\`\` or \`\`recommended\`\` or \`\`\`featured_artists\`\`\`',
     },
     {
       type: 'string',
@@ -110,7 +110,7 @@ export const description: any = {
 export interface types {
   (filters: {
     query?: string,
-    general?: 'converts' | 'follows' | 'recommended',
+    general?: 'converts' | 'follows' | 'recommended' | 'featured_artists',
     mode?: 'osu' | 'fruits' | 'mania' | 'taiko',
     section?: 'ranked' | 'qualified' | 'loved' | 'favourites' | 'pending' | 'graveyard' | 'mine',
     genre?: 'Unspecified' | 'Video Game' | 'Anime' | 'Rock' | 'Pop' | 'Other' | 'Novelty' | 'Hip Hop' | 'Electronic' | 'Metal' | 'Classical' | 'Folk' | 'Jazz'
@@ -137,6 +137,7 @@ export interface response {
     };
     creator: string;
     favourite_count: number;
+    hype?: string;
     id: number;
     nsfw: boolean;
     offset: number;
@@ -146,10 +147,12 @@ export interface response {
     status: string;
     title: string;
     title_unicode: string;
+    track_id?: string;
     user_id: number;
     video: boolean;
     availability: {
       download_disabled: boolean;
+      more_information: string;
     };
     bpm: number;
     can_be_hyped: boolean;
@@ -185,7 +188,7 @@ export interface response {
       count_sliders: number;
       count_spinners: number;
       cs: number;
-      deleted_at: object;
+      deleted_at?: string;
       drain: number;
       hit_length: number;
       is_scoreable: boolean;
@@ -198,19 +201,20 @@ export interface response {
       checksum: string;
       max_combo: number;
     }[];
-    track_id?: number;
   }[];
   search: {
     sort: string;
   };
   recommended_difficulty: number;
+  error: string;
   total: number;
   cursor: {
-    approved_date: string;
-    id: string;
+    approved_date: number;
+    id: number;
   };
   cursor_string: string;
-};
+}
+
 
 
 const name: types = async (filters) => {

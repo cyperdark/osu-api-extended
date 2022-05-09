@@ -38,6 +38,16 @@ export interface response {
   title: string;
   content: string;
   navigation: {
+    newer: {
+      id: number;
+      author: string;
+      edit_url: string;
+      first_image: string;
+      published_at: string;
+      updated_at: string;
+      slug: string;
+      title: string;
+    };
     older: {
       id: number;
       author: string;
@@ -49,7 +59,8 @@ export interface response {
       title: string;
     };
   };
-};
+}
+
 
 
 const name: types = async (news, key) => {

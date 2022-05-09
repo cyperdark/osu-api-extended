@@ -79,7 +79,8 @@ export interface response {
     sort: string;
     year: string;
   };
-};
+}
+
 
 
 const name: types = async (obj) => {

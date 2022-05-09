@@ -61,12 +61,15 @@ export interface response {
       is_deleted: boolean;
       is_online: boolean;
       is_supporter: boolean;
+      last_visit: string;
       pm_friends_only: boolean;
+      profile_colour: string;
       username: string;
     };
   };
   new_channel_id: number;
 }
+
 
 
 const name: types = async (user_id: number, message: string, is_action: true | false) => {

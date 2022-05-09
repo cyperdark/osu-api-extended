@@ -54,6 +54,7 @@ export interface response {
   };
   creator: string;
   favourite_count: number;
+  hype: string;
   id: number;
   nsfw: boolean;
   offset: number;
@@ -63,10 +64,12 @@ export interface response {
   status: string;
   title: string;
   title_unicode: string;
+  track_id: string;
   user_id: number;
   video: boolean;
   availability: {
     download_disabled: boolean;
+    more_information: string;
   };
   bpm: number;
   can_be_hyped: boolean;
@@ -80,6 +83,7 @@ export interface response {
     required: number;
   };
   ranked: number;
+  ranked_date: string;
   storyboard: boolean;
   submitted_date: string;
   tags: string;
@@ -101,7 +105,7 @@ export interface response {
     count_sliders: number;
     count_spinners: number;
     cs: number;
-    deleted_at: object;
+    deleted_at?: string;
     drain: number;
     hit_length: number;
     is_scoreable: boolean;
@@ -113,13 +117,8 @@ export interface response {
     url: string;
     checksum: string;
   }[];
-  hype: {
-    current?: number;
-    required?: number;
-  };
-  ranked_date?: string;
-  track_id?: number;
 }
+
 
 
 const name: types = async (user, type, obj) => {

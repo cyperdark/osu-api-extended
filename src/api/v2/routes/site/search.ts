@@ -49,9 +49,9 @@ export interface response {
       is_deleted: boolean;
       is_online: boolean;
       is_supporter: boolean;
-      last_visit: string;
+      last_visit?: string;
       pm_friends_only: boolean;
-      profile_colour: string;
+      profile_colour?: string;
       username: string;
     }[];
     total: number;
@@ -64,12 +64,13 @@ export interface response {
       markdown: string;
       path: string;
       subtitle: string;
-      tags: string[];
+      tags: [];
       title: string;
     }[];
     total: number;
   };
 }
+
 
 
 const name: types = async (obj) => {

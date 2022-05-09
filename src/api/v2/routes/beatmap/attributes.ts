@@ -55,7 +55,7 @@ export interface response {
     approach_rate: number;
     overall_difficulty: number;
   };
-};
+}
 
 
 const name: types = async (beatmap_id, body) => {

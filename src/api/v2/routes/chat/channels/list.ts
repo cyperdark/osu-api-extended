@@ -19,10 +19,13 @@ export interface types {
 export interface response {
   channel_id: number;
   description: string;
+  icon: string;
   moderated: boolean;
   name: string;
   type: string;
 }
+
+
 
 
 const name: types = async () => {

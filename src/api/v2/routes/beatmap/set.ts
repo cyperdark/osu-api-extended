@@ -37,6 +37,7 @@ export interface response {
   };
   creator: string;
   favourite_count: number;
+  hype: string;
   id: number;
   nsfw: boolean;
   offset: number;
@@ -46,10 +47,12 @@ export interface response {
   status: string;
   title: string;
   title_unicode: string;
+  track_id: string;
   user_id: number;
   video: boolean;
   availability: {
     download_disabled: boolean;
+    more_information: string;
   };
   bpm: number;
   can_be_hyped: boolean;
@@ -85,7 +88,7 @@ export interface response {
     count_sliders: number;
     count_spinners: number;
     cs: number;
-    deleted_at: object;
+    deleted_at?: string;
     drain: number;
     hit_length: number;
     is_scoreable: boolean;
@@ -96,8 +99,11 @@ export interface response {
     ranked: number;
     url: string;
     checksum: string;
-    failtimes: object;
-    max_combo: object;
+    failtimes: {
+      fail: number[];
+      exit: number[];
+    };
+    max_combo?: string;
   }[];
   converts: {
     beatmapset_id: number;
@@ -116,7 +122,7 @@ export interface response {
     count_sliders: number;
     count_spinners: number;
     cs: number;
-    deleted_at: object;
+    deleted_at?: string;
     drain: number;
     hit_length: number;
     is_scoreable: boolean;
@@ -127,7 +133,10 @@ export interface response {
     ranked: number;
     url: string;
     checksum: string;
-    failtimes: object;
+    failtimes: {
+      fail: number[];
+      exit: number[];
+    };
   }[];
   description: {
     description: string;
@@ -151,9 +160,9 @@ export interface response {
     is_deleted: boolean;
     is_online: boolean;
     is_supporter: boolean;
-    last_visit: string;
+    last_visit?: string;
     pm_friends_only: boolean;
-    profile_colour: object;
+    profile_colour?: string;
     username: string;
   }[];
   user: {
@@ -166,13 +175,13 @@ export interface response {
     is_deleted: boolean;
     is_online: boolean;
     is_supporter: boolean;
-    last_visit?: string;
+    last_visit: string;
     pm_friends_only: boolean;
+    profile_colour: string;
     username: string;
-    profile_colour?: string;
   };
-  track_id?: number;
-};
+}
+
 
 
 const name: types = async (beatmapset) => {

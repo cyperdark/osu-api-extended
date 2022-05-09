@@ -39,6 +39,7 @@ export interface response {
   amount: number;
   model: string;
   created_at: string;
+  giver: string;
   post: {
     url: string;
     title: string;
@@ -47,6 +48,7 @@ export interface response {
     event: string;
   };
 }
+
 
 
 const name: types = async (user, obj) => {

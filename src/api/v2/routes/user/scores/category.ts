@@ -104,6 +104,7 @@ export interface response {
     count_sliders: number;
     count_spinners: number;
     cs: number;
+    deleted_at: string;
     drain: number;
     hit_length: number;
     is_scoreable: boolean;
@@ -130,6 +131,7 @@ export interface response {
     };
     creator: string;
     favourite_count: number;
+    hype: string;
     id: number;
     nsfw: boolean;
     offset: number;
@@ -139,9 +141,9 @@ export interface response {
     status: string;
     title: string;
     title_unicode: string;
+    track_id: string;
     user_id: number;
     video: boolean;
-    track_id?: number;
   };
   user: {
     avatar_url: string;
@@ -153,10 +155,13 @@ export interface response {
     is_deleted: boolean;
     is_online: boolean;
     is_supporter: boolean;
+    last_visit: string;
     pm_friends_only: boolean;
+    profile_colour: string;
     username: string;
   };
 }
+
 
 
 const name: types = async (user, type, obj) => {

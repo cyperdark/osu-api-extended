@@ -54,9 +54,9 @@ export interface types {
 export interface response {
   posts: {
     created_at: string;
-    deleted_at: string;
-    edited_at: string;
-    edited_by_id: number;
+    deleted_at?: string;
+    edited_at?: string;
+    edited_by_id?: number;
     forum_id: number;
     id: number;
     topic_id: number;
@@ -83,33 +83,14 @@ export interface response {
     type: string;
     updated_at: string;
     user_id: number;
-    poll?: {
-      allow_vote_change: boolean;
-      ended_at: string;
-      hide_incomplete_results: boolean;
-      last_vote_at: string;
-      max_votes: number;
-      started_at: string;
-      title: {
-        bbcode: string;
-        html: string;
-      };
-      total_vote_count: number;
-      options: {
-        id: number;
-        text: {
-          bbcode: string;
-          html: string;
-        };
-        vote_count: number;
-      }[];
-    } | null;
+    poll: string;
   };
   cursor: {
     id: number;
   };
   cursor_string: string;
-};
+}
+
 
 
 const name: types = async (topic, obj) => {
