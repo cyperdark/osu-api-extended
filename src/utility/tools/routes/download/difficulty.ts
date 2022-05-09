@@ -1,6 +1,38 @@
 import { request } from "../../../request";
 import fs from "fs";
 
+
+export const description: any = {
+  auth: 4,
+  title: __filename,
+  method: 'GET',
+  description: 'Download \`\`\`.osu\`\`\` file',
+  params: [
+    {
+      type: 'number',
+      name: 'diff_id',
+      optional: false,
+      description: 'id of the beatmap',
+    },
+    {
+      type: 'number',
+      name: 'path',
+      optional: false,
+      description: 'Folder path',
+    },
+    {
+      type: 'string',
+      name: 'name',
+      optional: false,
+      description: 'File name (without extension)',
+    },
+  ],
+};
+
+export interface types {
+  (diff_id: number, path: string, name: string | number): Promise<string>;
+};
+
 /**
  * 
  * @param diff_id Beatmap id
@@ -8,7 +40,7 @@ import fs from "fs";
  * @param name File name
  * @returns Download .osu file of beatmap by id
  */
-const name = async (diff_id: number, path: string, name: string | number): Promise<string> => {
+const name: types = async (diff_id, path, name) => {
   let file = '';
   if (name === undefined) name = diff_id;
   if (path !== undefined) file = `${path}/${name}.osu`;

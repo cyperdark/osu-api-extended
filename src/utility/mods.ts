@@ -47,6 +47,23 @@ const mods_order: { [key: string]: number } = {
   td: 7,
 };
 
+
+export const description: any = {
+  auth: 4,
+  title: __filename,
+  method: 'GET',
+  description: 'Return number or name of the mods',
+  params: [
+    {
+      type: 'string/number',
+      name: 'mods',
+      optional: false,
+      description: '\`\`\`HDDT\`\`\` or \`\`\`72\`\`\`',
+    },
+  ],
+};
+
+
 /**
  * 
  * @param mods Mods number
@@ -99,3 +116,5 @@ const id = (mods: string | number): number | undefined => {
 };
 
 export { id, name };
+
+export const desc: object = description;
