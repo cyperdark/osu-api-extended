@@ -624,6 +624,21 @@ const flags: {
     }
   ];
 
+export const description: any = {
+  auth: 4,
+  title: __filename,
+  method: 'GET',
+  description: 'Return country name from country code',
+  params: [
+    {
+      type: 'string',
+      name: 'flag',
+      optional: false,
+      description: 'country code',
+    },
+  ],
+};
+
 /**
 * 
 * @param flag Country code

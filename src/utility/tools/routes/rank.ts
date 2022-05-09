@@ -1,5 +1,62 @@
 import { name as mods_name } from "../../mods";
 
+export const description: any = {
+  auth: 4,
+  title: __filename,
+  method: 'GET',
+  description: 'Return rank letter from hits',
+  params: [
+    {
+      type: 'string',
+      name: '300',
+      optional: false,
+      description: 'Amount of 300',
+    },
+    {
+      type: 'string',
+      name: 'geki',
+      optional: false,
+      description: 'Amount of geki (300g)',
+    },
+    {
+      type: 'string',
+      name: '100',
+      optional: false,
+      description: 'Amount of 100',
+    },
+    {
+      type: 'string',
+      name: 'katu',
+      optional: false,
+      description: 'Amount of katu (100k)',
+    },
+    {
+      type: 'string',
+      name: '50',
+      optional: false,
+      description: 'Amount of 50',
+    },
+    {
+      type: 'string',
+      name: '0',
+      optional: false,
+      description: 'Amount of misses',
+    },
+    {
+      type: 'string',
+      name: 'mods',
+      optional: false,
+      description: 'Name of the mods \`\`\`HDDT\`\`\` or mods number \`\`\`72\`\`\`',
+    },
+    {
+      type: 'string',
+      name: 'mode',
+      optional: false,
+      description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
+    },
+  ],
+};
+
 export interface types {
   (hits: {
     300: string,

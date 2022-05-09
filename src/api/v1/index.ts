@@ -33,12 +33,10 @@ export const user: {
 
 
 import match_details, { types as match_details_type, description as match_details_desc } from "./routes/match";
-
 export const match: match_details_type = match_details;
 
 
 import replay_download, { types as replay_download_type, description as replay_download_desc } from "./routes/replay";
-
 export const replay: replay_download_type = replay_download;
 
 
