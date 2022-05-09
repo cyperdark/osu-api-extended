@@ -1,24 +1,16 @@
+export interface types {
+  (hits: {
+    300: string,
+    100: string,
+    50: string,
+    0: string,
+    geki: string,
+    katu: string
+  }, mode: 'osu' | 'fruits' | 'taiko' | 'mania'): number;
+};
 
 
-/**
- * 
- * @param hits.h300 count of hit 300
- * @param hits.h100 count of hit 100
- * @param hits.h50 count of hit 50
- * @param hits.h0 count of misses
- * @param hits.geki count of hit geki
- * @param hits.katu count of hit katu
- * @param mode osu | fruits | taiko | mania
- * @returns {number} Accuracy number
- */
-const name = (hits: {
-  300: any,
-  100: any,
-  50: any,
-  0: any,
-  geki: any,
-  katu: any
-}, mode: 'osu' | 'fruits' | 'taiko' | 'mania' = 'osu'): number => {
+const name: types = (hits, mode = 'osu') => {
   const h300 = parseInt(hits[300]);
   const h100 = parseInt(hits[100]);
   const h50 = parseInt(hits[50]);
