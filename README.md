@@ -4,7 +4,7 @@
 
 # Usage
 
-## [Documentation](/wiki)
+## [Documentation](https://github.com/cyperdark/osu-api-extended/wiki)
 
 ## Installation
 
