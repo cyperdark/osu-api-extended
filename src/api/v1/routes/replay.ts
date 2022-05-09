@@ -1,6 +1,6 @@
 import { namespace, RequestNamepsace } from "../../../utility/request";
 // import { id as mods_id } from "../../../../utility/mods";
-import path from "path";
+// import path from "path";
 import fs from "fs";
 
 import scores from "./beatmap/scores";
@@ -18,15 +18,75 @@ const _mode = [
 ];
 
 
+export const description: any = {
+  auth: 2,
+  title: __filename,
+  method: 'GET',
+  description: 'Download replay file for specified score',
+  params: [
+    {
+      type: 'number',
+      name: 'id',
+      optional: true,
+      description: 'id of the beatmap',
+    },
+    {
+      type: 'number',
+      name: 'user',
+      optional: true,
+      description: 'id of the user',
+    },
+    {
+      type: 'string',
+      name: 'mode',
+      optional: true,
+      description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
+    },
+    {
+      type: 'number',
+      name: 'score_id',
+      optional: true,
+      description: 'id of the score',
+    },
+    {
+      type: 'string/number',
+      name: 'mods',
+      optional: true,
+      description: 'Name of the mods \`\`\`HDDT\`\`\` or mods number \`\`\`72\`\`\`',
+    },
+    {
+      type: 'string',
+      name: 'type',
+      optional: true,
+      description: '\`\`\`u\`\`\` is a user_id or a username. Use string for usernames or \`\`\`id\`\`\` for user_ids',
+    },
+    {
+      type: 'string',
+      name: 'dest',
+      optional: false,
+      description: 'Path to the folder',
+    },
+    {
+      type: 'string',
+      name: 'file',
+      optional: false,
+      description: 'File name (without extension)',
+    },
+  ],
+};
+
 export interface types {
   (obj: {
-    id?: number, user?: string | number,
+    id?: number,
+    user?: string | number,
     mode?: 'osu' | 'fruits' | 'mania' | 'taiko',
     score_id?: number,
     mods?: string | number,
     type?: 'u' | 'id',
   }, dest: string, file: string): Promise<string>;
 };
+
+export interface response { }
 
 
 const name: types = async (obj = {}, dest, file) => {

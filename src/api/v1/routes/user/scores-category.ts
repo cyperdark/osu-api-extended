@@ -13,43 +13,72 @@ const _mode = [
 ];
 
 
+export const description: any = {
+  auth: 1,
+  title: __filename,
+  method: 'GET',
+  description: 'Return scores from user for a specified type',
+  params: [
+    {
+      type: 'string',
+      name: 'user',
+      optional: false,
+      description: 'id of the user',
+    },
+    {
+      type: 'string',
+      name: 'mode',
+      optional: true,
+      description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
+    },
+    {
+      type: 'string',
+      name: 'type',
+      optional: true,
+      description: '\`\`\`u\`\`\` is a user_id or a username. Use string for usernames or \`\`\`id\`\`\` for user_ids',
+    },
+    {
+      type: 'string',
+      name: 'event_days',
+      optional: true,
+      description: 'Max number of days between now and last event date. Range of 1-31. Optional, default value is 1',
+    },
+  ],
+};
+
 export interface types {
   (user: string | number, type: 'best' | 'recent', obj?: {
     mode?: 'osu' | 'fruits' | 'mania' | 'taiko',
     type?: 'u' | 'id',
     limit?: number,
-  }): Promise<{
-    date: string;
-    beatmap: number;
-    rank: string;
-    user: {
-      id: number;
-    };
-    score: {
-      id?: number;
-      total: number;
-    };
-    combo: {
-      max: number;
-      full: number;
-    };
-    hits: {
-      0: number;
-      50: number;
-      100: number;
-      300: number;
-      geki: number;
-      katu: number;
-    };
-    mods: {
-      id: number;
-      name: string;
-    };
-    accuracy: number;
-    pp?: number;
-    replay?: number;
-  }[]>;
+  }): Promise<response[]>;
 };
+
+export interface response {
+  date: string;
+  beatmap: number;
+  rank: string;
+  user: {
+    id: number;
+  };
+  score: {
+    id: number;
+    total: number;
+  };
+  combo: {
+    max: number;
+    full: number;
+  };
+  hits: number[];
+  mods: {
+    id: number;
+    name: string;
+  };
+  accuracy: number;
+  pp: number;
+  replay: number;
+}
+
 
 
 const name: types = async (user, type, obj = {}) => {
