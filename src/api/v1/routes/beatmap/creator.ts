@@ -12,6 +12,57 @@ const _mode = [
 ];
 
 
+export const description: any = {
+  auth: 2,
+  title: __filename,
+  method: 'GET',
+  description: 'Return list of beatmaps for specified user',
+  params: [
+    {
+      type: 'number',
+      name: 'id',
+      optional: false,
+      description: 'id of the user',
+    },
+    {
+      type: 'string',
+      name: 'mode',
+      optional: true,
+      description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
+    },
+    {
+      type: 'string',
+      name: 'converted',
+      optional: true,
+      description: '\`\`\`0\`\`\` or \`\`\`1\`\`\`',
+    },
+    {
+      type: 'string',
+      name: 'hash',
+      optional: true,
+      description: 'beatmap file hash',
+    },
+    {
+      type: 'string',
+      name: 'limit',
+      optional: true,
+      description: 'Maximum number of results',
+    },
+    {
+      type: 'string/number',
+      name: 'mods',
+      optional: true,
+      description: 'Name of the mods \`\`\`HDDT\`\`\` or mods number \`\`\`72\`\`\`',
+    },
+    {
+      type: 'string',
+      name: 'since',
+      optional: true,
+      description: 'Return all beatmaps ranked or loved since this date. Must be a MySQL date. In UTC',
+    },
+  ],
+};
+
 export interface types {
   (id: number, obj?: {
     mode?: 'osu' | 'fruits' | 'mania' | 'taiko',
@@ -20,13 +71,119 @@ export interface types {
     limit?: number,
     mods?: string | number,
     since?: string,
-  }): Promise<{}[]>;
+  }): Promise<response[]>;
 };
 
+export interface response {
+  id: {
+    set: number;
+    diff: number;
+  };
+  date: {
+    submit: string;
+    approved: string;
+    update: string;
+  };
+  metadata: {
+    artist: {
+      original: string;
+      unicode: string;
+    };
+    title: {
+      original: string;
+      unicode: string;
+    };
+    creator: {
+      id: number;
+      name: string;
+    };
+    favs: number;
+    rating: number;
+    source: string;
+    genre_id: {
+      id: number;
+      name: string;
+    };
+    language_id: {
+      id: number;
+      name: string;
+    };
+    tags: string;
+  };
+  status: {
+    id: number;
+    name: string;
+  };
+  difficulties: {
+    id: number;
+    diff: string;
+    mode: {
+      id: number;
+      name: string;
+    };
+    file_md5: string;
+    stats: {
+      star: {
+        pure: number;
+        aim: number;
+        speed: number;
+      };
+      ar: number;
+      od: number;
+      cs: number;
+      hp: number;
+      bpm: {
+        avg: number;
+      };
+      combo: number;
+      time: {
+        full: number;
+        drain: number;
+      };
+      objects: {
+        all: number;
+        circles: number;
+        sliders: number;
+        spinners: number;
+      };
+    };
+    plays: number;
+    pass: number;
+  };
+  misc: {
+    download_unavailable: boolean;
+    audio_unavailable: boolean;
+    storyboard: boolean;
+    video: boolean;
+    packs: string;
+    bg: {
+      full: string;
+      raw: string;
+      slim: {
+        1: string;
+        2: string;
+      };
+      cover: {
+        1: string;
+        2: string;
+      };
+      card: {
+        1: string;
+        2: string;
+      };
+      list: {
+        1: string;
+        2: string;
+      };
+    };
+  };
+}
 
-const name: types = async (id, obj = {}) => {
+
+
+const name: types = async (user_id, obj = {}) => {
   const params = {
-    u: id,
+    u: user_id,
     m: _mode.indexOf(obj.mode),
     a: obj.converted,
     h: obj.hash,
