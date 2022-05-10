@@ -48,7 +48,7 @@ export const request = (url: string, { method = "GET", headers, data, params }: 
   // console.log('\n', url, method, headers, data, o(params), '\n'); // debug too
   const req = https.request(url + (o(params) ? '?' + o(params) : ''), { method, headers }, r => {
     let data: any = '';
-    // console.log('headers', r.headers);
+    // console.log('statusCode', r.statusCode);
 
     r.on('data', (chunk: any) => data += chunk);
     r.on('end', async () => {
