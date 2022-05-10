@@ -2,7 +2,7 @@
 
 [![](https://img.shields.io/npm/v/osu-api-extended?color=AD745F&style=for-the-badge)](https://www.npmjs.org/package/osu-api-extended)
 [![](https://img.shields.io/bundlephobia/min/@aqilcont/osu-api-extended?color=5FAE89&label=size&style=for-the-badge)](https://www.npmjs.org/package/osu-api-extended)
-![](https://img.shields.io/npm/dm/osu-api-extended?color=625FAD&style=for-the-badge)
+[![](https://img.shields.io/npm/dm/osu-api-extended?color=625FAD&style=for-the-badge)](https://npm-stat.com/charts.html?package=osu-api-extended)
 ![](https://img.shields.io/npm/l/osu-api-extended?color=AD5F8C&style=for-the-badge)
 
 # Usage
