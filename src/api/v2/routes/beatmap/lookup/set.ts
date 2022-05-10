@@ -6,13 +6,13 @@ export const description: any = {
   auth: 1,
   title: __filename,
   method: 'GET',
-  description: 'asd',
+  description: 'Return beatmap set for specified beatmap id',
   params: [
     {
       type: 'number',
       name: 'beatmap_id',
       optional: true,
-      description: 'id of the beatmap set',
+      description: 'id of the beatmap',
     },
   ],
 };
