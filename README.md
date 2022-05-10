@@ -25,7 +25,7 @@ const { v1, auth } = require('osu-api-extended')
 const main = async () => {
   auth.set_v1(api_key)
 
-  const data = await v1.beatmap.set()
+  const data = await v2.beatmap.diff(1256136)
   console.log(data)
 }
 
@@ -49,7 +49,7 @@ const main = async () => {
   // Auth via oauth2
   await auth.authorize('CLIENT_ID', 'CLIENT_SECRET', 'CALLBACK_URL')
 
-  const data = await v2.beatmap.get(2379651)
+  const data = await v2.beatmap.diff(1256136)
   console.log(data)
 }
 
