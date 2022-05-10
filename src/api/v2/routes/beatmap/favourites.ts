@@ -7,7 +7,7 @@ export const description: any = {
   auth: 1,
   title: __filename,
   method: 'POST',
-  description: 'Return list of beatmap favourites',
+  description: 'Added specified beatmapset to favourite list',
   params: [
     {
       type: 'number',
@@ -15,21 +15,28 @@ export const description: any = {
       optional: false,
       description: 'id of the beatmap set',
     },
+    {
+      type: 'string',
+      name: 'action',
+      optional: false,
+      description: '\`\`\`favourite\`\`\` or \`\`\`unfavourite\`\`\`',
+    },
   ],
 };
 
 export interface types {
-  (beatmapset_id: number): Promise<response[]>;
+  (beatmapset_id: number, action: 'favourite' | 'unfavourite'): Promise<response[]>;
 };
 
 export interface response {
-  ask: 'peppy';
-};
+  favourite_count: number;
+}
 
 
-const name: types = async (beatmapset_id) => {
+const name: types = async (beatmapset_id, action) => {
   const data = await request(`beatmapsets/${beatmapset_id}/favourites`, {
     method: 'POST',
+    params: { action }
   });
 
   return data;

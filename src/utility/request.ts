@@ -45,7 +45,7 @@ export const request = (url: string, { method = "GET", headers, data, params }: 
   };
 
   // console.log('\n', url, method, headers, o(params), '\n'); // debug too
-  // console.log('\n', url, method, headers, data, o(params), '\n'); // debug too
+  // console.log({ url, method, headers, data, params: o(params) }); // debug too
   const req = https.request(url + (o(params) ? '?' + o(params) : ''), { method, headers }, r => {
     let data: any = '';
     // console.log('statusCode', r.statusCode);
