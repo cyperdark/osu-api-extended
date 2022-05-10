@@ -11,7 +11,7 @@ export const description: any = {
     {
       type: 'number',
       name: 'beatmap_id',
-      optional: true,
+      optional: false,
       description: 'id of the beatmap',
     },
   ],
