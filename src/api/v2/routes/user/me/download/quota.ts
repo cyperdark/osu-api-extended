@@ -18,7 +18,7 @@ export interface types {
 };
 
 export interface response {
-  error: string;
+  quota_used: number;
 }
 
 
