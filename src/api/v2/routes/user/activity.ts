@@ -57,7 +57,6 @@ export interface response {
 }
 
 
-
 const name: types = async (user, obj = {}) => {
   const data = await request(`users/${user}/recent_activity`, {
     method: 'GET',
