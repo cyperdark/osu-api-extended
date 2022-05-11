@@ -166,7 +166,6 @@ export interface response {
 }
 
 
-
 const name: types = async (user, mode, key) => {
   const data = await request(`users/${user}/${mode}`, {
     method: 'GET',
