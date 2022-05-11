@@ -75,9 +75,21 @@ export interface response {
         is_featured: boolean;
       };
     };
+    next: {
+      id: number;
+      version: string;
+      display_version: string;
+      users: number;
+      created_at: string;
+      update_stream: {
+        id: number;
+        name: string;
+        display_name: string;
+        is_featured: boolean;
+      };
+    };
   };
 }
-
 
 
 const name: types = async (stream, build) => {
