@@ -129,7 +129,7 @@ export interface response {
     is_deleted: boolean;
     is_online: boolean;
     is_supporter: boolean;
-    last_visit: string;
+    last_visit?: string;
     pm_friends_only: boolean;
     profile_colour?: string;
     username: string;
@@ -137,7 +137,6 @@ export interface response {
   cursor: string;
   cursor_string: string;
 }
-
 
 
 const name: types = async (obj) => {
