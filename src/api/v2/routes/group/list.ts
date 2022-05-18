@@ -85,13 +85,18 @@ export interface response {
 
 
 const name: types = async (id) => {
-  const data = await request(`https://osu.ppy.sh/groups/${id}`, {
-    method: 'GET',
-  });
+  try {
+    const data = await request(`https://osu.ppy.sh/groups/${id}`, {
+      method: 'GET',
+    });
 
-  const parse = data.split('<script id="json-users" type="application/json">')[1].split('</script>')[0];
+    const parse = data.split('<script id="json-users" type="application/json">')[1].split('</script>')[0];
+    return JSON.parse(parse);
+  } catch (err: any) {
+    console.log('groups-list error', id, err.message);
 
-  return JSON.parse(parse);
+    return [];
+  }
 };
 
 
