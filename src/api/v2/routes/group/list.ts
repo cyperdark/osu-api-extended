@@ -95,7 +95,7 @@ const name: types = async (id) => {
   } catch (err: any) {
     console.log('groups-list error', id, err.message);
 
-    return [];
+    return null;
   }
 };
 
