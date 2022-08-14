@@ -35,7 +35,6 @@ export interface types {
 
 const name: types = async (score_id, mode, file_path) => {
   const data = await download(`https://osu.ppy.sh/api/v2/scores/${mode}/${score_id}/download`, file_path);
-
   return data;
 };
 
