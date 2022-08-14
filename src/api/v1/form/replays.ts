@@ -12,7 +12,10 @@ const name = (data: any, map: any, score: any, id: any, mods: any, file: string)
 
   replay.replay_data = lzma.decompress(decode);
 
-  replay.beatmapMD5 = map?.difficulties.find((r: any) => r.id === id).file_md5;
+  let hash = '';
+  if (map) hash = map.difficulties.find((r: any) => r.id === id).file_md5;
+
+  replay.beatmapMD5 = hash;
   replay.playerName = score[0].user.name;
   replay.number_300s = score[0].hits[300];
   replay.number_100s = score[0].hits[100];
