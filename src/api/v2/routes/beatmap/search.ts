@@ -219,17 +219,20 @@ export interface response {
 
 const name: types = async (filters) => {
   const obj: any = {
-    q: filters?.query,
-    c: filters?.general,
-    m: _mode.indexOf(filters?.mode),
-    s: filters?.section,
-    g: _genre.indexOf(filters?.genre),
-    l: _language.indexOf(filters?.language),
-    e: filters?.include,
-    r: filters?.rank,
     nsfw: undefined,
   };
-  if (!filters?.nfsw) obj.nsfw = 0;
+
+  if (filters) {
+    if (filters.query) obj.q = filters.query;
+    if (filters.general) obj.c = filters.general;
+    if (filters.mode) obj.m = _mode.indexOf(filters.mode);
+    if (filters.section) obj.s = filters.section;
+    if (filters.genre) obj.g = _genre.indexOf(filters.genre);
+    if (filters.language) obj.l = _language.indexOf(filters.language);
+    if (filters.include) obj.e = filters.include;
+    if (filters.rank) obj.r = filters.rank;
+    if (!filters.nfsw) obj.nsfw = 0;
+  }
   const data = await request(`beatmapsets/search/`, {
     method: 'GET',
     params: filters,
