@@ -110,7 +110,6 @@ export const download = (url: string, dest: string, { headers, data, params }: R
     }
 
     if (response.statusCode == 404) {
-      fs.unlinkSync(dest);
       return res({ error: 'file unavailable' });
     }
 
