@@ -103,6 +103,11 @@ export const description: any = {
       optional: true,
       description: '\`\`true\`\` or \`\`false\`\`',
     },
+    {
+      type: 'string',
+      name: 'cursor_string',
+      optional: true,
+    },
   ],
 };
 
@@ -118,6 +123,7 @@ export interface types {
     include?: 'video' | 'storyboard',
     rank?: 'XH' | 'X' | 'SH' | 'S' | 'A' | 'B' | 'C' | 'D',
     nfsw?: boolean,
+    cursor_string?: string,
   }): Promise<response>;
 };
 
@@ -232,6 +238,7 @@ const name: types = async (filters) => {
     if (filters.include) obj.e = filters.include;
     if (filters.rank) obj.r = filters.rank;
     if (!filters.nfsw) obj.nsfw = 0;
+    if (filters.cursor_string) obj.cursor_string = filters.cursor_string;
   }
   const data = await request(`beatmapsets/search/`, {
     method: 'GET',
