@@ -57,6 +57,12 @@ export const description: any = {
     },
     {
       type: 'string',
+      name: 'sort',
+      optional: true,
+      description: 'search sorting, \`\`title_desc\`\` or \`\`title_asc\`\` or \`\`artist_desc\`\` or \`\`artist_asc\`\` or \`\`difficulty_desc\`\` or \`\`difficulty_asc\`\` or \`\`updated_desc\`\` or \`\`updated_asc\`\` or \`\`ranked_desc\`\` or \`\`ranked_asc\`\` or \`\`rating_desc\`\` or \`\`rating_asc\`\` or \`\`plays_desc\`\` or \`\`plays_asc\`\` or \`\`favourites_desc\`\` or \`\`favourites_asc\`\`',
+    },
+    {
+      type: 'string',
       name: 'general',
       optional: true,
       description: '\`\`converts\`\` or \`\`follows\`\` or \`\`recommended\`\` or \`\`\`featured_artists\`\`\`',
@@ -107,6 +113,7 @@ export const description: any = {
       type: 'string',
       name: 'cursor_string',
       optional: true,
+      description: 'Pagination cursor'
     },
   ],
 };
@@ -115,9 +122,10 @@ export const description: any = {
 export interface types {
   (filters: {
     query?: string,
+    sort?: 'title_desc' | 'title_asc' | 'artist_desc' | 'artist_asc' | 'difficulty_desc' | 'difficulty_asc' | 'updated_desc' | 'updated_asc' | 'ranked_desc' | 'ranked_asc' | 'rating_desc' | 'rating_asc' | 'plays_desc' | 'plays_asc' | 'favourites_desc' | 'favourites_asc'
     general?: 'converts' | 'follows' | 'recommended' | 'featured_artists',
     mode?: 'osu' | 'fruits' | 'mania' | 'taiko',
-    section?: 'ranked' | 'qualified' | 'loved' | 'favourites' | 'pending' | 'graveyard' | 'mine',
+    section?: 'any' | 'ranked' | 'qualified' | 'loved' | 'favourites' | 'pending' | 'graveyard' | 'mine',
     genre?: 'Unspecified' | 'Video Game' | 'Anime' | 'Rock' | 'Pop' | 'Other' | 'Novelty' | 'Hip Hop' | 'Electronic' | 'Metal' | 'Classical' | 'Folk' | 'Jazz'
     language?: 'English' | 'Chinese' | 'French' | 'German' | 'Italian' | 'Japanese' | 'Korean' | 'Spanish' | 'Swedish' | 'Russian' | 'Polish' | 'Instrumental' | 'Unspecified' | 'Other',
     include?: 'video' | 'storyboard',
@@ -230,6 +238,7 @@ const name: types = async (filters) => {
 
   if (filters) {
     if (filters.query) obj.q = filters.query;
+    if (filters.sort) obj.sort = filters.sort;
     if (filters.general) obj.c = filters.general;
     if (filters.mode) obj.m = _mode.indexOf(filters.mode);
     if (filters.section) obj.s = filters.section;
