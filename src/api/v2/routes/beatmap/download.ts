@@ -17,18 +17,24 @@ export const description: any = {
       type: 'string',
       name: 'file_path',
       optional: false,
-      description: 'path to file directory',
+      description: 'path to file with their name and extension',
+    },
+    {
+      type: 'function',
+      name: 'callback',
+      optional: false,
+      description: 'function which is will be triggered on downloading progress',
     },
   ],
 };
 
 export interface types {
-  (beatmapset: number, file_path: string): Promise<string>;
+  (beatmapset: number, file_path: string, callback: Function): Promise<string>;
 };
 
 
-const name: types = async (beatmapset, file_path) => {
-  const data = await download(`https://osu.ppy.sh/api/v2/beatmapsets/${beatmapset}/download`, file_path);
+const name: types = async (beatmapset, file_path, callback) => {
+  const data = await download(`https://osu.ppy.sh/api/v2/beatmapsets/${beatmapset}/download`, file_path, {}, callback);
 
   return data;
 };
