@@ -111,16 +111,18 @@ export const download = (url: string, dest: string, { headers, data, params }: R
 
     if (response.statusCode == 404) return res({ error: 'file unavailable' });
 
-    const totalLength = parseInt(response.headers['content-length']);
+    if (callback != undefined) {
+      const totalLength = parseInt(response.headers['content-length']);
 
-    let progress = 0;
-    let progressBar = 0;
+      let progress = 0;
+      let progressBar = 0;
 
-    response.on('data', function (chunk) {
-      progress += chunk.length;
-      progressBar = 100 * (progress / totalLength);
-      callback(progressBar);
-    });
+      response.on('data', function (chunk) {
+        progress += chunk.length;
+        progressBar = 100 * (progress / totalLength);
+        callback(progressBar);
+      });
+    };
 
     response.pipe(file);
   });
