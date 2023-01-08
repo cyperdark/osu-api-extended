@@ -81,8 +81,8 @@ export const request = (url: string, { method = "GET", headers, data, params }: 
  * @param {string} dest The file destination
  * @returns {Promise<any>} The response
  */
-export const download = (url: string, dest: string, { headers, data, params }: RequestParams = {}): Promise<any> => new Promise(async (res, rej) => {
-  const file = fs.createWriteStream(dest);
+export const download = (url: string, dest: string, { headers, data, params }: RequestParams = {}, callback?: Function): Promise<any> => new Promise(async (res, rej) => {
+  const file = fs.createWriteStream(dest, { encoding: 'utf8' });
 
   file.on('error', err => {
     fs.unlinkSync(dest);
@@ -105,11 +105,23 @@ export const download = (url: string, dest: string, { headers, data, params }: R
     const { location } = response.headers;
 
     if (location) {
-      const redirect = download(location, dest);
+      const redirect = download(location, dest, { headers, data, params }, callback);
       return res(redirect);
-    }
+    };
 
     if (response.statusCode == 404) return res({ error: 'file unavailable' });
+
+    const totalLength = parseInt(response.headers['content-length']);
+
+    let progress = 0;
+    let progressBar = 0;
+
+    response.on('data', function (chunk) {
+      progress += chunk.length;
+      progressBar = 100 * (progress / totalLength);
+      callback(progressBar);
+    });
+
     response.pipe(file);
   });
 
