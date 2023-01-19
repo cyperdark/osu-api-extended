@@ -27,6 +27,8 @@ const o = (obj: any) => {
   return params.slice(0, params.length - 1);
 };
 
+let amount_retry = 0;
+
 /**
  * Executes an HTTP request
  * @param {string} url The url
@@ -55,15 +57,19 @@ export const request = (url: string, { method = "GET", headers, data, params }: 
       if (/^application\/json/.test(r.headers['content-type']))
         try {
           const parse = JSON.parse(data);
-          if (parse.authentication == 'basic' && auth.cache_v2) {
+          if (parse.authentication == 'basic' && auth.cache_v2 && amount_retry < 3) {
             await auth.re_login();
+
+            amount_retry++;
 
             const again = await request(url, { method, headers, data, params });
 
             return res(again);
           };
 
-          return res(parse)
+          amount_retry = 0;
+
+          return res(parse);
         } catch (err) { console.log(`JSON Parse on content of type ${r.headers['content-type']} failed.\nError: ${err}\nData: ${data}`) }
 
 
