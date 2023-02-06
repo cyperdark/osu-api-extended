@@ -233,7 +233,6 @@ export interface response {
 
 const name: types = async (filters) => {
   const obj: any = {
-    nsfw: undefined,
   };
 
   if (filters) {
@@ -246,13 +245,17 @@ const name: types = async (filters) => {
     if (filters.language) obj.l = _language.indexOf(filters.language).toString();
     if (filters.include) obj.e = filters.include;
     if (filters.rank) obj.r = filters.rank;
-    if (!filters.nfsw) obj.nsfw = '0';
+    if (filters.nfsw) obj.nsfw = '';
+    else obj.nsfw = false;
     if (filters.cursor_string) obj.cursor_string = filters.cursor_string;
   }
   const data = await request(`beatmapsets/search/`, {
     method: 'GET',
     params: obj,
   });  
+
+  // console.log(obj);
+  
 
   return data;
 };
