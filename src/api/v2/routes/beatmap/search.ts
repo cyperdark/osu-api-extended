@@ -240,19 +240,19 @@ const name: types = async (filters) => {
     if (filters.query) obj.q = filters.query;
     if (filters.sort) obj.sort = filters.sort;
     if (filters.general) obj.c = filters.general;
-    if (filters.mode) obj.m = _mode.indexOf(filters.mode);
+    if (filters.mode) obj.m = _mode.indexOf(filters.mode).toString();
     if (filters.section) obj.s = filters.section;
-    if (filters.genre) obj.g = _genre.indexOf(filters.genre);
-    if (filters.language) obj.l = _language.indexOf(filters.language);
+    if (filters.genre) obj.g = _genre.indexOf(filters.genre).toString();
+    if (filters.language) obj.l = _language.indexOf(filters.language).toString();
     if (filters.include) obj.e = filters.include;
     if (filters.rank) obj.r = filters.rank;
-    if (!filters.nfsw) obj.nsfw = 0;
+    if (!filters.nfsw) obj.nsfw = '0';
     if (filters.cursor_string) obj.cursor_string = filters.cursor_string;
   }
   const data = await request(`beatmapsets/search/`, {
     method: 'GET',
-    params: filters,
-  });
+    params: obj,
+  });  
 
   return data;
 };
