@@ -57,6 +57,7 @@ export interface types {
 };
 
 export interface response {
+  position: number;
   accuracy: number;
   best_id: number;
   created_at: string;
@@ -165,12 +166,12 @@ export interface response {
 
 
 const name: types = async (user, type, obj) => {
-  const data = await request(`users/${user}/scores/${type}`, {
+  const data: response[] = await request(`users/${user}/scores/${type}`, {
     method: 'GET',
     params: obj,
   });
 
-  return data;
+  return data.map((v, i) => ({ position: i + 1, ...v  }));
 };
 
 

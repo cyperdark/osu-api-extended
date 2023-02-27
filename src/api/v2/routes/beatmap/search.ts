@@ -116,6 +116,11 @@ export const description: any = {
       description: 'Pagination cursor'
     },
   ],
+  notes: [
+    {
+      param: 'nsfw',
+    }
+  ]
 };
 
 
