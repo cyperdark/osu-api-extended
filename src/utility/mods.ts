@@ -29,7 +29,7 @@ const num_codes: { [key: string]: string } = {
   134217728: '3K',
   268435456: '2K',
   536870912: 'ScoreV2',
-  1073741824: 'LastMod',
+  1073741824: 'MR',
 };
 
 const mods_order: { [key: string]: number } = {
