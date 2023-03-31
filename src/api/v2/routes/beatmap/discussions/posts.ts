@@ -9,40 +9,45 @@ export const description: any = {
   description: 'Return posts from beatmap set discussions',
   params: [
     {
-      type: 'number',
-      name: 'beatmapset_discussion_id',
-      optional: true,
-      description: 'id of beatmap set id',
-    },
-    {
-      type: 'number',
-      name: 'limit',
-      optional: true,
-      description: 'Maximum number of results',
-    },
-    {
-      type: 'number',
-      name: 'page',
-      optional: true,
-      description: 'Search page',
-    },
-    {
-      type: 'string',
-      name: 'sort',
-      optional: true,
-      description: '\`\`\`id_desc\`\`\` or \`\`\`id_asc\`\`\`',
-    },
-    {
-      type: 'string array',
-      name: 'types',
-      optional: true,
-      description: '\`\`\`first\`\`\` or \`\`\`replay\`\`\` or \`\`\`system\`\`\`',
-    },
-    {
-      type: 'number',
-      name: 'user',
-      optional: true,
-      description: 'id of the user',
+      name: 'object',
+      params: [
+        {
+          type: 'number',
+          name: 'beatmapset_discussion_id',
+          optional: true,
+          description: 'id of beatmap set id',
+        },
+        {
+          type: 'number',
+          name: 'limit',
+          optional: true,
+          description: 'Maximum number of results',
+        },
+        {
+          type: 'number',
+          name: 'page',
+          optional: true,
+          description: 'Search page',
+        },
+        {
+          type: 'string',
+          name: 'sort',
+          optional: true,
+          description: '\`\`\`id_desc\`\`\` or \`\`\`id_asc\`\`\`',
+        },
+        {
+          type: 'string array',
+          name: 'types',
+          optional: true,
+          description: '\`\`\`first\`\`\` or \`\`\`replay\`\`\` or \`\`\`system\`\`\`',
+        },
+        {
+          type: 'number',
+          name: 'user',
+          optional: true,
+          description: 'id of the user',
+        },
+      ],
     },
   ],
 };

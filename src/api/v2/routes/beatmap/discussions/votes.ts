@@ -9,46 +9,51 @@ export const description: any = {
   description: 'Return votes (+discussions, users) from beatmap set discussions',
   params: [
     {
-      type: 'number',
-      name: 'beatmapset_discussion_id',
-      optional: true,
-      description: 'id of beatmap set id',
-    },
-    {
-      type: 'number',
-      name: 'limit',
-      optional: true,
-      description: 'Maximum number of results',
-    },
-    {
-      type: 'number',
-      name: 'page',
-      optional: true,
-      description: 'Search page',
-    },
-    {
-      type: 'number',
-      name: 'receiver',
-      optional: true,
-      description: 'id of the user',
-    },
-    {
-      type: 'number',
-      name: 'score',
-      optional: true,
-      description: '\`\`\`1\`\`\` for up vote, \`\`\`-1\`\`\` for down vote',
-    },
-    {
-      type: 'string',
-      name: 'sort',
-      optional: true,
-      description: '\`\`\`id_desc\`\`\` or \`\`\`id_asc\`\`\`',
-    },
-    {
-      type: 'number',
-      name: 'user',
-      optional: true,
-      description: 'id of the user',
+      name: 'object',
+      params: [
+        {
+          type: 'number',
+          name: 'beatmapset_discussion_id',
+          optional: true,
+          description: 'id of beatmap set id',
+        },
+        {
+          type: 'number',
+          name: 'limit',
+          optional: true,
+          description: 'Maximum number of results',
+        },
+        {
+          type: 'number',
+          name: 'page',
+          optional: true,
+          description: 'Search page',
+        },
+        {
+          type: 'number',
+          name: 'receiver',
+          optional: true,
+          description: 'id of the user',
+        },
+        {
+          type: 'number',
+          name: 'score',
+          optional: true,
+          description: '\`\`\`1\`\`\` for up vote, \`\`\`-1\`\`\` for down vote',
+        },
+        {
+          type: 'string',
+          name: 'sort',
+          optional: true,
+          description: '\`\`\`id_desc\`\`\` or \`\`\`id_asc\`\`\`',
+        },
+        {
+          type: 'number',
+          name: 'user',
+          optional: true,
+          description: 'id of the user',
+        },
+      ],
     },
   ],
 };

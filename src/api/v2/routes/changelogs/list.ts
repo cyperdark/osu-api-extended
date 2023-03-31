@@ -9,35 +9,40 @@ export const description: any = {
   description: 'Returns a listing of update streams, builds, and changelog entries',
   params: [
     {
-      type: 'string',
-      name: 'from',
-      optional: true,
-      description: 'Minimum build version',
-    },
-    {
-      type: 'string',
-      name: 'to',
-      optional: true,
-      description: 'Maximum build version',
-    },
-    {
-      type: 'number',
-      name: 'max_id',
-      optional: true,
-      description: 'Maximum build ID',
-    },
-    {
-      type: 'string',
-      name: 'stream',
-      optional: true,
-      description: '\`\`\`stable40\`\`\` or \`\`\`stable\`\`\` or \`\`\`beta40\`\`\` or \`\`\`cuttingedge\`\`\` or \`\`\`lazer\`\`\` or \`\`\`web\`\`\`',
-    },
-    {
-      type: 'string array',
-      name: 'message_formats',
-      optional: true,
-      description: '\`\`\`html\`\`\` or \`\`\`markdown\`\`\`',
-    },
+      name: 'object',
+      params: [
+        {
+          type: 'string',
+          name: 'from',
+          optional: true,
+          description: 'Minimum build version',
+        },
+        {
+          type: 'string',
+          name: 'to',
+          optional: true,
+          description: 'Maximum build version',
+        },
+        {
+          type: 'number',
+          name: 'max_id',
+          optional: true,
+          description: 'Maximum build ID',
+        },
+        {
+          type: 'string',
+          name: 'stream',
+          optional: true,
+          description: '\`\`\`stable40\`\`\` or \`\`\`stable\`\`\` or \`\`\`beta40\`\`\` or \`\`\`cuttingedge\`\`\` or \`\`\`lazer\`\`\` or \`\`\`web\`\`\`',
+        },
+        {
+          type: 'string array',
+          name: 'message_formats',
+          optional: true,
+          description: '\`\`\`html\`\`\` or \`\`\`markdown\`\`\`',
+        },
+      ],
+    }
   ],
 };
 

@@ -8,35 +8,40 @@ export const description: any = {
   description: `This endpoint returns new messages since the given message_id along with updated channel 'presence' data.`,
   params: [
     {
-      type: 'number',
-      name: 'channel_id',
-      optional: true,
-      description: 'Messages after the specified message_id to return',
-    },
-    {
-      type: 'number',
-      name: 'history_since',
-      optional: true,
-      description: 'UserSilence after the specified id to return',
-    },
-    {
-      type: 'string array',
-      name: 'includes',
-      optional: true,
-      description: 'List of \`\`\`presence\`\`\`, \`\`\`messages\`\`\`, \`\`\`silences\`\`\` fields to include in the response. Returns all if not specified',
-    },
-    {
-      type: 'number',
-      name: 'limit',
-      optional: true,
-      description: 'Maximum number of messages to return (max of 50)',
-    },
-    {
-      type: 'number',
-      name: 'since',
-      optional: true,
-      description: 'Messages after the specified message_id to return',
-    },
+      name: 'object',
+      params: [
+        {
+          type: 'number',
+          name: 'channel_id',
+          optional: true,
+          description: 'Messages after the specified message_id to return',
+        },
+        {
+          type: 'number',
+          name: 'history_since',
+          optional: true,
+          description: 'UserSilence after the specified id to return',
+        },
+        {
+          type: 'string array',
+          name: 'includes',
+          optional: true,
+          description: 'List of \`\`\`presence\`\`\`, \`\`\`messages\`\`\`, \`\`\`silences\`\`\` fields to include in the response. Returns all if not specified',
+        },
+        {
+          type: 'number',
+          name: 'limit',
+          optional: true,
+          description: 'Maximum number of messages to return (max of 50)',
+        },
+        {
+          type: 'number',
+          name: 'since',
+          optional: true,
+          description: 'Messages after the specified message_id to return',
+        },
+      ],
+    }
   ],
 };
 

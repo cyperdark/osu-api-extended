@@ -15,22 +15,27 @@ export const description: any = {
       description: 'id of the channel',
     },
     {
-      type: 'number',
-      name: 'limit',
-      optional: true,
-      description: 'Maximum number of results (Max 50)',
-    },
-    {
-      type: 'number',
-      name: 'since',
-      optional: true,
-      description: 'Messages after the specified message id will be returned',
-    },
-    {
-      type: 'number',
-      name: 'until',
-      optional: true,
-      description: 'Messages up to but not including the specified message id will be returned',
+      name: 'object',
+      params: [
+        {
+          type: 'number',
+          name: 'limit',
+          optional: true,
+          description: 'Maximum number of results (Max 50)',
+        },
+        {
+          type: 'number',
+          name: 'since',
+          optional: true,
+          description: 'Messages after the specified message id will be returned',
+        },
+        {
+          type: 'number',
+          name: 'until',
+          optional: true,
+          description: 'Messages up to but not including the specified message id will be returned',
+        },
+      ]
     },
   ],
 };

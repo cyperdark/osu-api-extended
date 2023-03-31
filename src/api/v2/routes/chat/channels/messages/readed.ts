@@ -15,22 +15,27 @@ export const description: any = {
       description: 'id of the channel',
     },
     {
-      type: 'number',
-      name: 'message',
-      optional: false,
-      description: 'id of the message',
-    },
-    {
-      type: 'number',
-      name: 'channel_id',
-      optional: true,
-      description: 'The \`\`\`channel_id\`\`\` of the channel to mark as read',
-    },
-    {
-      type: 'number',
-      name: 'message_id',
-      optional: true,
-      description: 'The \`\`\`message_id\`\`\` of the message to mark as read up to',
+      name: 'object',
+      params: [
+        {
+          type: 'number',
+          name: 'message',
+          optional: false,
+          description: 'id of the message',
+        },
+        {
+          type: 'number',
+          name: 'channel_id',
+          optional: true,
+          description: 'The \`\`\`channel_id\`\`\` of the channel to mark as read',
+        },
+        {
+          type: 'number',
+          name: 'message_id',
+          optional: true,
+          description: 'The \`\`\`message_id\`\`\` of the message to mark as read up to',
+        },
+      ]
     },
   ],
 };

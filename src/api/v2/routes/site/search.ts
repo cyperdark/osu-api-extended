@@ -9,23 +9,28 @@ export const description: any = {
   description: 'Searches users and wiki pages.',
   params: [
     {
-      type: 'string',
-      name: 'mode',
-      optional: true,
-      description: '\`\`\`all\`\`\` or \`\`\`user\`\`\` or \`\`\`wiki_page\`\`\`',
-    },
-    {
-      type: 'string',
-      name: 'query',
-      optional: true,
-      description: 'Search keyword',
-    },
-    {
-      type: 'number',
-      name: 'page',
-      optional: true,
-      description: 'Search result page. Ignored for mode all',
-    },
+      name: 'object',
+      params: [
+        {
+          type: 'string',
+          name: 'mode',
+          optional: true,
+          description: '\`\`\`all\`\`\` or \`\`\`user\`\`\` or \`\`\`wiki_page\`\`\`',
+        },
+        {
+          type: 'string',
+          name: 'query',
+          optional: true,
+          description: 'Search keyword',
+        },
+        {
+          type: 'number',
+          name: 'page',
+          optional: true,
+          description: 'Search result page. Ignored for mode all',
+        },
+      ],
+    }
   ],
 };
 

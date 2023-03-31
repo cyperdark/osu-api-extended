@@ -15,22 +15,27 @@ export const description: any = {
       description: 'Beatmap id',
     },
     {
-      type: 'string array',
-      name: 'mods',
-      optional: true,
-      description: 'Array of matching mods [\'HD\', \'DT\']',
-    },
-    {
-      type: 'string',
-      name: 'ruleset',
-      optional: true,
-      description: `\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\``,
-    },
-    {
-      type: 'number',
-      name: 'ruleset_id',
-      optional: true,
-      description: `\`\`\`0\`\`\` or \`\`\`1\`\`\` or \`\`\`2\`\`\` or \`\`\`3\`\`\``,
+      name: 'body',
+      params: [
+        {
+          type: 'string array',
+          name: 'mods',
+          optional: true,
+          description: 'Array of matching mods [\'HD\', \'DT\']',
+        },
+        {
+          type: 'string',
+          name: 'ruleset',
+          optional: true,
+          description: `\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\``,
+        },
+        {
+          type: 'number',
+          name: 'ruleset_id',
+          optional: true,
+          description: `\`\`\`0\`\`\` or \`\`\`1\`\`\` or \`\`\`2\`\`\` or \`\`\`3\`\`\``,
+        },
+      ]
     },
   ],
 };

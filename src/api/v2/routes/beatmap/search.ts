@@ -50,77 +50,83 @@ export const description: any = {
   description: 'Return list of beatmaps',
   params: [
     {
-      type: 'string',
-      name: 'query',
-      optional: true,
-      description: 'search query, song \`\`title\`\` / \`\`artist\`\`, \`\`stars\`\`, \`\`bpm\`\`, \`\`date\`\` and etc.',
-    },
-    {
-      type: 'string',
-      name: 'sort',
-      optional: true,
-      description: 'search sorting, \`\`title_desc\`\` or \`\`title_asc\`\` or \`\`artist_desc\`\` or \`\`artist_asc\`\` or \`\`difficulty_desc\`\` or \`\`difficulty_asc\`\` or \`\`updated_desc\`\` or \`\`updated_asc\`\` or \`\`ranked_desc\`\` or \`\`ranked_asc\`\` or \`\`rating_desc\`\` or \`\`rating_asc\`\` or \`\`plays_desc\`\` or \`\`plays_asc\`\` or \`\`favourites_desc\`\` or \`\`favourites_asc\`\`',
-    },
-    {
-      type: 'string',
-      name: 'general',
-      optional: true,
-      description: '\`\`converts\`\` or \`\`follows\`\` or \`\`recommended\`\` or \`\`\`featured_artists\`\`\`',
-    },
-    {
-      type: 'string',
-      name: 'mode',
-      optional: true,
-      description: '\`\`osu\`\` or \`\`fruits\`\` or \`\`mania\`\` or \`\`taiko\`\`',
-    },
-    {
-      type: 'string',
-      name: 'section',
-      optional: true,
-      description: '\`\`ranked\`\` or \`\`qualified\`\` or \`\`loved\`\` or \`\`favourites\`\` or \`\`pending\`\` or \`\`graveyard\`\` or \`\`mine\`\`',
-    },
-    {
-      type: 'string',
-      name: 'genre',
-      optional: true,
-      description: '\`\`Unspecified\`\` or \`\`Video Game\`\` or \`\`Anime\`\` or \`\`Rock\`\` or \`\`Pop\`\` or \`\`Other\`\` or \`\`Novelty\`\` or \`\`Hip Hop\`\` or \`\`Electronic\`\` or \`\`Metal\`\` or \`\`Classical\`\` or \`\`Folk\`\` or \`\`Jazz\`\`',
-    },
-    {
-      type: 'string',
-      name: 'language',
-      optional: true,
-      description: '\`\`English\`\` or \`\`Chinese\`\` or \`\`French\`\` or \`\`German\`\` or \`\`Italian\`\` or \`\`Japanese\`\` or \`\`Korean\`\` or \`\`Spanish\`\` or \`\`Swedish\`\` or \`\`Russian\`\` or \`\`Polish\`\` or \`\`Instrumental\`\` or \`\`Unspecified\`\` or \`\`Other\`\`',
-    },
-    {
-      type: 'string',
-      name: 'include',
-      optional: true,
-      description: '\`\`video\`\` or \`\`storyboard\`\`',
-    },
-    {
-      type: 'string',
-      name: 'rank',
-      optional: true,
-      description: '\`\`XH\`\` or \`\`X\`\` or \`\`SH\`\` or \`\`S\`\` or \`\`A\`\` or \`\`B\`\` or \`\`C\`\` or \`\`D\`\`',
-    },
-    {
-      type: 'boolean',
-      name: 'nfsw',
-      optional: true,
-      description: '\`\`true\`\` or \`\`false\`\`',
-    },
-    {
-      type: 'string',
-      name: 'cursor_string',
-      optional: true,
-      description: 'Pagination cursor'
-    },
+      name: 'object',
+      params: [
+        {
+          type: 'string',
+          name: 'query',
+          optional: true,
+          description: 'search query, song \`\`title\`\` / \`\`artist\`\`, \`\`stars\`\`, \`\`bpm\`\`, \`\`date\`\` and etc.',
+        },
+        {
+          type: 'string',
+          name: 'sort',
+          optional: true,
+          description: 'search sorting, \`\`title_desc\`\` or \`\`title_asc\`\` or \`\`artist_desc\`\` or \`\`artist_asc\`\` or \`\`difficulty_desc\`\` or \`\`difficulty_asc\`\` or \`\`updated_desc\`\` or \`\`updated_asc\`\` or \`\`ranked_desc\`\` or \`\`ranked_asc\`\` or \`\`rating_desc\`\` or \`\`rating_asc\`\` or \`\`plays_desc\`\` or \`\`plays_asc\`\` or \`\`favourites_desc\`\` or \`\`favourites_asc\`\`',
+        },
+        {
+          type: 'string',
+          name: 'general',
+          optional: true,
+          description: '\`\`converts\`\` or \`\`follows\`\` or \`\`recommended\`\` or \`\`\`featured_artists\`\`\`',
+        },
+        {
+          type: 'string',
+          name: 'mode',
+          optional: true,
+          description: '\`\`osu\`\` or \`\`fruits\`\` or \`\`mania\`\` or \`\`taiko\`\`',
+        },
+        {
+          type: 'string',
+          name: 'section',
+          optional: true,
+          description: '\`\`ranked\`\` or \`\`qualified\`\` or \`\`loved\`\` or \`\`favourites\`\` or \`\`pending\`\` or \`\`graveyard\`\` or \`\`mine\`\`',
+        },
+        {
+          type: 'string',
+          name: 'genre',
+          optional: true,
+          description: '\`\`Unspecified\`\` or \`\`Video Game\`\` or \`\`Anime\`\` or \`\`Rock\`\` or \`\`Pop\`\` or \`\`Other\`\` or \`\`Novelty\`\` or \`\`Hip Hop\`\` or \`\`Electronic\`\` or \`\`Metal\`\` or \`\`Classical\`\` or \`\`Folk\`\` or \`\`Jazz\`\`',
+        },
+        {
+          type: 'string',
+          name: 'language',
+          optional: true,
+          description: '\`\`English\`\` or \`\`Chinese\`\` or \`\`French\`\` or \`\`German\`\` or \`\`Italian\`\` or \`\`Japanese\`\` or \`\`Korean\`\` or \`\`Spanish\`\` or \`\`Swedish\`\` or \`\`Russian\`\` or \`\`Polish\`\` or \`\`Instrumental\`\` or \`\`Unspecified\`\` or \`\`Other\`\`',
+        },
+        {
+          type: 'string',
+          name: 'include',
+          optional: true,
+          description: '\`\`video\`\` or \`\`storyboard\`\`',
+        },
+        {
+          type: 'string',
+          name: 'rank',
+          optional: true,
+          description: '\`\`XH\`\` or \`\`X\`\` or \`\`SH\`\` or \`\`S\`\` or \`\`A\`\` or \`\`B\`\` or \`\`C\`\` or \`\`D\`\`',
+        },
+        {
+          type: 'boolean',
+          name: 'nfsw',
+          optional: true,
+          description: '\`\`true\`\` or \`\`false\`\`',
+        },
+        {
+          type: 'string',
+          name: 'cursor_string',
+          optional: true,
+          description: 'Pagination cursor'
+        },
+      ]
+    }
   ],
   notes: [
     {
-      param: 'nsfw',
+      params: ['nsfw'],
+      description: 'Those parameters require to login via lazer',
     }
-  ]
+  ],
 };
 
 
@@ -257,10 +263,10 @@ const name: types = async (filters) => {
   const data = await request(`beatmapsets/search/`, {
     method: 'GET',
     params: obj,
-  });  
+  });
 
   // console.log(obj);
-  
+
 
   return data;
 };

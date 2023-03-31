@@ -21,16 +21,21 @@ export const description: any = {
       description: 'id of the user',
     },
     {
-      type: 'string',
-      name: 'mode',
-      optional: true,
-      description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
-    },
-    {
-      type: 'string array',
-      name: 'mods',
-      optional: true,
-      description: 'Array of matching mods [\'HD\', \'DT\']',
+      name: 'object',
+      params: [
+        {
+          type: 'string',
+          name: 'mode',
+          optional: true,
+          description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
+        },
+        {
+          type: 'string array',
+          name: 'mods',
+          optional: true,
+          description: 'Array of matching mods [\'HD\', \'DT\']',
+        },
+      ]
     },
   ],
 };

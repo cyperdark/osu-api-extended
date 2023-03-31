@@ -9,41 +9,46 @@ export const description: any = {
   description: 'Returns a list comments and their replies up to 2 levels deep',
   params: [
     {
-      type: 'string',
-      name: 'commentable_type',
-      optional: true,
-      description: '\`\`\`news_post\`\`\` or \`\`\`beatmapset\`\`\`',
-    },
-    {
-      type: 'string',
-      name: 'commentable_id',
-      optional: true,
-      description: 'id of the resource to get comments for',
-    },
-    {
-      type: 'number',
-      name: 'cursor.id',
-      optional: true,
-      description: '',
-    },
-    {
-      type: 'string',
-      name: 'cursor.created_at',
-      optional: true,
-      description: '',
-    },
-    {
-      type: 'string',
-      name: 'parent_id',
-      optional: true,
-      description: 'id of the comment parent',
-    },
-    {
-      type: 'string',
-      name: 'sort',
-      optional: true,
-      description: '\`\`\`new\`\`\` or \`\`\`old\`\`\` or \`\`\`top\`\`\`',
-    },
+      name: 'object',
+      params: [
+        {
+          type: 'string',
+          name: 'commentable_type',
+          optional: true,
+          description: '\`\`\`news_post\`\`\` or \`\`\`beatmapset\`\`\`',
+        },
+        {
+          type: 'string',
+          name: 'commentable_id',
+          optional: true,
+          description: 'id of the resource to get comments for',
+        },
+        {
+          type: 'number',
+          name: 'cursor.id',
+          optional: true,
+          description: '',
+        },
+        {
+          type: 'string',
+          name: 'cursor.created_at',
+          optional: true,
+          description: '',
+        },
+        {
+          type: 'string',
+          name: 'parent_id',
+          optional: true,
+          description: 'id of the comment parent',
+        },
+        {
+          type: 'string',
+          name: 'sort',
+          optional: true,
+          description: '\`\`\`new\`\`\` or \`\`\`old\`\`\` or \`\`\`top\`\`\`',
+        },
+      ],
+    }
   ],
 };
 

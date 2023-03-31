@@ -9,29 +9,34 @@ export const description: any = {
   description: 'Returns a list of news posts and related metadata',
   params: [
     {
-      type: 'number',
-      name: 'limit',
-      optional: true,
-      description: 'Maximum number of posts (12 default, 1 minimum, 21 maximum)',
-    },
-    {
-      type: 'number',
-      name: 'year',
-      optional: true,
-      description: 'Year to return posts from',
-    },
-    {
-      type: 'string',
-      name: 'cursorPublished',
-      optional: true,
-      description: 'Pagination cursorPublished',
-    },
-    {
-      type: 'number',
-      name: 'cursorId',
-      optional: true,
-      description: 'Pagination cursorId',
-    },
+      name: 'object',
+      params: [
+        {
+          type: 'number',
+          name: 'limit',
+          optional: true,
+          description: 'Maximum number of posts (12 default, 1 minimum, 21 maximum)',
+        },
+        {
+          type: 'number',
+          name: 'year',
+          optional: true,
+          description: 'Year to return posts from',
+        },
+        {
+          type: 'string',
+          name: 'cursorPublished',
+          optional: true,
+          description: 'Pagination cursorPublished',
+        },
+        {
+          type: 'number',
+          name: 'cursorId',
+          optional: true,
+          description: 'Pagination cursorId',
+        },
+      ],
+    }
   ],
 };
 
