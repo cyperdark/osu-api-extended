@@ -15,22 +15,27 @@ export const description: any = {
       description: 'id of the beatmap',
     },
     {
-      type: 'string',
-      name: 'mode',
-      optional: true,
-      description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
-    },
-    {
-      type: 'string array',
-      name: 'mods',
-      optional: true,
-      description: 'Array of matching mods [\'HD\', \'DT\']',
-    },
-    {
-      type: 'string',
-      name: 'type',
-      optional: true,
-      description: '?Beatmap score ranking type',
+      name: 'object',
+      params: [
+        {
+          type: 'string',
+          name: 'mode',
+          optional: true,
+          description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
+        },
+        {
+          type: 'string array',
+          name: 'mods',
+          optional: true,
+          description: 'Array of matching mods [\'HD\', \'DT\']',
+        },
+        {
+          type: 'string',
+          name: 'type',
+          optional: true,
+          description: '?Beatmap score ranking type',
+        },
+      ]
     },
   ],
 };

@@ -9,59 +9,64 @@ export const description: any = {
   description: 'Return details of beatmap discussion',
   params: [
     {
-      type: 'number',
-      name: 'beatmap_id',
-      optional: true,
-      description: 'beatmap id',
-    },
-    {
-      type: 'number',
-      name: 'beatmapset_id',
-      optional: true,
-      description: 'beatmapset id',
-    },
-    {
-      type: 'string',
-      name: 'beatmapset_status',
-      optional: true,
-      description: '\`\`\`all\`\`\` or \`\`\`ranked\`\`\` or \`\`\`qualified\`\`\` or \`\`\`disqualified\`\`\` or \`\`\`never_qualified\`\`\` or \`\`\`loved\`\`\`',
-    },
-    {
-      type: 'number',
-      name: 'limit',
-      optional: true,
-      description: 'Maximum number of results',
-    },
-    {
-      type: 'string array',
-      name: 'message_types',
-      optional: true,
-      description: '\`\`\`suggestion\`\`\` or \`\`\`problem\`\`\` or \`\`\`mapper_note\`\`\` or \`\`\`praise\`\`\` or \`\`\`hype\`\`\` or \`\`\`review\`\`\` or \`\`\`all\`\`\`',
-    },
-    {
-      type: 'boolean',
-      name: 'only_unresolved',
-      optional: true,
-      description: '\`\`\`true\`\`\` or \`\`\`false\`\`\`',
-    },
-    {
-      type: 'number',
-      name: 'page',
-      optional: true,
-      description: 'Search result page',
-    },
-    {
-      type: 'string',
-      name: 'sort',
-      optional: true,
-      description: '\`\`\`id_desc\`\`\` or \`\`\`id_asc\`\`\`',
-    },
-    {
-      type: 'number',
-      name: 'user',
-      optional: true,
-      description: 'id of the user',
-    },
+      name: 'object',
+      params: [
+        {
+          type: 'number',
+          name: 'beatmap_id',
+          optional: true,
+          description: 'beatmap id',
+        },
+        {
+          type: 'number',
+          name: 'beatmapset_id',
+          optional: true,
+          description: 'beatmapset id',
+        },
+        {
+          type: 'string',
+          name: 'beatmapset_status',
+          optional: true,
+          description: '\`\`\`all\`\`\` or \`\`\`ranked\`\`\` or \`\`\`qualified\`\`\` or \`\`\`disqualified\`\`\` or \`\`\`never_qualified\`\`\` or \`\`\`loved\`\`\`',
+        },
+        {
+          type: 'number',
+          name: 'limit',
+          optional: true,
+          description: 'Maximum number of results',
+        },
+        {
+          type: 'string array',
+          name: 'message_types',
+          optional: true,
+          description: '\`\`\`suggestion\`\`\` or \`\`\`problem\`\`\` or \`\`\`mapper_note\`\`\` or \`\`\`praise\`\`\` or \`\`\`hype\`\`\` or \`\`\`review\`\`\` or \`\`\`all\`\`\`',
+        },
+        {
+          type: 'boolean',
+          name: 'only_unresolved',
+          optional: true,
+          description: '\`\`\`true\`\`\` or \`\`\`false\`\`\`',
+        },
+        {
+          type: 'number',
+          name: 'page',
+          optional: true,
+          description: 'Search result page',
+        },
+        {
+          type: 'string',
+          name: 'sort',
+          optional: true,
+          description: '\`\`\`id_desc\`\`\` or \`\`\`id_asc\`\`\`',
+        },
+        {
+          type: 'number',
+          name: 'user',
+          optional: true,
+          description: 'id of the user',
+        },
+      ]
+    }
   ],
 };
 

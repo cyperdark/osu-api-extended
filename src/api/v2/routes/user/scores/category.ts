@@ -21,28 +21,33 @@ export const description: any = {
       description: '\`\`\`recent\`\`\` or \`\`\`best\`\`\` or \`\`\`firsts\`\`\` or \`\`\`pinned\`\`\`',
     },
     {
-      type: 'string',
-      name: 'include_fails',
-      optional: true,
-      description: 'Only for \`\`\`recent\`\`\` scores, include scores of failed plays. Set to \`\`\`1\`\`\` to include them. Defaults to \`\`\`0\`\`\`',
-    },
-    {
-      type: 'string',
-      name: 'mode',
-      optional: true,
-      description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
-    },
-    {
-      type: 'string',
-      name: 'limit',
-      optional: true,
-      description: 'Maximum number of results',
-    },
-    {
-      type: 'string',
-      name: 'offset',
-      optional: true,
-      description: 'Result offset for pagination',
+      name: 'object',
+      params: [
+        {
+          type: 'string',
+          name: 'include_fails',
+          optional: true,
+          description: 'Only for \`\`\`recent\`\`\` scores, include scores of failed plays. Set to \`\`\`1\`\`\` to include them. Defaults to \`\`\`0\`\`\`',
+        },
+        {
+          type: 'string',
+          name: 'mode',
+          optional: true,
+          description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
+        },
+        {
+          type: 'string',
+          name: 'limit',
+          optional: true,
+          description: 'Maximum number of results',
+        },
+        {
+          type: 'string',
+          name: 'offset',
+          optional: true,
+          description: 'Result offset for pagination',
+        },
+      ]
     },
   ],
 };
@@ -171,7 +176,7 @@ const name: types = async (user, type, obj) => {
     params: obj,
   });
 
-  return data.map((v, i) => ({ position: i + 1, ...v  }));
+  return data.map((v, i) => ({ position: i + 1, ...v }));
 };
 
 

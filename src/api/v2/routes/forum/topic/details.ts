@@ -15,28 +15,33 @@ export const description: any = {
       description: 'Parameter for pagination',
     },
     {
-      type: 'string',
-      name: 'sort',
-      optional: true,
-      description: '\`\`\`id_asc\`\`\` or \`\`\`id_desc\`\`\`',
-    },
-    {
-      type: 'number',
-      name: 'limit',
-      optional: true,
-      description: 'Maximum number of posts to be returned (20 default, 50 at most)',
-    },
-    {
-      type: 'string',
-      name: 'start',
-      optional: true,
-      description: 'First post id to be returned with sort set to id_asc. This parameter is ignored if cursor_string is specified',
-    },
-    {
-      type: 'string',
-      name: 'end',
-      optional: true,
-      description: 'Last post id to be returned with sort set to id_desc. This parameter is ignored if cursor_string is specified.',
+      name: 'object',
+      params: [
+        {
+          type: 'string',
+          name: 'sort',
+          optional: true,
+          description: '\`\`\`id_asc\`\`\` or \`\`\`id_desc\`\`\`',
+        },
+        {
+          type: 'number',
+          name: 'limit',
+          optional: true,
+          description: 'Maximum number of posts to be returned (20 default, 50 at most)',
+        },
+        {
+          type: 'string',
+          name: 'start',
+          optional: true,
+          description: 'First post id to be returned with sort set to id_asc. This parameter is ignored if cursor_string is specified',
+        },
+        {
+          type: 'string',
+          name: 'end',
+          optional: true,
+          description: 'Last post id to be returned with sort set to id_desc. This parameter is ignored if cursor_string is specified.',
+        },
+      ]
     },
   ],
 };

@@ -15,16 +15,21 @@ export const description: any = {
       description: 'id of the user',
     },
     {
-      type: 'number',
-      name: 'limit',
-      optional: true,
-      description: 'Maximum number of results',
-    },
-    {
-      type: 'string',
-      name: 'offset',
-      optional: true,
-      description: 'Result offset for pagination',
+      name: 'object',
+      params: [
+        {
+          type: 'number',
+          name: 'limit',
+          optional: true,
+          description: 'Maximum number of results',
+        },
+        {
+          type: 'string',
+          name: 'offset',
+          optional: true,
+          description: 'Result offset for pagination',
+        },
+      ]
     },
   ],
 };

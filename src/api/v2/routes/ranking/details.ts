@@ -21,40 +21,45 @@ export const description: any = {
       description: '\`\`\`charts\`\`\` or \`\`\`country\`\`\` or \`\`\`performance\`\`\` or \`\`\`score\`\`\`',
     },
     {
-      type: 'number',
-      name: 'country',
-      optional: true,
-      description: 'Filter ranking by country code. Only available for \`\`\`type\`\`\` of \`\`\`performance\`\`\`',
-    },
-    {
-      type: 'string',
-      name: 'cursorPublished',
-      optional: true,
-      description: 'Pagination cursorPublished',
-    },
-    {
-      type: 'number',
-      name: 'cursorId',
-      optional: true,
-      description: 'Pagination cursorId',
-    },
-    {
-      type: 'string',
-      name: 'filter',
-      optional: true,
-      description: '\`\`\`all\`\`\` or \`\`\`friends\`\`\`',
-    },
-    {
-      type: 'string',
-      name: 'spotlight',
-      optional: true,
-      description: 'The id of the spotlight if type is charts. Ranking for latest spotlight will be returned if not specified',
-    },
-    {
-      type: 'string',
-      name: 'variant',
-      optional: true,
-      description: `Filter ranking to specified mode variant. For \`\`\`mode\`\`\` of \`\`\`mania\`\`\`, it's either \`\`\`4k\`\`\` or \`\`\`7k\`\`\`. Only available for \`\`\`type\`\`\` of \`\`\`performance\`\`\``,
+      name: 'object',
+      params: [
+        {
+          type: 'number',
+          name: 'country',
+          optional: true,
+          description: 'Filter ranking by country code. Only available for \`\`\`type\`\`\` of \`\`\`performance\`\`\`',
+        },
+        {
+          type: 'string',
+          name: 'cursorPublished',
+          optional: true,
+          description: 'Pagination cursorPublished',
+        },
+        {
+          type: 'number',
+          name: 'cursorId',
+          optional: true,
+          description: 'Pagination cursorId',
+        },
+        {
+          type: 'string',
+          name: 'filter',
+          optional: true,
+          description: '\`\`\`all\`\`\` or \`\`\`friends\`\`\`',
+        },
+        {
+          type: 'string',
+          name: 'spotlight',
+          optional: true,
+          description: 'The id of the spotlight if type is charts. Ranking for latest spotlight will be returned if not specified',
+        },
+        {
+          type: 'string',
+          name: 'variant',
+          optional: true,
+          description: `Filter ranking to specified mode variant. For \`\`\`mode\`\`\` of \`\`\`mania\`\`\`, it's either \`\`\`4k\`\`\` or \`\`\`7k\`\`\`. Only available for \`\`\`type\`\`\` of \`\`\`performance\`\`\``,
+        },
+      ]
     },
   ],
 };

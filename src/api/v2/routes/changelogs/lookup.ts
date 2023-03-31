@@ -15,16 +15,21 @@ export const description: any = {
       description: 'Build version, update stream name, or build ID',
     },
     {
-      type: 'string',
-      name: 'key',
-      optional: false,
-      description: 'Unset to query by build version or stream name, or \`\`\`id\`\`\` to query by build ID.',
-    },
-    {
-      type: 'string array',
-      name: 'message_formats',
-      optional: false,
-      description: '\`\`\`html\`\`\` or \`\`\`markdown\`\`\`',
+      name: 'object',
+      params: [
+        {
+          type: 'string',
+          name: 'key',
+          optional: false,
+          description: 'Unset to query by build version or stream name, or \`\`\`id\`\`\` to query by build ID.',
+        },
+        {
+          type: 'string array',
+          name: 'message_formats',
+          optional: false,
+          description: '\`\`\`html\`\`\` or \`\`\`markdown\`\`\`',
+        },
+      ]
     },
   ],
 };

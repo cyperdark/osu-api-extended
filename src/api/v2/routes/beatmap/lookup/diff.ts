@@ -9,22 +9,27 @@ export const description: any = {
   description: 'Return data of the specified beatmap id',
   params: [
     {
-      type: 'number',
-      name: 'id',
-      optional: true,
-      description: 'id of the beatmap',
-    },
-    {
-      type: 'string',
-      name: 'checksum',
-      optional: true,
-      description: 'md5 of the beatmap file',
-    },
-    {
-      type: 'string',
-      name: 'filename',
-      optional: true,
-      description: 'file name of the beatmap',
+      name: 'object',
+      params: [
+        {
+          type: 'number',
+          name: 'id',
+          optional: true,
+          description: 'id of the beatmap',
+        },
+        {
+          type: 'string',
+          name: 'checksum',
+          optional: true,
+          description: 'md5 of the beatmap file',
+        },
+        {
+          type: 'string',
+          name: 'filename',
+          optional: true,
+          description: 'file name of the beatmap',
+        },
+      ],
     },
   ],
 };
