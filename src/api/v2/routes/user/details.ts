@@ -17,7 +17,7 @@ export const description: any = {
     {
       type: 'string/number',
       name: 'mode',
-      optional: false,
+      optional: true,
       description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
     },
     {
@@ -167,7 +167,10 @@ export interface response {
 
 
 const name: types = async (user, mode, key) => {
-  const data = await request(`users/${user}/${mode}`, {
+  let url = `users/${user}`;
+  if (mode != null) url += `/${mode}`;
+
+  const data = await request(url, {
     method: 'GET',
     params: { key },
   });
