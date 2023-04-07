@@ -36,12 +36,12 @@ export interface types {
    * ## Example 
    * 
    * ```js
-   * const { auth } = require('osu-api-extended');
+   * const { v2, auth } = require('osu-api-extended');
    * 
    * const main = async () => {
    *   await auth.login(CLIENT_ID, CLIENT_SECRET);
-
-   *   const v2_users_details = await v2.v2.users.details(user, mode, key);
+   * 
+   *   const v2_users_details = await v2.users.details(user, mode, key);
    *   console.log(v2_users_details);
    * };
    * 
