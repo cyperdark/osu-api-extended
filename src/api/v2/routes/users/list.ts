@@ -24,12 +24,12 @@ export interface types {
    * ## Example 
    * 
    * ```js
-   * const { auth } = require('osu-api-extended');
+   * const { v2, auth } = require('osu-api-extended');
    * 
    * const main = async () => {
    *   await auth.login(CLIENT_ID, CLIENT_SECRET);
-
-   *   const v2_users_list = await v2.v2.users.list(ids);
+   * 
+   *   const v2_users_list = await v2.users.list(ids);
    *   console.log(v2_users_list);
    * };
    * 
@@ -42,11 +42,6 @@ export interface types {
 
 export interface response {
   avatar_url: string;
-  /**
-   * @deprecated Use {@link response.country.code} instead.
-   */
-  country_code: string;
-
   default_group: string;
   id: number;
   is_active: boolean;
@@ -213,14 +208,7 @@ const name: types = async (ids) => {
     },
   });
 
-  if (data.users) {
-    data.users.forEach((r: any) => {
-      delete r.country_code;
-    });
-
-    return data.users;
-  };
-
+  if (data.users) return data.users;
   return data;
 };
 
