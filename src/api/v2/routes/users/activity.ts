@@ -35,6 +35,27 @@ export const description: any = {
 };
 
 export interface types {
+  /**
+   * Return list of recent user activity
+   * 
+   * ## Example 
+   * 
+   * ```js
+   * const { auth } = require('osu-api-extended');
+   * 
+   * const main = async () => {
+   *   await auth.login(CLIENT_ID, CLIENT_SECRET);
+
+  *   const v2_users_activity = await v2.v2.users.activity(user, object);
+  *   console.log(v2_users_activity);
+  * };
+  * 
+  * main();
+  * ```
+  * @param {number} user id of the user
+  * @param {number} object.limit undefined
+  * @param {string} object.offset undefined
+  */
   (user: number, obj: { limit?: number, offset?: string }): Promise<response[]>;
 };
 
@@ -43,8 +64,6 @@ export interface response {
   createdAt: string;
   id: number;
   type: string;
-  scoreRank: string;
-  rank: number;
   mode: string;
   beatmap: {
     title: string;
@@ -54,12 +73,26 @@ export interface response {
     username: string;
     url: string;
   };
+  scoreRank: string;
+  rank: number;
+  achievement: {
+    icon_url: string;
+    id: number;
+    name: string;
+    grouping: string;
+    ordering: number;
+    slug: string;
+    description: string;
+    mode: string;
+    instructions: string;
+  };
   approval: string;
   beatmapset: {
     title: string;
     url: string;
   };
 }
+
 
 
 const name: types = async (user, obj = {}) => {
