@@ -13,6 +13,24 @@ export const description: any = {
 };
 
 export interface types {
+  /**
+   * Return list of your friedns
+   * 
+   * ## Example 
+   * 
+   * ```js
+   * const { v2, auth } = require('osu-api-extended');
+   * 
+   * const main = async () => {
+   *   await auth.login_lazer(USERNAME, USER_PASSWORD);
+   * 
+   *   const v2_user_me_friends = await v2.user.me.friends();
+   *   console.log(v2_user_me_friends);
+   * };
+   * 
+   * main();
+   * ```
+  */
   (): Promise<response[]>;
 };
 
@@ -51,12 +69,18 @@ export interface response {
     playmodes?: string;
   }[];
   statistics: {
+    count_100: number;
+    count_300: number;
+    count_50: number;
+    count_miss: number;
     level: {
       current: number;
       progress: number;
     };
     global_rank: number;
+    global_rank_exp: string;
     pp: number;
+    pp_exp: number;
     ranked_score: number;
     hit_accuracy: number;
     play_count: number;
@@ -76,7 +100,6 @@ export interface response {
   };
   support_level: number;
 }
-
 
 
 const name: types = async () => {
