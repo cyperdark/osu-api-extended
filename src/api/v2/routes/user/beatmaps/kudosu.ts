@@ -1,8 +1,12 @@
+import { types } from '../../../../../types/v2_user_beatmaps_kudosu';
+import { Description } from '../../../../../utility/types';
+
+
 import { namespace, RequestNamepsace } from "../../../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
 
-export const description: any = {
+export const description: Description = {
   auth: 1,
   title: __filename,
   method: 'GET',
@@ -33,27 +37,6 @@ export const description: any = {
     },
   ],
 };
-
-export interface types {
-  (user: number, obj: { limit?: number, offset?: string }): Promise<response[]>;
-};
-
-export interface response {
-  id: number;
-  action: string;
-  amount: number;
-  model: string;
-  created_at: string;
-  giver: string;
-  post: {
-    url: string;
-    title: string;
-  };
-  details: {
-    event: string;
-  };
-}
-
 
 
 const name: types = async (user, obj) => {
