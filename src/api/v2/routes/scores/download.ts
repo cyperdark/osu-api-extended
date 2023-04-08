@@ -1,7 +1,11 @@
+import { types } from '../../../../types/v2_scores_download';
+import { Description } from '../../../../utility/types';
+
+
 import { download, namespace, RequestNamepsace } from "../../../../utility/request";
 
 
-export const description: any = {
+export const description: Description = {
   auth: 0,
   title: __filename,
   method: 'GET',
@@ -10,26 +14,23 @@ export const description: any = {
     {
       type: 'number',
       name: 'score_id',
-      optional: true,
+      optional: false,
       description: 'id of the score',
     },
     {
       type: 'string',
       name: 'mode',
-      optional: true,
+      optional: false,
       description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
     },
     {
       type: 'string',
       name: 'file_path',
-      optional: true,
+      optional: false,
       description: 'File path with \`\`\`.osr\`\`\` at the end',
     },
   ],
-};
-
-export interface types {
-  (score_id: number, mode: 'osu' | 'fruits' | 'mania' | 'taiko', file_path: string): Promise<string>;
+  return: 'string',
 };
 
 

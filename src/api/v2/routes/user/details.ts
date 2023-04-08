@@ -1,4 +1,4 @@
-import { types } from '../../../../types/v2_scores_details';
+import { types } from '../../../../types/v2_user_details';
 import { Description } from '../../../../utility/types';
 
 
@@ -10,28 +10,37 @@ export const description: Description = {
   auth: 1,
   title: __filename,
   method: 'GET',
-  description: 'Return data for a score',
+  description: 'Return details about user',
   params: [
     {
-      type: 'number',
-      name: 'score_id',
+      type: 'string/number',
+      name: 'user',
       optional: false,
-      description: 'id of the score',
+      description: 'id of the user',
     },
     {
-      type: 'string',
+      type: 'string/number',
       name: 'mode',
-      optional: false,
+      optional: true,
       description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
+    },
+    {
+      type: 'string/number',
+      name: 'key',
+      optional: true,
+      description: '\`\`\`id\`\`\` or \`\`\`username\`\`\`',
     },
   ],
   return: 'response',
 };
 
+const name: types = async (user, mode, key) => {
+  let url = `users/${user}`;
+  if (mode != null) url += `/${mode}`;
 
-const name: types = async (score_id, mode) => {
-  const data = await request(`scores/${mode}/${score_id}`, {
+  const data = await request(url, {
     method: 'GET',
+    params: { key },
   });
 
   return data;

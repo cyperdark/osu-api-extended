@@ -1,8 +1,8 @@
-import { types } from '../../../../../types/v2_user_beatmaps_most_played';
-import { Description } from '../../../../../utility/types';
+import { types } from '../../../../types/v2_user_activity';
+import { Description } from '../../../../utility/types';
 
 
-import { namespace, RequestNamepsace } from "../../../../../utility/request";
+import { namespace, RequestNamepsace } from "../../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
 
@@ -10,7 +10,7 @@ export const description: Description = {
   auth: 1,
   title: __filename,
   method: 'GET',
-  description: 'Return list of user most played beatmaps',
+  description: 'Return list of recent user activity',
   params: [
     {
       type: 'number',
@@ -28,7 +28,7 @@ export const description: Description = {
           description: 'Maximum number of results',
         },
         {
-          type: 'number',
+          type: 'string',
           name: 'offset',
           optional: true,
           description: 'Result offset for pagination',
@@ -39,10 +39,10 @@ export const description: Description = {
 };
 
 
-const name: types = async (user, obj) => {
-  const data = await request(`users/${user}/beatmapsets/most_played`, {
+const name: types = async (user, object = {}) => {
+  const data = await request(`users/${user}/recent_activity`, {
     method: 'GET',
-    params: obj,
+    params: object,
   });
 
   return data;
