@@ -157,15 +157,15 @@ import beatmaps_details, { description as beatmaps_details_desc } from "./routes
 import { types as beatmaps_details_type } from "../../types/v2_beatmaps_details";
 
 import beatmaps_search, { description as beatmaps_search_desc } from "./routes/beatmaps/search";
-import { types as beatmaps_search_type } from "../../types/v2_beatmap_set_download";
+import { types as beatmaps_search_type } from "../../types/v2_beatmaps_search";
 
 
 export type beatmaps = {
   details: beatmaps_details_type,
-  // search: any,
+  search: beatmaps_search_type,
 };
 
-export const beatmaps = {
+export const beatmaps: beatmaps = {
   details: beatmaps_details,
   search: beatmaps_search,
 };

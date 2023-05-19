@@ -5,6 +5,7 @@ export interface Description {
   description: string;
   params: Param[];
   return?: string;
+  notes?: object[];
 }
 
 export interface Param {

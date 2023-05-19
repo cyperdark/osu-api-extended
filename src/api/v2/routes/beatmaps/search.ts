@@ -1,3 +1,7 @@
+import { types, response } from '../../../../types/v2_beatmaps_search';
+import { Description } from '../../../../utility/types';
+
+
 import { namespace, RequestNamepsace } from "../../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
@@ -43,7 +47,7 @@ const _language = [
 ];
 
 
-export const description: any = {
+export const description: Description = {
   auth: 1,
   title: __filename,
   method: 'GET',
@@ -62,55 +66,55 @@ export const description: any = {
           type: 'string',
           name: 'sort',
           optional: true,
-          description: 'search sorting, \`\`title_desc\`\` or \`\`title_asc\`\` or \`\`artist_desc\`\` or \`\`artist_asc\`\` or \`\`difficulty_desc\`\` or \`\`difficulty_asc\`\` or \`\`updated_desc\`\` or \`\`updated_asc\`\` or \`\`ranked_desc\`\` or \`\`ranked_asc\`\` or \`\`rating_desc\`\` or \`\`rating_asc\`\` or \`\`plays_desc\`\` or \`\`plays_asc\`\` or \`\`favourites_desc\`\` or \`\`favourites_asc\`\`',
+          description: '\`\`\`title_desc\`\`\` or \`\`\`title_asc\`\`\` or \`\`\`artist_desc\`\`\` or \`\`\`artist_asc\`\`\` or \`\`\`difficulty_desc\`\`\` or \`\`\`difficulty_asc\`\`\` or \`\`\`updated_desc\`\`\` or \`\`\`updated_asc\`\`\` or \`\`\`ranked_desc\`\`\` or \`\`\`ranked_asc\`\`\` or \`\`\`rating_desc\`\`\` or \`\`\`rating_asc\`\`\` or \`\`\`plays_desc\`\`\` or \`\`\`plays_asc\`\`\` or \`\`\`favourites_desc\`\`\` or \`\`\`favourites_asc\`\`\`',
         },
         {
-          type: 'string',
+          type: 'string[]',
           name: 'general',
           optional: true,
-          description: '\`\`converts\`\` or \`\`follows\`\` or \`\`recommended\`\` or \`\`\`featured_artists\`\`\`',
+          description: '\`\`\`converts\`\`\` or \`\`\`follows\`\`\` or \`\`\`recommended\`\`\` or \`\`\`\`featured_artists\`\`\`\` or \`\`\`\`spotlights\`\`\`\`',
         },
         {
           type: 'string',
           name: 'mode',
           optional: true,
-          description: '\`\`osu\`\` or \`\`fruits\`\` or \`\`mania\`\` or \`\`taiko\`\`',
+          description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
         },
         {
           type: 'string',
           name: 'section',
           optional: true,
-          description: '\`\`ranked\`\` or \`\`qualified\`\` or \`\`loved\`\` or \`\`favourites\`\` or \`\`pending\`\` or \`\`graveyard\`\` or \`\`mine\`\`',
+          description: '\`\`\`ranked\`\`\` or \`\`\`qualified\`\`\` or \`\`\`loved\`\`\` or \`\`\`favourites\`\`\` or \`\`\`pending\`\`\` or \`\`\`wip\`\`\` or \`\`\`graveyard\`\`\` or \`\`\`mine\`\`\`',
         },
         {
           type: 'string',
           name: 'genre',
           optional: true,
-          description: '\`\`Unspecified\`\` or \`\`Video Game\`\` or \`\`Anime\`\` or \`\`Rock\`\` or \`\`Pop\`\` or \`\`Other\`\` or \`\`Novelty\`\` or \`\`Hip Hop\`\` or \`\`Electronic\`\` or \`\`Metal\`\` or \`\`Classical\`\` or \`\`Folk\`\` or \`\`Jazz\`\`',
+          description: '\`\`\`Unspecified\`\`\` or \`\`\`Video Game\`\`\` or \`\`\`Anime\`\`\` or \`\`\`Rock\`\`\` or \`\`\`Pop\`\`\` or \`\`\`Other\`\`\` or \`\`\`Novelty\`\`\` or \`\`\`Hip Hop\`\`\` or \`\`\`Electronic\`\`\` or \`\`\`Metal\`\`\` or \`\`\`Classical\`\`\` or \`\`\`Folk\`\`\` or \`\`\`Jazz\`\`\`',
         },
         {
           type: 'string',
           name: 'language',
           optional: true,
-          description: '\`\`English\`\` or \`\`Chinese\`\` or \`\`French\`\` or \`\`German\`\` or \`\`Italian\`\` or \`\`Japanese\`\` or \`\`Korean\`\` or \`\`Spanish\`\` or \`\`Swedish\`\` or \`\`Russian\`\` or \`\`Polish\`\` or \`\`Instrumental\`\` or \`\`Unspecified\`\` or \`\`Other\`\`',
+          description: '\`\`\`English\`\`\` or \`\`\`Chinese\`\`\` or \`\`\`French\`\`\` or \`\`\`German\`\`\` or \`\`\`Italian\`\`\` or \`\`\`Japanese\`\`\` or \`\`\`Korean\`\`\` or \`\`\`Spanish\`\`\` or \`\`\`Swedish\`\`\` or \`\`\`Russian\`\`\` or \`\`\`Polish\`\`\` or \`\`\`Instrumental\`\`\` or \`\`\`Unspecified\`\`\` or \`\`\`Other\`\`\`',
         },
         {
           type: 'string',
           name: 'include',
           optional: true,
-          description: '\`\`video\`\` or \`\`storyboard\`\`',
+          description: '\`\`\`video\`\`\` or \`\`\`storyboard\`\`\`',
         },
         {
-          type: 'string',
+          type: 'string[]',
           name: 'rank',
           optional: true,
-          description: '\`\`XH\`\` or \`\`X\`\` or \`\`SH\`\` or \`\`S\`\` or \`\`A\`\` or \`\`B\`\` or \`\`C\`\` or \`\`D\`\`',
+          description: '\`\`\`XH\`\`\` or \`\`\`X\`\`\` or \`\`\`SH\`\`\` or \`\`\`S\`\`\` or \`\`\`A\`\`\` or \`\`\`B\`\`\` or \`\`\`C\`\`\` or \`\`\`D\`\`\`',
         },
         {
           type: 'boolean',
           name: 'nfsw',
           optional: true,
-          description: '\`\`true\`\` or \`\`false\`\`',
+          description: '\`\`\`true\`\`\` or \`\`\`false\`\`\`',
         },
         {
           type: 'string',
@@ -128,121 +132,6 @@ export const description: any = {
     }
   ],
 };
-
-
-export interface types {
-  (filters: {
-    query?: string,
-
-    general?: [
-      'converts' | 'follows' | 'recommended' | 'featured_artists' | 'spotlights',
-    ],
-    mode?: 'osu' | 'fruits' | 'mania' | 'taiko',
-    section?: 'any' | 'ranked' | 'qualified' | 'loved' | 'favourites' | 'pending' | 'wip' | 'graveyard' | 'mine',
-    nfsw?: boolean,
-    genre?: 'Unspecified' | 'Video Game' | 'Anime' | 'Rock' | 'Pop' | 'Other' | 'Novelty' | 'Hip Hop' | 'Electronic' | 'Metal' | 'Classical' | 'Folk' | 'Jazz'
-    language?: 'English' | 'Chinese' | 'French' | 'German' | 'Italian' | 'Japanese' | 'Korean' | 'Spanish' | 'Swedish' | 'Russian' | 'Polish' | 'Instrumental' | 'Unspecified' | 'Other',
-
-    sort?: 'title_desc' | 'title_asc' | 'artist_desc' | 'artist_asc' | 'difficulty_desc' | 'difficulty_asc' | 'updated_desc' | 'updated_asc' | 'ranked_desc' | 'ranked_asc' | 'rating_desc' | 'rating_asc' | 'plays_desc' | 'plays_asc' | 'favourites_desc' | 'favourites_asc'
-    include?: ['video' | 'storyboard'],
-    rank?: ['XH' | 'X' | 'SH' | 'S' | 'A' | 'B' | 'C' | 'D'],
-    cursor_string?: string,
-  }): Promise<response>;
-};
-
-export interface response {
-  beatmapsets: {
-    artist: string;
-    artist_unicode: string;
-    covers: {
-      cover: string;
-      'cover@2x': string;
-      card: string;
-      'card@2x': string;
-      list: string;
-      'list@2x': string;
-      slimcover: string;
-      'slimcover@2x': string;
-    };
-    creator: string;
-    favourite_count: number;
-    hype?: string;
-    id: number;
-    nsfw: boolean;
-    offset: number;
-    play_count: number;
-    preview_url: string;
-    source: string;
-    status: string;
-    title: string;
-    title_unicode: string;
-    track_id?: string;
-    user_id: number;
-    video: boolean;
-    availability: {
-      download_disabled: boolean;
-      more_information: string;
-    };
-    bpm: number;
-    can_be_hyped: boolean;
-    discussion_enabled: boolean;
-    discussion_locked: boolean;
-    is_scoreable: boolean;
-    last_updated: string;
-    legacy_thread_url: string;
-    nominations_summary: {
-      current: number;
-      required: number;
-    };
-    ranked: number;
-    ranked_date: string;
-    storyboard: boolean;
-    submitted_date: string;
-    tags: string;
-    has_favourited: boolean;
-    beatmaps: {
-      beatmapset_id: number;
-      difficulty_rating: number;
-      id: number;
-      mode: string;
-      status: string;
-      total_length: number;
-      user_id: number;
-      version: string;
-      accuracy: number;
-      ar: number;
-      bpm: number;
-      convert: boolean;
-      count_circles: number;
-      count_sliders: number;
-      count_spinners: number;
-      cs: number;
-      deleted_at?: string;
-      drain: number;
-      hit_length: number;
-      is_scoreable: boolean;
-      last_updated: string;
-      mode_int: number;
-      passcount: number;
-      playcount: number;
-      ranked: number;
-      url: string;
-      checksum: string;
-      max_combo: number;
-    }[];
-  }[];
-  search: {
-    sort: string;
-  };
-  recommended_difficulty: number;
-  error: string;
-  total: number;
-  cursor: {
-    approved_date: number;
-    id: number;
-  };
-  cursor_string: string;
-}
 
 
 

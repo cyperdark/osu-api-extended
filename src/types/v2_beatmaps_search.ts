@@ -116,15 +116,15 @@ export interface types {
    * ```
    * @param {string} object.query 
    * @param {string} object.sort 
-   * @param {string} object.general 
+   * @param {string[]} object.general 
    * @param {string} object.mode 
    * @param {string} object.section 
    * @param {string} object.genre 
    * @param {string} object.language 
    * @param {string} object.include 
-   * @param {string} object.rank 
+   * @param {string[]} object.rank 
    * @param {boolean} object.nfsw 
    * @param {string} object.cursor_string 
   */
-  (object: {query?: string, sort?: string, general?: 'converts' | 'follows' | 'recommended' | 'featured_artists' , mode?: string, section?: string, genre?: string, language?: string, include?: string, rank?: string, nfsw?: boolean, cursor_string?: string, }): Promise<response[]>;
+  (object: {query?: string, sort?: 'title_desc' | 'title_asc' | 'artist_desc' | 'artist_asc' | 'difficulty_desc' | 'difficulty_asc' | 'updated_desc' | 'updated_asc' | 'ranked_desc' | 'ranked_asc' | 'rating_desc' | 'rating_asc' | 'plays_desc' | 'plays_asc' | 'favourites_desc' | 'favourites_asc' , general?: ['converts' | 'follows' | 'recommended' | 'featured_artists' | 'spotlights' ], mode?: 'osu' | 'fruits' | 'mania' | 'taiko' , section?: 'ranked' | 'qualified' | 'loved' | 'favourites' | 'pending' | 'wip' | 'graveyard' | 'mine' , genre?: 'Unspecified' | 'Video Game' | 'Anime' | 'Rock' | 'Pop' | 'Other' | 'Novelty' | 'Hip Hop' | 'Electronic' | 'Metal' | 'Classical' | 'Folk' | 'Jazz' , language?: 'English' | 'Chinese' | 'French' | 'German' | 'Italian' | 'Japanese' | 'K' | 'ean' | 'Spanish' | 'Swedish' | 'Russian' | 'Polish' | 'Instrumental' | 'Unspecified' | 'Other' , include?: 'video' | 'st' | 'yboard' , rank?: ['XH' | 'X' | 'SH' | 'S' | 'A' | 'B' | 'C' | 'D' ], nfsw?: 'true' | 'false' , cursor_string?: string, }): Promise<response[]>;
 }
