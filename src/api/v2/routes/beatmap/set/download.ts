@@ -1,4 +1,4 @@
-import { download } from "../../../../utility/request";
+import { download } from "../../../../../utility/request";
 
 
 export const description: any = {
@@ -20,12 +20,13 @@ export const description: any = {
       description: 'path to file with their name and extension',
     },
     {
-      type: 'function',
+      type: 'Function',
       name: 'callback',
-      optional: false,
+      optional: true,
       description: 'function which is will be triggered on downloading progress',
     },
   ],
+  return: 'string',
 };
 
 export interface types {
