@@ -133,15 +133,19 @@ export const description: any = {
 export interface types {
   (filters: {
     query?: string,
-    sort?: 'title_desc' | 'title_asc' | 'artist_desc' | 'artist_asc' | 'difficulty_desc' | 'difficulty_asc' | 'updated_desc' | 'updated_asc' | 'ranked_desc' | 'ranked_asc' | 'rating_desc' | 'rating_asc' | 'plays_desc' | 'plays_asc' | 'favourites_desc' | 'favourites_asc'
-    general?: 'converts' | 'follows' | 'recommended' | 'featured_artists',
+
+    general?: [
+      'converts' | 'follows' | 'recommended' | 'featured_artists' | 'spotlights',
+    ],
     mode?: 'osu' | 'fruits' | 'mania' | 'taiko',
-    section?: 'any' | 'ranked' | 'qualified' | 'loved' | 'favourites' | 'pending' | 'graveyard' | 'mine',
+    section?: 'any' | 'ranked' | 'qualified' | 'loved' | 'favourites' | 'pending' | 'wip' | 'graveyard' | 'mine',
+    nfsw?: boolean,
     genre?: 'Unspecified' | 'Video Game' | 'Anime' | 'Rock' | 'Pop' | 'Other' | 'Novelty' | 'Hip Hop' | 'Electronic' | 'Metal' | 'Classical' | 'Folk' | 'Jazz'
     language?: 'English' | 'Chinese' | 'French' | 'German' | 'Italian' | 'Japanese' | 'Korean' | 'Spanish' | 'Swedish' | 'Russian' | 'Polish' | 'Instrumental' | 'Unspecified' | 'Other',
-    include?: 'video' | 'storyboard',
-    rank?: 'XH' | 'X' | 'SH' | 'S' | 'A' | 'B' | 'C' | 'D',
-    nfsw?: boolean,
+
+    sort?: 'title_desc' | 'title_asc' | 'artist_desc' | 'artist_asc' | 'difficulty_desc' | 'difficulty_asc' | 'updated_desc' | 'updated_asc' | 'ranked_desc' | 'ranked_asc' | 'rating_desc' | 'rating_asc' | 'plays_desc' | 'plays_asc' | 'favourites_desc' | 'favourites_asc'
+    include?: ['video' | 'storyboard'],
+    rank?: ['XH' | 'X' | 'SH' | 'S' | 'A' | 'B' | 'C' | 'D'],
     cursor_string?: string,
   }): Promise<response>;
 };
@@ -248,16 +252,17 @@ const name: types = async (filters) => {
 
   if (filters) {
     if (filters.query) obj.q = filters.query;
-    if (filters.sort) obj.sort = filters.sort;
-    if (filters.general) obj.c = filters.general;
+    if (filters.general) obj.c = filters.general.toString().split(',').join('.');
     if (filters.mode) obj.m = _mode.indexOf(filters.mode).toString();
     if (filters.section) obj.s = filters.section;
-    if (filters.genre) obj.g = _genre.indexOf(filters.genre).toString();
-    if (filters.language) obj.l = _language.indexOf(filters.language).toString();
-    if (filters.include) obj.e = filters.include;
-    if (filters.rank) obj.r = filters.rank;
     if (filters.nfsw) obj.nsfw = '';
     else obj.nsfw = false;
+    if (filters.genre) obj.g = _genre.indexOf(filters.genre).toString();
+    if (filters.language) obj.l = _language.indexOf(filters.language).toString();
+    if (filters.include) obj.e = filters.include.toString().split(',').join('.');
+    if (filters.rank) obj.r = filters.rank.toString().split(',').join('.');
+
+    if (filters.sort) obj.sort = filters.sort;
     if (filters.cursor_string) obj.cursor_string = filters.cursor_string;
   }
   const data = await request(`beatmapsets/search/`, {

@@ -153,6 +153,25 @@ export const beatmap: beatmap = {
 
 
 
+import beatmaps_details, { description as beatmaps_details_desc } from "./routes/beatmaps/details";
+import { types as beatmaps_details_type } from "../../types/v2_beatmaps_details";
+
+import beatmaps_search, { description as beatmaps_search_desc } from "./routes/beatmaps/search";
+import { types as beatmaps_search_type } from "../../types/v2_beatmap_set_download";
+
+
+export type beatmaps = {
+  details: beatmaps_details_type,
+  // search: any,
+};
+
+export const beatmaps = {
+  details: beatmaps_details,
+  search: beatmaps_search,
+};
+
+
+
 export const description = {
   user: {
     activity: user_activity_desc,
@@ -195,14 +214,14 @@ export const description = {
       download: beatmap_set_download_desc,
     },
   },
+  beatmaps: {
+    details: beatmaps_details_desc,
+    search: beatmaps_search_desc,
+  },
 };
 
 
 
-// import beatmap_list, { types as beatmap_list_type, description as beatmap_list_desc } from "./routes/beatmap/list";
-// import beatmap_download, { types as beatmap_download_type, description as beatmap_download_desc } from "./routes/beatmap/download";
-// import beatmap_set, { types as beatmap_set_type, description as beatmap_set_desc } from "./routes/beatmap/set";
-// import beatmap_diff, { types as beatmap_diff_type, description as beatmap_diff_desc } from "./routes/beatmap/diff";
 // import beatmap_search, { types as beatmap_search_type, description as beatmap_search_desc } from "./routes/beatmap/search";
 // import beatmap_events, { types as beatmap_events_type, description as beatmap_events_desc } from "./routes/beatmap/events";
 // import beatmap_attributes, { types as beatmap_attributes_type, description as beatmap_attributes_desc } from "./routes/beatmap/attributes";
