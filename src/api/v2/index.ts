@@ -121,6 +121,37 @@ export const scores: scores = {
 
 
 
+import beatmap_id_details, { description as beatmap_id_details_desc } from "./routes/beatmap/id/details";
+import { types as beatmap_id_details_type } from "../../types/v2_beatmap_id_details";
+
+import beatmap_set_details, { description as beatmap_set_details_desc } from "./routes/beatmap/set/details";
+import { types as beatmap_set_details_type } from "../../types/v2_beatmap_set_details";
+
+import beatmap_set_download, { description as beatmap_set_download_desc } from "./routes/beatmap/set/download";
+import { types as beatmap_set_download_type } from "../../types/v2_beatmap_set_download";
+
+
+export type beatmap = {
+  id: {
+    details: beatmap_id_details_type,
+  },
+  set: {
+    details: beatmap_set_details_type,
+    download: beatmap_set_download_type
+  },
+};
+
+export const beatmap: beatmap = {
+  id: {
+    details: beatmap_id_details,
+  },
+  set: {
+    details: beatmap_set_details,
+    download: beatmap_set_download
+  },
+};
+
+
 
 export const description = {
   user: {
@@ -153,6 +184,15 @@ export const description = {
     user: {
       category: scores_user_category_desc,
       beatmap: scores_user_beatmap_desc,
+    },
+  },
+  beatmap: {
+    id: {
+      details: beatmap_id_details_desc,
+    },
+    set: {
+      details: beatmap_set_details_desc,
+      download: beatmap_set_download_desc,
     },
   },
 };
