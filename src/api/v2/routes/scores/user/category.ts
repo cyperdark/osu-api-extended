@@ -58,10 +58,13 @@ export const description: Description = {
 
 
 const name: types = async (user, type, obj) => {
+  // TODO: add an attempt to score
   const data: response[] = await request(`users/${user}/scores/${type}`, {
     method: 'GET',
     params: obj,
   });
+
+  if (!Array.isArray(data)) return data;
 
   return data.map((v, i) => ({ position: i + 1, ...v }));
 };
