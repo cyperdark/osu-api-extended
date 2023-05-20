@@ -89,7 +89,7 @@ const name = (mods: number): string => {
   enabled.filter(r => converted += r.n);
 
 
-  if (converted === '') return 'NM';
+  // if (converted === '') return 'NM';
   return converted;
 };
 
