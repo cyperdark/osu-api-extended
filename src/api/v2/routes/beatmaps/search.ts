@@ -1,4 +1,4 @@
-import { types, response } from '../../../../types/v2_beatmaps_search';
+import { types } from '../../../../types/v2_beatmaps_search';
 import { Description } from '../../../../utility/types';
 
 
