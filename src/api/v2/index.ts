@@ -124,6 +124,9 @@ export const scores: scores = {
 import beatmap_id_details, { description as beatmap_id_details_desc } from "./routes/beatmap/id/details";
 import { types as beatmap_id_details_type } from "../../types/v2_beatmap_id_details";
 
+import beatmap_id_attributes, { description as beatmap_id_attributes_desc } from "./routes/beatmap/id/attributes";
+import { types as beatmap_id_attributes_type } from "../../types/v2_beatmap_id_attributes";
+
 import beatmap_set_details, { description as beatmap_set_details_desc } from "./routes/beatmap/set/details";
 import { types as beatmap_set_details_type } from "../../types/v2_beatmap_set_details";
 
@@ -133,6 +136,7 @@ import { types as beatmap_set_download_type } from "../../types/v2_beatmap_set_d
 
 export type beatmap = {
   id: {
+    attributes: beatmap_id_attributes_type,
     details: beatmap_id_details_type,
   },
   set: {
@@ -143,6 +147,7 @@ export type beatmap = {
 
 export const beatmap: beatmap = {
   id: {
+    attributes: beatmap_id_attributes,
     details: beatmap_id_details,
   },
   set: {
@@ -159,15 +164,20 @@ import { types as beatmaps_details_type } from "../../types/v2_beatmaps_details"
 import beatmaps_search, { description as beatmaps_search_desc } from "./routes/beatmaps/search";
 import { types as beatmaps_search_type } from "../../types/v2_beatmaps_search";
 
+import beatmaps_events, { description as beatmaps_events_desc } from "./routes/beatmaps/events";
+import { types as beatmaps_events_type } from "../../types/v2_beatmaps_events";
+
 
 export type beatmaps = {
   details: beatmaps_details_type,
   search: beatmaps_search_type,
+  events: beatmaps_events_type,
 };
 
 export const beatmaps: beatmaps = {
   details: beatmaps_details,
   search: beatmaps_search,
+  events: beatmaps_events,
 };
 
 
@@ -207,6 +217,7 @@ export const description = {
   },
   beatmap: {
     id: {
+      attributes: beatmap_id_attributes_desc,
       details: beatmap_id_details_desc,
     },
     set: {
@@ -217,14 +228,12 @@ export const description = {
   beatmaps: {
     details: beatmaps_details_desc,
     search: beatmaps_search_desc,
+    events: beatmaps_events_desc,
   },
 };
 
 
 
-// import beatmap_search, { types as beatmap_search_type, description as beatmap_search_desc } from "./routes/beatmap/search";
-// import beatmap_events, { types as beatmap_events_type, description as beatmap_events_desc } from "./routes/beatmap/events";
-// import beatmap_attributes, { types as beatmap_attributes_type, description as beatmap_attributes_desc } from "./routes/beatmap/attributes";
 // import beatmap_favourites, { types as beatmap_favourites_type, description as beatmap_favourites_desc } from "./routes/beatmap/favourites";
 // import beatmap_lookup_set, { types as beatmap_lookup_set_type, description as beatmap_lookup_set_desc } from "./routes/beatmap/lookup/set";
 // import beatmap_lookup_diff, { types as beatmap_lookup_diff_type, description as beatmap_lookup_diff_desc } from "./routes/beatmap/lookup/diff";

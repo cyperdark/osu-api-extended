@@ -1,8 +1,12 @@
-import { namespace, RequestNamepsace } from "../../../../utility/request";
+import { types } from '../../../../../types/v2_beatmap_id_attributes';
+import { Description } from '../../../../../utility/types';
+
+
+import { namespace, RequestNamepsace } from "../../../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
+import { name as mods_name } from '../../../../../utility/mods';
 
-
-export const description: any = {
+export const description: Description = {
   auth: 1,
   title: __filename,
   method: 'POST',
@@ -18,7 +22,7 @@ export const description: any = {
       name: 'body',
       params: [
         {
-          type: 'string array',
+          type: 'string[] | number',
           name: 'mods',
           optional: true,
           description: 'Array of matching mods [\'HD\', \'DT\']',
@@ -41,29 +45,10 @@ export const description: any = {
 };
 
 
-export interface types {
-  (beatmap_id: number, body: {
-    mods?: string[],
-    ruleset?: 'osu' | 'fruits' | 'mania' | 'taiko',
-    ruleset_id?: number,
-  }): Promise<response>;
-};
 
-export interface response {
-  attributes: {
-    star_rating: number;
-    max_combo: number;
-    aim_difficulty: number;
-    speed_difficulty: number;
-    flashlight_difficulty: number;
-    slider_factor: number;
-    approach_rate: number;
-    overall_difficulty: number;
-  };
-}
-
-
-const name: types = async (beatmap_id, body) => {
+const name: types = async (beatmap_id, body = {}) => {
+  if (body.mods) body.mods = Array.isArray(body.mods) ? body.mods : mods_name(body.mods).match(/.{1,2}/g);
+  
   const data = await request(`beatmaps/${beatmap_id}/attributes`, {
     method: 'POST',
     data: JSON.stringify(body),
