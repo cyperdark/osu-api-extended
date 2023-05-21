@@ -1,26 +1,3 @@
-import { namespace, RequestNamepsace } from "../../../../../utility/request";
-const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
-
-
-export const description: any = {
-  auth: 1,
-  title: __filename,
-  method: 'GET',
-  description: 'Return details about beatmapset for specified beatmap id',
-  params: [
-    {
-      type: 'number',
-      name: 'beatmap_id',
-      optional: false,
-      description: 'id of the beatmap',
-    },
-  ],
-};
-
-export interface types {
-  (beatmap_id: number): Promise<response[]>;
-};
-
 export interface response {
   artist: string;
   artist_unicode: string;
@@ -43,18 +20,16 @@ export interface response {
   play_count: number;
   preview_url: string;
   source: string;
+  spotlight: boolean;
   status: string;
   title: string;
   title_unicode: string;
   track_id: string;
   user_id: number;
   video: boolean;
-  availability: {
-    download_disabled: boolean;
-    more_information: string;
-  };
   bpm: number;
   can_be_hyped: boolean;
+  deleted_at: string;
   discussion_enabled: boolean;
   discussion_locked: boolean;
   is_scoreable: boolean;
@@ -69,6 +44,10 @@ export interface response {
   storyboard: boolean;
   submitted_date: string;
   tags: string;
+  availability: {
+    download_disabled: boolean;
+    more_information: string;
+  };
   has_favourited: boolean;
   beatmaps: {
     beatmapset_id: number;
@@ -137,6 +116,7 @@ export interface response {
       exit: number[];
     };
   }[];
+  current_nominations: [];
   description: {
     description: string;
   };
@@ -148,8 +128,24 @@ export interface response {
     id: number;
     name: string;
   };
+  pack_tags: [];
   ratings: number[];
   recent_favourites: {
+    avatar_url: string;
+    country_code: string;
+    default_group: string;
+    id: number;
+    is_active: boolean;
+    is_bot: boolean;
+    is_deleted: boolean;
+    is_online: boolean;
+    is_supporter: boolean;
+    last_visit: string;
+    pm_friends_only: boolean;
+    profile_colour?: string;
+    username: string;
+  };
+  related_users: {
     avatar_url: string;
     country_code: string;
     default_group: string;
@@ -163,7 +159,7 @@ export interface response {
     pm_friends_only: boolean;
     profile_colour?: string;
     username: string;
-  }[];
+  };
   user: {
     avatar_url: string;
     country_code: string;
@@ -182,18 +178,25 @@ export interface response {
 }
 
 
-
-
-const name: types = async (beatmap_id) => {
-  const data = await request(`beatmapsets/lookup`, {
-    method: 'GET',
-    params: {
-      beatmap_id: beatmap_id,
-    },
-  });
-
-  return data;
-};
-
-
-export default name;
+export interface types {
+  /**
+   * Return details about beatmapset for specified beatmap id
+   * 
+   * ## Example 
+   * 
+   * ```js
+   * const { v2, auth } = require('osu-api-extended');
+   * 
+   * const main = async () => {
+   *   await auth.login(CLIENT_ID, CLIENT_SECRET);
+   *
+   *   const v2_beatmap_set_lookup = await v2.beatmap.set.lookup(beatmap_id);
+   *   console.log(v2_beatmap_set_lookup);
+   * };
+   * 
+   * main();
+   * ```
+   * @param {number} beatmap_id id of the beatmap
+  */
+  (beatmap_id: number): Promise<response[]>;
+}
