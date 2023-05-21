@@ -127,32 +127,66 @@ import { types as beatmap_id_details_type } from "../../types/v2_beatmap_id_deta
 import beatmap_id_attributes, { description as beatmap_id_attributes_desc } from "./routes/beatmap/id/attributes";
 import { types as beatmap_id_attributes_type } from "../../types/v2_beatmap_id_attributes";
 
+import beatmap_id_lookup, { description as beatmap_id_lookup_desc } from "./routes/beatmap/id/lookup";
+import { types as beatmap_id_lookup_type } from "../../types/v2_beatmap_id_lookup";
+
 import beatmap_set_details, { description as beatmap_set_details_desc } from "./routes/beatmap/set/details";
 import { types as beatmap_set_details_type } from "../../types/v2_beatmap_set_details";
 
+import beatmap_set_lookup, { description as beatmap_set_lookup_desc } from "./routes/beatmap/set/lookup";
+import { types as beatmap_set_lookup_type } from "../../types/v2_beatmap_set_lookup";
+
 import beatmap_set_download, { description as beatmap_set_download_desc } from "./routes/beatmap/set/download";
 import { types as beatmap_set_download_type } from "../../types/v2_beatmap_set_download";
+
+import beatmap_set_addToFavourites, { description as beatmap_set_addToFavourites_desc } from "./routes/beatmap/set/addToFavourites";
+import { types as beatmap_set_addToFavourites_type } from "../../types/v2_beatmap_set_addToFavourites";
+
+import beatmap_discussions_details, { description as beatmap_discussions_details_desc } from "./routes/beatmap/discussions/details";
+import { types as beatmap_discussions_details_type } from "../../types/v2_beatmap_discussions_details";
+
+import beatmap_discussions_posts, { description as beatmap_discussions_posts_desc } from "./routes/beatmap/discussions/posts";
+import { types as beatmap_discussions_posts_type } from "../../types/v2_beatmap_discussions_posts";
+
+import beatmap_discussions_votes, { description as beatmap_discussions_votes_desc } from "./routes/beatmap/discussions/votes";
+import { types as beatmap_discussions_votes_type } from "../../types/v2_beatmap_discussions_votes";
 
 
 export type beatmap = {
   id: {
     attributes: beatmap_id_attributes_type,
+    lookup: beatmap_id_lookup_type,
     details: beatmap_id_details_type,
   },
   set: {
+    lookup: beatmap_set_lookup_type,
     details: beatmap_set_details_type,
-    download: beatmap_set_download_type
+    download: beatmap_set_download_type,
+    addToFavourites: beatmap_set_addToFavourites_type,
+  },
+  discussions: {
+    votes: beatmap_discussions_votes_type,
+    posts: beatmap_discussions_posts_type,
+    details: beatmap_discussions_details_type,
   },
 };
 
-export const beatmap: beatmap = {
+export const beatmap = {
   id: {
     attributes: beatmap_id_attributes,
+    lookup: beatmap_id_lookup,
     details: beatmap_id_details,
   },
   set: {
+    lookup: beatmap_set_lookup,
     details: beatmap_set_details,
-    download: beatmap_set_download
+    download: beatmap_set_download,
+    addToFavourites: beatmap_set_addToFavourites,
+  },
+  discussions: {
+    votes: beatmap_discussions_votes,
+    posts: beatmap_discussions_posts,
+    details: beatmap_discussions_details,
   },
 };
 
@@ -179,6 +213,44 @@ export const beatmaps: beatmaps = {
   search: beatmaps_search,
   events: beatmaps_events,
 };
+
+
+
+import forums_topic_details, { description as forums_topic_details_desc } from "./routes/forums/topic/details";
+import { types as forums_topic_details_type } from "../../types/v2_forums_topic_details";
+
+import forums_topic_edit, { description as forums_topic_edit_desc } from "./routes/forums/topic/edit";
+import { types as forums_topic_edit_type } from "../../types/v2_forums_topic_edit";
+
+import forums_post_edit, { description as forums_post_edit_desc } from "./routes/forums/post/edit";
+import { types as forums_post_edit_type } from "../../types/v2_forums_topic_edit";
+
+// import forums_topic_vote, { description as forums_topic_vote_desc } from "./routes/forums/topic/vote";
+// import { types as forums_topic_vote_type } from "../../types/v2_forums_topic_details";
+
+
+export type forums = {
+  topic: {
+    edit: forums_topic_edit_type,
+    // vote: any,
+    details: forums_topic_details_type,
+  },
+  post: {
+    edit: any
+  }
+};
+
+export const forums = {
+  topic: {
+    edit: forums_topic_edit,
+    // vote: forums_topic_vote,
+    details: forums_topic_details,
+  },
+  post: {
+    edit: forums_post_edit
+  },
+};
+
 
 
 
@@ -218,11 +290,19 @@ export const description = {
   beatmap: {
     id: {
       attributes: beatmap_id_attributes_desc,
+      lookup: beatmap_id_lookup_desc,
       details: beatmap_id_details_desc,
     },
     set: {
+      lookup: beatmap_set_lookup_desc,
       details: beatmap_set_details_desc,
       download: beatmap_set_download_desc,
+      addToFavourites: beatmap_set_addToFavourites_desc,
+    },
+    discussions: {
+      votes: beatmap_discussions_votes_desc,
+      posts: beatmap_discussions_posts_desc,
+      details: beatmap_discussions_details_desc,
     },
   },
   beatmaps: {
@@ -230,57 +310,20 @@ export const description = {
     search: beatmaps_search_desc,
     events: beatmaps_events_desc,
   },
+  forums: {
+    topic: {
+      edit: forums_topic_edit_desc,
+      // vote: forums_topic_vote_desc,
+      details: forums_topic_details_desc,
+    },
+    post: {
+      edit: forums_post_edit_desc,
+      // details: forums_topic_details_desc,
+    },
+  },
 };
 
 
-
-// import beatmap_favourites, { types as beatmap_favourites_type, description as beatmap_favourites_desc } from "./routes/beatmap/favourites";
-// import beatmap_lookup_set, { types as beatmap_lookup_set_type, description as beatmap_lookup_set_desc } from "./routes/beatmap/lookup/set";
-// import beatmap_lookup_diff, { types as beatmap_lookup_diff_type, description as beatmap_lookup_diff_desc } from "./routes/beatmap/lookup/diff";
-// import beatmap_discussions_details, { types as beatmap_discussions_details_type, description as beatmap_discussions_details_desc } from "./routes/beatmap/discussions/details";
-// import beatmap_discussions_posts, { types as beatmap_discussions_posts_type, description as beatmap_discussions_posts_desc } from "./routes/beatmap/discussions/posts";
-// import beatmap_discussions_votes, { types as beatmap_discussions_votes_type, description as beatmap_discussions_votes_desc } from "./routes/beatmap/discussions/votes";
-
-
-// export const beatmap: {
-//   leaderboard: beatmap_leaderboard_type,
-//   list: beatmap_list_type,
-//   download: beatmap_download_type,
-//   set: beatmap_set_type,
-//   diff: beatmap_diff_type,
-//   search: beatmap_search_type,
-//   events: beatmap_events_type,
-//   attributes: beatmap_attributes_type,
-//   favourites: beatmap_favourites_type,
-//   lookup: {
-//     set: beatmap_lookup_set_type,
-//     diff: beatmap_lookup_diff_type,
-//   },
-//   discussions: {
-//     details: beatmap_discussions_details_type,
-//     posts: beatmap_discussions_posts_type,
-//     votes: beatmap_discussions_votes_type,
-//   },
-// } = {
-//   leaderboard: beatmap_leaderboard,
-//   list: beatmap_list,
-//   download: beatmap_download,
-//   set: beatmap_set,
-//   diff: beatmap_diff,
-//   search: beatmap_search,
-//   events: beatmap_events,
-//   attributes: beatmap_attributes,
-//   favourites: beatmap_favourites,
-//   lookup: {
-//     set: beatmap_lookup_set,
-//     diff: beatmap_lookup_diff,
-//   },
-//   discussions: {
-//     details: beatmap_discussions_details,
-//     posts: beatmap_discussions_posts,
-//     votes: beatmap_discussions_votes,
-//   },
-// };
 
 
 

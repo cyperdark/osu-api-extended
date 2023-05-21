@@ -1,10 +1,13 @@
-import { namespace, RequestNamepsace } from "../../../../utility/request";
+import { types } from '../../../../../types/v2_beatmap_set_addToFavourites';
+import { Description } from '../../../../../utility/types';
+
+
+import { namespace, RequestNamepsace } from "../../../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
 
-export const description: any = {
-  type: false,
-  auth: 1,
+export const description: Description = {
+  auth: 0,
   title: __filename,
   method: 'POST',
   description: 'Added specified beatmapset to favourite list',
@@ -16,27 +19,25 @@ export const description: any = {
       description: 'id of the beatmap set',
     },
     {
-      type: 'string',
+      type: 'boolean',
       name: 'action',
       optional: false,
-      description: '\`\`\`favourite\`\`\` or \`\`\`unfavourite\`\`\`',
+      description: 'true/false',
     },
   ],
 };
 
-export interface types {
-  (beatmapset_id: number, action: 'favourite' | 'unfavourite'): Promise<response[]>;
-};
-
-export interface response {
-  favourite_count: number;
-}
 
 
 const name: types = async (beatmapset_id, action) => {
+  let _action = '';
+
+  if (action == true) _action = 'favourite';
+  if (action == false) _action = 'unfavourite';
+
   const data = await request(`beatmapsets/${beatmapset_id}/favourites`, {
     method: 'POST',
-    params: { action }
+    params: { action: _action }
   });
 
   return data;

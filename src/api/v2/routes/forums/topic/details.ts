@@ -1,22 +1,32 @@
+import { types } from '../../../../../types/v2_forums_topic_details';
+import { Description } from '../../../../../utility/types';
+
+
 import { namespace, RequestNamepsace } from "../../../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
 
-export const description: any = {
+export const description: Description = {
   auth: 1,
   title: __filename,
   method: 'GET',
   description: 'Return topic data and posts list',
   params: [
     {
-      type: 'string',
-      name: 'cursor_string',
-      optional: true,
-      description: 'Parameter for pagination',
+      type: 'number',
+      name: 'topic',
+      optional: false,
+      description: 'Topic id',
     },
     {
       name: 'object',
       params: [
+        {
+          type: 'string',
+          name: 'cursor_string',
+          optional: true,
+          description: 'Parameter for pagination',
+        },
         {
           type: 'string',
           name: 'sort',
@@ -45,56 +55,6 @@ export const description: any = {
     },
   ],
 };
-
-export interface types {
-  (topic: number, obj: {
-    cursor_string?: string,
-    sort?: 'id_asc' | 'id_desc',
-    limit?: number,
-    start?: string,
-    end?: string,
-  }): Promise<response>;
-};
-
-export interface response {
-  posts: {
-    created_at: string;
-    deleted_at?: string;
-    edited_at?: string;
-    edited_by_id?: number;
-    forum_id: number;
-    id: number;
-    topic_id: number;
-    user_id: number;
-    body: {
-      html: string;
-      raw: string;
-    };
-  }[];
-  search: {
-    limit: number;
-    sort: string;
-  };
-  topic: {
-    created_at: string;
-    deleted_at: string;
-    first_post_id: number;
-    forum_id: number;
-    id: number;
-    is_locked: boolean;
-    last_post_id: number;
-    post_count: number;
-    title: string;
-    type: string;
-    updated_at: string;
-    user_id: number;
-    poll: string;
-  };
-  cursor: {
-    id: number;
-  };
-  cursor_string: string;
-}
 
 
 

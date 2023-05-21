@@ -1,43 +1,3 @@
-import { namespace, RequestNamepsace } from "../../../../../utility/request";
-const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
-
-
-export const description: any = {
-  auth: 1,
-  title: __filename,
-  method: 'GET',
-  description: 'Return data of the specified beatmap id',
-  params: [
-    {
-      name: 'object',
-      params: [
-        {
-          type: 'number',
-          name: 'id',
-          optional: true,
-          description: 'id of the beatmap',
-        },
-        {
-          type: 'string',
-          name: 'checksum',
-          optional: true,
-          description: 'md5 of the beatmap file',
-        },
-        {
-          type: 'string',
-          name: 'filename',
-          optional: true,
-          description: 'file name of the beatmap',
-        },
-      ],
-    },
-  ],
-};
-
-export interface types {
-  (obj: { id?: number, checksum?: string, filename?: string }): Promise<response>;
-};
-
 export interface response {
   beatmapset_id: number;
   difficulty_rating: number;
@@ -81,28 +41,23 @@ export interface response {
     };
     creator: string;
     favourite_count: number;
-    hype: {
-      current: number;
-      required: number;
-    };
+    hype: string;
     id: number;
     nsfw: boolean;
     offset: number;
     play_count: number;
     preview_url: string;
     source: string;
+    spotlight: boolean;
     status: string;
     title: string;
     title_unicode: string;
-    track_id: number;
+    track_id: string;
     user_id: number;
     video: boolean;
-    availability: {
-      download_disabled: boolean;
-      more_information: string;
-    };
     bpm: number;
     can_be_hyped: boolean;
+    deleted_at: string;
     discussion_enabled: boolean;
     discussion_locked: boolean;
     is_scoreable: boolean;
@@ -117,6 +72,10 @@ export interface response {
     storyboard: boolean;
     submitted_date: string;
     tags: string;
+    availability: {
+      download_disabled: boolean;
+      more_information: string;
+    };
     has_favourited: boolean;
     ratings: number[];
   };
@@ -128,19 +87,27 @@ export interface response {
 }
 
 
-
-const name: types = async (obj) => {
-  const data = await request(`beatmaps/lookup`, {
-    method: 'GET',
-    params: {
-      checksum: obj.checksum,
-      filename: obj.filename,
-      id: obj.id,
-    },
-  });
-
-  return data;
-};
-
-
-export default name;
+export interface types {
+  /**
+   * Return data of the specified beatmap id
+   * 
+   * ## Example 
+   * 
+   * ```js
+   * const { v2, auth } = require('osu-api-extended');
+   * 
+   * const main = async () => {
+   *   await auth.login(CLIENT_ID, CLIENT_SECRET);
+   *
+   *   const v2_beatmap_id_lookup = await v2.beatmap.id.lookup(object);
+   *   console.log(v2_beatmap_id_lookup);
+   * };
+   * 
+   * main();
+   * ```
+   * @param {number} object.id 
+   * @param {string} object.checksum 
+   * @param {string} object.filename 
+  */
+  (object: {id?: number, checksum?: string, filename?: string, }): Promise<response[]>;
+}
