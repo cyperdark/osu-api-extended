@@ -307,14 +307,34 @@ import { types as comments_list_type } from "../../types/v2_comments_list";
 import comments_details, { description as comments_details_desc } from "./routes/comments/details";
 import { types as comments_details_type } from "../../types/v2_comments_details";
 
+import comments_new, { description as comments_new_desc } from "./routes/comments/new";
+import { types as comments_new_type } from "../../types/v2_comments_details";
+
+import comments_edit, { description as comments_edit_desc } from "./routes/comments/edit";
+import { types as comments_edit_type } from "../../types/v2_comments_edit";
+
+import comments_remove, { description as comments_remove_desc } from "./routes/comments/remove";
+import { types as comments_remove_type } from "../../types/v2_comments_remove";
+
+import comments_vote, { description as comments_vote_desc } from "./routes/comments/vote";
+import { types as comments_vote_type } from "../../types/v2_comments_remove";
+
 
 export type comments = {
+  new: comments_new_type,
+  edit: comments_edit_type,
   list: comments_list_type,
+  vote: comments_vote_type,
+  remove: comments_remove_type,
   details: comments_details_type,
 };
 
 export const comments = {
+  new: comments_new,
+  edit: comments_edit,
   list: comments_list,
+  vote: comments_vote,
+  remove: comments_remove,
   details: comments_details,
 };
 
@@ -399,7 +419,11 @@ export const description = {
     details: changelogs_details_desc,
   },
   comments: {
+    new: comments_new_desc,
+    edit: comments_edit_desc,
     list: comments_list_desc,
+    vote: comments_vote_desc,
+    remove: comments_remove_desc,
     details: comments_details_desc,
   }
 };
@@ -443,34 +467,6 @@ export const description = {
 //   details: news_details,
 // };
 
-
-// import comments_list, { types as comments_list_type, description as comments_list_desc } from "./routes/comments/list";
-// import comments_details, { types as comments_details_type, description as comments_details_desc } from "./routes/comments/details";
-
-
-// export const comments: {
-//   list: comments_list_type,
-//   details: comments_details_type,
-// } = {
-//   list: comments_list,
-//   details: comments_details,
-// };
-
-
-// import changelogs_list, { types as changelogs_list_type, description as changelogs_list_desc } from "./routes/changelogs/list";
-// import changelogs_lookup, { types as changelogs_lookup_type, description as changelogs_lookup_desc } from "./routes/changelogs/lookup";
-// import changelogs_details, { types as changelogs_details_type, description as changelogs_details_desc } from "./routes/changelogs/details";
-
-
-// export const changelogs: {
-//   list: changelogs_list_type,
-//   lookup: changelogs_lookup_type,
-//   details: changelogs_details_type,
-// } = {
-//   list: changelogs_list,
-//   lookup: changelogs_lookup,
-//   details: changelogs_details,
-// };
 
 
 // import ranking_details, { types as ranking_details_type, description as ranking_details_desc } from "./routes/ranking/details";
