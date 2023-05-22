@@ -1,4 +1,4 @@
-// import { types } from '../../../../../types/v2_site_spotlights_list';
+import { types } from '../../../../../types/v2_site_news_list';
 import { Description } from '../../../../../utility/types';
 
 
@@ -44,53 +44,6 @@ export const description: Description = {
   ],
   return: 'response',
 };
-
-export interface types {
-  (obj: {
-    limit?: number,
-    year?: number,
-    cursorPublished?: string,
-    cursorId?: number
-  }): Promise<response>;
-};
-
-export interface response {
-  cursor: {
-    published_at: string;
-    id: number;
-  };
-  news_posts: {
-    id: number;
-    author: string;
-    edit_url: string;
-    first_image: string;
-    published_at: string;
-    updated_at: string;
-    slug: string;
-    title: string;
-    preview: string;
-  }[];
-  news_sidebar: {
-    current_year: number;
-    news_posts: {
-      id: number;
-      author: string;
-      edit_url: string;
-      first_image: string;
-      published_at: string;
-      updated_at: string;
-      slug: string;
-      title: string;
-    }[];
-    years: number[];
-  };
-  search: {
-    limit: number;
-    sort: string;
-    year: string;
-  };
-}
-
 
 
 const name: types = async (obj) => {

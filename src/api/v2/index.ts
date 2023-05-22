@@ -67,13 +67,22 @@ export const user: user = {
 import users_details, { description as users_details_desc } from "./routes/users/details";
 import { types as users_details_type } from "../../types/v2_users_details";
 
+import users_groups_list, { description as users_groups_list_desc } from "./routes/users/groups/list";
+import { types as users_groups_list_type } from "../../types/v2_users_groups_list";
+
 
 export type users = {
   details: users_details_type,
+  groups: {
+    list: users_groups_list_type,
+  },
 }
 
 export const users: users = {
   details: users_details,
+  groups: {
+    list: users_groups_list,
+  },
 };
 
 
@@ -264,11 +273,11 @@ export const forums: forums = {
 
 
 import assets_seasonalBackgrounds, { description as assets_seasonalBackgrounds_desc } from "./routes/assets/seasonalBackgrounds";
-import { types as assets_seasonalBackgrounds_type } from "../../types/v2_forums_topic_new";
+import { types as assets_seasonalBackgrounds_type } from "../../types/v2_assets_seasonalBackgrounds";
 
 
 export type assets = {
-  seasonalBackgrounds: any,
+  seasonalBackgrounds: assets_seasonalBackgrounds_type,
 };
 
 export const assets: assets = {
@@ -341,7 +350,7 @@ export const comments: comments = {
 
 
 import site_search, { description as site_search_desc } from "./routes/site/search";
-import { types as site_search_type } from "../../types/v2_comments_remove";
+import { types as site_search_type } from "../../types/v2_site_search";
 
 import site_wiki, { description as site_wiki_desc } from "./routes/site/wiki";
 import { types as site_wiki_type } from "../../types/v2_site_wiki";
@@ -353,10 +362,10 @@ import site_leaderboard_details, { description as site_leaderboard_details_desc 
 import { types as site_leaderboard_details_type } from "../../types/v2_site_leaderboard_details";
 
 import site_news_list, { description as site_news_list_desc } from "./routes/site/news/list";
-import { types as site_news_list_type } from "../../types/v2_site_leaderboard_details";
+import { types as site_news_list_type } from "../../types/v2_site_news_list";
 
 import site_news_details, { description as site_news_details_desc } from "./routes/site/news/details";
-import { types as site_news_details_type } from "../../types/v2_site_leaderboard_details";
+import { types as site_news_details_type } from "../../types/v2_site_news_details";
 
 
 export type site = {
@@ -374,7 +383,7 @@ export type site = {
   },
 };
 
-export const site = {
+export const site: site = {
   search: site_search,
   wiki: site_wiki,
   spotlights: {
@@ -387,6 +396,58 @@ export const site = {
     list: site_news_list,
     details: site_news_details,
   },
+};
+
+
+
+import matches_list, { description as matches_list_desc } from "./routes/matches/list";
+import { types as matches_list_type } from "../../types/v2_matches_list";
+
+import matches_details, { description as matches_details_desc } from "./routes/matches/details";
+import { types as matches_details_type } from "../../types/v2_matches_details";
+
+
+export type matches = {
+  list: matches_list_type,
+  details: matches_details_type,
+};
+
+export const matches: matches = {
+  list: matches_list,
+  details: matches_details,
+};
+
+
+
+import rooms_list, { description as rooms_list_desc } from "./routes/rooms/list";
+import { types as rooms_list_type } from "../../types/v2_rooms_list";
+
+
+export type rooms = {
+  list: rooms_list_type,
+};
+
+export const rooms = {
+  list: rooms_list,
+};
+
+
+
+import room_details, { description as room_details_desc } from "./routes/room/details";
+import { types as room_details_type } from "../../types/v2_room_details";
+
+import room_leaderboard, { description as room_leaderboard_desc } from "./routes/room/leaderboard";
+import { types as room_leaderboard_type } from "../../types/v2_room_leaderboard";
+
+
+export type room = {
+  details: room_details_type,
+  leaderboard: room_leaderboard_type,
+};
+
+export const room = {
+  details: room_details,
+  leaderboard: room_leaderboard,
 };
 
 
@@ -412,6 +473,9 @@ export const description = {
   },
   users: {
     details: users_details_desc,
+    groups: {
+      list: users_groups_list_desc,
+    },
   },
   scores: {
     details: scores_details_desc,
@@ -490,41 +554,23 @@ export const description = {
       details: site_news_details_desc,
     },
   },
+  matches: {
+    list: matches_list_desc,
+    details: matches_details_desc,
+  },
+  rooms: {
+    list: rooms_list_desc,
+  },
+  room: {
+    details: room_details_desc,
+    leaderboard: room_leaderboard_desc,
+  },
 };
 
 
 
 
 
-
-
-
-// import news_list, { types as news_list_type, description as news_list_desc } from "./routes/news/list";
-// import news_details, { types as news_details_type, description as news_details_desc } from "./routes/news/details";
-
-
-// export const news: {
-//   list: news_list_type,
-//   details: news_details_type,
-// } = {
-//   list: news_list,
-//   details: news_details,
-// };
-
-
-
-
-// import matches_list, { types as matches_list_type, description as matches_list_desc } from "./routes/matches/list";
-// import matches_details, { types as matches_details_type, description as matches_details_desc } from "./routes/matches/details";
-
-
-// export const matches: {
-//   list: matches_list_type,
-//   details: matches_details_type,
-// } = {
-//   list: matches_list,
-//   details: matches_details,
-// };
 
 
 // // import rooms_list, { types as rooms_list_type } from "./routes/rooms/list";
@@ -610,14 +656,4 @@ export const description = {
 // } = {
 //   list: notifications_list,
 //   readed: notifications_readed,
-// };
-
-
-// import group_list, { types as group_list_type, description as group_list_desc } from "./routes/group/list";
-
-
-// export const group: {
-//   list: group_list_type,
-// } = {
-//   list: group_list,
 // };

@@ -1,4 +1,4 @@
-// import { types } from '../../../../../types/v2_site_spotlights_list';
+import { types } from '../../../../../types/v2_site_news_details';
 import { Description } from '../../../../../utility/types';
 
 
@@ -27,45 +27,6 @@ export const description: Description = {
   ],
   return: 'response',
 };
-
-export interface types {
-  (news: string | number, key?: 'id'): Promise<response>;
-};
-
-export interface response {
-  id: number;
-  author: string;
-  edit_url: string;
-  first_image: string;
-  published_at: string;
-  updated_at: string;
-  slug: string;
-  title: string;
-  content: string;
-  navigation: {
-    newer: {
-      id: number;
-      author: string;
-      edit_url: string;
-      first_image: string;
-      published_at: string;
-      updated_at: string;
-      slug: string;
-      title: string;
-    };
-    older: {
-      id: number;
-      author: string;
-      edit_url: string;
-      first_image: string;
-      published_at: string;
-      updated_at: string;
-      slug: string;
-      title: string;
-    };
-  };
-}
-
 
 
 const name: types = async (news, key) => {

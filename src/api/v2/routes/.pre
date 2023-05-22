@@ -1,6 +1,18 @@
+import { Description } from '../../../utility/types';
+
+
 import { namespace, RequestNamepsace } from "../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
+export const description: Description = {
+  auth: 3,
+  title: __filename,
+  method: 'GET',
+  description: '',
+  params: [
+
+  ],
+};
 
 export interface types {
   (obj: object): Promise<{
