@@ -1,8 +1,11 @@
+import { Description } from '../../../../utility/types';
+
+
 import { namespace, RequestNamepsace } from "../../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
 
-export const description: any = {
+export const description: Description = {
   auth: 0,
   title: __filename,
   method: 'GET',
@@ -10,11 +13,13 @@ export const description: any = {
   params: [
     {
       type: 'string',
-      name: 'query',
+      name: 'max_id',
+      options: false,
       optional: true,
       description: 'Maximum \`\`\`id\`\`\` fetched. Can be used to load earlier notifications. Defaults to no limit (fetch latest notifications)',
     },
   ],
+  return: 'response',
 };
 
 export interface types {

@@ -452,6 +452,25 @@ export const room = {
 
 
 
+import notifications_list, { description as notifications_list_desc } from "./routes/notifications/list";
+import { types as notifications_list_type } from "../../types/v2_room_details";
+
+import notifications_markAsReaded, { description as notifications_markAsReaded_desc } from "./routes/notifications/markAsReaded";
+import { types as notifications_markAsReaded_type } from "../../types/v2_room_leaderboard";
+
+
+export type notifications = {
+  list: notifications_list_type,
+  // markAsReaded: notifications_markAsReaded_type, // TODO:
+};
+
+export const notifications = {
+  list: notifications_list,
+  // markAsReaded: notifications_markAsReaded, // TODO:
+};
+
+
+
 export const description = {
   user: {
     activity: user_activity_desc,
@@ -565,49 +584,16 @@ export const description = {
     details: room_details_desc,
     leaderboard: room_leaderboard_desc,
   },
+  notifications: {
+    list: notifications_list_desc,
+    markAsReaded: notifications_markAsReaded_desc,
+  },
 };
 
 
 
 
 
-
-
-// // import rooms_list, { types as rooms_list_type } from "./routes/rooms/list";
-// // import rooms_room_details, { types as rooms_room_details_type } from "./routes/rooms/room/details";
-// // import rooms_room_leaderboard, { types as rooms_room_leaderboard_type } from "./routes/rooms/room/leaderboard";
-// // import rooms_room_playlist_scores_list, { types as rooms_room_playlist_scores_list_type } from "./routes/rooms/room/playlist/scores/list";
-// // import rooms_room_playlist_scores_details, { types as rooms_room_playlist_scores_details_type } from "./routes/rooms/room/playlist/scores/details";
-// // import rooms_room_playlist_scores_user, { types as rooms_room_playlist_scores_user_type } from "./routes/rooms/room/playlist/scores/user";
-
-
-// // export const rooms: {
-// //   list: rooms_list_type,
-// //   room: {
-// //     details: rooms_room_details_type,
-// //     leaderboard: rooms_room_leaderboard_type,
-// //     playlist: {
-// //       scores: {
-// //         list: rooms_room_playlist_scores_list_type,
-// //         details: rooms_room_playlist_scores_details_type,
-// //         user: rooms_room_playlist_scores_user_type,
-// //       }
-// //     }
-// //   }
-// // } = {
-// //   list: rooms_list,
-// //   room: {
-// //     details: rooms_room_details,
-// //     leaderboard: rooms_room_leaderboard,
-// //     playlist: {
-// //       scores: {
-// //         list: rooms_room_playlist_scores_list,
-// //         details: rooms_room_playlist_scores_details,
-// //         user: rooms_room_playlist_scores_user,
-// //       }
-// //     }
-// //   }
-// // };
 
 
 // import chat_updates, { types as chat_updates_type, description as chat_updates_desc } from "./routes/chat/updates";
@@ -643,17 +629,4 @@ export const description = {
 //       send: chat_channel_messages_send,
 //     },
 //   },
-// };
-
-
-// import notifications_list, { types as notifications_list_type, description as notifications_list_desc } from "./routes/notifications/list";
-// import notifications_readed, { types as notifications_readed_type, description as notifications_readed_desc } from "./routes/notifications/readed";
-
-
-// export const notifications: {
-//   list: notifications_list_type,
-//   readed: notifications_readed_type,
-// } = {
-//   list: notifications_list,
-//   readed: notifications_readed,
 // };

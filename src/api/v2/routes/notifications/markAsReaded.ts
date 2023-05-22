@@ -28,9 +28,13 @@ export interface response {
 
 
 const name: types = async (ids) => {
+  const obj: any = {};
+
+  ids.forEach((r, index) => obj[`identities[${index}][object_id]`] = r);
+
   const data = await request(`notifications/mark-read`, {
     method: 'POST',
-    data: JSON.stringify({ ids })
+    data: JSON.stringify(obj)
   });
 
   return data;
