@@ -20,11 +20,12 @@ export const description: any = {
         {
           type: 'string',
           name: 'key',
+          options: false,
           optional: false,
           description: 'Unset to query by build version or stream name, or \`\`\`id\`\`\` to query by build ID.',
         },
         {
-          type: 'string array',
+          type: 'string[]',
           name: 'message_formats',
           optional: false,
           description: '\`\`\`html\`\`\` or \`\`\`markdown\`\`\`',

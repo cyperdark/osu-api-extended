@@ -248,7 +248,7 @@ export type forums = {
   }
 };
 
-export const forums = {
+export const forums: forums = {
   topic: {
     new: forums_topic_new,
     edit: forums_topic_edit,
@@ -259,6 +259,44 @@ export const forums = {
   post: {
     edit: forums_post_edit
   },
+};
+
+
+
+import assets_seasonalBackgrounds, { description as assets_seasonalBackgrounds_desc } from "./routes/assets/seasonalBackgrounds";
+import { types as assets_seasonalBackgrounds_type } from "../../types/v2_forums_topic_new";
+
+
+export type assets = {
+  seasonalBackgrounds: any,
+};
+
+export const assets = {
+  seasonalBackgrounds: assets_seasonalBackgrounds,
+};
+
+
+
+import changelogs_list, { description as changelogs_list_desc } from "./routes/changelogs/list";
+import { types as changelogs_list_type } from "../../types/v2_forums_topic_new";
+
+import changelogs_lookup, { description as changelogs_lookup_desc } from "./routes/changelogs/lookup";
+import { types as changelogs_lookup_type } from "../../types/v2_forums_topic_new";
+
+import changelogs_details, { description as changelogs_details_desc } from "./routes/changelogs/details";
+import { types as changelogs_details_type } from "../../types/v2_forums_topic_new";
+
+
+export type changelogs = {
+  list: changelogs_list_type,
+  lookup: changelogs_lookup_type,
+  details: changelogs_details_type,
+};
+
+export const changelogs = {
+  list: changelogs_list,
+  lookup: changelogs_lookup,
+  details: changelogs_details,
 };
 
 
@@ -333,25 +371,20 @@ export const description = {
       // details: forums_topic_details_desc,
     },
   },
+  assets: {
+    seasonalBackgrounds: assets_seasonalBackgrounds_desc,
+  },
+  changelogs: {
+    list: changelogs_list_desc,
+    lookup: changelogs_lookup_desc,
+    details: changelogs_details_desc,
+  }
 };
 
 
 
 
 
-
-// import forum_topic_details, { types as forum_topic_details_type, description as forum_topic_details_desc } from "./routes/forum/topic/details";
-
-
-// export const forum: {
-//   topic: {
-//     details: forum_topic_details_type,
-//   },
-// } = {
-//   topic: {
-//     details: forum_topic_details,
-//   },
-// };
 
 
 // import site_search, { types as site_search_type, description as site_search_desc } from "./routes/site/search";
@@ -373,15 +406,6 @@ export const description = {
 //   },
 // };
 
-
-// import backgrounds_seasonal, { types as backgrounds_seasonal_type, description as backgrounds_seasonal_desc } from "./routes/backgrounds/seasonal";
-
-
-// export const backgrounds: {
-//   seasonal: backgrounds_seasonal_type,
-// } = {
-//   seasonal: backgrounds_seasonal,
-// };
 
 
 // import news_list, { types as news_list_type, description as news_list_desc } from "./routes/news/list";
