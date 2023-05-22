@@ -1,4 +1,4 @@
-import { types } from '../../../../../types/v2_forums_post_edit';
+// import { types } from '../../../../../types/v2_forums_topic_new';
 import { Description } from '../../../../../utility/types';
 
 
@@ -10,28 +10,29 @@ export const description: Description = {
   auth: 0,
   title: __filename,
   method: 'GET',
-  description: '',
+  description: 'Edit your topic and post from the forum',
   params: [
     {
       type: 'number',
-      name: 'post_id',
+      name: 'topic_id',
       optional: false,
-      description: 'Post id',
+      description: 'Topic id',
     },
     {
       type: 'number',
       name: 'body',
       optional: false,
-      description: 'Body of the post',
+      description: 'Message body',
     },
   ],
   return: 'response',
 };
 
 
-const name: types = async (post_id, body) => {
-  const data = await request(`forums/posts/${post_id}`, {
-    method: 'PUT',
+// @ts-ignore
+const name: any = async (topic_id, body) => {
+  const data = await request(`forums/topics/${topic_id}/reply`, {
+    method: 'POST',
     data: JSON.stringify({ body }),
   });
 
