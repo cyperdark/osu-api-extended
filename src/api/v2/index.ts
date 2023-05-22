@@ -223,7 +223,13 @@ import forums_topic_edit, { description as forums_topic_edit_desc } from "./rout
 import { types as forums_topic_edit_type } from "../../types/v2_forums_topic_edit";
 
 import forums_post_edit, { description as forums_post_edit_desc } from "./routes/forums/post/edit";
-import { types as forums_post_edit_type } from "../../types/v2_forums_topic_edit";
+import { types as forums_post_edit_type } from "../../types/v2_forums_post_edit";
+
+import forums_topic_new, { description as forums_topic_new_desc } from "./routes/forums/topic/new";
+import { types as forums_topic_new_type } from "../../types/v2_forums_topic_new";
+
+import forums_topic_reply, { description as forums_topic_reply_desc } from "./routes/forums/topic/reply";
+import { types as forums_topic_reply_type } from "../../types/v2_forums_topic_new";
 
 // import forums_topic_vote, { description as forums_topic_vote_desc } from "./routes/forums/topic/vote";
 // import { types as forums_topic_vote_type } from "../../types/v2_forums_topic_details";
@@ -231,18 +237,22 @@ import { types as forums_post_edit_type } from "../../types/v2_forums_topic_edit
 
 export type forums = {
   topic: {
+    new: forums_topic_new_type,
     edit: forums_topic_edit_type,
+    reply: forums_topic_reply_type,
     // vote: any,
     details: forums_topic_details_type,
   },
   post: {
-    edit: any
+    edit: forums_post_edit_type,
   }
 };
 
 export const forums = {
   topic: {
+    new: forums_topic_new,
     edit: forums_topic_edit,
+    reply: forums_topic_reply,
     // vote: forums_topic_vote,
     details: forums_topic_details,
   },
@@ -312,7 +322,9 @@ export const description = {
   },
   forums: {
     topic: {
+      new: forums_topic_new_desc,
       edit: forums_topic_edit_desc,
+      reply: forums_topic_reply_desc,
       // vote: forums_topic_vote_desc,
       details: forums_topic_details_desc,
     },
