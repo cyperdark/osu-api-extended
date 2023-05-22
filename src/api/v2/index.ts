@@ -489,6 +489,15 @@ import { types as chat_new_type } from "../../types/v2_chat_new";
 import chat_updates, { description as chat_updates_desc } from "./routes/chat/updates";
 import { types as chat_updates_type } from "../../types/v2_chat_updates";
 
+import chat_channels_messages_list, { description as chat_channels_messages_list_desc } from "./routes/chat/channels/messages/list";
+import { types as chat_channels_messages_list_type } from "../../types/v2_chat_channels_messages_list";
+
+import chat_channels_messages_send, { description as chat_channels_messages_send_desc } from "./routes/chat/channels/messages/send";
+import { types as chat_channels_messages_send_type } from "../../types/v2_chat_channels_messages_send";
+
+import chat_channels_messages_markAsReaded, { description as chat_channels_messages_markAsReaded_desc } from "./routes/chat/channels/messages/markAsReaded";
+import { types as chat_channels_messages_markAsReaded_type } from "../../types/v2_chat_channels_messages_markAsReaded";
+
 
 export type chat = {
   new: chat_new_type,
@@ -498,6 +507,11 @@ export type chat = {
     join: chat_channels_join_type,
     leave: chat_channels_leave_type,
     details: chat_channels_details_type,
+    messages: {
+      list: chat_channels_messages_list_type,
+      send: chat_channels_messages_send_type,
+      markAsReaded: chat_channels_messages_markAsReaded_type,
+    }
   },
 };
 
@@ -509,6 +523,11 @@ export const chat = {
     join: chat_channels_join,
     leave: chat_channels_leave,
     details: chat_channels_details,
+    messages: {
+      list: chat_channels_messages_list,
+      send: chat_channels_messages_send,
+      markAsReaded: chat_channels_messages_markAsReaded,
+    }
   },
 };
 
@@ -639,47 +658,11 @@ export const description = {
       join: chat_channels_join_desc,
       leave: chat_channels_leave_desc,
       details: chat_channels_details_desc,
+      messages: {
+        list: chat_channels_messages_list_desc,
+        send: chat_channels_messages_send_desc,
+        markAsReaded: chat_channels_messages_markAsReaded_desc,
+      }
     },
   },
 };
-
-
-
-
-
-
-
-// import chat_updates, { types as chat_updates_type, description as chat_updates_desc } from "./routes/chat/updates";
-// import chat_presense, { types as chat_presense_type, description as chat_presense_desc } from "./routes/chat/presense";
-// import chat_channel_list, { types as chat_channel_list_type, description as chat_channel_list_desc } from "./routes/chat/channels/list";
-// import chat_channel_details, { types as chat_channel_details_type, description as chat_channel_details_desc } from "./routes/chat/channels/details";
-// import chat_channel_messages_list, { types as chat_channel_messages_list_type, description as chat_channel_messages_list_desc } from "./routes/chat/channels/messages/list";
-// import chat_channel_messages_send, { types as chat_channel_messages_send_type, description as chat_channel_messages_send_desc } from "./routes/chat/channels/messages/send";
-// import chat_channel_messages_readed, { types as chat_channel_messages_readed_type, description as chat_channel_messages_readed_desc } from "./routes/chat/channels/messages/readed";
-
-
-// export const chat: {
-//   updates: chat_updates_type,
-//   presense: chat_presense_type,
-//   channel: {
-//     list: chat_channel_list_type,
-//     details: chat_channel_details_type,
-//     messages: {
-//       readed: chat_channel_messages_readed_type,
-//       list: chat_channel_messages_list_type,
-//       send: chat_channel_messages_send_type,
-//     },
-//   },
-// } = {
-//   updates: chat_updates,
-//   presense: chat_presense,
-//   channel: {
-//     list: chat_channel_list,
-//     details: chat_channel_details,
-//     messages: {
-//       readed: chat_channel_messages_readed,
-//       list: chat_channel_messages_list,
-//       send: chat_channel_messages_send,
-//     },
-//   },
-// };

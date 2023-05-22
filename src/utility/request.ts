@@ -13,13 +13,16 @@ export interface RequestNamepsace {
   (url: string, params: { method: string, data?: string, headers?: { [key: string]: string }, params?: object }): Promise<any>
 };
 
-const o = (obj: any) => {
+const o = (obj: any, trail?: string) => {
   let params = '';
 
   for (const i in obj) {
     if (obj[i] == undefined) continue;
 
-    if (typeof obj[i] == 'object') obj[i].filter((d: any) => params += `${i}[]=${d}&`);
+    if (trail) params += `${trail}.`;
+
+    if (Array.isArray(obj[i])) obj[i].filter((d: any) => params += `${i}[]=${d}&`);
+    else if (typeof obj[i] == 'object') params += `${o(obj[i], i)}&`;
     else if (typeof obj[i] == 'number' && obj[i] > 0) params += `${i}=${obj[i]}&`;
     else if (typeof obj[i] == 'string') params += `${i}=${obj[i]}&`;
   };
@@ -44,6 +47,7 @@ export const request = (url: string, { method = "GET", headers, data, params }: 
     Authorization: `Bearer ${auth.cache_v2}`,
     Accept: `application/json`,
     'Content-Type': `application/json`,
+    // 'Content-Length': data ? data.length : '',
   };
 
   // console.log('\n', url, method, headers, o(params), '\n'); // debug too
@@ -106,7 +110,7 @@ export const download = (url: string, dest: string, { headers, data, params }: R
     'Content-Type': `application/octet-stream`,
   };
 
-  // console.log('\n', url, headers, data, o(params), '\n'); // debug too
+  console.log('\n', url, headers, data, o(params), '\n'); // debug too
   const req = https.request(url + (params ? '?' + o(params) : ''), { method: 'GET', headers }, response => {
     const { location } = response.headers;
 

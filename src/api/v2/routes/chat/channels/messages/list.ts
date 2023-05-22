@@ -1,8 +1,12 @@
+import { types } from '../../../../../../types/v2_chat_channels_messages_list';
+import { Description } from '../../../../../../utility/types';
+
+
 import { namespace, RequestNamepsace } from "../../../../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
 
-export const description: any = {
+export const description: Description = {
   auth: 0,
   title: __filename,
   method: 'GET',
@@ -10,7 +14,7 @@ export const description: any = {
   params: [
     {
       type: 'number',
-      name: 'channel',
+      name: 'channel_id',
       optional: false,
       description: 'id of the channel',
     },
@@ -40,44 +44,11 @@ export const description: any = {
   ],
 };
 
-export interface types {
-  (channel: number, obj: {
-    limit?: number,
-    since?: number,
-    until?: number,
-  }): Promise<response[]>;
-};
 
-export interface response {
-  message_id: number;
-  sender_id: number;
-  channel_id: number;
-  timestamp: string;
-  content: string;
-  is_action: boolean;
-  sender: {
-    avatar_url: string;
-    country_code: string;
-    default_group: string;
-    id: number;
-    is_active: boolean;
-    is_bot: boolean;
-    is_deleted: boolean;
-    is_online: boolean;
-    is_supporter: boolean;
-    last_visit: string;
-    pm_friends_only: boolean;
-    profile_colour: string;
-    username: string;
-  };
-}
-
-
-
-const name: types = async (channel, obj) => {
-  const data = await request(`chat/channels/${channel}/messages`, {
+const name: types = async (channel_id, object) => {
+  const data = await request(`chat/channels/${channel_id}/messages`, {
     method: 'GET',
-    params: obj,
+    params: object,
   });
 
   return data;
