@@ -1,4 +1,4 @@
-import { types } from '../../../../types/v2_matches_list';
+import { types } from "../../../../types/v2_room_leaderboard";
 import { Description } from '../../../../utility/types';
 
 
@@ -10,14 +10,19 @@ export const description: Description = {
   auth: 1,
   title: __filename,
   method: 'GET',
-  description: 'Return array of the matches',
-  params: [],
-  return: 'response',
+  description: 'Return leaderboard of room',
+  params: [
+    {
+      type: 'number',
+      name: 'room_id',
+      description: 'Id of the room',
+    },
+  ],
 };
 
 
-const name: types = async () => {
-  const data = await request(`matches`, {
+const name: types = async (room_id) => {
+  const data = await request(`rooms/${room_id}/leaderboard`, {
     method: 'GET',
   });
 

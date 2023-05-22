@@ -1,26 +1,3 @@
-import { request, namespace, RequestNamepsace } from "../../../../utility/request";
-// const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
-
-
-export const description: any = {
-  auth: 3,
-  title: __filename,
-  method: 'GET',
-  description: 'Return array of users from specified group id',
-  params: [
-    {
-      type: 'number',
-      name: 'id',
-      optional: false,
-      description: '\`\`\`4\`\`\` or \`\`\`7\`\`\` or \`\`\`11\`\`\` or \`\`\`16\`\`\` or \`\`\`22\`\`\` or \`\`\`28\`\`\` or \`\`\`31\`\`\` or \`\`\`32\`\`\`',
-    },
-  ],
-};
-
-export interface types {
-  (id: 4 | 7 | 11 | 16 | 22 | 28 | 31 | 32): Promise<response[]>;
-};
-
 export interface response {
   avatar_url: string;
   country_code: string;
@@ -56,12 +33,18 @@ export interface response {
     playmodes?: string;
   }[];
   statistics: {
+    count_100: number;
+    count_300: number;
+    count_50: number;
+    count_miss: number;
     level: {
       current: number;
       progress: number;
     };
     global_rank: number;
+    global_rank_exp: number;
     pp: number;
+    pp_exp: number;
     ranked_score: number;
     hit_accuracy: number;
     play_count: number;
@@ -83,21 +66,25 @@ export interface response {
 }
 
 
-
-const name: types = async (id) => {
-  try {
-    const data = await request(`https://osu.ppy.sh/groups/${id}`, {
-      method: 'GET',
-    });
-
-    const parse = data.split('<script id="json-users" type="application/json">')[1].split('</script>')[0];
-    return JSON.parse(parse);
-  } catch (err: any) {
-    console.log('groups-list error', id, err.message);
-
-    return null;
-  }
-};
-
-
-export default name;
+export interface types {
+  /**
+   * Return array of users from specified group id
+   * 
+   * ## Example 
+   * 
+   * ```js
+   * const { v2, auth } = require('osu-api-extended');
+   * 
+   * const main = async () => {
+   *   
+   *
+   *   const v2_users_groups_list = await v2.users.groups.list(id);
+   *   console.log(v2_users_groups_list);
+   * };
+   * 
+   * main();
+   * ```
+   * @param {number} id ```4``` or ```7``` or ```11``` or ```16``` or ```22``` or ```28``` or ```31``` or ```32```
+  */
+  (id: '4' | '7' | '11' | '16' | '22' | '28' | '31' | '32' ): Promise<response[]>;
+}
