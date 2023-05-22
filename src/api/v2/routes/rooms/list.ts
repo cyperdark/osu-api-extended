@@ -1,4 +1,4 @@
-// import { types } from '../../../../types/v2_matches_list';
+import { types } from '../../../../types/v2_rooms_list';
 import { Description } from '../../../../utility/types';
 
 
@@ -50,15 +50,6 @@ export const description: Description = {
     }
   ],
 };
-
-export interface types {
-  (mode: 'all' | 'owned' | 'participated' | 'ended', object?: {
-  }): Promise<response>;
-};
-
-export interface response {
-  ask: 'peppy',
-}
 
 
 const name: types = async (mode, object) => {
