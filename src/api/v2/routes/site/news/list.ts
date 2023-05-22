@@ -1,8 +1,12 @@
-import { namespace, RequestNamepsace } from "../../../../utility/request";
+// import { types } from '../../../../../types/v2_site_spotlights_list';
+import { Description } from '../../../../../utility/types';
+
+
+import { namespace, RequestNamepsace } from "../../../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
 
-export const description: any = {
+export const description: Description = {
   auth: 1,
   title: __filename,
   method: 'GET',
@@ -38,6 +42,7 @@ export const description: any = {
       ],
     }
   ],
+  return: 'response',
 };
 
 export interface types {

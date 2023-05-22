@@ -1,15 +1,19 @@
-import { namespace, RequestNamepsace } from "../../../../utility/request";
+// import { types } from '../../../../../types/v2_site_spotlights_list';
+import { Description } from '../../../../../utility/types';
+
+
+import { namespace, RequestNamepsace } from "../../../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
 
-export const description: any = {
+export const description: Description = {
   auth: 1,
   title: __filename,
   method: 'GET',
   description: 'Returns details of the specified news post',
   params: [
     {
-      type: 'string/number',
+      type: 'string | number',
       name: 'news',
       optional: false,
       description: 'News post slug or ID',
@@ -21,6 +25,7 @@ export const description: any = {
       description: 'Unset to query by slug, or id to query by ID',
     },
   ],
+  return: 'response',
 };
 
 export interface types {

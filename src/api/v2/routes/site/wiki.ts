@@ -1,8 +1,12 @@
+import { types } from '../../../../types/v2_site_wiki';
+import { Description } from '../../../../utility/types';
+
+
 import { namespace, RequestNamepsace } from "../../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
 
-export const description: any = {
+export const description: Description = {
   auth: 1,
   title: __filename,
   method: 'GET',
@@ -21,23 +25,8 @@ export const description: any = {
       description: 'The path name of the wiki page',
     },
   ],
+  return: 'response',
 };
-
-export interface types {
-  (language: string, path: string): Promise<response>;
-};
-
-export interface response {
-  available_locales: string[];
-  layout: string;
-  locale: string;
-  markdown: string;
-  path: string;
-  subtitle: string;
-  tags: [];
-  title: string;
-}
-
 
 
 const name: types = async (language, path) => {

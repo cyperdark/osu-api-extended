@@ -1,4 +1,4 @@
-import { types } from '../../../../types/v2_comments_list';
+import { types } from '../../../../types/v2_comments_vote';
 import { Description } from '../../../../utility/types';
 
 
