@@ -271,7 +271,7 @@ export type assets = {
   seasonalBackgrounds: any,
 };
 
-export const assets = {
+export const assets: assets = {
   seasonalBackgrounds: assets_seasonalBackgrounds,
 };
 
@@ -293,7 +293,7 @@ export type changelogs = {
   details: changelogs_details_type,
 };
 
-export const changelogs = {
+export const changelogs: changelogs = {
   list: changelogs_list,
   lookup: changelogs_lookup,
   details: changelogs_details,
@@ -308,7 +308,7 @@ import comments_details, { description as comments_details_desc } from "./routes
 import { types as comments_details_type } from "../../types/v2_comments_details";
 
 import comments_new, { description as comments_new_desc } from "./routes/comments/new";
-import { types as comments_new_type } from "../../types/v2_comments_details";
+import { types as comments_new_type } from "../../types/v2_comments_new";
 
 import comments_edit, { description as comments_edit_desc } from "./routes/comments/edit";
 import { types as comments_edit_type } from "../../types/v2_comments_edit";
@@ -317,7 +317,7 @@ import comments_remove, { description as comments_remove_desc } from "./routes/c
 import { types as comments_remove_type } from "../../types/v2_comments_remove";
 
 import comments_vote, { description as comments_vote_desc } from "./routes/comments/vote";
-import { types as comments_vote_type } from "../../types/v2_comments_remove";
+import { types as comments_vote_type } from "../../types/v2_comments_vote";
 
 
 export type comments = {
@@ -329,7 +329,7 @@ export type comments = {
   details: comments_details_type,
 };
 
-export const comments = {
+export const comments: comments = {
   new: comments_new,
   edit: comments_edit,
   list: comments_list,
@@ -338,6 +338,56 @@ export const comments = {
   details: comments_details,
 };
 
+
+
+import site_search, { description as site_search_desc } from "./routes/site/search";
+import { types as site_search_type } from "../../types/v2_comments_remove";
+
+import site_wiki, { description as site_wiki_desc } from "./routes/site/wiki";
+import { types as site_wiki_type } from "../../types/v2_site_wiki";
+
+import site_spotlights_list, { description as site_spotlights_list_desc } from "./routes/site/spotlights/list";
+import { types as site_spotlights_list_type } from "../../types/v2_site_spotlights_list";
+
+import site_leaderboard_details, { description as site_leaderboard_details_desc } from "./routes/site/leaderboard/details";
+import { types as site_leaderboard_details_type } from "../../types/v2_site_leaderboard_details";
+
+import site_news_list, { description as site_news_list_desc } from "./routes/site/news/list";
+import { types as site_news_list_type } from "../../types/v2_site_leaderboard_details";
+
+import site_news_details, { description as site_news_details_desc } from "./routes/site/news/details";
+import { types as site_news_details_type } from "../../types/v2_site_leaderboard_details";
+
+
+export type site = {
+  search: site_search_type,
+  wiki: site_wiki_type,
+  spotlights: {
+    list: site_spotlights_list_type,
+  },
+  leaderboard: {
+    details: site_leaderboard_details_type,
+  },
+  news: {
+    list: site_news_list_type,
+    details: site_news_details_type,
+  },
+};
+
+export const site = {
+  search: site_search,
+  wiki: site_wiki,
+  spotlights: {
+    list: site_spotlights_list,
+  },
+  leaderboard: {
+    details: site_leaderboard_details,
+  },
+  news: {
+    list: site_news_list,
+    details: site_news_details,
+  },
+};
 
 
 
@@ -425,33 +475,27 @@ export const description = {
     vote: comments_vote_desc,
     remove: comments_remove_desc,
     details: comments_details_desc,
-  }
+  },
+  site: {
+    search: site_search_desc,
+    wiki: site_wiki_desc,
+    spotlights: {
+      list: site_spotlights_list_desc,
+    },
+    leaderboard: {
+      details: site_leaderboard_details_desc,
+    },
+    news: {
+      list: site_news_list_desc,
+      details: site_news_details_desc,
+    },
+  },
 };
 
 
 
 
 
-
-
-// import site_search, { types as site_search_type, description as site_search_desc } from "./routes/site/search";
-// import site_wiki, { types as site_wiki_type, description as site_wiki_desc } from "./routes/site/wiki";
-// import site_spotlights_list, { types as site_spotlights_list_type, description as site_spotlights_list_desc } from "./routes/site/spotlights/list";
-
-
-// export const site: {
-//   search: site_search_type,
-//   wiki: site_wiki_type,
-//   spotlights: {
-//     list: site_spotlights_list_type,
-//   },
-// } = {
-//   search: site_search,
-//   wiki: site_wiki,
-//   spotlights: {
-//     list: site_spotlights_list,
-//   },
-// };
 
 
 
@@ -468,15 +512,6 @@ export const description = {
 // };
 
 
-
-// import ranking_details, { types as ranking_details_type, description as ranking_details_desc } from "./routes/ranking/details";
-
-
-// export const ranking: {
-//   details: ranking_details_type,
-// } = {
-//   details: ranking_details,
-// };
 
 
 // import matches_list, { types as matches_list_type, description as matches_list_desc } from "./routes/matches/list";
@@ -586,114 +621,3 @@ export const description = {
 // } = {
 //   list: group_list,
 // };
-
-
-// // export const desc: {
-// //   user_activity: object,
-// //   user_details: object,
-// //   user_me_details: object,
-// //   user_me_friends: object,
-// //   user_me_download_quota: object,
-// //   user_list: object,
-// //   scores_user_category: object,
-// //   user_scores_beatmap_best: object,
-// //   user_scores_beatmap_all: object,
-// //   user_beatmap_category: object,
-// //   user_beatmap_most_played: object,
-// //   user_beatmap_kudosu: object,
-// //   users_list: object,
-// //   beatmap_leaderboard: object,
-// //   beatmap_list: object,
-// //   beatmap_download: object,
-// //   beatmap_set: object,
-// //   beatmap_diff: object,
-// //   beatmap_search: object,
-// //   beatmap_events: object,
-// //   beatmap_attributes: object,
-// //   beatmap_favourites: object,
-// //   beatmap_lookup_set: object,
-// //   beatmap_lookup_diff: object,
-// //   beatmap_discussions_details: object,
-// //   beatmap_discussions_posts: object,
-// //   beatmap_discussions_votes: object,
-// //   scores_details: object,
-// //   scores_download: object,
-// //   forum_topic_details: object,
-// //   site_search: object,
-// //   site_wiki: object,
-// //   site_spotlights_list: object,
-// //   backgrounds_seasonal: object,
-// //   news_list: object,
-// //   news_details: object,
-// //   comments_list: object,
-// //   comments_details: object,
-// //   changelogs_list: object,
-// //   changelogs_lookup: object,
-// //   changelogs_details: object,
-// //   ranking_details: object,
-// //   matches_list: object,
-// //   matches_details: object,
-// //   chat_updates: object,
-// //   chat_presense: object,
-// //   chat_channel_list: object,
-// //   chat_channel_details: object,
-// //   chat_channel_messages_list: object,
-// //   chat_channel_messages_send: object,
-// //   chat_channel_messages_readed: object,
-// //   notifications_list: object,
-// //   notifications_readed: object,
-// //   group_list: object,
-// // } = {
-// //   user_activity: user_activity_desc,
-// //   user_details: user_details_desc,
-// //   user_me_details: user_me_details_desc,
-// //   user_me_friends: user_me_friends_desc,
-// //   user_me_download_quota: user_me_download_quota_desc,
-// //   scores_user_category: scores_user_category_desc,
-// //   user_scores_beatmap_all: user_scores_beatmap_all_desc,
-// //   user_beatmap_category: user_beatmap_category_desc,
-// //   user_beatmap_most_played: user_beatmap_most_played_desc,
-// //   user_beatmap_kudosu: user_beatmap_kudosu_desc,
-// //   users_list: users_list_desc,
-// //   beatmap_leaderboard: beatmap_leaderboard_desc,
-// //   beatmap_list: beatmap_list_desc,
-// //   beatmap_download: beatmap_download_desc,
-// //   beatmap_set: beatmap_set_desc,
-// //   beatmap_diff: beatmap_diff_desc,
-// //   beatmap_search: beatmap_search_desc,
-// //   beatmap_events: beatmap_events_desc,
-// //   beatmap_attributes: beatmap_attributes_desc,
-// //   beatmap_favourites: beatmap_favourites_desc,
-// //   beatmap_lookup_set: beatmap_lookup_set_desc,
-// //   beatmap_lookup_diff: beatmap_lookup_diff_desc,
-// //   beatmap_discussions_details: beatmap_discussions_details_desc,
-// //   beatmap_discussions_posts: beatmap_discussions_posts_desc,
-// //   beatmap_discussions_votes: beatmap_discussions_votes_desc,
-// //   scores_details: scores_details_desc,
-// //   scores_download: scores_download_desc,
-// //   forum_topic_details: forum_topic_details_desc,
-// //   site_search: site_search_desc,
-// //   site_wiki: site_wiki_desc,
-// //   site_spotlights_list: site_spotlights_list_desc,
-// //   backgrounds_seasonal: backgrounds_seasonal_desc,
-// //   news_list: news_list_desc,
-// //   news_details: news_details_desc,
-// //   comments_list: comments_list_desc,
-// //   comments_details: comments_details_desc,
-// //   changelogs_list: changelogs_list_desc,
-// //   changelogs_lookup: changelogs_lookup_desc,
-// //   changelogs_details: changelogs_details_desc,
-// //   ranking_details: ranking_details_desc,
-// //   matches_list: matches_list_desc,
-// //   matches_details: matches_details_desc,
-// //   chat_updates: chat_updates_desc,
-// //   chat_presense: chat_presense_desc,
-// //   chat_channel_list: chat_channel_list_desc,
-// //   chat_channel_details: chat_channel_details_desc,
-// //   chat_channel_messages_list: chat_channel_messages_list_desc,
-// //   chat_channel_messages_send: chat_channel_messages_send_desc,
-// //   chat_channel_messages_readed: chat_channel_messages_readed_desc,
-// //   notifications_list: notifications_list_desc,
-// //   notifications_readed: notifications_readed_desc,
-// //   group_list: group_list_desc,
-// // } 

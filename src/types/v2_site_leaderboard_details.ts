@@ -1,91 +1,20 @@
-import { namespace, RequestNamepsace } from "../../../../utility/request";
-const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
-
-
-export const description: any = {
-  auth: 1,
-  title: __filename,
-  method: 'GET',
-  description: 'Gets the current ranking for the specified type and game mode',
-  params: [
-    {
-      type: 'string',
-      name: 'mode',
-      optional: false,
-      description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
-    },
-    {
-      type: 'string',
-      name: 'type',
-      optional: false,
-      description: '\`\`\`charts\`\`\` or \`\`\`country\`\`\` or \`\`\`performance\`\`\` or \`\`\`score\`\`\`',
-    },
-    {
-      name: 'object',
-      params: [
-        {
-          type: 'number',
-          name: 'country',
-          optional: true,
-          description: 'Filter ranking by country code. Only available for \`\`\`type\`\`\` of \`\`\`performance\`\`\`',
-        },
-        {
-          type: 'string',
-          name: 'cursorPublished',
-          optional: true,
-          description: 'Pagination cursorPublished',
-        },
-        {
-          type: 'number',
-          name: 'cursorId',
-          optional: true,
-          description: 'Pagination cursorId',
-        },
-        {
-          type: 'string',
-          name: 'filter',
-          optional: true,
-          description: '\`\`\`all\`\`\` or \`\`\`friends\`\`\`',
-        },
-        {
-          type: 'string',
-          name: 'spotlight',
-          optional: true,
-          description: 'The id of the spotlight if type is charts. Ranking for latest spotlight will be returned if not specified',
-        },
-        {
-          type: 'string',
-          name: 'variant',
-          optional: true,
-          description: `Filter ranking to specified mode variant. For \`\`\`mode\`\`\` of \`\`\`mania\`\`\`, it's either \`\`\`4k\`\`\` or \`\`\`7k\`\`\`. Only available for \`\`\`type\`\`\` of \`\`\`performance\`\`\``,
-        },
-      ]
-    },
-  ],
-};
-
-export interface types {
-  (mode: 'osu' | 'fruits' | 'mania' | 'taiko', type: 'charts' | 'country' | 'performance' | 'score', obj: {
-    country?: number,
-    cursorPublished?: string,
-    cursorId?: number
-    filter?: 'all' | 'friends',
-    spotlight?: string,
-    variant?: 'all' | '4k' | '7k',
-  }): Promise<response>;
-};
-
 export interface response {
   cursor: {
     page: number;
   };
   ranking: {
+    count_100?: number;
+    count_300?: number;
+    count_50?: number;
+    count_miss?: number;
     level: {
       current: number;
       progress: number;
     };
     global_rank?: number;
+    global_rank_exp?: number;
     pp?: number;
+    pp_exp?: number;
     ranked_score: number;
     hit_accuracy?: number;
     play_count: number;
@@ -157,18 +86,16 @@ export interface response {
     play_count: number;
     preview_url: string;
     source: string;
+    spotlight: boolean;
     status: string;
     title: string;
     title_unicode: string;
     track_id?: string;
     user_id: number;
     video: boolean;
-    availability: {
-      download_disabled: boolean;
-      more_information: string;
-    };
     bpm: number;
     can_be_hyped: boolean;
+    deleted_at?: string;
     discussion_enabled: boolean;
     discussion_locked: boolean;
     is_scoreable: boolean;
@@ -183,6 +110,10 @@ export interface response {
     storyboard: boolean;
     submitted_date: string;
     tags: string;
+    availability: {
+      download_disabled: boolean;
+      more_information: string;
+    };
     has_favourited: boolean;
     beatmaps: {
       beatmapset_id: number;
@@ -226,15 +157,32 @@ export interface response {
 }
 
 
-
-const name: types = async (mode, type, obj) => {
-  const data = await request(`rankings/${mode}/${type}`, {
-    method: 'GET',
-    params: obj,
-  });
-
-  return data;
-};
-
-
-export default name;
+export interface types {
+  /**
+   * Gets the current ranking leaderboard for the specified type and game mode
+   * 
+   * ## Example 
+   * 
+   * ```js
+   * const { v2, auth } = require('osu-api-extended');
+   * 
+   * const main = async () => {
+   *   await auth.login(CLIENT_ID, CLIENT_SECRET);
+   *
+   *   const v2_site_leaderboard_details = await v2.site.leaderboard.details(mode, type, object);
+   *   console.log(v2_site_leaderboard_details);
+   * };
+   * 
+   * main();
+   * ```
+   * @param {string} mode ```osu``` or ```fruits``` or ```mania``` or ```taiko```
+   * @param {string} type ```charts``` or ```country``` or ```performance``` or ```score```
+   * @param {number} object.country Filter ranking by country code. Only available for ```type``` of ```performance```
+   * @param {string} object.cursorPublished Pagination cursorPublished
+   * @param {number} object.cursorId Pagination cursorId
+   * @param {string} object.filter ```all``` or ```friends```
+   * @param {string} object.spotlight The id of the spotlight if type is charts. Ranking for latest spotlight will be returned if not specified
+   * @param {string} object.variant Filter ranking to specified mode variant. For ```mode``` of ```mania```, it's either ```4k``` or ```7k```. Only available for ```type``` of ```performance```
+  */
+  (mode: 'osu' | 'fruits' | 'mania' | 'taiko' , type: 'charts' | 'country' | 'performance' | 'score' , object: {country?: number, cursorPublished?: string, cursorId?: number, filter?: 'all' | 'friends' , spotlight?: string, variant?: string, }): Promise<response>;
+}

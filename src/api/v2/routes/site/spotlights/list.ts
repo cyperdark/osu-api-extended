@@ -1,8 +1,12 @@
+import { types } from '../../../../../types/v2_site_spotlights_list';
+import { Description } from '../../../../../utility/types';
+
+
 import { namespace, RequestNamepsace } from "../../../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
 
-export const description: any = {
+export const description: Description = {
   auth: 1,
   title: __filename,
   method: 'GET',
@@ -11,28 +15,13 @@ export const description: any = {
   ],
 };
 
-export interface types {
-  (): Promise<response>;
-};
-
-export interface response {
-  spotlights: {
-    end_date: string;
-    id: number;
-    mode_specific: boolean;
-    name: string;
-    start_date: string;
-    type: string;
-  }[];
-}
-
-
 
 const name: types = async () => {
   const data = await request(`spotlights`, {
     method: 'GET',
   });
 
+  if (data.spotlights) return data.spotlights;
   return data;
 };
 
