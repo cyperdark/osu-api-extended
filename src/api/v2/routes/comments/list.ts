@@ -24,16 +24,21 @@ export const description: any = {
           description: 'id of the resource to get comments for',
         },
         {
-          type: 'number',
-          name: 'cursor.id',
-          optional: true,
-          description: '',
-        },
-        {
-          type: 'string',
-          name: 'cursor.created_at',
-          optional: true,
-          description: '',
+          name: 'cursor',
+          params: [
+            {
+              type: 'number',
+              name: 'id',
+              optional: true,
+              description: '',
+            },
+            {
+              type: 'string',
+              name: 'created_at',
+              optional: true,
+              description: '',
+            },
+          ]
         },
         {
           type: 'string',

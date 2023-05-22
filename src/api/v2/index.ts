@@ -278,13 +278,13 @@ export const assets = {
 
 
 import changelogs_list, { description as changelogs_list_desc } from "./routes/changelogs/list";
-import { types as changelogs_list_type } from "../../types/v2_forums_topic_new";
+import { types as changelogs_list_type } from "../../types/v2_changelogs_list";
 
 import changelogs_lookup, { description as changelogs_lookup_desc } from "./routes/changelogs/lookup";
-import { types as changelogs_lookup_type } from "../../types/v2_forums_topic_new";
+import { types as changelogs_lookup_type } from "../../types/v2_changelogs_lookup";
 
 import changelogs_details, { description as changelogs_details_desc } from "./routes/changelogs/details";
-import { types as changelogs_details_type } from "../../types/v2_forums_topic_new";
+import { types as changelogs_details_type } from "../../types/v2_changelogs_details";
 
 
 export type changelogs = {
@@ -297,6 +297,25 @@ export const changelogs = {
   list: changelogs_list,
   lookup: changelogs_lookup,
   details: changelogs_details,
+};
+
+
+
+import comments_list, { description as comments_list_desc } from "./routes/comments/list";
+import { types as comments_list_type } from "../../types/v2_forums_topic_new";
+
+import comments_details, { description as comments_details_desc } from "./routes/comments/details";
+import { types as comments_details_type } from "../../types/v2_forums_topic_new";
+
+
+export type comments = {
+  list: comments_list_type,
+  details: comments_details_type,
+};
+
+export const comments = {
+  list: comments_list,
+  details: comments_details,
 };
 
 
@@ -378,6 +397,10 @@ export const description = {
     list: changelogs_list_desc,
     lookup: changelogs_lookup_desc,
     details: changelogs_details_desc,
+  },
+  comments: {
+    list: comments_list_desc,
+    details: comments_details_desc,
   }
 };
 
