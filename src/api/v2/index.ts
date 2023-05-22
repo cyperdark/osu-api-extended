@@ -302,10 +302,10 @@ export const changelogs = {
 
 
 import comments_list, { description as comments_list_desc } from "./routes/comments/list";
-import { types as comments_list_type } from "../../types/v2_forums_topic_new";
+import { types as comments_list_type } from "../../types/v2_comments_list";
 
 import comments_details, { description as comments_details_desc } from "./routes/comments/details";
-import { types as comments_details_type } from "../../types/v2_forums_topic_new";
+import { types as comments_details_type } from "../../types/v2_comments_details";
 
 
 export type comments = {

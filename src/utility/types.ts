@@ -11,6 +11,7 @@ export interface Description {
 export interface Param {
   type?: string;
   name: string;
+  options?: boolean;
   optional?: boolean;
   description?: string;
   params?: Param[];
