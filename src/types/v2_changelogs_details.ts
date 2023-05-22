@@ -1,33 +1,3 @@
-import { namespace, RequestNamepsace } from "../../../../utility/request";
-const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
-
-
-export const description: any = {
-  auth: 1,
-  title: __filename,
-  method: 'GET',
-  description: 'Returns details of the specified build',
-  params: [
-    {
-      type: 'string',
-      name: 'stream',
-      optional: false,
-      description: '\`\`\`stable40\`\`\` or \`\`\`stable\`\`\` or \`\`\`beta40\`\`\` or \`\`\`cuttingedge\`\`\` or \`\`\`lazer\`\`\` or \`\`\`web\`\`\`',
-    },
-    {
-      type: 'string',
-      name: 'build',
-      options: false,
-      optional: false,
-      description: '\`\`\`id\`\`\` or \`\`\`name\`\`\` of the build',
-    },
-  ],
-};
-
-export interface types {
-  (stream: 'stable40' | 'stable' | 'beta40' | 'cuttingedge' | 'lazer' | 'web', build: string): Promise<response>;
-};
-
 export interface response {
   id: number;
   version: number;
@@ -63,6 +33,19 @@ export interface response {
     message_html?: string;
   }[];
   versions: {
+    next: {
+      id: number;
+      version: number;
+      display_version: number;
+      users: number;
+      created_at: string;
+      update_stream: {
+        id: number;
+        name: string;
+        display_name: string;
+        is_featured: boolean;
+      };
+    };
     previous: {
       id: number;
       version: number;
@@ -76,30 +59,31 @@ export interface response {
         is_featured: boolean;
       };
     };
-    next: {
-      id: number;
-      version: string;
-      display_version: string;
-      users: number;
-      created_at: string;
-      update_stream: {
-        id: number;
-        name: string;
-        display_name: string;
-        is_featured: boolean;
-      };
-    };
   };
+  error: string;
 }
 
 
-const name: types = async (stream, build) => {
-  const data = await request(`changelog/${stream}/${build}`, {
-    method: 'GET',
-  });
-
-  return data;
-};
-
-
-export default name;
+export interface types {
+  /**
+   * Returns details of the specified build
+   * 
+   * ## Example 
+   * 
+   * ```js
+   * const { v2, auth } = require('osu-api-extended');
+   * 
+   * const main = async () => {
+   *   await auth.login(CLIENT_ID, CLIENT_SECRET);
+   *
+   *   const v2_changelogs_details = await v2.changelogs.details(stream, build);
+   *   console.log(v2_changelogs_details);
+   * };
+   * 
+   * main();
+   * ```
+   * @param {string} stream ```stable40``` or ```stable``` or ```beta40``` or ```cuttingedge``` or ```lazer``` or ```web```
+   * @param {string} build ```id``` or ```name``` of the build
+  */
+  (stream: 'stable40' | 'stable' | 'beta40' | 'cuttingedge' | 'lazer' | 'web' , build: string): Promise<response[]>;
+}

@@ -36,7 +36,7 @@ export const description: any = {
           description: '\`\`\`stable40\`\`\` or \`\`\`stable\`\`\` or \`\`\`beta40\`\`\` or \`\`\`cuttingedge\`\`\` or \`\`\`lazer\`\`\` or \`\`\`web\`\`\`',
         },
         {
-          type: 'string array',
+          type: 'string[]',
           name: 'message_formats',
           optional: true,
           description: '\`\`\`html\`\`\` or \`\`\`markdown\`\`\`',
