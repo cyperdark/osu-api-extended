@@ -1,3 +1,4 @@
+import { types } from "../../../../types/v2_notifications_list";
 import { Description } from '../../../../utility/types';
 
 
@@ -21,49 +22,6 @@ export const description: Description = {
   ],
   return: 'response',
 };
-
-export interface types {
-  (max_id: number): Promise<response>;
-};
-
-export interface response {
-  notifications: {
-    id: number;
-    name: string;
-    created_at: string;
-    object_type: string;
-    object_id: number;
-    source_user_id: number;
-    is_read: boolean;
-    details: {
-      title: string;
-      username: string;
-      cover_url: string;
-      beatmapset_id: number;
-      title_unicode: string;
-      type: string;
-    };
-  }[];
-  stacks: {
-    category: string;
-    cursor?: string;
-    name: string;
-    object_type: string;
-    object_id: number;
-    total: number;
-  }[];
-  timestamp: string;
-  types: {
-    cursor: {
-      id: number;
-      type: string;
-    };
-    name: string;
-    total: number;
-  }[];
-  notification_endpoint: string;
-}
-
 
 
 const name: types = async (max_id) => {

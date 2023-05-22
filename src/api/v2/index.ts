@@ -445,7 +445,7 @@ export type room = {
   leaderboard: room_leaderboard_type,
 };
 
-export const room = {
+export const room: room = {
   details: room_details,
   leaderboard: room_leaderboard,
 };
@@ -453,7 +453,7 @@ export const room = {
 
 
 import notifications_list, { description as notifications_list_desc } from "./routes/notifications/list";
-import { types as notifications_list_type } from "../../types/v2_room_details";
+import { types as notifications_list_type } from "../../types/v2_notifications_list";
 
 import notifications_markAsReaded, { description as notifications_markAsReaded_desc } from "./routes/notifications/markAsReaded";
 import { types as notifications_markAsReaded_type } from "../../types/v2_room_leaderboard";
@@ -464,9 +464,52 @@ export type notifications = {
   // markAsReaded: notifications_markAsReaded_type, // TODO:
 };
 
-export const notifications = {
+export const notifications: notifications = {
   list: notifications_list,
   // markAsReaded: notifications_markAsReaded, // TODO:
+};
+
+
+
+import chat_channels_list, { description as chat_channels_list_desc } from "./routes/chat/channels/list";
+import { types as chat_channels_list_type } from "../../types/v2_chat_channels_list";
+
+import chat_channels_details, { description as chat_channels_details_desc } from "./routes/chat/channels/details";
+import { types as chat_channels_details_type } from "../../types/v2_chat_channels_details";
+
+import chat_channels_join, { description as chat_channels_join_desc } from "./routes/chat/channels/join";
+import { types as chat_channels_join_type } from "../../types/v2_chat_channels_join";
+
+import chat_channels_leave, { description as chat_channels_leave_desc } from "./routes/chat/channels/leave";
+import { types as chat_channels_leave_type } from "../../types/v2_chat_channels_leave";
+
+import chat_new, { description as chat_new_desc } from "./routes/chat/new";
+import { types as chat_new_type } from "../../types/v2_chat_new";
+
+import chat_updates, { description as chat_updates_desc } from "./routes/chat/updates";
+import { types as chat_updates_type } from "../../types/v2_chat_updates";
+
+
+export type chat = {
+  new: chat_new_type,
+  updates: chat_updates_type,
+  channels: {
+    list: chat_channels_list_type,
+    join: chat_channels_join_type,
+    leave: chat_channels_leave_type,
+    details: chat_channels_details_type,
+  },
+};
+
+export const chat = {
+  new: chat_new,
+  updates: chat_updates,
+  channels: {
+    list: chat_channels_list,
+    join: chat_channels_join,
+    leave: chat_channels_leave,
+    details: chat_channels_details,
+  },
 };
 
 
@@ -587,6 +630,16 @@ export const description = {
   notifications: {
     list: notifications_list_desc,
     markAsReaded: notifications_markAsReaded_desc,
+  },
+  chat: {
+    new: chat_new_desc,
+    updates: chat_updates_desc,
+    channels: {
+      list: chat_channels_list_desc,
+      join: chat_channels_join_desc,
+      leave: chat_channels_leave_desc,
+      details: chat_channels_details_desc,
+    },
   },
 };
 

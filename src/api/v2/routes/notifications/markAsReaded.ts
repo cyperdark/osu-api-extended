@@ -1,9 +1,12 @@
+// import { types } from "../../../../types/v2_notifications_list";
+import { Description } from '../../../../utility/types';
+
+
 import { namespace, RequestNamepsace } from "../../../../utility/request";
 const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
 
 
-export const description: any = {
-  type: false,
+export const description: Description = {
   auth: 1,
   title: __filename,
   method: 'POST',
