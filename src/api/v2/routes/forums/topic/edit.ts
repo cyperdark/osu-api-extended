@@ -46,7 +46,7 @@ const name: types = async (topic_id, object) => {
     method: 'GET',
   });
 
-  const response: response = {};
+  const response: any = {};
 
   if (object.title) {
     const data = await request(`forums/topics/${topic_id}`, {

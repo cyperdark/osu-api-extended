@@ -1,4 +1,4 @@
-import { types } from '../../../../../types/v2_site_leaderboard_details';
+import { types } from '../../../../../types/v2_site_ranking_details';
 import { Description } from '../../../../../utility/types';
 
 
