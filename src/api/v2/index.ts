@@ -169,7 +169,7 @@ export const comments = {
 import site_search, { description as site_search_desc } from "./routes/site/search";
 import site_wiki, { description as site_wiki_desc } from "./routes/site/wiki";
 import site_spotlights_list, { description as site_spotlights_list_desc } from "./routes/site/spotlights/list";
-import site_leaderboard_details, { description as site_leaderboard_details_desc } from "./routes/site/leaderboard/details";
+import site_ranking_details, { description as site_ranking_details_desc } from "./routes/site/ranking/details";
 import site_news_list, { description as site_news_list_desc } from "./routes/site/news/list";
 import site_news_details, { description as site_news_details_desc } from "./routes/site/news/details";
 
@@ -179,8 +179,8 @@ export const site = {
   spotlights: {
     list: site_spotlights_list,
   },
-  leaderboard: {
-    details: site_leaderboard_details,
+  ranking: {
+    details: site_ranking_details,
   },
   news: {
     list: site_news_list,
@@ -349,8 +349,8 @@ export const description = {
     spotlights: {
       list: site_spotlights_list_desc,
     },
-    leaderboard: {
-      details: site_leaderboard_details_desc,
+    ranking: {
+      details: site_ranking_details_desc,
     },
     news: {
       list: site_news_list_desc,

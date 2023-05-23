@@ -169,8 +169,8 @@ export interface types {
    * const main = async () => {
    *   await auth.login(CLIENT_ID, CLIENT_SECRET);
    *
-   *   const v2_site_leaderboard_details = await v2.site.leaderboard.details(mode, type, object);
-   *   console.log(v2_site_leaderboard_details);
+   *   const v2_site_ranking_details = await v2.site.ranking.details(mode, type, object);
+   *   console.log(v2_site_ranking_details);
    * };
    * 
    * main();
