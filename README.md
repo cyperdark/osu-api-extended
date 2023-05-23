@@ -11,8 +11,17 @@
 
 ## Installation
 
+### npm
 ```
 npm i osu-api-extended
+```
+### yarn
+```
+yarn install osu-api-extended
+```
+### pnpm
+```
+pnpm install osu-api-extended
 ```
 
 <br>
