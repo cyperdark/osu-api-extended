@@ -21,5 +21,5 @@ export interface types {
    * main();
    * ```
   */
-  (): Promise<response[]>;
+  (): Promise<response>;
 }

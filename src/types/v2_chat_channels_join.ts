@@ -29,12 +29,14 @@ export interface types {
    * const main = async () => {
    *   await auth.login_lazer(USERNAME, USER_PASSWORD);
    *
-   *   const v2_chat_channels_join = await v2.chat.channels.join();
+   *   const v2_chat_channels_join = await v2.chat.channels.join(channel_id, user_id);
    *   console.log(v2_chat_channels_join);
    * };
    * 
    * main();
    * ```
+   * @param {number} channel_id Channel id
+   * @param {number} user_id User id
   */
-  (): Promise<response[]>;
+  (channel_id: number, user_id: number): Promise<response>;
 }

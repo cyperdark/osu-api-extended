@@ -105,9 +105,9 @@ export interface types {
    * 
    * main();
    * ```
-   * @param {number} object.id 
-   * @param {string} object.checksum 
-   * @param {string} object.filename 
+   * @param {number} object.id id of the beatmap
+   * @param {string} object.checksum md5 of the beatmap file
+   * @param {string} object.filename file name of the beatmap
   */
   (object: {id?: number, checksum?: string, filename?: string, }): Promise<response[]>;
 }

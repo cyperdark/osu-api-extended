@@ -82,11 +82,11 @@ export interface types {
    * 
    * main();
    * ```
-   * @param {string} object.from 
-   * @param {string} object.to 
-   * @param {number} object.max_id 
-   * @param {string} object.stream 
-   * @param {string[]} object.message_formats 
+   * @param {string} object.from Minimum build version
+   * @param {string} object.to Maximum build version
+   * @param {number} object.max_id Maximum build ID
+   * @param {string} object.stream ```stable40``` or ```stable``` or ```beta40``` or ```cuttingedge``` or ```lazer``` or ```web```
+   * @param {string[]} object.message_formats ```html``` or ```markdown```
   */
   (object: {from?: string, to?: string, max_id?: number, stream?: 'stable40' | 'stable' | 'beta40' | 'cuttingedge' | 'lazer' | 'web' , message_formats?: ['html' | 'markdown' ], }): Promise<response[]>;
 }

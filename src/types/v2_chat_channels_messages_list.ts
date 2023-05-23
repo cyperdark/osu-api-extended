@@ -1,6 +1,6 @@
 export interface response {
   channel_id: number;
-  content: string;
+  content: number;
   is_action: boolean;
   message_id: number;
   sender_id: number;

@@ -273,5 +273,5 @@ export interface types {
    * ```
    * @param {string} mode ```osu``` or ```fruits``` or ```mania``` or ```taiko```
   */
-  (mode?: string): Promise<response[]>;
+  (mode?: 'osu' | 'fruits' | 'mania' | 'taiko' ): Promise<response>;
 }

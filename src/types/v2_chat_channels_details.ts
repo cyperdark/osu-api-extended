@@ -22,7 +22,7 @@ export interface response {
 
 export interface types {
   /**
-   * Return details about specified channel
+   * Return details about specified channel (only channel that you joined to)
    * 
    * ## Example 
    * 

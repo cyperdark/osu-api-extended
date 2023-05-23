@@ -23,7 +23,7 @@ export interface response {
 
 export interface types {
   /**
-   * Return array of backgrounds
+   * Return array of seasonal backgrounds
    * 
    * ## Example 
    * 
@@ -40,5 +40,5 @@ export interface types {
    * main();
    * ```
   */
-  (): Promise<response[]>;
+  (): Promise<response>;
 }

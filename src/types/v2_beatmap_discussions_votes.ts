@@ -74,13 +74,13 @@ export interface types {
    * 
    * main();
    * ```
-   * @param {number} object.beatmapset_discussion_id 
-   * @param {number} object.limit 
-   * @param {number} object.page 
-   * @param {number} object.receiver 
-   * @param {number} object.score 
-   * @param {string} object.sort 
-   * @param {number} object.user 
+   * @param {number} object.beatmapset_discussion_id id of beatmap set id
+   * @param {number} object.limit Maximum number of results
+   * @param {number} object.page Search page
+   * @param {number} object.receiver id of the user
+   * @param {number} object.score ```1``` for up vote, ```-1``` for down vote
+   * @param {string} object.sort ```id_desc``` or ```id_asc```
+   * @param {number} object.user id of the user
   */
   (object: {beatmapset_discussion_id?: number, limit?: number, page?: number, receiver?: number, score?: '1 for up vote, -1 for down vote' , sort?: 'id_desc' | 'id_asc' , user?: number, }): Promise<response[]>;
 }

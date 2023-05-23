@@ -97,12 +97,12 @@ export interface types {
    * 
    * main();
    * ```
-   * @param {number} object.beatmapset_discussion_id 
-   * @param {number} object.limit 
-   * @param {number} object.page 
-   * @param {string} object.sort 
-   * @param {string[]} object.types 
-   * @param {number} object.user 
+   * @param {number} object.beatmapset_discussion_id id of beatmap set id
+   * @param {number} object.limit Maximum number of results
+   * @param {number} object.page Search page
+   * @param {string} object.sort ```id_desc``` or ```id_asc```
+   * @param {string[]} object.types ```first``` or ```replay``` or ```system```
+   * @param {number} object.user id of the user
   */
   (object: {beatmapset_discussion_id?: number, limit?: number, page?: number, sort?: 'id_desc' | 'id_asc' , types?: ['first' | 'replay' | 'system' ], user?: number, }): Promise<response[]>;
 }

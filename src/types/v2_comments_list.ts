@@ -1,7 +1,7 @@
 export interface response {
   comments: {
     id: number;
-    parent_id?: string;
+    parent_id?: number;
     user_id: number;
     pinned: boolean;
     replies_count: number;

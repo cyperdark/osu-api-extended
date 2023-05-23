@@ -63,8 +63,8 @@ export interface types {
    * main();
    * ```
    * @param {number} user id of the user
-   * @param {number} object.limit 
-   * @param {number} object.offset 
+   * @param {number} object.limit Maximum number of results
+   * @param {number} object.offset Result offset for pagination
   */
-  (user: number, object: {limit?: number, offset?: number, }): Promise<response>;
+  (user: number, object: {limit?: number, offset?: number, }): Promise<response[]>;
 }

@@ -50,14 +50,14 @@ export interface types {
    * main();
    * ```
    * @param {number} forum_id Forum id
-   * @param {string} object.title 
-   * @param {string} object.body 
-   * @param {string} poll.title 
-   * @param {string[]} poll.options 
-   * @param {boolean} poll.hide_results 
-   * @param {number} poll.length_days 
-   * @param {number} poll.max_options 
-   * @param {boolean} poll.vote_change 
+   * @param {string} object.title Title of the topic
+   * @param {string} object.body Body of the topic
+   * @param {string} poll.title Title of the poll.
+   * @param {string[]} poll.options Newline-separated list of voting options. BBCode is supported.
+   * @param {boolean} poll.hide_results Hide results of the poll until voting period ends
+   * @param {number} poll.length_days Number of days for voting period. 0 means the voting will never ends (default: 0). This parameter is required if hide_results option is enabled.
+   * @param {number} poll.max_options This is the number of options each user may select when voting.
+   * @param {boolean} poll.vote_change Enable this to allow user to change their votes (default: false).
   */
-  (forum_id: number, object: {title: string, body: string, }, poll?: {title: string, options: string[], hide_results?: boolean, length_days?: number, max_options?: number, vote_change?: boolean, }): Promise<response>;
+  (forum_id: number, object: {title: string, body: string, }, poll: {title: string, options: string[], hide_results?: boolean, length_days?: number, max_options?: number, vote_change?: boolean, }): Promise<response>;
 }

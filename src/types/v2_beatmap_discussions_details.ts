@@ -209,15 +209,15 @@ export interface types {
    * 
    * main();
    * ```
-   * @param {number} object.beatmap_id 
-   * @param {number} object.beatmapset_id 
-   * @param {string} object.beatmapset_status 
-   * @param {number} object.limit 
-   * @param {string[]} object.message_types 
-   * @param {boolean} object.only_unresolved 
-   * @param {number} object.page 
-   * @param {string} object.sort 
-   * @param {number} object.user 
+   * @param {number} object.beatmap_id beatmap id
+   * @param {number} object.beatmapset_id beatmapset id
+   * @param {string} object.beatmapset_status ```all``` or ```ranked``` or ```qualified``` or ```disqualified``` or ```never_qualified``` or ```loved```
+   * @param {number} object.limit Maximum number of results
+   * @param {string[]} object.message_types ```suggestion``` or ```problem``` or ```mapper_note``` or ```praise``` or ```hype``` or ```review``` or ```all```
+   * @param {boolean} object.only_unresolved ```true``` or ```false```
+   * @param {number} object.page Search result page
+   * @param {string} object.sort ```id_desc``` or ```id_asc```
+   * @param {number} object.user id of the user
   */
   (object: {beatmap_id?: number, beatmapset_id?: number, beatmapset_status?: 'all' | 'ranked' | 'qualified' | 'disqualified' | 'never_qualified' | 'loved' , limit?: number, message_types?: ['suggestion' | 'problem' | 'mapper_note' | 'praise' | 'hype' | 'review' | 'all' ], only_unresolved?: 'true' | 'false' , page?: number, sort?: 'id_desc' | 'id_asc' , user?: number, }): Promise<response[]>;
 }
