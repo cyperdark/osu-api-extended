@@ -15,6 +15,11 @@
 npm i osu-api-extended
 ```
 
+<br>
+<h2 align="center">IF SOME ENDPOINTS NOT WORKING, dm me in discord: cyperdark#6890</h2>
+<br>
+
+
 ### API V1
 
 You can [get your api key here](https://osu.ppy.sh/p/api 'https://osu.ppy.sh/p/api')
@@ -49,7 +54,7 @@ const main = async () => {
   // Auth via oauth2
   await auth.authorize('CLIENT_ID', 'CLIENT_SECRET', 'CALLBACK_URL')
 
-  const data = await v2.beatmap.diff(1256136)
+  const data = await v2.v2.beatmap.id.details(1256136)
   console.log(data)
 }
 
