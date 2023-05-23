@@ -22,7 +22,7 @@ export interface response {
     id: string;
   };
   groups: {
-    colour: string;
+    colour?: string;
     has_listing: boolean;
     has_playmodes: boolean;
     id: number;
@@ -85,5 +85,5 @@ export interface types {
    * main();
    * ```
   */
-  (): Promise<response>;
+  (): Promise<response[]>;
 }

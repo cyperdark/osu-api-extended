@@ -167,5 +167,5 @@ export interface types {
    * @param {string|number} mode ```osu``` or ```fruits``` or ```mania``` or ```taiko```
    * @param {string|number} key ```id``` or ```username```
   */
-  (user: string | number, mode?: string | number, key?: string | number): Promise<response[]>;
+  (user: string | number, mode?: 'osu' | 'fruits' | 'mania' | 'taiko' , key?: 'id' | 'username' ): Promise<response>;
 }

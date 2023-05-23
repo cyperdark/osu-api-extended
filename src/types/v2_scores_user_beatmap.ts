@@ -53,9 +53,9 @@ export interface types {
    * ```
    * @param {number} beatmap id of the beatmap
    * @param {string|number} user id of the user
-   * @param {string} object.mode 
-   * @param {string[]} object.mods 
-   * @param {boolean} object.best_only 
+   * @param {string} object.mode ```osu``` or ```fruits``` or ```mania``` or ```taiko```
+   * @param {string[]} object.mods Array of matching mods ['HD', 'DT']
+   * @param {boolean} object.best_only Return only best score from the beatmap
   */
   (beatmap: number, user?: string | number, object?: {mode?: 'osu' | 'fruits' | 'mania' | 'taiko' , mods?: string[], best_only?: boolean, }): Promise<response[]>;
 }

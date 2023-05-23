@@ -111,10 +111,10 @@ export interface types {
    * 
    * main();
    * ```
-   * @param {string|number} object.user 
-   * @param {string[]} object.types 
-   * @param {string} object.min_date 
-   * @param {string} object.max_date 
+   * @param {string|number} object.user id of the user
+   * @param {string[]} object.types ```nominate``` or ```qualify``` or ```rank``` or ```love``` or ```nomination_reset``` or ```nomination_reset_received``` or ```disqualify``` or ```remove_from_loved``` or ```kudosu_gain``` or ```kudosu_lost``` or ```genre_edit``` or ```language_edit``` or ```nsfw_toggle``` or ```offset_edit``` or ```issue_resolve``` or ```issue_reopen``` or ```beatmap_owner_change``` or ```kudosu_allow``` or ```kudosu_deny``` or ```approve``` or ```kudosu_recalculate``` or ```discussion_delete``` or ```discussion_restore``` or ```discussion_post_delete``` or ```discussion_post_restore```
+   * @param {string} object.min_date Date from
+   * @param {string} object.max_date Date to
   */
   (object: {user?: string | number, types?: ['nominate' | 'qualify' | 'rank' | 'love' | 'nomination_reset' | 'nomination_reset_received' | 'disqualify' | 'remove_from_loved' | 'kudosu_gain' | 'kudosu_lost' | 'genre_edit' | 'language_edit' | 'nsfw_toggle' | 'offset_edit' | 'issue_resolve' | 'issue_reopen' | 'beatmap_owner_change' | 'kudosu_allow' | 'kudosu_deny' | 'approve' | 'kudosu_recalculate' | 'discussion_delete' | 'discussion_restore' | 'discussion_post_delete' | 'discussion_post_restore' ], min_date?: string, max_date?: string, }): Promise<response[]>;
 }

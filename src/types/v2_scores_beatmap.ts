@@ -73,9 +73,9 @@ export interface types {
    * main();
    * ```
    * @param {number} beatmap id of the beatmap
-   * @param {string} object.mode 
-   * @param {string[]} object.mods 
-   * @param {string} object.type 
+   * @param {string} object.mode ```osu``` or ```fruits``` or ```mania``` or ```taiko```
+   * @param {string[]} object.mods Array of matching mods ['HD', 'DT']
+   * @param {string} object.type ```global``` or ```country``` or ```friend```
   */
   (beatmap: number, object: {mode?: 'osu' | 'fruits' | 'mania' | 'taiko' , mods?: string[], type?: 'global' | 'country' | 'friend' , }): Promise<response[]>;
 }

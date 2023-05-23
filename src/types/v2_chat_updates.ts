@@ -16,7 +16,10 @@ export interface response {
     last_read_id?: number;
     users: number[];
   }[];
-  silences: [];
+  silences: {
+    id: number;
+    user_id: number;
+  }[];
   messages: [];
 }
 
@@ -39,10 +42,9 @@ export interface types {
    * 
    * main();
    * ```
-   * @param {number} object.channel_id Messages after the specified message_id to return
    * @param {number} object.history_since UserSilence after the specified id to return
    * @param {string[]} object.includes ```presence```, ```messages```, ```silences```
    * @param {number} object.since Messages after the specified message_id to return
   */
-  (object: { channel_id?: number, history_since?: number, includes?: ['presence, messages, silences'], since: number, }): Promise<response>;
+  (object: {history_since?: number, includes?: ['presence, messages, silences' ], since: number, }): Promise<response>;
 }

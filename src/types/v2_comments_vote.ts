@@ -21,7 +21,7 @@ export interface response {
   has_more_id: string;
   included_comments: [];
   pinned_comments: [];
-  user_votes: [];
+  user_votes: number[];
   user_follow: boolean;
   users: {
     avatar_url: string;
@@ -40,7 +40,6 @@ export interface response {
   }[];
   sort: string;
   cursor: {
-    votes_count: number;
     created_at: string;
     id: number;
   };

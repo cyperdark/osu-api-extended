@@ -177,5 +177,5 @@ export interface types {
    * ```
    * @param {number[]} ids ids of the users (limit 50 users per request)
   */
-  (ids: number[]): Promise<response>;
+  (ids: number[]): Promise<response[]>;
 }

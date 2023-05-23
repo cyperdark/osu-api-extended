@@ -3,6 +3,8 @@ export interface response {
   createdAt: string;
   id: number;
   type: string;
+  scoreRank: string;
+  rank: number;
   mode: string;
   beatmap: {
     title: string;
@@ -12,8 +14,10 @@ export interface response {
     username: string;
     url: string;
   };
-  scoreRank: string;
-  rank: number;
+  beatmapset: {
+    title: string;
+    url: string;
+  };
   achievement: {
     icon_url: string;
     id: number;
@@ -24,11 +28,6 @@ export interface response {
     description: string;
     mode: string;
     instructions: string;
-  };
-  approval: string;
-  beatmapset: {
-    title: string;
-    url: string;
   };
 }
 
@@ -52,8 +51,8 @@ export interface types {
    * main();
    * ```
    * @param {number} user id of the user
-   * @param {number} object.limit 
-   * @param {string} object.offset 
+   * @param {number} object.limit Maximum number of results
+   * @param {string} object.offset Result offset for pagination
   */
-  (user: number, object: {limit?: number, offset?: string, }): Promise<response>;
+  (user: number, object: {limit?: number, offset?: string, }): Promise<response[]>;
 }

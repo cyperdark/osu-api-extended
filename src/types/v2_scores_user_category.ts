@@ -128,10 +128,10 @@ export interface types {
    * ```
    * @param {number} user id of the user
    * @param {string} type ```recent``` or ```best``` or ```firsts``` or ```pinned```
-   * @param {string} object.include_fails 
-   * @param {string} object.mode 
-   * @param {string} object.limit 
-   * @param {string} object.offset 
+   * @param {string} object.include_fails Only for ```recent``` scores, include scores of failed plays. Set to ```1``` to include them. Defaults to ```0```
+   * @param {string} object.mode ```osu``` or ```fruits``` or ```mania``` or ```taiko```
+   * @param {string} object.limit Maximum number of results
+   * @param {string} object.offset Result offset for pagination
   */
-  (user: number, type: 'recent' | 'best' | 'firsts' | 'pinned' , object: {include_fails?: 'Only f' | 'recent sc' | 'es, include sc' | 'es of failed plays. Set to 1 to include them. Defaults to 0' , mode?: 'osu' | 'fruits' | 'mania' | 'taiko' , limit?: string, offset?: string, }): Promise<response[]>;
+  (user: number, type: 'recent' | 'best' | 'firsts' | 'pinned' , object: {include_fails?: 'Only for recent scores, include scores of failed plays. Set to 1 to include them. Defaults to 0' , mode?: 'osu' | 'fruits' | 'mania' | 'taiko' , limit?: string, offset?: string, }): Promise<response[]>;
 }

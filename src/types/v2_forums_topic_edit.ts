@@ -1,5 +1,5 @@
 export interface response {
-  title?: {
+  title: {
     created_at: string;
     deleted_at: string;
     first_post_id: number;
@@ -14,7 +14,7 @@ export interface response {
     user_id: number;
     poll: string;
   };
-  body?: {
+  body: {
     created_at: string;
     deleted_at: string;
     edited_at: string;
@@ -33,7 +33,7 @@ export interface response {
 
 export interface types {
   /**
-   * Return topic data and posts list
+   * Edit your topic and post from the forum
    * 
    * ## Example 
    * 
@@ -50,8 +50,8 @@ export interface types {
    * main();
    * ```
    * @param {number} topic_id Topic id
-   * @param {string} object.title 
-   * @param {string} object.body 
+   * @param {string} object.title New title
+   * @param {string} object.body New body
   */
-  (topic_id: number, object?: {title?: string, body?: string, }): Promise<response>;
+  (topic_id: number, object: {title?: string, body?: string, }): Promise<response>;
 }
