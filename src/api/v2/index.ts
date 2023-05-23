@@ -388,3 +388,35 @@ export const description = {
     },
   },
 };
+
+
+
+/*
+POST /chat/ack
+POST /chat/channels
+GET /chat/presence
+
+POST /rooms
+GET /rooms/{room}/playlist/{playlist}/scores/users/{user}
+GET /rooms/{room}/playlist/{playlist}/scores
+GET /rooms/{room}/playlist/{playlist}/scores/{score}
+PUT /rooms/{room}/users/{user}
+DELETE /rooms/{room}/users/{user}
+POST /rooms/{room}/playlist/{playlist}/scores
+PUT /rooms/{room}/playlist/{playlist}/scores/{score}
+
+POST /beatmaps/{beatmap}/solo/scores
+PUT /beatmaps/{beatmap}/solo/scores/{token}
+
+POST /reports
+
+
+
+
+
+
+
+
+
+
+*/
