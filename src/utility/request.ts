@@ -104,15 +104,21 @@ export const download = (url: string, dest: string, { headers, data, params }: R
     res(dest);
   });
 
-  if (url.includes('https://osu.ppy.sh/api/v2')) headers = {
-    Authorization: `Bearer ${auth.cache_v2}`,
-    Accept: `application/octet-stream`,
-    'Content-Type': `application/octet-stream`,
-  };
 
-  console.log('\n', url, headers, data, o(params), '\n'); // debug too
+  if (!headers) headers = {};
+  if (url.includes('https://osu.ppy.sh/api/v2')) {
+    headers['Authorization'] = `Bearer ${auth.cache_v2}`;
+  };
+  headers['accept'] = `application/octet-stream`;
+  headers['content-Type'] = `application/octet-stream`;
+
+  
+  // console.log('\n', url, headers, data, o(params), '\n'); // debug too
   const req = https.request(url + (params ? '?' + o(params) : ''), { method: 'GET', headers }, response => {
     const { location } = response.headers;
+
+    // console.log(response.headers);
+    
 
     if (location) {
       const redirect = download(location, dest, { headers, data, params }, callback);
