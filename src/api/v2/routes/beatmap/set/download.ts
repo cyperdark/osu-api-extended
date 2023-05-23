@@ -1,7 +1,10 @@
+import { types } from '../../../../../types/v2_beatmap_set_download';
+import { Description } from '../../../../../utility/types';
+
 import { download } from "../../../../../utility/request";
 
 
-export const description: any = {
+export const description: Description = {
   auth: 0,
   title: __filename,
   method: 'GET',
@@ -20,6 +23,18 @@ export const description: any = {
       description: 'path to file with their name and extension',
     },
     {
+      type: 'string',
+      name: 'host_name',
+      optional: false,
+      description: '\`\`\`osu\`\`\` or \`\`\`chimu\`\`\` or \`\`\`beatconnect\`\`\` or \`\`\`sayobot\`\`\` or \`\`\`nerinyan\`\`\` or ',
+    },
+    {
+      type: 'boolean',
+      name: 'no_video',
+      optional: false,
+      description: 'Download with or without video',
+    },
+    {
       type: 'Function',
       name: 'callback',
       optional: true,
@@ -29,14 +44,41 @@ export const description: any = {
   return: 'string',
 };
 
-export interface types {
-  (beatmapset: number, file_path: string, callback: Function): Promise<string>;
-};
 
+const name: types = async (beatmapset, file_path, host_name, no_video, callback) => {
+  let url = '';
 
-const name: types = async (beatmapset, file_path, callback) => {
-  const data = await download(`https://osu.ppy.sh/api/v2/beatmapsets/${beatmapset}/download`, file_path, {}, callback);
+  switch (host_name) {
+    case 'osu':
+      url = `https://osu.ppy.sh/api/v2/beatmapsets/${beatmapset}/download${no_video ? '?noVideo=1' : ''}`;
+      break;
 
+    case 'chimu':
+      url = `https://chimu.moe/v1/download/${beatmapset}`;
+      break;
+
+    case 'beatconnect':
+      url = `https://beatconnect.io/b/${beatmapset}/`;
+      break;
+
+    case 'sayobot':
+      url = `https://dl.sayobot.cn/beatmaps/download/${no_video ? 'novideo' : 'full'}/${beatmapset}`;
+      break;
+
+    case 'nerinyan':
+      url = `https://api.nerinyan.moe/d/${beatmapset}${no_video ? '?nv=1' : ''}`;
+      break;
+
+    default:
+      url = `https://osu.ppy.sh/api/v2/beatmapsets/${beatmapset}/download${no_video ? '?noVideo=1' : ''}`;
+      break;
+  };
+
+  const data = await download(url, file_path, {
+    headers: {
+      "Referer": "https://osu.ppy.sh/",
+    }
+  }, callback);
   return data;
 };
 
