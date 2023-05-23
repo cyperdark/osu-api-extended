@@ -18,7 +18,10 @@ npm i osu-api-extended
 <br>
 <h2 align="center">IF SOME ENDPOINTS NOT WORKING, dm me in discord: cyperdark#6890</h2>
 <br>
+<br>
 
+
+<h2 align="center">You need to login only once on application start (auto renew token for v2)</h2>
 
 ### API V1
 
