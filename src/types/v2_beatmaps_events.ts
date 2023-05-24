@@ -116,5 +116,5 @@ export interface types {
    * @param {string} object.min_date Date from
    * @param {string} object.max_date Date to
   */
-  (object: {user?: string | number, types?: ['nominate' | 'qualify' | 'rank' | 'love' | 'nomination_reset' | 'nomination_reset_received' | 'disqualify' | 'remove_from_loved' | 'kudosu_gain' | 'kudosu_lost' | 'genre_edit' | 'language_edit' | 'nsfw_toggle' | 'offset_edit' | 'issue_resolve' | 'issue_reopen' | 'beatmap_owner_change' | 'kudosu_allow' | 'kudosu_deny' | 'approve' | 'kudosu_recalculate' | 'discussion_delete' | 'discussion_restore' | 'discussion_post_delete' | 'discussion_post_restore' ], min_date?: string, max_date?: string, }): Promise<response[]>;
+  (object: {user?: string | number, types?: ['nominate' | 'qualify' | 'rank' | 'love' | 'nomination_reset' | 'nomination_reset_received' | 'disqualify' | 'remove_from_loved' | 'kudosu_gain' | 'kudosu_lost' | 'genre_edit' | 'language_edit' | 'nsfw_toggle' | 'offset_edit' | 'issue_resolve' | 'issue_reopen' | 'beatmap_owner_change' | 'kudosu_allow' | 'kudosu_deny' | 'approve' | 'kudosu_recalculate' | 'discussion_delete' | 'discussion_restore' | 'discussion_post_delete' | 'discussion_post_restore' ], min_date?: string, max_date?: string, }): Promise<response>;
 }

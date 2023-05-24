@@ -73,5 +73,5 @@ export interface types {
    * @param {string} object.key Unset to query by build version or stream name, or ```id``` to query by build ID.
    * @param {string[]} object.message_formats ```html``` or ```markdown```
   */
-  (changelog: string | number, object: {key: string, message_formats: ['html' | 'markdown' ], }): Promise<response[]>;
+  (changelog: string | number, object: {key: string, message_formats: ['html' | 'markdown' ], }): Promise<response>;
 }

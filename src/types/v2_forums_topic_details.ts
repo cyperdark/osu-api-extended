@@ -84,5 +84,5 @@ export interface types {
    * @param {string} object.start First post id to be returned with sort set to id_asc. This parameter is ignored if cursor_string is specified
    * @param {string} object.end Last post id to be returned with sort set to id_desc. This parameter is ignored if cursor_string is specified.
   */
-  (topic: number, object: {cursor_string?: string, sort?: 'id_asc' | 'id_desc' , limit?: number, start?: string, end?: string, }): Promise<response[]>;
+  (topic: number, object: {cursor_string?: string, sort?: 'id_asc' | 'id_desc' , limit?: number, start?: string, end?: string, }): Promise<response>;
 }

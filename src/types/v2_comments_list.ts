@@ -101,5 +101,5 @@ export interface types {
    * @param {string} object.parent_id id of the comment parent
    * @param {string} object.sort ```new``` or ```old``` or ```top```
   */
-  (object: {commentable_type?: 'news_post' | 'beatmapset' , commentable_id?: string, cursor: {id?: number, created_at?: string, }, parent_id?: string, sort?: 'new' | 'old' | 'top' , }): Promise<response[]>;
+  (object: {commentable_type?: 'news_post' | 'beatmapset' , commentable_id?: string, cursor: {id?: number, created_at?: string, }, parent_id?: string, sort?: 'new' | 'old' | 'top' , }): Promise<response>;
 }

@@ -94,5 +94,5 @@ export interface types {
    * ```
    * @param {number} comment id of the comment
   */
-  (comment: number): Promise<response[]>;
+  (comment: number): Promise<response>;
 }

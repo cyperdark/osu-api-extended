@@ -41,5 +41,5 @@ export interface types {
    * @param {string} body.ruleset ```osu``` or ```fruits``` or ```mania``` or ```taiko```
    * @param {number} body.ruleset_id ```0``` or ```1``` or ```2``` or ```3```
   */
-  (beatmap_id: number, body: {mods?: string[] | number, ruleset?: 'osu' | 'fruits' | 'mania' | 'taiko' , ruleset_id?: '0' | '1' | '2' | '3' , }): Promise<response[]>;
+  (beatmap_id: number, body: {mods?: string[] | number, ruleset?: 'osu' | 'fruits' | 'mania' | 'taiko' , ruleset_id?: '0' | '1' | '2' | '3' , }): Promise<response>;
 }

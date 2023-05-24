@@ -88,5 +88,5 @@ export interface types {
    * @param {string} object.stream ```stable40``` or ```stable``` or ```beta40``` or ```cuttingedge``` or ```lazer``` or ```web```
    * @param {string[]} object.message_formats ```html``` or ```markdown```
   */
-  (object: {from?: string, to?: string, max_id?: number, stream?: 'stable40' | 'stable' | 'beta40' | 'cuttingedge' | 'lazer' | 'web' , message_formats?: ['html' | 'markdown' ], }): Promise<response[]>;
+  (object: {from?: string, to?: string, max_id?: number, stream?: 'stable40' | 'stable' | 'beta40' | 'cuttingedge' | 'lazer' | 'web' , message_formats?: ['html' | 'markdown' ], }): Promise<response>;
 }

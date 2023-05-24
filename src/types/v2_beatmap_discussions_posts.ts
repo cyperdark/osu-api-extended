@@ -104,5 +104,5 @@ export interface types {
    * @param {string[]} object.types ```first``` or ```replay``` or ```system```
    * @param {number} object.user id of the user
   */
-  (object: {beatmapset_discussion_id?: number, limit?: number, page?: number, sort?: 'id_desc' | 'id_asc' , types?: ['first' | 'replay' | 'system' ], user?: number, }): Promise<response[]>;
+  (object: {beatmapset_discussion_id?: number, limit?: number, page?: number, sort?: 'id_desc' | 'id_asc' , types?: ['first' | 'replay' | 'system' ], user?: number, }): Promise<response>;
 }

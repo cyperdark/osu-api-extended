@@ -144,5 +144,5 @@ export interface types {
    * ```
    * @param {number} match id of the match
   */
-  (match: number): Promise<response[]>;
+  (match: number): Promise<response>;
 }

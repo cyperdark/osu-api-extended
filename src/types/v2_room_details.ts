@@ -138,5 +138,5 @@ export interface types {
    * ```
    * @param {number} room_id Id of the room
   */
-  (room_id: number): Promise<response[]>;
+  (room_id: number): Promise<response>;
 }
