@@ -82,5 +82,5 @@ export interface types {
    * @param {string} object.sort ```id_desc``` or ```id_asc```
    * @param {number} object.user id of the user
   */
-  (object: {beatmapset_discussion_id?: number, limit?: number, page?: number, receiver?: number, score?: '1 for up vote, -1 for down vote' , sort?: 'id_desc' | 'id_asc' , user?: number, }): Promise<response[]>;
+  (object: {beatmapset_discussion_id?: number, limit?: number, page?: number, receiver?: number, score?: '1 for up vote, -1 for down vote' , sort?: 'id_desc' | 'id_asc' , user?: number, }): Promise<response>;
 }

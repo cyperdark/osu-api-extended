@@ -198,5 +198,5 @@ export interface types {
    * ```
    * @param {number} beatmap_id id of the beatmap
   */
-  (beatmap_id: number): Promise<response[]>;
+  (beatmap_id: number): Promise<response>;
 }

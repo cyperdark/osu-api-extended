@@ -24,5 +24,5 @@ export interface types {
    * @param {number} beatmapset_id id of the beatmap set
    * @param {boolean} action true/false
   */
-  (beatmapset_id: number, action: boolean): Promise<response[]>;
+  (beatmapset_id: number, action: boolean): Promise<response>;
 }

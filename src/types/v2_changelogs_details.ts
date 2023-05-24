@@ -85,5 +85,5 @@ export interface types {
    * @param {string} stream ```stable40``` or ```stable``` or ```beta40``` or ```cuttingedge``` or ```lazer``` or ```web```
    * @param {string} build ```id``` or ```name``` of the build
   */
-  (stream: 'stable40' | 'stable' | 'beta40' | 'cuttingedge' | 'lazer' | 'web' , build: string): Promise<response[]>;
+  (stream: 'stable40' | 'stable' | 'beta40' | 'cuttingedge' | 'lazer' | 'web' , build: string): Promise<response>;
 }
