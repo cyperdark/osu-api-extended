@@ -172,7 +172,7 @@ export const build_url = (clientId: number, redirectUri: string, scope: auth_sco
 };
 
 
-export const authorize = async (code: string, gamemode: osu_mode, clientId: number, clientSecret: string, redirectUri: string): Promise<any> => {
+export const authorize = async (code: string, gamemode: osu_mode, clientId: number, clientSecret: string, redirectUri: string): Promise<user_types> => {
   const { access_token } = await request('https://osu.ppy.sh/oauth/token', {
     method: 'POST',
     headers: {
