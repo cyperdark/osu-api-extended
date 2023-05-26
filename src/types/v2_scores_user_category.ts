@@ -11,7 +11,7 @@ export interface response {
   mods: string[];
   passed: boolean;
   perfect: boolean;
-  pp: number;
+  pp: string;
   rank: string;
   replay: boolean;
   score: number;
@@ -112,7 +112,7 @@ export interface types {
    * ## Example 
    * 
    * ```js
-   * const { v2, auth } = require('osu-api-extended');
+   * const { v2, auth, mods } = require('osu-api-extended');
    * 
    * const main = async () => {
    *   await auth.login(CLIENT_ID, CLIENT_SECRET);
@@ -127,7 +127,7 @@ export interface types {
    * @param {string} type ```recent``` or ```best``` or ```firsts``` or ```pinned```
    * @param {boolean} object.include_fails Only for ```recent``` scores, include scores of failed plays. Set to ```true``` to include them. Defaults to ```false```
    * @param {string} object.mode ```osu``` or ```fruits``` or ```mania``` or ```taiko```
-   * @param {number} object.mods Use mods.enums instead of mods id or name
+   * @param {number} object.mods Use ```mods.enums``` instead of mods id or name
    * @param {string} object.limit Maximum number of results
    * @param {string} object.offset Result offset for pagination
   */
