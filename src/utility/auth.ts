@@ -4,7 +4,7 @@ import open from "open";
 
 import { types as user_types } from '../types/v2_user_me_details';
 import { request } from "../utility/request";
-import { osu_mode } from './types';
+import { osu_mode, auth_scores } from './types';
 
 
 interface _login {
@@ -12,13 +12,22 @@ interface _login {
   expires_in: number
 }
 
-const credentials = {
+const credentials: {
+  type: number,
+  username: string,
+  password: string,
+  clientId: number,
+  clientSecret: string,
+  redirect_uri: string,
+  score: auth_scores,
+} = {
   type: 0,
   username: '',
   password: '',
   clientId: 0,
   clientSecret: '',
   redirect_uri: '',
+  score: ['public'],
 };
 
 
@@ -42,6 +51,7 @@ const save_credentials = (type: number, obj: any) => {
     credentials.type = 2;
     credentials.clientId = obj.clientId;
     credentials.clientSecret = obj.clientSecret;
+    credentials.score = obj.score;
   };
 
   if (type == 3) {
@@ -49,14 +59,15 @@ const save_credentials = (type: number, obj: any) => {
     credentials.clientId = obj.clientId;
     credentials.clientSecret = obj.clientSecret;
     credentials.redirect_uri = obj.redirect_uri;
+    credentials.score = obj.score;
   };
 };
 
 
 export const re_login = async () => {
   if (credentials.type == 1) await login_lazer(credentials.username, credentials.password);
-  if (credentials.type == 2) await login(credentials.clientId, credentials.clientSecret);
-  if (credentials.type == 3) await authorize_cli(credentials.clientId, credentials.clientSecret, credentials.redirect_uri);
+  if (credentials.type == 2) await login(credentials.clientId, credentials.clientSecret, credentials.score);
+  if (credentials.type == 3) await authorize_cli(credentials.clientId, credentials.clientSecret, credentials.redirect_uri, credentials.score);
 
   return true;
 };
@@ -87,8 +98,8 @@ export const login_lazer = async (username: string, password: string): Promise<_
 };
 
 
-export const login = async (clientId: number, clientSecret: string): Promise<_login> => {
-  if (!isInitial()) save_credentials(2, { clientId, clientSecret });
+export const login = async (clientId: number, clientSecret: string, scope: auth_scores): Promise<_login> => {
+  if (!isInitial()) save_credentials(2, { clientId, clientSecret, scope });
 
   const { access_token, expires_in } = await request('https://osu.ppy.sh/oauth/token', {
     method: 'POST',
@@ -100,7 +111,7 @@ export const login = async (clientId: number, clientSecret: string): Promise<_lo
       grant_type: 'client_credentials',
       client_id: clientId,
       client_secret: clientSecret,
-      scope: 'public',
+      scope,
       code: 'code',
     })
   });
@@ -111,13 +122,16 @@ export const login = async (clientId: number, clientSecret: string): Promise<_lo
 };
 
 
-export const authorize_cli = async (clientId: number, clientSecret: string, redirectUri: string, scope?: string, state?: string): Promise<_login> => {
-  if (!isInitial()) save_credentials(3, { clientId, clientSecret, redirect_uri: redirectUri });
+export const authorize_cli = async (clientId: number, clientSecret: string, redirectUri: string, scope: auth_scores, state?: string): Promise<_login> => {
+  if (!isInitial()) save_credentials(3, { clientId, clientSecret, redirect_uri: redirectUri, scope });
 
   const cl = readln.createInterface(process.stdin, process.stdout);
   const question = (q: string) => new Promise((res, rej) => cl.question(q + ': ', (answer: string) => res(answer)));
 
-  await open(`https://osu.ppy.sh/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=friends.read%20identify%20public`);
+
+  const url = build_url(clientId, redirectUri, scope, state);
+  await open(url);
+
 
   const code = await question('Paste code here');
   const { access_token, expires_in } = await request('https://osu.ppy.sh/oauth/token', {
@@ -141,7 +155,7 @@ export const authorize_cli = async (clientId: number, clientSecret: string, redi
 };
 
 
-export const build_url = (clientId: number, redirectUri: string, scope: ['chat.write' | 'delegate' | 'forum.write' | 'friends.read' | 'identify' | 'public'], state?: string): string => {
+export const build_url = (clientId: number, redirectUri: string, scope: auth_scores, state?: string): string => {
   const url = new URL('https://osu.ppy.sh/oauth/authorize');
   const params: any = {
     client_id: clientId,
