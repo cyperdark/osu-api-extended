@@ -16,3 +16,5 @@ export interface Param {
   description?: string;
   params?: Param[];
 };
+
+export type osu_mode = 'osu' | 'fruits' | 'mania' | 'taiko';
