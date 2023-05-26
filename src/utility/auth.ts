@@ -4,7 +4,7 @@ import open from "open";
 
 import { types as user_types } from '../types/v2_user_me_details';
 import { request } from "../utility/request";
-import { osu_mode, auth_scores } from './types';
+import { osu_mode, auth_scopes } from './types';
 
 
 interface _login {
@@ -19,7 +19,7 @@ const credentials: {
   clientId: number,
   clientSecret: string,
   redirect_uri: string,
-  score: auth_scores,
+  score: auth_scopes,
 } = {
   type: 0,
   username: '',
@@ -98,7 +98,7 @@ export const login_lazer = async (username: string, password: string): Promise<_
 };
 
 
-export const login = async (clientId: number, clientSecret: string, scope: auth_scores): Promise<_login> => {
+export const login = async (clientId: number, clientSecret: string, scope: auth_scopes): Promise<_login> => {
   if (!isInitial()) save_credentials(2, { clientId, clientSecret, scope });
 
   const { access_token, expires_in } = await request('https://osu.ppy.sh/oauth/token', {
@@ -122,7 +122,7 @@ export const login = async (clientId: number, clientSecret: string, scope: auth_
 };
 
 
-export const authorize_cli = async (clientId: number, clientSecret: string, redirectUri: string, scope: auth_scores, state?: string): Promise<_login> => {
+export const authorize_cli = async (clientId: number, clientSecret: string, redirectUri: string, scope: auth_scopes, state?: string): Promise<_login> => {
   if (!isInitial()) save_credentials(3, { clientId, clientSecret, redirect_uri: redirectUri, scope });
 
   const cl = readln.createInterface(process.stdin, process.stdout);
@@ -155,7 +155,7 @@ export const authorize_cli = async (clientId: number, clientSecret: string, redi
 };
 
 
-export const build_url = (clientId: number, redirectUri: string, scope: auth_scores, state?: string): string => {
+export const build_url = (clientId: number, redirectUri: string, scope: auth_scopes, state?: string): string => {
   const url = new URL('https://osu.ppy.sh/oauth/authorize');
   const params: any = {
     client_id: clientId,
