@@ -1,4 +1,4 @@
-// import { types } from '../../../../../types/v2_forums_topic_new';
+import { types } from '../../../../../types/v2_forums_topic_reply';
 import { Description } from '../../../../../utility/types';
 
 
@@ -29,8 +29,7 @@ export const description: Description = {
 };
 
 
-// @ts-ignore
-const name: any = async (topic_id, body) => {
+const name: types = async (topic_id, body) => {
   const data = await request(`forums/topics/${topic_id}/reply`, {
     method: 'POST',
     data: JSON.stringify({ body }),

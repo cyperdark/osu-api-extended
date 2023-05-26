@@ -26,7 +26,7 @@ export const description: Description = {
   return: 'response',
 };
 
-// @ts-ignore
+
 const name: types = async (comment_id, message) => {
   const data = await request(`comments/${comment_id}`, {
     method: 'PUT',
