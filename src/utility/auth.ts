@@ -99,6 +99,7 @@ export const login_lazer = async (username: string, password: string): Promise<_
 
 
 export const login = async (clientId: number, clientSecret: string, scope: auth_scopes): Promise<_login> => {
+  if (!Array.isArray(scope) || !scope) throw new Error('Scope must be an Array');
   if (!isInitial()) save_credentials(2, { clientId, clientSecret, scope });
 
   const { access_token, expires_in } = await request('https://osu.ppy.sh/oauth/token', {
@@ -123,6 +124,7 @@ export const login = async (clientId: number, clientSecret: string, scope: auth_
 
 
 export const authorize_cli = async (clientId: number, clientSecret: string, redirectUri: string, scope: auth_scopes, state?: string): Promise<_login> => {
+  if (!Array.isArray(scope) || !scope) throw new Error('Scope must be an Array');
   if (!isInitial()) save_credentials(3, { clientId, clientSecret, redirect_uri: redirectUri, scope });
 
   const cl = readln.createInterface(process.stdin, process.stdout);
@@ -158,6 +160,8 @@ export const authorize_cli = async (clientId: number, clientSecret: string, redi
 
 
 export const build_url = (clientId: number, redirectUri: string, scope: auth_scopes, state?: string): string => {
+  if (!Array.isArray(scope) || !scope) throw new Error('Scope must be an Array');
+  
   const url = new URL('https://osu.ppy.sh/oauth/authorize');
   const params: any = {
     client_id: clientId,
