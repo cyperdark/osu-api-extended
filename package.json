@@ -38,7 +38,6 @@
   },
   "dependencies": {
     "lzma-native": "^8.0.1",
-    "node-osr": "^1.2.1",
-    "open": "^8.4.0"
+    "node-osr": "^1.2.1"
   }
 }

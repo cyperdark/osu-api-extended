@@ -1,10 +1,10 @@
+import { execSync } from 'child_process';
 import readln from "readline";
-import open from "open";
 
 
 import { types as user_types } from '../types/v2_user_me_details';
-import { request } from "../utility/request";
 import { osu_mode, auth_scopes } from './types';
+import { request } from "../utility/request";
 
 
 interface _login {
@@ -130,7 +130,9 @@ export const authorize_cli = async (clientId: number, clientSecret: string, redi
 
 
   const url = build_url(clientId, redirectUri, scope, state);
-  await open(url);
+  // await open(url);
+  const start = (process.platform == 'darwin' ? 'open' : process.platform == 'win32' ? 'start' : 'xdg-open');
+  execSync(start + ' ' + url.replaceAll('&', '^&'));
 
 
   const code = await question('Paste code here');

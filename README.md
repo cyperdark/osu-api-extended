@@ -130,4 +130,3 @@ main()
 - [lzma-native](https://www.npmjs.com/package/lzma-native 'https://www.npmjs.com/package/lzma-native'): decompress data from replay
 - [node-osr](npmjs.com/package/node-osr 'npmjs.com/package/node-osr'): Working with replay file
 - `request.ts` by [AqilCont](https://github.com/AqilCont 'https://github.com/AqilCont')
-- [open](npmjs.com/package/open 'npmjs.com/package/open'): open links in browser
