@@ -111,7 +111,7 @@ export const login = async (clientId: number, clientSecret: string, scope: auth_
       grant_type: 'client_credentials',
       client_id: clientId,
       client_secret: clientSecret,
-      scope,
+      scope: scope.join(' '),
       code: 'code',
     })
   });
