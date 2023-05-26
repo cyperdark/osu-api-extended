@@ -3,6 +3,7 @@ export interface Description {
   title: string;
   method: string;
   description: string;
+  imports?: string[];
   params: Param[];
   return?: string;
   notes?: object[];
@@ -18,3 +19,5 @@ export interface Param {
 };
 
 export type osu_mode = 'osu' | 'fruits' | 'mania' | 'taiko';
+
+export type auth_scopes = ['chat.write' | 'delegate' | 'forum.write' | 'friends.read' | 'identify' | 'public'];
