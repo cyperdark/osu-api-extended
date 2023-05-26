@@ -1,4 +1,5 @@
 import { types, response } from '../../../../../types/v2_scores_user_category';
+import { id as mods_id } from '../../../../../utility/mods';
 import { Description } from '../../../../../utility/types';
 
 
@@ -28,16 +29,23 @@ export const description: Description = {
       name: 'object',
       params: [
         {
-          type: 'string',
+          type: 'boolean',
           name: 'include_fails',
+          options: false,
           optional: true,
-          description: 'Only for \`\`\`recent\`\`\` scores, include scores of failed plays. Set to \`\`\`1\`\`\` to include them. Defaults to \`\`\`0\`\`\`',
+          description: 'Only for \`\`\`recent\`\`\` scores, include scores of failed plays. Set to \`\`\`true\`\`\` to include them. Defaults to \`\`\`false\`\`\`',
         },
         {
           type: 'string',
           name: 'mode',
           optional: true,
           description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
+        },
+        {
+          type: 'number',
+          name: 'mods',
+          optional: true,
+          description: 'Use mods.enums instead of mods id or name',
         },
         {
           type: 'string',
@@ -58,15 +66,23 @@ export const description: Description = {
 
 
 const name: types = async (user, type, obj) => {
-  // TODO: add an attempt to score
   const data: response[] = await request(`users/${user}/scores/${type}`, {
     method: 'GET',
     params: obj,
   });
 
-  if (!Array.isArray(data)) return data;
+  if (Array.isArray(data)) {
+    const transform = data.map((v, i) => ({
+      position: i + 1,
+      mods_id: mods_id(v.mods.join('')),
+      ...v
+    }));
 
-  return data.map((v, i) => ({ position: i + 1, ...v }));
+    if (obj.mods) return transform.filter(r => (r.mods_id & obj.mods) > 0);
+    return transform;
+  };
+
+  return data;
 };
 
 
