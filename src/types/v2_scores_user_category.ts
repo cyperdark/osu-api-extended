@@ -1,5 +1,6 @@
 export interface response {
   position: number;
+  mods_id: number;
   accuracy: number;
   best_id: number;
   created_at: string;
@@ -101,10 +102,6 @@ export interface response {
     profile_colour: string;
     username: string;
   };
-  weight: {
-    percentage: number;
-    pp: number;
-  };
 }
 
 
@@ -128,10 +125,11 @@ export interface types {
    * ```
    * @param {number} user id of the user
    * @param {string} type ```recent``` or ```best``` or ```firsts``` or ```pinned```
-   * @param {string} object.include_fails Only for ```recent``` scores, include scores of failed plays. Set to ```1``` to include them. Defaults to ```0```
+   * @param {boolean} object.include_fails Only for ```recent``` scores, include scores of failed plays. Set to ```true``` to include them. Defaults to ```false```
    * @param {string} object.mode ```osu``` or ```fruits``` or ```mania``` or ```taiko```
+   * @param {number} object.mods Use mods.enums instead of mods id or name
    * @param {string} object.limit Maximum number of results
    * @param {string} object.offset Result offset for pagination
   */
-  (user: number, type: 'recent' | 'best' | 'firsts' | 'pinned' , object: {include_fails?: 'Only for recent scores, include scores of failed plays. Set to 1 to include them. Defaults to 0' , mode?: 'osu' | 'fruits' | 'mania' | 'taiko' , limit?: string, offset?: string, }): Promise<response[]>;
+  (user: number, type: 'recent' | 'best' | 'firsts' | 'pinned' , object: {include_fails?: boolean, mode?: 'osu' | 'fruits' | 'mania' | 'taiko' , mods?: number, limit?: string, offset?: string, }): Promise<response[]>;
 }
