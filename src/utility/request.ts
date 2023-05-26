@@ -38,8 +38,9 @@ let amount_retry = 0;
  * @returns {Promise<any>} The response
  */
 export const request = (url: string, { method = "GET", headers, data, params }: RequestParams = {}): Promise<any> => new Promise(async (res, rej) => {
+  if (!params) params = {};
+  
   if (url.includes('https://osu.ppy.sh/api/') && !url.includes('https://osu.ppy.sh/api/v2')) {
-    if (!params) params = {};
     // @ts-ignore
     params.k = params.v1 || auth.cache_v1;
   };
