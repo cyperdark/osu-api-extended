@@ -81,7 +81,6 @@ export const description: Description = {
 };
 
 
-// @ts-ignore
 const name: types = async (forum_id, object, poll) => {
   const obj: any = { forum_id };
   if (object.title) obj.title = object.title;

@@ -28,7 +28,7 @@ export const description: Description = {
   return: 'response',
 };
 
-// @ts-ignore
+
 const name: types = async (comment_id, type) => {
   const data = await request(`comments/${comment_id}/vote`, {
     method: type == true ? 'POST' : 'DELETE',
