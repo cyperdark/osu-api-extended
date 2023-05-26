@@ -70,6 +70,9 @@ export const description: Description = {
 
 
 const name: types = async (user, type, obj) => {
+  // @ts-ignore
+  if (obj.include_fails) obj.include_fails = obj.include_fails == true ? 1 : 0;
+
   const data: response[] = await request(`users/${user}/scores/${type}`, {
     method: 'GET',
     params: obj,
