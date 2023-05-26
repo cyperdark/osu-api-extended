@@ -40,11 +40,13 @@ let amount_retry = 0;
 export const request = (url: string, { method = "GET", headers, data, params }: RequestParams = {}): Promise<any> => new Promise(async (res, rej) => {
   if (url.includes('https://osu.ppy.sh/api/') && !url.includes('https://osu.ppy.sh/api/v2')) {
     if (!params) params = {};
-    params.k = auth.cache_v1;
+    // @ts-ignore
+    params.k = params.v1 || auth.cache_v1;
   };
 
   if (url.includes('https://osu.ppy.sh/api/v2')) headers = {
-    Authorization: `Bearer ${auth.cache_v2}`,
+    // @ts-ignore
+    Authorization: `Bearer ${params.v2 || auth.cache_v2}`,
     Accept: `application/json`,
     'Content-Type': `application/json`,
     // 'Content-Length': data ? data.length : '',
@@ -112,13 +114,13 @@ export const download = (url: string, dest: string, { headers, data, params }: R
   headers['accept'] = `application/octet-stream`;
   headers['content-Type'] = `application/octet-stream`;
 
-  
+
   // console.log('\n', url, headers, data, o(params), '\n'); // debug too
   const req = https.request(url + (params ? '?' + o(params) : ''), { method: 'GET', headers }, response => {
     const { location } = response.headers;
 
     // console.log(response.headers);
-    
+
 
     if (location) {
       const redirect = download(location, dest, { headers, data, params }, callback);
