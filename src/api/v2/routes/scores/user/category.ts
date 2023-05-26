@@ -12,6 +12,9 @@ export const description: Description = {
   title: __filename,
   method: 'GET',
   description: 'Return list of user scores on a beatmap',
+  imports: [
+    'mods'
+  ],
   params: [
     {
       type: 'number',
@@ -44,8 +47,9 @@ export const description: Description = {
         {
           type: 'number',
           name: 'mods',
+          options: false,
           optional: true,
-          description: 'Use mods.enums instead of mods id or name',
+          description: 'Use \`\`\`mods.enums\`\`\` instead of mods id or name',
         },
         {
           type: 'string',
@@ -74,7 +78,7 @@ const name: types = async (user, type, obj) => {
   if (Array.isArray(data)) {
     const transform = data.map((v, i) => ({
       position: i + 1,
-      mods_id: mods_id(v.mods.join('')),
+      mods_id: mods_id(v.mods.join('')) || 0,
       ...v
     }));
 
