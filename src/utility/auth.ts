@@ -19,7 +19,7 @@ const credentials: {
   clientId: number,
   clientSecret: string,
   redirect_uri: string,
-  score: auth_scopes,
+  scope: auth_scopes,
 } = {
   type: 0,
   username: '',
@@ -27,7 +27,7 @@ const credentials: {
   clientId: 0,
   clientSecret: '',
   redirect_uri: '',
-  score: ['public'],
+  scope: ['public'],
 };
 
 
@@ -51,7 +51,7 @@ const save_credentials = (type: number, obj: any) => {
     credentials.type = 2;
     credentials.clientId = obj.clientId;
     credentials.clientSecret = obj.clientSecret;
-    credentials.score = obj.score;
+    credentials.scope = obj.scope;
   };
 
   if (type == 3) {
@@ -59,15 +59,15 @@ const save_credentials = (type: number, obj: any) => {
     credentials.clientId = obj.clientId;
     credentials.clientSecret = obj.clientSecret;
     credentials.redirect_uri = obj.redirect_uri;
-    credentials.score = obj.score;
+    credentials.scope = obj.scope;
   };
 };
 
 
 export const re_login = async () => {
   if (credentials.type == 1) await login_lazer(credentials.username, credentials.password);
-  if (credentials.type == 2) await login(credentials.clientId, credentials.clientSecret, credentials.score);
-  if (credentials.type == 3) await authorize_cli(credentials.clientId, credentials.clientSecret, credentials.redirect_uri, credentials.score);
+  if (credentials.type == 2) await login(credentials.clientId, credentials.clientSecret, credentials.scope);
+  if (credentials.type == 3) await authorize_cli(credentials.clientId, credentials.clientSecret, credentials.redirect_uri, credentials.scope);
 
   return true;
 };
