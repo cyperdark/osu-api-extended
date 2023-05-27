@@ -26,29 +26,33 @@ export const description: any = {
       optional: false,
       description: 'File name (without extension)',
     },
+    {
+      type: 'boolean',
+      name: 'overwrite',
+      optional: true,
+      description: 'Overwrite file',
+    },
   ],
 };
 
 export interface types {
-  (diff_id: number, path: string, name: string | number): Promise<string>;
+  (diff_id: number, path: string, name: string | number, overwrite?: boolean): Promise<string | null>;
 };
 
-/**
- * 
- * @param diff_id Beatmap id
- * @param path Path to folder (without name and extension)
- * @param name File name
- * @returns Download .osu file of beatmap by id
- */
-const name: types = async (diff_id, path, name) => {
+
+const name: types = async (diff_id, path, name, overwrite) => {
+  if (!fs.existsSync(path)) fs.mkdirSync(path, { recursive: true });
+
   let file = '';
   if (name === undefined) name = diff_id;
   if (path !== undefined) file = `${path}/${name}.osu`;
   else file = `${name}.osu`;
 
-  // if (fs.existsSync(file)) return file;
+  if (fs.existsSync(file) && overwrite != true) return file;
 
   const data = await request(`https://osu.ppy.sh/osu/${diff_id}`, { method: "GET" });
+  if (!data.includes('osu file format v')) return null;
+
   fs.writeFileSync(file, data, 'utf-8');
   return file;
 };
