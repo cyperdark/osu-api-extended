@@ -88,7 +88,7 @@ const main = async () => {
   // Calucalute pp for a difficulty
   const pp_calc = tools.pp_calc(2379651)
 
-  // Rank letter form hits
+  // Rank letter from hits
   const rank = tools.rank(
     {
       geki: 236,
