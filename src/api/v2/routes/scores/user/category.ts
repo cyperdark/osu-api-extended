@@ -52,7 +52,7 @@ export const description: Description = {
           description: 'Use \`\`\`mods.enums\`\`\` instead of mods id or name',
         },
         {
-          type: 'string',
+          type: 'number',
           name: 'limit',
           optional: true,
           description: 'Maximum number of results',
