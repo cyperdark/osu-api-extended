@@ -3,6 +3,7 @@ export interface response {
     channel_id: number;
     description: string;
     icon: string;
+    message_length_limit: number;
     moderated: boolean;
     name: string;
     type: string;
@@ -46,5 +47,5 @@ export interface types {
    * @param {string[]} object.includes ```presence```, ```messages```, ```silences```
    * @param {number} object.since Messages after the specified message_id to return
   */
-  (object: {history_since?: number, includes?: ['presence, messages, silences' ], since: number, }): Promise<response>;
+  (object: {history_since?: number, includes?: Array<'presence, messages, silences' >, since: number, }): Promise<response>;
 }

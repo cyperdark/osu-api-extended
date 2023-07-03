@@ -5,11 +5,12 @@ export interface response {
     display_name: string;
     is_featured: boolean;
     latest_build: {
-      id: number;
-      version: number;
-      display_version: number;
-      users: number;
       created_at: string;
+      display_version: number;
+      id: number;
+      users: number;
+      version: number;
+      youtube_id: string;
       update_stream: {
         id: number;
         name: string;
@@ -20,11 +21,12 @@ export interface response {
     user_count: number;
   }[];
   builds: {
-    id: number;
-    version: number;
-    display_version: number;
-    users: number;
     created_at: string;
+    display_version: number;
+    id: number;
+    users: number;
+    version: number;
+    youtube_id?: string;
     update_stream: {
       id: number;
       name: string;
@@ -88,5 +90,5 @@ export interface types {
    * @param {string} object.stream ```stable40``` or ```stable``` or ```beta40``` or ```cuttingedge``` or ```lazer``` or ```web```
    * @param {string[]} object.message_formats ```html``` or ```markdown```
   */
-  (object: {from?: string, to?: string, max_id?: number, stream?: 'stable40' | 'stable' | 'beta40' | 'cuttingedge' | 'lazer' | 'web' , message_formats?: ['html' | 'markdown' ], }): Promise<response>;
+  (object: {from?: string, to?: string, max_id?: number, stream?: 'stable40' | 'stable' | 'beta40' | 'cuttingedge' | 'lazer' | 'web' , message_formats?: Array<'html' | 'markdown' >, }): Promise<response[]>;
 }
