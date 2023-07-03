@@ -30,10 +30,12 @@ export const user = {
 
 
 import users_details, { description as users_details_desc } from "./routes/users/details";
+import users_events, { description as users_events_desc } from "./routes/users/events";
 import users_groups_list, { description as users_groups_list_desc } from "./routes/users/groups/list";
 
 export const users = {
   details: users_details,
+  events: users_events,
   groups: {
     list: users_groups_list,
   },
@@ -276,6 +278,7 @@ export const description = {
   },
   users: {
     details: users_details_desc,
+    events: users_events_desc,
     groups: {
       list: users_groups_list_desc,
     },
