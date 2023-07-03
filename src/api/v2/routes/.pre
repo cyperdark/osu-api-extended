@@ -1,3 +1,4 @@
+import { types } from '../../../types/v2_users_details';
 import { Description } from '../../../utility/types';
 
 
@@ -12,12 +13,6 @@ export const description: Description = {
   params: [
 
   ],
-};
-
-export interface types {
-  (obj: object): Promise<{
-
-  }[]>;
 };
 
 
