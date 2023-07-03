@@ -219,5 +219,5 @@ export interface types {
    * @param {string} object.sort ```id_desc``` or ```id_asc```
    * @param {number} object.user id of the user
   */
-  (object: {beatmap_id?: number, beatmapset_id?: number, beatmapset_status?: 'all' | 'ranked' | 'qualified' | 'disqualified' | 'never_qualified' | 'loved' , limit?: number, message_types?: ['suggestion' | 'problem' | 'mapper_note' | 'praise' | 'hype' | 'review' | 'all' ], only_unresolved?: 'true' | 'false' , page?: number, sort?: 'id_desc' | 'id_asc' , user?: number, }): Promise<response>;
+  (object: {beatmap_id?: number, beatmapset_id?: number, beatmapset_status?: 'all' | 'ranked' | 'qualified' | 'disqualified' | 'never_qualified' | 'loved' , limit?: number, message_types?: Array<'suggestion' | 'problem' | 'mapper_note' | 'praise' | 'hype' | 'review' | 'all' >, only_unresolved?: 'true' | 'false' , page?: number, sort?: 'id_desc' | 'id_asc' , user?: number, }): Promise<response[]>;
 }

@@ -1,9 +1,10 @@
 export interface response {
-  id: number;
-  version: number;
-  display_version: number;
-  users: number;
   created_at: string;
+  display_version: number;
+  id: number;
+  users: number;
+  version: number;
+  youtube_id: string;
   update_stream: {
     id: number;
     name: string;
@@ -34,11 +35,12 @@ export interface response {
   }[];
   versions: {
     previous: {
-      id: number;
-      version: number;
-      display_version: number;
-      users: number;
       created_at: string;
+      display_version: number;
+      id: number;
+      users: number;
+      version: number;
+      youtube_id: string;
       update_stream: {
         id: number;
         name: string;
@@ -73,5 +75,5 @@ export interface types {
    * @param {string} object.key Unset to query by build version or stream name, or ```id``` to query by build ID.
    * @param {string[]} object.message_formats ```html``` or ```markdown```
   */
-  (changelog: string | number, object: {key: string, message_formats: ['html' | 'markdown' ], }): Promise<response>;
+  (changelog: string | number, object: {key: string, message_formats: Array<'html' | 'markdown' >, }): Promise<response[]>;
 }
