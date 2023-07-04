@@ -13,6 +13,7 @@ export const description: Description = {
   params: [
     {
       name: 'object',
+      optional: true,
       params: [
         {
           type: 'string',
