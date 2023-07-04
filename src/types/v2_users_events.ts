@@ -4,17 +4,6 @@ export interface response {
     createdAt: string;
     id: number;
     type: string;
-    scoreRank?: string;
-    rank?: number;
-    mode?: string;
-    beatmap: {
-      title: string;
-      url: string;
-    };
-    user: {
-      username: string;
-      url: string;
-    };
     achievement: {
       icon_url: string;
       id: number;
@@ -25,6 +14,21 @@ export interface response {
       description: string;
       mode: string;
       instructions: string;
+    };
+    user: {
+      username: string;
+      url: string;
+    };
+    scoreRank?: string;
+    rank?: number;
+    mode?: string;
+    beatmap: {
+      title: string;
+      url: string;
+    };
+    beatmapset: {
+      title: string;
+      url: string;
     };
   }[];
   cursor: {
@@ -56,5 +60,5 @@ export interface types {
    * @param {string} object.cursor_string Parameter for pagination
    * @param {string[]} object.type ```achievement``` or ```beatmapPlaycount``` or ```beatmapsetApprove``` or ```beatmapsetDelete``` or ```beatmapsetRevive``` or ```beatmapsetUpdate``` or ```beatmapsetUpload``` or ```rank``` or ```userSupportAgain``` or ```userSupportFirst``` or ```userSupportGift``` or ```usernameChange```
   */
-  (object: { sort?: 'id_desc' | 'id_asc', cursor_string?: string, type?: Array<'achievement' | 'beatmapPlaycount' | 'beatmapsetApprove' | 'beatmapsetDelete' | 'beatmapsetRevive' | 'beatmapsetUpdate' | 'beatmapsetUpload' | 'rank' | 'userSupportAgain' | 'userSupportFirst' | 'userSupportGift' | 'usernameChange'>, }): Promise<response>;
+  (object?: {sort?: 'id_desc' | 'id_asc' , cursor_string?: string, type?: Array<'achievement' | 'beatmapPlaycount' | 'beatmapsetApprove' | 'beatmapsetDelete' | 'beatmapsetRevive' | 'beatmapsetUpdate' | 'beatmapsetUpload' | 'rank' | 'userSupportAgain' | 'userSupportFirst' | 'userSupportGift' | 'usernameChange' >, }): Promise<response>;
 }
