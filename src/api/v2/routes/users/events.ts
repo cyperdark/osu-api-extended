@@ -42,12 +42,12 @@ export const description: Description = {
 const name: types = async (object) => {
   const data: response = await request(`events`, {
     method: 'GET',
-    params: object,
+    params: { sort: object.sort, cursor_string: object.cursor_string },
   });
 
 
   if (object.type != null) {
-    if (Array.isArray(object.type)) throw new Error('Event Type must be an Array of options');
+    if (!Array.isArray(object.type)) throw new Error('Event Type must be an Array of options');
 
     const sorted = data.events.filter(r => object.type.includes(r.type));
     data.events = sorted;
