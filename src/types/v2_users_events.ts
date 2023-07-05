@@ -4,6 +4,17 @@ export interface response {
     createdAt: string;
     id: number;
     type: string;
+    scoreRank?: string;
+    rank?: number;
+    mode?: string;
+    beatmap: {
+      title: string;
+      url: string;
+    };
+    user: {
+      username: string;
+      url: string;
+    };
     achievement: {
       icon_url: string;
       id: number;
@@ -14,21 +25,6 @@ export interface response {
       description: string;
       mode: string;
       instructions: string;
-    };
-    user: {
-      username: string;
-      url: string;
-    };
-    scoreRank?: string;
-    rank?: number;
-    mode?: string;
-    beatmap: {
-      title: string;
-      url: string;
-    };
-    beatmapset: {
-      title: string;
-      url: string;
     };
   }[];
   cursor: {
