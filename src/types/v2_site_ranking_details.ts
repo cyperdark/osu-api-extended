@@ -178,11 +178,10 @@ export interface types {
    * @param {string} mode ```osu``` or ```fruits``` or ```mania``` or ```taiko```
    * @param {string} type ```charts``` or ```country``` or ```performance``` or ```score```
    * @param {number} object.country Filter ranking by country code. Only available for ```type``` of ```performance```
-   * @param {string} object.cursorPublished Pagination cursorPublished
-   * @param {number} object.cursorId Pagination cursorId
+   * @param {number} object.cursor[page] Page number
    * @param {string} object.filter ```all``` or ```friends```
    * @param {string} object.spotlight The id of the spotlight if type is charts. Ranking for latest spotlight will be returned if not specified
    * @param {string} object.variant Filter ranking to specified mode variant. For ```mode``` of ```mania```, it's either ```4k``` or ```7k```. Only available for ```type``` of ```performance```
   */
-  (mode: 'osu' | 'fruits' | 'mania' | 'taiko' , type: 'charts' | 'country' | 'performance' | 'score' , object: {country?: number, cursorPublished?: string, cursorId?: number, filter?: 'all' | 'friends' , spotlight?: string, variant?: string, }): Promise<response>;
+  (mode: 'osu' | 'fruits' | 'mania' | 'taiko' , type: 'charts' | 'country' | 'performance' | 'score' , object?: {country?: number, cursor[page]?: number, filter?: 'all' | 'friends' , spotlight?: string, variant?: string, }): Promise<response>;
 }
