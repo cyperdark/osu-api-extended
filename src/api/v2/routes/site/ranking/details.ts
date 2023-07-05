@@ -26,6 +26,7 @@ export const description: Description = {
     },
     {
       name: 'object',
+      optional: true,
       params: [
         {
           type: 'number',
@@ -35,16 +36,10 @@ export const description: Description = {
           description: 'Filter ranking by country code. Only available for \`\`\`type\`\`\` of \`\`\`performance\`\`\`',
         },
         {
-          type: 'string',
-          name: 'cursorPublished',
-          optional: true,
-          description: 'Pagination cursorPublished',
-        },
-        {
           type: 'number',
-          name: 'cursorId',
+          name: 'cursor[page]',
           optional: true,
-          description: 'Pagination cursorId',
+          description: 'Page number',
         },
         {
           type: 'string',
