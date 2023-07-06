@@ -13,89 +13,89 @@ export interface RequestNamespace {
   (url: string, params: { method: string, data?: string, headers?: { [key: string]: string }, params?: object }): Promise<any>;
 }
 
-const o = (obj: any, trail?: string): string => {
-  let params = '';
+const o = (obj: any, trail: string = ''): string => {
+  const params: string[] = [];
 
   for (const i in obj) {
-    if (obj[i] == undefined) continue;
-
-    if (trail) params += `${trail}.`;
+    if (obj[i] === undefined)
+      continue;
 
     if (Array.isArray(obj[i])) {
       obj[i].forEach((d: any) => {
-        params += `${i}[]=${d}&`;
+        params.push(`${i}[]=${d}`);
       });
-    } else if (typeof obj[i] == 'object') {
-      params += `${o(obj[i], i)}&`;
-    } else if (typeof obj[i] == 'number' && obj[i] > 0) {
-      params += `${i}=${obj[i]}&`;
-    } else if (typeof obj[i] == 'string') {
-      params += `${i}=${obj[i]}&`;
+    } else if (typeof obj[i] === 'object') {
+      params.push(o(obj[i], i));
+    } else if (typeof obj[i] === 'number' && obj[i] > 0) {
+      params.push(`${i}=${obj[i]}`);
+    } else if (typeof obj[i] === 'string') {
+      params.push(`${i}=${obj[i]}`);
     }
   }
 
-  return params.slice(0, params.length - 1);
+  return params.join('&');
 };
 
-let amountRetry = 0;
+
+let amount_retry = 0;
 
 /**
  * Executes an HTTP request
  * @param {string} url The url
  * @returns {Promise<any>} The response
  */
-export const request = (url: string, { method = "GET", headers, data, params }: RequestParams = {}): Promise<any> => new Promise((res, rej) => {
-  if (!params) params = {};
-
+export const request = (url: string, { method = "GET", headers, data, params = {} }: RequestParams = {}): Promise<any> => {
   if (url.includes('https://osu.ppy.sh/api/') && !url.includes('https://osu.ppy.sh/api/v2')) {
+    // @ts-ignore
     params.k = params.v1 || auth.cache_v1;
   }
 
-  if (url.includes('https://osu.ppy.sh/api/v2')) {
+  if (url.includes('https://osu.ppy.sh/api/v2'))
     headers = {
+      // @ts-ignore
       Authorization: `Bearer ${params.v2 || auth.cache_v2}`,
       Accept: `application/json`,
       'Content-Type': `application/json`,
     };
-  }
 
-  // console.log('\n', url, method, headers, o(params), '\n'); // debug too
   // console.log({ url, method, headers, data, params: o(params) }); // debug too
-  const req = https.request(url + (o(params) ? '?' + o(params) : ''), { method, headers }, r => {
-    const chunks: any[] = [];
+  return new Promise((resolve, reject) => {
+    const req = https.request(url + (o(params) ? `?${o(params)}` : ''), { method, headers }, (response) => {
+      const chunks: any[] = [];
 
-    r.on('data', (chunk: any) => chunks.push(chunk));
-    r.on('end', async () => {
-      const data = Buffer.concat(chunks).toString();
+      response.on('data', (chunk: any) => chunks.push(chunk));
+      response.on('end', async () => {
+        const data = Buffer.concat(chunks).toString();
 
-      if (/^application\/json/.test(r.headers['content-type'])) {
-        try {
-          const parse = JSON.parse(data);
-          if (parse.authentication == 'basic' && auth.cache_v2 && amountRetry < 3) {
-            await auth.re_login();
+        if (/^application\/json/.test(response.headers['content-type'])) {
+          try {
+            const parse = JSON.parse(data);
+            if (parse.authentication === 'basic' && auth.cache_v2 && amount_retry < 3) {
+              await auth.re_login();
 
-            amountRetry++;
+              amount_retry++;
 
-            const again = await request(url, { method, headers, data, params });
+              const again = await request(url, { method, headers, data, params });
+              return resolve(again);
+            }
 
-            return res(again);
+            amount_retry = 0;
+
+            return resolve(parse);
+          } catch (err) {
+            console.log(`JSON Parse on content of type ${response.headers['content-type']} failed.\nError: ${err}\nData: ${data}`);
           }
-
-          amountRetry = 0;
-
-          return res(parse);
-        } catch (err) {
-          console.log(`JSON Parse on content of type ${r.headers['content-type']} failed.\nError: ${err}\nData: ${data}`);
         }
-      }
 
-      res(data);
-    });
-  }).on('error', rej);
+        resolve(data);
+      });
+    }).on('error', reject);
 
-  if (data) req.write(data);
-  req.end();
-});
+    if (data) req.write(data);
+    req.end();
+  });
+};
+
 
 /**
  * Executes an HTTP request
@@ -103,57 +103,64 @@ export const request = (url: string, { method = "GET", headers, data, params }: 
  * @param {string} dest The file destination
  * @returns {Promise<any>} The response
  */
-export const download = (url: string, dest: string, { headers, data, params }: RequestParams = {}, callback?: Function): Promise<any> => new Promise(async (res, rej) => {
-  const file = fs.createWriteStream(dest, { encoding: 'utf8' });
+export const download = (url: string, dest: string, { headers = {}, data, params }: RequestParams = {}, callback?: Function): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    const file = fs.createWriteStream(dest, { encoding: 'utf8' });
 
-  file.on('error', err => {
-    fs.unlinkSync(dest);
-    rej(err);
-  });
+    file.on('error', err => {
+      fs.unlinkSync(dest);
+      reject(err);
+    });
 
-  file.on('finish', () => {
-    file.close();
-    res(dest);
-  });
+    file.on('finish', () => {
+      file.close();
+      resolve(dest);
+    });
 
-  if (!headers) headers = {};
-  if (url.includes('https://osu.ppy.sh/api/v2')) {
-    headers['Authorization'] = `Bearer ${auth.cache_v2}`;
-  }
-  headers['accept'] = `application/octet-stream`;
-  headers['content-Type'] = `application/octet-stream`;
 
-  const req = https.request(url + (params ? '?' + o(params) : ''), { method: 'GET', headers }, response => {
-    const { location } = response.headers;
+    if (url.includes('https://osu.ppy.sh/api/v2')) headers['Authorization'] = `Bearer ${auth.cache_v2}`;
 
-    if (location) {
-      const redirect = download(location, dest, { headers, data, params }, callback);
-      return res(redirect);
+    headers['accept'] = `application/octet-stream`;
+    headers['content-Type'] = `application/octet-stream`;
+
+
+    const req = https.request(url + (params ? '?' + o(params) : ''), { method: 'GET', headers }, response => {
+      const { location } = response.headers;
+
+      if (location) {
+        download(location, dest, { headers, data, params }, callback)
+          .then(resolve)
+          .catch(reject);
+        return;
+      }
+
+      if (response.statusCode === 404) {
+        resolve({ error: 'file unavailable' });
+        return;
+      }
+
+      if (callback !== undefined) {
+        const totalLength = parseInt(response.headers['content-length']);
+
+        let progress = 0;
+        let progressBar = 0;
+
+        response.on('data', (chunk) => {
+          progress += chunk.length;
+          progressBar = 100 * (progress / totalLength);
+          callback(progressBar);
+        });
+      }
+
+      response.pipe(file);
+    });
+
+    if (data) {
+      req.write(data);
     }
-
-    if (response.statusCode == 404) {
-      return res({ error: 'file unavailable' });
-    }
-
-    if (callback != undefined) {
-      const totalLength = parseInt(response.headers['content-length']);
-
-      let progress = 0;
-      let progressBar = 0;
-
-      response.on('data', function (chunk) {
-        progress += chunk.length;
-        progressBar = 100 * (progress / totalLength);
-        callback(progressBar);
-      });
-    }
-
-    response.pipe(file);
+    req.end();
   });
-
-  if (data) req.write(data);
-  req.end();
-});
+};
 
 /**
  * Makes a namespace 
