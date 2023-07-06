@@ -2,7 +2,7 @@ import { types } from '../../../../types/v2_scores_download';
 import { Description } from '../../../../utility/types';
 
 
-import { download, namespace, RequestNamepsace } from "../../../../utility/request";
+import { download, namespace, RequestNamespace } from "../../../../utility/request";
 
 
 export const description: Description = {

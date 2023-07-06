@@ -1,4 +1,4 @@
-import { namespace, RequestNamepsace } from "../../../utility/request";
+import { namespace, RequestNamespace } from "../../../utility/request";
 // import { id as mods_id } from "../../../../utility/mods";
 // import path from "path";
 import fs from "fs";
@@ -8,7 +8,7 @@ import diff from "./beatmap/diff";
 
 import form from "../form/replays";
 
-const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/');
+const request: RequestNamespace = namespace('https://osu.ppy.sh/api/');
 
 const _mode = [
   'osu',
