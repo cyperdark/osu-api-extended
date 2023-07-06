@@ -13,23 +13,30 @@ export interface RequestNamespace {
   (url: string, params: { method: string, data?: string, headers?: { [key: string]: string }, params?: object }): Promise<any>;
 }
 
-const o = (obj: any, trail: string = ''): string => {
+const generateQueryString = (obj: any, trail: string = ''): string => {
   const params: string[] = [];
 
-  for (const i in obj) {
-    if (obj[i] === undefined)
-      continue;
-
-    if (Array.isArray(obj[i])) {
-      obj[i].forEach((d: any) => {
-        params.push(`${i}[]=${d}`);
+  const processValue = (key: string, value: any) => {
+    if (Array.isArray(value)) {
+      value.forEach((item) => {
+        params.push(`${key}[]=${encodeURIComponent(item)}`);
       });
-    } else if (typeof obj[i] === 'object') {
-      params.push(o(obj[i], i));
-    } else if (typeof obj[i] === 'number' && obj[i] > 0) {
-      params.push(`${i}=${obj[i]}`);
-    } else if (typeof obj[i] === 'string') {
-      params.push(`${i}=${obj[i]}`);
+    } else if (typeof value === 'object' && value !== null) {
+      const newTrail = trail ? `${trail}.${key}` : key;
+      params.push(generateQueryString(value, newTrail));
+    } else if (typeof value === 'number' && value > 0) {
+      params.push(`${key}=${value}`);
+    } else if (typeof value === 'string') {
+      params.push(`${key}=${encodeURIComponent(value)}`);
+    }
+  };
+
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const value = obj[key];
+      if (value !== undefined) {
+        processValue(key, value);
+      }
     }
   }
 
@@ -60,7 +67,7 @@ export const request = (url: string, { method = "GET", headers, data, params = {
 
   // console.log({ url, method, headers, data, params: o(params) }); // debug too
   return new Promise((resolve, reject) => {
-    const req = https.request(url + (o(params) ? `?${o(params)}` : ''), { method, headers }, (response) => {
+    const req = https.request(url + (generateQueryString(params) ? `?${generateQueryString(params)}` : ''), { method, headers }, (response) => {
       const chunks: any[] = [];
 
       response.on('data', (chunk: any) => chunks.push(chunk));
@@ -124,7 +131,7 @@ export const download = (url: string, dest: string, { headers = {}, data, params
     headers['content-Type'] = `application/octet-stream`;
 
 
-    const req = https.request(url + (params ? '?' + o(params) : ''), { method: 'GET', headers }, response => {
+    const req = https.request(url + (params ? '?' + generateQueryString(params) : ''), { method: 'GET', headers }, response => {
       const { location } = response.headers;
 
       if (location) {
