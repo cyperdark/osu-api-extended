@@ -14,6 +14,7 @@ export interface response {
     user: {
       username: string;
       url: string;
+      previousUsername: string;
     };
     achievement: {
       icon_url: string;
@@ -26,6 +27,11 @@ export interface response {
       mode: string;
       instructions: string;
     };
+    beatmapset: {
+      title: string;
+      url: string;
+    };
+    approval?: string;
   }[];
   cursor: {
     event_id: number;
