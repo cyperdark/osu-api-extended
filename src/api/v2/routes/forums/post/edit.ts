@@ -2,8 +2,8 @@ import { types } from '../../../../../types/v2_forums_post_edit';
 import { Description } from '../../../../../utility/types';
 
 
-import { namespace, RequestNamepsace } from "../../../../../utility/request";
-const request: RequestNamepsace = namespace('https://osu.ppy.sh/api/v2/');
+import { namespace, RequestNamespace } from "../../../../../utility/request";
+const request: RequestNamespace = namespace('https://osu.ppy.sh/api/v2/');
 
 
 export const description: Description = {
