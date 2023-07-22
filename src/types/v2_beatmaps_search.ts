@@ -25,7 +25,7 @@ export interface response {
     status: string;
     title: string;
     title_unicode: string;
-    track_id: number;
+    track_id?: number;
     user_id: number;
     video: boolean;
     bpm: number;
@@ -124,7 +124,8 @@ export interface types {
    * @param {string} object.include ```video``` or ```storyboard```
    * @param {string[]} object.rank ```XH``` or ```X``` or ```SH``` or ```S``` or ```A``` or ```B``` or ```C``` or ```D```
    * @param {boolean} object.nfsw ```true``` or ```false```
+   * @param {string} object.played ```played``` or ```unplayed```
    * @param {string} object.cursor_string Pagination cursor
   */
-  (object: {query?: string, sort?: 'title_desc' | 'title_asc' | 'artist_desc' | 'artist_asc' | 'difficulty_desc' | 'difficulty_asc' | 'updated_desc' | 'updated_asc' | 'ranked_desc' | 'ranked_asc' | 'rating_desc' | 'rating_asc' | 'plays_desc' | 'plays_asc' | 'favourites_desc' | 'favourites_asc' , general?: Array<'converts' | 'follows' | 'recommended' | 'featured_artists' | 'spotlights' >, mode?: 'osu' | 'fruits' | 'mania' | 'taiko' , section?: 'ranked' | 'qualified' | 'loved' | 'favourites' | 'pending' | 'wip' | 'graveyard' | 'mine' , genre?: 'Unspecified' | 'Video Game' | 'Anime' | 'Rock' | 'Pop' | 'Other' | 'Novelty' | 'Hip Hop' | 'Electronic' | 'Metal' | 'Classical' | 'Folk' | 'Jazz' , language?: 'English' | 'Chinese' | 'French' | 'German' | 'Italian' | 'Japanese' | 'Korean' | 'Spanish' | 'Swedish' | 'Russian' | 'Polish' | 'Instrumental' | 'Unspecified' | 'Other' , include?: 'video' | 'storyboard' , rank?: Array<'XH' | 'X' | 'SH' | 'S' | 'A' | 'B' | 'C' | 'D' >, nfsw?: 'true' | 'false' , cursor_string?: string, }): Promise<response[]>;
+  (object: { query?: string, sort?: 'title_desc' | 'title_asc' | 'artist_desc' | 'artist_asc' | 'difficulty_desc' | 'difficulty_asc' | 'updated_desc' | 'updated_asc' | 'ranked_desc' | 'ranked_asc' | 'rating_desc' | 'rating_asc' | 'plays_desc' | 'plays_asc' | 'favourites_desc' | 'favourites_asc', general?: Array<'converts' | 'follows' | 'recommended' | 'featured_artists' | 'spotlights'>, mode?: 'osu' | 'fruits' | 'mania' | 'taiko', section?: 'ranked' | 'qualified' | 'loved' | 'favourites' | 'pending' | 'wip' | 'graveyard' | 'mine', genre?: 'Unspecified' | 'Video Game' | 'Anime' | 'Rock' | 'Pop' | 'Other' | 'Novelty' | 'Hip Hop' | 'Electronic' | 'Metal' | 'Classical' | 'Folk' | 'Jazz', language?: 'English' | 'Chinese' | 'French' | 'German' | 'Italian' | 'Japanese' | 'Korean' | 'Spanish' | 'Swedish' | 'Russian' | 'Polish' | 'Instrumental' | 'Unspecified' | 'Other', include?: 'video' | 'storyboard', rank?: Array<'XH' | 'X' | 'SH' | 'S' | 'A' | 'B' | 'C' | 'D'>, nfsw?: 'true' | 'false', played?: 'played' | 'unplayed', cursor_string?: string, }): Promise<response[]>;
 }

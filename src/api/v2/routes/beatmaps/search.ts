@@ -118,6 +118,12 @@ export const description: Description = {
         },
         {
           type: 'string',
+          name: 'played',
+          optional: true,
+          description: '\`\`\`played\`\`\` or \`\`\`unplayed\`\`\`'
+        },
+        {
+          type: 'string',
           name: 'cursor_string',
           optional: true,
           description: 'Pagination cursor'
@@ -136,8 +142,7 @@ export const description: Description = {
 
 
 const name: types = async (filters) => {
-  const obj: any = {
-  };
+  const obj: any = {};
 
   if (filters) {
     if (filters.query) obj.q = filters.query;
@@ -153,6 +158,7 @@ const name: types = async (filters) => {
 
     if (filters.sort) obj.sort = filters.sort;
     if (filters.cursor_string) obj.cursor_string = filters.cursor_string;
+    if (filters.played) obj.played = filters.played;
   }
   const data = await request(`beatmapsets/search/`, {
     method: 'GET',
