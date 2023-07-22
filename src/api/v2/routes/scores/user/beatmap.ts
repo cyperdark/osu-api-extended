@@ -61,6 +61,11 @@ const name: types = async (beatmap, user, obj) => {
     params: obj,
   });
 
+  if (obj.best_only == true) {
+    data.score.position = data.position;
+    return [data.score];
+  };
+
   if (data.scores) return data.scores
   return data;
 };
