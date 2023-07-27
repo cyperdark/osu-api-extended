@@ -89,7 +89,11 @@ const callback_page = async () => {
   return user_data;
 };
 
+```
 
+### V2 Discord auth helpers
+
+```javascript
 // discord bot auth | REQUEIRE TO HAVE A SITE WHERE YOU'LL REDIRECT USERS AFTER AUTH
 const discord_auth_link = async () => {
   const SCOPE_LIST = ['public', ...];
