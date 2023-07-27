@@ -14,9 +14,11 @@
 ```
 npm i osu-api-extended
 ```
+
 ```
 yarn install osu-api-extended
 ```
+
 ```
 pnpm install osu-api-extended
 ```
@@ -25,7 +27,6 @@ pnpm install osu-api-extended
 <h2 align="center">IF SOME ENDPOINTS NOT WORKING, dm me in discord: cyperdark#6890</h2>
 <br>
 <br>
-
 
 <h2 align="center">You need to login only once on application start (auto renew token for v2)</h2>
 
@@ -61,13 +62,51 @@ const main = async () => {
   await auth.login_lazer('YOUR_LOGIN', 'YOUR_PASSWORD')
 
   // Auth via oauth2
-  await auth.authorize('CLIENT_ID', 'CLIENT_SECRET', 'CALLBACK_URL')
+  await auth.authorize_cli('CLIENT_ID', 'CLIENT_SECRET', 'CALLBACK_URL')
 
   const data = await v2.v2.beatmap.id.details(1256136)
   console.log(data)
 }
 
 main()
+```
+
+### V2 Auth users via page
+
+```javascript
+const { v2, auth } = require('osu-api-extended');
+
+// code example for redirect page
+const redirect_page = async () => {
+  const SCOPE_LIST = ['public', ...];
+
+  const url = auth.build_url('CLIENT_ID', 'CLIENT_CALLBACK_URL', SCOPE_LIST);
+  return url;
+};
+
+const callback_page = async () => {
+  const user_data = await auth.authorize(code, 'GAMEMODE', 'CLIENT_ID', 'CLIENT_SECRET', 'CLIENT_CALLBACK_URL');
+  return user_data;
+};
+
+
+// discord bot auth | REQUEIRE TO HAVE A SITE WHERE YOU'LL REDIRECT USERS AFTER AUTH
+const discord_auth_link = async () => {
+  const SCOPE_LIST = ['public', ...];
+
+  const url = auth.build_url('CLIENT_ID', 'CLIENT_CALLBACK_URL', SCOPE_LIST, 'DICSORD_USER_ID');
+  return url;
+};
+
+const discord_callback_page = async (code, state) => {
+  const user_data = await auth.authorize(code, 'GAMEMODE', 'CLIENT_ID', 'CLIENT_SECRET', 'CLIENT_CALLBACK_URL');
+
+  return {
+    discord_user_id: state,
+    user_data
+  };
+};
+
 ```
 
 ### Tools
