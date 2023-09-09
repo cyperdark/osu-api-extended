@@ -66,7 +66,7 @@ export const request = (url: string, { method = "GET", headers, data, params = {
       'Content-Type': `application/json`,
     };
 
-  console.log({ url, method, headers, data, params: generateQueryString(params) }); // debug too
+  // console.log({ url, method, headers, data, params: generateQueryString(params) }); // debug too
   return new Promise((resolve, reject) => {
     const req = https.request(url + (generateQueryString(params) ? `?${generateQueryString(params)}` : ''), { method, headers }, (response) => {
       const chunks: any[] = [];
