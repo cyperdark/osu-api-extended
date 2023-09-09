@@ -44,6 +44,7 @@ const generateQueryString = (obj: any, trail: string = ''): string => {
 };
 
 
+const TIMEOUT_MS = 60000;
 let amount_retry = 0;
 
 /**
@@ -65,7 +66,7 @@ export const request = (url: string, { method = "GET", headers, data, params = {
       'Content-Type': `application/json`,
     };
 
-  // console.log({ url, method, headers, data, params: generateQueryString(params) }); // debug too
+  console.log({ url, method, headers, data, params: generateQueryString(params) }); // debug too
   return new Promise((resolve, reject) => {
     const req = https.request(url + (generateQueryString(params) ? `?${generateQueryString(params)}` : ''), { method, headers }, (response) => {
       const chunks: any[] = [];
@@ -97,6 +98,11 @@ export const request = (url: string, { method = "GET", headers, data, params = {
         resolve(data);
       });
     }).on('error', reject);
+
+    req.setTimeout(TIMEOUT_MS, () => {
+      req.destroy();
+      reject(new Error(`Request to ${url} time out after ${TIMEOUT_MS}ms`));
+    });
 
     if (data) req.write(data);
     req.end();
@@ -160,6 +166,11 @@ export const download = (url: string, dest: string, { headers = {}, data, params
       }
 
       response.pipe(file);
+    });
+
+    req.setTimeout(TIMEOUT_MS, () => {
+      req.destroy();
+      reject(new Error(`Request to ${url} time out after ${TIMEOUT_MS}ms`));
     });
 
     if (data) {
