@@ -1,4 +1,4 @@
-import { gamemode_names, ranking_types, country_codes } from "../../../../utility/types";
+import { gamemode_names, ranking_types, country_codes } from "../../../../types";
 import { request } from "../../../../utility/request";
 
 

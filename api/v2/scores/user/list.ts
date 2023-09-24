@@ -1,5 +1,5 @@
 import { request } from "../../../../utility/request";
-import { gamemode_names } from "../../../../utility/types";
+import { gamemode_names } from "../../../../types";
 import mods from '../../../../tools/mods';
 
 
