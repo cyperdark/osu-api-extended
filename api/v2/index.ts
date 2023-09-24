@@ -1,8 +1,10 @@
 import users_details from "./users/details";
+import users_events from "./users/events";
 
 
 export const users = {
   details: users_details,
+  events: users_events,
 };
 
 
