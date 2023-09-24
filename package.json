@@ -2,14 +2,14 @@
   "name": "osu-api-extended",
   "version": "2.7.67",
   "description": "Advanced osu! api wrapper for v1 and v2, with extra stuff",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "files": [
     "dist/*"
   ],
   "scripts": {
     "build": "tsc",
-    "tester": "node test/index.js"
+    "tester": "node test/test_new.js"
   },
   "keywords": [
     "osu",
