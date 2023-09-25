@@ -7,7 +7,7 @@ const name = async (ids: number[]): Promise<UsersDetails[]> => {
   const data = await request(`https://osu.ppy.sh/api/v2/users`, {
     method: 'GET',
     params: {
-      ids
+      'ids[]': ids
     },
   });
 
