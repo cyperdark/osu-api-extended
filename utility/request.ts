@@ -1,5 +1,6 @@
 // PACKAGES
 import https from 'https';
+import querystring from 'node:querystring';
 // import fs from "fs";
 
 
@@ -30,40 +31,6 @@ const TIMEOUT_MS = 60000;
 let total_retries = 0;
 
 
-const generateQueryString = (obj: any, trail: string = ''): string => {
-  const params: string[] = [];
-  console.time('generateQueryString');
-
-
-  const processValue = (key: string, value: any) => {
-    if (Array.isArray(value)) {
-      value.forEach((item) => {
-        params.push(`${key}[]=${encodeURIComponent(item)}`);
-      });
-    } else if (typeof value === 'object' && value !== null) {
-      const newTrail = trail ? `${trail}.${key}` : key;
-      params.push(generateQueryString(value, newTrail));
-    } else if (typeof value === 'number' && value > 0) {
-      params.push(`${key}=${value}`);
-    } else if (typeof value === 'string') {
-      params.push(`${key}=${encodeURIComponent(value)}`);
-    }
-  };
-
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      const value = obj[key];
-      if (value !== undefined) {
-        processValue(key, value);
-      }
-    }
-  }
-
-  console.timeEnd('generateQueryString');
-
-  return params.join('&');
-};
-
 
 export const request = (url: string, { method, headers, data, params = {} }: RequestParams = {}): Promise<any> => new Promise((resolve, reject) => {
   // check required args
@@ -88,10 +55,10 @@ export const request = (url: string, { method, headers, data, params = {} }: Req
     };
 
 
-  const generate_query = generateQueryString(params);
+  const generate_query = querystring.encode(params);
   const build_url = url + (generate_query ? `?${generate_query}` : '');
 
-  console.log({ url: build_url, method, headers, data });
+  // console.log({ url: build_url, method, headers, data });
   const req = https.request(build_url, { method, headers }, (response) => {
     const chunks: any[] = [];
 
