@@ -1,9 +1,9 @@
 {
   "name": "osu-api-extended",
-  "version": "3.0.0-beta.0",
+  "version": "3.0.0-beta.1",
   "description": "Advanced osu! api wrapper for v1 and v2, with extra stuff",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist/*"
   ],
