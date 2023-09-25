@@ -4,7 +4,7 @@ import { ScoresDetails } from '../../../types/scores_details';
 
 
 
-const name = async (score_id: number, mode: gamemode_names): Promise<ScoresDetails[]> => {
+const name = async (score_id: number, mode: gamemode_names): Promise<ScoresDetails> => {
   if (mode == null)
     throw new Error('Gamemode name not specified');
 
