@@ -31,7 +31,7 @@ const credentials: {
   clientId: number,
   clientSecret: string,
   redirect_uri: string,
-  scope: auth_scopes,
+  scopes: auth_scopes,
 } = {
   type: 0,
   username: '',
@@ -39,7 +39,7 @@ const credentials: {
   clientId: 0,
   clientSecret: '',
   redirect_uri: '',
-  scope: ['public'],
+  scopes: ['public'],
 };
 
 
@@ -52,7 +52,9 @@ export const set_v2 = (v: string) => cache_v2 = v;
 
 const isInitial = () => cache_v2 != '';
 
-const store_credentials = (type: number, obj: any) => {
+const store_credentials = (type: number, obj: {
+  username?: string, password?: string, clientId?: number, clientSecret?: string, scopes?: auth_scopes, redirect_uri?: string
+}) => {
   if (type == 1) {
     credentials.type = 1;
     credentials.username = obj.username;
@@ -63,7 +65,7 @@ const store_credentials = (type: number, obj: any) => {
     credentials.type = 2;
     credentials.clientId = obj.clientId;
     credentials.clientSecret = obj.clientSecret;
-    credentials.scope = obj.scope;
+    credentials.scopes = obj.scopes;
   };
 
   if (type == 3) {
@@ -71,14 +73,14 @@ const store_credentials = (type: number, obj: any) => {
     credentials.clientId = obj.clientId;
     credentials.clientSecret = obj.clientSecret;
     credentials.redirect_uri = obj.redirect_uri;
-    credentials.scope = obj.scope;
+    credentials.scopes = obj.scopes;
   };
 };
 
 
 export const update_cache_token = async () => {
   // if (credentials.type == 1) await lazer_user(credentials.username, credentials.password);
-  if (credentials.type == 2) await client_login(credentials.clientId, credentials.clientSecret, credentials.scope);
+  if (credentials.type == 2) await client_login(credentials.clientId, credentials.clientSecret, credentials.scopes);
   // if (credentials.type == 3) await cli(credentials.clientId, credentials.clientSecret, credentials.redirect_uri, credentials.scope);
 
   return true;
