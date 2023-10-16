@@ -10,6 +10,6 @@ export * as v1 from "./api/v1/index";
 export * as v2 from "./api/v2/index";
 
 export { download } from "./utility/request";
-export { MethodsEnum } from "./utility/types";
+export { MethodsEnum as LoginMethods } from "./utility/types";
 
 // export * as md from './md';

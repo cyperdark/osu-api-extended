@@ -52,19 +52,19 @@ main()
 You can [create your client here](https://osu.ppy.sh/home/account/edit#oauth 'https://osu.ppy.sh/home/account/edit#oauth')
 
 ```javascript
-const { v2, auth, MethodsEnum  } = require('osu-api-extended')
+const { v2, auth, LoginMethods } = require('osu-api-extended')
 
 const main = async () => {
   const SCOPE_LIST = ['public', ...];
 
   // Auth via client
-  await auth.login({ method: MethodsEnum.STABLE, clientId: 'CLIENT_ID', clientSecret: 'CLIENT_SECRET', scope: SCOPE_LIST });
+  await auth.login({ method: LoginMethods.STABLE, clientId: 'CLIENT_ID', clientSecret: 'CLIENT_SECRET', scope: SCOPE_LIST });
 
   // Auth via lazer credentials
-  await auth.login_lazer({ method: MethodsEnum.LAZER, username: 'YOUR_USERNAME', password: 'YOUR_PASSWORD' });
+  await auth.login_lazer({ method: LoginMethods.LAZER, username: 'YOUR_USERNAME', password: 'YOUR_PASSWORD' });
 
   // Auth via oauth2
-  await auth.authorize_cli({ method: MethodsEnum.CLI, clientId: 'CLIENT_ID', clientSecret: 'CLIENT_SECRET', redirectUri: 'CALLBACK_URL', scope: SCOPE_LIST });
+  await auth.authorize_cli({ method: LoginMethods.CLI, clientId: 'CLIENT_ID', clientSecret: 'CLIENT_SECRET', redirectUri: 'CALLBACK_URL', scope: SCOPE_LIST });
 
   const data = await v2.beatmap.id.details(1256136)
   console.log(data) // returns beatmap details
