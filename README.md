@@ -52,11 +52,10 @@ main()
 You can [create your client here](https://osu.ppy.sh/home/account/edit#oauth 'https://osu.ppy.sh/home/account/edit#oauth')
 
 ```javascript
-const { v2, auth } = require('osu-api-extended')
+const { v2, auth, MethodsEnum  } = require('osu-api-extended')
 
 const main = async () => {
   const SCOPE_LIST = ['public', ...];
-  const { MethodsEnum } = require("osu-api-extended")
 
   // Auth via client
   await auth.login({ method: MethodsEnum.STABLE, clientId: 'CLIENT_ID', clientSecret: 'CLIENT_SECRET', scope: SCOPE_LIST });
