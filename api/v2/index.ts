@@ -46,3 +46,12 @@ export const site = {
   },
 };
 
+
+
+import forums_topic_details from './forums/topic/details';
+
+export const forums = {
+  topic: {
+    details: forums_topic_details
+  }
+}
