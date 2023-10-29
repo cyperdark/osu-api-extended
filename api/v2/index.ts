@@ -19,7 +19,9 @@ export const user = {
 
 
 import scores_details from "./scores/details";
+import scores_beatmap from "./scores/beatmaps";
 import scores_user_list from "./scores/user/list";
+import scores_user_beatmap from "./scores/user/beatmap";
 
 export const scores = {
   details: scores_details,
@@ -29,7 +31,9 @@ export const scores = {
      */
     category: scores_user_list,
     list: scores_user_list,
-  }
+    beatmap: scores_user_beatmap,
+  },
+  beatmap: scores_beatmap,
 };
 
 
@@ -41,3 +45,4 @@ export const site = {
     details: site_ranking_details,
   },
 };
+
