@@ -1,30 +1,40 @@
 import { request } from "../utility/request";
-import FS from "fs/promises";
 import path from "path";
 import fs from "fs";
 
 
 export interface types {
-  (difficulty_id: number, file_path: string, overwrite?: boolean): Promise<string | null>;
+  (difficulty_id: number, file_path: string, overwrite?: boolean): Promise<{ type: 'created' | 'exists' | 'rate-limit', path?: string }>;
 };
 
 
-const name: types = async (difficulty_id, file_path, overwrite) => {
+const name: types = (difficulty_id, file_path, overwrite) => new Promise(async (resolve, reject) => {
   const { dir } = path.parse(file_path);
-  if (!fs.existsSync(dir))
-    FS.mkdir(file_path, { recursive: true });
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
 
-  if (fs.existsSync(file_path) && overwrite != true)
-    return file_path;
+  if (fs.existsSync(file_path) && overwrite != true) {
+    resolve({
+      type: 'exists',
+      path: file_path,
+    });
+    return;
+  };
 
 
   const data = await request(`https://osu.ppy.sh/osu/${difficulty_id}`, { method: "GET" });
-  if (!data.includes('osu file format v')) return null;
+  fs.writeFile(file_path, data, 'utf8', (err) => {
+    if (err) {
+      reject(err);
+      return;
+    };
 
 
-  FS.writeFile(file_path, data, 'utf-8');
-  return file_path;
-};
+    resolve({
+      type: data.includes('429 Too Many Requests') ? 'rate-limit' : 'created',
+      path: file_path,
+    });
+  });
+});
 
 export default name;
