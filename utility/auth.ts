@@ -4,7 +4,7 @@ import readln from "readline";
 
 
 import { auth_params, auth_response, auth_scopes, gamemode_names } from '../types/index';
-import { UserDetails } from '../types/user_details';
+import { UserAuth } from '../types/user_details';
 
 
 const credentials: {
@@ -209,8 +209,8 @@ export const authorize = async ({ code, mode, client_id, client_secret, redirect
   client_secret: string;
 
   redirect_url: string;
-}): Promise<UserDetails> => {
-  const { access_token } = await request('https://osu.ppy.sh/oauth/token', {
+}): Promise<UserAuth> => {
+  const { access_token, refresh_token, expires_in } = await request('https://osu.ppy.sh/oauth/token', {
     method: 'POST',
     headers: {
       "Accept": "application/json",
@@ -227,5 +227,9 @@ export const authorize = async ({ code, mode, client_id, client_secret, redirect
 
 
   const user = await request(`https://osu.ppy.sh/api/v2/me/${mode}`, { params: { v2: access_token } });
+  user.access_token;
+  user.refresh_token;
+  user.expires_in;
+
   return user;
 };
