@@ -43,13 +43,13 @@ export const request = (url: string, { method, headers, data, params = {} }: Req
 
   // V1 add credentials
   if (url.includes('https://osu.ppy.sh/api/') && !url.includes('https://osu.ppy.sh/api/v2'))
-    params.k = params.v1 || auth.cache_v1;
+    params.k = params.v1 || auth.cache_tokens.v1;
 
   // V2 add credentials
   if (url.includes('https://osu.ppy.sh/api/v2'))
     headers = {
       // @ts-ignore
-      Authorization: `Bearer ${params.v2 || auth.cache_v2}`,
+      Authorization: `Bearer ${params.v2 || auth.cache_tokens.v2}`,
       Accept: `application/json`,
       'Content-Type': `application/json`,
     };
@@ -70,8 +70,8 @@ export const request = (url: string, { method, headers, data, params = {} }: Req
       if (/^application\/json/.test(response.headers['content-type'])) {
         try {
           const parse = JSON.parse(data);
-          if (parse.authentication === 'basic' && auth.cache_v2 && total_retries < 3) {
-            await auth.update_cache_token();
+          if (parse.authentication === 'basic' && auth.cache_tokens.v1 && total_retries < 3) {
+            await auth.refresh_token();
             total_retries++;
 
 
