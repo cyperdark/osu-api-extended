@@ -192,8 +192,8 @@ export const build_url = ({ client_id, redirect_uri, scopes, state }: {
     redirect_uri: redirect_uri,
     response_type: 'code',
     scope: scopes.join(' '),
-    state: state,
   };
+  if (state) params.state = state;
 
 
   Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
@@ -227,9 +227,9 @@ export const authorize = async ({ code, mode, client_id, client_secret, redirect
 
 
   const user = await request(`https://osu.ppy.sh/api/v2/me/${mode}`, { method: 'GET', params: { v2: access_token } });
-  user.access_token;
-  user.refresh_token;
-  user.expires_in;
+  user.access_token = access_token;
+  user.refresh_token = refresh_token;
+  user.expires_in = expires_in;
 
   return user;
 };
