@@ -226,7 +226,7 @@ export const authorize = async ({ code, mode, client_id, client_secret, redirect
   });
 
 
-  const user = await request(`https://osu.ppy.sh/api/v2/me/${mode}`, { params: { v2: access_token } });
+  const user = await request(`https://osu.ppy.sh/api/v2/me/${mode}`, { method: 'GET', params: { v2: access_token } });
   user.access_token;
   user.refresh_token;
   user.expires_in;
