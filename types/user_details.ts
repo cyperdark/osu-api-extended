@@ -65,6 +65,12 @@ export interface UserDetails {
   unranked_beatmapset_count: number;
 }
 
+export interface UserAuth extends UserDetails {
+  access_token: string;
+  refresh_token: string;
+  expires_in: number;
+}
+
 export interface ActiveTournamentBanner {
   id: number;
   tournament_id: number;
