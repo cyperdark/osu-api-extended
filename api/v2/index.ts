@@ -54,4 +54,10 @@ export const forums = {
   topic: {
     details: forums_topic_details
   }
-}
+};
+
+
+
+import search_all from './search/index';
+
+export const search = search_all;
