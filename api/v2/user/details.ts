@@ -1,5 +1,5 @@
 import { request } from "../../../utility/request";
-import { gamemode_names } from "../../../types";
+import { Modes_names } from "../../../types";
 import { UserDetails } from '../../../types/user_details';
 
 
@@ -7,7 +7,7 @@ import { UserDetails } from '../../../types/user_details';
 const name = async ({ myself, user, mode, key }: {
   myself?: boolean;
   user?: number;
-  mode?: gamemode_names;
+  mode?: Modes_names;
   key?: 'id' | 'username';
 }): Promise<UserDetails> => {
   let url = 'https://osu.ppy.sh/api/v2';
