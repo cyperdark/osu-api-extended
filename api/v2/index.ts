@@ -61,3 +61,19 @@ export const forums = {
 import search_all from './search/index';
 
 export const search = search_all;
+
+
+
+import beatmaps_events from "./beatmaps/events";
+import beatmaps_lookup from "./beatmaps/lookup";
+import beatmaps_details from "./beatmaps/details";
+import beatmaps_download from "./beatmaps/download";
+
+
+export const beatmaps = {
+  events: beatmaps_events,
+  lookup: beatmaps_lookup,
+  details: beatmaps_details,
+  download: beatmaps_download,
+};
+
