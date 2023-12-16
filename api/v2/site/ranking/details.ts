@@ -1,10 +1,10 @@
-import { gamemode_names, ranking_types, country_codes } from "../../../../types";
+import { Modes_names, ranking_types, country_codes } from "../../../../types";
 import { request } from "../../../../utility/request";
 import { RankingDetails } from '../../../../types/ranking_details';
 
 
 
-const name = async (mode: gamemode_names, type: ranking_types, object?: {
+const name = async (mode: Modes_names, type: ranking_types, object?: {
   country?: country_codes,
   "cursor[page]"?: number,
   filter?: 'all' | 'friends',

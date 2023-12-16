@@ -3,7 +3,7 @@ import { request } from "./request";
 import readln from "readline";
 
 
-import { auth_params, auth_response, auth_scopes, gamemode_names } from '../types/index';
+import { auth_params, auth_response, auth_scopes, Modes_names } from '../types/index';
 import { UserAuth } from '../types/user_details';
 
 
@@ -203,7 +203,7 @@ export const build_url = ({ client_id, redirect_uri, scopes, state }: {
 
 export const authorize = async ({ code, mode, client_id, client_secret, redirect_url }: {
   code: string;
-  mode: gamemode_names;
+  mode: Modes_names;
 
   client_id: number | string;
   client_secret: string;
