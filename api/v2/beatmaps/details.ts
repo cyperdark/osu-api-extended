@@ -13,13 +13,10 @@ type params = ({
 
 
 type Response<T extends params['type']> =
-  T extends 'difficulty' ? {
-    type: 'difficulty';
-    result: BeamapsDetailsDifficulty
-  } : T extends 'set' ? {
-    type: 'set';
-    result: BeamapsDetailsSet
-  } : never;
+  T extends 'difficulty'
+  ? BeamapsDetailsDifficulty
+  : T extends 'set'
+  ? BeamapsDetailsSet : never;
 
 
 const name = async <T extends params>(obj: T): Promise<Response<T['type']>> => {
@@ -44,7 +41,7 @@ const name = async <T extends params>(obj: T): Promise<Response<T['type']>> => {
     params: params,
   });
 
-  return { type: obj.type, result: data } as Response<T['type']>;
+  return data as Response<T['type']>;
 };
 
 
