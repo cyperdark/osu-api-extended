@@ -10,10 +10,12 @@ export const users = {
 
 
 import user_details from "./user/details";
+import user_activity from "./user/activity";
 
 
 export const user = {
   details: user_details,
+  activity: user_activity
 };
 
 
