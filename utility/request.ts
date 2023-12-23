@@ -63,7 +63,7 @@ export const request: RequestType = (url, { method, headers, data, params = {} }
       if (/^application\/json/.test(response.headers['content-type'])) {
         try {
           const parse = JSON.parse(data);
-          if (parse.authentication === 'basic' && auth.cache_tokens.v1 && total_retries < 3) {
+          if (parse.authentication === 'basic' && total_retries < 3) {
             await auth.refresh_token();
             total_retries++;
 
