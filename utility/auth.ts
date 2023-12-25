@@ -201,7 +201,7 @@ export const build_url = ({ client_id, redirect_uri, scopes, state }: {
 };
 
 
-export const authorize = async ({ code, mode, client_id, client_secret, redirect_url }: {
+export const authorize = async ({ code, mode, client_id, client_secret, redirect_url, grant_type }: {
   code: string;
   mode: Modes_names;
 
@@ -209,6 +209,7 @@ export const authorize = async ({ code, mode, client_id, client_secret, redirect
   client_secret: string;
 
   redirect_url: string;
+  grant_type?: string;
 }): Promise<UserAuth> => {
   const { access_token, refresh_token, expires_in } = await request('https://osu.ppy.sh/oauth/token', {
     method: 'POST',
@@ -217,7 +218,7 @@ export const authorize = async ({ code, mode, client_id, client_secret, redirect
       "Content-Type": "application/json",
     },
     data: JSON.stringify({
-      grant_type: 'authorization_code',
+      grant_type: grant_type || 'authorization_code',
       client_id: client_id,
       client_secret: client_secret,
       redirect_uri: redirect_url,
