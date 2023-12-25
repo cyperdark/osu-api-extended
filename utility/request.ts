@@ -63,7 +63,7 @@ export const request: RequestType = (url, { method, headers, data, params = {} }
       if (/^application\/json/.test(response.headers['content-type'])) {
         try {
           const parse = JSON.parse(data);
-          if (parse.authentication === 'basic' && total_retries < 3) {
+          if (parse.authentication === 'basic' && total_retries < 3 && params.nor != true) {
             await auth.refresh_token();
             total_retries++;
 
@@ -116,7 +116,7 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
   callback?: Function;
 }): Promise<any> => {
   return new Promise((resolve, reject) => {
-    
+
     const file = fs.createWriteStream(dest, { encoding: 'utf8' });
 
     file.on('error', err => {
