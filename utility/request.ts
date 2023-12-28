@@ -64,7 +64,8 @@ export const request: RequestType = (url, { method, headers, data, params = {} }
         try {
           const parse = JSON.parse(data);
           if (parse.authentication === 'basic' && total_retries < 3 && params.nor != true) {
-            await auth.refresh_token();
+            const refresh = await auth.refresh_token();
+            if (refresh == null) return resolve({ authentication: 'basic' });
             total_retries++;
 
 

@@ -90,7 +90,7 @@ export const login = async (params: auth_params) => {
   };
 
 
-  throw new Error('Unknown login method');
+  return null;
 };
 
 
