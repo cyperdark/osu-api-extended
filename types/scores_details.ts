@@ -10,17 +10,17 @@ export interface ScoresDetails {
   type: string;
   user_id: number;
   accuracy: number;
-  build_id?: number;
+  build_id: number;
   ended_at: string;
   has_replay: boolean;
   legacy_perfect: any;
-  legacy_score_id?: number;
+  legacy_score_id: any;
   legacy_total_score: number;
   max_combo: number;
   passed: boolean;
-  pp: number;
+  pp: any;
   ruleset_id: number;
-  started_at?: string;
+  started_at: string;
   total_score: number;
   replay: boolean;
   current_user_attributes: CurrentUserAttributes;
@@ -32,25 +32,34 @@ export interface ScoresDetails {
 
 export interface MaximumStatistics {
   great: number;
-  legacy_combo_increase?: number;
-  ignore_hit?: number;
-  large_tick_hit?: number;
-  slider_tail_hit?: number;
+  ignore_hit: number;
+  large_bonus: number;
+  small_bonus: number;
+  large_tick_hit: number;
 }
 
 export interface Mod {
   acronym: string;
+  settings?: Settings;
+}
+
+export interface Settings {
+  seed?: number;
+  angle_sharpness?: number;
+  drain_rate?: number;
+  circle_size?: number;
+  approach_rate?: number;
+  overall_difficulty?: number;
 }
 
 export interface Statistics {
-  ok: number;
   meh: number;
   miss: number;
   great: number;
-  ignore_hit?: number;
-  ignore_miss?: number;
-  large_tick_hit?: number;
-  slider_tail_hit?: number;
+  ignore_hit: number;
+  ignore_miss: number;
+  small_bonus: number;
+  large_tick_miss: number;
 }
 
 export interface CurrentUserAttributes {
@@ -99,9 +108,9 @@ export interface User {
   is_deleted: boolean;
   is_online: boolean;
   is_supporter: boolean;
-  last_visit?: string;
+  last_visit: string;
   pm_friends_only: boolean;
-  profile_colour?: string;
+  profile_colour: string;
   username: string;
 }
 
@@ -148,7 +157,7 @@ export interface User2 {
   is_deleted: boolean;
   is_online: boolean;
   is_supporter: boolean;
-  last_visit?: string;
+  last_visit: string;
   pm_friends_only: boolean;
   profile_colour: any;
   username: string;
@@ -163,7 +172,7 @@ export interface Country {
 }
 
 export interface Cover {
-  custom_url: string;
+  custom_url: any;
   url: string;
-  id: any;
+  id: string;
 }
