@@ -183,5 +183,5 @@ export interface types {
    * @param {string} object.spotlight The id of the spotlight if type is charts. Ranking for latest spotlight will be returned if not specified
    * @param {string} object.variant Filter ranking to specified mode variant. For ```mode``` of ```mania```, it's either ```4k``` or ```7k```. Only available for ```type``` of ```performance```
   */
-  (mode: 'osu' | 'fruits' | 'mania' | 'taiko' , type: 'charts' | 'country' | 'performance' | 'score' , object?: {country?: number, "cursor[page]"?: number, filter?: 'all' | 'friends' , spotlight?: string, variant?: string, }): Promise<response>;
+  (mode: 'osu' | 'fruits' | 'mania' | 'taiko', type: 'charts' | 'country' | 'performance' | 'score', object?: { country?: string, "cursor[page]"?: number, filter?: 'all' | 'friends' , spotlight?: string, variant?: string, }): Promise<response>;
 }
