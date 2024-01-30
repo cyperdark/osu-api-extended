@@ -64,6 +64,7 @@ export const request = (url: string, { method = "GET", headers, data, params = {
       Authorization: `Bearer ${params.v2 || auth.cache_v2}`,
       Accept: `application/json`,
       'Content-Type': `application/json`,
+      'x-api-version': '20240130',
     };
 
   // console.log({ url, method, headers, data, params: generateQueryString(params) }); // debug too
@@ -145,7 +146,7 @@ export const download = (url: string, dest: string, { headers = {}, data, params
         fs.unlinkSync(dest);
         reject(err);
       });
-  
+
       file.on('finish', () => {
         file.close();
         resolve(dest);
