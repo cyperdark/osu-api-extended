@@ -12,7 +12,7 @@ const name = async (user_id: number, type: 'recent' | 'best' | 'firsts' | 'pinne
   offset?: number,
   mods?: number
 }): Promise<ScoresUser[]> => {
-  if (object.include_fails)
+  if (object.include_fails != null)
     // @ts-ignore
     object.include_fails = object.include_fails == true ? 1 : 0;
 
