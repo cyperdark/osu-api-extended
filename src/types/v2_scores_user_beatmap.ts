@@ -1,35 +1,40 @@
 export interface response {
-  accuracy: number;
-  best_id: number;
-  created_at: string;
-  id: number;
-  max_combo: number;
-  mode: string;
-  mode_int: number;
-  mods: string[];
-  passed: boolean;
-  perfect: boolean;
-  pp: number;
-  rank: string;
-  replay: boolean;
-  score: number;
+  maximum_statistics: {
+    great: number
+    legacy_combo_increase: number
+  }
+  mods: Array<{
+    acronym: string
+  }>
   statistics: {
-    count_100: number;
-    count_300: number;
-    count_50: number;
-    count_geki: number;
-    count_katu: number;
-    count_miss: number;
-  };
-  type: string;
-  user_id: number;
+    ok: number
+    meh?: number
+    miss: number
+    great: number
+  }
+  beatmap_id: number
+  best_id: any
+  id: number
+  rank: string
+  type: string
+  user_id: number
+  accuracy: number
+  build_id: any
+  ended_at: string
+  has_replay: boolean
+  legacy_perfect: any
+  legacy_score_id: number
+  legacy_total_score: number
+  max_combo: number
+  passed: boolean
+  pp: any
+  ruleset_id: number
+  started_at: any
+  total_score: number
+  replay: boolean
   current_user_attributes: {
-    pin: {
-      is_pinned: boolean;
-      score_id: number;
-      score_type: string;
-    };
-  };
+    pin: any
+  }
 }
 
 
@@ -57,5 +62,5 @@ export interface types {
    * @param {string[]} object.mods Array of matching mods ['HD', 'DT']
    * @param {boolean} object.best_only Return only best score from the beatmap
   */
-  (beatmap: number, user?: string | number, object?: {mode?: 'osu' | 'fruits' | 'mania' | 'taiko' , mods?: string[], best_only?: boolean, }): Promise<response[]>;
+  (beatmap: number, user?: string | number, object?: { mode?: 'osu' | 'fruits' | 'mania' | 'taiko', mods?: string[], best_only?: boolean, }): Promise<response[]>;
 }

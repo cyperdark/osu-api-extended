@@ -81,6 +81,7 @@ export const login_lazer = async (username: string, password: string): Promise<_
     headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
+      'x-api-version': '20240130',
     },
     data: JSON.stringify({
       username,
@@ -107,6 +108,7 @@ export const login = async (clientId: number, clientSecret: string, scope: auth_
     headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
+      'x-api-version': '20240130',
     },
     data: JSON.stringify({
       grant_type: 'client_credentials',
@@ -143,6 +145,7 @@ export const authorize_cli = async (clientId: number, clientSecret: string, redi
     headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
+      'x-api-version': '20240130',
     },
     data: JSON.stringify({
       grant_type: 'authorization_code',
@@ -184,6 +187,7 @@ export const authorize = async (code: string, gamemode: osu_mode, clientId: numb
     headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
+      'x-api-version': '20240130',
     },
     data: JSON.stringify({
       grant_type: 'authorization_code',

@@ -30,7 +30,7 @@ export const description: Description = {
 
 
 const name: types = async (score_id, mode) => {
-  const data = await request(`scores/${mode}/${score_id}`, {
+  const data = await request(`scores/${score_id}`, {
     method: 'GET',
   });
 
