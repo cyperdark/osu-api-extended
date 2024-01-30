@@ -79,11 +79,15 @@ const name: types = async (user, type, obj) => {
   });
 
   if (Array.isArray(data)) {
-    const transform = data.map((v, i) => ({
-      position: i + 1,
-      mods_id: mods_id(v.mods.join('')) || 0,
-      ...v
-    }));
+    const transform = data.map((v, i) => {
+      const id = v.mods.map(r => r.acronym).filter(r => r != 'CL').join('');
+
+      return {
+        position: i + 1,
+        mods_id: mods_id(id) || 0,
+        ...v
+      };
+    });
 
     if (obj.mods) return transform.filter(r => (r.mods_id & obj.mods) > 0);
     return transform;

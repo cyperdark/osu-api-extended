@@ -20,4 +20,4 @@ export interface Param {
 
 export type osu_mode = 'osu' | 'fruits' | 'mania' | 'taiko';
 
-export type auth_scopes = ['chat.write' | 'delegate' | 'forum.write' | 'friends.read' | 'identify' | 'public'];
+export type auth_scopes = ('chat.write' | 'delegate' | 'forum.write' | 'friends.read' | 'identify' | 'public')[];
