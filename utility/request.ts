@@ -45,7 +45,7 @@ export const request: RequestType = (url, { method, headers, data, params = {} }
     headers.Authorization = `Bearer ${params.v2 || auth.cache_tokens.v2}`;
     headers.Accept = `application/json`;
     headers['Content-Type'] = `application/json`;
-    headers['x-api-version'] = '20220705';
+    headers['x-api-version'] = '20240130';
   };
 
 

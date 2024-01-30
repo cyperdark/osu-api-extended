@@ -29,17 +29,17 @@ export interface ScoresUser {
   beatmap: Beatmap;
   beatmapset: Beatmapset;
   user: User;
+  weight?: Weight;
 }
 
 export interface MaximumStatistics {
   great: number;
-  legacy_combo_increase?: number;
   ignore_hit?: number;
   large_bonus?: number;
   small_bonus?: number;
   large_tick_hit?: number;
-  small_tick_hit?: number;
   slider_tail_hit?: number;
+  legacy_combo_increase?: number;
 }
 
 export interface Mod {
@@ -75,18 +75,18 @@ export interface Settings {
 
 export interface Statistics {
   ok?: number;
-  great?: number;
   meh?: number;
   miss?: number;
+  great: number;
   ignore_hit?: number;
   ignore_miss?: number;
+  large_bonus?: number;
   small_bonus?: number;
   large_tick_hit?: number;
-  large_bonus?: number;
+  slider_tail_hit?: number;
   large_tick_miss?: number;
   small_tick_hit?: number;
   small_tick_miss?: number;
-  slider_tail_hit?: number;
 }
 
 export interface CurrentUserAttributes {
@@ -170,4 +170,9 @@ export interface User {
   pm_friends_only: boolean;
   profile_colour: any;
   username: string;
+}
+
+export interface Weight {
+  percentage: number;
+  pp: number;
 }
