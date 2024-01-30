@@ -29,7 +29,7 @@ export const description: Description = {
       optional: true,
       params: [
         {
-          type: 'number',
+          type: 'string',
           name: 'country',
           options: false,
           optional: true,
