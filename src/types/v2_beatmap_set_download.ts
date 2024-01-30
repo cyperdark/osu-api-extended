@@ -26,5 +26,5 @@ export interface types {
    * @param {boolean} no_video Download with or without video
    * @param {Function} callback function which is will be triggered on downloading progress
   */
-  (beatmapset: number, file_path: string, host_name: 'osu' | 'chimu' | 'beatconnect' | 'sayobot' | 'nerinyan' | 'mino' | '' , no_video: boolean, callback?: Function): Promise<string>;
+  (beatmapset: number, file_path: string, host_name: 'osu' | 'chimu' | 'beatconnect' | 'sayobot' | 'nerinyan' | 'mino' | '', no_video: boolean, callback?: Function): Promise<string | { error: string }>;
 }
