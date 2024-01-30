@@ -23,11 +23,15 @@ const name = async (user_id: number, type: 'recent' | 'best' | 'firsts' | 'pinne
 
   // check if scores exists. Sometimes there can an error
   if (Array.isArray(data)) {
-    const transform: ScoresUser[] = data.map((v, i) => ({
-      index: i + 1,
-      mods_id: mods.id(v.mods.join('')) || 0,
-      ...v
-    }));
+    const transform: ScoresUser[] = data.map((v: ScoresUser, i) => {
+      const id = v.mods.map(r => r.acronym).filter(r => r != 'CL').join('');
+
+      return {
+        index: i + 1,
+        mods_id: mods.id(id) || 0,
+        ...v
+      };
+    });
 
     if (object?.mods) return transform.filter(r => (r.mods_id & object.mods) > 0);
     return transform;

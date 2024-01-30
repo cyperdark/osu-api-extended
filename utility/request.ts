@@ -39,13 +39,14 @@ export const request: RequestType = (url, { method, headers, data, params = {} }
     params.k = params.v1 || auth.cache_tokens.v1;
 
   // V2 add credentials
-  if (url.includes('https://osu.ppy.sh/api/v2'))
-    headers = {
-      // @ts-ignore
-      Authorization: `Bearer ${params.v2 || auth.cache_tokens.v2}`,
-      Accept: `application/json`,
-      'Content-Type': `application/json`,
-    };
+  if (url.includes('https://osu.ppy.sh/api/v2')) {
+    if (!headers) headers = {};
+
+    headers.Authorization = `Bearer ${params.v2 || auth.cache_tokens.v2}`;
+    headers.Accept = `application/json`;
+    headers['Content-Type'] = `application/json`;
+    headers['x-api-version'] = '20220705';
+  };
 
 
   const generate_query = querystring.encode(params);
