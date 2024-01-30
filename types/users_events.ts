@@ -1,3 +1,17 @@
+import { Modes_names } from ".";
+
+export enum ActionType {
+  Rank = 'rank',
+  Achievement = 'achievement',
+  BeatmapsetUpload = 'beatmapsetUpload',
+  BeatmapsetUpdate = 'beatmapsetUpdate',
+  UsernameChange = 'usernameChange',
+  UserSupportFirst = 'userSupportFirst',
+  UserSupportAgain = 'userSupportAgain',
+  BeatmapsetRevive = 'beatmapsetRevive',
+  BeatmapsetApprove = 'beatmapsetApprove',
+}
+
 export interface UsersEvents {
   events: Event[];
   cursor: Cursor;
@@ -9,17 +23,29 @@ export interface Cursor {
 }
 
 export interface Event {
-  created_at: Date;
-  createdAt: Date;
+  created_at: string;
+  createdAt: string;
   id: number;
-  type: Type;
+  type: ActionType;
   scoreRank?: string;
   rank?: number;
-  mode?: Mode;
+  mode?: Modes_names;
   beatmap?: Beatmap;
-  user: User;
+  user?: User;
   achievement?: Achievement;
-  beatmapset?: Beatmap;
+  beatmapset?: Beatmapset;
+  approval?: string;
+}
+
+export interface Beatmap {
+  title: string;
+  url: string;
+}
+
+export interface User {
+  username: string;
+  url: string;
+  previousUsername?: string;
 }
 
 export interface Achievement {
@@ -30,29 +56,11 @@ export interface Achievement {
   ordering: number;
   slug: string;
   description: string;
-  mode: Mode | null;
-  instructions: null | string;
+  mode: Modes_names;
+  instructions: any;
 }
 
-export enum Mode {
-  Fruits = "fruits",
-  Mania = "mania",
-  Osu = "osu",
-  Taiko = "taiko",
-}
-
-export interface Beatmap {
-  title: string;
-  url: string;
-}
-
-export enum Type {
-  Achievement = "achievement",
-  BeatmapsetUpdate = "beatmapsetUpdate",
-  Rank = "rank",
-}
-
-export interface User {
-  username: string;
-  url: string;
+export interface Beatmapset {
+  title: string
+  url: string
 }
