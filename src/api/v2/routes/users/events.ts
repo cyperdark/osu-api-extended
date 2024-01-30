@@ -50,7 +50,7 @@ const name: types = async (object) => {
   if (object.type != null) {
     if (!Array.isArray(object.type)) throw new Error('Event Type must be an Array of options');
 
-    const sorted = data.events.filter(r => object.type.includes(r.type));
+    const sorted = data.events.filter(r => object.type.includes(r.type as any));
     data.events = sorted;
   };
 
