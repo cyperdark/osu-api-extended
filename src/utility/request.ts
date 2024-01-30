@@ -118,19 +118,6 @@ export const request = (url: string, { method = "GET", headers, data, params = {
  */
 export const download = (url: string, dest: string, { headers = {}, data, params }: RequestParams = {}, callback?: Function): Promise<any> => {
   return new Promise((resolve, reject) => {
-    const file = fs.createWriteStream(dest, { encoding: 'utf8' });
-
-    file.on('error', err => {
-      fs.unlinkSync(dest);
-      reject(err);
-    });
-
-    file.on('finish', () => {
-      file.close();
-      resolve(dest);
-    });
-
-
     if (url.includes('https://osu.ppy.sh/api/v2')) headers['Authorization'] = `Bearer ${auth.cache_v2}`;
 
     headers['accept'] = `application/octet-stream`;
@@ -151,6 +138,18 @@ export const download = (url: string, dest: string, { headers = {}, data, params
         resolve({ error: 'file unavailable' });
         return;
       }
+
+      const file = fs.createWriteStream(dest, { encoding: 'utf8' });
+
+      file.on('error', err => {
+        fs.unlinkSync(dest);
+        reject(err);
+      });
+  
+      file.on('finish', () => {
+        file.close();
+        resolve(dest);
+      });
 
       if (callback !== undefined) {
         const totalLength = parseInt(response.headers['content-length']);

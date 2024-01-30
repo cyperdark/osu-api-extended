@@ -46,33 +46,30 @@ export const description: Description = {
 
 
 const name: types = async (beatmapset, file_path, host_name, no_video, callback) => {
-  let url = '';
-
-  switch (host_name) {
-    case 'osu':
-      url = `https://osu.ppy.sh/api/v2/beatmapsets/${beatmapset}/download${no_video ? '?noVideo=1' : ''}`;
-      break;
-
-    case 'chimu':
-      url = `https://chimu.moe/v1/download/${beatmapset}`;
-      break;
-
-    case 'beatconnect':
-      url = `https://beatconnect.io/b/${beatmapset}/`;
-      break;
-
-    case 'sayobot':
-      url = `https://dl.sayobot.cn/beatmaps/download/${no_video ? 'novideo' : 'full'}/${beatmapset}`;
-      break;
-
-    case 'nerinyan':
-      url = `https://api.nerinyan.moe/d/${beatmapset}${no_video ? '?nv=1' : ''}`;
-      break;
-
-    default:
-      url = `https://osu.ppy.sh/api/v2/beatmapsets/${beatmapset}/download${no_video ? '?noVideo=1' : ''}`;
-      break;
-  };
+  const url = (() => {
+    switch (host_name) {
+      case 'osu':
+        return `https://osu.ppy.sh/api/v2/beatmapsets/${beatmapset}/download${no_video ? '?noVideo=1' : ''}`;
+  
+      case 'chimu':
+        return `https://chimu.moe/v1/download/${beatmapset}`;
+  
+      case 'beatconnect':
+        return `https://beatconnect.io/b/${beatmapset}/`;
+  
+      case 'sayobot':
+        return `https://dl.sayobot.cn/beatmaps/download/${no_video ? 'novideo' : 'full'}/${beatmapset}`;
+  
+      case 'nerinyan':
+        return `https://api.nerinyan.moe/d/${beatmapset}${no_video ? '?nv=1' : ''}`;
+      
+      case 'mino':
+        return `https://catboy.best/d/${beatmapset}${no_video ? "n" : ""}`;
+  
+      default:
+        return `https://osu.ppy.sh/api/v2/beatmapsets/${beatmapset}/download${no_video ? '?noVideo=1' : ''}`;
+    };
+  })();
 
   const data = await download(url, file_path, {
     headers: {
