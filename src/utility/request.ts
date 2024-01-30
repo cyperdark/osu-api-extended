@@ -116,7 +116,7 @@ export const request = (url: string, { method = "GET", headers, data, params = {
  * @param {string} dest The file destination
  * @returns {Promise<any>} The response
  */
-export const download = (url: string, dest: string, { headers = {}, data, params }: RequestParams = {}, callback?: Function): Promise<Boolean> => {
+export const download = (url: string, dest: string, { headers = {}, data, params }: RequestParams = {}, callback?: Function): Promise<any> => {
   return new Promise((resolve, reject) => {
     if (url.includes('https://osu.ppy.sh/api/v2')) headers['Authorization'] = `Bearer ${auth.cache_v2}`;
 
@@ -135,7 +135,7 @@ export const download = (url: string, dest: string, { headers = {}, data, params
       }
 
       if (response.statusCode === 404) {
-        resolve(false);
+        resolve({ error: 'file unavailable' });
         return;
       }
 
@@ -148,7 +148,7 @@ export const download = (url: string, dest: string, { headers = {}, data, params
   
       file.on('finish', () => {
         file.close();
-        resolve(true);
+        resolve(dest);
       });
 
       if (callback !== undefined) {
