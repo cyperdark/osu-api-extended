@@ -103,12 +103,12 @@ export interface CurrentUserAttributes {
 }
 
 export interface Statistics {
-  count_100: number;
-  count_300: number;
-  count_50: number;
-  count_geki: number;
-  count_katu: number;
-  count_miss: number;
+  count_100: number | null;
+  count_300: number | null;
+  count_50: number | null;
+  count_geki: number | null;
+  count_katu: number | null;
+  count_miss: number | null;
 }
 
 export enum Type {
