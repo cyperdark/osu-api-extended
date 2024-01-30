@@ -40,7 +40,7 @@ const { v1, auth } = require('osu-api-extended')
 const main = async () => {
   auth.set_v1(api_key)
 
-  const data = await v2.beatmap.diff(1256136)
+  const data = await v1.beatmap.diff(1256136)
   console.log(data)
 }
 
@@ -55,16 +55,18 @@ You can [create your client here](https://osu.ppy.sh/home/account/edit#oauth 'ht
 const { v2, auth } = require('osu-api-extended')
 
 const main = async () => {
+  const SCOPE_LIST = ['public', ...];
+
   // Auth via client
-  await auth.login('CLIENT_ID', 'CLIENT_SECRET')
+  await auth.login('CLIENT_ID', 'CLIENT_SECRET', SCOPE_LIST);
 
   // Auth via lazer credentials
-  await auth.login_lazer('YOUR_LOGIN', 'YOUR_PASSWORD')
+  await auth.login_lazer('YOUR_LOGIN', 'YOUR_PASSWORD');
 
   // Auth via oauth2
-  await auth.authorize_cli('CLIENT_ID', 'CLIENT_SECRET', 'CALLBACK_URL')
+  await auth.authorize_cli('CLIENT_ID', 'CLIENT_SECRET', 'CALLBACK_URL', SCOPE_LIST);
 
-  const data = await v2.v2.beatmap.id.details(1256136)
+  const data = await v2.beatmap.id.details(1256136)
   console.log(data)
 }
 
