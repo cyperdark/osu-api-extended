@@ -1,26 +1,60 @@
 export interface ScoresDetails {
-  accuracy: number;
-  best_id: number;
-  created_at: Date;
-  id: number;
-  max_combo: number;
-  mode: string;
-  mode_int: number;
-  mods: string[];
-  passed: boolean;
-  perfect: boolean;
-  pp: number;
-  rank: string;
-  replay: boolean;
-  score: number;
+  ranked: boolean;
+  maximum_statistics: MaximumStatistics;
+  mods: Mod[];
   statistics: Statistics;
+  beatmap_id: number;
+  best_id: any;
+  id: number;
+  rank: string;
   type: string;
   user_id: number;
+  accuracy: number;
+  build_id?: number;
+  ended_at: string;
+  has_replay: boolean;
+  legacy_perfect: any;
+  legacy_score_id?: number;
+  legacy_total_score: number;
+  max_combo: number;
+  passed: boolean;
+  pp: number;
+  ruleset_id: number;
+  started_at?: string;
+  total_score: number;
+  replay: boolean;
   current_user_attributes: CurrentUserAttributes;
   beatmap: Beatmap;
   beatmapset: Beatmapset;
   rank_global: number;
-  user: User;
+  user: User2;
+}
+
+export interface MaximumStatistics {
+  great: number;
+  legacy_combo_increase?: number;
+  ignore_hit?: number;
+  large_tick_hit?: number;
+  slider_tail_hit?: number;
+}
+
+export interface Mod {
+  acronym: string;
+}
+
+export interface Statistics {
+  ok: number;
+  meh: number;
+  miss: number;
+  great: number;
+  ignore_hit?: number;
+  ignore_miss?: number;
+  large_tick_hit?: number;
+  slider_tail_hit?: number;
+}
+
+export interface CurrentUserAttributes {
+  pin: any;
 }
 
 export interface Beatmap {
@@ -40,11 +74,11 @@ export interface Beatmap {
   count_sliders: number;
   count_spinners: number;
   cs: number;
-  deleted_at: null;
+  deleted_at: any;
   drain: number;
   hit_length: number;
   is_scoreable: boolean;
-  last_updated: Date;
+  last_updated: string;
   mode_int: number;
   passcount: number;
   playcount: number;
@@ -65,24 +99,10 @@ export interface User {
   is_deleted: boolean;
   is_online: boolean;
   is_supporter: boolean;
-  last_visit: Date;
+  last_visit?: string;
   pm_friends_only: boolean;
-  profile_colour: null;
+  profile_colour?: string;
   username: string;
-  country?: Country;
-  cover?: Cover;
-  groups?: any[];
-}
-
-export interface Country {
-  code: string;
-  name: string;
-}
-
-export interface Cover {
-  custom_url: string;
-  url: string;
-  id: string;
 }
 
 export interface Beatmapset {
@@ -91,7 +111,7 @@ export interface Beatmapset {
   covers: Covers;
   creator: string;
   favourite_count: number;
-  hype: null;
+  hype: any;
   id: number;
   nsfw: boolean;
   offset: number;
@@ -102,7 +122,7 @@ export interface Beatmapset {
   status: string;
   title: string;
   title_unicode: string;
-  track_id: number;
+  track_id: any;
   user_id: number;
   video: boolean;
 }
@@ -118,15 +138,32 @@ export interface Covers {
   "slimcover@2x": string;
 }
 
-export interface CurrentUserAttributes {
-  pin: null;
+export interface User2 {
+  avatar_url: string;
+  country_code: string;
+  default_group: string;
+  id: number;
+  is_active: boolean;
+  is_bot: boolean;
+  is_deleted: boolean;
+  is_online: boolean;
+  is_supporter: boolean;
+  last_visit?: string;
+  pm_friends_only: boolean;
+  profile_colour: any;
+  username: string;
+  country: Country;
+  cover: Cover;
+  groups: any[];
 }
 
-export interface Statistics {
-  count_100: number;
-  count_300: number;
-  count_50: number;
-  count_geki: number;
-  count_katu: number;
-  count_miss: number;
+export interface Country {
+  code: string;
+  name: string;
+}
+
+export interface Cover {
+  custom_url: string;
+  url: string;
+  id: any;
 }

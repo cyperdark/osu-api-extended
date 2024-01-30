@@ -4,12 +4,8 @@ import { ScoresDetails } from '../../../types/scores_details';
 
 
 
-const name = async (score_id: number, mode: Modes_names): Promise<ScoresDetails> => {
-  if (mode == null)
-    throw new Error('Gamemode name not specified');
-
-
-  const data = await request(`https://osu.ppy.sh/api/v2/scores/${mode}/${score_id}`, {
+const name = async (score_id: number): Promise<ScoresDetails> => {
+  const data = await request(`https://osu.ppy.sh/api/v2/scores/${score_id}`, {
     method: 'GET',
   });
 

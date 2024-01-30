@@ -7,7 +7,7 @@ import { auth_params, auth_response, auth_scopes, Modes_names } from '../types/i
 import { UserAuth } from '../types/user_details';
 
 
-const credentials: {
+export const credentials: {
   method: any;
 
   api_key: string;
@@ -50,7 +50,7 @@ export const login = async (params: auth_params) => {
   credentials.method = params.method;
 
 
-  if (params.method == 'stable v1') {
+  if (params.method == 'v1') {
     credentials.api_key = params.api_key;
 
     cache_tokens.v1 = params.api_key;
@@ -58,7 +58,7 @@ export const login = async (params: auth_params) => {
   };
 
 
-  if (params.method == 'stable v2') {
+  if (params.method == 'v2') {
     credentials.client_id = params.client_id;
     credentials.client_secret = params.client_secret;
     if (params.scopes) credentials.scopes = params.scopes;

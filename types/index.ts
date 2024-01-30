@@ -13,7 +13,7 @@ export type beatmap_languages = 'Any' | 'English' | 'Chinese' | 'French' | 'Germ
 export type beatmap_ranks = 'XH' | 'X' | 'SH' | 'S' | 'A' | 'B' | 'C' | 'D';
 export type beatmap_extra = 'storyboard' | 'video';
 
-export type beatmap_events_types = 'nominate' | 'qualify' | 'rank' | 'love' | 'nomination_reset' | 'nomination_reset_received' | 'disqualify' | 'remove_from_loved' | 'kudosu_gain' | 'kudosu_lost' | 'genre_edit' | 'language_edit' | 'nsfw_toggle' | 'offset_edit' | 'issue_resolve' | 'issue_reopen' | 'beatmap_owner_change' | 'kudosu_allow' | 'kudosu_deny' | 'approve' | 'kudosu_recalculate' | 'discussion_delete' | 'discussion_restore' | 'discussion_post_delete' | 'discussion_post_restor' ;
+export type beatmap_events_types = 'nominate' | 'qualify' | 'rank' | 'love' | 'nomination_reset' | 'nomination_reset_received' | 'disqualify' | 'remove_from_loved' | 'kudosu_gain' | 'kudosu_lost' | 'genre_edit' | 'language_edit' | 'nsfw_toggle' | 'offset_edit' | 'issue_resolve' | 'issue_reopen' | 'beatmap_owner_change' | 'kudosu_allow' | 'kudosu_deny' | 'approve' | 'kudosu_recalculate' | 'discussion_delete' | 'discussion_restore' | 'discussion_post_delete' | 'discussion_post_restor';
 
 
 export type auth_scopes = (
@@ -29,18 +29,18 @@ export type auth_scopes = (
 
 
 export type auth_params = ({
-  method: 'stable v2';
+  method: 'v2';
 
   client_id: number | string;
   client_secret: string;
 
   scopes: auth_scopes;
 } | {
-  method: 'stable v1';
+  method: 'v1';
 
   api_key: string;
 } | {
-  method: 'lazer'
+  method: 'lazer';
 
   login: string;
   password: string;
