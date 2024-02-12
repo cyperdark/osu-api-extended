@@ -1,3 +1,5 @@
+import { Mod } from "./mods";
+
 export interface response {
   id: number;
   name: string;
@@ -47,11 +49,7 @@ export interface response {
     room_id: number;
     beatmap_id: number;
     ruleset_id: number;
-    allowed_mods: {
-      acronym: string;
-      settings: {
-      };
-    }[];
+    allowed_mods: Mod[];
     required_mods: [];
     expired: boolean;
     owner_id: number;

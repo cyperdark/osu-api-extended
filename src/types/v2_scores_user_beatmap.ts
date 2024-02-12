@@ -1,13 +1,11 @@
+import { Mod } from "./mods"
+
 export interface response {
   maximum_statistics: {
     great: number
     legacy_combo_increase: number
   }
-  mods: Array<{
-    acronym: string
-    settings?: Settings;
-
-  }>
+  mods: Mod[]
   statistics: {
     ok: number
     meh?: number
@@ -38,16 +36,6 @@ export interface response {
     pin: any
   }
 }
-
-export interface Settings {
-  seed?: number;
-  angle_sharpness?: number;
-  drain_rate?: number;
-  circle_size?: number;
-  approach_rate?: number;
-  overall_difficulty?: number;
-}
-
 
 
 export interface types {
