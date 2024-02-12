@@ -1,109 +1,109 @@
-interface BaseMod {
+type BaseMod = {
   acronym: string;
   settings?: {};
-}
+};
 
-interface EZ extends BaseMod {
+type EZ = BaseMod & {
   acronym: "EZ";
   settings: {
     retries: number;
   };
-}
+};
 
-interface NF extends BaseMod {
+type NF = BaseMod & {
   acronym: "NF";
-}
+};
 
-interface HT extends BaseMod {
+type HT = BaseMod & {
   acronym: "HT";
   settings?: {
     speed_change: number;
     adjust_pitch: boolean;
   };
-}
+};
 
-interface DC extends BaseMod {
+type DC = BaseMod & {
   acronym: "DC";
   settings: {
     speed_change: number;
   };
-}
+};
 
-interface HR extends BaseMod {
+type HR = BaseMod & {
   acronym: "HR";
-}
+};
 
-interface SD extends BaseMod {
+type SD = BaseMod & {
   acronym: "SD";
   settings: {
     restart: boolean;
   };
-}
+};
 
-interface PF extends BaseMod {
+type PF = BaseMod & {
   acronym: "PF";
   settings: {
     restart: boolean;
   };
-}
+};
 
-interface DT extends BaseMod {
+type DT = BaseMod & {
   acronym: "DT";
   settings?: {
     speed_change: number;
     adjust_pitch: boolean;
   };
-}
+};
 
-interface NC extends BaseMod {
+type NC = BaseMod & {
   acronym: "NC";
   settings: {
     speed_change: number;
   };
-}
+};
 
-interface HD extends BaseMod {
+type HD = BaseMod & {
   acronym: "HD";
   settings: {
     only_fade_approach_circles: boolean;
   };
-}
+};
 
-interface FL extends BaseMod {
+type FL = BaseMod & {
   acronym: "FL";
   settings?: {
     follow_delay: number;
     size_multiplier: number;
     combo_based_size: boolean;
   };
-}
+};
 
-interface BL extends BaseMod {
+type BL = BaseMod & {
   acronym: "BL";
-}
+};
 
-interface ST extends BaseMod {
+type ST = BaseMod & {
   acronym: "ST";
-}
+};
 
-interface AC extends BaseMod {
+type AC = BaseMod & {
   acronym: "AC";
   settings?: {
     minimum_accuracy: number;
     accuracy_judge_mode: string;
     restart: boolean;
   };
-}
+};
 
-interface TP extends BaseMod {
+type TP = BaseMod & {
   acronym: "TP";
   settings?: {
     seed: number;
     metronome: boolean;
   };
-}
+};
 
-interface DA extends BaseMod {
+type DA = BaseMod & {
   acronym: "DA";
   settings?: {
     circle_size: number;
@@ -112,9 +112,9 @@ interface DA extends BaseMod {
     overall_difficulty: number;
     extended_limits: boolean;
   };
-}
+};
 
-interface CL extends BaseMod {
+type CL = BaseMod & {
   acronym: "CL";
   settings?: {
     no_slider_head_accuracy: boolean;
@@ -123,119 +123,119 @@ interface CL extends BaseMod {
     fade_hit_circle_early: boolean;
     classic_health: boolean;
   };
-}
+};
 
-interface RD extends BaseMod {
+type RD = BaseMod & {
   acronym: "RD";
   settings?: {
     angle_sharpness: number;
     seed: number;
   };
-}
+};
 
-interface MR extends BaseMod {
+type MR = BaseMod & {
   acronym: "MR";
   settings: {
     reflection: string;
   };
-}
+};
 
-interface AL extends BaseMod {
+type AL = BaseMod & {
   acronym: "AL";
-}
+};
 
-interface SG extends BaseMod {
+type SG = BaseMod & {
   acronym: "SG";
-}
+};
 
-interface AT extends BaseMod {
+type AT = BaseMod & {
   acronym: "AT";
-}
+};
 
-interface CN extends BaseMod {
+type CN = BaseMod & {
   acronym: "CN";
-}
+};
 
-interface RX extends BaseMod {
+type RX = BaseMod & {
   acronym: "RX";
-}
+};
 
-interface AP extends BaseMod {
+type AP = BaseMod & {
   acronym: "AP";
-}
+};
 
-interface SO extends BaseMod {
+type SO = BaseMod & {
   acronym: "SO";
-}
+};
 
-interface TR extends BaseMod {
+type TR = BaseMod & {
   acronym: "TR";
-}
+};
 
-interface WG extends BaseMod {
+type WG = BaseMod & {
   acronym: "WG";
   settings: {
     strength: number;
   };
-}
+};
 
-interface SI extends BaseMod {
+type SI = BaseMod & {
   acronym: "SI";
-}
+};
 
-interface GR extends BaseMod {
+type GR = BaseMod & {
   acronym: "GR";
   settings: {
     start_scale: number;
   };
-}
+};
 
-interface DF extends BaseMod {
+type DF = BaseMod & {
   acronym: "DF";
   settings: {
     start_scale: number;
   };
-}
+};
 
-interface WU extends BaseMod {
+type WU = BaseMod & {
   acronym: "WU";
   settings?: {
     initial_rate: number;
     final_rate: number;
     adjust_pitch: boolean;
   };
-}
+};
 
-interface WD extends BaseMod {
+type WD = BaseMod & {
   acronym: "WD";
   settings?: {
     initial_rate: number;
     final_rate: number;
     adjust_pitch: boolean;
   };
-}
+};
 
-interface TC extends BaseMod {
+type TC = BaseMod & {
   acronym: "TC";
-}
+};
 
-interface BR extends BaseMod {
+type BR = BaseMod & {
   acronym: "BR";
   settings?: {
     spin_speed: number;
     direction: string;
   };
-}
+};
 
-interface AD extends BaseMod {
+type AD = BaseMod & {
   acronym: "AD";
   settings?: {
     scale: number;
     style: string;
   };
-}
+};
 
-interface MU extends BaseMod {
+type MU = BaseMod & {
   acronym: "MU";
   settings?: {
     inverse_muting: boolean;
@@ -243,135 +243,135 @@ interface MU extends BaseMod {
     mute_combo_count: number;
     affects_hit_sounds: boolean;
   };
-}
+};
 
-interface NS extends BaseMod {
+type NS = BaseMod & {
   acronym: "NS";
   settings: {
     hidden_combo_count: number;
   };
-}
+};
 
-interface MG extends BaseMod {
+type MG = BaseMod & {
   acronym: "MG";
   settings: {
     attraction_strength: number;
   };
-}
+};
 
-interface RP extends BaseMod {
+type RP = BaseMod & {
   acronym: "RP";
   settings: {
     repulsion_strength: number;
   };
-}
+};
 
-interface AS extends BaseMod {
+type AS = BaseMod & {
   acronym: "AS";
   settings?: {
     initial_rate: number;
     adjust_pitch: boolean;
   };
-}
+};
 
-interface FR extends BaseMod {
+type FR = BaseMod & {
   acronym: "FR";
-}
+};
 
-interface BU extends BaseMod {
+type BU = BaseMod & {
   acronym: "BU";
-}
+};
 
-interface SY extends BaseMod {
+type SY = BaseMod & {
   acronym: "SY";
-}
+};
 
-interface DP extends BaseMod {
+type DP = BaseMod & {
   acronym: "DP";
   settings?: {
     max_depth: number;
     show_approach_circles: boolean;
   };
-}
+};
 
-interface TD extends BaseMod {
+type TD = BaseMod & {
   acronym: "TD";
-}
+};
 
-interface SV2 extends BaseMod {
+type SV2 = BaseMod & {
   acronym: "SV2";
-}
+};
 
-interface SW extends BaseMod {
+type SW = BaseMod & {
   acronym: "SW";
-}
+};
 
-interface FF extends BaseMod {
+type FF = BaseMod & {
   acronym: "FF";
-}
+};
 
-interface FI extends BaseMod {
+type FI = BaseMod & {
   acronym: "FI";
   settings: {
     coverage: number;
   };
-}
+};
 
-interface DS extends BaseMod {
+type DS = BaseMod & {
   acronym: "DS";
-}
+};
 
-interface IN extends BaseMod {
+type IN = BaseMod & {
   acronym: "IN";
-}
+};
 
-interface CS extends BaseMod {
+type CS = BaseMod & {
   acronym: "CS";
-}
+};
 
-interface HO extends BaseMod {
+type HO = BaseMod & {
   acronym: "HO";
-}
+};
 
-interface K1 extends BaseMod {
+type K1 = BaseMod & {
   acronym: "1K";
-}
+};
 
-interface K2 extends BaseMod {
+type K2 = BaseMod & {
   acronym: "2K";
-}
+};
 
-interface K3 extends BaseMod {
+type K3 = BaseMod & {
   acronym: "3K";
-}
+};
 
-interface K4 extends BaseMod {
+type K4 = BaseMod & {
   acronym: "4K";
-}
+};
 
-interface K5 extends BaseMod {
+type K5 = BaseMod & {
   acronym: "5K";
-}
+};
 
-interface K6 extends BaseMod {
+type K6 = BaseMod & {
   acronym: "6K";
-}
+};
 
-interface K7 extends BaseMod {
+type K7 = BaseMod & {
   acronym: "7K";
-}
+};
 
-interface K8 extends BaseMod {
+type K8 = BaseMod & {
   acronym: "8K";
-}
+};
 
-interface K9 extends BaseMod {
+type K9 = BaseMod & {
   acronym: "9K";
-}
+};
 
-interface K10 extends BaseMod {
+type K10 = BaseMod & {
   acronym: "10K";
-}
+};
 
 export type Mod =
   | EZ
