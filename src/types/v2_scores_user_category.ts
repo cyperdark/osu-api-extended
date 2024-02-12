@@ -7,6 +7,7 @@ export interface response {
   }
   mods: Array<{
     acronym: string
+    settings?: Settings;
   }>
   statistics: {
     ok?: number
@@ -111,6 +112,15 @@ export interface response {
     profile_colour: any
     username: string
   }
+}
+
+export interface Settings {
+  seed?: number;
+  angle_sharpness?: number;
+  drain_rate?: number;
+  circle_size?: number;
+  approach_rate?: number;
+  overall_difficulty?: number;
 }
 
 

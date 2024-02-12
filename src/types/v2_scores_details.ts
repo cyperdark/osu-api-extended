@@ -5,6 +5,7 @@ export type response = {
   }
   mods: Array<{
     acronym: string
+    settings?: Settings;
   }>
   statistics: {
     ok: number
@@ -137,6 +138,16 @@ export type response = {
     groups: Array<any>
   }
 }
+
+export interface Settings {
+  seed?: number;
+  angle_sharpness?: number;
+  drain_rate?: number;
+  circle_size?: number;
+  approach_rate?: number;
+  overall_difficulty?: number;
+}
+
 
 
 export interface types {
