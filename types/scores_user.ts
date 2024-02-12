@@ -33,13 +33,15 @@ export interface ScoresUser {
 }
 
 export interface MaximumStatistics {
-  great: number;
+  great?: number;
+  legacy_combo_increase?: number;
+  small_tick_hit?: number;
+  large_tick_hit?: number;
+  perfect?: number;
   ignore_hit?: number;
   large_bonus?: number;
   small_bonus?: number;
-  large_tick_hit?: number;
   slider_tail_hit?: number;
-  legacy_combo_increase?: number;
 }
 
 export interface Mod {
@@ -48,45 +50,26 @@ export interface Mod {
 }
 
 export interface Settings {
-  speed_change?: number;
-  retries?: number;
-  seed?: number;
-  start_scale?: number;
-  angle_sharpness?: number;
-  drain_rate?: number;
-  circle_size?: number;
   approach_rate?: number;
-  overall_difficulty?: number;
-  max_depth?: number;
-  scale?: number;
-  style?: string;
-  reflection?: string;
-  extended_limits?: boolean;
-  repulsion_strength?: number;
-  hidden_combo_count?: number;
-  spin_speed?: number;
-  final_rate?: number;
-  initial_rate?: number;
-  mute_combo_count?: number;
-  strength?: number;
-  attraction_strength?: number;
-  only_fade_approach_circles?: boolean;
+  speed_change?: number;
 }
 
 export interface Statistics {
   ok?: number;
-  meh?: number;
   miss?: number;
   great: number;
+  large_bonus?: number;
+  small_tick_hit?: number;
+  large_tick_hit?: number;
+  small_tick_miss?: number;
+  meh?: number;
+  good?: number;
+  perfect?: number;
   ignore_hit?: number;
   ignore_miss?: number;
-  large_bonus?: number;
   small_bonus?: number;
-  large_tick_hit?: number;
   slider_tail_hit?: number;
   large_tick_miss?: number;
-  small_tick_hit?: number;
-  small_tick_miss?: number;
 }
 
 export interface CurrentUserAttributes {
@@ -129,7 +112,7 @@ export interface Beatmapset {
   covers: Covers;
   creator: string;
   favourite_count: number;
-  hype: any;
+  hype?: Hype;
   id: number;
   nsfw: boolean;
   offset: number;
@@ -156,6 +139,11 @@ export interface Covers {
   "slimcover@2x": string;
 }
 
+export interface Hype {
+  current: number;
+  required: number;
+}
+
 export interface User {
   avatar_url: string;
   country_code: string;
@@ -166,7 +154,7 @@ export interface User {
   is_deleted: boolean;
   is_online: boolean;
   is_supporter: boolean;
-  last_visit: string;
+  last_visit?: string;
   pm_friends_only: boolean;
   profile_colour: any;
   username: string;
