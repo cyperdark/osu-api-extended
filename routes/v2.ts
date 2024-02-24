@@ -42,6 +42,16 @@ export const changelogs = {
 
 
 
+import comments_list from '../api/v2/comments_list';
+
+
+export const comments = {
+  list: comments_list,
+};
+
+
+
+
 import users_details from "../api/v2/users_list";
 import users_events from "../api/v2/users/events";
 
