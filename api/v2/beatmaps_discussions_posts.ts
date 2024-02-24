@@ -5,12 +5,12 @@ import { request } from "../../utility/request";
 
 
 const name = async (params: {
-  discussion_id: number;
-  sort: 'id_desc' | 'id_asc';
-  types: ('first' | 'reply' | 'system')[];
-  user: number;
+  discussion_id?: number;
+  sort?: 'id_desc' | 'id_asc';
+  types?: ('first' | 'reply' | 'system')[];
+  user?: number;
 
-  limit: number;
+  limit?: number;
   cursor_string?: string;
 }, addons: IDefaultParams): Promise<BeatmapsDiscussionsListResponse> => {
   if (params.discussion_id) {

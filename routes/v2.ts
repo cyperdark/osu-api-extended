@@ -1,3 +1,47 @@
+import beatmap_events_list from "../api/v2/beatmap_events_list";
+import beatmaps_lookup from "../api/v2/beatmaps_lookup";
+import beatmaps_details from "../api/v2/beatmaps_details";
+import beatmaps_download from "../api/v2/beatmaps_download";
+import beatmap_packs_list from "../api/v2/beatmap_packs_list";
+import beatmap_packs_details from "../api/v2/beatmap_packs_details";
+import beatmaps_discussions_list from "../api/v2/beatmaps_discussions_list";
+import beatmaps_discussions_posts from "../api/v2/beatmaps_discussions_posts";
+import beatmaps_discussions_votes from "../api/v2/beatmaps_discussions_votes";
+
+
+export const beatmaps = {
+  packs: {
+    list: beatmap_packs_list,
+    details: beatmap_packs_details,
+  },
+  lookup: beatmaps_lookup,
+  details: beatmaps_details,
+  events: {
+    list: beatmap_events_list,
+  },
+  download: beatmaps_download,
+  discussions: {
+    list: beatmaps_discussions_list,
+    posts: beatmaps_discussions_posts,
+    votes: beatmaps_discussions_votes,
+  }
+};
+
+
+
+
+import changelogs_list from '../api/v2/changelogs_list';
+import changelogs_details from '../api/v2/changelogs_details';
+
+
+export const changelogs = {
+  list: changelogs_list,
+  details: changelogs_details,
+};
+
+
+
+
 import users_details from "../api/v2/users_list";
 import users_events from "../api/v2/users/events";
 
@@ -63,34 +107,3 @@ export const forums = {
 import search_all from '../api/v2/search';
 
 export const search = search_all;
-
-
-
-import beatmap_events_list from "../api/v2/beatmap_events_list";
-import beatmaps_lookup from "../api/v2/beatmaps_lookup";
-import beatmaps_details from "../api/v2/beatmaps_details";
-import beatmaps_download from "../api/v2/beatmaps_download";
-import beatmap_packs_list from "../api/v2/beatmap_packs_list";
-import beatmap_packs_details from "../api/v2/beatmap_packs_details";
-import beatmaps_discussions_list from "../api/v2/beatmaps_discussions_list";
-import beatmaps_discussions_posts from "../api/v2/beatmaps_discussions_posts";
-import beatmaps_discussions_votes from "../api/v2/beatmaps_discussions_votes";
-
-
-export const beatmaps = {
-  packs: {
-    list: beatmap_packs_list,
-    details: beatmap_packs_details,
-  },
-  lookup: beatmaps_lookup,
-  details: beatmaps_details,
-  events: {
-    list: beatmap_events_list,
-  },
-  download: beatmaps_download,
-  discussions: {
-    list: beatmaps_discussions_list,
-    posts: beatmaps_discussions_posts,
-    votes: beatmaps_discussions_votes,
-  }
-};
