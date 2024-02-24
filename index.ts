@@ -16,4 +16,4 @@ export * as auth from './utility/auth';
 export * as Enums from './types/enums';
 
 
-export * as v2 from "./api/v2/index";
+export * as v2 from "./routes/v2";

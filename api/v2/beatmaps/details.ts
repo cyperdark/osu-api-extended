@@ -1,3 +1,4 @@
+import { IDefaultParams } from "../../../types";
 import { BeamapsDetailsDifficulty } from "../../../types/v2/beamaps_details_difficulty";
 import { BeamapsDetailsSet } from "../../../types/v2/beamaps_details_set";
 import { request } from "../../../utility/request";
@@ -19,26 +20,27 @@ type Response<T extends params['type']> =
   ? BeamapsDetailsSet : never;
 
 
-const name = async <T extends params>(obj: T): Promise<Response<T['type']>> => {
-  const params: any = {};
+const name = async <T extends params>(params: T, addons: IDefaultParams): Promise<Response<T['type']>> => {
+  const object: any = {};
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'GET';
 
 
-  switch (obj.type) {
+  switch (params.type) {
     case 'difficulty':
-      url += `/beatmaps/${obj.id}`;
+      url += `/beatmaps/${params.id}`;
       break;
 
     case 'set':
-      url += `/beatmapsets/${obj.id}`;
+      url += `/beatmapsets/${params.id}`;
       break;
   };
 
 
   const data = await request(url, {
     method: method,
-    params: params,
+    params: object,
+    addons
   });
 
   return data as Response<T['type']>;
