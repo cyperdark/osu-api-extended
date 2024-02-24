@@ -1,7 +1,7 @@
-import { IDefaultParams } from "../../../types";
-import { BeamapsDetailsDifficulty } from "../../../types/v2/beamaps_details_difficulty";
-import { BeamapsDetailsSet } from "../../../types/v2/beamaps_details_set";
-import { request } from "../../../utility/request";
+import { IDefaultParams } from "../../types";
+import { BeamapsDetailsDifficulty } from "../../types/v2/beamaps_details_difficulty";
+import { BeamapsDetailsSet } from "../../types/v2/beamaps_details_set";
+import { request } from "../../utility/request";
 
 
 type params = ({

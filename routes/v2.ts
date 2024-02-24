@@ -68,10 +68,11 @@ export const search = search_all;
 
 import beatmap_events_list from "../api/v2/beatmap_events_list";
 import beatmaps_lookup from "../api/v2/beatmaps_lookup";
-import beatmaps_details from "../api/v2/beatmaps/details";
+import beatmaps_details from "../api/v2/beatmaps_details";
 import beatmaps_download from "../api/v2/beatmaps_download";
 import beatmap_packs_list from "../api/v2/beatmap_packs_list";
 import beatmap_packs_details from "../api/v2/beatmap_packs_details";
+import beatmaps_discussions_list from "../api/v2/beatmaps_discussions_list";
 
 
 export const beatmaps = {
@@ -85,4 +86,9 @@ export const beatmaps = {
     list: beatmap_events_list,
   },
   download: beatmaps_download,
+  discussions: {
+    list: beatmaps_discussions_list,
+    // posts: ,
+    // votes: ,
+  }
 };
