@@ -43,17 +43,19 @@ export const changelogs = {
 
 
 import comments_list from '../api/v2/comments_list';
+import comments_details from '../api/v2/comments_details';
 
 
 export const comments = {
   list: comments_list,
+  details: comments_details,
 };
 
 
 
 
 import users_details from "../api/v2/users_list";
-import users_events from "../api/v2/users/events";
+import users_events from "../api/v2/users_events";
 
 
 export const users = {
@@ -104,12 +106,12 @@ export const site = {
 
 
 
-import forums_topic_details from '../api/v2/forums/topic/details';
+import forums_topic_details from '../api/v2/forum_topic_details';
 
 export const forums = {
-  topic: {
-    details: forums_topic_details
-  }
+  topics: {
+    details: forums_topic_details,
+  },
 };
 
 

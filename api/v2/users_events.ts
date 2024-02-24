@@ -1,13 +1,14 @@
-import { request } from "../../../utility/request";
-import { UsersEvents, Event } from '../../../types/users_events';
+import { request } from "../../utility/request";
+import { UsersEvents } from '../../types/users_events';
+import { IDefaultParams } from "../../types";
 
 
 
 const name = async ({ sort, cursor_string, type }: {
-  cursor_string?: string;
-  sort?: 'id_desc' | 'id_asc',
   type?: ('achievement' | 'beatmapPlaycount' | 'beatmapsetApprove' | 'beatmapsetDelete' | 'beatmapsetRevive' | 'beatmapsetUpdate' | 'beatmapsetUpload' | 'rank' | 'userSupportAgain' | 'userSupportFirst' | 'userSupportGift' | 'usernameChange')[]
-} = {}): Promise<UsersEvents> => {
+  sort?: 'id_desc' | 'id_asc',
+  cursor_string?: string;
+} = {}, addons: IDefaultParams): Promise<UsersEvents> => {
   const data: UsersEvents = await request(`https://osu.ppy.sh/api/v2/events`, {
     method: 'GET',
     params: { sort: sort, cursor_string: cursor_string },
