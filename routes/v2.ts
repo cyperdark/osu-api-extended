@@ -119,3 +119,37 @@ export const forums = {
 import search_all from '../api/v2/search';
 
 export const search = search_all;
+
+
+
+import assets_backgrounds from "../api/v2/assets_backgrounds";
+import assets_dataFiles from "../api/v2/assets_dataFiles";
+
+
+export const assets = {
+  backgrounds: assets_backgrounds,
+  dataFiles: assets_dataFiles
+};
+
+
+
+import news_list from "../api/v2/news_list";
+import news_details from "../api/v2/news_details";
+
+
+export const news = {
+  list: news_list,
+  details: news_details,
+};
+
+
+
+
+import notifications_list from '../api/v2/notifications_list';
+import notification_actions from '../api/v2/notification_actions';
+
+
+export const notifications = {
+  list: notifications_list,
+  action: notification_actions,
+};

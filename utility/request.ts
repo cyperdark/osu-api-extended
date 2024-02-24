@@ -44,8 +44,8 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
     if (!headers) headers = {};
 
     headers.Authorization = `Bearer ${addons.authKey || auth.cache_tokens.v2}`;
-    headers.Accept = `application/json`;
-    headers['Content-Type'] = `application/json`;
+    if (!headers.Accept) headers.Accept = `application/json`;
+    if (!headers['Content-Type']) headers['Content-Type'] = `application/json`;
     headers['x-api-version'] = addons.apiVersion == '' ? null : addons.apiVersion || '20240130';
   };
 
