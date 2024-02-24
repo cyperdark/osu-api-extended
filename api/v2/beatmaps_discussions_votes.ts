@@ -5,14 +5,14 @@ import { request } from "../../utility/request";
 
 
 const name = async (params: {
-  discussion_id: number;
-  sort: 'id_desc' | 'id_asc';
-  score: '1' | '-1';
+  discussion_id?: number;
+  sort?: 'id_desc' | 'id_asc';
+  score?: '1' | '-1';
 
-  user: number;
-  receiver: number;
+  user?: number;
+  receiver?: number;
 
-  limit: number;
+  limit?: number;
   cursor_string?: string;
 }, addons: IDefaultParams): Promise<BeatmapsDiscussionsListResponse> => {
   if (params.discussion_id) {
