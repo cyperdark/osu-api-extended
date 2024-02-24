@@ -1,3 +1,13 @@
+export type IDefaultParams = {
+  legacy_only?: boolean;
+  apiVersion?: '20240130' | '';
+  /**
+   * Only use it if you want to use user authKey to perform requests on their behave
+   */
+  authKey?: string;
+};
+
+
 export type Modes_names = 'osu' | 'fruits' | 'mania' | 'taiko';
 
 export type ranking_types = 'charts' | 'country' | 'performance' | 'score';
@@ -61,3 +71,5 @@ export type auth_response = {
   access_token: string;
   expires_in: number;
 };
+
+export type IBeatmapPackType = 'standard' | 'featured' | 'tournament' | 'loved' | 'chart' | 'theme' | 'artist';
