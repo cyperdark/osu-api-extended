@@ -57,25 +57,23 @@ export const comments = {
 
 
 
-import users_details from "../api/v2/users_list";
+import users_list from "../api/v2/users_list";
 import users_events from "../api/v2/users_events";
+import users_details from "../api/v2/users_details";
+import users_activity from "../api/v2/users_activity";
+import users_beatmaps from "../api/v2/users_beatmaps";
+import users_kudosu from "../api/v2/users_kudosu";
 
 
 export const users = {
-  list: users_details,
+  list: users_list,
+  kudosu: users_kudosu,
   events: users_events,
+  details: users_details,
+  beatmaps: users_beatmaps,
+  activity: users_activity,
 };
 
-
-
-import user_details from "../api/v2/user/details";
-import user_activity from "../api/v2/user/activity";
-
-
-export const user = {
-  details: user_details,
-  activity: user_activity
-};
 
 
 
