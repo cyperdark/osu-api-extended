@@ -1,6 +1,5 @@
 import { request } from "../../utility/request";
 import { IDefaultParams } from "../../types";
-import { postData } from "../../tools";
 
 
 type params = ({
@@ -46,15 +45,15 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
       // params.ids.forEach((r, index) => object[`identities[${index}][id]`] = r);
 
       if (Array.isArray(params.notifications)) {
-        const formData = postData(params.notifications);
+        // const formData = postData(params.notifications);
 
-        object.push(formData);
+        // object.push(formData);
       };
 
       if (Array.isArray(params.identities)) {
-        const formData = postData(params.identities);
+        // const formData = postData(params.identities);
 
-        object.push(formData);
+        // object.push(formData);
       };
       break;
   };
