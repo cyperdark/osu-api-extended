@@ -79,22 +79,21 @@ export const user = {
 
 
 
-import scores_details from "../api/v2/scores/details";
-import scores_beatmap from "../api/v2/scores/beatmaps";
-import scores_user_list from "../api/v2/scores/user/list";
-import scores_user_beatmap from "../api/v2/scores/user/beatmap";
+import scores_list from "../api/v2/scores_list";
+
 
 export const scores = {
-  details: scores_details,
-  user: {
-    /**
-     * @deprecated since 3.0.0. Use ***v2.scores.user.list*** instead
-     */
-    category: scores_user_list,
-    list: scores_user_list,
-    beatmap: scores_user_beatmap,
-  },
-  beatmap: scores_beatmap,
+  // details: scores_details,
+  // user: {
+  //   /**
+  //    * @deprecated since 3.0.0. Use ***v2.scores.user.list*** instead
+  //    */
+  //   category: scores_user_list,
+  //   list: scores_user_list,
+  //   beatmap: scores_user_beatmap,
+  // },
+  // beatmap: scores_beatmap,
+  list: scores_list,
 };
 
 
