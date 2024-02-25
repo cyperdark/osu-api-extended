@@ -8,7 +8,7 @@ const name = async ({ sort, cursor_string, type }: {
   type?: ('achievement' | 'beatmapPlaycount' | 'beatmapsetApprove' | 'beatmapsetDelete' | 'beatmapsetRevive' | 'beatmapsetUpdate' | 'beatmapsetUpload' | 'rank' | 'userSupportAgain' | 'userSupportFirst' | 'userSupportGift' | 'usernameChange')[]
   sort?: 'id_desc' | 'id_asc',
   cursor_string?: string;
-} = {}, addons: IDefaultParams): Promise<UsersEvents> => {
+} = {}, addons?: IDefaultParams): Promise<UsersEvents> => {
   const data: UsersEvents = await request(`https://osu.ppy.sh/api/v2/events`, {
     method: 'GET',
     params: { sort: sort, cursor_string: cursor_string },

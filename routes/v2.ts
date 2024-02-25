@@ -96,16 +96,6 @@ export const scores = {
 
 
 
-import site_ranking_details from "../api/v2/site/ranking/details";
-
-export const site = {
-  ranking: {
-    details: site_ranking_details,
-  },
-};
-
-
-
 import forums_topic_details from '../api/v2/forum_topic_details';
 
 export const forums = {
@@ -152,4 +142,22 @@ import notification_actions from '../api/v2/notification_actions';
 export const notifications = {
   list: notifications_list,
   action: notification_actions,
+};
+
+
+
+import ranking_list from "../api/v2/ranking_list";
+
+
+export const ranking = {
+  list: ranking_list,
+};
+
+
+
+import spotlights_list from "../api/v2/spotlights_list";
+
+
+export const spotlights = {
+  list: spotlights_list,
 };

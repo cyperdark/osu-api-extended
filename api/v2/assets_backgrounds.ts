@@ -14,7 +14,7 @@ type Response<T extends params['type']> =
   : never;
 
 
-const name = async <T extends params>(params: T, addons: IDefaultParams): Promise<Response<T['type']>> => {
+const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
   let url = 'https://osu.ppy.sh/api/v2';
 
   switch (params.type) {

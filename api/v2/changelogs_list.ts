@@ -28,7 +28,7 @@ type Response<T extends params['type']> =
   : never;
 
 
-const name = async <T extends params>(params: T, addons: IDefaultParams) => {
+const name = async <T extends params>(params: T, addons?: IDefaultParams) => {
   if (params.type == null) return null;
 
   let object: any = {};

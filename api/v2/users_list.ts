@@ -4,7 +4,7 @@ import { IDefaultParams } from "../../types";
 
 
 
-const name = async (ids: number[], addons: IDefaultParams): Promise<UsersDetails[]> => {
+const name = async (ids: number[], addons?: IDefaultParams): Promise<UsersDetails[]> => {
   const data = await request(`https://osu.ppy.sh/api/v2/users`, {
     method: 'GET',
     params: {

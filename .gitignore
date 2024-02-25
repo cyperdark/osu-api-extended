@@ -4,3 +4,5 @@
 /node_modules
 index.js
 package-lock.json
+.ts
+1.ts

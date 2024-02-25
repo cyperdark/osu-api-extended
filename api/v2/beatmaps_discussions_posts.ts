@@ -12,7 +12,7 @@ const name = async (params: {
 
   limit?: number;
   cursor_string?: string;
-}, addons: IDefaultParams): Promise<BeatmapsDiscussionsListResponse> => {
+}, addons?: IDefaultParams): Promise<BeatmapsDiscussionsListResponse> => {
   if (params.discussion_id) {
     // @ts-ignore
     params.beatmapset_discussion_id = params.discussion_id;

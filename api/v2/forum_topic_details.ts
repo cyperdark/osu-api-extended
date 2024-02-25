@@ -14,7 +14,7 @@ const name = async (params: {
   sort?: 'id_asc' | 'id_desc',
 
   cursor_string?: string,
-}, addons: IDefaultParams): Promise<ForumPostDetails> => {
+}, addons?: IDefaultParams): Promise<ForumPostDetails> => {
   const object = {
     start: params.start_id,
     end: params.end_id,
