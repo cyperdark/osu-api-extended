@@ -8,7 +8,7 @@ const name = async (params: {
 
   limit?: string;
   cursor_string?: string;
-} = {}, addons: IDefaultParams) => {
+} = {}, addons?: IDefaultParams) => {
   const data = await request(`https://osu.ppy.sh/api/v2/news`, {
     method: 'GET',
     params: {

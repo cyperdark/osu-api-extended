@@ -29,7 +29,7 @@ type Response<T extends params['type']> =
   : never;
 
 
-const name = async <T extends params>(params: T, addons: IDefaultParams): Promise<any> => {
+const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<any> => {
   const object: string[] = [];
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'GET';

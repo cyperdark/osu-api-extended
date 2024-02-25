@@ -29,7 +29,7 @@ type params = ({
 });
 
 
-const name = <T extends params>(params: T, addons: IDefaultParams): Promise<string | null> => new Promise((resolve, reject) => {
+const name = <T extends params>(params: T, addons?: IDefaultParams): Promise<string | null> => new Promise((resolve, reject) => {
   const { dir } = path.parse(params.file_path);
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 

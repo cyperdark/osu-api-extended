@@ -20,7 +20,7 @@ type Response<T extends params['type']> =
   ? BeamapsDetailsSet : never;
 
 
-const name = async <T extends params>(params: T, addons: IDefaultParams): Promise<Response<T['type']>> => {
+const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
   const object: any = {};
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'GET';

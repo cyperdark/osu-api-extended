@@ -6,7 +6,7 @@ import { request } from "../../utility/request";
 const name = async (params: {
   max_id: string;
   unreaded_only: boolean;
-}, addons: IDefaultParams) => {
+}, addons?: IDefaultParams) => {
   const data = await request(`https://osu.ppy.sh/api/v2/notifications`, {
     method: 'GET',
     params: { max_id: params.max_id },

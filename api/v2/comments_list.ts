@@ -15,7 +15,7 @@ const name = async (params: {
   };
   parent_id?: string,
   sort?: 'new' | 'old' | 'top';
-}, addons: IDefaultParams) => {
+}, addons?: IDefaultParams) => {
   const object = {
     after: params.after_id,
     commentable_type: params.commentable_type,

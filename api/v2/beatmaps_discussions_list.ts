@@ -14,7 +14,7 @@ const name = async (params: {
   limit?: number;
   sort?: 'id_desc' | 'id_asc';
   cursor_string?: string;
-}, addons: IDefaultParams): Promise<BeatmapsDiscussionsListResponse> => {
+}, addons?: IDefaultParams): Promise<BeatmapsDiscussionsListResponse> => {
   const data = await request(`https://osu.ppy.sh/api/v2/beatmapsets/discussions`, {
     method: 'GET',
     params,
