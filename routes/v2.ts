@@ -8,6 +8,8 @@ import beatmaps_discussions_list from "../api/v2/beatmaps_discussions_list";
 import beatmaps_discussions_posts from "../api/v2/beatmaps_discussions_posts";
 import beatmaps_discussions_votes from "../api/v2/beatmaps_discussions_votes";
 
+import beatmaps_actions from "../api/v2/beatmaps_actions";
+
 
 export const beatmaps = {
   packs: {
@@ -24,7 +26,8 @@ export const beatmaps = {
     list: beatmaps_discussions_list,
     posts: beatmaps_discussions_posts,
     votes: beatmaps_discussions_votes,
-  }
+  },
+  actions: beatmaps_actions,
 };
 
 
@@ -96,11 +99,13 @@ export const scores = {
 
 
 
-import forums_topic_details from '../api/v2/forum_topic_details';
+import forums_topic_details from '../api/v2/forums_topics_details';
+import forums_topics_actions from '../api/v2/forums_topics_actions';
 
 export const forums = {
   topics: {
     details: forums_topic_details,
+    actions: forums_topics_actions,
   },
 };
 
@@ -141,7 +146,7 @@ import notification_actions from '../api/v2/notification_actions';
 
 export const notifications = {
   list: notifications_list,
-  action: notification_actions,
+  actions: notification_actions,
 };
 
 
