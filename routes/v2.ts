@@ -80,20 +80,14 @@ export const user = {
 
 
 import scores_list from "../api/v2/scores_list";
+import scores_details from "../api/v2/scores_details";
+import scores_download from "../api/v2/scores_download";
 
 
 export const scores = {
-  // details: scores_details,
-  // user: {
-  //   /**
-  //    * @deprecated since 3.0.0. Use ***v2.scores.user.list*** instead
-  //    */
-  //   category: scores_user_list,
-  //   list: scores_user_list,
-  //   beatmap: scores_user_beatmap,
-  // },
-  // beatmap: scores_beatmap,
   list: scores_list,
+  details: scores_details,
+  download: scores_download,
 };
 
 

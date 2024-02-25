@@ -1,6 +1,7 @@
 // PACKAGES
 import querystring from 'querystring';
 import https from 'https';
+import fs from 'fs';
 
 
 // CREDENTIALS
@@ -115,17 +116,17 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
  * @param {string} dest The file destination
  * @returns {Promise<any>} The response
  */
-export const download = (url: string, { _callback, headers = {}, data, params, addons, callback }: {
+export const download = (url: string, dest: string, { _callback, headers = {}, data, params, callback }: {
   _callback: boolean;
   headers?: { [key: string]: string },
   data?: string;
   params?: any;
-  addons?: IDefaultParams;
   callback?: Function;
 }): Promise<any> => {
   return new Promise((resolve, reject) => {
-    if (url.includes('https://osu.ppy.sh/api/v2'))
-      headers['Authorization'] = `Bearer ${addons?.authKey || auth.cache_tokens.v2}`;
+    if (url.includes('https://osu.ppy.sh/api/v2')) headers['Authorization'] = `Bearer ${params?.v2 || auth.cache_tokens.v2}`;
+
+    if (!headers['accept']) headers['accept'] = `application/octet-stream`;
 
 
     const generate_query = querystring.encode(params);
@@ -134,58 +135,55 @@ export const download = (url: string, { _callback, headers = {}, data, params, a
     // console.log({ url: build_url, method, headers, data });
     const req = https.request(build_url, { method: 'GET', headers }, response => {
       const { location } = response.headers;
+
       if (location) {
-        download(location, { _callback, headers, data, params, callback })
+        download(location, dest, { _callback, headers, data, params, callback })
           .then(resolve)
           .catch(reject);
         return;
-      };
+      }
 
-      if (response.statusCode != 200) {
-        resolve({
-          error: 'file unavailable'
-        });
+      const file = fs.createWriteStream(dest, { encoding: 'utf8' });
+
+      file.on('error', err => {
+        fs.unlinkSync(dest);
+        reject(err);
+      });
+
+      file.on('finish', () => {
+        file.close();
+        resolve(dest);
+      });
+
+      if (response.statusCode === 404) {
+        resolve('file unavailable');
         return;
-      };
+      }
 
-
-      let chunk_data = '';
-      let progress = 0;
-      let progressBar = 0;
-
-
-      try {
+      if (_callback == true && callback !== undefined) {
         const totalLength = parseInt(response.headers['content-length']);
 
-        response.on('data', function (chunk) {
-          chunk_data += chunk;
-          if (_callback == true && callback !== undefined) {
-            progress += chunk.length;
-            progressBar = 100 * (progress / totalLength);
-            callback(progressBar);
-          };
-        });
+        let progress = 0;
+        let progressBar = 0;
 
-
-        response.on('end', function () {
-          resolve({ result: chunk_data });
+        response.on('data', (chunk) => {
+          progress += chunk.length;
+          progressBar = 100 * (progress / totalLength);
+          callback(progressBar);
         });
-      } catch (error) {
-        reject(error);
-      };
+      }
+
+      response.pipe(file);
     });
-
 
     req.setTimeout(TIMEOUT_MS, () => {
       req.destroy();
       reject(new Error(`Request to ${url} time out after ${TIMEOUT_MS}ms`));
     });
 
-
     if (data) {
       req.write(data);
     };
-
     req.end();
   });
 };
