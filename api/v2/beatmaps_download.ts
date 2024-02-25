@@ -29,16 +29,13 @@ type params = ({
 });
 
 
-const name = <T extends params>(params: T, addons?: IDefaultParams): Promise<string | null> => new Promise((resolve, reject) => {
+const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<string | null> => {
   const { dir } = path.parse(params.file_path);
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
 
   if (fs.existsSync(params.file_path) && params.overwrite != true) {
-    return {
-      type: 'exists',
-      path: params.file_path,
-    };
+    return 'exists';
   };
 
 
@@ -107,22 +104,14 @@ const name = <T extends params>(params: T, addons?: IDefaultParams): Promise<str
     };
 
 
-    return download(url, {
+    const data = await download(url, params.file_path, {
       _callback: params.progress_track_fn != null,
       headers,
-      addons: addons,
       callback: progress_track,
-    })
-      .then((result: any) => {
-        if (result.error) return resolve(result.error);
+    });
 
-        fs.writeFile(params.file_path, result.result, 'utf8', (err) => {
-          if (err) return reject(err);
 
-          resolve(params.file_path);
-        });
-      })
-      .catch(reject);
+    return data;
   } else if (params.type == 'difficulty') {
     switch (params.host) {
       case 'osu_direct_mirror':
@@ -139,27 +128,20 @@ const name = <T extends params>(params: T, addons?: IDefaultParams): Promise<str
         break;
     };
 
-    return download(url, {
+
+    const data = await download(url, params.file_path, {
       _callback: params.progress_track_fn != null,
       headers,
-      addons: addons,
       callback: progress_track,
-    })
-      // return request(url, { method: "GET" })
-      .then((result: any) => {
-        if (result.error) return resolve(result.error);
+    });
 
-        fs.writeFile(params.file_path, result.result, 'utf8', (err) => {
-          if (err) return reject(err);
 
-          resolve(params.file_path);
-        });
-      })
-      .catch(reject);
+    return data;
   };
 
-  return resolve(`Unknown type: ${(params as any).type}`);
-});
+
+  return `Unknown type: ${(params as any).type}`;
+};
 
 
 export default name;
