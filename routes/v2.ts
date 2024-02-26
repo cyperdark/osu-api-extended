@@ -225,3 +225,14 @@ import session_actions from "../api/v2/session_actions";
 export const session = {
   actions: session_actions,
 };
+
+
+
+import rooms_list from "../api/v2/rooms_list";
+import rooms_details from "../api/v2/rooms_details";
+
+
+export const rooms = {
+  list: rooms_list,
+  details: rooms_details,
+};
