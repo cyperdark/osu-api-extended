@@ -112,7 +112,11 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
         urls.push(`https://osu.ppy.sh/api/v2/forums/topics/${params.topic_id}`);
         methods.push('PUT');
 
-        object['forum_topic[topic_title]'] = params.title;
+        object = {
+          forum_topic: {
+            'topic_title': params.title,
+          },
+        };
 
         body.push(object);
         fields.push('topic');
