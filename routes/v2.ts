@@ -47,11 +47,13 @@ export const changelogs = {
 
 import comments_list from '../api/v2/comments_list';
 import comments_details from '../api/v2/comments_details';
+import comments_actions from '../api/v2/comments_actions';
 
 
 export const comments = {
   list: comments_list,
   details: comments_details,
+  actions: comments_actions,
 };
 
 
@@ -213,4 +215,13 @@ export const chat = {
   updates: chat_updates,
   details: chat_details,
   actions: chat_actions,
+};
+
+
+
+import session_actions from "../api/v2/session_actions";
+
+
+export const session = {
+  actions: session_actions,
 };

@@ -13,7 +13,7 @@ const name = async (params: {
     addons,
   });
 
-  if (params.unreaded_only == true)
+  if (params.unreaded_only == true && !('error' in data))
     data.notifications = data.notifications.filter((r: any) => r.is_read == false);
 
   return data;
