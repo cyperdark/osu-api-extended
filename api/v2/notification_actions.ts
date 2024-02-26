@@ -29,12 +29,10 @@ type Response<T extends params['type']> =
 
 
 const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<any> => {
-  const object: string[] = [];
+  const object: any = {};
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'GET';
 
-
-  return 'doesnt work';
 
   switch (params.type) {
     case 'mark_as_readed':
@@ -46,14 +44,16 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
 
       if (Array.isArray(params.notifications)) {
         // const formData = postData(params.notifications);
-
         // object.push(formData);
+        
+        object['notifications'] = params.notifications;
       };
 
       if (Array.isArray(params.identities)) {
         // const formData = postData(params.identities);
-
         // object.push(formData);
+        
+        object['identities'] = params.identities;
       };
       break;
   };
@@ -61,13 +61,7 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
 
   const data = await request(url, {
     method: method,
-    headers: {
-      Accept: `application/json`,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    // data: JSON.stringify(object),
-
-    data: encodeURI(object.join('&')),
+    data: JSON.stringify(object),
     addons,
   });
 
