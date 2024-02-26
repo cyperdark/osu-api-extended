@@ -1,6 +1,6 @@
 export type IDefaultParams = {
   legacy_only?: boolean;
-  apiVersion?: '20240130' | '';
+  apiVersion?: '20240130' | '99999999' | null | '';
   /**
    * Only use it if you want to use user authKey to perform requests on their behave
    */
