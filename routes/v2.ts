@@ -157,3 +157,60 @@ import spotlights_list from "../api/v2/spotlights_list";
 export const spotlights = {
   list: spotlights_list,
 };
+
+
+
+import wiki_details from "../api/v2/wiki_details";
+
+
+export const wiki = {
+  details: wiki_details,
+};
+
+
+
+import me_details from "../api/v2/me_details";
+import me_friends from "../api/v2/me_friends";
+import me_download_quota from "../api/v2/me_download_quota";
+
+
+export const me = {
+  download_quota: me_download_quota,
+  friends: me_friends,
+  details: me_details,
+};
+
+
+
+import matches_list from "../api/v2/matches_list";
+import matches_details from "../api/v2/matches_details";
+
+
+export const matches = {
+  list: matches_list,
+  details: matches_details,
+};
+
+
+
+import chat_channels_list from "../api/v2/chat_channels_list";
+import chat_channels_actions from "../api/v2/chat_channels_actions";
+
+import chat_list from "../api/v2/chat_list";
+import chat_messages from "../api/v2/chat_messages";
+import chat_updates from "../api/v2/chat_updates";
+import chat_details from "../api/v2/chat_details";
+import chat_actions from "../api/v2/chat_actions";
+
+
+export const chat = {
+  channels: {
+    list: chat_channels_list,
+    actions: chat_channels_actions,
+  },
+  list: chat_list,
+  messages: chat_messages,
+  updates: chat_updates,
+  details: chat_details,
+  actions: chat_actions,
+};

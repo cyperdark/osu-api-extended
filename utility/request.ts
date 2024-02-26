@@ -60,6 +60,13 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
 
   // console.log({ url: build_url, method, headers, data });
   const req = https.request(build_url, { method, headers }, (response) => {
+    const { location } = response.headers;
+    if (location) {
+      request(location, { method, headers, data, params, addons })
+        .then(resolve)
+        .catch(reject);
+      return;
+    };
     const chunks: any[] = [];
 
     // handle response events
