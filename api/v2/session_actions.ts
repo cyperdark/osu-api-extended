@@ -6,6 +6,8 @@ type params = ({
   type: 'verify';
 } | {
   type: 'reissue';
+} | {
+  type: 'delete';
 });
 
 
@@ -31,6 +33,12 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
 
     case 'reissue':
       url += `/session/verify/reissue`;
+
+      break;
+
+    case 'delete':
+      url += `/oauth/tokens/current`;
+      method = 'DELETE';
 
       break;
   };

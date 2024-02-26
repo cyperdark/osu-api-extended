@@ -58,7 +58,7 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
   const generate_query = querystring.encode(params);
   const build_url = url + (generate_query ? `?${generate_query}` : '');
 
-  // console.log({ url: build_url, method, headers, data });
+  // console.log({ url: build_url, method, headers, data, generate_query, params }); // debug
   const req = https.request(build_url, { method, headers }, (response) => {
     const { location } = response.headers;
     if (location) {
@@ -67,6 +67,8 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
         .catch(reject);
       return;
     };
+
+    // console.log(response.statusCode, response.statusMessage, response.headers.accept); // debug
     const chunks: any[] = [];
 
     // handle response events
