@@ -49,6 +49,13 @@ export const description: any = {
   ],
 };
 
+export enum modes {
+  Osu,
+  Taiko,
+  Catch,
+  Mania
+}
+
 export interface types {
   (hits: {
     300: string,
@@ -57,7 +64,7 @@ export interface types {
     0: string,
     geki: string,
     katu: string
-  }, mode: 'osu' | 'fruits' | 'taiko' | 'mania'): number;
+  }, mode: modes): number;
 };
 
 
@@ -72,10 +79,10 @@ const name: types = (hits, mode = 'osu') => {
   let acc = 0.0;
 
   switch (mode) {
-    case 'osu': acc = (100.0 * (6 * h300 + 2 * h100 + h50)) / (6 * (h50 + h100 + h300 + h0)); break;
-    case 'taiko': acc = (100.0 * (2 * h300 + h100)) / (2 * (h300 + h100 + h0)); break;
-    case 'fruits': acc = (100.0 * (h300 + h100 + h50)) / (h300 + h100 + h50 + katu + h0); break;
-    case 'mania': acc = (100.0 * (6 * geki + 6 * h300 + 4 * katu + 2 * h100 + h50)) / (6 * (h50 + h100 + h300 + h0 + geki + katu)); break;
+    case modes.Osu: acc = (100.0 * (6 * h300 + 2 * h100 + h50)) / (6 * (h50 + h100 + h300 + h0)); break;
+    case modes.Taiko: acc = (100.0 * (2 * h300 + h100)) / (2 * (h300 + h100 + h0)); break;
+    case modes.Catch: acc = (100.0 * (h300 + h100 + h50)) / (h300 + h100 + h50 + katu + h0); break;
+    case modes.Mania: acc = (100.0 * (6 * geki + 6 * h300 + 4 * katu + 2 * h100 + h50)) / (6 * (h50 + h100 + h300 + h0 + geki + katu)); break;
   };
 
   return parseFloat(acc.toFixed(2));
