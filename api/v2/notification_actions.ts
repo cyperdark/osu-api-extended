@@ -53,6 +53,9 @@ export const notification_actions = async <T extends params>(params: T, addons?:
         object['identities'] = params.identities;
       };
       break;
+
+    default:
+      return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
   };
 
 

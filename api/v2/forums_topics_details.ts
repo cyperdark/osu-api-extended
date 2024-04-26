@@ -19,20 +19,17 @@ export const forums_topics_details = async (params: {
   };
 
 
-  const object = {
-    start: params.start_id,
-    end: params.end_id,
-
-    sort: params.sort,
-    limit: params.limit,
-
-    cursor_string: params.cursor_string,
-  };
-
-
   const data = await request(`https://osu.ppy.sh/api/v2/forums/topics/${params.id}`, {
     method: 'GET',
-    params: object,
+    params: {
+      start: params.start_id,
+      end: params.end_id,
+
+      sort: params.sort,
+      limit: params.limit,
+
+      cursor_string: params.cursor_string,
+    },
     addons,
   });
 

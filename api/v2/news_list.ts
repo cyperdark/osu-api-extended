@@ -9,10 +9,11 @@ export const news_list = async (params: {
   limit?: string;
   cursor_string?: string;
 } = {}, addons?: IDefaultParams): Promise<NewsListResponse | IError> => {
-  const object: any = {};
-  if (params.from_year != null) object.year = params.from_year;
-  if (params.limit != null) object.limit = params.limit;
-  if (params.cursor_string != null) object.cursor_string = params.cursor_string;
+  const object: any = {
+    year: params.from_year,
+    limit: params.limit,
+    cursor_string: params.cursor_string,
+  };
 
 
   const data = await request(`https://osu.ppy.sh/api/v2/news`, {

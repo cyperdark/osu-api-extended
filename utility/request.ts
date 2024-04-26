@@ -25,6 +25,21 @@ export interface RequestType {
 let total_retries = 0;
 
 
+const sanitize_query = (obj: object): string => {
+  const object: any = Object.assign({}, obj);
+
+  const array = Object.keys(object);
+  for (let i = 0; i < array.length; i++) {
+    const key = array[i];
+    const value = object[key];
+
+    if (value != null) continue;
+    delete object[key];
+  };
+
+  return querystring.encode(object);
+};
+
 
 export const request: RequestType = (url, { method, headers, data, params = {}, addons = {} }) => new Promise((resolve, reject) => {
   // check required args
@@ -66,7 +81,7 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
     params.legacy_only = params.legacy_only == true ? 1 : 0;
 
 
-  const generate_query = querystring.encode(params);
+  const generate_query = sanitize_query(params);
   const build_url = url + (generate_query ? `?${generate_query}` : '');
 
   // console.log({ url: build_url, method, headers, data, generate_query, params }); // debug
@@ -185,7 +200,7 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
     if (!headers['accept']) headers['accept'] = `application/octet-stream`;
 
 
-    const generate_query = querystring.encode(params);
+    const generate_query = sanitize_query(params);
     const build_url = url + (generate_query ? `?${generate_query}` : '');
 
     // console.log({ url: build_url, headers, data }); // debug

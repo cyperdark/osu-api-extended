@@ -23,7 +23,6 @@ type Response<T extends params['type']> =
 
 // FIXME?
 export const session_actions = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
-  const object: any = {};
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'POST';
 
@@ -49,7 +48,6 @@ export const session_actions = async <T extends params>(params: T, addons?: IDef
 
   const data = await request(url, {
     method: method,
-    params: object,
     addons,
   });
 
