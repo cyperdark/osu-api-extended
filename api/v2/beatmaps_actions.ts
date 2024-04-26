@@ -18,7 +18,7 @@ type Response<T extends params['type']> =
   ? any
   : never;
 
-
+// FIX
 const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']> | { error: string }> => {
   return {
     error: 'TEMPORARY NOT WORKING, have no clue why',
