@@ -7,6 +7,11 @@ import { auth_params, auth_response, auth_scopes, Modes_names } from '../types/i
 import { UserAuth } from '../types/user_details';
 
 
+export const settings = {
+  timeout: 60000,
+};
+
+
 export const credentials: {
   method: any;
 
@@ -39,9 +44,12 @@ export const credentials: {
   scopes: ['public'],
 };
 
-export const cache_tokens = {
+export const cache = {
   v1: '',
   v2: '',
+
+  'ratelimit-remaining': 0,
+  'ratelimit-limit': 0,
 };
 
 
@@ -53,8 +61,8 @@ export const login = async (params: auth_params) => {
   if (params.method == 'v1') {
     credentials.api_key = params.api_key;
 
-    cache_tokens.v1 = params.api_key;
-    return cache_tokens.v1;
+    cache.v1 = params.api_key;
+    return cache.v1;
   };
 
 
@@ -94,7 +102,7 @@ export const login = async (params: auth_params) => {
 };
 
 
-export const set_v2 = (token: string) => cache_tokens.v2 = token;
+export const set_v2 = (token: string) => cache.v2 = token;
 
 export const refresh_token = async () => {
   const refresh = await login(credentials);
@@ -120,7 +128,7 @@ const client_login = async (client_id: number | string, client_secret: string, s
   });
 
 
-  cache_tokens.v2 = access_token;
+  cache.v2 = access_token;
   return { access_token, expires_in };
 };
 
@@ -143,7 +151,7 @@ const lazer_login = async (login: string, password: string) => {
   });
 
 
-  cache_tokens.v2 = access_token;
+  cache.v2 = access_token;
   return { access_token, expires_in };
 };
 
@@ -175,7 +183,7 @@ const authorize_cli = async (client_id: number | string, client_secret: string, 
   });
 
 
-  cache_tokens.v2 = access_token;
+  cache.v2 = access_token;
   return { access_token, expires_in };
 };
 

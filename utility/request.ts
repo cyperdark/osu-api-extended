@@ -22,7 +22,6 @@ export interface RequestType {
 
 
 // VALUES
-const TIMEOUT_MS = 60000;
 let total_retries = 0;
 
 
@@ -38,13 +37,13 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
 
   // V1 add credentials
   if (url.includes('https://osu.ppy.sh/api/') && !url.includes('https://osu.ppy.sh/api/v2'))
-    params.k = params.v1 || auth.cache_tokens.v1;
+    params.k = params.v1 || auth.cache.v1;
 
   // V2 add credentials
   if (url.includes('https://osu.ppy.sh/api/v2')) {
     if (!headers) headers = {};
 
-    headers.Authorization = `Bearer ${addons.authKey || auth.cache_tokens.v2}`;
+    headers.Authorization = `Bearer ${addons.authKey || auth.cache.v2}`;
     if (!headers.Accept) headers.Accept = `application/json`;
     if (!headers['Content-Type']) headers['Content-Type'] = `application/json`;
     headers['x-api-version'] = addons.apiVersion == '' ? null : addons.apiVersion || '20240130';
@@ -61,6 +60,13 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
   // console.log({ url: build_url, method, headers, data, generate_query, params }); // debug
   const req = https.request(build_url, { method, headers }, (response) => {
     const { location } = response.headers;
+
+    if (response.headers['x-ratelimit-limit'])
+      auth.cache['ratelimit-limit'] = parseInt(response.headers['x-ratelimit-limit'].toString() || '60');
+    if (response.headers['x-ratelimit-remaining'])
+      auth.cache['ratelimit-remaining'] = parseInt(response.headers['x-ratelimit-remaining'].toString() || '60');
+
+
     if (location) {
       request(location, { method, headers, data, params, addons })
         .then(resolve)
@@ -68,7 +74,13 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
       return;
     };
 
-    // console.log(response.statusCode, response.statusMessage, response.headers.accept); // debug
+    // console.log(response.statusCode, response.statusMessage, response.headers.accept, {
+    //   'ratelimit-limit': auth.cache['ratelimit-limit'],
+    //   'ratelimit-remaining': auth.cache['ratelimit-remaining'],
+    // }, {
+    //   url: build_url, method, headers, data, generate_query, params,
+    // }); // debug
+
     const chunks: any[] = [];
 
     // handle response events
@@ -107,9 +119,9 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
   req.on('error', reject);
 
   // timeout
-  req.setTimeout(TIMEOUT_MS, () => {
+  req.setTimeout(addons.timeout_ms || auth.settings.timeout, () => {
     req.destroy();
-    reject(new Error(`Request to ${build_url} time out after ${TIMEOUT_MS}ms`));
+    reject(new Error(`Request to ${build_url} time out after ${addons.timeout_ms || auth.settings.timeout}ms`));
   });
 
 
@@ -125,15 +137,16 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
  * @param {string} dest The file destination
  * @returns {Promise<any>} The response
  */
-export const download = (url: string, dest: string, { _callback, headers = {}, data, params, callback }: {
+export const download = (url: string, dest: string, { _callback, headers = {}, data, params, callback, addons = {} }: {
   _callback: boolean;
   headers?: { [key: string]: string },
   data?: string;
   params?: any;
+  addons?: IDefaultParams;
   callback?: Function;
 }): Promise<any> => {
   return new Promise((resolve, reject) => {
-    if (url.includes('https://osu.ppy.sh/api/v2')) headers['Authorization'] = `Bearer ${params?.v2 || auth.cache_tokens.v2}`;
+    if (url.includes('https://osu.ppy.sh/api/v2')) headers['Authorization'] = `Bearer ${params?.v2 || auth.cache.v2}`;
 
     if (!headers['accept']) headers['accept'] = `application/octet-stream`;
 
@@ -185,9 +198,9 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
       response.pipe(file);
     });
 
-    req.setTimeout(TIMEOUT_MS, () => {
+    req.setTimeout(addons.timeout_ms || auth.settings.timeout, () => {
       req.destroy();
-      reject(new Error(`Request to ${url} time out after ${TIMEOUT_MS}ms`));
+      reject(new Error(`Request to ${url} time out after ${addons.timeout_ms || auth.settings.timeout}ms`));
     });
 
     if (data) {

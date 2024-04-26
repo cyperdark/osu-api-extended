@@ -5,6 +5,7 @@ export type IDefaultParams = {
    * Only use it if you want to use user authKey to perform requests on their behave
    */
   authKey?: string;
+  timeout_ms?: number;
 };
 
 
@@ -38,7 +39,9 @@ export type auth_scopes = (
 )[];
 
 
-export type auth_params = ({
+export type auth_params = {
+  timeout?: number,
+} & ({
   method: 'v2';
 
   client_id: number | string;
