@@ -1,5 +1,8 @@
 import { request } from "../../utility/request";
-import { IDefaultParams } from "../../types";
+import { IDefaultParams, IError } from "../../types";
+import { RoomsScoresSingleResponse } from "../../types/v2/rooms_scores_single";
+import { RoomScoresUserHighestResponse } from "../../types/v2/rooms_scores_user_highest";
+import { RoomsScoresAllResponse } from "../../types/v2/rooms_scores_all";
 
 
 type params = ({
@@ -28,28 +31,37 @@ type params = ({
 
 
 type Response<T extends params['type']> =
-  T extends 'difficulty'
-  ? any
-  : T extends 'difficulties'
-  ? any
-  : never;
+  T extends 'all'
+  ? RoomsScoresAllResponse | IError
+  : T extends 'single'
+  ? RoomsScoresSingleResponse | IError
+  : T extends 'user_highest'
+  ? RoomScoresUserHighestResponse | IError
+  : IError;
 
 
-const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
+export const rooms_scores = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
   let object: any = {};
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'GET';
+
+
+  if (params.id == null) {
+    return { error: new Error(`Specify room id`) } as Response<T['type']>;
+  };
+
+  if (params.playlist_id == null) {
+    return { error: new Error(`Specify playlist id`) } as Response<T['type']>;
+  };
 
 
   switch (params.type) {
     case 'all':
       url += `/rooms/${params.id}/playlist/${params.playlist_id}/scores`;
 
-      object = {
-        limit: params.limit,
-        sort: params.sort,
-        cursor_string: params.cursor_string,
-      };
+      if (params.limit != null) object.limit = params.limit;
+      if (params.sort != null) object.sort = params.sort;
+      if (params.cursor_string != null) object.cursor_string = params.cursor_string;
       break;
 
     case 'single':
@@ -73,6 +85,3 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
 
   return data as Response<T['type']>;
 };
-
-
-export default name;
