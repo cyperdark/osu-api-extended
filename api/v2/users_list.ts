@@ -1,10 +1,15 @@
 import { request } from "../../utility/request";
-import { UsersDetails } from '../../types/users_details';
-import { IDefaultParams } from "../../types";
+import { IDefaultParams, IError } from "../../types";
+import { UsersLisResponse } from "../../types/v2/users_list";
 
 
 
-const name = async (ids: number[], addons?: IDefaultParams): Promise<UsersDetails[]> => {
+export const users_list = async (ids: number[], addons?: IDefaultParams): Promise<UsersLisResponse[] | IError> => {
+  if ((ids || [])?.length == 0) {
+    return { error: new Error(`Specify at least one user id`) };
+  };
+
+
   const data = await request(`https://osu.ppy.sh/api/v2/users`, {
     method: 'GET',
     params: {
@@ -13,9 +18,7 @@ const name = async (ids: number[], addons?: IDefaultParams): Promise<UsersDetail
     addons
   });
 
+
   if (data.users) return data.users;
   return data;
 };
-
-
-export default name;
