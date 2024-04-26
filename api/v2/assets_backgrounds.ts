@@ -18,7 +18,7 @@ type Response<T extends params['type']> =
   : IError;
 
 
-const name = <T extends params>(params: T, addons?: IDefaultParams): Response<T['type']> => {
+export const assets_backgrounds = <T extends params>(params: T, addons?: IDefaultParams): Response<T['type']> => {
   if (params.type == 'seasonal') {
     return request(`https://osu.ppy.sh/api/v2/seasonal-backgrounds`, {
       method: 'GET',
@@ -50,6 +50,3 @@ const name = <T extends params>(params: T, addons?: IDefaultParams): Response<T[
 
   return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
 };
-
-
-export default name;

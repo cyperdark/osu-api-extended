@@ -1,11 +1,16 @@
+import { IError } from "../../types";
 import { request } from "../../utility/request";
 
 
+type Response = { files: string[] } | IError;
 
-const name = async () => {
+
+export const assets_dataFiles = async (): Promise<Response> => {
   const data = await request(`https://data.ppy.sh/`, {
     method: 'GET',
   });
+
+  if (data.error) return data.error;
 
 
   const array = data.split('\n')
@@ -17,8 +22,5 @@ const name = async () => {
     .filter((r: string) => r != null);
 
 
-  return array;
+  return { files: array };
 };
-
-
-export default name;

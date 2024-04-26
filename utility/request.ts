@@ -17,7 +17,7 @@ export interface RequestType {
     headers?: { [key: string]: string },
     params?: { [key: string]: any };
     addons?: IDefaultParams;
-  }): Promise<any>;
+  }): Promise<any | IError>;
 };
 
 
@@ -26,7 +26,7 @@ let total_retries = 0;
 
 
 
-export const request: RequestType = (url, { method, headers, data, params = {}, addons = {} }): Promise<any | IError> => new Promise((resolve, reject) => {
+export const request: RequestType = (url, { method, headers, data, params = {}, addons = {} }) => new Promise((resolve, reject) => {
   // check required args
   if (url == null) {
     return resolve({ error: new Error('URL not specified'), });
