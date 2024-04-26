@@ -94,6 +94,3 @@ export interface Failtimes {
   fail: number[]
   exit: number[]
 }
-
-
-
