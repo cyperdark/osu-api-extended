@@ -1,12 +1,13 @@
-import { IDefaultParams } from "../../types";
+import { IDefaultParams, IError } from "../../types";
+import { ChatListResponse } from "../../types/v2/chat_list";
 import { request } from "../../utility/request";
 
 
 
-const name = async (params: {
+export const chat_list = async (params: {
   unreaded?: boolean;
   sort?: 'date_desc' | 'date_asc';
-}, addons?: IDefaultParams) => {
+}, addons?: IDefaultParams): Promise<ChatListResponse | IError> => {
   let data = await request(`https://osu.ppy.sh/api/v2/chat/presence/`, {
     method: 'GET',
     addons
@@ -25,6 +26,3 @@ const name = async (params: {
 
   return data;
 };
-
-
-export default name;
