@@ -172,7 +172,7 @@ export const wiki = {
 
 
 import { me_details } from "../api/v2/me_details";
-import me_friends from "../api/v2/me_friends";
+import { me_friends } from "../api/v2/me_friends";
 import { me_download_quota } from "../api/v2/me_download_quota";
 
 
