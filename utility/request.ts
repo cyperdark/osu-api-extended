@@ -38,8 +38,14 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
 
 
   // V1 add credentials
-  if (url.includes('https://osu.ppy.sh/api/') && !url.includes('https://osu.ppy.sh/api/v2'))
+  if (url.includes('https://osu.ppy.sh/api/') && !url.includes('https://osu.ppy.sh/api/v2')) {
     params.k = addons.authKey || auth.cache.v1;
+
+    if (params.k == null) {
+      return resolve({ error: new Error('v1 api key not specified'), });
+    };
+  };
+
 
   // V2 add credentials
   if (url.includes('https://osu.ppy.sh/api/v2')) {
@@ -49,6 +55,10 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
     if (!headers.Accept) headers.Accept = `application/json`;
     if (!headers['Content-Type']) headers['Content-Type'] = `application/json`;
     headers['x-api-version'] = addons.apiVersion == '' ? null : addons.apiVersion || '20240130';
+
+    if ((addons.authKey || auth.cache.v2) == null) {
+      return resolve({ error: new Error('v2 not authorized'), });
+    };
   };
 
 
@@ -238,7 +248,7 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
 
       file.on('finish', () => {
         file.close();
-        
+
         const finish_time = performance.now();
         resolve({ status: 'finished', destination: dest, elapsed_time: finish_time - start_time });
       });
