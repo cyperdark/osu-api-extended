@@ -34,14 +34,14 @@ export const assets_backgrounds = <T extends params>(params: T, addons?: IDefaul
 
 
     return {
-      cover: `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/cover.jpg?1707077934`,
-      "cover@2x": `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/cover@2x.jpg?1707077934`,
-      card: `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/card.jpg?1707077934`,
-      "card@2x": `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/card@2x.jpg?1707077934`,
-      list: `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/list.jpg?1707077934`,
-      "list@2x": `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/list@2x.jpg?1707077934`,
-      slimcover: `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/slimcover.jpg?1707077934`,
-      "slimcover@2x": `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/slimcover@2x.jpg?1707077934`,
+      cover: `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/cover.jpg`,
+      "cover@2x": `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/cover@2x.jpg`,
+      card: `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/card.jpg`,
+      "card@2x": `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/card@2x.jpg`,
+      list: `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/list.jpg`,
+      "list@2x": `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/list@2x.jpg`,
+      slimcover: `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/slimcover.jpg`,
+      "slimcover@2x": `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/slimcover@2x.jpg`,
       raw: `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/raw.jpg`,
       fullsize: `https://assets.ppy.sh/beatmaps/${params.set_id}/covers/fullsize.jpg`,
     } as Response<T['type']>;
