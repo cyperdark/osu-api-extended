@@ -1,5 +1,5 @@
 import { request } from "../../utility/request";
-import { IDefaultParams } from "../../types";
+import { IDefaultParams, IError } from "../../types";
 
 
 type params = ({
@@ -12,14 +12,17 @@ type params = ({
 
 
 type Response<T extends params['type']> =
-  T extends 'difficulty'
-  ? any
-  : T extends 'difficulties'
-  ? any
-  : never;
+  T extends 'verify'
+  ? any | IError
+  : T extends 'reissue'
+  ? any | IError
+  : T extends 'delete'
+  ? any | IError
+  : IError;
 
 
-const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
+// FIXME?
+export const session_actions = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
   const object: any = {};
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'POST';
@@ -53,6 +56,3 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
 
   return data as Response<T['type']>;
 };
-
-
-export default name;
