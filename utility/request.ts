@@ -76,12 +76,12 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
       return;
     };
 
-    // console.log(response.statusCode, response.statusMessage, response.headers.accept, {
-    //   'ratelimit-limit': auth.cache['ratelimit-limit'],
-    //   'ratelimit-remaining': auth.cache['ratelimit-remaining'],
-    // }, {
-    //   url: build_url, method, headers, data, generate_query, params,
-    // }); // debug
+    console.log(response.statusCode, response.statusMessage, response.headers.accept, {
+      'ratelimit-limit': auth.cache['ratelimit-limit'],
+      'ratelimit-remaining': auth.cache['ratelimit-remaining'],
+    }, {
+      url: build_url, method, headers, data, generate_query, params,
+    }); // debug
 
     const chunks: any[] = [];
 

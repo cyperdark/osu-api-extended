@@ -1,4 +1,4 @@
-import beatmap_events_list from "../api/v2/beatmap_events_list";
+import { beatmaps_events_list } from "../api/v2/beatmaps_events_list";
 import beatmaps_lookup from "../api/v2/beatmaps_lookup";
 import beatmaps_details from "../api/v2/beatmaps_details";
 import beatmaps_download from "../api/v2/beatmaps_download";
@@ -19,7 +19,7 @@ export const beatmaps = {
   lookup: beatmaps_lookup,
   details: beatmaps_details,
   events: {
-    list: beatmap_events_list,
+    list: beatmaps_events_list,
   },
   download: beatmaps_download,
   discussions: {
