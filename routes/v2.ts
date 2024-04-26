@@ -229,7 +229,7 @@ export const session = {
 
 
 import rooms_list from "../api/v2/rooms_list";
-import rooms_details from "../api/v2/rooms_details";
+import { rooms_details } from "../api/v2/rooms_details";
 import rooms_leaderboard from "../api/v2/rooms_leaderboard";
 import rooms_scores from "../api/v2/rooms_scores";
 
