@@ -199,7 +199,7 @@ import { chat_channels_list } from "../api/v2/chat_channels_list";
 import { chat_channels_actions } from "../api/v2/chat_channels_actions";
 
 import { chat_list } from "../api/v2/chat_list";
-import chat_messages from "../api/v2/chat_messages";
+import { chat_messages } from "../api/v2/chat_messages";
 import chat_updates from "../api/v2/chat_updates";
 import { chat_details } from "../api/v2/chat_details";
 import { chat_actions } from "../api/v2/chat_actions";
