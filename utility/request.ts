@@ -110,7 +110,7 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
 
           if ('error' in parse) {
             if (parse.error === null) {
-              return resolve({ error: new Error(`osu returned empty error, double check your parameters`) });
+              return resolve({ error: new Error(`osu returned empty error, double check your parameters (request)`) });
             };
 
 
@@ -169,6 +169,7 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
   callback?: Function;
 }): Promise<any | IError> => {
   return new Promise((resolve, reject) => {
+    const start_time = performance.now();
     if (url.includes('https://osu.ppy.sh/api/v2')) headers['Authorization'] = `Bearer ${params?.v2 || auth.cache.v2}`;
 
     if (!headers['accept']) headers['accept'] = `application/octet-stream`;
@@ -177,15 +178,54 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
     const generate_query = querystring.encode(params);
     const build_url = url + (generate_query ? `?${generate_query}` : '');
 
-    // console.log({ url: build_url, method, headers, data });
+    // console.log({ url: build_url, headers, data }); // debug
     const req = https.request(build_url, { method: 'GET', headers }, response => {
       const { location } = response.headers;
+      // console.log(url, response.headers['content-type'], response.headers); // debug too
 
       if (location) {
         download(location, dest, { _callback, headers, data, params, callback })
           .then(resolve)
           .catch(error => ({ error: error }));
         return;
+      };
+
+
+      if (response.statusCode === 404) {
+        return resolve({ error: new Error('file unavailable') });
+      };
+
+
+      if (response.headers['content-type'] == 'application/json') {
+        const chunks: any[] = [];
+
+
+        response.on('data', (chunk: any) => chunks.push(chunk));
+        response.on('end', async () => {
+          try {
+            const data = Buffer.concat(chunks).toString();
+            const json = JSON.parse(data);
+
+
+            if ('error' in json && json.error == null) {
+              return resolve({ error: new Error('osu returned empty error (download)') });
+            };
+
+
+            return resolve(json);
+          } catch (error) {
+            return resolve({ error: error });
+          };
+        });
+
+
+        return;
+      };
+
+
+      if (response.headers['content-type'] == null && +(response.headers['content-length'] || 0) < 100) {
+
+        return resolve({ error: new Error(`Unnable to download from: ${url}`) });
       };
 
 
@@ -198,14 +238,10 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
 
       file.on('finish', () => {
         file.close();
-        resolve(dest);
+        
+        const finish_time = performance.now();
+        resolve({ status: 'finished', destination: dest, elapsed_time: finish_time - start_time });
       });
-
-
-      if (response.statusCode === 404) {
-        resolve({ error: new Error('file unavailable') });
-        return;
-      };
 
 
       if (_callback == true && callback !== undefined) {
@@ -224,6 +260,14 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
       response.pipe(file);
     });
 
+
+    // send error
+    req.on('error', (error) => {
+      resolve({ error: error });
+    });
+
+
+    // timeout
     req.setTimeout(addons.timeout_ms || auth.settings.timeout, () => {
       req.destroy();
       resolve({ error: new Error(`Request to ${build_url} time out after ${addons.timeout_ms || auth.settings.timeout}ms`) });
