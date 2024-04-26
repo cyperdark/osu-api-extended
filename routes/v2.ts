@@ -62,7 +62,7 @@ export const comments = {
 import users_list from "../api/v2/users_list";
 import users_events from "../api/v2/users_events";
 import users_details from "../api/v2/users_details";
-import users_activity from "../api/v2/users_activity";
+import { users_activity } from "../api/v2/users_activity";
 import users_beatmaps from "../api/v2/users_beatmaps";
 import users_kudosu from "../api/v2/users_kudosu";
 
