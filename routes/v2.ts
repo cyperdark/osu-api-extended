@@ -104,7 +104,7 @@ export const forums = {
 
 
 
-import search_all from '../api/v2/search';
+import { search_all } from '../api/v2/search';
 
 export const search = search_all;
 
