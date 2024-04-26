@@ -162,7 +162,7 @@ export const spotlights = {
 
 
 
-import wiki_details from "../api/v2/wiki_details";
+import { wiki_details } from "../api/v2/wiki_details";
 
 
 export const wiki = {
