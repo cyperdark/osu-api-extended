@@ -1,10 +1,10 @@
-import { IDefaultParams } from "../../types";
+import { IDefaultParams, IError } from "../../types";
 import { BeatmapsDiscussionsListResponse } from "../../types/v2/beatmaps_discussions_list";
 import { request } from "../../utility/request";
 
 
 
-const name = async (params: {
+export const beatmaps_discussions_list = async (params: {
   only_unresolved?: boolean;
   user?: number;
   beatmap_id?: number;
@@ -14,7 +14,7 @@ const name = async (params: {
   limit?: number;
   sort?: 'id_desc' | 'id_asc';
   cursor_string?: string;
-}, addons?: IDefaultParams): Promise<BeatmapsDiscussionsListResponse> => {
+}, addons?: IDefaultParams): Promise<BeatmapsDiscussionsListResponse | IError> => {
   const data = await request(`https://osu.ppy.sh/api/v2/beatmapsets/discussions`, {
     method: 'GET',
     params,
@@ -23,6 +23,3 @@ const name = async (params: {
 
   return data;
 };
-
-
-export default name;
