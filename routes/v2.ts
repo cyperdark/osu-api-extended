@@ -79,7 +79,7 @@ export const users = {
 
 
 
-import scores_list from "../api/v2/scores_list";
+import { scores_list } from "../api/v2/scores_list";
 import { scores_details } from "../api/v2/scores_details";
 import { scores_download } from "../api/v2/scores_download";
 

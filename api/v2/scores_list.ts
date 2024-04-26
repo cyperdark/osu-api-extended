@@ -1,5 +1,13 @@
 import { request } from "../../utility/request";
-import { IDefaultParams, Modes_names } from "../../types";
+import { IDefaultParams, IError, Modes_names } from "../../types";
+import { ScoresListLeaderboardResponse } from "../../types/v2/scores_list_leaderboard";
+import { ScoresListSoloScoresResponse } from "../../types/v2/scores_list_solo_scores";
+import { ScoresListBeatmapBestResponse } from "../../types/v2/scores_list_beatmap_best";
+import { ScoresListBeatmapAllResponse } from "../../types/v2/scores_list_beatmap_all";
+import { ScoresListUserBestResponse } from "../../types/v2/scores_list_user_best";
+import { ScoresListUserFirstsResponse } from "../../types/v2/scores_list_user_firsts";
+import { ScoresListUserRecentResponse } from "../../types/v2/scores_list_user_recent";
+import { ScoresListUserPinnedResponse } from "../../types/v2/scores_list_user_pinned";
 
 
 type params = {
@@ -34,14 +42,26 @@ type params = {
 
 
 type Response<T extends params['type']> =
-  T extends 'difficulty'
-  ? any
-  : T extends 'difficulties'
-  ? any
-  : never;
+  T extends 'leaderboard'
+  ? ScoresListLeaderboardResponse | IError
+  : T extends 'solo_scores'
+  ? ScoresListSoloScoresResponse | IError
+  : T extends 'beatmap_best'
+  ? ScoresListBeatmapBestResponse | IError
+  : T extends 'beatmap_all'
+  ? ScoresListBeatmapAllResponse | IError
+  : T extends 'user_best'
+  ? ScoresListUserBestResponse | IError
+  : T extends 'user_firsts'
+  ? ScoresListUserFirstsResponse | IError
+  : T extends 'user_recent'
+  ? ScoresListUserRecentResponse | IError
+  : T extends 'user_pinned'
+  ? ScoresListUserPinnedResponse | IError
+  : IError;
 
 
-const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
+export const scores_list = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
   const object: any = {};
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'GET';
@@ -49,6 +69,11 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
 
   switch (params.type) {
     case 'leaderboard':
+      if (params.beatmap_id == null) {
+        return { error: new Error(`Specify beatmap id`) } as Response<T['type']>;
+      };
+
+
       url += `/beatmaps/${params.beatmap_id}/scores`;
 
 
@@ -58,6 +83,15 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
       break;
 
     case 'beatmap_best':
+      if (params.beatmap_id == null) {
+        return { error: new Error(`Specify beatmap id`) } as Response<T['type']>;
+      };
+
+      if (params.user_id == null) {
+        return { error: new Error(`Specify user id`) } as Response<T['type']>;
+      };
+
+
       url += `/beatmaps/${params.beatmap_id}/scores/users/${params.user_id}`;
 
 
@@ -66,6 +100,15 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
       break;
 
     case 'beatmap_all':
+      if (params.beatmap_id == null) {
+        return { error: new Error(`Specify beatmap id`) } as Response<T['type']>;
+      };
+
+      if (params.user_id == null) {
+        return { error: new Error(`Specify user id`) } as Response<T['type']>;
+      };
+
+
       url += `/beatmaps/${params.beatmap_id}/scores/users/${params.user_id}/all`;
 
 
@@ -76,6 +119,11 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
     case 'user_firsts':
     case 'user_recent':
     case 'user_pinned':
+      if (params.user_id == null) {
+        return { error: new Error(`Specify user id`) } as Response<T['type']>;
+      };
+
+
       url += `/users/${params.user_id}/scores/${params.type.replace('user_', '')}`;
 
 
@@ -86,6 +134,11 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
       break;
 
     case 'solo_scores':
+      if (params.beatmap_id == null) {
+        return { error: new Error(`Specify beatmap id`) } as Response<T['type']>;
+      };
+
+
       url += `/beatmaps/${params.beatmap_id}/solo-scores`;
 
 
@@ -93,6 +146,9 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
       object['mode'] = params.mode;
       object['mods[]'] = params.mods;
       break;
+
+    default:
+      return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
   };
 
 
@@ -107,15 +163,12 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
     return data;
   };
 
+
   if (['leaderboard', 'beatmap_all'].includes(params.type)) {
     data.scores.forEach((r: any, index: number) => r.index = index);
     return data.scores as Response<T['type']>;
   };
 
   if (params.type != 'beatmap_best') data.forEach((r: any, index: number) => r.index = index);
-
   return data as Response<T['type']>;
 };
-
-
-export default name;
