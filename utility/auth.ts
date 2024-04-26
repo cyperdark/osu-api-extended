@@ -234,7 +234,10 @@ export const authorize = async ({ code, mode, client_id, client_secret, redirect
   });
 
 
-  const user = await request(`https://osu.ppy.sh/api/v2/me/${mode}`, { method: 'GET', params: { v2: access_token, nor: true } });
+  const user = await request(`https://osu.ppy.sh/api/v2/me/${mode}`, {
+    method: 'GET',
+    addons: { authKey: access_token, ignoreSessionRefresh: true }
+  });
   user.access_token = access_token;
   user.refresh_token = refresh_token;
   user.expires_in = expires_in;
@@ -268,7 +271,10 @@ export const refresh_session = async ({ refresh_token, mode, client_id, client_s
   });
 
 
-  const user = await request(`https://osu.ppy.sh/api/v2/me/${mode}`, { method: 'GET', params: { v2: access_token, nor: true } });
+  const user = await request(`https://osu.ppy.sh/api/v2/me/${mode}`, {
+    method: 'GET',
+    addons: { authKey: access_token, ignoreSessionRefresh: true }
+  });
   user.access_token = access_token;
   user.refresh_token = refresh_token_new;
   user.expires_in = expires_in;
