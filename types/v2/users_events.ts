@@ -1,4 +1,4 @@
-import { Modes_names } from ".";
+import { Modes_names } from "../index";
 
 export enum ActionType {
   Rank = 'rank',
@@ -12,7 +12,7 @@ export enum ActionType {
   BeatmapsetApprove = 'beatmapsetApprove',
 }
 
-export interface UsersEvents {
+export interface UsersEventsResponse {
   events: Event[];
   cursor: Cursor;
   cursor_string: string;
