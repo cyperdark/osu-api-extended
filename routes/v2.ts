@@ -184,7 +184,7 @@ export const me = {
 
 
 
-import matches_list from "../api/v2/matches_list";
+import { matches_list } from "../api/v2/matches_list";
 import { matches_details } from "../api/v2/matches_details";
 
 
