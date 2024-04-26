@@ -9,7 +9,7 @@ export interface BeatmapPack {
   date: string
   name: string
   no_diff_reduction: boolean
-  ruleset_id: any
+  ruleset_id?: number
   tag: string
   url: string
 }
