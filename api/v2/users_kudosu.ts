@@ -1,13 +1,19 @@
-import { IDefaultParams } from "../../types";
+import { IDefaultParams, IError } from "../../types";
+import { UsersKudosuResponse } from "../../types/v2/users_kudosu";
 import { request } from "../../utility/request";
 
 
 
-const name = async (params: {
+export const users_kudosu = async (params: {
   id: number;
   limit?: number;
   offset?: number;
-}, addons?: IDefaultParams) => {
+}, addons?: IDefaultParams): Promise<UsersKudosuResponse | IError> => {
+  if (params.id == null) {
+    return { error: new Error(`Specify user id`) };
+  };
+
+
   const data = await request(`https://osu.ppy.sh/api/v2/users/${params.id}/kudosu`, {
     method: 'GET',
     params: {
@@ -20,6 +26,3 @@ const name = async (params: {
 
   return data;
 };
-
-
-export default name;
