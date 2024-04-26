@@ -1,5 +1,4 @@
 export interface BeatmapsLookupSet {
-  error: any
   artist?: string
   artist_unicode?: string
   covers?: Covers

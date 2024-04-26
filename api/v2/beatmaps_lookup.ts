@@ -3,7 +3,7 @@ import { BeatmapsLookupDifficulty } from "../../types/v2/beatmaps_lookup_difficu
 import { BeatmapsLookupSet } from "../../types/v2/beatmaps_lookup_set";
 import { Modes_enums } from "../../types/enums";
 import { request } from "../../utility/request";
-import { IDefaultParams, Modes_names } from "../../types";
+import { IDefaultParams, IError, Modes_names } from "../../types";
 import { BeatmapsLookupDifficultiesResponse } from "../../types/v2/beatmaps_lookup_difficulties";
 
 
@@ -28,17 +28,17 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'difficulty'
-  ? BeatmapsLookupDifficulty
+  ? BeatmapsLookupDifficulty | IError
   : T extends 'set'
-  ? BeatmapsLookupSet
+  ? BeatmapsLookupSet | IError
   : T extends 'attributes'
-  ? BeatmapsLookupAttributes
+  ? BeatmapsLookupAttributes | IError
   : T extends 'difficulties'
-  ? BeatmapsLookupDifficultiesResponse[]
-  : never;
+  ? BeatmapsLookupDifficultiesResponse[] | IError
+  : IError;
 
 
-const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
+export const beatmaps_lookup = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
   const object: any = {};
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'GET';
@@ -47,6 +47,10 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
   switch (params.type) {
     case 'difficulty':
       url += '/beatmaps/lookup';
+
+      if (params.id == null && params.checksum && params.filename) {
+        return { error: new Error(`Specify at least one parameter`) } as Response<T['type']>;
+      };
 
       if (params.id) object.id = params.id;
       if (params.checksum) object.checksum = params.checksum;
@@ -57,6 +61,10 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
     case 'set':
       url += '/beatmapsets/lookup';
 
+      if (params.id == null) {
+        return { error: new Error(`Specify beatmap set id`) } as Response<T['type']>;
+      };
+
       if (params.id) object.beatmap_id = params.id;
 
       break;
@@ -64,6 +72,10 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
     case 'attributes':
       url += `/beatmaps/${params.id}/attributes`;
       method = 'POST';
+
+      if (params.id == null) {
+        return { error: new Error(`Specify beatmap id`) } as Response<T['type']>;
+      };
 
       if (params.mods) object.mods = params.mods;
 
@@ -76,6 +88,9 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
       url += `/beatmaps`;
 
       if (Array.isArray(params.ids)) object['ids[]'] = params.ids;
+      else {
+        return { error: new Error(`Specify at least one beatmap id`) } as Response<T['type']>;
+      };
 
       break;
   };
@@ -92,6 +107,3 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
   if (params.type == 'difficulties') return data.beatmaps as Response<T['type']>;
   return data as Response<T['type']>;
 };
-
-
-export default name;
