@@ -15,21 +15,19 @@ export const rooms_list = async (params: {
 
   cursor_string?: string;
 }, addons?: IDefaultParams): Promise<RoomsListResponse | IError> => {
-  const object = {
-    type_group: params.type,
-    mode: params.show,
-    sort: params.sort,
-    limit: params.limit,
-    cursor_string: params.cursor_string,
-  };
-
   if (addons == null)
     addons = { apiVersion: '99999999' }
 
 
   const data = await request(`https://osu.ppy.sh/api/v2/rooms`, {
     method: 'GET',
-    params: object,
+    params: {
+      type_group: params.type,
+      mode: params.show,
+      sort: params.sort,
+      limit: params.limit,
+      cursor_string: params.cursor_string,
+    },
     addons,
   });
 

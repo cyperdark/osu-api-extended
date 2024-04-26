@@ -59,9 +59,9 @@ export const rooms_scores = async <T extends params>(params: T, addons?: IDefaul
     case 'all':
       url += `/rooms/${params.id}/playlist/${params.playlist_id}/scores`;
 
-      if (params.limit != null) object.limit = params.limit;
-      if (params.sort != null) object.sort = params.sort;
-      if (params.cursor_string != null) object.cursor_string = params.cursor_string;
+      object.limit = params.limit;
+      object.sort = params.sort;
+      object.cursor_string = params.cursor_string;
       break;
 
     case 'single':
@@ -73,6 +73,9 @@ export const rooms_scores = async <T extends params>(params: T, addons?: IDefaul
       url += `/rooms/${params.id}/playlist/${params.playlist_id}/scores/users/${params.user_id}`;
 
       break;
+
+    default:
+      return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
   };
 
 

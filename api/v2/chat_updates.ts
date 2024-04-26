@@ -9,16 +9,13 @@ export const chat_updates = async (params: {
   includes: ('presence' | 'silences' | 'messages')[];
   history_since: number;
 }, addons?: IDefaultParams): Promise<ChatUpdatesResponse | IError> => {
-  const object = {
-    'history_since': params.history_since,
-    'includes[]': params.includes,
-    'since': params.after_id,
-  };
-
-
   const data = await request(`https://osu.ppy.sh/api/v2/chat/updates`, {
     method: 'GET',
-    params: object,
+    params: {
+      'history_since': params.history_since,
+      'includes[]': params.includes,
+      'since': params.after_id,
+    },
     addons,
   });
 

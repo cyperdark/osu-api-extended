@@ -52,9 +52,9 @@ export const beatmaps_lookup = async <T extends params>(params: T, addons?: IDef
         return { error: new Error(`Specify at least one parameter`) } as Response<T['type']>;
       };
 
-      if (params.id) object.id = params.id;
-      if (params.checksum) object.checksum = params.checksum;
-      if (params.filename) object.filename = params.filename;
+      object.id = params.id;
+      object.checksum = params.checksum;
+      object.filename = params.filename;
 
       break;
 
@@ -65,7 +65,7 @@ export const beatmaps_lookup = async <T extends params>(params: T, addons?: IDef
         return { error: new Error(`Specify beatmap set id`) } as Response<T['type']>;
       };
 
-      if (params.id) object.beatmap_id = params.id;
+      object.beatmap_id = params.id;
 
       break;
 
@@ -77,7 +77,7 @@ export const beatmaps_lookup = async <T extends params>(params: T, addons?: IDef
         return { error: new Error(`Specify beatmap id`) } as Response<T['type']>;
       };
 
-      if (params.mods) object.mods = params.mods;
+      object.mods = params.mods;
 
       if (typeof params.mode == 'string') object.ruleset = params.mode;
       else if (typeof params.mode == 'number') object.ruleset_id = Modes_enums[params.mode];

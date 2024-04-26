@@ -193,6 +193,9 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
         object = {};
       };
       break;
+
+    default:
+      return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
   };
 
 

@@ -8,13 +8,11 @@ export const notifications_list = async (params: {
   max_id: string;
   unreaded_only: boolean;
 }, addons?: IDefaultParams): Promise<NotificationsListResponse | IError> => {
-  const object: any = {};
-  if (params.max_id != null) object.max_id = params.max_id;
-
-
   const data = await request(`https://osu.ppy.sh/api/v2/notifications`, {
     method: 'GET',
-    params: object,
+    params: {
+      max_id: params.max_id
+    },
     addons,
   });
 

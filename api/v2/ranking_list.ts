@@ -54,10 +54,11 @@ type Response<T extends params['type']> =
 
 
 export const ranking_list = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
-  if (params.type != 'kudosu' && params.mode == null)
+  if (params.type != 'kudosu' && params.mode == null) {
     return {
       error: new Error('Gamemode not specified'),
     } as Response<T['type']>;
+  };
 
 
   let object: any = {};
@@ -68,40 +69,40 @@ export const ranking_list = async <T extends params>(params: T, addons?: IDefaul
     case 'charts':
       url += `/rankings/${params.mode}/${params.type}`;
 
-      if (params.page != null) object['cursor[page]'] = params.page;
-      if (params.filter != null) object.filter = params.filter;
-      if (params.spotlight_id != null) object.spotlight = params.spotlight_id;
+      object['cursor[page]'] = params.page;
+      object.filter = params.filter;
+      object.spotlight = params.spotlight_id;
 
       break;
 
     case 'country':
       url += `/rankings/${params.mode}/${params.type}`;
 
-      if (params.page != null) object['cursor[page]'] = params.page;
-      if (params.filter != null) object.filter = params.filter;
+      object['cursor[page]'] = params.page;
+      object.filter = params.filter;
       break;
 
     case 'performance':
       url += `/rankings/${params.mode}/${params.type}`;
 
-      if (params.page != null) object['cursor[page]'] = params.page;
-      if (params.filter != null) object.filter = params.filter;
-      if (params.country_code != null) object.country = params.country_code;
-      if (params.variant != null) object.variant = params.variant;
+      object['cursor[page]'] = params.page;
+      object.filter = params.filter;
+      object.country = params.country_code;
+      object.variant = params.variant;
 
       break;
 
     case 'score':
       url += `/rankings/${params.mode}/${params.type}`;
 
-      if (params.page != null) object['cursor[page]'] = params.page;
-      if (params.filter != null) object.filter = params.filter;
+      object['cursor[page]'] = params.page;
+      object.filter = params.filter;
       break;
 
     case 'kudosu':
       url += `/rankings/kudosu`;
 
-      if (params.page != null) object.page = params.page;
+      object.page = params.page;
       break;
 
     default:

@@ -19,5 +19,6 @@ export const me_details = async (addons?: IDefaultParams & { mode: Modes_names }
     addons,
   });
 
+
   return data;
 };

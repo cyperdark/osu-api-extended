@@ -17,20 +17,17 @@ export const comments_list = async (params: {
   };
   sort?: 'new' | 'old' | 'top';
 }, addons?: IDefaultParams): Promise<CommentsListResponse | IError> => {
-  const object = {
-    after: params.after_id,
-    commentable_type: params.type,
-    commentable_id: params.id,
-    'cursor[id]': params.cursor?.id,
-    'cursor[created_at]': params.cursor?.created_at,
-    parent_id: params.parent_id,
-    sort: params.sort,
-  };
-
-
   const data = await request(`https://osu.ppy.sh/api/v2/comments`, {
     method: 'GET',
-    params: object,
+    params: {
+      after: params.after_id,
+      commentable_type: params.type,
+      commentable_id: params.id,
+      'cursor[id]': params.cursor?.id,
+      'cursor[created_at]': params.cursor?.created_at,
+      parent_id: params.parent_id,
+      sort: params.sort,
+    },
     addons,
   });
 

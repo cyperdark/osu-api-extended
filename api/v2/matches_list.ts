@@ -12,16 +12,13 @@ export const matches_list = async (params: {
    */
   after_id: number;
 }, addons?: IDefaultParams): Promise<MatchesListResponse | IError> => {
-  const object = {
-    limit: params.limit,
-    sort: params.sort,
-    'cursor[match_id]': params.after_id,
-  };
-
-
   const data = await request(`https://osu.ppy.sh/api/v2/matches`, {
     method: 'GET',
-    params: object,
+    params: {
+      limit: params.limit,
+      sort: params.sort,
+      'cursor[match_id]': params.after_id,
+    },
     addons,
   });
 

@@ -17,7 +17,8 @@ type Response<T extends params['type']> =
   T extends 'difficulty'
   ? BeamapsDetailsDifficulty | IError
   : T extends 'set'
-  ? BeamapsDetailsSet | IError : IError;
+  ? BeamapsDetailsSet | IError
+  : IError;
 
 
 export const beatmaps_details = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {

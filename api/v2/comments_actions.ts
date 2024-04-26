@@ -72,10 +72,10 @@ export const comments_actions = async <T extends params>(params: T, addons?: IDe
       };
 
 
-      if (params.commentable_type) object['comment[commentable_type]'] = params.commentable_type;
-      if (params.parent_id) object['comment[parent_id]'] = params.parent_id;
-      if (params.id) object['comment[commentable_id]'] = params.id;
-      if (params.message) object['comment[message]'] = params.message;
+      object['comment[commentable_type]'] = params.commentable_type;
+      object['comment[parent_id]'] = params.parent_id;
+      object['comment[commentable_id]'] = params.id;
+      object['comment[message]'] = params.message;
       break;
 
     case 'edit':
@@ -126,6 +126,9 @@ export const comments_actions = async <T extends params>(params: T, addons?: IDe
       method = 'DELETE';
 
       break;
+
+    default:
+      return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
   };
 
 
