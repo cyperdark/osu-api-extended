@@ -1,11 +1,11 @@
 import { request } from "../../utility/request";
-import { IDefaultParams } from "../../types";
+import { IDefaultParams, IError } from "../../types";
 
 
 type params = ({
   type: 'mark_as_readed';
 
-  ids: number[];
+  // ids: number[];
 
   identities?: {
     category: string;
@@ -24,11 +24,11 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'mark_as_readed'
-  ? any
-  : never;
+  ? ""
+  : IError;
 
 
-const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<any> => {
+export const notification_actions = async <T extends params>(params: T, addons?: IDefaultParams): Promise<any> => {
   const object: any = {};
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'GET';
@@ -39,20 +39,17 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
       url += '/notifications/mark-read';
       method = 'POST';
 
+      if (params.notifications == null && params.identities == null) {
+        return { error: new Error(`Missing on of parameters`) } as Response<T['type']>;
+      };
 
       // params.ids.forEach((r, index) => object[`identities[${index}][id]`] = r);
 
       if (Array.isArray(params.notifications)) {
-        // const formData = postData(params.notifications);
-        // object.push(formData);
-        
         object['notifications'] = params.notifications;
       };
 
       if (Array.isArray(params.identities)) {
-        // const formData = postData(params.identities);
-        // object.push(formData);
-        
         object['identities'] = params.identities;
       };
       break;
@@ -68,6 +65,3 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
 
   return data as Response<T['type']>;
 };
-
-
-export default name;
