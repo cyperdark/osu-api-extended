@@ -110,8 +110,8 @@ export const search = search_all;
 
 
 
-import assets_backgrounds from "../api/v2/assets_backgrounds";
-import assets_dataFiles from "../api/v2/assets_dataFiles";
+import { assets_backgrounds } from "../api/v2/assets_backgrounds";
+import { assets_dataFiles } from "../api/v2/assets_dataFiles";
 
 
 export const assets = {
