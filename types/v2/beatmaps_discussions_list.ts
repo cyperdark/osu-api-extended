@@ -2,11 +2,11 @@ export interface BeatmapsDiscussionsListResponse {
   beatmaps: Beatmap[]
   beatmapsets: Beatmapset[]
   discussions: Discussion[]
-  included_discussions: any[]
+  included_discussions: IncludedDiscussion[]
   reviews_config: ReviewsConfig
   users: User[]
-  cursor?: Cursor
-  cursor_string?: string
+  cursor: Cursor
+  cursor_string: string
 }
 
 export interface Beatmap {
@@ -56,7 +56,7 @@ export interface Beatmapset {
   status: string
   title: string
   title_unicode: string
-  track_id: any
+  track_id?: number
   user_id: number
   video: boolean
   bpm: number
@@ -69,7 +69,7 @@ export interface Beatmapset {
   legacy_thread_url: string
   nominations_summary: NominationsSummary
   ranked: number
-  ranked_date?: string
+  ranked_date: any
   storyboard: boolean
   submitted_date: string
   tags: string
@@ -129,6 +129,39 @@ export interface StartingPost {
   deleted_by_id: any
   id: number
   last_editor_id?: number
+  message: string
+  system: boolean
+  updated_at: string
+  user_id: number
+}
+
+export interface IncludedDiscussion {
+  id: number
+  beatmapset_id: number
+  beatmap_id?: number
+  user_id: number
+  deleted_by_id: any
+  message_type: string
+  parent_id: number
+  timestamp?: number
+  resolved: boolean
+  can_be_resolved: boolean
+  can_grant_kudosu: boolean
+  created_at: string
+  updated_at: string
+  deleted_at: any
+  last_post_at: string
+  kudosu_denied: boolean
+  starting_post: StartingPost2
+}
+
+export interface StartingPost2 {
+  beatmapset_discussion_id: number
+  created_at: string
+  deleted_at: any
+  deleted_by_id: any
+  id: number
+  last_editor_id: any
   message: string
   system: boolean
   updated_at: string
