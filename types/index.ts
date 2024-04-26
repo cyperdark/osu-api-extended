@@ -6,6 +6,11 @@ export type IDefaultParams = {
    */
   authKey?: string;
   timeout_ms?: number;
+
+  /**
+   * If request returns `authentication: 'basic', it wont try to refresh session
+   */
+  ignoreSessionRefresh?: boolean
 };
 
 
@@ -76,3 +81,6 @@ export type auth_response = {
 };
 
 export type IBeatmapPackType = 'standard' | 'featured' | 'tournament' | 'loved' | 'chart' | 'theme' | 'artist';
+
+
+export type IError = { error: Error };

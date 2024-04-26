@@ -6,7 +6,7 @@ import fs from 'fs';
 
 // CREDENTIALS
 import * as auth from "./auth";
-import { IDefaultParams } from '../types';
+import { IDefaultParams, IError } from '../types';
 
 
 // TYPES
@@ -26,18 +26,20 @@ let total_retries = 0;
 
 
 
-export const request: RequestType = (url, { method, headers, data, params = {}, addons = {} }): Promise<any> => new Promise((resolve, reject) => {
+export const request: RequestType = (url, { method, headers, data, params = {}, addons = {} }): Promise<any | IError> => new Promise((resolve, reject) => {
   // check required args
-  if (url == null)
-    throw new Error('URL not specified');
+  if (url == null) {
+    return resolve({ error: new Error('URL not specified'), });
+  };
 
-  if (method == null)
-    throw new Error('Method not specified');
+  if (method == null) {
+    return resolve({ error: new Error('Method not specified'), });
+  };
 
 
   // V1 add credentials
   if (url.includes('https://osu.ppy.sh/api/') && !url.includes('https://osu.ppy.sh/api/v2'))
-    params.k = params.v1 || auth.cache.v1;
+    params.k = addons.authKey || auth.cache.v1;
 
   // V2 add credentials
   if (url.includes('https://osu.ppy.sh/api/v2')) {
@@ -91,10 +93,14 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
       if (/^application\/json/.test(response.headers['content-type'])) {
         try {
           const parse = JSON.parse(data);
-          if (parse.authentication === 'basic' && total_retries < 3 && params.nor != true) {
-            const refresh = await auth.refresh_token();
-            if (refresh == null) return resolve({ authentication: 'basic' });
+          if (parse.authentication === 'basic' && total_retries < 3 && addons.ignoreSessionRefresh != true) {
             total_retries++;
+
+
+            const refresh = await auth.refresh_token();
+            if (refresh == null) {
+              return resolve({ error: 'Cannot refresh session, double check your credentials (or report to package author)' });
+            };
 
 
             const retry_request = await request(url, { method, headers, data, params });
@@ -102,10 +108,25 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
           };
 
 
+          if ('error' in parse) {
+            if (parse.error === null) {
+              return resolve({ error: new Error(`osu returned empty error, double check your parameters`) });
+            };
+
+
+            return resolve({ error: new Error(parse.error) });
+          };
+
+
+          if (parse.authentication === 'basic') {
+            return resolve({ error: new Error('Unauthorized (double check credentials)') });
+          };
+
+
           total_retries = 0;
           return resolve(parse);
         } catch (error) {
-          reject(error);
+          return resolve({ error: error });
         };
       };
 
@@ -115,13 +136,15 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
   });
 
 
-  // throw error
-  req.on('error', reject);
+  // send error
+  req.on('error', (error) => {
+    resolve({ error: error });
+  });
 
   // timeout
   req.setTimeout(addons.timeout_ms || auth.settings.timeout, () => {
     req.destroy();
-    reject(new Error(`Request to ${build_url} time out after ${addons.timeout_ms || auth.settings.timeout}ms`));
+    resolve({ error: new Error(`Request to ${build_url} time out after ${addons.timeout_ms || auth.settings.timeout}ms`) });
   });
 
 
@@ -144,7 +167,7 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
   params?: any;
   addons?: IDefaultParams;
   callback?: Function;
-}): Promise<any> => {
+}): Promise<any | IError> => {
   return new Promise((resolve, reject) => {
     if (url.includes('https://osu.ppy.sh/api/v2')) headers['Authorization'] = `Bearer ${params?.v2 || auth.cache.v2}`;
 
@@ -161,15 +184,16 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
       if (location) {
         download(location, dest, { _callback, headers, data, params, callback })
           .then(resolve)
-          .catch(reject);
+          .catch(error => ({ error: error }));
         return;
-      }
+      };
+
 
       const file = fs.createWriteStream(dest, { encoding: 'utf8' });
 
-      file.on('error', err => {
+      file.on('error', error => {
         fs.unlinkSync(dest);
-        reject(err);
+        resolve({ error: error });
       });
 
       file.on('finish', () => {
@@ -177,10 +201,12 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
         resolve(dest);
       });
 
+
       if (response.statusCode === 404) {
-        resolve('file unavailable');
+        resolve({ error: new Error('file unavailable') });
         return;
-      }
+      };
+
 
       if (_callback == true && callback !== undefined) {
         const totalLength = parseInt(response.headers['content-length']);
@@ -200,7 +226,7 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
 
     req.setTimeout(addons.timeout_ms || auth.settings.timeout, () => {
       req.destroy();
-      reject(new Error(`Request to ${url} time out after ${addons.timeout_ms || auth.settings.timeout}ms`));
+      resolve({ error: new Error(`Request to ${build_url} time out after ${addons.timeout_ms || auth.settings.timeout}ms`) });
     });
 
     if (data) {
