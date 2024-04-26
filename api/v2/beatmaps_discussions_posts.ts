@@ -1,10 +1,10 @@
-import { IDefaultParams } from "../../types";
+import { IDefaultParams, IError } from "../../types";
 import { BeatmapsDiscussionsListResponse } from "../../types/v2/beatmaps_discussions_list";
 import { request } from "../../utility/request";
 
 
 
-const name = async (params: {
+export const beatmaps_discussions_posts = async (params: {
   discussion_id?: number;
   sort?: 'id_desc' | 'id_asc';
   types?: ('first' | 'reply' | 'system')[];
@@ -12,7 +12,7 @@ const name = async (params: {
 
   limit?: number;
   cursor_string?: string;
-}, addons?: IDefaultParams): Promise<BeatmapsDiscussionsListResponse> => {
+}, addons?: IDefaultParams): Promise<BeatmapsDiscussionsListResponse | IError> => {
   if (params.discussion_id) {
     // @ts-ignore
     params.beatmapset_discussion_id = params.discussion_id;
@@ -34,6 +34,3 @@ const name = async (params: {
 
   return data;
 };
-
-
-export default name;

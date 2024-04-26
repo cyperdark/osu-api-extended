@@ -5,7 +5,7 @@ import beatmaps_download from "../api/v2/beatmaps_download";
 import { beatmaps_packs_list } from "../api/v2/beatmaps_packs_list";
 import { beatmap_packs_details } from "../api/v2/beatmaps_packs_details";
 import { beatmaps_discussions_list } from "../api/v2/beatmaps_discussions_list";
-import beatmaps_discussions_posts from "../api/v2/beatmaps_discussions_posts";
+import { beatmaps_discussions_posts } from "../api/v2/beatmaps_discussions_posts";
 import beatmaps_discussions_votes from "../api/v2/beatmaps_discussions_votes";
 
 import beatmaps_actions from "../api/v2/beatmaps_actions";
