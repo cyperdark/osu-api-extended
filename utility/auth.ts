@@ -4,7 +4,7 @@ import readln from "readline";
 
 
 import { auth_params, auth_response, auth_scopes, Modes_names } from '../types/index';
-import { UserAuth } from '../types/user_details';
+import { UserAuth } from '../types/v2/users_details';
 
 
 export const settings = {

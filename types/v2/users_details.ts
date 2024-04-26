@@ -66,6 +66,12 @@ export interface UsersDetailsResponse {
   unranked_beatmapset_count: number
 }
 
+export interface UserAuth extends UsersDetailsResponse {
+  access_token: string;
+  refresh_token: string;
+  expires_in: number;
+}
+
 export interface Country {
   code: string
   name: string
