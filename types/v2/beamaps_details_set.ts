@@ -173,7 +173,7 @@ export interface RecentFavourite {
   is_supporter: boolean
   last_visit?: string
   pm_friends_only: boolean
-  profile_colour: any
+  profile_colour?: string
   username: string
 }
 
