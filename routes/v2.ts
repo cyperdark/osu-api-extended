@@ -33,7 +33,7 @@ export const beatmaps = {
 
 
 
-import changelogs_list from '../api/v2/changelogs_list';
+import { changelogs_list } from '../api/v2/changelogs_list';
 import { changelogs_details } from '../api/v2/changelogs_details';
 
 

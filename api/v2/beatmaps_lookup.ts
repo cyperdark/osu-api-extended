@@ -93,6 +93,9 @@ export const beatmaps_lookup = async <T extends params>(params: T, addons?: IDef
       };
 
       break;
+
+    default:
+      return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
   };
 
 
