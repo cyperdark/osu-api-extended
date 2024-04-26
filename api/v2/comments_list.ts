@@ -1,9 +1,10 @@
-import { IDefaultParams } from "../../types";
+import { IDefaultParams, IError } from "../../types";
+import { CommentsListResponse } from "../../types/v2/comments_list";
 import { request } from "../../utility/request";
 
 
 
-const name = async (params: {
+export const comments_list = async (params: {
   type?: 'news_post' | 'beatmapset' | 'Build';
   id?: string;
 
@@ -15,7 +16,7 @@ const name = async (params: {
     created_at: string;
   };
   sort?: 'new' | 'old' | 'top';
-}, addons?: IDefaultParams) => {
+}, addons?: IDefaultParams): Promise<CommentsListResponse | IError> => {
   const object = {
     after: params.after_id,
     commentable_type: params.type,
@@ -36,6 +37,3 @@ const name = async (params: {
 
   return data;
 };
-
-
-export default name;

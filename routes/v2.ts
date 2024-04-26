@@ -45,7 +45,7 @@ export const changelogs = {
 
 
 
-import comments_list from '../api/v2/comments_list';
+import { comments_list } from '../api/v2/comments_list';
 import { comments_details } from '../api/v2/comments_details';
 import { comments_actions } from '../api/v2/comments_actions';
 
