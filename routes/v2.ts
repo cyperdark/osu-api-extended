@@ -153,7 +153,7 @@ export const ranking = {
 
 
 
-import spotlights_list from "../api/v2/spotlights_list";
+import { spotlights_list } from "../api/v2/spotlights_list";
 
 
 export const spotlights = {
