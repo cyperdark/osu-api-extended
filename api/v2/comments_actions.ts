@@ -1,5 +1,10 @@
 import { request } from "../../utility/request";
-import { IDefaultParams } from "../../types";
+import { IDefaultParams, IError } from "../../types";
+import { CommentsActionsNewResponse } from "../../types/v2/comments_actions_new";
+import { CommentsActionsEditResponse } from "../../types/v2/comments_actions_edit";
+import { CommentsActionsDeleteResponse } from "../../types/v2/comments_actions_delete";
+import { CommentsActionsVoteResponse } from "../../types/v2/comments_actions_vote";
+import { CommentsActionsUnvoteResponse } from "../../types/v2/comments_actions_unvote";
 
 
 type params = ({
@@ -31,14 +36,20 @@ type params = ({
 
 
 type Response<T extends params['type']> =
-  T extends 'difficulty'
-  ? any
-  : T extends 'difficulties'
-  ? any
-  : never;
+  T extends 'new'
+  ? CommentsActionsNewResponse | IError
+  : T extends 'edit'
+  ? CommentsActionsEditResponse | IError
+  : T extends 'delete'
+  ? CommentsActionsDeleteResponse | IError
+  : T extends 'vote'
+  ? CommentsActionsVoteResponse | IError
+  : T extends 'unvote'
+  ? CommentsActionsUnvoteResponse | IError
+  : IError;
 
 
-const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']> | { error: string }> => {
+export const comments_actions = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']> | { error: string }> => {
   const object: any = {};
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'POST';
@@ -48,6 +59,19 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
     case 'new':
       url += `/comments`;
 
+      if (params.id == null) {
+        return { error: new Error(`Specify news id or beatmap set id`) } as Response<T['type']>;
+      };
+
+      if (params.commentable_type == null) {
+        return { error: new Error(`Specify commentable_type`) } as Response<T['type']>;
+      };
+
+      if (params.message == null) {
+        return { error: new Error(`You forgot to provide message`) } as Response<T['type']>;
+      };
+
+
       if (params.commentable_type) object['comment[commentable_type]'] = params.commentable_type;
       if (params.parent_id) object['comment[parent_id]'] = params.parent_id;
       if (params.id) object['comment[commentable_id]'] = params.id;
@@ -55,6 +79,15 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
       break;
 
     case 'edit':
+      if (params.id == null) {
+        return { error: new Error(`Specify comment id`) } as Response<T['type']>;
+      };
+
+      if (params.message == null) {
+        return { error: new Error(`You forgot to provide message`) } as Response<T['type']>;
+      };
+
+
       url += `/comments/${params.id}`;
       method = 'PUT';
 
@@ -62,18 +95,33 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
       break;
 
     case 'delete':
+      if (params.id == null) {
+        return { error: new Error(`Specify comment id`) } as Response<T['type']>;
+      };
+
+
       url += `/comments/${params.id}`;
       method = 'DELETE';
 
       break;
 
     case 'vote':
+      if (params.id == null) {
+        return { error: new Error(`Specify comment id`) } as Response<T['type']>;
+      };
+
+
       url += `/comments/${params.id}/vote`;
       method = 'POST';
 
       break;
 
     case 'unvote':
+      if (params.id == null) {
+        return { error: new Error(`Specify comment id`) } as Response<T['type']>;
+      };
+
+
       url += `/comments/${params.id}/vote`;
       method = 'DELETE';
 
@@ -90,6 +138,3 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
 
   return data as Response<T['type']>;
 };
-
-
-export default name;
