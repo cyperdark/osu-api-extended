@@ -1,26 +1,26 @@
-import { IDefaultParams } from "../../types";
+import { IDefaultParams, IError } from "../../types";
+import { NewsListResponse } from "../../types/v2/news_list";
 import { request } from "../../utility/request";
 
 
 
-const name = async (params: {
+export const news_list = async (params: {
   from_year?: string;
-
   limit?: string;
   cursor_string?: string;
-} = {}, addons?: IDefaultParams) => {
+} = {}, addons?: IDefaultParams): Promise<NewsListResponse | IError> => {
+  const object: any = {};
+  if (params.from_year != null) object.year = params.from_year;
+  if (params.limit != null) object.limit = params.limit;
+  if (params.cursor_string != null) object.cursor_string = params.cursor_string;
+
+
   const data = await request(`https://osu.ppy.sh/api/v2/news`, {
     method: 'GET',
-    params: {
-      year: params.from_year,
-      limit: params.limit,
-      cursor_string: params.cursor_string,
-    },
+    params: object,
     addons,
   });
 
+
   return data;
 };
-
-
-export default name;
