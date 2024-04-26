@@ -122,7 +122,7 @@ export const assets = {
 
 
 import news_list from "../api/v2/news_list";
-import news_details from "../api/v2/news_details";
+import { news_details } from "../api/v2/news_details";
 
 
 export const news = {
