@@ -1,5 +1,10 @@
 import { request } from "../../utility/request";
-import { IDefaultParams, Modes_names } from "../../types";
+import { IDefaultParams, IError, Modes_names } from "../../types";
+import { RankingListChartsResponse } from "../../types/v2/ranking_list_charts";
+import { RankingListCountryResponse } from "../../types/v2/ranking_list_country";
+import { RankingListPerformanceResponse } from "../../types/v2/ranking_list_performance";
+import { RankingListKudosuResponse } from "../../types/v2/ranking_list_kudosu";
+import { RankingListScoreResponse } from "../../types/v2/ranking_list_score";
 
 
 type params = {
@@ -36,28 +41,23 @@ type params = {
 
 type Response<T extends params['type']> =
   T extends 'charts'
-  ? any
+  ? RankingListChartsResponse | IError
   : T extends 'country'
-  ? any
+  ? RankingListCountryResponse | IError
   : T extends 'performance'
-  ? any
+  ? RankingListPerformanceResponse | IError
   : T extends 'score'
-  ? any
+  ? RankingListScoreResponse | IError
   : T extends 'kudosu'
-  ? any
-  : never;
+  ? RankingListKudosuResponse | IError
+  : IError;
 
 
-const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']> | { error: string }> => {
-  if (params.type == null)
-    return {
-      error: 'Ranking type not specified',
-    };
-
+export const ranking_list = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
   if (params.type != 'kudosu' && params.mode == null)
     return {
-      error: 'Gamemode not specified',
-    };;
+      error: new Error('Gamemode not specified'),
+    } as Response<T['type']>;
 
 
   let object: any = {};
@@ -68,47 +68,44 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
     case 'charts':
       url += `/rankings/${params.mode}/${params.type}`;
 
-      object = {
-        'cursor[page]': params.page,
-        filter: params.filter,
-        spotlight: params.spotlight_id,
-      };
+      if (params.page != null) object['cursor[page]'] = params.page;
+      if (params.filter != null) object.filter = params.filter;
+      if (params.spotlight_id != null) object.spotlight = params.spotlight_id;
+
       break;
 
     case 'country':
       url += `/rankings/${params.mode}/${params.type}`;
 
-      object = {
-        'cursor[page]': params.page,
-        filter: params.filter,
-      };
+      if (params.page != null) object['cursor[page]'] = params.page;
+      if (params.filter != null) object.filter = params.filter;
       break;
 
     case 'performance':
       url += `/rankings/${params.mode}/${params.type}`;
 
-      object = {
-        'cursor[page]': params.page,
-        filter: params.filter,
-        country: params.country_code,
-        variant: params.variant,
-      };
+      if (params.page != null) object['cursor[page]'] = params.page;
+      if (params.filter != null) object.filter = params.filter;
+      if (params.country_code != null) object.country = params.country_code;
+      if (params.variant != null) object.variant = params.variant;
+
       break;
 
     case 'score':
       url += `/rankings/${params.mode}/${params.type}`;
 
-      object = {
-        'cursor[page]': params.page,
-        filter: params.filter,
-      };
+      if (params.page != null) object['cursor[page]'] = params.page;
+      if (params.filter != null) object.filter = params.filter;
       break;
 
     case 'kudosu':
       url += `/rankings/kudosu`;
 
-      object.page = params.page;
+      if (params.page != null) object.page = params.page;
       break;
+
+    default:
+      return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
   };
 
 
@@ -119,15 +116,11 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
   });
 
 
-  if ('error' in data)
-    return {
-      error: 'Api returned error, check your request parameters'
-    };
+  if ('error' in data) {
+    return data as Response<T['type']>;
+  };
 
 
   if (params.type == 'kudosu') return data.ranking as Response<T['type']>;
   return data as Response<T['type']>;
 };
-
-
-export default name;

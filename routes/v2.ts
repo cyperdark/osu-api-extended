@@ -144,7 +144,7 @@ export const notifications = {
 
 
 
-import ranking_list from "../api/v2/ranking_list";
+import { ranking_list } from "../api/v2/ranking_list";
 
 
 export const ranking = {
