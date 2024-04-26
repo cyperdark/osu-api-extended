@@ -202,7 +202,7 @@ import chat_list from "../api/v2/chat_list";
 import chat_messages from "../api/v2/chat_messages";
 import chat_updates from "../api/v2/chat_updates";
 import chat_details from "../api/v2/chat_details";
-import chat_actions from "../api/v2/chat_actions";
+import { chat_actions } from "../api/v2/chat_actions";
 
 
 export const chat = {
