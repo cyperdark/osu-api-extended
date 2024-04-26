@@ -1,11 +1,10 @@
 import { request } from "../../utility/request";
-import { ForumPostDetails } from '../../types/forums_topic_details';
-import { IDefaultParams } from "../../types";
+import { IDefaultParams, IError } from "../../types";
+import { ForumsTopicsDetailsResponse } from "../../types/v2/forums_topics_details";
 
 
-// FIXME: add query params
-const name = async (params: {
-  topic_id: number
+export const forums_topics_details = async (params: {
+  id: number
 
   start_id?: string,
   end_id?: string,
@@ -14,7 +13,12 @@ const name = async (params: {
   sort?: 'id_asc' | 'id_desc',
 
   cursor_string?: string,
-}, addons?: IDefaultParams): Promise<ForumPostDetails> => {
+}, addons?: IDefaultParams): Promise<ForumsTopicsDetailsResponse | IError> => {
+  if (params.id == null) {
+    return { error: new Error(`Specify topic id`) };
+  };
+
+
   const object = {
     start: params.start_id,
     end: params.end_id,
@@ -26,7 +30,7 @@ const name = async (params: {
   };
 
 
-  const data = await request(`https://osu.ppy.sh/api/v2/forums/topics/${params.topic_id}`, {
+  const data = await request(`https://osu.ppy.sh/api/v2/forums/topics/${params.id}`, {
     method: 'GET',
     params: object,
     addons,
@@ -35,6 +39,3 @@ const name = async (params: {
 
   return data;
 };
-
-
-export default name;

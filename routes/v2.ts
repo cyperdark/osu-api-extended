@@ -92,12 +92,12 @@ export const scores = {
 
 
 
-import forums_topic_details from '../api/v2/forums_topics_details';
+import { forums_topics_details } from '../api/v2/forums_topics_details';
 import { forums_topics_actions } from '../api/v2/forums_topics_actions';
 
 export const forums = {
   topics: {
-    details: forums_topic_details,
+    details: forums_topics_details,
     actions: forums_topics_actions,
   },
 };
