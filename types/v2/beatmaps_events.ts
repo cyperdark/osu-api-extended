@@ -50,7 +50,7 @@ export interface Beatmapset {
   status: string
   title: string
   title_unicode: string
-  track_id: any
+  track_id?: number
   user_id: number
   video: boolean
   user: User
@@ -91,11 +91,11 @@ export interface User {
 export interface Discussion {
   id: number
   beatmapset_id: number
-  beatmap_id: number
+  beatmap_id?: number
   user_id: number
   deleted_by_id: any
   message_type: string
-  parent_id?: number
+  parent_id?: any
   timestamp?: number
   resolved: boolean
   can_be_resolved: boolean
@@ -151,5 +151,5 @@ export interface Group {
   is_probationary: boolean
   name: string
   short_name: string
-  playmodes: string[]
+  playmodes?: string[]
 }

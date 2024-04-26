@@ -4,7 +4,7 @@ import { request } from "../../utility/request";
 
 
 
-const name = async (obj: {
+export const beatmaps_events_list = async (obj: {
   user: string | number,
   types: (beatmap_events_types)[];
   min_date: string;
@@ -21,6 +21,3 @@ const name = async (obj: {
 
   return data;
 };
-
-
-export default name;
