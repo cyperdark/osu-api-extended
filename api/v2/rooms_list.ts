@@ -1,9 +1,10 @@
-import { IDefaultParams } from "../../types";
+import { IDefaultParams, IError } from "../../types";
+import { RoomsListResponse } from "../../types/v2/rooms_list";
 import { request } from "../../utility/request";
 
 
 
-const name = async (params: {
+export const rooms_list = async (params: {
   type?: 'playlists' | 'realtime';
   show?: 'all' | 'active' | 'ended' | 'participated' | 'owned';
 
@@ -13,7 +14,7 @@ const name = async (params: {
   sort?: 'ended' | 'created';
 
   cursor_string?: string;
-}, addons?: IDefaultParams) => {
+}, addons?: IDefaultParams): Promise<RoomsListResponse | IError> => {
   const object = {
     type_group: params.type,
     mode: params.show,
@@ -25,11 +26,13 @@ const name = async (params: {
   if (addons == null)
     addons = { apiVersion: '99999999' }
 
+
   const data = await request(`https://osu.ppy.sh/api/v2/rooms`, {
     method: 'GET',
     params: object,
     addons,
   });
+
 
   if (params?.query && !('error' in data))
     data.rooms = data.rooms.filter((r: any) => r.name.toLowerCase().includes(params.query.trim().toLowerCase()))
@@ -37,6 +40,3 @@ const name = async (params: {
 
   return data;
 };
-
-
-export default name;
