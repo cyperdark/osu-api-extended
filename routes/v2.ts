@@ -1,7 +1,7 @@
 import { beatmaps_events_list } from "../api/v2/beatmaps_events_list";
 import beatmaps_lookup from "../api/v2/beatmaps_lookup";
 import { beatmaps_details } from "../api/v2/beatmaps_details";
-import beatmaps_download from "../api/v2/beatmaps_download";
+import { beatmaps_download } from "../api/v2/beatmaps_download";
 import { beatmaps_packs_list } from "../api/v2/beatmaps_packs_list";
 import { beatmap_packs_details } from "../api/v2/beatmaps_packs_details";
 import { beatmaps_discussions_list } from "../api/v2/beatmaps_discussions_list";

@@ -1,5 +1,5 @@
-import { IDefaultParams } from "../../types";
-import { download, request } from "../../utility/request";
+import { IDefaultParams, IError } from "../../types";
+import { download } from "../../utility/request";
 import path from "path";
 import fs from "fs";
 
@@ -19,7 +19,7 @@ type params = ({
   type: 'set';
 
   id: number;
-  host: 'osu' | 'beatconnect' | 'chimu' | 'nerinyan' | 'osu_direct_mirror' | 'sayobot' | 'gatari' | 'ripple' | 'akatsuki' | 'catboy',
+  host: 'osu' | 'beatconnect' | 'chimu' | 'nerinyan' | 'osu_direct_mirror' | 'sayobot' | 'gatari' | 'ripple' | 'catboy',
 
   file_path: string;
   no_video?: boolean;
@@ -29,13 +29,23 @@ type params = ({
 });
 
 
-const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<string | null> => {
+type Response = {
+  status: string,
+  destination?: string,
+  /**
+   * Time in milliseconds
+   */
+  elapsed_time?: number
+} | IError;
+
+
+export const beatmaps_download = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response> => {
   const { dir } = path.parse(params.file_path);
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
 
   if (fs.existsSync(params.file_path) && params.overwrite != true) {
-    return 'exists';
+    return { status: 'exists' };
   };
 
 
@@ -86,10 +96,10 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
         headers['Referer'] = 'https://ripple.moe/';
         break;
 
-      case 'akatsuki':
-        url = `https://akatsuki.gg/d/${params.id}`;
-        headers['Referer'] = 'https://akatsuki.gg/';
-        break;
+      // case 'akatsuki':
+      //   url = `https://akatsuki.gg/d/${params.id}`;
+      //   headers['Referer'] = 'https://akatsuki.gg/';
+      //   break;
 
       case 'catboy':
         url = `https://catboy.best/d/${params.id}`;
@@ -107,12 +117,16 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
     const data = await download(url, params.file_path, {
       _callback: params.progress_track_fn != null,
       headers,
+      addons: addons,
       callback: progress_track,
     });
 
 
     return data;
-  } else if (params.type == 'difficulty') {
+  };
+
+
+  if (params.type == 'difficulty') {
     switch (params.host) {
       case 'osu_direct_mirror':
         url = `https://api.osu.direct/osu/${params.id}?raw=true`
@@ -132,6 +146,7 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
     const data = await download(url, params.file_path, {
       _callback: params.progress_track_fn != null,
       headers,
+      addons: addons,
       callback: progress_track,
     });
 
@@ -140,8 +155,5 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
   };
 
 
-  return `Unknown type: ${(params as any).type}`;
+  return { error: new Error(`Unsupported type: ${(params as any).type}`) };
 };
-
-
-export default name;
