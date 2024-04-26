@@ -1,5 +1,7 @@
 import { request } from "../../utility/request";
-import { IDefaultParams } from "../../types";
+import { IDefaultParams, IError } from "../../types";
+import { chatChannelsActionsSendResponse } from "../../types/v2/chat_channels_actions_send";
+import { chatChannelsActionsJoinResponse } from "../../types/v2/chat_channels_actions_join";
 
 
 type params = ({
@@ -23,14 +25,18 @@ type params = ({
 
 
 type Response<T extends params['type']> =
-  T extends 'difficulty'
-  ? any
-  : T extends 'difficulties'
-  ? any
-  : never;
+  T extends 'send'
+  ? chatChannelsActionsSendResponse | IError
+  : T extends 'join'
+  ? chatChannelsActionsJoinResponse | IError
+  : T extends 'leave'
+  ? "" | IError
+  : T extends 'readed'
+  ? "" | IError
+  : IError;
 
 
-const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
+export const chat_channels_actions = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
   const object: any = {};
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'POST';
@@ -38,6 +44,11 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
 
   switch (params.type) {
     case 'send':
+      if (params.id == null || params.message == null || params.is_action == null) {
+        return { error: new Error(`Missing required parameters`) } as Response<T['type']>;
+      };
+
+
       url += `/chat/channels/${params.id}/messages`;
 
       object['message'] = params.message;
@@ -45,19 +56,37 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
       break;
 
     case 'join':
+      if (params.id == null || params.user_id == null) {
+        return { error: new Error(`Missing required parameters`) } as Response<T['type']>;
+      };
+
+
       url += `/chat/channels/${params.id}/users/${params.user_id}`;
       method = 'PUT';
       break;
 
     case 'leave':
+      if (params.id == null || params.user_id == null) {
+        return { error: new Error(`Missing required parameters`) } as Response<T['type']>;
+      };
+
+
       url += `/chat/channels/${params.id}/users/${params.user_id}`;
       method = 'DELETE';
       break;
 
     case 'readed':
+      if (params.channel_id == null || params.message_id == null) {
+        return { error: new Error(`Missing required parameters`) } as Response<T['type']>;
+      };
+
+
       url += `/chat/channels/${params.channel_id}/mark-as-read/${params.message_id}`;
       method = 'PUT';
       break;
+
+    default:
+      return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
   };
 
 
@@ -70,6 +99,3 @@ const name = async <T extends params>(params: T, addons?: IDefaultParams): Promi
 
   return data as Response<T['type']>;
 };
-
-
-export default name;
