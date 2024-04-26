@@ -219,7 +219,7 @@ export const chat = {
 
 
 
-import session_actions from "../api/v2/session_actions";
+import { session_actions } from "../api/v2/session_actions";
 
 
 export const session = {
