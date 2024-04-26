@@ -1,4 +1,4 @@
-export interface ForumPostDetails {
+export interface ForumsTopicsDetailsResponse {
   posts: Post[]
   search: Search
   topic: Topic
