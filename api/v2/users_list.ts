@@ -3,10 +3,12 @@ import { IDefaultParams, IError } from "../../types";
 import { UsersLisResponse } from "../../types/v2/users_list";
 
 
+type Response = UsersLisResponse[] & IError;
 
-export const users_list = async (ids: number[], addons?: IDefaultParams): Promise<UsersLisResponse[] | IError> => {
+
+export const users_list = async (ids: number[], addons?: IDefaultParams): Promise<Response> => {
   if ((ids || [])?.length == 0) {
-    return { error: new Error(`Specify at least one user id`) };
+    return { error: new Error(`Specify at least one user id`) } as Response;
   };
 
 

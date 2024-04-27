@@ -9,7 +9,7 @@ export const beatmaps_events_list = async (obj: {
   types: (beatmap_events_types)[];
   min_date: string;
   max_date: string;
-}, addons?: IDefaultParams): Promise<BeatmapsEvents | IError> => {
+}, addons?: IDefaultParams): Promise<BeatmapsEvents & IError> => {
   let url = 'https://osu.ppy.sh/api/v2/beatmapsets/events';
 
 

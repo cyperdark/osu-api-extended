@@ -37,15 +37,15 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'new'
-  ? CommentsActionsNewResponse | IError
+  ? CommentsActionsNewResponse & IError
   : T extends 'edit'
-  ? CommentsActionsEditResponse | IError
+  ? CommentsActionsEditResponse & IError
   : T extends 'delete'
-  ? CommentsActionsDeleteResponse | IError
+  ? CommentsActionsDeleteResponse & IError
   : T extends 'vote'
-  ? CommentsActionsVoteResponse | IError
+  ? CommentsActionsVoteResponse & IError
   : T extends 'unvote'
-  ? CommentsActionsUnvoteResponse | IError
+  ? CommentsActionsUnvoteResponse & IError
   : IError;
 
 

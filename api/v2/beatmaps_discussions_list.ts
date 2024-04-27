@@ -14,7 +14,7 @@ export const beatmaps_discussions_list = async (params: {
   limit?: number;
   sort?: 'id_desc' | 'id_asc';
   cursor_string?: string;
-}, addons?: IDefaultParams): Promise<BeatmapsDiscussionsListResponse | IError> => {
+}, addons?: IDefaultParams): Promise<BeatmapsDiscussionsListResponse & IError> => {
   const data = await request(`https://osu.ppy.sh/api/v2/beatmapsets/discussions`, {
     method: 'GET',
     params,

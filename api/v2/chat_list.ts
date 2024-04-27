@@ -3,11 +3,13 @@ import { ChatListResponse } from "../../types/v2/chat_list";
 import { request } from "../../utility/request";
 
 
+type Response = ChatListResponse[] & IError;
+
 
 export const chat_list = async (params: {
   unreaded?: boolean;
   sort?: 'date_desc' | 'date_asc';
-}, addons?: IDefaultParams): Promise<ChatListResponse | IError> => {
+}, addons?: IDefaultParams): Promise<Response> => {
   let data = await request(`https://osu.ppy.sh/api/v2/chat/presence/`, {
     method: 'GET',
     addons

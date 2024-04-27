@@ -3,10 +3,12 @@ import { BeatmapsPacksDetailsResponse } from "../../types/v2/beatmaps_packs_deta
 import { request } from "../../utility/request";
 
 
+type Response = BeatmapsPacksDetailsResponse & IError;
 
-export const beatmap_packs_details = async (pack_tag: string, addons?: IDefaultParams): Promise<BeatmapsPacksDetailsResponse | IError> => {
+
+export const beatmap_packs_details = async (pack_tag: string, addons?: IDefaultParams): Promise<Response> => {
   if (pack_tag == null) {
-    return { error: new Error('Specify beatmap pack tag') };
+    return { error: new Error('Specify beatmap pack tag') } as Response;
   };
 
 

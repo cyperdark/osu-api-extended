@@ -36,7 +36,7 @@ type Response = {
    * Time in milliseconds
    */
   elapsed_time?: number
-} | IError;
+} & IError;
 
 
 export const beatmaps_download = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response> => {
@@ -45,7 +45,7 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
 
 
   if (fs.existsSync(params.file_path) && params.overwrite != true) {
-    return { status: 'exists' };
+    return { status: 'exists' } as Response;
   };
 
 
@@ -155,5 +155,5 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
   };
 
 
-  return { error: new Error(`Unsupported type: ${(params as any).type}`) };
+  return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response;
 };

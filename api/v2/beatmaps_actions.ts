@@ -1,6 +1,6 @@
 import { request } from "../../utility/request";
 import { IDefaultParams, IError } from "../../types";
-import { postDataObject } from "../../tools";
+// import { postDataObject } from "../../tools";
 
 
 type params = ({
@@ -13,16 +13,14 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'difficulty'
-  ? any
+  ? any & IError
   : T extends 'difficulties'
-  ? any
-  : never;
+  ? any & IError
+  : IError;
 
 // FIX
-const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']> | IError> => {
-  return {
-    error: new Error('TEMPORARY NOT WORKING, have no clue why'),
-  };
+const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
+  return { error: new Error('TEMPORARY NOT WORKING, have no clue why') } as Response<T['type']>;
   // if (params.type == null)
   //   return {
   //     error: 'Type not specified',

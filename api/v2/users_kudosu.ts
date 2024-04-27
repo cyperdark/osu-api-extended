@@ -3,14 +3,16 @@ import { UsersKudosuResponse } from "../../types/v2/users_kudosu";
 import { request } from "../../utility/request";
 
 
+type Response = UsersKudosuResponse & IError;
+
 
 export const users_kudosu = async (params: {
   id: number;
   limit?: number;
   offset?: number;
-}, addons?: IDefaultParams): Promise<UsersKudosuResponse | IError> => {
+}, addons?: IDefaultParams): Promise<Response> => {
   if (params.id == null) {
-    return { error: new Error(`Specify user id`) };
+    return { error: new Error(`Specify user id`) } as Response;
   };
 
 

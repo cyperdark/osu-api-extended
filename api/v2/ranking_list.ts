@@ -41,15 +41,15 @@ type params = {
 
 type Response<T extends params['type']> =
   T extends 'charts'
-  ? RankingListChartsResponse | IError
+  ? RankingListChartsResponse & IError
   : T extends 'country'
-  ? RankingListCountryResponse | IError
+  ? RankingListCountryResponse & IError
   : T extends 'performance'
-  ? RankingListPerformanceResponse | IError
+  ? RankingListPerformanceResponse & IError
   : T extends 'score'
-  ? RankingListScoreResponse | IError
+  ? RankingListScoreResponse & IError
   : T extends 'kudosu'
-  ? RankingListKudosuResponse | IError
+  ? RankingListKudosuResponse & IError
   : IError;
 
 

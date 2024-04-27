@@ -3,10 +3,12 @@ import { RoomsDetailsResponse } from "../../types/v2/rooms_details";
 import { request } from "../../utility/request";
 
 
+type Response = RoomsDetailsResponse & IError;
 
-export const rooms_details = async (id: number | 'latest', addons?: IDefaultParams): Promise<RoomsDetailsResponse | IError> => {
+
+export const rooms_details = async (id: number | 'latest', addons?: IDefaultParams): Promise<Response> => {
   if (id == null) {
-    return { error: new Error(`Specify room id`) };
+    return { error: new Error(`Specify room id`) } as Response;
   };
 
 

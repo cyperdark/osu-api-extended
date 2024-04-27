@@ -3,12 +3,14 @@ import { NewsListResponse } from "../../types/v2/news_list";
 import { request } from "../../utility/request";
 
 
+type Response = NewsListResponse & IError;
+
 
 export const news_list = async (params: {
   from_year?: string;
   limit?: string;
   cursor_string?: string;
-} = {}, addons?: IDefaultParams): Promise<NewsListResponse | IError> => {
+} = {}, addons?: IDefaultParams): Promise<Response> => {
   const object: any = {
     year: params.from_year,
     limit: params.limit,

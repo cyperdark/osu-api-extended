@@ -12,9 +12,9 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'seasonal'
-  ? Promise<SeasonalBackgrounds | IError>
+  ? Promise<SeasonalBackgrounds & IError>
   : T extends 'beatmapset'
-  ? BeatmapsetBackground | IError
+  ? BeatmapsetBackground & IError
   : IError;
 
 

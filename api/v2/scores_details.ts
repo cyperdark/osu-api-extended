@@ -3,13 +3,15 @@ import { ScoresDetailsResponse } from "../../types/v2/scores_details";
 import { request } from "../../utility/request";
 
 
+type Response = ScoresDetailsResponse & IError;
+
 
 export const scores_details = async (params: {
   id: number;
   mode?: Modes_names;
-}, addons?: IDefaultParams): Promise<ScoresDetailsResponse | IError> => {
+}, addons?: IDefaultParams): Promise<Response> => {
   if (params.id == null) {
-    return { error: new Error(`Specify score id`) };
+    return { error: new Error(`Specify score id`) } as Response;
   };
 
 

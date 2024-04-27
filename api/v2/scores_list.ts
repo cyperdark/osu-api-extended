@@ -43,21 +43,21 @@ type params = {
 
 type Response<T extends params['type']> =
   T extends 'leaderboard'
-  ? ScoresListLeaderboardResponse | IError
+  ? ScoresListLeaderboardResponse[] & IError
   : T extends 'solo_scores'
-  ? ScoresListSoloScoresResponse | IError
+  ? ScoresListSoloScoresResponse[] & IError
   : T extends 'beatmap_best'
-  ? ScoresListBeatmapBestResponse | IError
+  ? ScoresListBeatmapBestResponse[] & IError
   : T extends 'beatmap_all'
-  ? ScoresListBeatmapAllResponse | IError
+  ? ScoresListBeatmapAllResponse[] & IError
   : T extends 'user_best'
-  ? ScoresListUserBestResponse | IError
+  ? ScoresListUserBestResponse[] & IError
   : T extends 'user_firsts'
-  ? ScoresListUserFirstsResponse | IError
+  ? ScoresListUserFirstsResponse[] & IError
   : T extends 'user_recent'
-  ? ScoresListUserRecentResponse | IError
+  ? ScoresListUserRecentResponse[] & IError
   : T extends 'user_pinned'
-  ? ScoresListUserPinnedResponse | IError
+  ? ScoresListUserPinnedResponse[] & IError
   : IError;
 
 

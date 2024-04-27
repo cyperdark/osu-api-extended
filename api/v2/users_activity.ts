@@ -3,14 +3,16 @@ import { UsersActivityResponse } from "../../types/v2/users_activity";
 import { request } from "../../utility/request";
 
 
+type Response = UsersActivityResponse & IError;
+
 
 export const users_activity = async (params: {
   id: number;
   limit?: number;
   offset?: number;
-}, addons?: IDefaultParams): Promise<UsersActivityResponse | IError> => {
+}, addons?: IDefaultParams): Promise<Response> => {
   if (params.id == null) {
-    return { error: new Error(`Specify activity id`) };
+    return { error: new Error(`Specify activity id`) } as Response;
   };
 
 

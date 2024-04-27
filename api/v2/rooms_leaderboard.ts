@@ -3,13 +3,15 @@ import { RoomsLeaderboardResponse } from "../../types/v2/rooms_leaderboard";
 import { request } from "../../utility/request";
 
 
+type Response = RoomsLeaderboardResponse & IError;
+
 
 export const rooms_leaderboard = async (params: {
   id: number;
   limit?: number;
-}, addons?: IDefaultParams): Promise<RoomsLeaderboardResponse | IError> => {
+}, addons?: IDefaultParams): Promise<Response> => {
   if (params.id == null) {
-    return { error: new Error(`Specify room id`) };
+    return { error: new Error(`Specify room id`) } as Response;
   };
 
 

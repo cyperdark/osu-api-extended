@@ -21,13 +21,13 @@ type Hits = {
 type Responnse = {
   accuracy: number;
   fc_accuracy: number;
-} | IError;
+} & IError;
 
 
 
 export const calculate_accuracy = (hits: Hits, mode: GamemodeEnum): Responnse => {
   if (Object.keys(hits).length == 0) {
-    return { error: new Error('Provide hits (300, 100, 50, etc)') };
+    return { error: new Error('Provide hits (300, 100, 50, etc)') } as Responnse;
   };
 
 
@@ -69,12 +69,12 @@ export const calculate_accuracy = (hits: Hits, mode: GamemodeEnum): Responnse =>
       break;
 
     default:
-      return { error: new Error(`Unsupported gamemode: ${mode}}`) };
+      return { error: new Error(`Unsupported gamemode: ${mode}}`) } as Responnse;
   };
 
 
   return {
     accuracy,
     fc_accuracy,
-  };
+  } as Responnse;
 };

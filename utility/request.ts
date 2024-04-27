@@ -17,7 +17,7 @@ export interface RequestType {
     headers?: { [key: string]: string },
     params?: { [key: string]: any };
     addons?: IDefaultParams;
-  }): Promise<any | IError>;
+  }): Promise<any & IError>;
 };
 
 
@@ -192,7 +192,7 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
   params?: any;
   addons?: IDefaultParams;
   callback?: Function;
-}): Promise<any | IError> => {
+}): Promise<any & IError> => {
   return new Promise((resolve, reject) => {
     const start_time = performance.now();
     if (url.includes('https://osu.ppy.sh/api/v2')) headers['Authorization'] = `Bearer ${params?.v2 || auth.cache.v2}`;

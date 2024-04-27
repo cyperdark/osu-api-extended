@@ -1,5 +1,6 @@
 import { IError } from "../types";
 import { ModsOrder } from "../types/enums";
+import { ModsResponse } from "../types/tools";
 
 
 
@@ -123,11 +124,13 @@ export const ModsToName = (modsNumber: number, order?: boolean): string => {
 };
 
 
+type Response = ModsResponse & IError;
+
 
 // SWITCH STATEMENT CREATED ON PURPOSE BECAUSE IT'S WAY FASTER
-export const calculate_mods = (ModsName: string | number, order?: boolean): { number: number, name: string } | IError => {
+export const calculate_mods = (ModsName: string | number, order?: boolean): Response => {
   if (ModsName == null) {
-    return { error: new Error(`Specify mods name (HDDT or 72)`) };
+    return { error: new Error(`Specify mods name (HDDT or 72)`) } as Response;
   };
 
 
@@ -136,7 +139,7 @@ export const calculate_mods = (ModsName: string | number, order?: boolean): { nu
     return {
       number: ModsName,
       name: name,
-    };
+    } as any;
   };
 
 
@@ -144,7 +147,7 @@ export const calculate_mods = (ModsName: string | number, order?: boolean): { nu
 
   const ModsArray = ModsName.toLowerCase().match(/.{1,2}/g);
   if (!Array.isArray(ModsArray)) {
-    return { error: new Error(`Can't convert mods (${ModsName}) to array of mods`) };
+    return { error: new Error(`Can't convert mods (${ModsName}) to array of mods`) } as Response;
   };
 
 
@@ -251,5 +254,5 @@ export const calculate_mods = (ModsName: string | number, order?: boolean): { nu
   return {
     number: mods_id,
     name: ModsName,
-  };
+  } as Response;
 };

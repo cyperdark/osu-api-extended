@@ -3,6 +3,8 @@ import { UsersBeatmapsResponse } from "../../types/v2/users_beatmaps";
 import { request } from "../../utility/request";
 
 
+type Response = UsersBeatmapsResponse & IError;
+
 
 export const users_beatmaps = async (params: {
   type: 'favourite' | 'graveyard' | 'guest' | 'loved' | 'most_played' | 'nominated' | 'pending' | 'ranked';
@@ -10,13 +12,13 @@ export const users_beatmaps = async (params: {
 
   limit?: number;
   offset?: number;
-}, addons?: IDefaultParams): Promise<UsersBeatmapsResponse | IError> => {
+}, addons?: IDefaultParams): Promise<Response> => {
   if (params.id == null) {
-    return { error: new Error(`Specify user id`) };
+    return { error: new Error(`Specify user id`) } as Response;
   };
 
   if (params.type == null) {
-    return { error: new Error(`Specify beatmaps type`) };
+    return { error: new Error(`Specify beatmaps type`) } as Response;
   };
 
 
