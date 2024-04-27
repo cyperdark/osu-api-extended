@@ -54,7 +54,7 @@ export const cache = {
 
 
 
-export const login = async (params: auth_params) => {
+export const login = (params: auth_params) => {
   credentials.method = params.method;
 
 
@@ -71,8 +71,7 @@ export const login = async (params: auth_params) => {
     credentials.client_secret = params.client_secret;
     if (params.scopes) credentials.scopes = params.scopes;
 
-    const authorize = await client_login(params.client_id, params.client_secret, params.scopes || ['public']);
-    return authorize;
+    return client_login(params.client_id, params.client_secret, params.scopes || ['public']);
   };
 
 
@@ -80,8 +79,7 @@ export const login = async (params: auth_params) => {
     credentials.login = params.login;
     credentials.password = params.password;
 
-    const authorize = await lazer_login(params.login, params.password);
-    return authorize;
+    return lazer_login(params.login, params.password);
   };
 
 
@@ -93,8 +91,7 @@ export const login = async (params: auth_params) => {
     credentials.redirect_url = params.redirect_url;
     credentials.state = params.state;
 
-    const authorize = await authorize_cli(params.client_id, params.client_secret, params.redirect_url, params.scopes || ['public'], params.state);
-    return authorize;
+    return authorize_cli(params.client_id, params.client_secret, params.redirect_url, params.scopes || ['public'], params.state);
   };
 
 

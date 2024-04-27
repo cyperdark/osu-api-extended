@@ -1,9 +1,7 @@
-import { namespace, RequestNamespace } from "../../../../utility/request";
-import { id as mods_id } from "../../../../utility/mods";
+import { request } from "../../../../utility/request";
 import form_best from "../../form/user/best";
 import form_recent from "../../form/user/recent";
 
-const request: RequestNamespace = namespace('https://osu.ppy.sh/api/');
 
 const _mode = [
   'osu',
@@ -46,12 +44,14 @@ export const description: any = {
   ],
 };
 
+type Reponse = response[];
+
 export interface types {
   (user: string | number, type: 'best' | 'recent', obj?: {
     mode?: 'osu' | 'fruits' | 'mania' | 'taiko',
     type?: 'u' | 'id',
     limit?: number,
-  }): Promise<response[]>;
+  }): Promise<Reponse>;
 };
 
 export interface response {
@@ -88,13 +88,14 @@ const name: types = async (user, type, obj = {}) => {
     type: obj.type,
     limit: obj.limit,
   };
+  if (params.m == -1) delete params.m;
 
-  const data = await request(`get_user_${type}`, {
+  const data = await request(`https://osu.ppy.sh/api/get_user_${type}`, {
     method: 'GET',
     params: params,
   });
 
-  if (data.length == 0) return null;
+  if (data.length == 0) return [];
 
   if (type == 'best') {
     const format = form_best(data, obj.mode);

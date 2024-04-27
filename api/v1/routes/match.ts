@@ -1,8 +1,7 @@
-import { namespace, RequestNamespace } from "../../../utility/request";
-import { id as mods_id } from "../../../utility/mods";
+import { IError } from "../../../types";
+import { request } from "../../../utility/request";
 import form from "../form/match";
 
-const request: RequestNamespace = namespace('https://osu.ppy.sh/api/');
 
 
 export const description: any = {
@@ -20,8 +19,10 @@ export const description: any = {
   ],
 };
 
+type Response = response & IError;
+
 export interface types {
-  (id: number): Promise<response>;
+  (id: number): Promise<Response>;
 };
 
 export interface response {
@@ -89,15 +90,17 @@ export interface response {
 const name: types = async (id) => {
   const params = { mp: id };
 
-  const data = await request(`get_match`, {
+  const data = await request(`https://osu.ppy.sh/api/get_match`, {
     method: 'GET',
     params: params,
   });
 
-  if (data.match == 0 || !data.match) return null;
+  if (data.match == 0 || !data.match) {
+    return { error: new Error('Match not found') } as Response;
+  }
 
-  const format = form(data);
-  return format;
+  const format: response = form(data);
+  return format as Response;
 };
 
 

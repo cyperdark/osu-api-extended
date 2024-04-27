@@ -1,8 +1,7 @@
-import { namespace, RequestNamespace } from "../../../../utility/request";
-import { id as mods_id } from "../../../../utility/mods";
+import { IError } from "../../../../types";
+import { request } from "../../../../utility/request";
 import form from "../../form/user/details";
 
-const request: RequestNamespace = namespace('https://osu.ppy.sh/api/');
 
 const _mode = [
   'osu',
@@ -45,12 +44,14 @@ export const description: any = {
   ],
 };
 
+type Response = response[] & IError;
+
 export interface types {
   (user: string | number, obj?: {
     mode?: 'osu' | 'fruits' | 'mania' | 'taiko',
     type?: 'u' | 'id',
     event_days?: number
-  }): Promise<response>;
+  }): Promise<Response>;
 };
 
 export interface response {
@@ -100,7 +101,7 @@ export interface response {
     };
     date: string;
     epicfactor: number;
-  }[];
+  };
 }
 
 
@@ -112,13 +113,15 @@ const name: types = async (user, obj = {}) => {
     type: obj.type,
     event_days: obj.event_days,
   };
+  if (params.m == -1) delete params.m;
 
-  const data = await request(`get_user`, {
+
+  const data = await request(`https://osu.ppy.sh/api/get_user`, {
     method: 'GET',
     params: params,
   });
 
-  if (data.length == 0) return null;
+  if (data.length == 0) return { error: new Error('User not found') };
 
   const format = form(data);
   return format;

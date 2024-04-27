@@ -1,4 +1,5 @@
-import { country } from "../../../../utility/tools/index";
+import { country_details } from "../../../../tools/index";
+
 
 const parse = (num: string | number, amount: number) => parseFloat(Number(num).toFixed(amount))
 
@@ -28,7 +29,7 @@ const name = (data: any) => {
     country: {
       flag: `https://osu.ppy.sh/images/flags/${data[0].country}.png`,
       short: data[0].country,
-      full: country(data[0].country),
+      full: country_details(data[0].country).name || '',
     },
     play: {
       count: +data[0].playcount,

@@ -1,11 +1,12 @@
-import { name as mods_name } from "../../../utility/mods";
+import { calculate_mods } from "../../../tools/index";
+
 
 const modes = ['std', 'taiko', 'ctb', 'mania'];
 const scoring = ['Score', 'Accuracy', 'Combo', 'Score v2'];
 const team = ['Head to head', 'Tag Co-op', 'Team vs', 'Tag Team vs'];
 const teams = ['no team', 'blue', 'red'];
 
-const name = (data: any) => {  
+const name = (data: any) => {
   const match: any = {
     match: {
       id: +data.match.match_id,
@@ -44,7 +45,7 @@ const name = (data: any) => {
       },
       mods: {
         id: +g.mods,
-        name: mods_name(+g.mods),
+        name: calculate_mods(+g.mods).name || '',
       },
       scores: [],
     };
@@ -76,7 +77,7 @@ const name = (data: any) => {
         },
         mods: {
           id: +ss.enabled_mods,
-          name: mods_name(+ss.enabled_mods),
+          name: calculate_mods(+ss.enabled_mods).name || '',
         },
         rank: g.rank,
         pass: g.pass,
