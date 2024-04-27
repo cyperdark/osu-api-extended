@@ -3,6 +3,8 @@ import { RoomsListResponse } from "../../types/v2/rooms_list";
 import { request } from "../../utility/request";
 
 
+type Response = RoomsListResponse & IError;
+
 
 export const rooms_list = async (params: {
   type?: 'playlists' | 'realtime';
@@ -14,7 +16,7 @@ export const rooms_list = async (params: {
   sort?: 'ended' | 'created';
 
   cursor_string?: string;
-}, addons?: IDefaultParams): Promise<RoomsListResponse | IError> => {
+}, addons?: IDefaultParams): Promise<Response> => {
   if (addons == null)
     addons = { apiVersion: '99999999' }
 

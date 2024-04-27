@@ -15,9 +15,9 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'difficulty'
-  ? BeamapsDetailsDifficulty | IError
+  ? BeamapsDetailsDifficulty & IError
   : T extends 'set'
-  ? BeamapsDetailsSet | IError
+  ? BeamapsDetailsSet & IError
   : IError;
 
 

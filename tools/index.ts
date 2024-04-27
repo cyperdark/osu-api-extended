@@ -1,14 +1,5 @@
-import { calculate_accuracy } from "./accuracy";
-import { calculate_mods } from "./mods";
-
-
-export const calculate = {
-  accuracy: calculate_accuracy,
-  /**
-   *  Hello world
-   */
-  mods: calculate_mods,
-};
+export { calculate_accuracy } from "./accuracy";
+export { calculate_mods } from "./mods";
 
 
 

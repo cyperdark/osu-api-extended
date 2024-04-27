@@ -26,13 +26,13 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'send'
-  ? chatChannelsActionsSendResponse | IError
+  ? chatChannelsActionsSendResponse & IError
   : T extends 'join'
-  ? chatChannelsActionsJoinResponse | IError
+  ? chatChannelsActionsJoinResponse & IError
   : T extends 'leave'
-  ? "" | IError
+  ? "" & IError
   : T extends 'readed'
-  ? "" | IError
+  ? "" & IError
   : IError;
 
 

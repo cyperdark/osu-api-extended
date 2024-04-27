@@ -23,9 +23,9 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'new'
-  ? ChatActionsNewResponse | IError
+  ? ChatActionsNewResponse & IError
   : T extends 'keepalive'
-  ? ChatActionsKeepaliveResponse | IError
+  ? ChatActionsKeepaliveResponse & IError
   : IError;
 
 

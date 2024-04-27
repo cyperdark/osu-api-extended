@@ -1,5 +1,5 @@
 import { beatmap_category, beatmap_sorting, beatmap_statuses, Modes_names, beatmap_genres, beatmap_languages, beatmap_ranks, beatmap_extra, IDefaultParams, IError } from "../../types";
-import { Genres_enum, Languages_enum, Modes_enums } from "../../types/enums";
+import { Genres_enum, Languages_enum, GamemodeEnum } from "../../types/enums";
 import { SearchBeatmaps, SearchWiki } from '../../types/v2/search_all';
 import { request } from "../../utility/request";
 
@@ -32,9 +32,9 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'site'
-  ? SearchWiki | IError
+  ? SearchWiki & IError
   : T extends 'beatmaps'
-  ? SearchBeatmaps | IError
+  ? SearchBeatmaps & IError
   : IError;
 
 
@@ -60,7 +60,7 @@ export const search_all = async <T extends params>(params: T, addons?: IDefaultP
       if (params._nsfw != null) object.nsfw = params._nsfw;
 
       if (params.query != null) object.q = params.query;
-      if (params.mode != null) object.m = typeof params.mode == 'number' ? params.mode : Modes_enums[params.mode];
+      if (params.mode != null) object.m = typeof params.mode == 'number' ? params.mode : GamemodeEnum[params.mode];
       if (params.status != null) object.s = params.status;
       if (params.category != null) object.c = params.category.join('.');
 

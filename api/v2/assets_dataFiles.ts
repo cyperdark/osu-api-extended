@@ -2,7 +2,7 @@ import { IError } from "../../types";
 import { request } from "../../utility/request";
 
 
-type Response = { files: string[] } | IError;
+type Response = { files: string[] } & IError;
 
 
 export const assets_dataFiles = async (): Promise<Response> => {
@@ -22,5 +22,5 @@ export const assets_dataFiles = async (): Promise<Response> => {
     .filter((r: string) => r != null);
 
 
-  return { files: array };
+  return { files: array } as Response;
 };

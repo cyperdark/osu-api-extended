@@ -32,11 +32,11 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'all'
-  ? RoomsScoresAllResponse | IError
+  ? RoomsScoresAllResponse & IError
   : T extends 'single'
-  ? RoomsScoresSingleResponse | IError
+  ? RoomsScoresSingleResponse & IError
   : T extends 'user_highest'
-  ? RoomScoresUserHighestResponse | IError
+  ? RoomScoresUserHighestResponse & IError
   : IError;
 
 

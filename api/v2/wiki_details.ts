@@ -3,17 +3,19 @@ import { WikiDetailsResponse } from "../../types/v2/wiki_details";
 import { request } from "../../utility/request";
 
 
+type Response = WikiDetailsResponse[] & IError;
+
 
 export const wiki_details = async (params: {
   locale: string;
   path_name: string;
-}, addons?: IDefaultParams): Promise<WikiDetailsResponse | IError> => {
+}, addons?: IDefaultParams): Promise<Response> => {
   if (params.locale == null) {
-    return { error: new Error(`Specify locale code. Example: en`) };
+    return { error: new Error(`Specify locale code. Example: en`) } as Response;
   };
 
   if (params.path_name == null) {
-    return { error: new Error(`Specify wiki page path`) };
+    return { error: new Error(`Specify wiki page path`) } as Response;
   };
 
 

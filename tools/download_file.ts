@@ -7,8 +7,8 @@ export interface types {
   (difficulty_id: number, file_path: string, overwrite?: boolean): Promise<{ type: 'created' | 'exists' | 'rate-limit', path?: string }>;
 };
 
-
-const name: types = (difficulty_id, file_path, overwrite) => new Promise(async (resolve, reject) => {
+// FIXME
+export const download_file: types = (difficulty_id, file_path, overwrite) => new Promise(async (resolve, reject) => {
   const { dir } = path.parse(file_path);
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
@@ -36,5 +36,3 @@ const name: types = (difficulty_id, file_path, overwrite) => new Promise(async (
     });
   });
 });
-
-export default name;

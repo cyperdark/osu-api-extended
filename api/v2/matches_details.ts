@@ -3,10 +3,12 @@ import { MatchesDetailsResponse } from "../../types/v2/matches_detaIls";
 import { request } from "../../utility/request";
 
 
+type Response = MatchesDetailsResponse & IError;
 
-export const matches_details = async (match_id: number, addons?: IDefaultParams): Promise<MatchesDetailsResponse | IError> => {
+
+export const matches_details = async (match_id: number, addons?: IDefaultParams): Promise<Response> => {
   if (match_id == null) {
-    return { error: new Error(`Specify match id`) };
+    return { error: new Error(`Specify match id`) } as Response;
   };
 
 

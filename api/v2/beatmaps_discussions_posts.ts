@@ -12,7 +12,7 @@ export const beatmaps_discussions_posts = async (params: {
 
   limit?: number;
   cursor_string?: string;
-}, addons?: IDefaultParams): Promise<BeatmapsDiscussionsListResponse | IError> => {
+}, addons?: IDefaultParams): Promise<BeatmapsDiscussionsListResponse & IError> => {
   if (params.discussion_id) {
     // @ts-ignore
     params.beatmapset_discussion_id = params.discussion_id;

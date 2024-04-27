@@ -13,11 +13,11 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'verify'
-  ? any | IError
+  ? any & IError
   : T extends 'reissue'
-  ? any | IError
+  ? any & IError
   : T extends 'delete'
-  ? any | IError
+  ? any & IError
   : IError;
 
 

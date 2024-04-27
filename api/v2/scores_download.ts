@@ -3,14 +3,16 @@ import { ScoresDownloadResponse } from "../../types/v2/scores_download";
 import { download } from "../../utility/request";
 
 
+type Response = ScoresDownloadResponse & IError;
+
 
 export const scores_download = async (params: {
   id: number;
   mode?: Modes_names;
   file_path?: string;
-}): Promise<ScoresDownloadResponse | IError> => {
+}): Promise<Response> => {
   if (params.id == null) {
-    return { error: new Error(`Specify score id`) };
+    return { error: new Error(`Specify score id`) } as Response;
   };
 
 

@@ -47,13 +47,13 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'create'
-  ? ForumsTopicsActionsCreateResponse | IError
+  ? ForumsTopicsActionsCreateResponse & IError
   : T extends 'reply'
-  ? ForumsTopicsActionsReplyResponse | IError
+  ? ForumsTopicsActionsReplyResponse & IError
   : T extends 'edit_post'
-  ? ForumsTopicsActionsEditPostResponse | IError
+  ? ForumsTopicsActionsEditPostResponse & IError
   : T extends 'edit_topic'
-  ? ForumsTopicsActionsEditTopicResponse | IError
+  ? ForumsTopicsActionsEditTopicResponse & IError
   : IError;
 
 

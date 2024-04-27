@@ -3,6 +3,9 @@ import { IDefaultParams, IError } from "../../types";
 import { ForumsTopicsDetailsResponse } from "../../types/v2/forums_topics_details";
 
 
+type Response = ForumsTopicsDetailsResponse & IError;
+
+
 export const forums_topics_details = async (params: {
   id: number
 
@@ -13,9 +16,9 @@ export const forums_topics_details = async (params: {
   sort?: 'id_asc' | 'id_desc',
 
   cursor_string?: string,
-}, addons?: IDefaultParams): Promise<ForumsTopicsDetailsResponse | IError> => {
+}, addons?: IDefaultParams): Promise<Response> => {
   if (params.id == null) {
-    return { error: new Error(`Specify topic id`) };
+    return { error: new Error(`Specify topic id`) } as Response
   };
 
 

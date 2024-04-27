@@ -3,12 +3,14 @@ import { ChatUpdatesResponse } from "../../types/v2/chat_updates";
 import { request } from "../../utility/request";
 
 
+type Response = ChatUpdatesResponse & IError;
+
 
 export const chat_updates = async (params: {
   after_id: number;
   includes: ('presence' | 'silences' | 'messages')[];
   history_since: number;
-}, addons?: IDefaultParams): Promise<ChatUpdatesResponse | IError> => {
+}, addons?: IDefaultParams): Promise<Response> => {
   const data = await request(`https://osu.ppy.sh/api/v2/chat/updates`, {
     method: 'GET',
     params: {

@@ -1,7 +1,7 @@
 import { BeatmapsLookupAttributes } from "../../types/v2/beatmaps_lookup_attributes";
 import { BeatmapsLookupDifficulty } from "../../types/v2/beatmaps_lookup_difficulty";
 import { BeatmapsLookupSet } from "../../types/v2/beatmaps_lookup_set";
-import { Modes_enums } from "../../types/enums";
+import { GamemodeEnum } from "../../types/enums";
 import { request } from "../../utility/request";
 import { IDefaultParams, IError, Modes_names } from "../../types";
 import { BeatmapsLookupDifficultiesResponse } from "../../types/v2/beatmaps_lookup_difficulties";
@@ -28,13 +28,13 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'difficulty'
-  ? BeatmapsLookupDifficulty | IError
+  ? BeatmapsLookupDifficulty & IError
   : T extends 'set'
-  ? BeatmapsLookupSet | IError
+  ? BeatmapsLookupSet & IError
   : T extends 'attributes'
-  ? BeatmapsLookupAttributes | IError
+  ? BeatmapsLookupAttributes & IError
   : T extends 'difficulties'
-  ? BeatmapsLookupDifficultiesResponse[] | IError
+  ? BeatmapsLookupDifficultiesResponse[] & IError
   : IError;
 
 
@@ -80,7 +80,7 @@ export const beatmaps_lookup = async <T extends params>(params: T, addons?: IDef
       object.mods = params.mods;
 
       if (typeof params.mode == 'string') object.ruleset = params.mode;
-      else if (typeof params.mode == 'number') object.ruleset_id = Modes_enums[params.mode];
+      else if (typeof params.mode == 'number') object.ruleset_id = GamemodeEnum[params.mode];
 
       break;
 

@@ -24,9 +24,9 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'all'
-  ? ChangelogsListAllResponse | IError
+  ? ChangelogsListAllResponse & IError
   : T extends 'lookup'
-  ? ChangelogsListLookupResponse | IError
+  ? ChangelogsListLookupResponse & IError
   : IError;
 
 

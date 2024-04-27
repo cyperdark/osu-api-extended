@@ -3,6 +3,8 @@ import { CommentsListResponse } from "../../types/v2/comments_list";
 import { request } from "../../utility/request";
 
 
+type Response = CommentsListResponse & IError;
+
 
 export const comments_list = async (params: {
   type?: 'news_post' | 'beatmapset' | 'Build';
@@ -16,7 +18,7 @@ export const comments_list = async (params: {
     created_at: string;
   };
   sort?: 'new' | 'old' | 'top';
-}, addons?: IDefaultParams): Promise<CommentsListResponse | IError> => {
+}, addons?: IDefaultParams): Promise<Response> => {
   const data = await request(`https://osu.ppy.sh/api/v2/comments`, {
     method: 'GET',
     params: {
