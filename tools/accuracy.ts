@@ -1,5 +1,6 @@
 import { IError } from "../types";
 import { GamemodeEnum } from "../types/enums";
+import { AccuracyResponse } from "../types/tools";
 
 
 type Hits = {
@@ -18,16 +19,13 @@ type Hits = {
   miss?: any;
 };
 
-type Responnse = {
-  accuracy: number;
-  fc_accuracy: number;
-} & IError;
+type Response = AccuracyResponse & IError;
 
 
 
-export const calculate_accuracy = (hits: Hits, mode: GamemodeEnum): Responnse => {
+export const calculate_accuracy = (hits: Hits, mode: GamemodeEnum | string | number): Response => {
   if (Object.keys(hits).length == 0) {
-    return { error: new Error('Provide hits (300, 100, 50, etc)') } as Responnse;
+    return { error: new Error('Provide hits (300, 100, 50, etc)') } as Response;
   };
 
 
@@ -43,24 +41,28 @@ export const calculate_accuracy = (hits: Hits, mode: GamemodeEnum): Responnse =>
 
 
   switch (mode) {
+    case 'osu':
     case GamemodeEnum.osu:
       accuracy = (100.0 * (6 * h300 + 2 * h100 + h50)) / (6 * (h50 + h100 + h300 + h0));
 
       fc_accuracy = (100.0 * (6 * (h300 + h0) + 2 * h100 + h50)) / (6 * (h50 + h100 + (h300 + h0) + 0));
       break;
 
+    case 'taiko':
     case GamemodeEnum.taiko:
       accuracy = (100.0 * (2 * h300 + h100)) / (2 * (h300 + h100 + h0));
 
       fc_accuracy = (100.0 * (2 * (h300 + h0) + h100)) / (2 * ((h300 + h0) + h100 + 0));
       break;
 
+    case 'fruits':
     case GamemodeEnum.fruits:
       accuracy = (100.0 * (h300 + h100 + h50)) / (h300 + h100 + h50 + katu + h0);
 
       fc_accuracy = (100.0 * ((h300 + h0) + h100 + h50)) / ((h300 + h0) + h100 + h50 + katu + 0);
       break;
 
+    case 'mania':
     case GamemodeEnum.mania:
       accuracy = (100.0 * (6 * geki + 6 * h300 + 4 * katu + 2 * h100 + h50)) / (6 * (h50 + h100 + h300 + h0 + geki + katu));
 
@@ -69,12 +71,12 @@ export const calculate_accuracy = (hits: Hits, mode: GamemodeEnum): Responnse =>
       break;
 
     default:
-      return { error: new Error(`Unsupported gamemode: ${mode}}`) } as Responnse;
+      return { error: new Error(`Unsupported gamemode: ${mode}}`) } as Response;
   };
 
 
   return {
     accuracy,
     fc_accuracy,
-  } as Responnse;
+  } as Response;
 };
