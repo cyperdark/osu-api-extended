@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { download } from "../../utility/request";
+import { cache } from "../../utility/auth";
 import path from "path";
 import fs from "fs";
 
@@ -45,7 +46,7 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
 
 
   if (fs.existsSync(params.file_path) && params.overwrite != true) {
-    return { status: 'exists' } as Response;
+    return { status: 'File already exists' } as Response;
   };
 
 
@@ -107,10 +108,17 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
         break;
 
       case 'osu':
-      default:
+        if ((addons.authKey || cache.v2) == null) {
+          return { error: new Error('osu is not authorized') } as Response;
+        };
+
+
         url = `https://osu.ppy.sh/api/v2/beatmapsets/${params.id}/download${params.no_video ? '?noVideo=1' : ''}`;
         headers['Referer'] = 'https://osu.ppy.sh/';
         break;
+
+      default:
+        return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response;
     };
 
 
