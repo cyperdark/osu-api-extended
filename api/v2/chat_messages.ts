@@ -3,7 +3,7 @@ import { ChatMessagesResponse } from "../../types/v2/chat_messages";
 import { request } from "../../utility/request";
 
 
-type Response = ChatMessagesResponse & IError;
+type Response = ChatMessagesResponse[] & IError;
 
 
 export const chat_messages = async (params: {

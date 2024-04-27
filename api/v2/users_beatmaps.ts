@@ -3,7 +3,7 @@ import { UsersBeatmapsResponse } from "../../types/v2/users_beatmaps";
 import { request } from "../../utility/request";
 
 
-type Response = UsersBeatmapsResponse & IError;
+type Response = UsersBeatmapsResponse[] & IError;
 
 
 export const users_beatmaps = async (params: {

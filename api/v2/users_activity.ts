@@ -3,7 +3,7 @@ import { UsersActivityResponse } from "../../types/v2/users_activity";
 import { request } from "../../utility/request";
 
 
-type Response = UsersActivityResponse & IError;
+type Response = UsersActivityResponse[] & IError;
 
 
 export const users_activity = async (params: {

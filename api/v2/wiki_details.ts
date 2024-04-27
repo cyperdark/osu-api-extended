@@ -3,7 +3,7 @@ import { WikiDetailsResponse } from "../../types/v2/wiki_details";
 import { request } from "../../utility/request";
 
 
-type Response = WikiDetailsResponse[] & IError;
+type Response = WikiDetailsResponse & IError;
 
 
 export const wiki_details = async (params: {

@@ -3,7 +3,7 @@ import { SpotlightsListResponse } from "../../types/v2/spotlights_list";
 import { request } from "../../utility/request";
 
 
-type Response = SpotlightsListResponse & IError;
+type Response = SpotlightsListResponse[] & IError;
 
 
 export const spotlights_list = async (addons?: IDefaultParams): Promise<Response> => {

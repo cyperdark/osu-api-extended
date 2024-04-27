@@ -3,7 +3,7 @@ import { UsersEventsResponse } from '../../types/v2/users_events';
 import { IDefaultParams, IError } from "../../types";
 
 
-type Response = UsersEventsResponse & IError;
+type Response = UsersEventsResponse[] & IError;
 
 
 export const users_events = async ({ sort, cursor_string, type }: {
