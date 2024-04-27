@@ -118,7 +118,6 @@ export const calculate_rank = (hits: Hits, mods: string | number = 0, mode: Game
       break;
   };
 
-  console.log(mode, rank, is_silver, accuracy);
 
   return {
     rank,

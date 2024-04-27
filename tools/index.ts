@@ -3,10 +3,13 @@ export { calculate_accuracy } from "./accuracy";
 export { calculate_mods } from "./mods";
 export { country_details } from "./country";
 export { calculate_rank } from "./rank";
+export { calculate_total_objects } from "./objects";
 
 
 
-
+export const calculate_pp = () => {
+  return new Error('Use rosu-pp-js instead');
+};
 
 
 
