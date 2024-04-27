@@ -1,142 +1,317 @@
-const num_codes: { [key: string]: string } = {
-  1: 'NF',
-  2: 'EZ',
-  4: 'TD',
-  8: 'HD',
-  16: 'HR',
-  32: 'SD',
-  64: 'DT',
-  128: 'RX',
-  256: 'HT',
-  576: 'NC',
-  1024: 'FL',
-  2048: 'AT',
-  4096: 'SO',
-  8192: 'AP',
-  16416: 'PF',
-  32768: '4K',
-  65536: '5K',
-  131072: '6K',
-  262144: '7K',
-  524288: '8K',
-  1048576: 'FI',
-  2097152: 'RD',
-  4194304: 'LM',
-  8388608: 'Target',
-  16777216: '9K',
-  33554432: 'KeyCoop',
-  67108864: '1K',
-  134217728: '3K',
-  268435456: '2K',
-  536870912: 'ScoreV2',
-  1073741824: 'MR',
-};
-
-export const enums = {
-  None: 0,
-  NoFail: 1,
-  Easy: 1 << 1,
-  TouchDevice: 1 << 2,
-  Hidden: 1 << 3,
-  HardRock: 1 << 4,
-  SuddenDeath: 1 << 5,
-  DoubleTime: 1 << 6,
-  Relax: 1 << 7,
-  HalfTime: 1 << 8,
-  Nightcore: 1 << 9, // DoubleTime mod
-  Flashlight: 1 << 10,
-  Autoplay: 1 << 11,
-  SpunOut: 1 << 12,
-  Relax2: 1 << 13, // Autopilot
-  Perfect: 1 << 14, // SuddenDeath mod
-  Key4: 1 << 15,
-  Key5: 1 << 16,
-  Key6: 1 << 17,
-  Key7: 1 << 18,
-  Key8: 1 << 19,
-  FadeIn: 1 << 20,
-  Random: 1 << 21,
-  Cinema: 1 << 22,
-  Target: 1 << 23,
-  Key9: 1 << 24,
-  KeyCoop: 1 << 25,
-  Key1: 1 << 26,
-  Key3: 1 << 27,
-  Key2: 1 << 28,
-  KeyMod: 521109504,
-  FreeModAllowed: 522171579,
-  ScoreIncreaseMods: 1049662
-};
-
-const mods_order: { [key: string]: number } = {
-  nf: 0,
-  ez: 1,
-  hd: 2,
-  dt: 3,
-  nc: 3,
-  ht: 3,
-  hr: 4,
-  so: 5,
-  sd: 5,
-  pf: 5,
-  fl: 6,
-  td: 7,
-};
+import { IError } from "../types";
+import { ModsCodes, ModsOrder } from "../types/enums";
 
 
-/**
- * 
- * @param mods Mods number
- * @returns {string} Mods name
- */
-const name = (mods: number): string => {
-  let enabled = [];
-  let _mods = mods;
-  let converted = '';
 
-  const values = Object.keys(num_codes).map(a => Number(a));
 
-  for (let i = values.length - 1; i >= 0; i--) {
+export const ModsToName = (modsNumber: number): string => {
+  const convertedParts = [];
+  const values = Object.keys(ModsCodes);
+  let mods_id = modsNumber;
+
+
+  for (let i = values.length - 1; i >= 0 && mods_id > 0; i--) {
     const v = values[i];
-    if (_mods >= v) {
-      const mode = num_codes[v];
-      enabled.push({ i: mods_order[mode.toLowerCase()], n: mode });
-      _mods -= v;
+    if (mods_id >= +v) {
+      const mode = ModsCodes[v];
+      convertedParts.push(mode);
+      mods_id -= +v;
     };
   };
 
-  enabled = enabled.sort((a, b) => (a.i > b.i ? 1 : b.i > a.i ? -1 : 0));
-  enabled.filter(r => converted += r.n);
+
+  convertedParts.sort((a, b) => ModsOrder[a.toLowerCase()] - ModsOrder[b.toLowerCase()]);
 
 
-  // if (converted === '') return 'NM';
+  const converted = convertedParts.join('');
   return converted;
 };
 
-/**
- * 
- * @param mods Mods name
- * @returns {string | undefined} Mods number
- */
-const id = (mods: string | number): number | undefined => {
-  if (!mods) return undefined;
-  if (typeof mods == 'number') return mods;
 
-  let _mods = 0;
-  const name = mods.match(/.{1,2}/g);
-  if (name == null) return undefined;
-
-  const values: string[] = Object.keys(num_codes).map((a) => a);
-  for (let i = 0; i < name.length; i++) {
-    const find = values.find((v) => num_codes[v].toLowerCase() === name[i].toLowerCase());
-    if (!find) continue;
-
-    _mods += parseInt(find);
+export const calculate_mods = (ModsName: string | number): { number: number, name: string } | IError => {
+  if (ModsName == null) {
+    return { error: new Error(`Specify mods name (HDDT or 72)`) };
   };
 
-  return _mods;
+
+  if (typeof ModsName == 'number') {
+    const name = ModsToName(ModsName);
+    return {
+      number: ModsName,
+      name: name,
+    };
+  };
+
+
+  let mods_id = 0;
+  const ModsArray = ModsName.match(/.{1,2}/g);
+  if (!Array.isArray(ModsArray)) {
+    return { error: new Error(`Can't convert mods (${ModsName}) to array of mods`) };
+  };
+
+
+  const codes = Object.keys(ModsCodes);
+  for (let i = 0; i < ModsArray.length; i++) {
+    const mod_name = ModsArray[i];
+
+    const find = codes.find(v => ModsCodes[v].toLowerCase() === mod_name?.toLowerCase());
+    if (find == null) continue;
+
+    mods_id += parseInt(find);
+  };
+
+
+  return {
+    number: mods_id,
+    name: ModsName,
+  };
 };
 
 
-export { id, name, num_codes };
-export default { id, name, enums, num_codes };
+
+export const calculate_mods_switch = (ModsName: string | number): { number: number, name: string } | IError => {
+  if (ModsName == null) {
+    return { error: new Error(`Specify mods name (HDDT or 72)`) };
+  };
+
+
+  if (typeof ModsName == 'number') {
+    const name = ModsToName(ModsName);
+    return {
+      number: ModsName,
+      name: name,
+    };
+  };
+
+
+  let mods_id = 0;
+
+  const ModsArray = ModsName.toLowerCase().match(/.{1,2}/g);
+  if (!Array.isArray(ModsArray)) {
+    return { error: new Error(`Can't convert mods (${ModsName}) to array of mods`) };
+  };
+
+
+  for (let i = 0; i < ModsArray.length; i++) {
+    const mod_name = ModsArray[i];
+    switch (mod_name) {
+      case 'nf':
+        mods_id += 1;
+        break;
+      case 'ez':
+        mods_id += 2;
+        break;
+      case 'td':
+        mods_id += 4;
+        break;
+      case 'hd':
+        mods_id += 8;
+        break;
+      case 'hr':
+        mods_id += 16;
+        break;
+      case 'sd':
+        mods_id += 32;
+        break;
+      case 'dt':
+        mods_id += 64;
+        break;
+      case 'rx':
+        mods_id += 128;
+        break;
+      case 'ht':
+        mods_id += 256;
+        break;
+      case 'nc':
+        mods_id += 576;
+        break;
+      case 'fl':
+        mods_id += 1024;
+        break;
+      case 'at':
+        mods_id += 2048;
+        break;
+      case 'so':
+        mods_id += 4096;
+        break;
+      case 'ap':
+        mods_id += 8192;
+        break;
+      case 'pf':
+        mods_id += 16416;
+        break;
+      case '4k':
+        mods_id += 32768;
+        break;
+      case '5k':
+        mods_id += 65536;
+        break;
+      case '6k':
+        mods_id += 131072;
+        break;
+      case '7k':
+        mods_id += 262144;
+        break;
+      case '8k':
+        mods_id += 524288;
+        break;
+      case 'fi':
+        mods_id += 1048576;
+        break;
+      case 'rd':
+        mods_id += 2097152;
+        break;
+      case 'lm':
+        mods_id += 4194304;
+        break;
+      case 'target':
+        mods_id += 8388608;
+        break;
+      case '9k':
+        mods_id += 16777216;
+        break;
+      case 'keycoop':
+        mods_id += 33554432;
+        break;
+      case '1k':
+        mods_id += 67108864;
+        break;
+      case '3k':
+        mods_id += 134217728;
+        break;
+      case '2k':
+        mods_id += 268435456;
+        break;
+      case 'scorev2':
+        mods_id += 536870912;
+        break;
+      case 'mr':
+        mods_id += 1073741824;
+        break;
+    };
+  };
+
+
+  return {
+    number: mods_id,
+    name: ModsName,
+  };
+};
+
+
+export const calculate_mods_if = (ModsName: string | number): { number: number, name: string } | IError => {
+  if (ModsName == null) {
+    return { error: new Error(`Specify mods name (HDDT or 72)`) };
+  }
+
+  if (typeof ModsName === 'number') {
+    return {
+      number: ModsName,
+      name: ModsToName(ModsName),
+    };
+  }
+
+
+  let mods_id = 0;
+  let mods_name = ModsName.toLowerCase();
+
+  if (mods_name.includes('nf')) {
+    mods_id += 1;
+  }
+  if (mods_name.includes('ez')) {
+    mods_id += 2;
+  }
+  if (mods_name.includes('td')) {
+    mods_id += 4;
+  }
+  if (mods_name.includes('hd')) {
+    mods_id += 8;
+  }
+  if (mods_name.includes('hr')) {
+    mods_id += 16;
+  }
+  if (mods_name.includes('sd')) {
+    mods_id += 32;
+  }
+  if (mods_name.includes('dt')) {
+    mods_id += 64;
+  }
+  if (mods_name.includes('rx')) {
+    mods_id += 128;
+  }
+  if (mods_name.includes('ht')) {
+    mods_id += 256;
+  }
+  if (mods_name.includes('nc')) {
+    mods_id += 576;
+  }
+  if (mods_name.includes('fl')) {
+    mods_id += 1024;
+  }
+  if (mods_name.includes('at')) {
+    mods_id += 2048;
+  }
+  if (mods_name.includes('so')) {
+    mods_id += 4096;
+  }
+  if (mods_name.includes('ap')) {
+    mods_id += 8192;
+  }
+  if (mods_name.includes('pf')) {
+    mods_id += 16416;
+  }
+  if (mods_name.includes('4k')) {
+    mods_id += 32768;
+  }
+  if (mods_name.includes('5k')) {
+    mods_id += 65536;
+  }
+  if (mods_name.includes('6k')) {
+    mods_id += 131072;
+  }
+  if (mods_name.includes('7k')) {
+    mods_id += 262144;
+  }
+  if (mods_name.includes('8k')) {
+    mods_id += 524288;
+  }
+  if (mods_name.includes('fi')) {
+    mods_id += 1048576;
+  }
+  if (mods_name.includes('rd')) {
+    mods_id += 2097152;
+  }
+  if (mods_name.includes('lm')) {
+    mods_id += 4194304;
+  }
+  if (mods_name.includes('target')) {
+    mods_id += 8388608;
+  }
+  if (mods_name.includes('9k')) {
+    mods_id += 16777216;
+  }
+  if (mods_name.includes('keycoop')) {
+    mods_id += 33554432;
+  }
+  if (mods_name.includes('1k')) {
+    mods_id += 67108864;
+  }
+  if (mods_name.includes('3k')) {
+    mods_id += 134217728;
+  }
+  if (mods_name.includes('2k')) {
+    mods_id += 268435456;
+  }
+  if (mods_name.includes('scorev2')) {
+    mods_id += 536870912;
+  }
+  if (mods_name.includes('mr')) {
+    mods_id += 1073741824;
+  }
+
+
+  return {
+    number: mods_id,
+    name: ModsName,
+  };
+};
