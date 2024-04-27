@@ -1,8 +1,7 @@
-import { namespace, RequestNamespace } from "../../../../utility/request";
-import { id as mods_id } from "../../../../utility/mods";
-import form from "../../form/beatmap/category";
+import { request } from "../../../../utility/request";
+import { calculate_mods } from "../../../../tools/index";
 
-const request: RequestNamespace = namespace('https://osu.ppy.sh/api/');
+import form from "../../form/beatmap/category";
 
 const _mode = [
   'osu',
@@ -188,16 +187,17 @@ const name: types = async (id, obj = {}) => {
     a: obj.converted,
     h: obj.hash,
     since: obj.since,
-    mods: mods_id(obj.mods),
+    mods: calculate_mods(obj.mods).number,
     limit: obj.limit,
   };
+  if (params.m == -1) delete params.m;
 
-  const data = await request(`get_beatmaps`, {
+  const data = await request(`https://osu.ppy.sh/api/get_beatmaps`, {
     method: 'GET',
     params: params,
   });
 
-  if (data.length == 0) return null;  
+  if (data.length == 0) return [];
 
   const format = form(data);
   return format;

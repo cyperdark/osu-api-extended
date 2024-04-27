@@ -1,12 +1,10 @@
-import { name as mods_name } from "../../../../utility/mods";
-import { accuracy } from "../../../../utility/tools/index";
+import { calculate_accuracy, calculate_mods } from "../../../../tools/index";
 
 const name = (data: any, mode: any) => {
   const info = [];
 
   for (let i = 0; i < data.length; i++) {
     const d = data[i];
-    console.log(d);
 
     const score: any = {
       date: d.date,
@@ -33,14 +31,14 @@ const name = (data: any, mode: any) => {
       },
       mods: {
         id: +d.enabled_mods,
-        name: mods_name(+d.enabled_mods),
+        name: calculate_mods(+d.enabled_mods).name || '',
       },
       accuracy: 0,
       pp: parseFloat(d.pp),
       replay: +d.replay_available,
     };
 
-    score.accuracy = accuracy(score.hits, mode);
+    score.accuracy = calculate_accuracy(score.hits, mode).accuracy || 0;
 
 
     info.push(score);
