@@ -1,3 +1,4 @@
+import { handleErrors } from "../../../../utility/handleErrors";
 import { request } from "../../../../utility/request";
 import form_best from "../../form/user/best";
 import form_recent from "../../form/user/recent";
@@ -94,6 +95,9 @@ const name: types = async (user, type, obj = {}) => {
     method: 'GET',
     params: params,
   });
+
+  if (data.error) return handleErrors(data.error);
+
 
   if (data.length == 0) return [];
 

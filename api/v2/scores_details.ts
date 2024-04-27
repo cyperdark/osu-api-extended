@@ -1,5 +1,6 @@
 import { IDefaultParams, IError, Modes_names } from "../../types";
 import { ScoresDetailsResponse } from "../../types/v2/scores_details";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -11,7 +12,7 @@ export const scores_details = async (params: {
   mode?: Modes_names;
 }, addons?: IDefaultParams): Promise<Response> => {
   if (params.id == null) {
-    return { error: new Error(`Specify score id`) } as Response;
+    return handleErrors(`Specify score id`) as Response;
   };
 
 
@@ -21,6 +22,8 @@ export const scores_details = async (params: {
     method: 'GET',
     addons,
   });
+
+  if (data.error) return handleErrors(data.error);
 
 
   return data;

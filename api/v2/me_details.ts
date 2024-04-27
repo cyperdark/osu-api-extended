@@ -2,6 +2,7 @@ import { credentials } from "../../utility/auth";
 import { IDefaultParams, IError, Modes_names } from "../../types";
 import { MeDetailsResponse } from "../../types/v2/me_details";
 import { request } from "../../utility/request";
+import { handleErrors } from "../../utility/handleErrors";
 
 
 type Response = MeDetailsResponse & IError;
@@ -9,7 +10,7 @@ type Response = MeDetailsResponse & IError;
 
 export const me_details = async (addons?: IDefaultParams & { mode: Modes_names }): Promise<Response> => {
   if (credentials.method != 'lazer') {
-    return { error: new Error(`Login via lazer to use this endpoint`) } as Response
+    return handleErrors(`Login via lazer to use this endpoint`) as Response
   };
 
 
@@ -20,6 +21,8 @@ export const me_details = async (addons?: IDefaultParams & { mode: Modes_names }
     method: 'GET',
     addons,
   });
+
+  if (data.error) return handleErrors(data.error);
 
 
   return data;

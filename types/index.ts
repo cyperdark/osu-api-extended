@@ -45,7 +45,8 @@ export type auth_scopes = (
 
 
 export type auth_params = {
-  timeout?: number,
+  timeout?: number;
+  tokenPath?: string;
 } & ({
   method: 'v2';
 
@@ -76,8 +77,13 @@ export type auth_params = {
 
 
 export type auth_response = {
+  token_type: string;
   access_token: string;
   expires_in: number;
+};
+
+export interface lazer_auth_response extends auth_response {
+  refresh_token: string;
 };
 
 export type IBeatmapPackType = 'standard' | 'featured' | 'tournament' | 'loved' | 'chart' | 'theme' | 'artist';

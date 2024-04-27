@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { SpotlightsListResponse } from "../../types/v2/spotlights_list";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -11,6 +12,8 @@ export const spotlights_list = async (addons?: IDefaultParams): Promise<Response
     method: 'GET',
     addons,
   });
+
+  if (data.error) return handleErrors(data.error);
 
 
   return data.spotlights;

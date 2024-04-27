@@ -1,6 +1,7 @@
 import { beatmap_category, beatmap_sorting, beatmap_statuses, Modes_names, beatmap_genres, beatmap_languages, beatmap_ranks, beatmap_extra, IDefaultParams, IError } from "../../types";
 import { Genres_enum, Languages_enum, GamemodeEnum } from "../../types/enums";
 import { SearchBeatmaps, SearchWiki } from '../../types/v2/search_all';
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -82,6 +83,8 @@ export const search_all = async <T extends params>(params: T, addons?: IDefaultP
     params: object,
     addons
   });
+
+  if (data.error) return handleErrors(data.error) as Response<T['type']>;
 
 
   return data as Response<T['type']>;

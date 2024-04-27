@@ -1,6 +1,7 @@
 import { IError } from "../types";
-import { GamemodeEnum, ModsBitwise, ModsEnum } from "../types/enums";
+import { GamemodeEnum } from "../types/enums";
 import { RankResponse } from "../types/tools";
+import { handleErrors } from "../utility/handleErrors";
 import { calculate_accuracy } from "./accuracy";
 import { calculate_mods } from "./mods";
 
@@ -27,7 +28,7 @@ type Response = RankResponse & IError;
 
 export const calculate_rank = (hits: Hits, mods: string | number = 0, mode: GamemodeEnum | string | number): Response => {
   if (Object.keys(hits).length == 0) {
-    return { error: new Error('Provide hits (300, 100, 50, etc)') } as Response;
+    return handleErrors('Provide hits (300, 100, 50, etc)') as Response;
   };
 
 

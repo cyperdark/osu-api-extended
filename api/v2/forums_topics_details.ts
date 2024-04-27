@@ -1,6 +1,7 @@
 import { request } from "../../utility/request";
 import { IDefaultParams, IError } from "../../types";
 import { ForumsTopicsDetailsResponse } from "../../types/v2/forums_topics_details";
+import { handleErrors } from "../../utility/handleErrors";
 
 
 type Response = ForumsTopicsDetailsResponse & IError;
@@ -18,7 +19,7 @@ export const forums_topics_details = async (params: {
   cursor_string?: string,
 }, addons?: IDefaultParams): Promise<Response> => {
   if (params.id == null) {
-    return { error: new Error(`Specify topic id`) } as Response
+    return handleErrors(`Specify topic id`) as Response
   };
 
 
@@ -35,6 +36,8 @@ export const forums_topics_details = async (params: {
     },
     addons,
   });
+
+  if (data.error) return handleErrors(data.error);
 
 
   return data;

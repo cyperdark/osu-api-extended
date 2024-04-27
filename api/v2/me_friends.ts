@@ -2,6 +2,7 @@ import { credentials } from "../../utility/auth";
 import { IDefaultParams, IError } from "../../types";
 import { request } from "../../utility/request";
 import { MeFriendsResponse } from "../../types/v2/me_friends";
+import { handleErrors } from "../../utility/handleErrors";
 
 
 type Response = MeFriendsResponse[] & IError;
@@ -9,7 +10,7 @@ type Response = MeFriendsResponse[] & IError;
 
 export const me_friends = async (addons?: IDefaultParams): Promise<Response> => {
   if (credentials.method != 'lazer') {
-    return { error: new Error(`Login via lazer to use this endpoint`) } as Response
+    return handleErrors(`Login via lazer to use this endpoint`) as Response
   };
 
 
@@ -18,6 +19,7 @@ export const me_friends = async (addons?: IDefaultParams): Promise<Response> => 
     addons,
   });
 
+  if (data.error) return handleErrors(data.error);
 
   return data;
 };

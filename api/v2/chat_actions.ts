@@ -2,6 +2,7 @@ import { request } from "../../utility/request";
 import { IDefaultParams, IError } from "../../types";
 import { ChatActionsNewResponse } from "../../types/v2/chat_actions_new";
 import { ChatActionsKeepaliveResponse } from "../../types/v2/chat_actions_keepalive";
+import { handleErrors } from "../../utility/handleErrors";
 
 
 type params = ({
@@ -41,7 +42,7 @@ export const chat_actions = async <T extends params>(params: T, addons?: IDefaul
       method = 'POST';
 
       if (params.is_action == null || params.user_id == null || params.message == null) {
-        return { error: new Error('Missing required parameters') } as Response<T['type']>;
+        return handleErrors('Missing required parameters') as Response<T['type']>;
       };
 
 
@@ -60,7 +61,7 @@ export const chat_actions = async <T extends params>(params: T, addons?: IDefaul
       break;
 
     default:
-      return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
+      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
   };
 
 
@@ -69,6 +70,8 @@ export const chat_actions = async <T extends params>(params: T, addons?: IDefaul
     params: object,
     addons,
   });
+
+  if (data.error) return handleErrors(data.error) as Response<T['type']>;
 
 
   if (params.type == 'keepalive') return data.silences as Response<T['type']>;

@@ -1,5 +1,6 @@
 import { IError, Modes_names } from "../../types";
 import { ScoresDownloadResponse } from "../../types/v2/scores_download";
+import { handleErrors } from "../../utility/handleErrors";
 import { download } from "../../utility/request";
 
 
@@ -12,7 +13,7 @@ export const scores_download = async (params: {
   file_path?: string;
 }): Promise<Response> => {
   if (params.id == null) {
-    return { error: new Error(`Specify score id`) } as Response;
+    return handleErrors(`Specify score id`) as Response;
   };
 
 
@@ -21,6 +22,8 @@ export const scores_download = async (params: {
   const data = await download(`${url}/download`, params.file_path, {
     _callback: false,
   });
+
+  if (data.error) return handleErrors(data.error);
 
 
   return data;

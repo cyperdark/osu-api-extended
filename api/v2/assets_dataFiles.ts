@@ -1,5 +1,6 @@
 import { IError } from "../../types";
 import { AssetsDatafilesResponse } from "../../types/v2/assets_datafiles";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -11,7 +12,7 @@ export const assets_dataFiles = async (): Promise<Response> => {
     method: 'GET',
   });
 
-  if (data.error) return data.error;
+  if (data.error) return handleErrors(data.error) as Response;
 
 
   const array = data.split('\n')

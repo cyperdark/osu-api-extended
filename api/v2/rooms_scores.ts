@@ -3,6 +3,7 @@ import { IDefaultParams, IError } from "../../types";
 import { RoomsScoresSingleResponse } from "../../types/v2/rooms_scores_single";
 import { RoomScoresUserHighestResponse } from "../../types/v2/rooms_scores_user_highest";
 import { RoomsScoresAllResponse } from "../../types/v2/rooms_scores_all";
+import { handleErrors } from "../../utility/handleErrors";
 
 
 type params = ({
@@ -47,11 +48,11 @@ export const rooms_scores = async <T extends params>(params: T, addons?: IDefaul
 
 
   if (params.id == null) {
-    return { error: new Error(`Specify room id`) } as Response<T['type']>;
+    return handleErrors(`Specify room id`) as Response<T['type']>;
   };
 
   if (params.playlist_id == null) {
-    return { error: new Error(`Specify playlist id`) } as Response<T['type']>;
+    return handleErrors(`Specify playlist id`) as Response<T['type']>;
   };
 
 
@@ -75,7 +76,7 @@ export const rooms_scores = async <T extends params>(params: T, addons?: IDefaul
       break;
 
     default:
-      return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
+      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
   };
 
 
@@ -84,6 +85,8 @@ export const rooms_scores = async <T extends params>(params: T, addons?: IDefaul
     params: object,
     addons,
   });
+
+  if (data.error) return handleErrors(data.error) as Response<T['type']>;
 
 
   return data as Response<T['type']>;

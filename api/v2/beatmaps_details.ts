@@ -1,6 +1,7 @@
 import { IDefaultParams, IError } from "../../types";
 import { BeamapsDetailsDifficulty } from "../../types/v2/beamaps_details_difficulty";
 import { BeamapsDetailsSet } from "../../types/v2/beamaps_details_set";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -23,7 +24,7 @@ type Response<T extends params['type']> =
 
 export const beatmaps_details = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
   if (params.id == null) {
-    return { error: new Error(`Specify ${params.type} id`) } as Response<T['type']>;
+    return handleErrors(`Specify ${params.type} id`) as Response<T['type']>;
   };
 
 
@@ -42,7 +43,7 @@ export const beatmaps_details = async <T extends params>(params: T, addons?: IDe
       break;
 
     default:
-      return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
+      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
   };
 
 
@@ -51,6 +52,8 @@ export const beatmaps_details = async <T extends params>(params: T, addons?: IDe
     params: object,
     addons
   });
+  
+  if (data.error) return handleErrors(data.error) as Response<T['type']>;
 
 
   return data as Response<T['type']>;

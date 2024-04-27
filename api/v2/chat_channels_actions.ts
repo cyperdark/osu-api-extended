@@ -2,6 +2,7 @@ import { request } from "../../utility/request";
 import { IDefaultParams, IError } from "../../types";
 import { chatChannelsActionsSendResponse } from "../../types/v2/chat_channels_actions_send";
 import { chatChannelsActionsJoinResponse } from "../../types/v2/chat_channels_actions_join";
+import { handleErrors } from "../../utility/handleErrors";
 
 
 type params = ({
@@ -45,7 +46,7 @@ export const chat_channels_actions = async <T extends params>(params: T, addons?
   switch (params.type) {
     case 'send':
       if (params.id == null || params.message == null || params.is_action == null) {
-        return { error: new Error(`Missing required parameters`) } as Response<T['type']>;
+        return handleErrors(`Missing required parameters`) as Response<T['type']>;
       };
 
 
@@ -57,7 +58,7 @@ export const chat_channels_actions = async <T extends params>(params: T, addons?
 
     case 'join':
       if (params.id == null || params.user_id == null) {
-        return { error: new Error(`Missing required parameters`) } as Response<T['type']>;
+        return handleErrors(`Missing required parameters`) as Response<T['type']>;
       };
 
 
@@ -67,7 +68,7 @@ export const chat_channels_actions = async <T extends params>(params: T, addons?
 
     case 'leave':
       if (params.id == null || params.user_id == null) {
-        return { error: new Error(`Missing required parameters`) } as Response<T['type']>;
+        return handleErrors(`Missing required parameters`) as Response<T['type']>;
       };
 
 
@@ -77,7 +78,7 @@ export const chat_channels_actions = async <T extends params>(params: T, addons?
 
     case 'readed':
       if (params.channel_id == null || params.message_id == null) {
-        return { error: new Error(`Missing required parameters`) } as Response<T['type']>;
+        return handleErrors(`Missing required parameters`) as Response<T['type']>;
       };
 
 
@@ -86,7 +87,7 @@ export const chat_channels_actions = async <T extends params>(params: T, addons?
       break;
 
     default:
-      return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
+      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
   };
 
 
@@ -95,6 +96,8 @@ export const chat_channels_actions = async <T extends params>(params: T, addons?
     params: object,
     addons,
   });
+
+  if (data.error) return handleErrors(data.error) as Response<T['type']>;
 
 
   return data as Response<T['type']>;

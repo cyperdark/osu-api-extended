@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { CommentsListResponse } from "../../types/v2/comments_list";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -33,6 +34,7 @@ export const comments_list = async (params: {
     addons,
   });
 
+  if (data.error) return handleErrors(data.error);
 
   return data;
 };

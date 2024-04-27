@@ -1,5 +1,6 @@
 import { request } from "../../utility/request";
 import { IDefaultParams, IError } from "../../types";
+import { handleErrors } from "../../utility/handleErrors";
 
 
 type params = ({
@@ -50,6 +51,8 @@ export const session_actions = async <T extends params>(params: T, addons?: IDef
     method: method,
     addons,
   });
+
+  if (data.error) return handleErrors(data.error) as Response<T['type']>;
 
 
   return data as Response<T['type']>;

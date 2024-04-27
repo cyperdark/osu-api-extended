@@ -1,5 +1,6 @@
-import { request } from "../../utility/request";
+// import { request } from "../../utility/request";
 import { IDefaultParams, IError } from "../../types";
+import { handleErrors } from "../../utility/handleErrors";
 // import { postDataObject } from "../../tools";
 
 
@@ -20,7 +21,7 @@ type Response<T extends params['type']> =
 
 // FIX
 const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
-  return { error: new Error('TEMPORARY NOT WORKING, have no clue why') } as Response<T['type']>;
+  return handleErrors('TEMPORARY NOT WORKING, have no clue why') as Response<T['type']>;
   // if (params.type == null)
   //   return {
   //     error: 'Type not specified',

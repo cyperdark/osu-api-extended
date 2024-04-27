@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { RoomsDetailsResponse } from "../../types/v2/rooms_details";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -8,7 +9,7 @@ type Response = RoomsDetailsResponse & IError;
 
 export const rooms_details = async (id: number | 'latest', addons?: IDefaultParams): Promise<Response> => {
   if (id == null) {
-    return { error: new Error(`Specify room id`) } as Response;
+    return handleErrors(`Specify room id`) as Response;
   };
 
 
@@ -16,6 +17,8 @@ export const rooms_details = async (id: number | 'latest', addons?: IDefaultPara
     method: 'GET',
     addons,
   });
+
+  if (data.error) return handleErrors(data.error);
 
 
   return data;

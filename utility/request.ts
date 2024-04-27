@@ -17,7 +17,7 @@ export interface RequestType {
     headers?: { [key: string]: string },
     params?: { [key: string]: any };
     addons?: IDefaultParams;
-  }): Promise<any & IError>;
+  }): Promise<any & { error: string }>;
 };
 
 
@@ -44,11 +44,11 @@ const sanitize_query = (obj: object): string => {
 export const request: RequestType = (url, { method, headers, data, params = {}, addons = {} }) => new Promise((resolve, reject) => {
   // check required args
   if (url == null) {
-    return resolve({ error: new Error('URL not specified'), });
+    return resolve({ error: 'URL not specified', });
   };
 
   if (method == null) {
-    return resolve({ error: new Error('Method not specified'), });
+    return resolve({ error: 'Method not specified', });
   };
 
 
@@ -57,7 +57,7 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
     params.k = addons.authKey || auth.cache.v1;
 
     if (params.k == null) {
-      return resolve({ error: new Error('v1 api key not specified'), });
+      return resolve({ error: 'v1 api key not specified', });
     };
   };
 
@@ -72,7 +72,7 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
     headers['x-api-version'] = addons.apiVersion == '' ? null : addons.apiVersion || '20240130';
 
     if ((addons.authKey || auth.cache.v2) == null) {
-      return resolve({ error: new Error('v2 not authorized') });
+      return resolve({ error: 'v2 not authorized' });
     };
   };
 
@@ -135,23 +135,23 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
 
           if ('error' in parse) {
             if (parse.error === null) {
-              return resolve({ error: new Error(`osu returned empty error, double check your parameters (request)`) });
+              return resolve({ error: `osu returned empty error, double check your parameters (request)` });
             };
 
 
-            return resolve({ error: new Error(parse.error) });
+            return resolve({ error: parse.error });
           };
 
 
           if (parse.authentication === 'basic') {
-            return resolve({ error: new Error('Unauthorized (double check credentials)') });
+            return resolve({ error: 'Unauthorized (double check credentials)' });
           };
 
 
           total_retries = 0;
           return resolve(parse);
         } catch (error) {
-          return resolve({ error: error });
+          return resolve({ error: (error as any).name });
         };
       };
 
@@ -163,13 +163,13 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
 
   // send error
   req.on('error', (error) => {
-    resolve({ error: error });
+    resolve({ error: error.name });
   });
 
   // timeout
   req.setTimeout(addons.timeout_ms || auth.settings.timeout, () => {
     req.destroy();
-    resolve({ error: new Error(`Request to ${build_url} time out after ${addons.timeout_ms || auth.settings.timeout}ms`) });
+    resolve({ error: `Request to ${build_url} time out after ${addons.timeout_ms || auth.settings.timeout}ms` });
   });
 
 
@@ -217,7 +217,7 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
 
 
       if (response.statusCode === 404) {
-        return resolve({ error: new Error('file unavailable') });
+        return resolve({ error: 'file unavailable' });
       };
 
 
@@ -233,13 +233,13 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
 
 
             if ('error' in json && json.error == null) {
-              return resolve({ error: new Error('osu returned empty error (download)') });
+              return resolve({ error: 'osu returned empty error (download)' });
             };
 
 
             return resolve(json);
           } catch (error) {
-            return resolve({ error: new Error(`Unable to download file: ${data} (${url})`) });
+            return resolve({ error: `Unable to download file: ${data} (${url})` });
           };
         });
 
@@ -252,7 +252,7 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
 
       file.on('error', error => {
         fs.unlinkSync(dest);
-        resolve({ error: error });
+        resolve({ error: error.name });
       });
 
       file.on('finish', () => {
@@ -282,14 +282,14 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
 
     // send error
     req.on('error', (error) => {
-      resolve({ error: error });
+      resolve({ error: error.name });
     });
 
 
     // timeout
     req.setTimeout(addons.timeout_ms || auth.settings.timeout, () => {
       req.destroy();
-      resolve({ error: new Error(`Request to ${build_url} time out after ${addons.timeout_ms || auth.settings.timeout}ms`) });
+      resolve({ error: `Request to ${build_url} time out after ${addons.timeout_ms || auth.settings.timeout}ms` });
     });
 
     if (data) {

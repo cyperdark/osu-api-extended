@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { NotificationsListResponse } from "../../types/v2/notifications_list";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -17,6 +18,8 @@ export const notifications_list = async (params: {
     },
     addons,
   });
+
+  if (data.error) return handleErrors(data.error);
 
 
   if (params.unreaded_only == true && !('error' in data))

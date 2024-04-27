@@ -3,12 +3,14 @@ import { request } from "./request";
 import readln from "readline";
 
 
-import { auth_params, auth_response, auth_scopes, Modes_names } from '../types/index';
+import { auth_params, auth_response, auth_scopes, lazer_auth_response, Modes_names } from '../types/index';
 import { UserAuth } from '../types/v2/users_details';
+import { handleErrors } from './handleErrors';
 
 
 export const settings = {
   timeout: 60000,
+  throwErrors: true,
 };
 
 
@@ -26,6 +28,8 @@ export const credentials: {
   redirect_url: string;
   state: string;
 
+  tokenPath: string;
+
   scopes: auth_scopes;
 } = {
   method: '' as any,
@@ -40,6 +44,8 @@ export const credentials: {
 
   redirect_url: '',
   state: '',
+
+  tokenPath: '',
 
   scopes: ['public'],
 };
@@ -56,6 +62,9 @@ export const cache = {
 
 export const login = (params: auth_params) => {
   credentials.method = params.method;
+
+  if (params.tokenPath) credentials.tokenPath = params.tokenPath;
+  if (params.timeout) settings.timeout = params.timeout;
 
 
   if (params.method == 'v1') {
@@ -109,7 +118,7 @@ export const refresh_token = async () => {
 
 
 const client_login = async (client_id: number | string, client_secret: string, scopes: auth_scopes): Promise<auth_response> => {
-  const { access_token, expires_in } = await request('https://osu.ppy.sh/oauth/token', {
+  const response = await request('https://osu.ppy.sh/oauth/token', {
     method: 'POST',
     headers: {
       "Accept": "application/json",
@@ -124,14 +133,16 @@ const client_login = async (client_id: number | string, client_secret: string, s
     })
   });
 
+  if (response.error) return handleErrors(response.error);
 
-  cache.v2 = access_token;
-  return { access_token, expires_in };
+
+  cache.v2 = response.access_token;
+  return response;
 };
 
 
-const lazer_login = async (login: string, password: string) => {
-  const { access_token, expires_in } = await request('https://osu.ppy.sh/oauth/token', {
+const lazer_login = async (login: string, password: string): Promise<lazer_auth_response> => {
+  const response = await request('https://osu.ppy.sh/oauth/token', {
     method: 'POST',
     headers: {
       "Accept": "application/json",
@@ -147,9 +158,11 @@ const lazer_login = async (login: string, password: string) => {
     })
   });
 
+  if (response.error) return handleErrors(response.error);
 
-  cache.v2 = access_token;
-  return { access_token, expires_in };
+
+  cache.v2 = response.access_token;
+  return response;
 };
 
 
@@ -164,7 +177,7 @@ const authorize_cli = async (client_id: number | string, client_secret: string, 
 
 
   const code = await question('Paste code here');
-  const { access_token, expires_in } = await request('https://osu.ppy.sh/oauth/token', {
+  const response = await request('https://osu.ppy.sh/oauth/token', {
     method: 'POST',
     headers: {
       "Accept": "application/json",
@@ -179,9 +192,11 @@ const authorize_cli = async (client_id: number | string, client_secret: string, 
     })
   });
 
+  if (response.error) return handleErrors(response.error);
 
-  cache.v2 = access_token;
-  return { access_token, expires_in };
+
+  cache.v2 = response.access_token;
+  return response;
 };
 
 
@@ -215,7 +230,7 @@ export const authorize = async ({ code, mode, client_id, client_secret, redirect
 
   redirect_url: string;
 }): Promise<UserAuth> => {
-  const { access_token, refresh_token, expires_in } = await request('https://osu.ppy.sh/oauth/token', {
+  const response = await request('https://osu.ppy.sh/oauth/token', {
     method: 'POST',
     headers: {
       "Accept": "application/json",
@@ -230,14 +245,20 @@ export const authorize = async ({ code, mode, client_id, client_secret, redirect
     })
   });
 
+  if (response.error) return handleErrors(response.error);
+
 
   const user = await request(`https://osu.ppy.sh/api/v2/me/${mode}`, {
     method: 'GET',
-    addons: { authKey: access_token, ignoreSessionRefresh: true }
+    addons: { authKey: response.access_token, ignoreSessionRefresh: true }
   });
-  user.access_token = access_token;
-  user.refresh_token = refresh_token;
-  user.expires_in = expires_in;
+
+  if (user.error) return handleErrors(user.error);
+
+
+  user.access_token = response.access_token;
+  user.refresh_token = response.refresh_token;
+  user.expires_in = response.expires_in;
 
   return user;
 };
@@ -252,7 +273,7 @@ export const refresh_session = async ({ refresh_token, mode, client_id, client_s
 
   redirect_url: string;
 }): Promise<UserAuth> => {
-  const { access_token, refresh_token: refresh_token_new, expires_in } = await request('https://osu.ppy.sh/oauth/token', {
+  const response = await request('https://osu.ppy.sh/oauth/token', {
     method: 'POST',
     headers: {
       "Accept": "application/json",
@@ -267,14 +288,20 @@ export const refresh_session = async ({ refresh_token, mode, client_id, client_s
     })
   });
 
+  if (response.error) return handleErrors(response.error);
+
 
   const user = await request(`https://osu.ppy.sh/api/v2/me/${mode}`, {
     method: 'GET',
-    addons: { authKey: access_token, ignoreSessionRefresh: true }
+    addons: { authKey: response.access_token, ignoreSessionRefresh: true }
   });
-  user.access_token = access_token;
-  user.refresh_token = refresh_token_new;
-  user.expires_in = expires_in;
+  
+  if (user.error) return handleErrors(user.error);
+
+
+  user.access_token = response.access_token;
+  user.refresh_token = response.refresh_token_new;
+  user.expires_in = response.expires_in;
 
   return user;
 };

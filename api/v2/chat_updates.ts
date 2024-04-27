@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { ChatUpdatesResponse } from "../../types/v2/chat_updates";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -21,6 +22,7 @@ export const chat_updates = async (params: {
     addons,
   });
 
+  if (data.error) return handleErrors(data.error);
 
   return data;
 };

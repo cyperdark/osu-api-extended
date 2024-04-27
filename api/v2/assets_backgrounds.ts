@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { BeatmapsetBackground, SeasonalBackgrounds } from "../../types/v2/assets_backgrounds";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -29,7 +30,7 @@ export const assets_backgrounds = <T extends params>(params: T, addons?: IDefaul
 
   if (params.type == 'beatmapset') {
     if (params.set_id == null) {
-      return { error: new Error('Specify beatmapset id') } as any;
+      return handleErrors('Specify beatmapset id') as Response<T['type']>;
     };
 
 
@@ -48,5 +49,5 @@ export const assets_backgrounds = <T extends params>(params: T, addons?: IDefaul
   };
 
 
-  return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
+  return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
 };
