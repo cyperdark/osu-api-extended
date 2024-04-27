@@ -3,7 +3,7 @@ import { UsersKudosuResponse } from "../../types/v2/users_kudosu";
 import { request } from "../../utility/request";
 
 
-type Response = UsersKudosuResponse & IError;
+type Response = UsersKudosuResponse[] & IError;
 
 
 export const users_kudosu = async (params: {

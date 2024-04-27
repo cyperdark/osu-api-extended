@@ -49,7 +49,7 @@ type Response<T extends params['type']> =
   : T extends 'score'
   ? RankingListScoreResponse & IError
   : T extends 'kudosu'
-  ? RankingListKudosuResponse & IError
+  ? RankingListKudosuResponse[] & IError
   : IError;
 
 

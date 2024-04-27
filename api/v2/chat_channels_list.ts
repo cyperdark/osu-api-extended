@@ -4,7 +4,7 @@ import { request } from "../../utility/request";
 
 
 
-export const chat_channels_list = async (): Promise<chatChannelsListResponse & IError> => {
+export const chat_channels_list = async (): Promise<chatChannelsListResponse[] & IError> => {
   const data = await request(`https://osu.ppy.sh/api/v2/chat/channels`, {
     method: 'GET',
   });

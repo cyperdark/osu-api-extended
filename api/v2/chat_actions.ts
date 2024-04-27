@@ -25,7 +25,7 @@ type Response<T extends params['type']> =
   T extends 'new'
   ? ChatActionsNewResponse & IError
   : T extends 'keepalive'
-  ? ChatActionsKeepaliveResponse & IError
+  ? ChatActionsKeepaliveResponse[] & IError
   : IError;
 
 
@@ -71,5 +71,6 @@ export const chat_actions = async <T extends params>(params: T, addons?: IDefaul
   });
 
 
+  if (params.type == 'keepalive') return data.silences as Response<T['type']>;
   return data as Response<T['type']>;
 };

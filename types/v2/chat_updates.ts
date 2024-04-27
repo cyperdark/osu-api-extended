@@ -1,7 +1,13 @@
 export interface ChatUpdatesResponse {
   presence: Presence[]
-  silences: any[]
+  silences: Silence[]
 }
+
+export interface Silence {
+  id: number
+  user_id: number
+}
+
 
 export interface Presence {
   channel_id: number

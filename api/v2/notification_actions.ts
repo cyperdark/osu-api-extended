@@ -24,7 +24,7 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'mark_as_readed'
-  ? ""
+  ? "" & IError
   : IError;
 
 

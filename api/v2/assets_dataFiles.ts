@@ -1,8 +1,9 @@
 import { IError } from "../../types";
+import { AssetsDatafilesResponse } from "../../types/v2/assets_datafiles";
 import { request } from "../../utility/request";
 
 
-type Response = { files: string[] } & IError;
+type Response = AssetsDatafilesResponse & IError;
 
 
 export const assets_dataFiles = async (): Promise<Response> => {

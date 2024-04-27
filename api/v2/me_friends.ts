@@ -4,7 +4,7 @@ import { request } from "../../utility/request";
 import { MeFriendsResponse } from "../../types/v2/me_friends";
 
 
-type Response = MeFriendsResponse & IError;
+type Response = MeFriendsResponse[] & IError;
 
 
 export const me_friends = async (addons?: IDefaultParams): Promise<Response> => {
