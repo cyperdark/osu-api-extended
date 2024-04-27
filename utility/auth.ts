@@ -1,6 +1,8 @@
 import { execSync } from 'child_process';
 import { request } from "./request";
 import readln from "readline";
+import path from "path";
+import fs from "fs";
 
 
 import { auth_params, auth_response, auth_scopes, lazer_auth_response, Modes_names } from '../types/index';
@@ -116,8 +118,36 @@ export const refresh_token = async () => {
 };
 
 
+const token_exists = () => {
+  if (!fs.existsSync(credentials.tokenPath)) return false;
+
+  try {
+    const authData: auth_response = JSON.parse(fs.readFileSync(credentials.tokenPath, 'utf8'));
+    set_v2(authData.access_token);
+
+    return true;
+  } catch (error) {
+    return false;
+  };
+};
+
+
+const save_token = (response: auth_response) => {
+  const { dir } = path.parse(credentials.tokenPath);
+  if (fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+
+  fs.writeFileSync(credentials.tokenPath, JSON.stringify(response), 'utf8');
+};
+
+
 
 const client_login = async (client_id: number | string, client_secret: string, scopes: auth_scopes): Promise<auth_response> => {
+  if (cache.v2 == '' && credentials.tokenPath != '') {
+    const is = token_exists();
+    if (is) return;
+  };
+
+
   const response = await request('https://osu.ppy.sh/oauth/token', {
     method: 'POST',
     headers: {
@@ -137,11 +167,20 @@ const client_login = async (client_id: number | string, client_secret: string, s
 
 
   cache.v2 = response.access_token;
+  save_token(response);
+
+
   return response;
 };
 
 
 const lazer_login = async (login: string, password: string): Promise<lazer_auth_response> => {
+  if (cache.v2 == '' && credentials.tokenPath != '') {
+    const is = token_exists();
+    if (is) return;
+  };
+
+
   const response = await request('https://osu.ppy.sh/oauth/token', {
     method: 'POST',
     headers: {
@@ -162,6 +201,9 @@ const lazer_login = async (login: string, password: string): Promise<lazer_auth_
 
 
   cache.v2 = response.access_token;
+  save_token(response);
+
+
   return response;
 };
 
@@ -295,7 +337,7 @@ export const refresh_session = async ({ refresh_token, mode, client_id, client_s
     method: 'GET',
     addons: { authKey: response.access_token, ignoreSessionRefresh: true }
   });
-  
+
   if (user.error) return handleErrors(user.error);
 
 
