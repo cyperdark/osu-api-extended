@@ -16,3 +16,8 @@ export interface AccuracyResponse {
 export interface RankResponse {
   rank: string;
 };
+
+export type TotalObjectsResponse = {
+  amount: number;
+  mode: string;
+};
