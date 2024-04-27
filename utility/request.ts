@@ -72,7 +72,7 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
     headers['x-api-version'] = addons.apiVersion == '' ? null : addons.apiVersion || '20240130';
 
     if ((addons.authKey || auth.cache.v2) == null) {
-      return resolve({ error: new Error('v2 not authorized'), });
+      return resolve({ error: new Error('v2 not authorized') });
     };
   };
 
@@ -221,14 +221,14 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
       };
 
 
-      if (response.headers['content-type'] == 'application/json') {
+      if (response.headers['content-type'] == 'application/json' || (response.headers['content-type'] == null && +(response.headers['content-length'] || 0) < 150)) {
         const chunks: any[] = [];
 
 
         response.on('data', (chunk: any) => chunks.push(chunk));
         response.on('end', async () => {
+          const data = Buffer.concat(chunks).toString();
           try {
-            const data = Buffer.concat(chunks).toString();
             const json = JSON.parse(data);
 
 
@@ -239,18 +239,12 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
 
             return resolve(json);
           } catch (error) {
-            return resolve({ error: error });
+            return resolve({ error: new Error(`Unable to download file: ${data} (${url})`) });
           };
         });
 
 
         return;
-      };
-
-
-      if (response.headers['content-type'] == null && +(response.headers['content-length'] || 0) < 100) {
-
-        return resolve({ error: new Error(`Unnable to download from: ${url}`) });
       };
 
 
