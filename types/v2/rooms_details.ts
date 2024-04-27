@@ -1,3 +1,5 @@
+import { Mod } from "../mods"
+
 export interface RoomsDetailsResponse {
   id: number
   name: string
@@ -57,18 +59,13 @@ export interface Playlist {
   room_id: number
   beatmap_id: number
   ruleset_id: number
-  allowed_mods: any[]
-  required_mods: RequiredMod[]
+  allowed_mods: Mod[]
+  required_mods: Mod[]
   expired: boolean
   owner_id: number
   playlist_order?: number
   played_at?: string
   beatmap: Beatmap
-}
-
-export interface RequiredMod {
-  acronym: string
-  settings: Settings
 }
 
 export interface Settings { }

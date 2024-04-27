@@ -1,3 +1,5 @@
+import { Mod } from "../mods"
+
 export interface ScoresListLeaderboardResponse {
   ranked: boolean
   preserve: boolean
@@ -38,14 +40,6 @@ export interface MaximumStatistics {
   slider_tail_hit?: number
 }
 
-export interface Mod {
-  acronym: string
-  settings?: Settings
-}
-
-export interface Settings {
-  speed_change: number
-}
 
 export interface Statistics {
   ok?: number

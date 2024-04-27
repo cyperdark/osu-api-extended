@@ -1,3 +1,5 @@
+import { Mod } from "../mods"
+
 export interface RoomsListResponse {
   rooms: Room[]
   cursor: Cursor
@@ -31,8 +33,8 @@ export interface CurrentPlaylistItem {
   room_id: number
   beatmap_id: number
   ruleset_id: number
-  allowed_mods: any[]
-  required_mods: any[]
+  allowed_mods: Mod[]
+  required_mods: Mod[]
   expired: boolean
   owner_id: number
   playlist_order: number

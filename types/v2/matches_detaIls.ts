@@ -1,3 +1,5 @@
+import { Mod } from "../mods"
+
 export interface MatchesDetailsResponse {
   match: Match
   events: Event[]
@@ -36,7 +38,7 @@ export interface Game {
   mode_int: number
   scoring_type: string
   team_type: string
-  mods: string[]
+  mods: Mod[]
   beatmap?: Beatmap
   scores: Score[]
 }
@@ -94,7 +96,7 @@ export interface Score {
   max_combo: number
   mode: string
   mode_int: number
-  mods: string[]
+  mods: Mod[]
   passed: boolean
   perfect: number
   pp: any

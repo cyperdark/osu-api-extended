@@ -1,3 +1,5 @@
+import { Mod } from "../mods"
+
 export interface RoomScoresUserHighestResponse {
   playlist_item_id: number
   room_id: number
@@ -5,7 +7,7 @@ export interface RoomScoresUserHighestResponse {
   ranked: boolean
   preserve: boolean
   maximum_statistics: MaximumStatistics
-  mods: any[]
+  mods: Mod[]
   statistics: Statistics
   beatmap_id: number
   best_id: any
@@ -109,7 +111,7 @@ export interface Score {
   ranked: boolean
   preserve: boolean
   maximum_statistics: MaximumStatistics2
-  mods: any[]
+  mods: Mod[]
   statistics: Statistics2
   beatmap_id: number
   best_id: any

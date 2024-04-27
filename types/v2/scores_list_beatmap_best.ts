@@ -1,3 +1,5 @@
+import { Mod } from "../mods"
+
 export interface ScoresListBeatmapBestResponse {
   position: number
   score: Score
@@ -39,10 +41,6 @@ export interface Score {
 export interface MaximumStatistics {
   great: number
   legacy_combo_increase: number
-}
-
-export interface Mod {
-  acronym: string
 }
 
 export interface Statistics {

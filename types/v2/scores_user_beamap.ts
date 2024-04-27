@@ -1,3 +1,5 @@
+import { Mod } from "../mods";
+
 export interface ScoresUserBeatmap {
   ranked: boolean;
   maximum_statistics: MaximumStatistics;
@@ -33,20 +35,6 @@ export interface MaximumStatistics {
   large_bonus?: number;
   small_bonus?: number;
   large_tick_hit?: number;
-}
-
-export interface Mod {
-  acronym: string;
-  settings?: Settings;
-}
-
-export interface Settings {
-  seed?: number;
-  angle_sharpness?: number;
-  drain_rate?: number;
-  circle_size?: number;
-  approach_rate?: number;
-  overall_difficulty?: number;
 }
 
 export interface Statistics {

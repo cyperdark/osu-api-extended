@@ -1,3 +1,5 @@
+import { Mod } from "../mods"
+
 export interface RoomsScoresAllResponse {
   params: Params
   scores: Score[]
@@ -20,7 +22,7 @@ export interface Score {
   preserve: boolean
   processed: boolean
   maximum_statistics: MaximumStatistics
-  mods: any[]
+  mods: Mod[]
   statistics: Statistics
   beatmap_id: number
   best_id: any

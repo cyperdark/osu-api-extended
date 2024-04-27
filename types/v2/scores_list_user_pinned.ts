@@ -1,3 +1,5 @@
+import { Mod } from "../mods"
+
 export interface ScoresListUserPinnedResponse {
   ranked: boolean
   preserve: boolean
@@ -38,9 +40,6 @@ export interface MaximumStatistics {
   legacy_combo_increase: number
 }
 
-export interface Mod {
-  acronym: string
-}
 
 export interface Statistics {
   ok: number
