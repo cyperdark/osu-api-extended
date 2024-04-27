@@ -1,119 +1,10 @@
 import { IError } from "../types";
-import { ModsCodes, ModsOrder } from "../types/enums";
+import { ModsOrder } from "../types/enums";
 
 
 
-
+// WHILE LOOP FASTER dot
 export const ModsToName = (modsNumber: number, order?: boolean): string => {
-  if (modsNumber == 0) return '';
-
-
-  const convertedParts = [];
-  const values = Object.keys(ModsCodes);
-  let mods_id = modsNumber;
-
-
-  for (let i = values.length - 1; i >= 0 && mods_id > 0; i--) {
-    const v = values[i];
-    if (mods_id >= +v) {
-      const mode = ModsCodes[v];
-      convertedParts.push(mode);
-      mods_id -= +v;
-    };
-  };
-
-
-  if (order) {
-    convertedParts.sort((a, b) => ModsOrder[a.toLowerCase()] - ModsOrder[b.toLowerCase()]);
-  };
-
-
-  const converted = convertedParts.join('');
-  return converted;
-};
-
-
-export const ModsToName1 = (modsNumber: number, order?: boolean): string => {
-  if (modsNumber == 0) return '';
-
-
-  const convertedParts = [];
-
-  // NF
-  if (modsNumber & 1) convertedParts.push('NF');
-  // EZ
-  if (modsNumber & 2) convertedParts.push('EZ');
-  // TD
-  if (modsNumber & 4) convertedParts.push('TD');
-  // HD
-  if (modsNumber & 8) convertedParts.push('HD');
-  // HR
-  if (modsNumber & 16) convertedParts.push('HR');
-  // SD
-  if (modsNumber & 32) convertedParts.push('SD');
-  // DT
-  if (modsNumber & 64) convertedParts.push('DT');
-  // RX
-  if (modsNumber & 128) convertedParts.push('RX');
-  // HT
-  if (modsNumber & 256) convertedParts.push('HT');
-  // NC
-  if (modsNumber & 576) convertedParts.push('NC');
-  // FL
-  if (modsNumber & 1024) convertedParts.push('FL');
-  // AT
-  if (modsNumber & 2048) convertedParts.push('AT');
-  // SO
-  if (modsNumber & 4096) convertedParts.push('SO');
-  // AP
-  if (modsNumber & 8192) convertedParts.push('AP');
-  // PF
-  if (modsNumber & 16416) convertedParts.push('PF');
-  // 4K
-  if (modsNumber & 32768) convertedParts.push('4K');
-  // 5K
-  if (modsNumber & 65536) convertedParts.push('5K');
-  // 6K
-  if (modsNumber & 131072) convertedParts.push('6K');
-  // 7K
-  if (modsNumber & 262144) convertedParts.push('7K');
-  // 8K
-  if (modsNumber & 524288) convertedParts.push('8K');
-  // FI
-  if (modsNumber & 1048576) convertedParts.push('FI');
-  // RD
-  if (modsNumber & 2097152) convertedParts.push('RD');
-  // LM
-  if (modsNumber & 4194304) convertedParts.push('LM');
-  // Target
-  if (modsNumber & 8388608) convertedParts.push('Target');
-  // 9K
-  if (modsNumber & 16777216) convertedParts.push('9K');
-  // KeyCoop
-  if (modsNumber & 33554432) convertedParts.push('KeyCoop');
-  // 1K
-  if (modsNumber & 67108864) convertedParts.push('1K');
-  // 3K
-  if (modsNumber & 134217728) convertedParts.push('3K');
-  // 2K
-  if (modsNumber & 268435456) convertedParts.push('2K');
-  // ScoreV2
-  if (modsNumber & 536870912) convertedParts.push('ScoreV2');
-  // MR
-  if (modsNumber & 1073741824) convertedParts.push('MR');
-
-
-  if (order) {
-    convertedParts.sort((a, b) => ModsOrder[a.toLowerCase()] - ModsOrder[b.toLowerCase()]);
-  };
-
-
-  const converted = convertedParts.join('');
-  return converted;
-};
-
-
-export const ModsToName2 = (modsNumber: number, order?: boolean): string => {
   const convertedParts = [];
   let bit = 1;
 
@@ -234,14 +125,14 @@ export const ModsToName2 = (modsNumber: number, order?: boolean): string => {
 
 
 // SWITCH STATEMENT CREATED ON PURPOSE BECAUSE IT'S WAY FASTER
-export const calculate_mods = (ModsName: string | number): { number: number, name: string } | IError => {
+export const calculate_mods = (ModsName: string | number, order?: boolean): { number: number, name: string } | IError => {
   if (ModsName == null) {
     return { error: new Error(`Specify mods name (HDDT or 72)`) };
   };
 
 
   if (typeof ModsName == 'number') {
-    const name = ModsToName(ModsName);
+    const name = ModsToName(ModsName, order);
     return {
       number: ModsName,
       name: name,
