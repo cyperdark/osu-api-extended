@@ -1,5 +1,6 @@
 import { IBeatmapPackType, IDefaultParams, IError } from "../../types";
 import { BeatmapsPacksListResponse } from "../../types/v2/beatmaps_packs_list";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -16,6 +17,7 @@ export const beatmaps_packs_list = async (params: {
     addons,
   });
 
+  if (data.error) return handleErrors(data.error);
 
   return data;
 };

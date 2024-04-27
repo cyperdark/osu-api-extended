@@ -1,6 +1,7 @@
 import { IDefaultParams, IError } from "../../types";
 import { ChangelogsListAllResponse } from "../../types/v2/changelogs_list_all";
 import { ChangelogsListLookupResponse } from "../../types/v2/changelogs_list_lookup";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -52,7 +53,7 @@ export const changelogs_list = async <T extends params>(params: T, addons?: IDef
       url += `/changelog/${params.changelog}`;
 
       if (params.changelog == null) {
-        return { error: new Error(`Specify changelog stream`) } as Response<T['type']>;
+        return handleErrors(`Specify changelog stream`) as Response<T['type']>;
       };
 
 
@@ -61,7 +62,7 @@ export const changelogs_list = async <T extends params>(params: T, addons?: IDef
       break;
 
     default:
-      return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
+      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
   };
 
 
@@ -70,6 +71,8 @@ export const changelogs_list = async <T extends params>(params: T, addons?: IDef
     params: object,
     addons
   });
+
+  if (data.error) return handleErrors(data.error) as Response<T['type']>;
 
 
   return data as Response<T['type']>;

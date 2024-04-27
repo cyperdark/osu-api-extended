@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { NewsDetailsResponse } from "../../types/v2/news_details";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -11,7 +12,7 @@ export const news_details = async (params: {
   key?: 'id' | null;
 }, addons?: IDefaultParams): Promise<Response> => {
   if (params.news_id == null) {
-    return { error: new Error(`Specify news id`) } as Response
+    return handleErrors(`Specify news id`) as Response
   };
 
 
@@ -21,6 +22,7 @@ export const news_details = async (params: {
     addons,
   });
 
+  if (data.error) return handleErrors(data.error);
 
   return data;
 };

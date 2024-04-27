@@ -2,6 +2,7 @@ import { request } from "../../../../utility/request";
 import { calculate_mods } from "../../../../tools/index";
 
 import form from "../../form/beatmap/creator";
+import { handleErrors } from "../../../../utility/handleErrors";
 
 
 const _mode = [
@@ -198,6 +199,9 @@ const name: types = async (user_id, obj = {}) => {
     method: 'GET',
     params: params,
   });
+
+  if (data.error) return handleErrors(data.error);
+
 
   if (data.length == 0) return [];
 

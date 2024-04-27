@@ -5,6 +5,7 @@ import { RankingListCountryResponse } from "../../types/v2/ranking_list_country"
 import { RankingListPerformanceResponse } from "../../types/v2/ranking_list_performance";
 import { RankingListKudosuResponse } from "../../types/v2/ranking_list_kudosu";
 import { RankingListScoreResponse } from "../../types/v2/ranking_list_score";
+import { handleErrors } from "../../utility/handleErrors";
 
 
 type params = {
@@ -55,9 +56,7 @@ type Response<T extends params['type']> =
 
 export const ranking_list = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
   if (params.type != 'kudosu' && params.mode == null) {
-    return {
-      error: new Error('Gamemode not specified'),
-    } as Response<T['type']>;
+    return handleErrors('Gamemode not specified') as Response<T['type']>;
   };
 
 
@@ -106,7 +105,7 @@ export const ranking_list = async <T extends params>(params: T, addons?: IDefaul
       break;
 
     default:
-      return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
+      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
   };
 
 
@@ -116,10 +115,7 @@ export const ranking_list = async <T extends params>(params: T, addons?: IDefaul
     addons,
   });
 
-
-  if ('error' in data) {
-    return data as Response<T['type']>;
-  };
+  if (data.error) return handleErrors(data.error) as Response<T['type']>;
 
 
   if (params.type == 'kudosu') return data.ranking as Response<T['type']>;

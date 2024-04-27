@@ -1,5 +1,6 @@
 import { request } from "../../utility/request";
 import { IDefaultParams, IError } from "../../types";
+import { handleErrors } from "../../utility/handleErrors";
 
 
 type params = ({
@@ -40,7 +41,7 @@ export const notification_actions = async <T extends params>(params: T, addons?:
       method = 'POST';
 
       if (params.notifications == null && params.identities == null) {
-        return { error: new Error(`Missing on of parameters`) } as Response<T['type']>;
+        return handleErrors(`Missing on of parameters`) as Response<T['type']>;
       };
 
       // params.ids.forEach((r, index) => object[`identities[${index}][id]`] = r);
@@ -55,7 +56,7 @@ export const notification_actions = async <T extends params>(params: T, addons?:
       break;
 
     default:
-      return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
+      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
   };
 
 
@@ -64,6 +65,8 @@ export const notification_actions = async <T extends params>(params: T, addons?:
     data: JSON.stringify(object),
     addons,
   });
+
+  if (data.error) return handleErrors(data.error) as Response<T['type']>;
 
 
   return data as Response<T['type']>;

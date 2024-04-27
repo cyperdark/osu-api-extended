@@ -1,3 +1,5 @@
+import { handleErrors } from "../utility/handleErrors";
+
 export { beatmaps_download } from "../api/v2/beatmaps_download";
 export { calculate_accuracy } from "./accuracy";
 export { calculate_mods } from "./mods";
@@ -8,7 +10,7 @@ export { calculate_total_objects } from "./objects";
 
 
 export const calculate_pp = () => {
-  return new Error('Use rosu-pp-js instead');
+  return handleErrors('Use rosu-pp-js instead');
 };
 
 

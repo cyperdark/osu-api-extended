@@ -5,6 +5,7 @@ import { CommentsActionsEditResponse } from "../../types/v2/comments_actions_edi
 import { CommentsActionsDeleteResponse } from "../../types/v2/comments_actions_delete";
 import { CommentsActionsVoteResponse } from "../../types/v2/comments_actions_vote";
 import { CommentsActionsUnvoteResponse } from "../../types/v2/comments_actions_unvote";
+import { handleErrors } from "../../utility/handleErrors";
 
 
 type params = ({
@@ -60,15 +61,15 @@ export const comments_actions = async <T extends params>(params: T, addons?: IDe
       url += `/comments`;
 
       if (params.id == null) {
-        return { error: new Error(`Specify news id or beatmap set id`) } as Response<T['type']>;
+        return handleErrors(`Specify news id or beatmap set id`) as Response<T['type']>;
       };
 
       if (params.commentable_type == null) {
-        return { error: new Error(`Specify commentable_type`) } as Response<T['type']>;
+        return handleErrors(`Specify commentable_type`) as Response<T['type']>;
       };
 
       if (params.message == null) {
-        return { error: new Error(`You forgot to provide message`) } as Response<T['type']>;
+        return handleErrors(`You forgot to provide message`) as Response<T['type']>;
       };
 
 
@@ -80,11 +81,11 @@ export const comments_actions = async <T extends params>(params: T, addons?: IDe
 
     case 'edit':
       if (params.id == null) {
-        return { error: new Error(`Specify comment id`) } as Response<T['type']>;
+        return handleErrors(`Specify comment id`) as Response<T['type']>;
       };
 
       if (params.message == null) {
-        return { error: new Error(`You forgot to provide message`) } as Response<T['type']>;
+        return handleErrors(`You forgot to provide message`) as Response<T['type']>;
       };
 
 
@@ -96,7 +97,7 @@ export const comments_actions = async <T extends params>(params: T, addons?: IDe
 
     case 'delete':
       if (params.id == null) {
-        return { error: new Error(`Specify comment id`) } as Response<T['type']>;
+        return handleErrors(`Specify comment id`) as Response<T['type']>;
       };
 
 
@@ -107,7 +108,7 @@ export const comments_actions = async <T extends params>(params: T, addons?: IDe
 
     case 'vote':
       if (params.id == null) {
-        return { error: new Error(`Specify comment id`) } as Response<T['type']>;
+        return handleErrors(`Specify comment id`) as Response<T['type']>;
       };
 
 
@@ -118,7 +119,7 @@ export const comments_actions = async <T extends params>(params: T, addons?: IDe
 
     case 'unvote':
       if (params.id == null) {
-        return { error: new Error(`Specify comment id`) } as Response<T['type']>;
+        return handleErrors(`Specify comment id`) as Response<T['type']>;
       };
 
 
@@ -128,7 +129,7 @@ export const comments_actions = async <T extends params>(params: T, addons?: IDe
       break;
 
     default:
-      return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
+      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
   };
 
 
@@ -137,6 +138,8 @@ export const comments_actions = async <T extends params>(params: T, addons?: IDe
     params: object,
     addons,
   });
+
+  if (data.error) return handleErrors(data.error) as Response<T['type']>;
 
 
   return data as Response<T['type']>;

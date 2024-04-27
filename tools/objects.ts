@@ -1,6 +1,7 @@
 import { IError } from "../types";
 import { GamemodeEnum } from "../types/enums";
 import { TotalObjectsResponse } from "../types/tools";
+import { handleErrors } from "../utility/handleErrors";
 
 
 type Hits = {
@@ -25,7 +26,7 @@ type Response = TotalObjectsResponse & IError;
 
 export const calculate_total_objects = (hits: Hits, mode: GamemodeEnum | string | number): Response => {
   if (Object.keys(hits).length == 0) {
-    return { error: new Error('Provide hits (300, 100, 50, etc)') } as Response;
+    return handleErrors('Provide hits (300, 100, 50, etc)') as Response;
   };
 
 
@@ -61,7 +62,7 @@ export const calculate_total_objects = (hits: Hits, mode: GamemodeEnum | string 
       break;
 
     default:
-      return { error: new Error(`Unsupported gamemode: ${mode}}`) } as Response;
+      return handleErrors(`Unsupported gamemode: ${mode}}`) as Response;
   };
 
 

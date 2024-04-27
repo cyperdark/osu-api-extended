@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { changelogsDetailsResponse } from "../../types/v2/changelogs_details";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -11,11 +12,11 @@ export const changelogs_details = async (params: {
   build_version: string;
 }, addons?: IDefaultParams): Promise<Response> => {
   if (params.stream_name == null) {
-    return { error: new Error(`Specify stream name`) } as Response;
+    return handleErrors(`Specify stream name`) as Response;
   };
 
   if (params.build_version == null) {
-    return { error: new Error(`Specify build version`) } as Response;
+    return handleErrors(`Specify build version`) as Response;
   };
 
 
@@ -24,6 +25,7 @@ export const changelogs_details = async (params: {
     addons,
   });
 
+  if (data.error) return handleErrors(data.error);
 
   return data;
 };

@@ -2,6 +2,7 @@ import { credentials } from "../../utility/auth";
 import { IError } from "../../types";
 import { MedownloadquotaResponse } from "../../types/v2/me_download_quota";
 import { request } from "../../utility/request";
+import { handleErrors } from "../../utility/handleErrors";
 
 
 type Response = MedownloadquotaResponse & IError;
@@ -9,7 +10,7 @@ type Response = MedownloadquotaResponse & IError;
 
 export const me_download_quota = async (): Promise<Response> => {
   if (credentials.method != 'lazer') {
-    return { error: new Error(`Login via lazer to use this endpoint`) } as Response
+    return handleErrors(`Login via lazer to use this endpoint`) as Response
   };
 
 
@@ -17,6 +18,7 @@ export const me_download_quota = async (): Promise<Response> => {
     method: 'GET',
   });
 
+  if (data.error) return handleErrors(data.error);
 
   return data;
 };

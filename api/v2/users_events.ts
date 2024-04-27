@@ -1,6 +1,7 @@
 import { request } from "../../utility/request";
 import { UsersEventsResponse } from '../../types/v2/users_events';
 import { IDefaultParams, IError } from "../../types";
+import { handleErrors } from "../../utility/handleErrors";
 
 
 type Response = UsersEventsResponse[] & IError;
@@ -17,11 +18,11 @@ export const users_events = async ({ sort, cursor_string, type }: {
     addons,
   });
 
-  if (data.error) return data.error;
+  if (data.error) return handleErrors(data.error);
 
 
   if (type != null && !Array.isArray(type)) {
-    return { error: new Error(`Events Type must be an Array of types. Example: ['achievement', 'rank']`) } as Response;
+    return handleErrors(`Events Type must be an Array of types. Example: ['achievement', 'rank']`) as Response;
   };
 
 

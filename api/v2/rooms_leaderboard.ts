@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { RoomsLeaderboardResponse } from "../../types/v2/rooms_leaderboard";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -11,7 +12,7 @@ export const rooms_leaderboard = async (params: {
   limit?: number;
 }, addons?: IDefaultParams): Promise<Response> => {
   if (params.id == null) {
-    return { error: new Error(`Specify room id`) } as Response;
+    return handleErrors(`Specify room id`) as Response;
   };
 
 
@@ -20,6 +21,8 @@ export const rooms_leaderboard = async (params: {
     params: { limit: params.limit },
     addons,
   });
+
+  if (data.error) return handleErrors(data.error);
 
 
   return data;

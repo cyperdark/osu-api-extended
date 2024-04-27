@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { WikiDetailsResponse } from "../../types/v2/wiki_details";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -11,11 +12,11 @@ export const wiki_details = async (params: {
   path_name: string;
 }, addons?: IDefaultParams): Promise<Response> => {
   if (params.locale == null) {
-    return { error: new Error(`Specify locale code. Example: en`) } as Response;
+    return handleErrors(`Specify locale code. Example: en`) as Response;
   };
 
   if (params.path_name == null) {
-    return { error: new Error(`Specify wiki page path`) } as Response;
+    return handleErrors(`Specify wiki page path`) as Response;
   };
 
 
@@ -23,6 +24,8 @@ export const wiki_details = async (params: {
     method: 'GET',
     addons,
   });
+
+  if (data.error) return handleErrors(data.error);
 
 
   return data;

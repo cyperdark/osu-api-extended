@@ -1,4 +1,5 @@
 import { IError } from "../../../types";
+import { handleErrors } from "../../../utility/handleErrors";
 import { request } from "../../../utility/request";
 import form from "../form/match";
 
@@ -94,10 +95,12 @@ const name: types = async (id) => {
     method: 'GET',
     params: params,
   });
+  if (data.error) return handleErrors(data.error) as Response;
+
 
   if (data.match == 0 || !data.match) {
-    return { error: new Error('Match not found') } as Response;
-  }
+    return handleErrors('Match not found') as Response;
+  };
 
   const format: response = form(data);
   return format as Response;

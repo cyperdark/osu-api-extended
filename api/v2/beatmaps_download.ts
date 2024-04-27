@@ -3,6 +3,7 @@ import { download } from "../../utility/request";
 import { cache } from "../../utility/auth";
 import path from "path";
 import fs from "fs";
+import { handleErrors } from "../../utility/handleErrors";
 
 
 
@@ -109,7 +110,7 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
 
       case 'osu':
         if ((addons.authKey || cache.v2) == null) {
-          return { error: new Error('osu is not authorized') } as Response;
+          return handleErrors('osu is not authorized') as Response;
         };
 
 
@@ -118,7 +119,7 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
         break;
 
       default:
-        return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response;
+        return handleErrors(`Unsupported type: ${(params as any).type}`) as Response;
     };
 
 
@@ -128,6 +129,8 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
       addons: addons,
       callback: progress_track,
     });
+
+    if (data.error) return handleErrors(data.error);
 
 
     return data;
@@ -158,10 +161,12 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
       callback: progress_track,
     });
 
+    if (data.error) return handleErrors(data.error);
+
 
     return data;
   };
 
 
-  return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response;
+  return handleErrors(`Unsupported type: ${(params as any).type}`) as Response;
 };

@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { ChatListResponse } from "../../types/v2/chat_list";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -14,6 +15,8 @@ export const chat_list = async (params: {
     method: 'GET',
     addons
   });
+
+  if (data.error) return handleErrors(data.error);
 
 
   if (params?.sort == 'date_asc')

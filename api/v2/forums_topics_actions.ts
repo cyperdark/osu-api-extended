@@ -4,6 +4,7 @@ import { ForumsTopicsActionsCreateResponse } from "../../types/v2/forums_topics_
 import { ForumsTopicsActionsReplyResponse } from "../../types/v2/forums_topics_actions_reply";
 import { ForumsTopicsActionsEditTopicResponse } from "../../types/v2/forums_topics_actions_edit_topic";
 import { ForumsTopicsActionsEditPostResponse } from "../../types/v2/forums_topics_actions_edit_post";
+import { handleErrors } from "../../utility/handleErrors";
 
 
 type params = ({
@@ -69,15 +70,15 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
   switch (params.type) {
     case 'create':
       if (params.forum_id == null) {
-        return { error: new Error(`Specify forum id`) } as Response<T['type']>;
+        return handleErrors(`Specify forum id`) as Response<T['type']>;
       };
 
       if (params.title == null) {
-        return { error: new Error(`Specify title`) } as Response<T['type']>;
+        return handleErrors(`Specify title`) as Response<T['type']>;
       };
 
       if (params.message == null) {
-        return { error: new Error(`Specify message`) } as Response<T['type']>;
+        return handleErrors(`Specify message`) as Response<T['type']>;
       };
 
 
@@ -111,11 +112,11 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
 
     case 'reply':
       if (params.post_id == null) {
-        return { error: new Error(`Specify post id`) } as Response<T['type']>;
+        return handleErrors(`Specify post id`) as Response<T['type']>;
       };
 
       if (params.message == null) {
-        return { error: new Error(`Specify message`) } as Response<T['type']>;
+        return handleErrors(`Specify message`) as Response<T['type']>;
       };
 
 
@@ -129,11 +130,11 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
 
     case 'edit_post':
       if (params.post_id == null) {
-        return { error: new Error(`Specify post id`) } as Response<T['type']>;
+        return handleErrors(`Specify post id`) as Response<T['type']>;
       };
 
       if (params.message == null) {
-        return { error: new Error(`Specify message`) } as Response<T['type']>;
+        return handleErrors(`Specify message`) as Response<T['type']>;
       };
 
 
@@ -148,11 +149,11 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
     case 'edit_topic':
       if (params.topic_id && (params.title != null && params.title != '')) {
         if (params.topic_id == null) {
-          return { error: new Error(`Specify topic id`) } as Response<T['type']>;
+          return handleErrors(`Specify topic id`) as Response<T['type']>;
         };
 
         if (params.title == null) {
-          return { error: new Error(`Specify title`) } as Response<T['type']>;
+          return handleErrors(`Specify title`) as Response<T['type']>;
         };
 
 
@@ -174,11 +175,11 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
 
       if (params.post_id && (params.message != null && params.message != '')) {
         if (params.post_id == null) {
-          return { error: new Error(`Specify post id`) } as Response<T['type']>;
+          return handleErrors(`Specify post id`) as Response<T['type']>;
         };
 
         if (params.message == null) {
-          return { error: new Error(`Specify message`) } as Response<T['type']>;
+          return handleErrors(`Specify message`) as Response<T['type']>;
         };
 
 
@@ -195,7 +196,7 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
       break;
 
     default:
-      return { error: new Error(`Unsupported type: ${(params as any).type}`) } as Response<T['type']>;
+      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
   };
 
 
@@ -210,6 +211,11 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
       data: JSON.stringify(body[i]),
       addons,
     });
+
+    if (data.error) {
+      results.push(handleErrors(data.error) as Response<T['type']>);
+      continue;
+    };
 
     results.push(data);
   };

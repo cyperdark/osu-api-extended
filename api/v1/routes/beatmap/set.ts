@@ -2,6 +2,7 @@ import { request } from "../../../../utility/request";
 import { calculate_mods } from "../../../../tools/index";
 
 import form from "../../form/beatmap/category";
+import { handleErrors } from "../../../../utility/handleErrors";
 
 const _mode = [
   'osu',
@@ -196,6 +197,9 @@ const name: types = async (id, obj = {}) => {
     method: 'GET',
     params: params,
   });
+
+  if (data.error) return handleErrors(data.error);
+
 
   if (data.length == 0) return [];
 

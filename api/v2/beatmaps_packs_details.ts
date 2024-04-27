@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { BeatmapsPacksDetailsResponse } from "../../types/v2/beatmaps_packs_details";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -8,7 +9,7 @@ type Response = BeatmapsPacksDetailsResponse & IError;
 
 export const beatmap_packs_details = async (pack_tag: string, addons?: IDefaultParams): Promise<Response> => {
   if (pack_tag == null) {
-    return { error: new Error('Specify beatmap pack tag') } as Response;
+    return handleErrors('Specify beatmap pack tag') as Response;
   };
 
 
@@ -17,6 +18,7 @@ export const beatmap_packs_details = async (pack_tag: string, addons?: IDefaultP
     addons,
   });
 
+  if (data.error) return handleErrors(data.error);
 
   return data;
 };

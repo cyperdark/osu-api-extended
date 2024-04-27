@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { UsersKudosuResponse } from "../../types/v2/users_kudosu";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -12,7 +13,7 @@ export const users_kudosu = async (params: {
   offset?: number;
 }, addons?: IDefaultParams): Promise<Response> => {
   if (params.id == null) {
-    return { error: new Error(`Specify user id`) } as Response;
+    return handleErrors(`Specify user id`) as Response;
   };
 
 
@@ -24,6 +25,8 @@ export const users_kudosu = async (params: {
     },
     addons,
   });
+
+  if (data.error) return handleErrors(data.error);
 
 
   return data;

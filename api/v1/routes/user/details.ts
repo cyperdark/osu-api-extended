@@ -1,4 +1,5 @@
 import { IError } from "../../../../types";
+import { handleErrors } from "../../../../utility/handleErrors";
 import { request } from "../../../../utility/request";
 import form from "../../form/user/details";
 
@@ -120,8 +121,9 @@ const name: types = async (user, obj = {}) => {
     method: 'GET',
     params: params,
   });
+  if (data.error) return handleErrors(data.error) as Response;
 
-  if (data.length == 0) return { error: new Error('User not found') };
+  if (data.length == 0) return handleErrors('User not found') as Response;
 
   const format = form(data);
   return format;

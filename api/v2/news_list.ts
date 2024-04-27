@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { NewsListResponse } from "../../types/v2/news_list";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -23,6 +24,8 @@ export const news_list = async (params: {
     params: object,
     addons,
   });
+
+  if (data.error) return handleErrors(data.error);
 
 
   return data;

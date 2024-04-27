@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { ChatMessagesResponse } from "../../types/v2/chat_messages";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -14,7 +15,7 @@ export const chat_messages = async (params: {
   return_object?: boolean;
 }, addons?: IDefaultParams): Promise<Response> => {
   if (params.id == null) {
-    return { error: new Error(`Specify channel id`) } as Response;
+    return handleErrors(`Specify channel id`) as Response;
   };
 
 
@@ -24,6 +25,7 @@ export const chat_messages = async (params: {
     addons,
   });
 
+  if (data.error) return handleErrors(data.error);
 
   return data;
 };

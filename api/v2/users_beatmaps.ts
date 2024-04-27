@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { UsersBeatmapsResponse } from "../../types/v2/users_beatmaps";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -14,11 +15,11 @@ export const users_beatmaps = async (params: {
   offset?: number;
 }, addons?: IDefaultParams): Promise<Response> => {
   if (params.id == null) {
-    return { error: new Error(`Specify user id`) } as Response;
+    return handleErrors(`Specify user id`) as Response;
   };
 
   if (params.type == null) {
-    return { error: new Error(`Specify beatmaps type`) } as Response;
+    return handleErrors(`Specify beatmaps type`) as Response;
   };
 
 
@@ -30,6 +31,8 @@ export const users_beatmaps = async (params: {
     },
     addons,
   });
+
+  if (data.error) return handleErrors(data.error);
 
 
   return data;

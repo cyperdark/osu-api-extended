@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { MatchesListResponse } from "../../types/v2/matches_list";
+import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
@@ -23,6 +24,8 @@ export const matches_list = async (params: {
     },
     addons,
   });
+
+  if (data.error) return handleErrors(data.error);
 
 
   return data;
