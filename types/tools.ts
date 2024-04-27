@@ -7,3 +7,12 @@ export interface CountryResponse {
   code: string;
   name: string;
 };
+
+export interface AccuracyResponse {
+  accuracy: number;
+  fc_accuracy: number;
+};
+
+export interface RankResponse {
+  rank: string;
+};
