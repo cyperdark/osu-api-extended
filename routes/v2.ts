@@ -11,20 +11,159 @@ import { beatmaps_discussions_votes } from "../api/v2/beatmaps_discussions_votes
 import beatmaps_actions from "../api/v2/beatmaps_actions";
 
 
+/**
+ * ##### Description
+ * Object containing methods for retrieving beatmaps data.
+ */
 export const beatmaps = {
+  /**
+   * ##### Description
+   * Covers API Endpoints regarding beatmap packs.
+   *
+   */
   packs: {
+    /**
+     * ##### Description
+     * Request `GET` https://osu.ppy.sh/api/v2/beatmaps/packs
+     *
+     * `async` Retrieves a list of all available beatmap packs.
+     *
+     * @param type - Type of the beatmap pack.
+     * @param [cursor_string] - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
+     * @param [addons] - Additional parameters to include in the request.
+     *
+     * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+     */
     list: beatmaps_packs_list,
+    /**
+     * ##### Description
+     * Request `GET` https://osu.ppy.sh/api/v2/beatmaps/packs/
+     *
+     * `async` Retrieves a beatmap pack by given ID.
+     *
+     * @param pack_tag - ID of the beatmap pack to retrieve.
+     * @param [addons] - Additional parameters to include in the request.
+     *
+     * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+     */
     details: beatmap_packs_details,
   },
+  /**
+   * ##### Description
+   * Request `GET` https://osu.ppy.sh/api/v2/beatmaps/lookup
+   *
+   * `async` Lookup for a beatmap by given parameters.
+   *
+   * Check documentation for available parameters.
+   *
+   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   */
   lookup: beatmaps_lookup,
+  /**
+   * ##### Description
+   * Request `GET` https://osu.ppy.sh/api/v2/beatmaps | https://osu.ppy.sh/api/v2/beatmapsets
+   *
+   * `async` Retrieves a beatmap or beatmap set by given ID.
+   *
+   * Check documentation for available parameters.
+   *
+   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   */
   details: beatmaps_details,
+  /**
+   * ##### Description
+   * Covers API Endpoints regarding beatmap set events.
+   */
   events: {
+    /**
+     * ##### Description
+     * Request `GET` https://osu.ppy.sh/api/v2/beatmapsets/events
+     *
+     * `async` Retrieves a list of beatmap set events.
+     *
+     * @param obj - Object containing parameters to include in the request.
+     * @param obj.user - Filter by author of the event.
+     * @param obj.types - Filter by type of the event.
+     * @param obj.min_date - Filter by minimum date of the event.
+     * @param obj.max_date - Filter by maximum date of the event.
+     * @param [addons] - Additional parameters to include in the request.
+     *
+     * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+     */
     list: beatmaps_events_list,
   },
+  /**
+   * ##### Description
+   *
+   * `async` Downloads a beatmap or beatmap set by given ID. (Supports different hosts)
+   *
+   * Check documentation for available parameters.
+   *
+   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   */
   download: beatmaps_download,
+  /**
+   * ##### Description
+   * Covers API Endpoints regarding beatmap discussions.
+   */
   discussions: {
+    /**
+     * ##### Description
+     * Request `GET` https://osu.ppy.sh/api/v2/beatmapsets/discussions
+     *
+     * `async` Retrieves a list of beatmap set discussions.
+     *
+     * @param params - Parameters to include in the request.
+     * @param [params.only_unresolved] - Filter by unresolved discussions.
+     * @param [params.user] - Filter by author of the discussion.
+     * @param [params.beatmap_id] - Filter by beatmap ID.
+     * @param [params.beatmapset_id] - Filter by beatmap set ID.
+     * @param [params.beatmapset_status] - Filter by beatmap set status.
+     * @param [params.message_type] - Filter by message type.
+     * @param [params.limit] - Maximum number of discussions to return.
+     * @param [params.sort] - Sort order of the discussions.
+     * @param [params.cursor_string] - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
+     * @param addons - Additional parameters to include in the request.
+     *
+     * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+     */
     list: beatmaps_discussions_list,
+    /**
+     * ##### Description
+     * Request `GET` https://osu.ppy.sh/api/v2/beatmapsets/discussions/posts
+     *
+     * `async` Retrieves the posts of a beatmap set discussion.
+     *
+     * @param {Object} params - Parameters to include in the request.
+     * @param [params.discussion_id] - ID of the beatmap set discussion to retrieve.
+     * @param [params.sort] - Sort order of the posts.
+     * @param [params.type] - Filter by type of the post.
+     * @param [params.limit]- Maximum number of posts to return.
+     * @param [params.user] - Filter by author of the post.
+     * @param [params.cursor_string] - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
+     * @param [addons] - Additional parameters to include in the request.
+     *
+     * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+     */
     posts: beatmaps_discussions_posts,
+    /**
+     * ##### Description
+     * Request `GET` https://osu.ppy.sh/api/v2/beatmapsets/discussions/votes
+     *
+     * `async` Retrieves the votes given to beatmap set discussions.
+     *
+     * @param params - Parameters to include in the request.
+     * @param [params.discussion_id] - ID of the beatmap set discussion to retrieve.
+     * @param [params.sort] - Sort order of the votes.
+     * @param [params.score] - Filter by score of the vote.
+     * @param [params.user] - Filter by author of the vote.
+     * @param [params.receiver] - Filter by receiver of the vote.
+     * @param [params.limit] - Maximum number of votes to return.
+     * @param [params.cursor_string] - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
+     * @param [addons] - Additional parameters to include in the request.
+     *
+     * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+     */
     votes: beatmaps_discussions_votes,
   },
   actions: beatmaps_actions,
