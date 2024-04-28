@@ -372,10 +372,50 @@ import { scores_list } from "../api/v2/scores_list";
 import { scores_details } from "../api/v2/scores_details";
 import { scores_download } from "../api/v2/scores_download";
 
-
+/**
+ * ##### Description
+ * Covers API Endpoints regarding scores.
+ */
 export const scores = {
+  /**
+   * ##### Description
+   * `GET` https://osu.ppy.sh/api/v2/beatmaps/
+   *
+   * `async` Retrieves a list of scores by given parameters.
+   *
+   * Check documentation for available parameters.
+   *
+   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   */
   list: scores_list,
+  /**
+   * ##### Description
+   * `GET` https://osu.ppy.sh/api/v2/scores/
+   *
+   * `async` Retrieves a score by given parameters.
+   *
+   * @param {Object} params - Parameters to include in the request.
+   * @param params.id - ID of the score to retrieve.
+   * @param [params.mode] - Gamemode of the score.
+   * @param [addons] - Additional parameters to include in the request.
+   *
+   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   */
   details: scores_details,
+  /**
+   * ##### Description
+   * `GET` https://osu.ppy.sh/api/v2/scores/
+   *
+   * `async` Downloads a score by given parameters.
+   *
+   * @param {Object} params - Parameters to include in the request.
+   * @param params.id - ID of the score to download.
+   * @param [params.mode] - Gamemode of the score.
+   * @param [params.file_path] - Where to save the file.
+   * @param [addons] - Additional parameters to include in the request.
+   *
+   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   */
   download: scores_download,
 };
 
