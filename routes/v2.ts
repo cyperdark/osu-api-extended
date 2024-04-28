@@ -214,10 +214,52 @@ import { comments_list } from '../api/v2/comments_list';
 import { comments_details } from '../api/v2/comments_details';
 import { comments_actions } from '../api/v2/comments_actions';
 
-
+/**
+ * ##### Description
+ * Covers API Endpoints regarding comments.
+ */
 export const comments = {
+  /**
+   * ##### Description
+   * `GET` https://osu.ppy.sh/api/v2/comments
+   *
+   * `async` Retrieves a list of all comments by given parameters.
+   *
+   * @param {Object} params - Parameters to include in the request.
+   * @param [params.type] - Filter by type of the resource to get comments from.
+   * @param [param.id] - Filter by ID of the resource to get comments from.
+   * @param [param.parent_id] - Filter by ID of the parent comment.
+   * @param [params.after_id] - Filter by ID of the comment after which the comments will be returned.
+   * @param [params.cursor.id] - The ID of the cursor.
+   * @param [params.cursor.created_at] - The timestamp of the cursor.
+   * @param [params.sort] - Sort order of the comments.
+   * @param [addons] - Additional parameters to include in the request.
+   *
+   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   */
   list: comments_list,
+  /**
+   * ##### Description
+   * `GET` https://osu.ppy.sh/api/v2/comments
+   *
+   * `async` Retrieves a comment by given parameters.
+   *
+   * @param comment_id - ID of the comment to retrieve.
+   * @param [addons] - Additional parameters to include in the request.
+   *
+   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   */
   details: comments_details,
+  /**
+   * ##### Description
+   * `PUT` `PATCH` `POST` `DELETE` https://osu.ppy.sh/api/v2/comments
+   *
+   * `async` Perform comment actions via endpoint.
+   *
+   * Check documentation for available parameters.
+   *
+   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   */
   actions: comments_actions,
 };
 
