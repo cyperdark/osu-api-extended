@@ -175,9 +175,35 @@ export const beatmaps = {
 import { changelogs_list } from '../api/v2/changelogs_list';
 import { changelogs_details } from '../api/v2/changelogs_details';
 
-
+/**
+ * ##### Description
+ * Covers API Endpoints regarding changelogs.
+ */
 export const changelogs = {
+  /**
+   * ##### Description
+   * `GET` https://osu.ppy.sh/api/v2/changelogs
+   *
+   * `async` Retrieves a list of all available changelogs.
+   *
+   * Check documentation for available parameters.
+   *
+   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   */
   list: changelogs_list,
+  /**
+   * ##### Description
+   * `GET` https://osu.ppy.sh/api/v2/changelogs
+   *
+   * `async` Retrieves a changelog by given parameters.
+   *
+   * @param {Object} params - Parameters to include in the request.
+   * @param params.stream_name - Filter by changelog stream name.
+   * @param params.build_version - Filter by build version.
+   * @param [addons] - Additional parameters to include in the request.
+   *
+   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   */
   details: changelogs_details,
 };
 
