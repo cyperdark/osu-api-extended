@@ -273,13 +273,95 @@ import { users_activity } from "../api/v2/users_activity";
 import { users_beatmaps } from "../api/v2/users_beatmaps";
 import { users_kudosu } from "../api/v2/users_kudosu";
 
-
+/**
+ * ##### Description
+ * Covers API Endpoints regarding users.
+ */
 export const users = {
+  /**
+   * ##### Description
+   * `GET` https://osu.ppy.sh/api/v2/users
+   *
+   * `async` Retrieves a list of users by given parameters.
+   *
+   * @param ids - List of user ids to retrieve.
+   * @param [addons] - Additional parameters to include in the request.
+   *
+   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   */
   list: users_list,
+  /**
+   * ##### Description
+   * `GET` https://osu.ppy.sh/api/v2/users/{user}/kudosu
+   *
+   * `async` Retrieves the kudosu history of a given users.
+   *
+   * @params ids - List of user ids to retrieve.
+   * @param [addons] - Additional parameters to include in the request.
+   *
+   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   */
   kudosu: users_kudosu,
+  /**
+   * ##### Description
+   * `GET` https://osu.ppy.sh/api/v2/events
+   *
+   * `async` Retrieves a list of user events by given parameters.
+   *
+   * @param params - Parameters to include in the request.
+   * @param [params.type] - Filter by type of event.
+   * @param [params.sort] - Sort order of the events by id.
+   * @param [params.cursor_string] - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
+   * @param [addons] - Additional parameters to include in the request.
+   *
+   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   */
   events: users_events,
+  /**
+   * ##### Description
+   * `GET` https://osu.ppy.sh/api/v2/users/
+   *
+   * `async` Retrieves a user by given parameters.
+   *
+   * @param {Object} params - Parameters to include in the request.
+   * @param params.id - ID or username of the user to retrieve.
+   * @param [params.mode] - Retrieve data for a specific gamemode.
+   * @param [params.key] - Type of the `params.id` parameter.
+   * @param [addons] - Additional parameters to include in the request.
+   *
+   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   */
   details: users_details,
+  /**
+   * ##### Description
+   * `GET` https://osu.ppy.sh/api/v2/users/{user}/beatmapsets/
+   *
+   * `async` Retrieves a list of user's beatmaps sets by given parameters.
+   *
+   * @param {Object} params - Parameters to include in the request.
+   * @param params.type - Filter by type of beatmap set.
+   * @param params.id - ID of the user to retrieve.
+   * @param [params.limit] - Maximum number of beatmap sets to return.
+   * @param [params.offset] - Result offset for pagination.
+   * @param [addons] - Additional parameters to include in the request.
+   *
+   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   */
   beatmaps: users_beatmaps,
+  /**
+   * ##### Description
+   * `GET` https://osu.ppy.sh/api/v2/users/{user}/activity
+   *
+   * `async` Retrieves a list of user's recent activities by given parameters.
+   *
+   * @param {Object} params - Parameters to include in the request.
+   * @param params.id - ID of the user to retrieve.
+   * @param [params.limit] - Maximum number of activities to return.
+   * @param [params.offset] - Result offset for pagination.
+   * @param [addons] - Additional parameters to include in the request.
+   *
+   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   */
   activity: users_activity,
 };
 
