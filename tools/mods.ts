@@ -6,122 +6,43 @@ import { handleErrors } from "../utility/handleErrors";
 
 
 // WHILE LOOP FASTER dot
+const bitValues = [
+  'NF', 'EZ', 'TD', 'HD', 'HR', 'SD', 'DT', 'RX', 'HT', 'NC',
+  'FL', 'AT', 'SO', 'AP', 'PF', '4K', '5K', '6K', '7K', '8K',
+  'FI', 'RD', 'CN', 'TG', '9K', '10K', '1K', '3K', '2K', 'v2'
+];
+
 export const ModsToName = (modsNumber: number, order?: boolean): string => {
-  const convertedParts = [];
   let bit = 1;
 
 
-  while (bit <= modsNumber) {
-    switch (bit) {
-      case 1:
-        if (modsNumber & bit) convertedParts.push('NF');
-        break;
-      case 2:
-        if (modsNumber & bit) convertedParts.push('EZ');
-        break;
-      case 4:
-        if (modsNumber & bit) convertedParts.push('TD');
-        break;
-      case 8:
-        if (modsNumber & bit) convertedParts.push('HD');
-        break;
-      case 16:
-        if (modsNumber & bit) convertedParts.push('HR');
-        break;
-      case 32:
-        if (modsNumber & bit) convertedParts.push('SD');
-        break;
-      case 64:
-        if (modsNumber & bit) convertedParts.push('DT');
-        break;
-      case 128:
-        if (modsNumber & bit) convertedParts.push('RX');
-        break;
-      case 256:
-        if (modsNumber & bit) convertedParts.push('HT');
-        break;
-      case 576:
-        if (modsNumber & bit) convertedParts.push('NC');
-        break;
-      case 1024:
-        if (modsNumber & bit) convertedParts.push('FL');
-        break;
-      case 2048:
-        if (modsNumber & bit) convertedParts.push('AT');
-        break;
-      case 4096:
-        if (modsNumber & bit) convertedParts.push('SO');
-        break;
-      case 8192:
-        if (modsNumber & bit) convertedParts.push('AP');
-        break;
-      case 16416:
-        if (modsNumber & bit) convertedParts.push('PF');
-        break;
-      case 32768:
-        if (modsNumber & bit) convertedParts.push('4K');
-        break;
-      case 65536:
-        if (modsNumber & bit) convertedParts.push('5K');
-        break;
-      case 131072:
-        if (modsNumber & bit) convertedParts.push('6K');
-        break;
-      case 262144:
-        if (modsNumber & bit) convertedParts.push('7K');
-        break;
-      case 524288:
-        if (modsNumber & bit) convertedParts.push('8K');
-        break;
-      case 1048576:
-        if (modsNumber & bit) convertedParts.push('FI');
-        break;
-      case 2097152:
-        if (modsNumber & bit) convertedParts.push('RD');
-        break;
-      case 4194304:
-        if (modsNumber & bit) convertedParts.push('LM');
-        break;
-      case 8388608:
-        if (modsNumber & bit) convertedParts.push('Target');
-        break;
-      case 16777216:
-        if (modsNumber & bit) convertedParts.push('9K');
-        break;
-      case 33554432:
-        if (modsNumber & bit) convertedParts.push('KeyCoop');
-        break;
-      case 67108864:
-        if (modsNumber & bit) convertedParts.push('1K');
-        break;
-      case 134217728:
-        if (modsNumber & bit) convertedParts.push('3K');
-        break;
-      case 268435456:
-        if (modsNumber & bit) convertedParts.push('2K');
-        break;
-      case 536870912:
-        if (modsNumber & bit) convertedParts.push('ScoreV2');
-        break;
-      case 1073741824:
-        if (modsNumber & bit) convertedParts.push('MR');
-        break;
-      default:
-        break;
+  if (order == true) {
+    const convertedParts = [];
+
+    while (bit <= modsNumber && bit <= (1 << 30)) {
+      if (modsNumber & bit) {
+        convertedParts.push(bitValues[Math.log2(bit)]);
+      };
+      bit <<= 1;
     };
 
+    convertedParts.sort((a, b) => ModsOrder[a.toLowerCase()] - ModsOrder[b.toLowerCase()]);
 
+    const converted = convertedParts.join('');
+    return converted;
+  };
+
+
+  let convertedParts = '';
+
+  while (bit <= modsNumber && bit <= (1 << 30)) {
+    if (modsNumber & bit) {
+      convertedParts += bitValues[Math.log2(bit)];
+    }
     bit <<= 1;
   };
 
-
-  if (order) {
-    convertedParts.sort((a, b) => ModsOrder[a.toLowerCase()] - ModsOrder[b.toLowerCase()]);
-  };
-
-
-  const converted = convertedParts.join('');
-  return converted;
+  return convertedParts;
 };
 
 
