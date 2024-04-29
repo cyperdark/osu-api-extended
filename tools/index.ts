@@ -14,6 +14,58 @@ export const calculate_pp = () => {
 };
 
 
+export const build_url = ({ _direct, type, mode, value }: {
+  _direct?: boolean;
+  mode: 'osu' | 'fruits' | 'mania' | 'taiko';
+
+  type: 'beatmap' | 'beatmapset' | 'editor_timing' | 'news' | 'match' | 'avatar' | 'user' | 'badge' | 'score' | 'beatmapset_download';
+  value: any;
+}) => {
+  switch (type) {
+    case 'beatmap':
+      return _direct == true ? `osu://b/${value}` : `https://osu.ppy.sh/b/${value}`;
+
+    case 'beatmapset':
+      return _direct == true ? `osu://s/${value}` : `https://osu.ppy.sh/s/${value}`;
+
+
+    case 'news':
+      return `https://osu.ppy.sh/home/news/${value}`;
+
+
+    case 'editor_timing':
+      return `osu://edit/${value}`;
+
+
+    case 'match':
+      return `https://osu.ppy.sh/community/matches/${value}`;
+
+
+    case 'avatar':
+      return `https://a.ppy.sh/${value}`;
+
+    case 'user':
+      return `https://osu.ppy.sh/users/${value}`;
+
+
+    case 'badge':
+      return `https://assets.ppy.sh/profile-badges/${value}`;
+
+
+    case 'score':
+      return `https://osu.ppy.sh/scores/${mode ? "/" + mode : ''}${value}`;
+
+
+    case 'beatmapset_download':
+      return `https://osu.ppy.sh/scores/${mode ? "/" + mode : ''}${value}`;
+
+
+    default:
+      return '';
+  };
+};
+
+
 
 
 
