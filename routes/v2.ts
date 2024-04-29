@@ -424,9 +424,100 @@ export const scores = {
 import { forums_topics_details } from '../api/v2/forums_topics_details';
 import { forums_topics_actions } from '../api/v2/forums_topics_actions';
 
+/**
+ * ##### Description
+ * Covers API Endpoints regarding forums.
+ */
 export const forums = {
+  /**
+   * ##### Description
+   * Covers API Endpoints regarding forum topics.
+   */
   topics: {
+    /**
+     * ### `GET` [/v2/forums/topics](https://osu.ppy.sh/docs/index.html#get-topic-and-posts)
+     * `async` Retrieves a list of forum topics by given parameters.
+     *
+     * &nbsp;
+     *
+     * ### Parameters
+     * - `params.id` - ID of the topic to retrieve.
+     * - `params.start_id?` - ID of the topic after which the topics will be returned.
+     * - `params.end_id?` - ID of the topic before which the topics will be returned.
+     * - `params.limit?` - Maximum number of topics to return.
+     * - `params.sort?` - Sort order of the topics.
+     * - `params.cursor_string?` - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
+     * - `addons?` - Additional parameters to include in the request. ([See IDefaultParams](../types/index.ts))
+     *
+     * &nbsp;
+     *
+     * ### Usage Example
+     * ```js
+     * // TBA
+     * ```
+     *
+     * &nbsp;
+     *
+     * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmap-packs) | [Check return types](../types/v2/forums_topics_details.ts)
+     */
     details: forums_topics_details,
+    /**
+     * ### `POST` [/v2/forums/topics](https://osu.ppy.sh/docs/index.html#create-topic)
+     * ### `POST` [v2/forums/topics/{topic}/reply](https://osu.ppy.sh/docs/index.html#reply-topic)
+     * ### `PUT/PATCH` [v2/forums/posts/{post}](https://osu.ppy.sh/docs/index.html#edit-post)
+     * ### `PUT/PATCH` [v2/forums/topics/{topic}](https://osu.ppy.sh/docs/index.html#edit-topic)
+     *
+     * `async` Perform actions on forum topics via API.
+     *
+     * &nbsp;
+     *
+     * ### Global Parameters
+     * - `params.type` - Type of action to perform.
+     *
+     * ### Parameters for `params.type:'create'`
+     * - `params.forum_id` - ID of the forum to create the topic in.
+     * - `params.title` - Title of the topic.
+     * - `params.message` - Message of the topic.
+     * - `params.enable_poll` - Whether to enable the poll.
+     * - `params.poll.allow_vote_change?` - Whether to allow users to change their vote.
+     * - `params.poll.hide_results?` - Whether to hide the results of the poll.
+     * - `params.poll.title` - Title of the poll.
+     * - `params.poll.options` - Options of the poll.
+     * - `params.poll.max_votes_per_user?` - Maximum number of votes per user.
+     * - `params.poll.duration_days?` - Duration of the poll.
+     *
+     * &nbsp;
+     *
+     * ### Parameters for `params.type:'reply'`
+     * - `params.post_id` - ID of the post to reply to.
+     * - `params.message` - Message of the reply.
+     *
+     * &nbsp;
+     *
+     * ### Parameters for `params.type:'edit_post'`
+     * - `params.post_id` - ID of the post to edit.
+     * - `params.message` - Message of the edit.
+     *
+     * &nbsp;
+     *
+     * ### Parameters for `params.type:'edit_topic'`
+     * - `params.topic_id?` - ID of the topic to edit.
+     * - `params.post_id?` - ID of the post to edit.
+     * - `params.title?` - New title of the topic.
+     * - `params.message` - New message of the topic.
+     *
+     * &nbsp;
+     *
+     * ### Usage Example
+     * ```js
+     * // TBA
+     * ```
+     *
+     * &nbsp;
+     *
+     *
+     * [See documentation](https://osu.ppy.sh/docs/index.html#forum) | [Check return types](../)
+     */
     actions: forums_topics_actions,
   },
 };
