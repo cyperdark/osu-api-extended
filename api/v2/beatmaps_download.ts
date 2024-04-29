@@ -21,7 +21,7 @@ type params = ({
   type: 'set';
 
   id: number;
-  host: 'osu' | 'beatconnect' | 'chimu' | 'nerinyan' | 'osu_direct_mirror' | 'sayobot' | 'gatari' | 'ripple' | 'catboy',
+  host: 'osu' | 'beatconnect' | 'nerinyan' | 'osu_direct_mirror' | 'sayobot' | 'gatari' | 'ripple' | 'catboy',
 
   file_path: string;
   no_video?: boolean;
@@ -64,9 +64,9 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
 
   if (params.type == 'set') {
     switch (params.host) {
-      case 'chimu':
-        url = `https://api.chimu.moe/v1/download/${params.id}`;
-        break;
+      // case 'chimu':
+      //   url = `https://api.chimu.moe/v1/download/${params.id}`;
+      //   break;
 
       case 'beatconnect':
         url = `https://beatconnect.io/b/${params.id}/`;
