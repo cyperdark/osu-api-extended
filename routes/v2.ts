@@ -463,9 +463,9 @@ export const forums = {
     details: forums_topics_details,
     /**
      * ### `POST` [/v2/forums/topics](https://osu.ppy.sh/docs/index.html#create-topic)
-     * ### `POST` [v2/forums/topics/{topic}/reply](https://osu.ppy.sh/docs/index.html#reply-topic)
-     * ### `PUT/PATCH` [v2/forums/posts/{post}](https://osu.ppy.sh/docs/index.html#edit-post)
-     * ### `PUT/PATCH` [v2/forums/topics/{topic}](https://osu.ppy.sh/docs/index.html#edit-topic)
+     * ### `POST` [/v2/forums/topics/{topic}/reply](https://osu.ppy.sh/docs/index.html#reply-topic)
+     * ### `PUT/PATCH` [/v2/forums/posts/{post}](https://osu.ppy.sh/docs/index.html#edit-post)
+     * ### `PUT/PATCH` [/v2/forums/topics/{topic}](https://osu.ppy.sh/docs/index.html#edit-topic)
      *
      * `async` Perform actions on forum topics via API.
      *
