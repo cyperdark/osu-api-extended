@@ -134,6 +134,8 @@ export const beatmaps = {
    * // TBA
    * ```
    *
+   * &nbsp;
+   *
    * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmap) | [Check return types](../types/v2/beatmaps_details.ts)
    */
   details: beatmaps_details,
@@ -143,30 +145,57 @@ export const beatmaps = {
    */
   events: {
     /**
-     * ##### Description
-     * Request `GET` https://osu.ppy.sh/api/v2/beatmapsets/events
-     *
+     * ### `GET` [v2/beatmapsets/{beatmapset}/events](https://osu.ppy.sh/docs/index.html#get-apiv2beatmapsetsevents)
      * `async` Retrieves a list of beatmap set events.
      *
-     * @param obj - Object containing parameters to include in the request.
-     * @param obj.user - Filter by author of the event.
-     * @param obj.types - Filter by type of the event.
-     * @param obj.min_date - Filter by minimum date of the event.
-     * @param obj.max_date - Filter by maximum date of the event.
-     * @param [addons] - Additional parameters to include in the request.
+     * &nbsp;
      *
-     * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+     * ### Parameters
+     * - `obj.user` - Filter by author of the event.
+     * - `obj.types` - Filter by type of the event.
+     * - `obj.min_date` - Filter by minimum date of the event.
+     * - `obj.max_date` - Filter by maximum date of the event.
+     * - `addons?` - Additional parameters to include in the request.
+     *
+     * &nbsp;
+     *
+     * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2beatmapsetsevents) | [Check return types](../types/v2/beatmaps_events_list.ts)
      */
     list: beatmaps_events_list,
   },
   /**
-   * ##### Description
-   *
    * `async` Downloads a beatmap or beatmap set by given ID. (Supports different hosts)
    *
-   * Check documentation for available parameters.
+   * &nbsp;
    *
-   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   * ### Available hosts
+   * - `type:'difficulty'`: osu, osu_direct_mirror, catboy
+   * - `type:'set'`: osu, beatconnect, nerinyan, osu_direct_mirror, sayobot, gatari, ripple, catboy
+   *
+   * &nbsp;
+   *
+   * ### Global Parameters
+   * - `params.type` - Type of the beatmap.
+   * - `params.id` - ID of the beatmap or beatmap set.
+   * - `params.host` - Host of the download source.
+   * - `params.file_path` - Path to the save location.
+   * - `params.overwrite` - Whether to overwrite the file if it already exists.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type:'set'`
+   * - `params.no_video?` - Whether to include video in the download.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2beatmapsetsbeatmapsetdownload) | [Check return types](../types/v2/beatmaps_download.ts)
    */
   download: beatmaps_download,
   /**
@@ -175,64 +204,94 @@ export const beatmaps = {
    */
   discussions: {
     /**
-     * ##### Description
-     * Request `GET` https://osu.ppy.sh/api/v2/beatmapsets/discussions
-     *
+     * ### `GET` [/v2/beatmapsets/discussions`](https://osu.ppy.sh/docs/index.html#get-beatmapset-discussions)
      * `async` Retrieves a list of beatmap set discussions.
      *
-     * @param params - Parameters to include in the request.
-     * @param [params.only_unresolved] - Filter by unresolved discussions.
-     * @param [params.user] - Filter by author of the discussion.
-     * @param [params.beatmap_id] - Filter by beatmap ID.
-     * @param [params.beatmapset_id] - Filter by beatmap set ID.
-     * @param [params.beatmapset_status] - Filter by beatmap set status.
-     * @param [params.message_type] - Filter by message type.
-     * @param [params.limit] - Maximum number of discussions to return.
-     * @param [params.sort] - Sort order of the discussions.
-     * @param [params.cursor_string] - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
-     * @param addons - Additional parameters to include in the request.
+     * &nbsp;
      *
-     * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+     * ### Parameters
+     * - `params.only_unresolved?` - Filter by unresolved discussions.
+     * - `params.user?` - Filter by author of the discussion.
+     * - `params.beatmap_id?` - Filter by beatmap ID.
+     * - `params.beatmapset_id?` - Filter by beatmap set ID.
+     * - `params.beatmapset_status?` - Filter by beatmap set status.
+     * - `params.message_type?` - Filter by message type.
+     * - `params.limit?` - Maximum number of discussions to return.
+     * - `params.sort?` - Sort order of the discussions.
+     * - `params.cursor_string?` - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
+     * - `addons?` - Additional parameters to include in the request.
+     *
+     * &nbsp;
+     *
+     * ### Usage Example
+     * ```js
+     * // TBA
+     * ```
+     *
+     * &nbsp;
+     *
+     * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmapset-discussions) | [Check return types](../types/v2/beatmaps_discussions_list.ts)
      */
     list: beatmaps_discussions_list,
     /**
-     * ##### Description
-     * Request `GET` https://osu.ppy.sh/api/v2/beatmapsets/discussions/posts
-     *
+     * ### `GET` [/v2/beatmapsets/discussions/posts](https://osu.ppy.sh/docs/index.html#beatmapset-discussions)
      * `async` Retrieves the posts of a beatmap set discussion.
      *
-     * @param {Object} params - Parameters to include in the request.
-     * @param [params.discussion_id] - ID of the beatmap set discussion to retrieve.
-     * @param [params.sort] - Sort order of the posts.
-     * @param [params.type] - Filter by type of the post.
-     * @param [params.limit]- Maximum number of posts to return.
-     * @param [params.user] - Filter by author of the post.
-     * @param [params.cursor_string] - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
-     * @param [addons] - Additional parameters to include in the request.
+     * &nbsp;
      *
-     * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+     * ### Parameters
+     * - `params.discussion_id?` - ID of the beatmap set discussion to retrieve.
+     * - `params.sort?` - Sort order of the posts.
+     * - `params.type?` - Filter by type of the post.
+     * - `params.limit?` - Maximum number of posts to return.
+     * - `params.user?` - Filter by author of the post.
+     * - `params.cursor_string?` - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
+     * - `addons?` - Additional parameters to include in the request.
+     *
+     * &nbsp;
+     *
+     * ### Usage Example
+     * ```js
+     * // TBA
+     * ```
+     *
+     * &nbsp;
+     *
+     * [See documentation](https://osu.ppy.sh/docs/index.html#beatmapset-discussions) | [Check return types](../types/v2/beatmaps_discussions_posts.ts)
      */
     posts: beatmaps_discussions_posts,
     /**
-     * ##### Description
-     * Request `GET` https://osu.ppy.sh/api/v2/beatmapsets/discussions/votes
-     *
+     * ### `GET` [/v2/beatmapsets/discussions/votes](https://osu.ppy.sh/docs/index.html#get-beatmapset-discussion-votes)
      * `async` Retrieves the votes given to beatmap set discussions.
      *
-     * @param params - Parameters to include in the request.
-     * @param [params.discussion_id] - ID of the beatmap set discussion to retrieve.
-     * @param [params.sort] - Sort order of the votes.
-     * @param [params.score] - Filter by score of the vote.
-     * @param [params.user] - Filter by author of the vote.
-     * @param [params.receiver] - Filter by receiver of the vote.
-     * @param [params.limit] - Maximum number of votes to return.
-     * @param [params.cursor_string] - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
-     * @param [addons] - Additional parameters to include in the request.
+     * &nbsp;
      *
-     * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+     * ### Parameters
+     * - `params.discussion_id?` - ID of the beatmap set discussion to retrieve.
+     * - `params.sort?` - Sort order of the votes.
+     * - `params.score?` - Filter by score of the vote.
+     * - `params.user?` - Filter by author of the vote.
+     * - `params.receiver?` - Filter by receiver of the vote.
+     * - `params.limit?` - Maximum number of votes to return.
+     * - `params.cursor_string?` - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
+     * - `addons?` - Additional parameters to include in the request.
+     *
+     * &nbsp;
+     *
+     * ### Usage Example
+     * ```js
+     * // TBA
+     * ```
+     *
+     * &nbsp;
+     *
+     * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmapset-discussion-votes) | [Check return types](../types/v2/beatmaps_discussions_votes.ts)
      */
     votes: beatmaps_discussions_votes,
   },
+  /**
+   * Currently broken.
+   */
   actions: beatmaps_actions,
 };
 
