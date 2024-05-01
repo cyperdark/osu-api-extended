@@ -23,51 +23,118 @@ export const beatmaps = {
    */
   packs: {
     /**
-     * ##### Description
-     * Request `GET` https://osu.ppy.sh/api/v2/beatmaps/packs
-     *
+     * ### `GET` [/v2/beatmaps/packs](https://osu.ppy.sh/docs/index.html#get-beatmap-packs)
      * `async` Retrieves a list of all available beatmap packs.
      *
-     * @param type - Type of the beatmap pack.
-     * @param [cursor_string] - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
-     * @param [addons] - Additional parameters to include in the request.
+     * &nbsp;
      *
-     * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+     * ## Parameters
+     * - `params.type` - Type of the beatmap pack.
+     * - `params.cusor_string?` - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
+     * - `addons?` - Additional parameters to include in the request.
+     *
+     * &nbsp;
+     *
+     * ### Usage Example
+     * ```js
+     * // TBA
+     * ```
+     *
+     * &nbsp;
+     *
+     * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmap-packs) | [Check return types](../types/v2/beatmaps_packs_list.ts)
      */
     list: beatmaps_packs_list,
     /**
-     * ##### Description
-     * Request `GET` https://osu.ppy.sh/api/v2/beatmaps/packs/
-     *
+     * ### `GET` [/v2/beatmaps/packs/{pack_tag}](https://osu.ppy.sh/docs/index.html#get-beatmap-pack)
      * `async` Retrieves a beatmap pack by given ID.
      *
-     * @param pack_tag - ID of the beatmap pack to retrieve.
-     * @param [addons] - Additional parameters to include in the request.
+     * &nbsp;
      *
-     * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+     * ### Parameters
+     * - `pack_tag` - ID of the beatmap pack to retrieve.
+     * - `addons?` - Additional parameters to include in the request.
+     *
+     * &nbsp;
+     *
+     * ### Usage Example
+     * ```js
+     * // TBA
+     * ```
+     *
+     * &nbsp;
+     *
+     * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmap-pack) | [Check return types](../types/v2/beatmaps_packs_details.ts)
      */
     details: beatmap_packs_details,
   },
   /**
-   * ##### Description
-   * Request `GET` https://osu.ppy.sh/api/v2/beatmaps/lookup
-   *
+   * ### `GET` [/v2/beatmaps/lookup](https://osu.ppy.sh/docs/index.html#lookup-beatmap)
+   * ### `GET` [/v2/beatmapsets/lookup](https://osu.ppy.sh/docs/index.html#get-apiv2beatmapsetslookup)
+   * ### `POST` [/v2/beatmaps/{beatmap}/attributes](https://osu.ppy.sh/docs/index.html#get-beatmap-attributes)
+   * ### `GET` [/v2/beatmaps](https://osu.ppy.sh/docs/index.html#get-beatmaps)
    * `async` Lookup for a beatmap by given parameters.
    *
-   * Check documentation for available parameters.
+   * &nbsp;
    *
-   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   * ### Global Parameters
+   * - `params.type` - Type of lookup.
+   *
+   * & &nbsp;
+   *
+   * ### Parameters for `params.type:'difficulty'`
+   * - `params.id` - ID of the difficulty to lookup for.
+   * - `params.checksum` - Checksum of the difficulty to lookup.
+   * - `params.filename` - Filename of the difficulty to lookup.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type:'set'`
+   * - `params.id` - ID of the beatmap set to lookup for.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type:'attribute'`
+   * - `params.id` - ID of the beatmap to lookup for.
+   * - `params.mods` - Mod combination of the beatmap to lookup for.
+   * - `params.mode` - Mode of the beatmap to lookup for.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type:'difficulties'`
+   * - `params.ids` - IDs of the difficulties to lookup for.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#lookup-beatmap) | [Check return types](../types/v2/beatmaps_lookup.ts)
    */
   lookup: beatmaps_lookup,
   /**
-   * ##### Description
-   * Request `GET` https://osu.ppy.sh/api/v2/beatmaps | https://osu.ppy.sh/api/v2/beatmapsets
-   *
+   * ### `GET` [v2/beatmaps/{beatmap}](https://osu.ppy.sh/docs/index.html#get-beatmap)
+   * ### `GET` [v2/beatmapsets/{beatmapset}](https://osu.ppy.sh/docs/index.html#get-apiv2beatmapsetsbeatmapset)
    * `async` Retrieves a beatmap or beatmap set by given ID.
    *
-   * Check documentation for available parameters.
+   * &nbsp;
    *
-   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   * ##### Parameters
+   * - `params.type` - The type to search for.
+   * - `params.id` - The ID to search for.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmap) | [Check return types](../types/v2/beatmaps_details.ts)
    */
   details: beatmaps_details,
   /**
