@@ -382,45 +382,93 @@ import { comments_actions } from '../api/v2/comments_actions';
  */
 export const comments = {
   /**
-   * ##### Description
-   * `GET` https://osu.ppy.sh/api/v2/comments
-   *
+   * ### `GET` [/v2/comments](https://osu.ppy.sh/api/v2/comments)
    * `async` Retrieves a list of all comments by given parameters.
    *
-   * @param {Object} params - Parameters to include in the request.
-   * @param [params.type] - Filter by type of the resource to get comments from.
-   * @param [param.id] - Filter by ID of the resource to get comments from.
-   * @param [param.parent_id] - Filter by ID of the parent comment.
-   * @param [params.after_id] - Filter by ID of the comment after which the comments will be returned.
-   * @param [params.cursor.id] - The ID of the cursor.
-   * @param [params.cursor.created_at] - The timestamp of the cursor.
-   * @param [params.sort] - Sort order of the comments.
-   * @param [addons] - Additional parameters to include in the request.
+   * &nbsp;
    *
-   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   * ### Parameters
+   * - `params.type?` - Type of the resource to get comments from.
+   * - `params.id?` - ID of the resource to get comments from.
+   * - `params.parent_id?` - ID of the parent comment.
+   * - `params.after_id?` - ID of the comment after which the comments will be returned.
+   * - `params.cursor?.id`- The ID of the cursor.
+   * - `params.cursor?.created_at` - The timestamp of the cursor.
+   * - `params.sort?` - Sort order of the comments.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-comments-listing) | [Check return types](../types/v2/comments_list.ts)
    */
   list: comments_list,
   /**
-   * ##### Description
-   * `GET` https://osu.ppy.sh/api/v2/comments
-   *
+   * ### `GET` [/v2/comments/{comment}](https://osu.ppy.sh/docs/index.html#get-a-comment)
    * `async` Retrieves a comment by given parameters.
    *
-   * @param comment_id - ID of the comment to retrieve.
-   * @param [addons] - Additional parameters to include in the request.
+   * &nbsp;
    *
-   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   * ### Parameters
+   * - `params.comment_id` - ID of the comment to retrieve.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-a-comment) | [Check return types](../types/v2/comments_details.ts)
    */
   details: comments_details,
   /**
-   * ##### Description
-   * `PUT` `PATCH` `POST` `DELETE` https://osu.ppy.sh/api/v2/comments
-   *
+   * ### `POST` [/v2/comments](https://osu.ppy.sh/docs/index.html#post-a-new-comment)
+   * ### `PUT` [/v2/comments/{comment}](https://osu.ppy.sh/docs/index.html#edit-comment)
+   * ### `PATCH` [/v2/comments/{comment}](https://osu.ppy.sh/docs/index.html#edit-comment)
+   * ### `DELETE` [/v2/comments/{comment}](https://osu.ppy.sh/docs/index.html#delete-comment)
+   * ### `POST` [/v2/comments/{comment}/vote](https://osu.ppy.sh/docs/index.html#add-comment-vote)
+   * ### `DELETE` [/v2/comments/{comment}/vote](https://osu.ppy.sh/docs/index.html#remove-comment-vote)
    * `async` Perform comment actions via endpoint.
    *
-   * Check documentation for available parameters.
+   * &nbsp;
    *
-   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   * ### Global Parameters
+   * - `params.id?` - ID of the comment to perform the action on.
+   * - `params.type` - Type of the action to perform.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type:'new'`
+   * - `params.message?` - The message of the comment.
+   * - `params.parent_id?` - The id of the comment to reply to.
+   * - `params.commentable_type?` - Resource type the comment thread is attached to.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type:'edit'`
+   * - `params.message?` - The message of the comment.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#post-a-new-comment) | [Check return types](../types/v2/comments_actions.ts)
    */
   actions: comments_actions,
 };
