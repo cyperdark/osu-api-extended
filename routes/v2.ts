@@ -307,28 +307,64 @@ import { changelogs_details } from '../api/v2/changelogs_details';
  */
 export const changelogs = {
   /**
-   * ##### Description
-   * `GET` https://osu.ppy.sh/api/v2/changelogs
-   *
+   * ### `GET` [/v2/changelogs](https://osu.ppy.sh/docs/index.html#get-changelog-listing)
+   * ### `GET` [/v2/changelogs/{changelog}](https://osu.ppy.sh/docs/index.html#lookup-changelog-build)
    * `async` Retrieves a list of all available changelogs.
    *
-   * Check documentation for available parameters.
+   * &nbsp;
    *
-   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   * ### Global Parameters
+   * - `params.type` - Fetch type.
+   * - `params.message_formats` - Return format.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `type:'all'`
+   * - `params.from_build?` - Minimum build version.
+   * - `params.to_build?` - Maximum build version.
+   * - `params.stream_name?` - Stream name to return builds from.
+   * - `params.max_id?` - Maximum build ID.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `type:'lookup'`
+   * - `params.changelog` - Build version, update stream name, or build ID.
+   * - `params.key` - Unset to query by build version or stream name, or id to query by build ID.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-changelog-listing) | [Check return types](../types/v2/changelogs_list.ts)
    */
   list: changelogs_list,
   /**
-   * ##### Description
-   * `GET` https://osu.ppy.sh/api/v2/changelogs
+   * ### `GET` [/v2/changelog/{stream}/{build}](https://osu.ppy.sh/docs/index.html#get-changelog-build)
+   * `async` Retrieves details of the specified build.
    *
-   * `async` Retrieves a changelog by given parameters.
+   * &nbsp;
    *
-   * @param {Object} params - Parameters to include in the request.
-   * @param params.stream_name - Filter by changelog stream name.
-   * @param params.build_version - Filter by build version.
-   * @param [addons] - Additional parameters to include in the request.
+   * ### Parameters
+   * - `params.stream_name` - Update stream name.
+   * - `params.build_version` - Build version.
+   * - `addons?` - Additional parameters to include in the request.
    *
-   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-changelog-build) | [Check return types](../types/v2/changelogs_details.ts)
    */
   details: changelogs_details,
 };
