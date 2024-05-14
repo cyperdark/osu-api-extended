@@ -1,5 +1,6 @@
 import { IError } from "../types";
 import { ModsOrder } from "../types/enums";
+import { Mod } from "../types/mods";
 import { ModsResponse } from "../types/tools";
 import { handleErrors } from "../utility/handleErrors";
 
@@ -50,7 +51,7 @@ type Response = ModsResponse & IError;
 
 
 // SWITCH STATEMENT CREATED ON PURPOSE BECAUSE IT'S WAY FASTER
-export const calculate_mods = (ModsName: string | number, order?: boolean): Response => {
+export const calculate_mods = (ModsName: Mod[] | string | number, order?: boolean): Response => {
   if (ModsName == null) {
     return handleErrors(`Specify mods name (HDDT or 72)`) as Response;
   };
@@ -66,8 +67,17 @@ export const calculate_mods = (ModsName: string | number, order?: boolean): Resp
 
 
   let mods_id = 0;
+  let ModsArray = [];
 
-  const ModsArray = ModsName.toLowerCase().match(/.{1,2}/g);
+  if (Array.isArray(ModsName)) {
+    ModsArray = ModsName.map(r => r.acronym.toLowerCase());
+  }
+
+  else {
+    ModsArray = ModsName.toLowerCase().match(/.{1,2}/g);
+  };
+
+
   if (!Array.isArray(ModsArray)) {
     return handleErrors(`Can't convert mods (${ModsName}) to array of mods`) as Response;
   };
