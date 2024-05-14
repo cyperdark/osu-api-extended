@@ -489,88 +489,146 @@ import { users_kudosu } from "../api/v2/users_kudosu";
  */
 export const users = {
   /**
-   * ##### Description
-   * `GET` https://osu.ppy.sh/api/v2/users
-   *
+   * ### `GET` [/v2/users](https://osu.ppy.sh/docs/index.html#get-users)
    * `async` Retrieves a list of users by given parameters.
    *
-   * @param ids - List of user ids to retrieve.
-   * @param [addons] - Additional parameters to include in the request.
+   * &nbsp;
    *
-   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   * ### Parameters
+   * - `params.ids` - List of user ids to retrieve.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-users) | [Check return types](../types/v2/users_list.ts)
    */
   list: users_list,
   /**
-   * ##### Description
-   * `GET` https://osu.ppy.sh/api/v2/users/{user}/kudosu
+   * ### `GET` [/v2/users/{user}/kudosu](https://osu.ppy.sh/docs/index.html#get-user-kudosu)
+   * `async` Retrieves the kudosu history of a given user.
    *
-   * `async` Retrieves the kudosu history of a given users.
+   * &nbsp;
    *
-   * @params ids - List of user ids to retrieve.
-   * @param [addons] - Additional parameters to include in the request.
+   * ### Parameters
+   * - `params.id` - ID of the user to retrieve.
+   * - `params.limit?` - Maximum number of results to return.
+   * - `params.offset?` - Result offset for pagination.
+   * - `addons?` - Additional parameters to include in the request.
    *
-   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-user-kudosu) | [Check return types](../types/v2/users_kudosu.ts)
    */
   kudosu: users_kudosu,
   /**
-   * ##### Description
-   * `GET` https://osu.ppy.sh/api/v2/events
-   *
+   * ### `GET` [/v2/events](https://osu.ppy.sh/docs/index.html#get-events)
    * `async` Retrieves a list of user events by given parameters.
    *
-   * @param params - Parameters to include in the request.
-   * @param [params.type] - Filter by type of event.
-   * @param [params.sort] - Sort order of the events by id.
-   * @param [params.cursor_string] - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
-   * @param [addons] - Additional parameters to include in the request.
+   * &nbsp;
    *
-   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   * ### Parameters
+   * - `params.type?` - Filter by type of event.
+   * - `params.sort?` - Sort order of the events by id.
+   * - `params.cursor_string?` - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-events) | [Check return types](../types/v2/users_events.ts)
    */
   events: users_events,
   /**
-   * ##### Description
-   * `GET` https://osu.ppy.sh/api/v2/users/
-   *
+   * ### `GET` [/v2/users/{user}/{mode?}](https://osu.ppy.sh/docs/index.html#get-user)
    * `async` Retrieves a user by given parameters.
    *
-   * @param {Object} params - Parameters to include in the request.
-   * @param params.id - ID or username of the user to retrieve.
-   * @param [params.mode] - Retrieve data for a specific gamemode.
-   * @param [params.key] - Type of the `params.id` parameter.
-   * @param [addons] - Additional parameters to include in the request.
+   * &nbsp;
    *
-   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   * ### Parameters
+   * - `params.id` - ID or username of the user to retrieve.
+   * - `params.mode?` - Retrieve data for a specific gamemode.
+   * - `params.key?` - Type of the `params.id` parameter.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-user) | [Check return types](../types/v2/users_details.ts)
    */
   details: users_details,
   /**
-   * ##### Description
-   * `GET` https://osu.ppy.sh/api/v2/users/{user}/beatmapsets/
-   *
+   * ### `GET` [/v2/users/{user}/beatmapsets/{type}](https://osu.ppy.sh/docs/index.html#get-user-beatmaps)
    * `async` Retrieves a list of user's beatmaps sets by given parameters.
    *
-   * @param {Object} params - Parameters to include in the request.
-   * @param params.type - Filter by type of beatmap set.
-   * @param params.id - ID of the user to retrieve.
-   * @param [params.limit] - Maximum number of beatmap sets to return.
-   * @param [params.offset] - Result offset for pagination.
-   * @param [addons] - Additional parameters to include in the request.
+   * &nbsp;
    *
-   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   * ### Parameters
+   * - `params.type` - Filter by type of beatmap set.
+   * - `params.id` - ID of the user to retrieve.
+   * - `params.limit?` - Maximum number of beatmap sets to return.
+   * - `params.offset?` - Result offset for pagination.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-user-beatmaps) | [Check return types](../types/v2/users_beatmaps.ts)
    */
   beatmaps: users_beatmaps,
   /**
-   * ##### Description
-   * `GET` https://osu.ppy.sh/api/v2/users/{user}/activity
-   *
+   * ### `GET` [/v2/users/{user}/recent_activity](https://osu.ppy.sh/docs/index.html#get-user-recent-activity)
    * `async` Retrieves a list of user's recent activities by given parameters.
    *
-   * @param {Object} params - Parameters to include in the request.
-   * @param params.id - ID of the user to retrieve.
-   * @param [params.limit] - Maximum number of activities to return.
-   * @param [params.offset] - Result offset for pagination.
-   * @param [addons] - Additional parameters to include in the request.
+   * &nbsp;
    *
-   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   * ### Parameters
+   * - `params.id` - ID of the user to retrieve.
+   * - `params.limit?` - Maximum number of activities to return.
+   * - `params.offset?` - Result offset for pagination.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-user-recent-activity) | [Check return types](../types/v2/users_activity.ts)
    */
   activity: users_activity,
 };
