@@ -12,6 +12,9 @@ export const users_list = async (ids: number[], addons?: IDefaultParams): Promis
     return handleErrors(`Specify at least one user id`) as Response;
   };
 
+  if (ids.length > 50) {
+    return handleErrors("No more than 50 users can be requested at once.") as Response;
+  }
 
   const data = await request(`https://osu.ppy.sh/api/v2/users`, {
     method: 'GET',
