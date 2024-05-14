@@ -133,6 +133,8 @@ const token_exists = () => {
 
 
 const save_token = (response: auth_response) => {
+  if (!credentials.tokenPath) return;
+
   const { dir } = path.parse(credentials.tokenPath);
   if (fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
