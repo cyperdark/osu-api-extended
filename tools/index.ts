@@ -6,6 +6,7 @@ export { calculate_mods } from "./mods";
 export { country_details } from "./country";
 export { calculate_rank } from "./rank";
 export { calculate_total_objects } from "./objects";
+export { calculate_net_pp } from "./net-pp";
 
 
 
