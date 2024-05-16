@@ -8,12 +8,12 @@ type Response = UsersDetailsResponse & IError;
 
 
 export const users_details = async (params: {
-  id: number;
+  id?: number | string;
   mode?: Modes_names;
   key?: 'id' | 'username';
 }, addons?: IDefaultParams): Promise<Response> => {
   if (params.id == null) {
-    return handleErrors(`Specify user id`) as Response;
+    return handleErrors(`Specify user id or name`) as Response;
   };
 
 
