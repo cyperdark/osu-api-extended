@@ -777,7 +777,7 @@ export const forums = {
      * - `params.limit?` - Maximum number of topics to return.
      * - `params.sort?` - Sort order of the topics.
      * - `params.cursor_string?` - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
-     * - `addons?` - Additional parameters to include in the request. ([See IDefaultParams](../types/index.ts))
+     * - `addons?` - Additional parameters to include in the request.
      *
      * &nbsp;
      *
@@ -796,13 +796,13 @@ export const forums = {
      * ### `POST` [/v2/forums/topics/{topic}/reply](https://osu.ppy.sh/docs/index.html#reply-topic)
      * ### `PUT/PATCH` [/v2/forums/posts/{post}](https://osu.ppy.sh/docs/index.html#edit-post)
      * ### `PUT/PATCH` [/v2/forums/topics/{topic}](https://osu.ppy.sh/docs/index.html#edit-topic)
-     *
      * `async` Perform actions on forum topics via API.
      *
      * &nbsp;
      *
      * ### Global Parameters
      * - `params.type` - Type of action to perform.
+     * - `addons?` - Additional parameters to include in the request.
      *
      * ### Parameters for `params.type:'create'`
      * - `params.forum_id` - ID of the forum to create the topic in.
