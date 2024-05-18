@@ -646,43 +646,105 @@ import { scores_download } from "../api/v2/scores_download";
  */
 export const scores = {
   /**
-   * ##### Description
-   * `GET` https://osu.ppy.sh/api/v2/beatmaps/
-   *
+   * ### `GET` [/v2/beatmaps/{beatmap}/scores](https://osu.ppy.sh/docs/index.html#get-beatmap-scores)
+   * ### `GET` [/v2/beatmaps/{beatmap}/scores/users/{user}](https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-score)
+   * ### `GET` [/v2/beatmaps/{beatmap}/scores/users/{user}/all](https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-scores)
+   * ### `GET` [/v2/beatmaps/{beatmap}/solo-scores](https://osu.ppy.sh/docs/index.html#get-beatmap-scores-non-legacy)
    * `async` Retrieves a list of scores by given parameters.
    *
-   * Check documentation for available parameters.
+   * &nbsp;
    *
-   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   * ### Global Parameters
+   * - `params.mode?` - Retrieve data for a specific gamemode.
+   * - `params.type` - Type of scores to retrieve.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type: 'leaderboard' | 'solo_scores'`
+   * - `params.leaderboard_type?: Type of leaderboard to retrieve.`
+   * - `params.beatmap_id` - ID of the beatmap to retrieve data from.
+   * - `params.mods?` - Retrieve scores for specific mods.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type: 'beatmap_best'`
+   * - `params.beatmap_id` - ID of the beatmap.
+   * - `params.user_id` - ID of the user.
+   * - `params.mods?` - Retrieve scores for specific mods.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type: 'beatmap_all'`
+   * - `params.beatmap_id` - ID of the beatmap.
+   * - `params.user_id` - ID of the user.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type:'user_best' | 'user_firsts' | 'user_recent' | 'user_pinned'`
+   * - `params.user_id` - ID of the user to retrieve data from.
+   * - `params.include_fails?` - Include failed scores.
+   * - `params.limit?` - Maximum number of scores to return.
+   * - `params.offset?` - Result offset for pagination.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmap-scores) | [Check return types](../types/v2/scores_list.ts)
+   *
    */
   list: scores_list,
   /**
-   * ##### Description
-   * `GET` https://osu.ppy.sh/api/v2/scores/
-   *
+   * ### `GET` [/v2/scores/{rulesetOrScore}/{score?}](https://osu.ppy.sh/docs/index.html#get-apiv2scoresrulesetorscorescore)
    * `async` Retrieves a score by given parameters.
    *
-   * @param {Object} params - Parameters to include in the request.
-   * @param params.id - ID of the score to retrieve.
-   * @param [params.mode] - Gamemode of the score.
-   * @param [addons] - Additional parameters to include in the request.
+   * &nbsp;
    *
-   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   * ### Parameters
+   * - `params.id` - ID of the score to retrieve.
+   * - `params.mode?` - Gamemode of the score.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2scoresrulesetorscorescore) | [Check return types](../types/v2/scores_details.ts)
+   *
    */
   details: scores_details,
   /**
-   * ##### Description
-   * `GET` https://osu.ppy.sh/api/v2/scores/
-   *
+   * ### `GET` [/v2/scores/{rulesetOrScore}/{score}/download](https://osu.ppy.sh/docs/index.html#get-apiv2scoresrulesetorscorescoredownload)
    * `async` Downloads a score by given parameters.
    *
-   * @param {Object} params - Parameters to include in the request.
-   * @param params.id - ID of the score to download.
-   * @param [params.mode] - Gamemode of the score.
-   * @param [params.file_path] - Where to save the file.
-   * @param [addons] - Additional parameters to include in the request.
+   * &nbsp;
    *
-   * @link [See documentation](https://github.com/cyperdark/osu-api-extended/wiki)
+   * ### Parameters
+   * - `params.id` - ID of the score to download.
+   * - `params.mode?` - Gamemode of the score.
+   * - `params.file_path?` - Where to save the file.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2scoresrulesetorscorescoredownload) | [Check return types](../types/v2/scores_download.ts)
    */
   download: scores_download,
 };
