@@ -856,6 +856,50 @@ export const forums = {
 
 import { search_all } from '../api/v2/search';
 
+/**
+ * ### `GET` [/v2/search](https://osu.ppy.sh/docs/index.html#search)
+ * `async` Search for users and wiki pages.
+ *
+ * &nbsp;
+ *
+ * ### Global Parameters
+ * - `params.type` - Type of search.
+ * - `params.query?` - Query to search for.
+ * - `addons?` - Additional parameters to include in the request.
+ *
+ * &nbsp;
+ *
+ * ### Parameters for `params.type:'site'`
+ * - `params.mode?` - Mode of the search.
+ * - `params.page?` - Page number of the search results.
+ *
+ * &nbsp;
+ *
+ * ### Parameters for `params.type:'beatmaps'`
+ * - `params.mode?` - Gamemode to search for.
+ * - `params._played?` - Unknown parameter description.
+ * - `params._nsfw?` - Whether to include NSFW beatmaps.
+ * - `params.status?` - Filter by status.
+ * - `params.category?` - Filter by category.
+ * - `params.genre?` - Filter by genre.
+ * - `params.language?` - Filter by language.
+ * - `params.achieved_rank?` - Filter by achieved rank.
+ * - `params.extra?` - Filter by extra features.
+ * - `params.sort?` - Sort the results.
+ * - `params.cursor_string?` - Cursor string.
+ *
+ * &nbsp;
+ *
+ * ### Usage Example
+ * ```js
+ * // TBA
+ * ```
+ *
+ * &nbsp;
+ *
+ * [See documentation](https://osu.ppy.sh/docs/index.html#search) | [Check return types](../types/v2/search.ts)
+ *
+ */
 export const search = search_all;
 
 
