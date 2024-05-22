@@ -1153,7 +1153,31 @@ export const ranking = {
 import { spotlights_list } from "../api/v2/spotlights_list";
 
 
+/**
+ * ##### Description
+ * Retrieve data from the spotlights API.
+ */
 export const spotlights = {
+  /**
+   * ### `GET` [/v2/spotlights](https://osu.ppy.sh/docs/index.html#get-spotlights)
+   * `async` Retrieve a list of spotlights.
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-spotlights) | [Check return types](../types/v2/spotlights_list.ts)
+   */
   list: spotlights_list,
 };
 
