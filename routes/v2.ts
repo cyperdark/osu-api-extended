@@ -964,8 +964,56 @@ import { news_list } from "../api/v2/news_list";
 import { news_details } from "../api/v2/news_details";
 
 
+/**
+ * ##### Description
+ * Retrieve data from the news API.
+ */
 export const news = {
+  /**
+   * ### `GET` [/v2/news](https://osu.ppy.sh/docs/index.html#get-news-listing)
+   * `async` Get a list of all the news based on certain criteria.
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.from_year?` - Year to return posts from.
+   * - `params.limit?` - Maximum number of posts to return.
+   * - `params.cursor_string?` - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-news-listing) | [Check return types](../types/v2/news_list.ts)
+   */
   list: news_list,
+  /**
+   * ### `GET` [/v2/news/{news}](https://osu.ppy.sh/docs/index.html#get-news-post)
+   * `async` Retrieves a single news post based on given parameters.
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.news_id` - ID of the news post.
+   * - `params.key?` - Type of the id parameter.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-news-post) | [Check return types](../types/v2/news_details.ts)
+   */
   details: news_details,
 };
 
