@@ -9,16 +9,16 @@ type params = ({
   // ids: number[];
 
   identities?: {
-    category: string;
-    object_id: string
-    object_type: string
+    category?: string;
+    object_id?: string
+    object_type?: string
   }[];
 
   notifications?: {
-    category: string;
-    id: number;
-    object_id: string;
-    object_type: string;
+    category?: string;
+    id?: number;
+    object_id?: string;
+    object_type?: string;
   }[]
 });
 
@@ -40,9 +40,9 @@ export const notification_actions = async <T extends params>(params: T, addons?:
       url += '/notifications/mark-read';
       method = 'POST';
 
-      if (params.notifications == null && params.identities == null) {
-        return handleErrors(`Missing on of parameters`) as Response<T['type']>;
-      };
+      // if (params.notifications == null && params.identities == null) {
+      //   return handleErrors(`Missing on of parameters`) as Response<T['type']>;
+      // };
 
       // params.ids.forEach((r, index) => object[`identities[${index}][id]`] = r);
 
