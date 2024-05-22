@@ -1060,6 +1060,7 @@ export const notifications = {
    *
    * ### Global Parameters
    * - `params.type` - Type of the action.
+   * - `addons?` - Additional parameters to include in the request.
    *
    * &nbsp;
    *
@@ -1070,7 +1071,6 @@ export const notifications = {
    * - `params.notifications[].category?` - Category of the notification.
    * - `params.notifications[].object_id?` Id of the object that triggered the notification.
    * - `params.notifications[].object_type?` Type of the object that triggered the notification.
-   * - `addons?` - Additional parameters to include in the request.
    *
    * &nbsp;
    *
