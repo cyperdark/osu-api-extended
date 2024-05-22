@@ -1099,6 +1099,7 @@ export const ranking = {
   /**
    * ### `GET` [/v2/rankings/{mode}/{type}](https://osu.ppy.sh/docs/index.html#get-ranking)
    * ### `GET` [/v2/rankings/kudosu](https://osu.ppy.sh/docs/index.html#get-kudosu-ranking)
+   * `async` Retrieves a ranking list based on given parameters.
    *
    * &nbsp;
    *
@@ -1186,7 +1187,33 @@ export const spotlights = {
 import { wiki_details } from "../api/v2/wiki_details";
 
 
+/**
+ * ##### Description
+ * Retrieve data from the wiki API.
+ */
 export const wiki = {
+  /**
+   * ### `GET` [/v2/wiki/{locale}/{path}](https://osu.ppy.sh/docs/index.html#get-wiki-page)
+   * `async` Retrieve a wiki page or image data.
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.locale` - Two-letter language code of the wiki page.
+   * - `params.path_name` - Path of the wiki page.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * #### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-wiki-page) | [Check return types](../types/v2/wiki_details.ts)
+   */
   details: wiki_details,
 };
 
