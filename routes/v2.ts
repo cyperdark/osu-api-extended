@@ -1000,8 +1000,8 @@ export const news = {
    * &nbsp;
    *
    * ### Parameters
-   * - `params.news_id` - ID of the news post.
-   * - `params.key?` - Type of the id parameter.
+   * - `params.query` - ID or slug of the news post.
+   * - `params.key` - Type of the query.
    *
    * &nbsp;
    *
