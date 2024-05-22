@@ -870,7 +870,7 @@ import { search_all } from '../api/v2/search';
  * &nbsp;
  *
  * ### Parameters for `params.type:'site'`
- * - `params.mode?` - Mode of the search.
+ * - `params.location?` - Page to search on.
  * - `params.page?` - Page number of the search results.
  *
  * &nbsp;
