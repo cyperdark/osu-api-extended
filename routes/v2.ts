@@ -1024,8 +1024,64 @@ import { notifications_list } from '../api/v2/notifications_list';
 import { notification_actions } from '../api/v2/notification_actions';
 
 
+/**
+ * ##### Description
+ * Retrieve data from the notifications API.
+ */
 export const notifications = {
+  /**
+   * ### `GET` [/v2/notifications](https://osu.ppy.sh/docs/index.html#get-notifications)
+   * `async` Retrieves a list of the user's unread notifications.
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.max_id` - Maximum id fetched.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-notifications) | [Check return types](../types/v2/notifications_list.ts)
+   */
   list: notifications_list,
+  /**
+   * ### `POST` [/v2/notifications/mark-read](https://osu.ppy.sh/docs/index.html#mark-notifications-as-read)
+   * `async` Perform certain actions via the notifications API.
+   *
+   * &nbsp;
+   *
+   * ### Global Parameters
+   * - `params.type` - Type of the action.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type:'mark_as_read'`
+   * - `params.identities[].category?` - Category of the identity.
+   * - `params.identities[].object_id?` Id of the object that triggered the notification.
+   * - `params.identities[].object_type?` Type of the object that triggered the notification.
+   * - `params.notifications[].category?` - Category of the notification.
+   * - `params.notifications[].object_id?` Id of the object that triggered the notification.
+   * - `params.notifications[].object_type?` Type of the object that triggered the notification.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#mark-notifications-as-read) | [Check return types](../types/v2/notification_actions.ts)
+   */
   actions: notification_actions,
 };
 
