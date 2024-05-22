@@ -4,7 +4,7 @@ import { handleErrors } from "../../utility/handleErrors";
 
 
 type params = ({
-  type: 'mark_as_readed';
+  type: 'mark_as_read';
 
   // ids: number[];
 
@@ -24,7 +24,7 @@ type params = ({
 
 
 type Response<T extends params['type']> =
-  T extends 'mark_as_readed'
+  T extends 'mark_as_read'
   ? "" & IError
   : IError;
 
@@ -36,7 +36,7 @@ export const notification_actions = async <T extends params>(params: T, addons?:
 
 
   switch (params.type) {
-    case 'mark_as_readed':
+    case 'mark_as_read':
       url += '/notifications/mark-read';
       method = 'POST';
 
