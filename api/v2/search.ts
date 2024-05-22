@@ -7,7 +7,7 @@ import { request } from "../../utility/request";
 
 type params = ({
   type: 'site';
-  mode?: 'all' | 'user' | 'wiki_page';
+  location?: 'all' | 'user' | 'wiki_page';
   query?: string;
   page?: number;
 } | {
