@@ -908,8 +908,53 @@ import { assets_backgrounds } from "../api/v2/assets_backgrounds";
 import { assets_dataFiles } from "../api/v2/assets_dataFiles";
 
 
+/**
+ * ##### Description
+ * Retrieve data from the assets API.
+ */
 export const assets = {
+  /**
+   * ### `GET` [/v2/seasonal-backgrounds](https://osu.ppy.sh/docs/index.html#get-apiv2seasonal-backgrounds)
+   * `async` Retrieves seasonal or beatmap backgrounds.
+   *
+   * &nbsp;
+   *
+   * ### Global Parameters
+   * - `params.type` - Source of the background.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type:'beatmapset'`
+   * - `params.set_id` - ID of the beatmapset.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2seasonal-backgrounds) | [Check return types](../types/v2/assets_backgrounds.ts)
+   */
   backgrounds: assets_backgrounds,
+  /**
+   * ### `GET` `https://data.ppy.sh/`
+   * `async` Retrieves all urls from the data API.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2seasonal-backgrounds) | [Check return types](../types/v2/assets_backgrounds.ts)
+   */
   dataFiles: assets_dataFiles
 };
 
