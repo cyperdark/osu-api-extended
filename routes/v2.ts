@@ -1091,7 +1091,60 @@ export const notifications = {
 import { ranking_list } from "../api/v2/ranking_list";
 
 
+/**
+ * ##### Description
+ * Retrieve data from the ranking API.
+ */
 export const ranking = {
+  /**
+   * ### `GET` [/v2/rankings/{mode}/{type}](https://osu.ppy.sh/docs/index.html#get-ranking)
+   * ### `GET` [/v2/rankings/kudosu](https://osu.ppy.sh/docs/index.html#get-kudosu-ranking)
+   *
+   * &nbsp;
+   *
+   * ### Global Parameters
+   * - `params.type` - Type of ranking search.
+   * - `params.page?` - Page number of the search results.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type:'charts'`
+   * - `params.spotlight_id?` - ID of the spotlight.
+   * - `params.mode?` - Gamemode to search for.
+   * - `params.filter?` - Filter by type.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type:'country'`
+   * - `params.mode?` - Gamemode to search for.
+   * - `params.filter?` - Filter by type.
+   *
+   * &nbsp;
+   *
+   * #### Parameters for `params.type:'performance'`
+   * - `params.mode?` - Gamemode to search for.
+   * - `params.filter?` - Filter by type.
+   * - `params.country_code?` - Country code to search for.
+   * - `params.variant?` - Filter by mania variant.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type:'score'`
+   * - `params.mode?` - Gamemode to search for.
+   * - `params.filter?` - Filter by type.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-ranking) | [Check return types](../types/v2/ranking_list.ts)
+   */
   list: ranking_list,
 };
 
