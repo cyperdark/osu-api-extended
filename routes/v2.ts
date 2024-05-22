@@ -1002,6 +1002,7 @@ export const news = {
    * ### Parameters
    * - `params.query` - ID or slug of the news post.
    * - `params.key` - Type of the query.
+   * - `addons?` - Additional parameters to include in the request.
    *
    * &nbsp;
    *
