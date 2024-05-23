@@ -1366,14 +1366,153 @@ import { chat_details } from "../api/v2/chat_details";
 import { chat_actions } from "../api/v2/chat_actions";
 
 
+/**
+ * ##### Description
+ * Retrieve data from the chat API.
+ */
 export const chat = {
+  /**
+   * ##### Description
+   * Covers API endpoints related to chat channels.
+   */
   channels: {
+    /**
+     * ### `GET` [/v2/chat/channels](https://osu.ppy.sh/docs/index.html#get-channel-list)
+     * `async` Retrieves a list of all joinable public channels. (Requires lazer authentication)
+     *
+     * &nbsp;
+     *
+     * ### Parameters
+     * - `addons?` - Additional parameters to include in the request.
+     *
+     * &nbsp;
+     *
+     * ### Usage Example
+     * ```js
+     * // TBA
+     * ```
+     *
+     * &nbsp;
+     *
+     * [See documentation](https://osu.ppy.sh/docs/index.html#get-channel-list) | [Check return types](../types/v2/chat_channels_list.ts)
+     */
     list: chat_channels_list,
+    /**
+     * ### `POST` [/v2/chat/channels/{channel}/messages](https://osu.ppy.sh/docs/index.html#send-message-to-channel)
+     * ### `PUT` [/v2/chat/channels/{channel}/users/{user}](https://osu.ppy.sh/docs/index.html#join-channel)
+     * ### `DELETE` [/v2/chat/channels/{channel}/users/{user}](https://osu.ppy.sh/docs/index.html#leave-channel)
+     * ### `PUT` [/v2/chat/channels/{channel}/mark-as-read/{message}](https://osu.ppy.sh/docs/index.html#mark-channel-as-read)
+     * `async` Performs a set of actions on a list of channels. (Requires lazer authentication)
+     *
+     * &nbsp;
+     *
+     * ### Global Parameters
+     * - `params.type` - Type of action to perform.
+     * - `addons?` - Additional parameters to include in the request.
+     *
+     * &nbsp;
+     *
+     * ### Parameters for `params.type: 'send'`
+     * - `params.id` - The ID of the channel to send to.
+     * - `params.message` - The message to send.
+     * - `params.is_action` - Whether the message is an action.
+     *
+     * &nbsp;
+     *
+     * ### Parameters for `params.type: 'join' | 'leave'`
+     * - `params.id` - The ID of the channel.
+     * - `params.user_id` - The ID of the user.
+     *
+     * &nbsp;
+     *
+     * ### Parameters for `params.type: 'read'`
+     * - `params.channel_id` - The ID of the channel.
+     * - `params.message_id` - The ID of the user.
+     *
+     * &nbsp;
+     *
+     * ### Usage Example
+     * ```js
+     * // TBA
+     * ```
+     *
+     * &nbsp;
+     *
+     * [See documentation](https://osu.ppy.sh/docs/index.html#send-message-to-channel) | [Check return types](../types/v2/chat_channels_actions.ts)
+     */
     actions: chat_channels_actions,
   },
   list: chat_list,
+  /**
+   * ### `GET [/v2/chat/channels/{channel}/messages](https://osu.ppy.sh/docs/index.html#get-channel-messages)
+   * `async` Get a list of messages in a channel. (Requires lazer authentication)
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.id` - The ID of the channel.
+   * - `params.limit?` - Maximum number of messages to return.
+   * - `params.since?` - Message id to start returning messages from.
+   * - `params.until?` - Message id to end returning messages from.
+   * - `params.return_object?` - Whether to return object.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-channel-messages) | [Check return types](../types/v2/chat_messages.ts)
+   */
   messages: chat_messages,
+  /**
+   * ### `GET` [/v2/chat/updates](https://osu.ppy.sh/docs/index.html#get-updates)
+   * `async` Retrieves the list of channels the current User is in. (Requires lazer authentication)
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.after_id` - ID of the channel after which the channels will be returned.
+   * - `params.includes` - List of fields to include in the response.
+   * - `params.history_since` - Silence history since this id.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-updates) | [Check return types](../types/v2/chat_updates.ts)
+   */
   updates: chat_updates,
+  /**
+   * ### `GET` [/v2/chat/channels/{channel}](https://osu.ppy.sh/docs/index.html#get-channel)
+   * `async` Get a specific channel. (Requires lazer authentication)
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.channel_id` - The ID of the channel.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-channel) | [Check return types](../types/v2/chat_channels.ts)
+   */
   details: chat_details,
   actions: chat_actions,
 };
