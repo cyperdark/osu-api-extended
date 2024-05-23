@@ -1224,9 +1224,74 @@ import { me_friends } from "../api/v2/me_friends";
 import { me_download_quota } from "../api/v2/me_download_quota";
 
 
+/**
+ * ##### Description
+ * Retrieve data from the me API.
+ */
 export const me = {
+  /**
+   * ### `GET` [/v2/me/download-quota-check](https://osu.ppy.sh/docs/index.html#get-apiv2medownload-quota-check)
+   * `async` Get your download quota. (requires lazer authentication)
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2medownload-quota-check) | [Check return types](../types/v2/me_download_quota.ts)
+   */
   download_quota: me_download_quota,
+  /**
+   * ### `GET` [/v2/friends](https://osu.ppy.sh/docs/index.html#get-apiv2friends)
+   * `async` Get a list of your friends. (requires lazer authentication)
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2friends) | [Check return types](../types/v2/me_friends.ts)
+   */
   friends: me_friends,
+  /**
+   * ### `GET` [/v2/me/{mode?}](https://osu.ppy.sh/docs/index.html#get-own-data)
+   * `async` Get your own data. (requires lazer authentication)
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.mode?` - Gamemode to search for.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-own-data) | [Check return types](../types/v2/me_details.ts)
+   */
   details: me_details,
 };
 
