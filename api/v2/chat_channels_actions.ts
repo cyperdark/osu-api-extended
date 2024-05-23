@@ -10,12 +10,12 @@ type params = ({
 
   is_action: boolean;
 
-  id: number;
+  channel_id: number;
   message: string;
 } | {
   type: 'join' | 'leave';
 
-  id: number;
+  channel_id: number;
   user_id: number;
 } | {
   type: 'read';
@@ -45,34 +45,34 @@ export const chat_channels_actions = async <T extends params>(params: T, addons?
 
   switch (params.type) {
     case 'send':
-      if (params.id == null || params.message == null || params.is_action == null) {
+      if (params.channel_id == null || params.message == null || params.is_action == null) {
         return handleErrors(`Missing required parameters`) as Response<T['type']>;
       };
 
 
-      url += `/chat/channels/${params.id}/messages`;
+      url += `/chat/channels/${params.channel_id}/messages`;
 
       object['message'] = params.message;
       object['is_action'] = params.is_action;
       break;
 
     case 'join':
-      if (params.id == null || params.user_id == null) {
+      if (params.channel_id == null || params.user_id == null) {
         return handleErrors(`Missing required parameters`) as Response<T['type']>;
       };
 
 
-      url += `/chat/channels/${params.id}/users/${params.user_id}`;
+      url += `/chat/channels/${params.channel_id}/users/${params.user_id}`;
       method = 'PUT';
       break;
 
     case 'leave':
-      if (params.id == null || params.user_id == null) {
+      if (params.channel_id == null || params.user_id == null) {
         return handleErrors(`Missing required parameters`) as Response<T['type']>;
       };
 
 
-      url += `/chat/channels/${params.id}/users/${params.user_id}`;
+      url += `/chat/channels/${params.channel_id}/users/${params.user_id}`;
       method = 'DELETE';
       break;
 
