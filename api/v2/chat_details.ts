@@ -7,13 +7,13 @@ import { request } from "../../utility/request";
 type Response = ChatDetailsResponse & IError;
 
 
-export const chat_details = async (channel_id: number, addons?: IDefaultParams): Promise<Response> => {
-  if (channel_id == null) {
+export const chat_details = async (params: { channel_id: number }, addons?: IDefaultParams): Promise<Response> => {
+  if (params.channel_id == null) {
     return handleErrors(`Specify channel id`) as Response;
   };
 
 
-  const data = await request(`https://osu.ppy.sh/api/v2/chat/channels/${channel_id}`, {
+  const data = await request(`https://osu.ppy.sh/api/v2/chat/channels/${params.channel_id}`, {
     method: 'GET',
     addons,
   });
