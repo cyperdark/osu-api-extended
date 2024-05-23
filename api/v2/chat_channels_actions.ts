@@ -18,7 +18,7 @@ type params = ({
   id: number;
   user_id: number;
 } | {
-  type: 'readed';
+  type: 'read';
 
   channel_id: number;
   message_id: number;
@@ -32,7 +32,7 @@ type Response<T extends params['type']> =
   ? chatChannelsActionsJoinResponse & IError
   : T extends 'leave'
   ? "" & IError
-  : T extends 'readed'
+  : T extends 'read'
   ? "" & IError
   : IError;
 
@@ -76,7 +76,7 @@ export const chat_channels_actions = async <T extends params>(params: T, addons?
       method = 'DELETE';
       break;
 
-    case 'readed':
+    case 'read':
       if (params.channel_id == null || params.message_id == null) {
         return handleErrors(`Missing required parameters`) as Response<T['type']>;
       };
