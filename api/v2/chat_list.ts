@@ -8,7 +8,7 @@ type Response = ChatListResponse[] & IError;
 
 
 export const chat_list = async (params: {
-  unreaded?: boolean;
+  unread?: boolean;
   sort?: 'date_desc' | 'date_asc';
 }, addons?: IDefaultParams): Promise<Response> => {
   let data = await request(`https://osu.ppy.sh/api/v2/chat/presence/`, {
@@ -25,7 +25,7 @@ export const chat_list = async (params: {
     data.sort((a: any, b: any) => b.last_message_id - a.last_message_id);
 
 
-  if (params.unreaded == true)
+  if (params.unread == true)
     data = data.filter((r: any) => r.last_read_id != r.last_message_id);
 
 
