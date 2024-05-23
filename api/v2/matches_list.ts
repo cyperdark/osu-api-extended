@@ -8,8 +8,8 @@ type Response = MatchesListResponse & IError;
 
 
 export const matches_list = async (params: {
-  limit: number;
-  sort: 'id_desc' | 'id_asc',
+  limit?: number;
+  sort?: 'id_desc' | 'id_asc',
   /**
    * Use cursor.match_id
    */
