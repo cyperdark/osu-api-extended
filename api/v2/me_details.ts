@@ -8,14 +8,14 @@ import { handleErrors } from "../../utility/handleErrors";
 type Response = MeDetailsResponse & IError;
 
 
-export const me_details = async (addons?: IDefaultParams & { mode: Modes_names }): Promise<Response> => {
+export const me_details = async (params: { mode: Modes_names }, addons?: IDefaultParams): Promise<Response> => {
   if (credentials.method != 'lazer') {
     return handleErrors(`Login via lazer to use this endpoint`) as Response
   };
 
 
   let url = 'https://osu.ppy.sh/api/v2/me';
-  if (addons?.mode) url += `/${addons.mode}`;
+  if (params?.mode) url += `/${params.mode}`;
 
   const data = await request(url, {
     method: 'GET',
