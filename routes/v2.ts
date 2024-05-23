@@ -1301,8 +1301,56 @@ import { matches_list } from "../api/v2/matches_list";
 import { matches_details } from "../api/v2/matches_details";
 
 
+/**
+ * ##### Description
+ * Retrieve data from the matches API.
+ */
 export const matches = {
+  /**
+   * ### `GET` [/v2/matches](https://osu.ppy.sh/docs/index.html#get-apiv2matches)
+   * `async` Get a list of matches.
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.after_id` - ID of the match after which the matches will be returned.
+   * - `params.limit?` - Maximum number of matches to return.
+   * - `params.sort?` - Sort order of the matches.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2matches) | [Check return types](../types/v2/matches_list.ts)
+   */
   list: matches_list,
+  /**
+   * ### `GET` [/v2/matches/{match}](https://osu.ppy.sh/docs/index.html#get-apiv2matchesmatch)
+   * `async` Get a match by certain criteria.
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.match_id` - ID of the match.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2matchesmatch) | [Check return types](../types/v2/matches_details.ts)
+   */
   details: matches_details,
 };
 
