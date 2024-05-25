@@ -49,7 +49,7 @@ export const search_all = async <T extends params>(params: T, addons?: IDefaultP
       url += '/search';
 
 
-      object.mode = params.mode;
+      object.mode = params.location;
       object.query = params.query;
       object.page = params.page;
       break;
