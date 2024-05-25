@@ -78,7 +78,7 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
 
 
   if (addons.legacy_only != null)
-    params.legacy_only = params.legacy_only == true ? 1 : 0;
+    params.legacy_only = addons.legacy_only == true ? 1 : 0;
 
 
   const generate_query = sanitize_query(params);

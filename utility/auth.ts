@@ -56,8 +56,8 @@ export const cache = {
   v1: '',
   v2: '',
 
-  'ratelimit-remaining': 0,
-  'ratelimit-limit': 0,
+  'ratelimit-remaining': 1200,
+  'ratelimit-limit': 1200,
 };
 
 

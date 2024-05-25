@@ -117,6 +117,8 @@ export interface Statistics {
   count_100: number
   count_300: number
   count_50: number
+  count_geki: number
+  count_katu: number
   count_miss: number
   level: Level
   global_rank: number
@@ -165,6 +167,8 @@ export interface Osu {
   count_100: number
   count_300: number
   count_50: number
+  count_geki: number
+  count_katu: number
   count_miss: number
   level: Level2
   global_rank: number
@@ -200,6 +204,8 @@ export interface Taiko {
   count_100: number
   count_300: number
   count_50: number
+  count_geki: number
+  count_katu: number
   count_miss: number
   level: Level3
   global_rank: any
@@ -235,6 +241,8 @@ export interface Fruits {
   count_100: number
   count_300: number
   count_50: number
+  count_geki: number
+  count_katu: number
   count_miss: number
   level: Level4
   global_rank: any
@@ -270,6 +278,8 @@ export interface Mania {
   count_100: number
   count_300: number
   count_50: number
+  count_geki: number
+  count_katu: number
   count_miss: number
   level: Level5
   global_rank: any

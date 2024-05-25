@@ -39,8 +39,10 @@ export interface MaximumStatistics {
 
 
 export interface Statistics {
-  ok: number
-  great: number
+  perfect?: number
+  good?: number
+  ok?: number
+  great?: number
   meh?: number
   miss?: number
 }

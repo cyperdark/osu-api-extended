@@ -12,6 +12,8 @@ export interface Ranking {
   count_100: number
   count_300: number
   count_50: number
+  count_geki: number
+  count_katu: number
   count_miss: number
   level: Level
   global_rank: number

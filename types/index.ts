@@ -44,25 +44,31 @@ export type auth_scopes = (
 )[];
 
 
-export type auth_params = {
-  timeout?: number;
-  tokenPath?: string;
-} & ({
+export type auth_params = ({
   method: 'v2';
 
   client_id: number | string;
   client_secret: string;
+
+  timeout?: number;
+  tokenPath?: string;
 
   scopes: auth_scopes;
 } | {
   method: 'v1';
 
   api_key: string;
+
+  timeout?: number;
+  tokenPath?: string;
 } | {
   method: 'lazer';
 
   login: string;
   password: string;
+
+  timeout?: number;
+  tokenPath?: string;
 } | {
   method: 'cli';
 
@@ -71,6 +77,9 @@ export type auth_params = {
 
   redirect_url: string;
   state: string;
+
+  timeout?: number;
+  tokenPath?: string;
 
   scopes: auth_scopes;
 });

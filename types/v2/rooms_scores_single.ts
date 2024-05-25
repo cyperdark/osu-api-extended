@@ -46,8 +46,12 @@ export interface MaximumStatistics {
 }
 
 export interface Statistics {
-  ok: number
-  great: number
+  perfect?: number
+  good?: number
+  ok?: number
+  great?: number
+  meh?: number
+  miss?: number
   ignore_hit: number
   ignore_miss: number
   large_bonus: number
@@ -157,10 +161,12 @@ export interface MaximumStatistics2 {
 }
 
 export interface Statistics2 {
-  ok: number
-  meh: number
-  miss: number
-  great: number
+  perfect?: number
+  good?: number
+  ok?: number
+  great?: number
+  meh?: number
+  miss?: number
   ignore_hit: number
   ignore_miss: number
   large_bonus: number

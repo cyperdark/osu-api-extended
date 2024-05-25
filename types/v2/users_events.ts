@@ -26,7 +26,7 @@ export interface Event {
   created_at: string;
   createdAt: string;
   id: number;
-  type: ActionType;
+  type: 'achievement' | 'beatmapPlaycount' | 'beatmapsetApprove' | 'beatmapsetDelete' | 'beatmapsetRevive' | 'beatmapsetUpdate' | 'beatmapsetUpload' | 'rank' | 'userSupportAgain' | 'userSupportFirst' | 'userSupportGift' | 'usernameChange';
   scoreRank?: string;
   rank?: number;
   mode?: Modes_names;

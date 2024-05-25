@@ -59,16 +59,18 @@ export interface MaximumStatistics {
 }
 
 export interface Statistics {
-  ok: number
-  great: number
+  perfect?: number
+  good?: number
+  ok?: number
+  great?: number
+  meh?: number
+  miss?: number
   ignore_hit: number
   ignore_miss: number
   large_bonus: number
   small_bonus: number
   large_tick_hit: number
   slider_tail_hit: number
-  meh?: number
-  miss?: number
   large_tick_miss?: number
 }
 

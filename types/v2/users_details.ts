@@ -10,25 +10,25 @@ export interface UsersDetailsResponse {
   is_supporter: boolean
   last_visit: string
   pm_friends_only: boolean
-  profile_colour?: string
+  profile_colour: string
   username: string
   cover_url: string
-  discord?: string
+  discord: string
   has_supported: boolean
-  interests?: string
+  interests: string
   join_date: string
-  location?: string
+  location: string
   max_blocks: number
   max_friends: number
-  occupation?: string
+  occupation: string
   playmode: string
-  playstyle?: string[]
+  playstyle: string[]
   post_count: number
   profile_order: string[]
-  title: any
+  title: string
   title_url: any
-  twitter?: string
-  website?: string
+  twitter: string
+  website: string
   country: Country
   cover: Cover
   kudosu: Kudosu

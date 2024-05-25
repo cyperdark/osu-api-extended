@@ -4,7 +4,7 @@ import { IDefaultParams, IError } from "../../types";
 import { handleErrors } from "../../utility/handleErrors";
 
 
-type Response = UsersEventsResponse[] & IError;
+type Response = UsersEventsResponse & IError;
 
 
 export const users_events = async ({ sort, cursor_string, type }: {
@@ -26,8 +26,11 @@ export const users_events = async ({ sort, cursor_string, type }: {
   };
 
 
-  const sorted = data.events.filter((r: any) => type.includes(r.type));
-  data.events = sorted;
+  if (type) {
+    const sorted = data.events.filter((r: any) => type.includes(r.type));
+    data.events = sorted;
+  };
+
 
   return data;
 };

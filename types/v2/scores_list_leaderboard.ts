@@ -42,10 +42,12 @@ export interface MaximumStatistics {
 
 
 export interface Statistics {
+  perfect?: number
+  good?: number
   ok?: number
-  great: number
-  miss?: number
+  great?: number
   meh?: number
+  miss?: number
   ignore_hit?: number
   ignore_miss?: number
   slider_tail_hit?: number

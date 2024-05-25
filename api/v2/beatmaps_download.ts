@@ -14,9 +14,9 @@ type params = ({
   host: 'osu' | 'osu_direct_mirror' | 'catboy';
 
   file_path: string;
-  overwrite: boolean;
+  overwrite?: boolean;
 
-  progress_track_fn: (host: string, progress: number) => void;
+  progress_track_fn?: (host: string, progress: number) => void;
 } | {
   type: 'set';
 
@@ -25,9 +25,9 @@ type params = ({
 
   file_path: string;
   no_video?: boolean;
-  overwrite: boolean;
+  overwrite?: boolean;
 
-  progress_track_fn: (host: string, progress: number) => void;
+  progress_track_fn?: (host: string, progress: number) => void;
 });
 
 
