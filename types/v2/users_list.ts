@@ -181,6 +181,7 @@ export interface Mania {
   replays_watched_by_others: number
   is_ranked: boolean
   grade_counts: GradeCounts4
+  variants: Variant[]
 }
 
 export interface Level4 {
@@ -194,4 +195,13 @@ export interface GradeCounts4 {
   s: number
   sh: number
   a: number
+}
+
+
+export interface Variant {
+  mode: string
+  variant: string
+  country_rank: number
+  global_rank: number
+  pp: number
 }

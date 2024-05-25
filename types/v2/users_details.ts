@@ -150,6 +150,7 @@ export interface Statistics {
   grade_counts: GradeCounts
   country_rank: number
   rank: Rank
+  variants: Variant[]
 }
 
 export interface Level {
@@ -167,6 +168,14 @@ export interface GradeCounts {
 
 export interface Rank {
   country: number
+}
+
+export interface Variant {
+  mode: string
+  variant: string
+  country_rank: number
+  global_rank: number
+  pp: number
 }
 
 export interface UserAchievement {
