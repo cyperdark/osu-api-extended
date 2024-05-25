@@ -8,16 +8,16 @@ type Response = UsersDetailsResponse & IError;
 
 
 export const users_details = async (params: {
-  id?: number | string;
+  user?: number | string;
   mode?: Modes_names;
   key?: 'id' | 'username';
 }, addons?: IDefaultParams): Promise<Response> => {
-  if (params.id == null) {
+  if (params.user == null) {
     return handleErrors(`Specify user id or name`) as Response;
   };
 
 
-  const data = await request(`https://osu.ppy.sh/api/v2/users/${params.id}${params.mode ? `/${params.mode}` : ''}`, {
+  const data = await request(`https://osu.ppy.sh/api/v2/users/${params.user}${params.mode ? `/${params.mode}` : ''}`, {
     method: 'GET',
     params: { key: params.key },
     addons,
