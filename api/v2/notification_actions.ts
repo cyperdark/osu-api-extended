@@ -40,9 +40,9 @@ export const notification_actions = async <T extends params>(params: T, addons?:
       url += '/notifications/mark-read';
       method = 'POST';
 
-      // if (params.notifications == null && params.identities == null) {
-      //   return handleErrors(`Missing on of parameters`) as Response<T['type']>;
-      // };
+      if (!Array.isArray(params.notifications) && !Array.isArray(params.identities)) {
+        return handleErrors(`Missing on of parameters`) as Response<T['type']>;
+      };
 
       // params.ids.forEach((r, index) => object[`identities[${index}][id]`] = r);
 
