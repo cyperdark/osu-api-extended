@@ -31,6 +31,7 @@ export interface response {
       sh: number;
       a: number;
     };
+    rank_change_since_30_days?: number;
     user: {
       avatar_url: string;
       country_code: string;
