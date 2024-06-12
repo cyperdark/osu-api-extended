@@ -621,6 +621,10 @@ const flags: {
     {
       flag: "ER",
       country: "Eritrea"
+    },
+    {
+      flag: "AF",
+      country: "Afghanistan"
     }
   ];
 
