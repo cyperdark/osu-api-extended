@@ -25,6 +25,8 @@ export const ModsToName = (modsNumber: number, order?: boolean): string => {
         convertedParts.push(bitValues[Math.log2(bit)]);
       };
       bit <<= 1;
+
+      if (bit == 0) break;
     };
 
     convertedParts.sort((a, b) => ModsOrder[a.toLowerCase()] - ModsOrder[b.toLowerCase()]);
@@ -41,6 +43,8 @@ export const ModsToName = (modsNumber: number, order?: boolean): string => {
       convertedParts += bitValues[Math.log2(bit)];
     }
     bit <<= 1;
+
+    if (bit == 0) break;
   };
 
   return convertedParts;
@@ -212,8 +216,8 @@ export const calculate_mods = (ModsName: Mod[] | string | number, order?: boolea
         mods_id += 1073741824;
         convertedParts.push('MR');
         break;
-        
-        default:
+
+      default:
         convertedParts.push(mod_name.toUpperCase());
         break;
     };
