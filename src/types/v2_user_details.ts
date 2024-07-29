@@ -11,6 +11,7 @@ export interface response {
   last_visit: string;
   pm_friends_only: boolean;
   profile_colour: string;
+  profile_hue?: number;
   username: string;
   cover_url: string;
   discord: string;
@@ -52,6 +53,18 @@ export interface response {
   }[];
   beatmap_playcounts_count: number;
   comments_count: number;
+  daily_challenge_user_stats: {
+    daily_streak_best: number
+    daily_streak_current: number
+    last_update?: string
+    last_weekly_streak?: string
+    playcount: number
+    top_10p_placements: number
+    top_50p_placements: number
+    user_id: number
+    weekly_streak_best: number
+    weekly_streak_current: number
+  }
   favourite_beatmapset_count: number;
   follower_count: number;
   graveyard_beatmapset_count: number;
