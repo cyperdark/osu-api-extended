@@ -8,26 +8,27 @@ export interface UsersDetailsResponse {
   is_deleted: boolean
   is_online: boolean
   is_supporter: boolean
-  last_visit: string
+  last_visit?: string
   pm_friends_only: boolean
   profile_colour: string
   username: string
   cover_url: string
-  discord: string
+  discord?: string
   has_supported: boolean
   interests: string
   join_date: string
   location: string
   max_blocks: number
   max_friends: number
-  occupation: string
+  occupation?: string
   playmode: string
   playstyle: string[]
   post_count: number
+  profile_hue: number
   profile_order: string[]
-  title: string
+  title?: string
   title_url: any
-  twitter: string
+  twitter?: string
   website: string
   country: Country
   cover: Cover
@@ -38,6 +39,7 @@ export interface UsersDetailsResponse {
   badges: Badge[]
   beatmap_playcounts_count: number
   comments_count: number
+  daily_challenge_user_stats: DailyChallengeUserStats
   favourite_beatmapset_count: number
   follower_count: number
   graveyard_beatmapset_count: number
@@ -64,6 +66,7 @@ export interface UsersDetailsResponse {
   rankHistory: RankHistory2
   ranked_and_approved_beatmapset_count: number
   unranked_beatmapset_count: number
+  is_restricted?: boolean
 }
 
 export interface UserAuth extends UsersDetailsResponse {
@@ -80,7 +83,7 @@ export interface Country {
 export interface Cover {
   custom_url: string
   url: string
-  id: any
+  id?: string
 }
 
 export interface Kudosu {
@@ -106,6 +109,19 @@ export interface Group {
   name: string
   short_name: string
   playmodes: any
+}
+
+export interface DailyChallengeUserStats {
+  daily_streak_best: number
+  daily_streak_current: number
+  last_update?: string
+  last_weekly_streak?: string
+  playcount: number
+  top_10p_placements: number
+  top_50p_placements: number
+  user_id: number
+  weekly_streak_best: number
+  weekly_streak_current: number
 }
 
 export interface MonthlyPlaycount {
@@ -150,7 +166,7 @@ export interface Statistics {
   grade_counts: GradeCounts
   country_rank: number
   rank: Rank
-  variants: Variant[]
+  variants?: Variant[]
 }
 
 export interface Level {
