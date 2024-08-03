@@ -1521,8 +1521,34 @@ export const chat = {
 
 import { session_actions } from "../api/v2/session_actions";
 
-
+/**
+ * ##### Description
+ * Retrieve data from the session API.
+ */
 export const session = {
+  /**
+   * ### `POST` [/v2/session/verify](https://osu.ppy.sh/docs/index.html#post-apiv2sessionverify)
+   * ### `POST` [/v2/session/verify/reissue](https://osu.ppy.sh/docs/index.html#post-apiv2sessionverifyreissue)
+   * ### `DELETE` [/v2/oauth/tokens/current](https://osu.ppy.sh/docs/index.html#revoke-current-token)
+   * `async` Perform session actions via endpoint.
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.type` - Type of the action to perform.
+   * - `addons` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#post-apiv2sessionverify) | [Check return types](../types/v2/session_actions.ts)
+   */
   actions: session_actions,
 };
 
