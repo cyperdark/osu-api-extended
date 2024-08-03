@@ -1559,8 +1559,37 @@ import { rooms_details } from "../api/v2/rooms_details";
 import { rooms_leaderboard } from "../api/v2/rooms_leaderboard";
 import { rooms_scores } from "../api/v2/rooms_scores";
 
-
+/**
+ * ##### Description
+ * Retrieve data from the rooms API.
+ */
 export const rooms = {
+  /**
+   * ### `GET` [/v2/rooms](https://osu.ppy.sh/docs/index.html#get-multiplayer-rooms)
+   * `async` Retrieve a list of multiplayer rooms.
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.type?` - Type of rooms to retrieve.
+   * - `params.status?` - Status of the rooms to retrieve.
+   * - `params.query?` - Query to search for.
+   * - `params.limit?` - Number of rooms to return.
+   * - `params.sort?` - Sort order of the rooms.
+   * - `params.cursor_string?` - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-multiplayer-rooms) | [Check return types](../types/v2/rooms_list.ts)
+   */
   list: rooms_list,
   scores: rooms_scores,
   details: rooms_details,
