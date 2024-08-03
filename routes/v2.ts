@@ -1591,7 +1591,79 @@ export const rooms = {
    * [See documentation](https://osu.ppy.sh/docs/index.html#get-multiplayer-rooms) | [Check return types](../types/v2/rooms_list.ts)
    */
   list: rooms_list,
+  /**
+   * ### `GET` [/v2/rooms/{room}/playlist/{playlist}/scores](https://osu.ppy.sh/docs/index.html#get-scores)
+   * ### `GET` [/v2/rooms/{room}/playlist/{playlist}/scores/{score}](https://osu.ppy.sh/docs/index.html#get-a-score)
+   * ### `GET` [/v2/rooms/{room}/playlist/{playlist}/scores/users/{user}](https://osu.ppy.sh/docs/index.html#get-user-high-score)
+   * `async` Retrieve a list of scores from playlists.
+   *
+   * &nbsp;
+   *
+   * ### Global Parameters
+   * - `params.type` - Type of retrieval.
+   * - `params.id` - ID of the room.
+   * - `params.playlist_id` - ID of the playlist.
+   *
+   * ### Parameters for `params.type: 'all'`
+   * - `params.limit?` - Maximum number of scores to return.
+   * - `params.sort?` - Sort order of the scores.
+   * - `params.cursor_string?` - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-scores) | [Check return types](../types/v2/rooms_scores.ts)
+   */
   scores: rooms_scores,
+  /**
+   * ### `GET` [/v2/rooms/{room}](https://osu.ppy.sh/docs/index.html#get-apiv2roomsroom)
+   * `async` Retrieve a room by given parameters.
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.id` - ID of the room to retrieve.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2roomsroom) | [Check return types](../types/v2/rooms_details.ts)
+   */
   details: rooms_details,
+  /**
+   * ### `GET` [/v2/rooms/{room}/leaderboard](https://osu.ppy.sh/docs/index.html#get-apiv2roomsroomleaderboard)
+   * `async` Retrieve a leaderboard from a room.
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.id` - ID of the room.
+   * - `params.limit?` - Maximum number of scores to return.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * // TBA
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2roomsroomleaderboard) | [Check return types](../types/v2/rooms_leaderboard.ts)
+   */
   leaderboard: rooms_leaderboard,
 };
