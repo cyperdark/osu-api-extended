@@ -9,7 +9,7 @@ type Response = RoomsListResponse & IError;
 
 export const rooms_list = async (params: {
   type?: 'playlists' | 'realtime';
-  show?: 'all' | 'active' | 'ended' | 'participated' | 'owned';
+  status?: 'all' | 'active' | 'ended' | 'participated' | 'owned';
 
   query?: string;
 
@@ -26,7 +26,7 @@ export const rooms_list = async (params: {
     method: 'GET',
     params: {
       type_group: params.type,
-      mode: params.show,
+      mode: params.status,
       sort: params.sort,
       limit: params.limit,
       cursor_string: params.cursor_string,
