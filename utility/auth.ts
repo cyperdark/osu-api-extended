@@ -210,12 +210,12 @@ const lazer_login = async (login: string, password: string): Promise<lazer_auth_
 };
 
 
-const authorize_cli = async (client_id: number | string, client_secret: string, redirect_uri: string, scopes: auth_scopes, state?: string): Promise<auth_response> => {
+const authorize_cli = async (client_id: number | string, client_secret: string, redirect_url: string, scopes: auth_scopes, state?: string): Promise<auth_response> => {
   const cl = readln.createInterface(process.stdin, process.stdout);
   const question = (q: string) => new Promise((res, rej) => cl.question(q + ': ', (answer: string) => res(answer)));
 
 
-  const url = build_url({ client_id, redirect_uri, scopes, state });
+  const url = build_url({ client_id, redirect_url, scopes, state });
   const start = (process.platform == 'darwin' ? 'open' : process.platform == 'win32' ? 'start' : 'xdg-open');
   execSync(start + ' ' + url.replace(/&/g, '^&'));
 
@@ -231,7 +231,7 @@ const authorize_cli = async (client_id: number | string, client_secret: string, 
       grant_type: 'authorization_code',
       client_id: client_id,
       client_secret: client_secret,
-      redirect_uri: redirect_uri,
+      redirect_uri: redirect_url,
       code,
     })
   });
@@ -244,16 +244,16 @@ const authorize_cli = async (client_id: number | string, client_secret: string, 
 };
 
 
-export const build_url = ({ client_id, redirect_uri, scopes, state }: {
+export const build_url = ({ client_id, redirect_url, scopes, state }: {
   client_id: number | string,
-  redirect_uri: string,
+  redirect_url: string,
   scopes: auth_scopes,
   state?: string
 }): string => {
   const url = new URL('https://osu.ppy.sh/oauth/authorize');
   const params: any = {
     client_id: client_id,
-    redirect_uri: redirect_uri,
+    redirect_uri: redirect_url,
     response_type: 'code',
     scope: scopes.join(' '),
   };
