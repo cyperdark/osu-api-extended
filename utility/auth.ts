@@ -5,7 +5,7 @@ import path from "path";
 import fs from "fs";
 
 
-import { auth_params, auth_response, auth_scopes, lazer_auth_response, Modes_names } from '../types/index';
+import { auth_params, auth_response, auth_scopes, IError, lazer_auth_response, Modes_names } from '../types/index';
 import { UserAuth } from '../types/v2/users_details';
 import { handleErrors } from './handleErrors';
 
@@ -17,7 +17,7 @@ export const settings = {
 
 
 export const credentials: {
-  method: any;
+  type: any;
 
   api_key: string;
 
@@ -34,7 +34,7 @@ export const credentials: {
 
   scopes: auth_scopes;
 } = {
-  method: '' as any,
+  type: '' as any,
 
   api_key: '',
 
@@ -61,40 +61,51 @@ export const cache = {
 };
 
 
+type ResponseLogin<T extends auth_params['type']> =
+  T extends 'v2'
+  ? Promise<auth_response & IError>
+  : T extends 'v1'
+  ? string
+  : T extends 'lazer'
+  ? Promise<lazer_auth_response & IError>
+  : T extends 'cli'
+  ? Promise<auth_response & IError>
+  : null;
 
-export const login = (params: auth_params) => {
-  credentials.method = params.method;
+
+export const login = <T extends auth_params>(params: auth_params): ResponseLogin<T['type']> => {
+  credentials.type = params.type;
 
   if (params.tokenPath) credentials.tokenPath = params.tokenPath;
   if (params.timeout) settings.timeout = params.timeout;
 
 
-  if (params.method == 'v1') {
+  if (params.type == 'v1') {
     credentials.api_key = params.api_key;
 
     cache.v1 = params.api_key;
-    return cache.v1;
+    return cache.v1 as ResponseLogin<T['type']>;
   };
 
 
-  if (params.method == 'v2') {
+  if (params.type == 'v2') {
     credentials.client_id = params.client_id;
     credentials.client_secret = params.client_secret;
     if (params.scopes) credentials.scopes = params.scopes;
 
-    return client_login(params.client_id, params.client_secret, params.scopes || ['public']);
+    return client_login(params.client_id, params.client_secret, params.scopes || ['public']) as ResponseLogin<T['type']>;
   };
 
 
-  if (params.method == 'lazer') {
+  if (params.type == 'lazer') {
     credentials.login = params.login;
     credentials.password = params.password;
 
-    return lazer_login(params.login, params.password);
+    return lazer_login(params.login, params.password) as ResponseLogin<T['type']>;
   };
 
 
-  if (params.method == 'cli') {
+  if (params.type == 'cli') {
     credentials.client_id = params.client_id;
     credentials.client_secret = params.client_secret;
     if (params.scopes) credentials.scopes = params.scopes;
@@ -102,7 +113,7 @@ export const login = (params: auth_params) => {
     credentials.redirect_url = params.redirect_url;
     credentials.state = params.state;
 
-    return authorize_cli(params.client_id, params.client_secret, params.redirect_url, params.scopes || ['public'], params.state);
+    return authorize_cli(params.client_id, params.client_secret, params.redirect_url, params.scopes || ['public'], params.state) as ResponseLogin<T['type']>;
   };
 
 

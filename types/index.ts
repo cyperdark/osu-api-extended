@@ -45,7 +45,7 @@ export type auth_scopes = (
 
 
 export type auth_params = ({
-  method: 'v2';
+  type: 'v2';
 
   client_id: number | string;
   client_secret: string;
@@ -55,14 +55,14 @@ export type auth_params = ({
 
   scopes: auth_scopes;
 } | {
-  method: 'v1';
+  type: 'v1';
 
   api_key: string;
 
   timeout?: number;
   tokenPath?: string;
 } | {
-  method: 'lazer';
+  type: 'lazer';
 
   login: string;
   password: string;
@@ -70,7 +70,7 @@ export type auth_params = ({
   timeout?: number;
   tokenPath?: string;
 } | {
-  method: 'cli';
+  type: 'cli';
 
   client_id: number | string;
   client_secret: string;

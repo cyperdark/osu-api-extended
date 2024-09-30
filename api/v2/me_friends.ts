@@ -9,7 +9,7 @@ type Response = MeFriendsResponse[] & IError;
 
 
 export const me_friends = async (addons?: IDefaultParams): Promise<Response> => {
-  if (credentials.method != 'lazer') {
+  if (credentials.type != 'lazer') {
     return handleErrors(`Login via lazer to use this endpoint`) as Response
   };
 
