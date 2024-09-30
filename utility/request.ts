@@ -133,7 +133,7 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
           };
 
 
-          if ('error' in parse) {
+          if ('error' in parse && Object.keys(parse).length == 1) {
             if (parse.error === null) {
               return resolve({ error: `osu returned empty error, double check your parameters (request)` });
             };
