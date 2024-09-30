@@ -21,7 +21,7 @@ type params = ({
   type: 'set';
 
   id: number;
-  host: 'osu' | 'beatconnect' | 'nerinyan' | 'osu_direct_mirror' | 'sayobot' | 'gatari' | 'ripple' | 'catboy',
+  host: 'osu' | 'beatconnect' | 'nerinyan' | 'osu_direct_mirror' | 'sayobot' | 'gatari' | 'ripple' | 'catboy' | 'mino' | 'akatsuki',
 
   file_path: string;
   no_video?: boolean;
@@ -79,13 +79,14 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
       // DOESNT WORK FOR SOME REASON
       case 'nerinyan':
         url = `https://api.nerinyan.moe/d/${params.id}${params.no_video ? '?nv=1' : ''}`;
-        headers = {
-          Accept: 'application/x-osu-beatmap-archive'
-        };
+        headers['Accept'] = 'application/x-osu-beatmap-archive';
+        headers['Referer'] = 'https://nerinyan.moe/';
+        headers['User-Agent'] = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36`;
         break;
 
       case 'osu_direct_mirror':
-        url = `https://api.osu.direct/d/${params.id}`
+        url = `https://osu.direct/api/d/${params.id}`
+        // headers['User-Agent'] = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36`;
         break;
 
       case 'gatari':
@@ -98,18 +99,20 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
         headers['Referer'] = 'https://ripple.moe/';
         break;
 
-      // case 'akatsuki':
-      //   url = `https://akatsuki.gg/d/${params.id}`;
-      //   headers['Referer'] = 'https://akatsuki.gg/';
-      //   break;
+      case 'akatsuki':
+        url = `https://akatsuki.gg/d/${params.id}`;
+        headers['Referer'] = 'https://akatsuki.gg/';
+        break;
 
+      case 'mino':
       case 'catboy':
         url = `https://catboy.best/d/${params.id}`;
         headers['Referer'] = 'https://catboy.best/';
+        headers['User-Agent'] = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36`;
         break;
 
       case 'osu':
-        if ((addons.authKey || cache.v2) == null) {
+        if ((addons?.authKey || cache.v2) == null) {
           return handleErrors('osu is not authorized') as Response;
         };
 
@@ -119,7 +122,7 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
         break;
 
       default:
-        return handleErrors(`Unsupported type: ${(params as any).type}`) as Response;
+        return handleErrors(`Unsupported host: ${(params as any).host}`) as Response;
     };
 
 
