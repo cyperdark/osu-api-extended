@@ -3,6 +3,7 @@ import { IDefaultParams, IError } from "../../types";
 import { chatChannelsActionsSendResponse } from "../../types/v2/chat_channels_actions_send";
 import { chatChannelsActionsJoinResponse } from "../../types/v2/chat_channels_actions_join";
 import { handleErrors } from "../../utility/handleErrors";
+import { credentials } from "../../utility/auth";
 
 
 type params = ({
@@ -38,6 +39,11 @@ type Response<T extends params['type']> =
 
 
 export const chat_channels_actions = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
+  if (credentials.type != 'lazer') {
+    return handleErrors(`Login via lazer to use this endpoint`) as Response<T['type']>;
+  };
+
+
   const object: any = {};
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'POST';

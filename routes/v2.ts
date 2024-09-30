@@ -2782,9 +2782,10 @@ export const rooms = {
    * async function main() {
    *   try {
    *     await auth.login({
-   *       type: 'v2',
-   *       client_id: CLIENT_ID,
-   *       client_secret: CLIENT_SECRET,
+   *       type: 'lazer',
+   *       login,
+   *       password,
+   *       tokenPath: './test.json'
    *     });
    * 
    *     const result = await v2.rooms.details({
@@ -2829,9 +2830,10 @@ export const rooms = {
    * async function main() {
    *   try {
    *     await auth.login({
-   *       type: 'v2',
-   *       client_id: CLIENT_ID,
-   *       client_secret: CLIENT_SECRET,
+   *       type: 'lazer',
+   *       login,
+   *       password,
+   *       tokenPath: './test.json'
    *     });
    * 
    *     const result = await v2.rooms.leaderboard({

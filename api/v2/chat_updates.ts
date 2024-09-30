@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { ChatUpdatesResponse } from "../../types/v2/chat_updates";
+import { credentials } from "../../utility/auth";
 import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
@@ -12,6 +13,11 @@ export const chat_updates = async (params: {
   includes: ('presence' | 'silences' | 'messages')[];
   history_since: number;
 }, addons?: IDefaultParams): Promise<Response> => {
+  if (credentials.type != 'lazer') {
+    return handleErrors(`Login via lazer to use this endpoint`) as Response
+  };
+
+
   const data = await request(`https://osu.ppy.sh/api/v2/chat/updates`, {
     method: 'GET',
     params: {

@@ -1,6 +1,7 @@
 import { request } from "../../utility/request";
 import { IDefaultParams, IError } from "../../types";
 import { handleErrors } from "../../utility/handleErrors";
+import { credentials } from "../../utility/auth";
 
 
 type params = ({
@@ -34,6 +35,10 @@ export const session_actions = async <T extends params>(params: T, addons?: IDef
 
   switch (params?.type) {
     case 'verify':
+      if (credentials.type != 'lazer') {
+        return handleErrors(`Login via lazer to use this endpoint`);
+      };
+
       if (params?.code == null) {
         return handleErrors(`Specify verification code`) as Response<T['type']>;
       };
@@ -52,6 +57,10 @@ export const session_actions = async <T extends params>(params: T, addons?: IDef
       break;
 
     case 'reissue':
+      if (credentials.type != 'lazer') {
+        return handleErrors(`Login via lazer to use this endpoint`);
+      };
+
       url += `/session/verify/reissue`;
 
       break;

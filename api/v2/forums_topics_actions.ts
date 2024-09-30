@@ -5,6 +5,7 @@ import { ForumsTopicsActionsReplyResponse } from "../../types/v2/forums_topics_a
 import { ForumsTopicsActionsEditTopicResponse } from "../../types/v2/forums_topics_actions_edit_topic";
 import { ForumsTopicsActionsEditPostResponse } from "../../types/v2/forums_topics_actions_edit_post";
 import { handleErrors } from "../../utility/handleErrors";
+import { credentials } from "../../utility/auth";
 
 
 type params = ({
@@ -59,6 +60,11 @@ type Response<T extends params['type']> =
 
 
 export const forums_topics_actions = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
+  if (credentials.type != 'lazer') {
+    return handleErrors(`Login via lazer to use this endpoint`) as Response<T['type']>;
+  };
+
+
   let object: any = {};
   const body: any[] = [];
 

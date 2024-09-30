@@ -1,6 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { download } from "../../utility/request";
-import { cache } from "../../utility/auth";
+import { cache, credentials } from "../../utility/auth";
 import path from "path";
 import fs from "fs";
 import { handleErrors } from "../../utility/handleErrors";
@@ -112,6 +112,10 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
         break;
 
       case 'osu':
+        if (credentials.type != 'lazer') {
+          return handleErrors(`Login via lazer to use this endpoint`) as Response
+        };
+
         if ((addons?.authKey || cache.v2) == null) {
           return handleErrors('osu is not authorized') as Response;
         };

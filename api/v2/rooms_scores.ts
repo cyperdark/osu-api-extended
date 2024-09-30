@@ -4,6 +4,7 @@ import { RoomsScoresSingleResponse } from "../../types/v2/rooms_scores_single";
 import { RoomScoresUserHighestResponse } from "../../types/v2/rooms_scores_user_highest";
 import { RoomsScoresAllResponse } from "../../types/v2/rooms_scores_all";
 import { handleErrors } from "../../utility/handleErrors";
+import { credentials } from "../../utility/auth";
 
 
 type params = ({
@@ -42,6 +43,11 @@ type Response<T extends params['type']> =
 
 
 export const rooms_scores = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
+  if (credentials.type != 'lazer') {
+    return handleErrors(`Login via lazer to use this endpoint`) as Response<T['type']>;
+  };
+
+
   let object: any = {};
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'GET';

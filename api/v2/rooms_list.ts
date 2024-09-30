@@ -1,5 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
 import { RoomsListResponse } from "../../types/v2/rooms_list";
+import { credentials } from "../../utility/auth";
 import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
@@ -18,6 +19,10 @@ export const rooms_list = async (params: {
 
   cursor_string?: string;
 }, addons?: IDefaultParams): Promise<Response> => {
+  if (credentials.type != 'lazer') {
+    return handleErrors(`Login via lazer to use this endpoint`) as Response
+  };
+
   if (addons == null)
     addons = { apiVersion: '99999999' }
 
