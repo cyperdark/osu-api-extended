@@ -1,6 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
-import { BeamapsDetailsDifficulty } from "../../types/v2/beamaps_details_difficulty";
-import { BeamapsDetailsSet } from "../../types/v2/beamaps_details_set";
+import { BeamapsDetailsDifficulty } from "../../types/v2/beatmaps_details_difficulty";
+import { BeamapsDetailsSet } from "../../types/v2/beatmaps_details_set";
 import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 

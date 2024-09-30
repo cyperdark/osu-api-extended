@@ -196,7 +196,7 @@ export const beatmaps = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmap) | [Check return types](../types/v2/beatmaps_details.ts)
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmap) | [Check return types](../types/v2/beatmaps_details_set.ts)
    */
   details: beatmaps_details,
   /**
@@ -244,7 +244,7 @@ export const beatmaps = {
      *
      * &nbsp;
      *
-     * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2beatmapsetsevents) | [Check return types](../types/v2/beatmaps_events_list.ts)
+     * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2beatmapsetsevents) | [Check return types](../types/v2/beatmaps_events.ts)
      */
     list: beatmaps_events_list,
   },
@@ -313,7 +313,7 @@ export const beatmaps = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2beatmapsetsbeatmapsetdownload) | [Check return types](../types/v2/beatmaps_download.ts)
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2beatmapsetsbeatmapsetdownload)
    */
   download: beatmaps_download,
   /**
@@ -532,7 +532,7 @@ export const changelogs = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-changelog-listing) | [Check return types](../types/v2/changelogs_list.ts)
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-changelog-listing) | [Check return types](../types/v2/changelogs_list_all.ts)
    */
   list: changelogs_list,
   /**
@@ -1122,7 +1122,7 @@ export const scores = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmap-scores) | [Check return types](../types/v2/scores_list.ts)
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmap-scores) | [Check return types](../types/v2/scores_list_user_recent.ts)
    *
    */
   list: scores_list,
@@ -1401,7 +1401,7 @@ export const forums = {
      * &nbsp;
      *
      *
-     * [See documentation](https://osu.ppy.sh/docs/index.html#forum) | [Check return types](../)
+     * [See documentation](https://osu.ppy.sh/docs/index.html#forum) | [Check return types](../types/v2/forums_topics_actions_reply.ts)
      */
     actions: forums_topics_actions,
   },
@@ -1483,7 +1483,7 @@ import { search_all } from '../api/v2/search';
  *
  * &nbsp;
  *
- * [See documentation](https://osu.ppy.sh/docs/index.html#search) | [Check return types](../types/v2/search.ts)
+ * [See documentation](https://osu.ppy.sh/docs/index.html#search) | [Check return types](../types/v2/search_all.ts)
  *
  */
 export const search = search_all;
@@ -1584,7 +1584,7 @@ export const assets = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2seasonal-backgrounds) | [Check return types](../types/v2/assets_backgrounds.ts)
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2seasonal-backgrounds) | [Check return types](../types/v2/assets_datafiles.ts)
    */
   dataFiles: assets_dataFiles
 };
@@ -1782,7 +1782,7 @@ export const notifications = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#mark-notifications-as-read) | [Check return types](../types/v2/notification_actions.ts)
+   * [See documentation](https://osu.ppy.sh/docs/index.html#mark-notifications-as-read)
    */
   actions: notification_actions,
 };
@@ -1876,7 +1876,7 @@ export const ranking = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-ranking) | [Check return types](../types/v2/ranking_list.ts)
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-ranking) | [Check return types](../types/v2/ranking_list_performance.ts)
    */
   list: ranking_list,
 };
@@ -2398,7 +2398,7 @@ export const chat = {
      *
      * &nbsp;
      *
-     * [See documentation](https://osu.ppy.sh/docs/index.html#send-message-to-channel) | [Check return types](../types/v2/chat_channels_actions.ts)
+     * [See documentation](https://osu.ppy.sh/docs/index.html#send-message-to-channel)
      */
     actions: chat_channels_actions,
   },
@@ -2543,7 +2543,7 @@ export const chat = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-channel) | [Check return types](../types/v2/chat_channels.ts)
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-channel) | [Check return types](../types/v2/chat_details.ts)
    */
   details: chat_details,
   actions: chat_actions,
@@ -2614,7 +2614,7 @@ export const session = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#post-apiv2sessionverify) | [Check return types](../types/v2/session_actions.ts)
+   * [See documentation](https://osu.ppy.sh/docs/index.html#post-apiv2sessionverify)
    */
   actions: session_actions,
 };
@@ -2760,7 +2760,7 @@ export const rooms = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-scores) | [Check return types](../types/v2/rooms_scores.ts)
+   * [See documentation](https://osu.ppy.sh/docs/index.html#get-scores) | [Check return types](../types/v2/rooms_scores_all.ts)
    */
   scores: rooms_scores,
   /**
