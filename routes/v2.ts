@@ -2402,7 +2402,6 @@ export const chat = {
      */
     actions: chat_channels_actions,
   },
-  list: chat_list,
   /**
    * ### `GET [/v2/chat/channels/{channel}/messages](https://osu.ppy.sh/docs/index.html#get-channel-messages)
    * `async` Get a list of messages in a channel. (Requires lazer authentication)
