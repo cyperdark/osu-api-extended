@@ -35,7 +35,7 @@ export const notification_actions = async <T extends params>(params: T, addons?:
   let method = 'GET';
 
 
-  switch (params.type) {
+  switch (params?.type) {
     case 'mark_as_read':
       url += '/notifications/mark-read';
       method = 'POST';
@@ -46,11 +46,11 @@ export const notification_actions = async <T extends params>(params: T, addons?:
 
       // params.ids.forEach((r, index) => object[`identities[${index}][id]`] = r);
 
-      if (Array.isArray(params.notifications)) {
+      if (Array.isArray(params?.notifications)) {
         object['notifications'] = params.notifications;
       };
 
-      if (Array.isArray(params.identities)) {
+      if (Array.isArray(params?.identities)) {
         object['identities'] = params.identities;
       };
       break;

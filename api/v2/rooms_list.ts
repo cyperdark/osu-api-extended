@@ -22,23 +22,24 @@ export const rooms_list = async (params: {
     addons = { apiVersion: '99999999' }
 
 
-  const data = await request(`https://osu.ppy.sh/api/v2/rooms`, {
+  let data = await request(`https://osu.ppy.sh/api/v2/rooms`, {
     method: 'GET',
     params: {
-      type_group: params.type,
-      mode: params.status,
-      sort: params.sort,
-      limit: params.limit,
-      cursor_string: params.cursor_string,
+      type_group: params?.type,
+      mode: params?.status,
+      sort: params?.sort,
+      limit: params?.limit,
+      cursor_string: params?.cursor_string,
     },
     addons,
   });
 
   if (data.error) return handleErrors(data.error);
 
-
-  if (params?.query && !('error' in data))
-    data.rooms = data.rooms.filter((r: any) => r.name.toLowerCase().includes(params.query.trim().toLowerCase()))
+  if (params?.query && !('error' in data)) {
+    if (data.rooms) data.rooms = data.rooms.filter((r: any) => r.name.toLowerCase().includes(params?.query.trim().toLowerCase()))
+    else data = data.filter((r: any) => r.name.toLowerCase().includes(params?.query.trim().toLowerCase()))
+  };
 
 
   return data;

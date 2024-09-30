@@ -8,7 +8,7 @@ type Response = ChatDetailsResponse & IError;
 
 
 export const chat_details = async (params: { channel_id: number }, addons?: IDefaultParams): Promise<Response> => {
-  if (params.channel_id == null) {
+  if (params?.channel_id == null) {
     return handleErrors(`Specify channel id`) as Response;
   };
 

@@ -10,7 +10,7 @@ type params = ({
   from_build?: string;
   to_build?: string;
 
-  stream_name?: string;
+  stream_name?: 'stable40' | 'beta40' | 'cuttingedge' | 'lazer' | 'web';
   max_id?: string;
 
   message_formats?: ('html' | 'markdown')[];
@@ -18,7 +18,7 @@ type params = ({
   type: 'lookup';
 
   message_formats: ('html' | 'markdown')[];
-  changelog: string;
+  changelog: 'stable40' | 'beta40' | 'cuttingedge' | 'lazer' | 'web';
   key: string;
 });
 
@@ -37,32 +37,32 @@ export const changelogs_list = async <T extends params>(params: T, addons?: IDef
   let method = 'GET';
 
 
-  switch (params.type) {
+  switch (params?.type) {
     case 'all':
       url += '/changelog';
 
-      object.from = params.from_build;
-      object.to = params.to_build;
+      if (params?.from_build != null) object.from = params.from_build;
+      if (params?.to_build != null) object.to = params.to_build;
 
-      object.stream = params.stream_name;
-      object.max_id = params.max_id;
-      object['message_formats[]'] = params.message_formats;
+      if (params?.stream_name != null) object.stream = params.stream_name;
+      if (params?.max_id != null) object.max_id = params.max_id;
+      if (params?.message_formats != null) object['message_formats[]'] = params.message_formats;
       break;
 
     case 'lookup':
       url += `/changelog/${params.changelog}`;
 
-      if (params.changelog == null) {
+      if (params?.changelog != null == null) {
         return handleErrors(`Specify changelog stream`) as Response<T['type']>;
       };
 
 
-      object['message_formats[]'] = params.message_formats;
-      object['key'] = params.key;
+      if (params?.message_formats != null) object['message_formats[]'] = params.message_formats;
+      if (params?.key != null) object['key'] = params.key;
       break;
 
     default:
-      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
+      return handleErrors(`Unsupported type: ${(params as any)?.type}`) as Response<T['type']>;
   };
 
 

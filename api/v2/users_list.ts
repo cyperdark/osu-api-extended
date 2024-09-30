@@ -8,7 +8,7 @@ type Response = UsersLisResponse[] & IError;
 
 
 export const users_list = async (params: { ids: number[], include_variants?: boolean }, addons?: IDefaultParams): Promise<Response> => {
-  if ((params.ids || [])?.length == 0) {
+  if ((params?.ids || [])?.length == 0) {
     return handleErrors(`Specify at least one user id`) as Response;
   };
 

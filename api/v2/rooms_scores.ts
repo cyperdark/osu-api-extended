@@ -47,22 +47,22 @@ export const rooms_scores = async <T extends params>(params: T, addons?: IDefaul
   let method = 'GET';
 
 
-  if (params.id == null) {
+  if (params?.id == null) {
     return handleErrors(`Specify room id`) as Response<T['type']>;
   };
 
-  if (params.playlist_id == null) {
+  if (params?.playlist_id == null) {
     return handleErrors(`Specify playlist id`) as Response<T['type']>;
   };
 
 
-  switch (params.type) {
+  switch (params?.type) {
     case 'all':
       url += `/rooms/${params.id}/playlist/${params.playlist_id}/scores`;
 
-      object.limit = params.limit;
-      object.sort = params.sort;
-      object.cursor_string = params.cursor_string;
+      if (params?.limit != null) object.limit = params.limit;
+      if (params?.sort != null) object.sort = params.sort;
+      if (params?.cursor_string != null) object.cursor_string = params.cursor_string;
       break;
 
     case 'single':

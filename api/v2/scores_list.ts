@@ -20,13 +20,13 @@ type params = {
   beatmap_id: number;
   mods?: string[];
 } | {
-  type: 'beatmap_best';
+  type: 'user_beatmap_best';
 
   beatmap_id: number;
   user_id: number;
   mods?: string[];
 } | {
-  type: 'beatmap_all';
+  type: 'user_beatmap_all';
 
   beatmap_id: number;
   user_id: number;
@@ -68,7 +68,7 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
   let method = 'GET';
 
 
-  switch (params.type) {
+  switch (params?.type) {
     case 'leaderboard':
       if (params.beatmap_id == null) {
         return handleErrors(`Specify beatmap id`) as Response<T['type']>;
@@ -79,11 +79,11 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
 
 
       object['type'] = params.leaderboard_type;
-      object['mode'] = params.mode;
-      object['mods[]'] = params.mods;
+      if (params?.mode != null) object['mode'] = params.mode;
+      if (Array.isArray(params?.mods)) object['mods[]'] = params.mods;
       break;
 
-    case 'beatmap_best':
+    case 'user_beatmap_best':
       if (params.beatmap_id == null) {
         return handleErrors(`Specify beatmap id`) as Response<T['type']>;
       };
@@ -96,11 +96,11 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
       url += `/beatmaps/${params.beatmap_id}/scores/users/${params.user_id}`;
 
 
-      object['mode'] = params.mode;
-      object['mods[]'] = params.mods;
+      if (params?.mode != null) object['mode'] = params.mode;
+      if (Array.isArray(params?.mods)) object['mods[]'] = params.mods;
       break;
 
-    case 'beatmap_all':
+    case 'user_beatmap_all':
       if (params.beatmap_id == null) {
         return handleErrors(`Specify beatmap id`) as Response<T['type']>;
       };
@@ -113,7 +113,7 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
       url += `/beatmaps/${params.beatmap_id}/scores/users/${params.user_id}/all`;
 
 
-      object['mode'] = params.mode;
+      if (params?.mode != null) object['mode'] = params.mode;
       break;
 
     case 'user_best':
@@ -128,10 +128,10 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
       url += `/users/${params.user_id}/scores/${params.type.replace('user_', '')}`;
 
 
-      object['mode'] = params.mode;
-      object['limit'] = params.limit;
-      object['offset'] = params.offset;
-      object['include_fails'] = params.include_fails == true ? 1 : params.include_fails == false ? 0 : undefined;
+      if (params?.mode != null) object['mode'] = params.mode;
+      if (params?.limit != null) object['limit'] = params.limit;
+      if (params?.offset != null) object['offset'] = params.offset;
+      if (params?.include_fails != null) object['include_fails'] = params.include_fails == true ? 1 : params.include_fails == false ? 0 : undefined;
       break;
 
     case 'solo_scores':
@@ -143,9 +143,9 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
       url += `/beatmaps/${params.beatmap_id}/solo-scores`;
 
 
-      object['type'] = params.leaderboard_type;
-      object['mode'] = params.mode;
-      object['mods[]'] = params.mods;
+      if (params?.leaderboard_type) object['type'] = params.leaderboard_type;
+      if (params?.mode) object['mode'] = params.mode;
+      if (Array.isArray(params?.mods)) object['mods[]'] = params.mods;
       break;
 
     default:
@@ -162,11 +162,11 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
   if (data.error) return handleErrors(data.error) as Response<T['type']>;
 
 
-  if (['leaderboard', 'beatmap_all'].includes(params.type)) {
+  if (['leaderboard', 'user_beatmap_all'].includes(params.type)) {
     data.scores.forEach((r: any, index: number) => r.index = index);
     return data.scores as Response<T['type']>;
   };
 
-  if (params.type != 'beatmap_best') data.forEach((r: any, index: number) => r.index = index);
+  if (params.type != 'user_beatmap_best') data.forEach((r: any, index: number) => r.index = index);
   return data as Response<T['type']>;
 };

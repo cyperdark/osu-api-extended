@@ -12,7 +12,7 @@ export const users_kudosu = async (params: {
   limit?: number;
   offset?: number;
 }, addons?: IDefaultParams): Promise<Response> => {
-  if (params.id == null) {
+  if (params?.id == null) {
     return handleErrors(`Specify user id`) as Response;
   };
 

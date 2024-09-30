@@ -11,14 +11,14 @@ export const rooms_leaderboard = async (params: {
   id: number;
   limit?: number;
 }, addons?: IDefaultParams): Promise<Response> => {
-  if (params.id == null) {
+  if (params?.id == null) {
     return handleErrors(`Specify room id`) as Response;
   };
 
 
   const data = await request(`https://osu.ppy.sh/api/v2/rooms/${params.id}/leaderboard`, {
     method: 'GET',
-    params: { limit: params.limit },
+    params: { limit: params?.limit },
     addons,
   });
 

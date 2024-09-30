@@ -8,14 +8,14 @@ type Response = changelogsDetailsResponse[] & IError;
 
 
 export const changelogs_details = async (params: {
-  stream_name: string;
+  stream_name: 'stable40' | 'beta40' | 'cuttingedge' | 'lazer' | 'web';
   build_version: string;
 }, addons?: IDefaultParams): Promise<Response> => {
-  if (params.stream_name == null) {
+  if (params?.stream_name == null) {
     return handleErrors(`Specify stream name`) as Response;
   };
 
-  if (params.build_version == null) {
+  if (params?.build_version == null) {
     return handleErrors(`Specify build version`) as Response;
   };
 

@@ -5,6 +5,7 @@ import { handleErrors } from "../../utility/handleErrors";
 
 type params = ({
   type: 'verify';
+  code: string,
 } | {
   type: 'reissue';
 } | {
@@ -14,11 +15,11 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'verify'
-  ? any & IError
+  ? "" & IError
   : T extends 'reissue'
-  ? any & IError
+  ? { message: string } & IError
   : T extends 'delete'
-  ? any & IError
+  ? '' & IError
   : IError;
 
 
@@ -27,11 +28,27 @@ export const session_actions = async <T extends params>(params: T, addons?: IDef
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'POST';
 
+  const headers: any = {};
+  let body: any = '';
 
-  switch (params.type) {
+
+  switch (params?.type) {
     case 'verify':
+      if (params?.code == null) {
+        return handleErrors(`Specify verification code`) as Response<T['type']>;
+      };
+
       url += `/session/verify`;
 
+
+      const boundary = `----WebKitFormBoundary${Math.random().toString(16).substring(2)}`;
+      body += `--${boundary}\r\n`;
+      body += 'Content-Disposition: form-data; name="verification_key"\r\n\r\n';
+      body += `${params.code}\r\n`;
+      body += `--${boundary}--\r\n`;
+
+      headers['Content-Type'] = `multipart/form-data; boundary=${boundary}`;
+      headers['Content-Length'] = Buffer.byteLength(body);
       break;
 
     case 'reissue':
@@ -49,6 +66,8 @@ export const session_actions = async <T extends params>(params: T, addons?: IDef
 
   const data = await request(url, {
     method: method,
+    data: body,
+    headers: headers,
     addons,
   });
 

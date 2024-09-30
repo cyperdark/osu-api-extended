@@ -16,7 +16,7 @@ export const beatmaps_discussions_votes = async (params: {
   limit?: number;
   cursor_string?: string;
 }, addons?: IDefaultParams): Promise<BeatmapsDiscussionsListResponse & IError> => {
-  if (params.discussion_id) {
+  if (params?.discussion_id) {
     // @ts-ignore
     params.beatmapset_discussion_id = params.discussion_id;
     delete params.discussion_id;

@@ -18,9 +18,9 @@ export const matches_list = async (params: {
   const data = await request(`https://osu.ppy.sh/api/v2/matches`, {
     method: 'GET',
     params: {
-      limit: params.limit,
-      sort: params.sort,
-      'cursor[match_id]': params.after_id,
+      limit: params?.limit,
+      sort: params?.sort,
+      'cursor[match_id]': params?.after_id,
     },
     addons,
   });

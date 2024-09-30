@@ -12,7 +12,7 @@ export const users_details = async (params: {
   mode?: Modes_names;
   key?: 'id' | 'username';
 }, addons?: IDefaultParams): Promise<Response> => {
-  if (params.user == null) {
+  if (params?.user == null) {
     return handleErrors(`Specify user id or name`) as Response;
   };
 

@@ -69,15 +69,15 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
 
   switch (params.type) {
     case 'create':
-      if (params.forum_id == null) {
+      if (params?.forum_id == null) {
         return handleErrors(`Specify forum id`) as Response<T['type']>;
       };
 
-      if (params.title == null) {
+      if (params?.title == null) {
         return handleErrors(`Specify title`) as Response<T['type']>;
       };
 
-      if (params.message == null) {
+      if (params?.message == null) {
         return handleErrors(`Specify message`) as Response<T['type']>;
       };
 
@@ -85,37 +85,37 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
       urls.push(`https://osu.ppy.sh/api/v2/forums/topics`);
       methods.push('POST');
 
-      object['forum_id'] = params.forum_id;
+      if (params?.forum_id != null) object['forum_id'] = params.forum_id;
 
-      object['title'] = params.title;
-      object['body'] = params.message;
+      if (params?.title != null) object['title'] = params.title;
+      if (params?.message != null) object['body'] = params.message;
 
 
-      if (params.enable_poll != null) object['with_poll'] = params.enable_poll;
-      if (params.enable_poll != true) {
+      if (params?.enable_poll != null) object['with_poll'] = params.enable_poll;
+      if (params?.enable_poll != true) {
         body.push(object);
         break;
       };
 
 
-      object['forum_topic_poll[vote_change]'] = params.poll.allow_vote_change;
-      object['forum_topic_poll[hide_results]'] = params.poll.hide_results;
+      if (params?.poll?.allow_vote_change != null) object['forum_topic_poll[vote_change]'] = params.poll.allow_vote_change;
+      if (params?.poll?.hide_results != null) object['forum_topic_poll[hide_results]'] = params.poll.hide_results;
 
-      object['forum_topic_poll[title]'] = params.poll.title;
-      object['forum_topic_poll[options]'] = params.poll.options;
+      if (params?.poll?.title != null) object['forum_topic_poll[title]'] = params.poll.title;
+      if (params?.poll?.options != null) object['forum_topic_poll[options]'] = params.poll.options;
 
-      object['forum_topic_poll[max_options]'] = params.poll.max_votes_per_user;
-      object['forum_topic_poll[length_days]'] = params.poll.duration_days;
+      if (params?.poll?.max_votes_per_user != null) object['forum_topic_poll[max_options]'] = params.poll.max_votes_per_user;
+      if (params?.poll?.duration_days != null) object['forum_topic_poll[length_days]'] = params.poll.duration_days;
 
       body.push(object);
       break;
 
     case 'reply':
-      if (params.post_id == null) {
+      if (params?.post_id == null) {
         return handleErrors(`Specify post id`) as Response<T['type']>;
       };
 
-      if (params.message == null) {
+      if (params?.message == null || params?.message?.trim() == '') {
         return handleErrors(`Specify message`) as Response<T['type']>;
       };
 
@@ -123,17 +123,17 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
       urls.push(`https://osu.ppy.sh/api/v2/forums/topics/${params.post_id}/reply`);
       methods.push('POST');
 
-      object['body'] = params.message;
+      if (params?.message) object['body'] = params.message;
 
       body.push(object);
       break;
 
     case 'edit_post':
-      if (params.post_id == null) {
+      if (params?.post_id == null) {
         return handleErrors(`Specify post id`) as Response<T['type']>;
       };
 
-      if (params.message == null) {
+      if (params?.message == null) {
         return handleErrors(`Specify message`) as Response<T['type']>;
       };
 
@@ -141,18 +141,18 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
       urls.push(`https://osu.ppy.sh/api/v2/forums/posts/${params.post_id}`);
       methods.push('PATCH');
 
-      object['body'] = params.message;
+      if (params?.message) object['body'] = params.message;
 
       body.push(object);
       break;
 
     case 'edit_topic':
-      if (params.topic_id && (params.title != null && params.title != '')) {
-        if (params.topic_id == null) {
+      if (params?.topic_id && (params?.title != null && params?.title != '')) {
+        if (params?.topic_id == null) {
           return handleErrors(`Specify topic id`) as Response<T['type']>;
         };
 
-        if (params.title == null) {
+        if (params?.title == null || params?.title?.trim() == '') {
           return handleErrors(`Specify title`) as Response<T['type']>;
         };
 
@@ -160,7 +160,7 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
         urls.push(`https://osu.ppy.sh/api/v2/forums/topics/${params.topic_id}`);
         methods.push('PUT');
 
-        object = {
+        if (params?.title) object = {
           forum_topic: {
             'topic_title': params.title,
           },
@@ -173,12 +173,12 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
       };
 
 
-      if (params.post_id && (params.message != null && params.message != '')) {
-        if (params.post_id == null) {
+      if (params?.post_id && (params?.message != null && params?.message != '')) {
+        if (params?.post_id == null) {
           return handleErrors(`Specify post id`) as Response<T['type']>;
         };
 
-        if (params.message == null) {
+        if (params?.message == null) {
           return handleErrors(`Specify message`) as Response<T['type']>;
         };
 
@@ -186,7 +186,7 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
         urls.push(`https://osu.ppy.sh/api/v2/forums/posts/${params.post_id}`);
         methods.push('PUT');
 
-        object['body'] = params.message;
+        if (params?.message) object['body'] = params.message;
 
         body.push(object);
         fields.push('post');

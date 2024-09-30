@@ -74,6 +74,10 @@ type ResponseLogin<T extends auth_params['type']> =
 
 
 export const login = <T extends auth_params>(params: auth_params): ResponseLogin<T['type']> => {
+  if (params?.type == null) {
+    return handleErrors('Specify login type');
+  };
+
   credentials.type = params.type;
 
   if (params.tokenPath) credentials.tokenPath = params.tokenPath;

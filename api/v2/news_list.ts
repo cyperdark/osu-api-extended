@@ -13,9 +13,9 @@ export const news_list = async (params: {
   cursor_string?: string;
 } = {}, addons?: IDefaultParams): Promise<Response> => {
   const object: any = {
-    year: params.from_year,
-    limit: params.limit,
-    cursor_string: params.cursor_string,
+    year: params?.from_year,
+    limit: params?.limit,
+    cursor_string: params?.cursor_string,
   };
 
 

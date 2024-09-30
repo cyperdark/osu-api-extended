@@ -44,36 +44,36 @@ export const search_all = async <T extends params>(params: T, addons?: IDefaultP
   let url = 'https://osu.ppy.sh/api/v2';
 
 
-  switch (params.type) {
+  switch (params?.type) {
     case 'site':
       url += '/search';
 
 
-      object.mode = params.location;
-      object.query = params.query;
-      object.page = params.page;
+      if (params?.location != null) object.mode = params.location;
+      if (params?.query != null) object.query = params.query;
+      if (params?.page != null) object.page = params.page;
       break;
 
     case 'beatmaps':
       url += '/beatmapsets/search';
 
-      if (params._played != null) object.played = params._played ? 'played' : 'unplayed';
-      if (params._nsfw != null) object.nsfw = params._nsfw;
+      if (params?._played != null) object.played = params._played ? 'played' : 'unplayed';
+      if (params?._nsfw != null) object.nsfw = params._nsfw;
 
-      if (params.query != null) object.q = params.query;
-      if (params.mode != null) object.m = typeof params.mode == 'number' ? params.mode : GamemodeEnum[params.mode];
-      if (params.status != null) object.s = params.status;
-      if (params.category != null) object.c = params.category.join('.');
+      if (params?.query != null) object.q = params.query;
+      if (params?.mode != null) object.m = typeof params.mode == 'number' ? params.mode : GamemodeEnum[params.mode];
+      if (params?.status != null) object.s = params.status;
+      if (params?.category != null) object.c = params.category.join('.');
 
-      if (params.genre != null) object.g = typeof params.genre == 'number' ? params.genre : Genres_enum[params.genre];
-      if (params.language != null) object.l = typeof params.language == 'number' ? params.language : Languages_enum[params.language];
+      if (params?.genre != null) object.g = typeof params.genre == 'number' ? params.genre : Genres_enum[params.genre];
+      if (params?.language != null) object.l = typeof params.language == 'number' ? params.language : Languages_enum[params.language];
 
-      if (params.achieved_rank != null) object.r = params.achieved_rank.join('.');
+      if (params?.achieved_rank != null) object.r = params.achieved_rank.join('.');
 
-      if (params.extra != null) object.e = params.extra.join('.');
+      if (params?.extra != null) object.e = params.extra.join('.');
 
-      if (params.sort != null) object.sort = params.sort;
-      if (params.cursor_string != null) object.cursor_string = params.cursor_string;
+      if (params?.sort != null) object.sort = params.sort;
+      if (params?.cursor_string != null) object.cursor_string = params.cursor_string;
       break;
   };
 

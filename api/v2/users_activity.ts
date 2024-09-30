@@ -12,8 +12,8 @@ export const users_activity = async (params: {
   limit?: number;
   offset?: number;
 }, addons?: IDefaultParams): Promise<Response> => {
-  if (params.id == null) {
-    return handleErrors(`Specify activity id`) as Response;
+  if (params?.id == null) {
+    return handleErrors(`Specify user id`) as Response;
   };
 
 

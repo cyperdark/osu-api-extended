@@ -15,9 +15,9 @@ export const chat_updates = async (params: {
   const data = await request(`https://osu.ppy.sh/api/v2/chat/updates`, {
     method: 'GET',
     params: {
-      'history_since': params.history_since,
-      'includes[]': params.includes,
-      'since': params.after_id,
+      'history_since': params?.history_since,
+      'includes[]': params?.includes,
+      'since': params?.after_id,
     },
     addons,
   });

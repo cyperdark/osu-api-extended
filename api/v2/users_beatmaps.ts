@@ -14,11 +14,11 @@ export const users_beatmaps = async (params: {
   limit?: number;
   offset?: number;
 }, addons?: IDefaultParams): Promise<Response> => {
-  if (params.id == null) {
+  if (params?.id == null) {
     return handleErrors(`Specify user id`) as Response;
   };
 
-  if (params.type == null) {
+  if (params?.type == null) {
     return handleErrors(`Specify beatmaps type`) as Response;
   };
 

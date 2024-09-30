@@ -11,11 +11,11 @@ export const wiki_details = async (params: {
   locale: string;
   path_name: string;
 }, addons?: IDefaultParams): Promise<Response> => {
-  if (params.locale == null) {
+  if (params?.locale == null) {
     return handleErrors(`Specify locale code. Example: en`) as Response;
   };
 
-  if (params.path_name == null) {
+  if (params?.path_name == null) {
     return handleErrors(`Specify wiki page path`) as Response;
   };
 

@@ -36,7 +36,7 @@ export const chat_actions = async <T extends params>(params: T, addons?: IDefaul
   let method = 'POST';
 
 
-  switch (params.type) {
+  switch (params?.type) {
     case 'new':
       url += `/chat/new`;
       method = 'POST';
@@ -46,18 +46,18 @@ export const chat_actions = async <T extends params>(params: T, addons?: IDefaul
       };
 
 
-      object['is_action'] = params.is_action;
-      object['target_id'] = params.user_id;
-      object['message'] = params.message;
-      if (params.uuid) object['uuid'] = params.uuid;
+      if (params?.is_action != null) object['is_action'] = params.is_action;
+      if (params?.user_id != null) object['target_id'] = params.user_id;
+      if (params?.message != null) object['message'] = params.message;
+      if (params?.uuid) object['uuid'] = params.uuid;
       break;
 
     case 'keepalive':
       url += `/chat/ack`;
       method = 'POST';
 
-      object['history_since'] = params.history_since;
-      object['since'] = params.since;
+      if (params?.history_since != null) object['history_since'] = params.history_since;
+      if (params?.since != null) object['since'] = params.since;
       break;
 
     default:
@@ -74,6 +74,6 @@ export const chat_actions = async <T extends params>(params: T, addons?: IDefaul
   if (data.error) return handleErrors(data.error) as Response<T['type']>;
 
 
-  if (params.type == 'keepalive') return data.silences as Response<T['type']>;
+  if (params?.type == 'keepalive') return data.silences as Response<T['type']>;
   return data as Response<T['type']>;
 };

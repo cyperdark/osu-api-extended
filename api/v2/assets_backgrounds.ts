@@ -20,7 +20,7 @@ type Response<T extends params['type']> =
 
 
 export const assets_backgrounds = <T extends params>(params: T, addons?: IDefaultParams): Response<T['type']> => {
-  if (params.type == 'seasonal') {
+  if (params?.type == 'seasonal') {
     return request(`https://osu.ppy.sh/api/v2/seasonal-backgrounds`, {
       method: 'GET',
       addons,
@@ -28,7 +28,7 @@ export const assets_backgrounds = <T extends params>(params: T, addons?: IDefaul
   };
 
 
-  if (params.type == 'beatmapset') {
+  if (params?.type == 'beatmapset') {
     if (params.set_id == null) {
       return handleErrors('Specify beatmapset id') as Response<T['type']>;
     };
@@ -49,5 +49,5 @@ export const assets_backgrounds = <T extends params>(params: T, addons?: IDefaul
   };
 
 
-  return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
+  return handleErrors(`Unsupported type: ${(params as any)?.type}`) as Response<T['type']>;
 };

@@ -36,9 +36,29 @@ export const beatmaps = {
      * &nbsp;
      *
      * ### Usage Example
-     * ```js
-     * // TBA
-     * ```
+      * ```js
+      * const { auth, v2 } = require('osu-api-extended');
+      * 
+      * async function main() {
+      *   try {
+      *    await auth.login({
+      *      type: 'v2',
+      *      client_id: CLIENT_ID,
+      *      client_secret: CLIENT_SECRET,
+      *    });
+      * 
+      *     const result = await v2.beatmaps.packs.list({
+      *       type: 'loved'
+      *     });
+      * 
+      *     console.log(result);
+      *   } catch (error) {
+      *     console.log(error);
+      *   };
+      * };
+      * 
+      * main();
+      * ```
      *
      * &nbsp;
      *
@@ -59,7 +79,25 @@ export const beatmaps = {
      *
      * ### Usage Example
      * ```js
-     * // TBA
+     * const { auth, v2 } = require('osu-api-extended');
+     * 
+     * async function main() {
+     *   try {
+     *     await auth.login({
+     *       type: 'v2',
+     *       client_id: CLIENT_ID,
+     *       client_secret: CLIENT_SECRET,
+     *     });
+     * 
+     *     const result = await v2.beatmaps.packs.details('ST265');
+     * 
+     *     console.log(result);
+     *   } catch (error) {
+     *     console.log(error);
+     *   };
+     * };
+     * 
+     * main();
      * ```
      *
      * &nbsp;
@@ -124,14 +162,36 @@ export const beatmaps = {
    * &nbsp;
    *
    * ##### Parameters
-   * - `params.type` - The type to search for.
+   * - `params.type` - 'difficulty' or 'set'.
    * - `params.id` - The ID to search for.
    *
    * &nbsp;
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.beatmaps.details({
+   *       type: 'set',
+   *       id: 2182218
+   *     });
+   * 
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -156,6 +216,31 @@ export const beatmaps = {
      * - `obj.min_date` - Filter by minimum date of the event.
      * - `obj.max_date` - Filter by maximum date of the event.
      * - `addons?` - Additional parameters to include in the request.
+     *
+     * &nbsp;
+     *
+     * ### Usage Example
+     * ```js
+     * const { auth, v2 } = require('osu-api-extended');
+     * 
+     * async function main() {
+     *   try {
+     *     await auth.login({
+     *       type: 'v2',
+     *       client_id: CLIENT_ID,
+     *       client_secret: CLIENT_SECRET,
+     *     });
+     * 
+     *     const result = await v2.beatmaps.events.list({ types: ['approve'] });
+     * 
+     *     console.log(result);
+     *   } catch (error) {
+     *     console.log(error);
+     *   };
+     * };
+     * 
+     * main();
+     * ```
      *
      * &nbsp;
      *
@@ -190,7 +275,40 @@ export const beatmaps = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     // only for downloading sets from osu host
+   *     await auth.login({
+   *       type: 'lazer',
+   *       login: login,
+   *       password: password,
+   *       tokenPath: './test.json' // please use for caching
+   *     });
+   * 
+   * 
+   *     const progress_update = (...args) => {
+   *       console.log(args);
+   *     };
+   *     const set_id = 320118;
+   * 
+   * 
+   *     const result = await v2.beatmaps.download({
+   *       type: 'set',
+   *       host: 'gatari',
+   *       id: set_id,
+   *       file_path: `./cache/${set_id}.osz`,
+   *       progress_track_fn: progress_update
+   *     });
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -225,7 +343,25 @@ export const beatmaps = {
      *
      * ### Usage Example
      * ```js
-     * // TBA
+     * const { auth, v2 } = require('osu-api-extended');
+     * 
+     * async function main() {
+     *   try {
+     *     await auth.login({
+     *       type: 'v2',
+     *       client_id: CLIENT_ID,
+     *       client_secret: CLIENT_SECRET,
+     *     });
+     * 
+     *     const result = await v2.beatmaps.discussions.list({ beatmapset_id: 2084849 });
+     * 
+     *     console.log(result);
+     *   } catch (error) {
+     *     console.log(error);
+     *   };
+     * };
+     * 
+     * main();
      * ```
      *
      * &nbsp;
@@ -250,9 +386,26 @@ export const beatmaps = {
      *
      * &nbsp;
      *
-     * ### Usage Example
      * ```js
-     * // TBA
+     * const { auth, v2 } = require('osu-api-extended');
+     * 
+     * async function main() {
+     *   try {
+     *     await auth.login({
+     *       type: 'v2',
+     *       client_id: CLIENT_ID,
+     *       client_secret: CLIENT_SECRET,
+     *     });
+     * 
+     *     const result = await v2.beatmaps.discussions.posts();
+     * 
+     *     console.log(result);
+     *   } catch (error) {
+     *     console.log(error);
+     *   };
+     * };
+     * 
+     * main();
      * ```
      *
      * &nbsp;
@@ -280,7 +433,25 @@ export const beatmaps = {
      *
      * ### Usage Example
      * ```js
-     * // TBA
+     * const { auth, v2 } = require('osu-api-extended');
+     * 
+     * async function main() {
+     *   try {
+     *     await auth.login({
+     *       type: 'v2',
+     *       client_id: CLIENT_ID,
+     *       client_secret: CLIENT_SECRET,
+     *     });
+     * 
+     *     const result = await v2.beatmaps.discussions.votes({ discussion_id: 4533908 });
+     * 
+     *     console.log(result);
+     *   } catch (error) {
+     *     console.log(error);
+     *   };
+     * };
+     * 
+     * main();
      * ```
      *
      * &nbsp;
@@ -336,7 +507,27 @@ export const changelogs = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     const result = await v2.changelogs.list({
+   *       type: 'all',
+   *       stream_name: 'web',
+   *     });
+   *     // or
+   *     const result = await v2.changelogs.list({
+   *       type: 'lookup',
+   *       changelog: 'lazer'
+   *     });
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -359,7 +550,26 @@ export const changelogs = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     const result = await v2.changelogs.details({
+   *       stream_name: 'web',
+   *       build_version: '2024.930.0'
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -401,7 +611,27 @@ export const comments = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     const result = await v2.comments.list({
+   *       type: 'news_post',
+   *       id: 1430,
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -423,7 +653,24 @@ export const comments = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     const result = const result = await v2.comments.details(3035523);
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -502,7 +749,32 @@ export const users = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.users.list({
+   *       ids: [2, 8928855, 7562902, 10083439],
+   *       include_variants: true
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -526,7 +798,29 @@ export const users = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.users.kudosu({ id: 4830261 });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -550,7 +844,29 @@ export const users = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.users.events()
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -574,7 +890,29 @@ export const users = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.users.details({ user: 9893708, mode: 'osu', key: 'id' });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -599,7 +937,29 @@ export const users = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.users.beatmaps({ type: 'ranked', id: 4378277 });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -623,7 +983,29 @@ export const users = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.users.activity({ id: 11367222 });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -668,14 +1050,14 @@ export const scores = {
    *
    * &nbsp;
    *
-   * ### Parameters for `params.type: 'beatmap_best'`
+   * ### Parameters for `params.type: 'user_beatmap_best'`
    * - `params.beatmap_id` - ID of the beatmap.
    * - `params.user_id` - ID of the user.
    * - `params.mods?` - Retrieve scores for specific mods.
    *
    * &nbsp;
    *
-   * ### Parameters for `params.type: 'beatmap_all'`
+   * ### Parameters for `params.type: 'user_beatmap_all'`
    * - `params.beatmap_id` - ID of the beatmap.
    * - `params.user_id` - ID of the user.
    *
@@ -691,7 +1073,51 @@ export const scores = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.scores.list({
+   *       type: 'user_beatmap_all',
+   *       // or
+   *       type: 'user_beatmap_best',
+   *       beatmap_id: 1141858,
+   *       user_id: 7562902
+   *     });
+   *     // or
+   *     const result = await v2.scores.list({
+   *       type: 'leaderboard',
+   *       beatmap_id: 1141858
+   *     });
+   *     // or
+   *     const result = await v2.scores.list({
+   *       type: 'user_best',
+   *       // or
+   *       type: 'user_firsts',
+   *       // or
+   *       type: 'user_pinned',
+   *       // or
+   *       type: 'user_recent',
+   *       user_id: 7562902,
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -715,7 +1141,31 @@ export const scores = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.scores.details({
+   *       id: 3321956713,
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -739,7 +1189,33 @@ export const scores = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'lazer',
+   *       login: login,
+   *       password: password,
+   *       tokenPath: './test.json' // please use for caching
+   *     });
+   * 
+   *     const result = await v2.scores.download({
+   *       id: 3427873257,
+   *       file_path: './cache/replay.osr'
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -783,7 +1259,32 @@ export const forums = {
      *
      * ### Usage Example
      * ```js
-     * // TBA
+     * const { auth, v2 } = require('osu-api-extended');
+     * 
+     * async function main() {
+     *   try {
+     *     await auth.login({
+     *       type: 'v2',
+     *       client_id: CLIENT_ID,
+     *       client_secret: CLIENT_SECRET,
+     *     });
+     * 
+     *     const result = await v2.forums.topics.details({
+     *       id: 881367
+     *     });
+     * 
+     *     if (result.error != null) {
+     *       console.log(result.error);
+     *       return;
+     *     };
+     * 
+     *     console.log(result);
+     *   } catch (error) {
+     *     console.log(error);
+     *   };
+     * };
+     * 
+     * main();
      * ```
      *
      * &nbsp;
@@ -840,7 +1341,61 @@ export const forums = {
      *
      * ### Usage Example
      * ```js
-     * // TBA
+     * const { auth, v2 } = require('osu-api-extended');
+     * 
+     * async function main() {
+     *   try {
+     *     await auth.login({
+     *       type: 'lazer',
+     *       login: login,
+     *       password: password,
+     *       tokenPath: './test.json' // please use for caching
+     *     });
+     * 
+     *     const result = await v2.forums.topics.actions({
+     *       type: 'create',
+     * 
+     *       forum_id: 52,
+     * 
+     *       title: 'hi',
+     *       message: 'test',
+     *     });
+     *     // or
+     *     const result = await v2.forums.topics.actions({
+     *       type: 'reply',
+     *       topic_id: 1888959,
+     *       message: 'test'
+     *     });
+     *     //or
+     *     const result = await v2.forums.topics.actions({
+     *       type: 'edit_topic',
+     * 
+     *       topic_id: 986201,
+     *       title: 'New title',
+     * 
+     *       post_id: 7270325,
+     *       message: 'edited body/message',
+
+     *     });
+     *     // or
+     *     const result = await v2.forums.topics.actions({
+     *       type: 'edit_post',
+     * 
+     *       post_id: 9500788,
+     *       message: 'asdsadsada',
+     *     });
+     *     if (result.error != null) {
+     *       console.log(result.error);
+     *       return;
+     *     };
+     * 
+     *     console.log(result);
+     *   } catch (error) {
+     *     console.log(error);
+     *   };
+     * };
+     * 
+     * main();
      * ```
      *
      * &nbsp;
@@ -892,7 +1447,38 @@ import { search_all } from '../api/v2/search';
  *
  * ### Usage Example
  * ```js
- * // TBA
+ * const { auth, v2 } = require('osu-api-extended');
+ * 
+ * async function main() {
+ *   try {
+ *     await auth.login({
+ *       type: 'v2',
+ *       client_id: CLIENT_ID,
+ *       client_secret: CLIENT_SECRET,
+ *     });
+ * 
+ *     const result = await v2.search({
+ *       type: 'site',
+ *       mode: 'all',
+ *       query: 'mrekk'
+ *     });
+ *     // or
+ *     const result = await v2.search({
+ *       type: 'beatmaps',
+ *       query: 'hyikrwa'
+ *     });
+ *     if (result.error != null) {
+ *       console.log(result.error);
+ *       return;
+ *     };
+ * 
+ *     console.log(result);
+ *   } catch (error) {
+ *     console.log(error);
+ *   };
+ * };
+ * 
+ * main();
  * ```
  *
  * &nbsp;
@@ -932,7 +1518,30 @@ export const assets = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     const result = await v2.assets.backgrounds({
+   *       type: 'seasonal'
+   *     });
+   *     // or
+   *     const result = v2.assets.backgrounds({
+   *       type: 'beatmapset',
+   *       set_id: 2130552,
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -948,7 +1557,29 @@ export const assets = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.assets.dataFiles();
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -985,7 +1616,29 @@ export const news = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.news.list();
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1007,8 +1660,33 @@ export const news = {
    * &nbsp;
    *
    * ### Usage Example
-   * ```
-   * // TBA
+   * ```js
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.news.details({
+   *       news_id: 1440,
+   *       key: 'id'
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1043,8 +1721,31 @@ export const notifications = {
    * &nbsp;
    *
    * ### Usage Example
-   * ```
-   * // TBA
+   * ```js
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'lazer',
+   *       login: login,
+   *       password: password,
+   *       tokenPath: './test.json' // please use for caching
+   *     });
+   * 
+   *     const result = await v2.notifications.list();
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1076,7 +1777,7 @@ export const notifications = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * not working atm
    * ```
    *
    * &nbsp;
@@ -1139,7 +1840,38 @@ export const ranking = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.ranking.list({
+   *       type: 'performance',
+   *       // or
+   *       type: 'charts',
+   *       // or
+   *       type: 'country',
+   *       // or
+   *       type: 'score',
+   *       mode: 'osu'
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1172,7 +1904,29 @@ export const spotlights = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.spotlights.list();
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1207,7 +1961,26 @@ export const wiki = {
    *
    * #### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     const result = await v2.wiki.details({
+   *       locale: 'EN',
+   *       path_name: 'Main_page'
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1242,7 +2015,30 @@ export const me = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'lazer',
+   *       login,
+   *       password
+   *       tokenPath: './test.json' // please use for caching
+   *     });
+   * 
+   *     const result = await v2.me.download_quota();
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1263,7 +2059,30 @@ export const me = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'lazer',
+   *       login,
+   *       password
+   *       tokenPath: './test.json' // please use for caching
+   *     });
+   * 
+   *     const result = await v2.me.friends();
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1285,7 +2104,29 @@ export const me = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.me.details();
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1322,7 +2163,32 @@ export const matches = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.matches.list({
+   *       limit: 10,
+   *       sort: 'id_asc'
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1344,7 +2210,29 @@ export const matches = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     await v2.matches.details({ match_id: 16155689 });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1389,7 +2277,29 @@ export const chat = {
      *
      * ### Usage Example
      * ```js
-     * // TBA
+     * const { auth, v2 } = require('osu-api-extended');
+     * 
+     * async function main() {
+     *   try {
+     *     await auth.login({
+     *       type: 'v2',
+     *       client_id: CLIENT_ID,
+     *       client_secret: CLIENT_SECRET,
+     *     });
+     * 
+     *     const result = await v2.chat.channels.list();
+     *     if (result.error != null) {
+     *       console.log(result.error);
+     *       return;
+     *     };
+     * 
+     *     console.log(result);
+     *   } catch (error) {
+     *     console.log(error);
+     *   };
+     * };
+     * 
+     * main();
      * ```
      *
      * &nbsp;
@@ -1433,7 +2343,57 @@ export const chat = {
      *
      * ### Usage Example
      * ```js
-     * // TBA
+     * const { auth, v2 } = require('osu-api-extended');
+     * 
+     * async function main() {
+     *   try {
+     *     await auth.login({
+     *       type: 'lazer',
+     *       login,
+     *       password
+     *       tokenPath: './test.json' // please use for caching
+     *     });
+     * 
+     *     const result = await v2.chat.channels.actions({
+     *       type: 'send',
+     * 
+     *       id: 5,
+     *       is_action: false,
+     *       message: '.'
+     *     });
+     *     // or
+     *     const result = await v2.chat.channels.actions({
+     *       type: 'join',
+     * 
+     *       id: 6,
+     *       user_id: 9893708,
+     *     });
+     *     // or
+     *     const result = await v2.chat.channels.actions({
+     *       type: 'leave',
+     * 
+     *       id: 6,
+     *       user_id: 9893708,
+     *     });
+     *     // or
+     *     const result = await v2.chat.channels.actions({
+     *       type: 'readed',
+     * 
+     *       channel_id: 45145743,
+     *       message_id: 3626657177,
+     *     });
+     *     if (result.error != null) {
+     *       console.log(result.error);
+     *       return;
+     *     };
+     * 
+     *     console.log(result);
+     *   } catch (error) {
+     *     console.log(error);
+     *   };
+     * };
+     * 
+     * main();
      * ```
      *
      * &nbsp;
@@ -1450,7 +2410,7 @@ export const chat = {
    * &nbsp;
    *
    * ### Parameters
-   * - `params.id` - The ID of the channel.
+   * - `params.channel_id` - The ID of the channel.
    * - `params.limit?` - Maximum number of messages to return.
    * - `params.since?` - Message id to start returning messages from.
    * - `params.until?` - Message id to end returning messages from.
@@ -1461,7 +2421,30 @@ export const chat = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'lazer',
+   *       login,
+   *       password
+   *       tokenPath: './test.json' // please use for caching
+   *     });
+   * 
+   *     const result = await v2.chat.messages({ id: 24594482 });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1485,7 +2468,33 @@ export const chat = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'lazer',
+   *       login,
+   *       password
+   *       tokenPath: './test.json' // please use for caching
+   *     });
+   * 
+   *     const result = await v2.chat.updates({
+   *       after_id: 3641891943,
+   *       includes: ['presence', 'silences']
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1506,7 +2515,30 @@ export const chat = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'lazer',
+   *       login,
+   *       password
+   *       tokenPath: './test.json' // please use for caching
+   *     });
+   * 
+   *     const result = await v2.chat.details({ channel_id: 24594482 });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1536,13 +2568,48 @@ export const session = {
    *
    * ### Parameters
    * - `params.type` - Type of the action to perform.
+   * - `params.code` - verification code from email (only for `params.type: verify`)
    * - `addons` - Additional parameters to include in the request.
    *
    * &nbsp;
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'lazer',
+   *       login,
+   *       password,
+   *       tokenPath: './test.json' // please use for caching
+   *     });
+   * 
+   *     const result = await v2.session.actions({
+   *       type: 'verify',
+   *       code: '7aah1f7e'
+   *     });
+   *     // or
+   *     const result = await v2.session.actions({
+   *       type: 'reissue',
+   *     });
+   *     // or
+   *     const result = await v2.session.actions({
+   *       type: 'delete',
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1583,7 +2650,38 @@ export const rooms = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'lazer',
+   *       login,
+   *       password,
+   *       tokenPath: './test.json'
+   *     });
+   * 
+   *     const result = await v2.rooms.list({
+   *       type: 'realtime',
+   *       query: 'te',
+   *     });
+   *     // or
+   *     const result = await v2.rooms.list({
+   *       type: 'playlists',
+   *       query: 'te',
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1613,7 +2711,51 @@ export const rooms = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'lazer',
+   *       login,
+   *       password,
+   *       tokenPath: './test.json'
+   *     });
+   * 
+   *     const result = await v2.rooms.scores({
+   *       type: 'all',
+   * 
+   *       id: 582709,
+   *       playlist_id: 5302678,
+   *     });
+   *     // or
+   *     const result = await v2.rooms.scores({
+   *       type: 'single',
+   * 
+   *       id: 582709,
+   *       playlist_id: 5302678,
+   *       score_id: 2414452489,
+   *     });
+   *     // or
+   *     const result = await v2.rooms.scores({
+   *       type: 'user_highest',
+   * 
+   *       id: 582709,
+   *       playlist_id: 5302678,
+   *       user_id: 35015585,
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1635,7 +2777,31 @@ export const rooms = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.rooms.details({
+   *       id: 582709,
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
@@ -1658,7 +2824,31 @@ export const rooms = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.rooms.leaderboard({
+   *       id: 582265,
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;

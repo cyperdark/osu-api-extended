@@ -8,18 +8,18 @@ type Response = ChatMessagesResponse[] & IError;
 
 
 export const chat_messages = async (params: {
-  id: number;
+  channel_id: number;
   limit?: number;
   since?: number;
   until?: number;
   return_object?: boolean;
 }, addons?: IDefaultParams): Promise<Response> => {
-  if (params.id == null) {
+  if (params?.channel_id == null) {
     return handleErrors(`Specify channel id`) as Response;
   };
 
 
-  const data = await request(`https://osu.ppy.sh/api/v2/chat/channels/${params.id}/messages`, {
+  const data = await request(`https://osu.ppy.sh/api/v2/chat/channels/${params.channel_id}/messages`, {
     method: 'GET',
     params,
     addons,

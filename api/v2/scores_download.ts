@@ -12,7 +12,7 @@ export const scores_download = async (params: {
   mode?: Modes_names;
   file_path?: string;
 }): Promise<Response> => {
-  if (params.id == null) {
+  if (params?.id == null) {
     return handleErrors(`Specify score id`) as Response;
   };
 

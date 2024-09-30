@@ -14,13 +14,13 @@ export const beatmaps_discussions_posts = async (params: {
   limit?: number;
   cursor_string?: string;
 }, addons?: IDefaultParams): Promise<BeatmapsDiscussionsListResponse & IError> => {
-  if (params.discussion_id) {
+  if (params?.discussion_id) {
     // @ts-ignore
     params.beatmapset_discussion_id = params.discussion_id;
     delete params.discussion_id;
   };
 
-  if (Array.isArray(params.types)) {
+  if (Array.isArray(params?.types)) {
     // @ts-ignore
     params['types[]'] = params.types;
     delete params.types;
