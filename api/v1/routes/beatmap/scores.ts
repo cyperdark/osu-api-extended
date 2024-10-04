@@ -104,7 +104,7 @@ const name: types = async (id, obj = {}) => {
     b: id,
     u: obj.user,
     m: _mode.indexOf(obj.mode),
-    mods: calculate_mods(obj.mods).number,
+    mods: calculate_mods(obj.mods || '').number,
     type: obj.type,
     limit: obj.limit,
   };

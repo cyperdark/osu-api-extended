@@ -189,7 +189,7 @@ const name: types = async (id, obj = {}) => {
     a: obj.converted,
     h: obj.hash,
     since: obj.since,
-    mods: calculate_mods(obj.mods).number,
+    mods: calculate_mods(obj.mods || '').number,
     limit: obj.limit,
   };
   if (params.m == -1) delete params.m;

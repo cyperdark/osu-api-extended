@@ -31,7 +31,7 @@ const name = (data: any, mode: any) => {
       },
       mods: {
         id: +d.enabled_mods,
-        name: calculate_mods(+d.enabled_mods).name || '',
+        name: calculate_mods(+(d.enabled_mods || '0')).name || '',
       },
       accuracy: 0,
     };

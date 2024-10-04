@@ -45,7 +45,7 @@ const name = (data: any) => {
       },
       mods: {
         id: +g.mods,
-        name: calculate_mods(+g.mods).name || '',
+        name: calculate_mods(+(g.mods || '0')).name || '',
       },
       scores: [],
     };
@@ -77,7 +77,7 @@ const name = (data: any) => {
         },
         mods: {
           id: +ss.enabled_mods,
-          name: calculate_mods(+ss.enabled_mods).name || '',
+          name: calculate_mods(+(ss.enabled_mods || '0')).name || '',
         },
         rank: g.rank,
         pass: g.pass,

@@ -96,6 +96,10 @@ export const calculate_mods = (mods: Mod[] | string | number, order?: boolean): 
     return handleErrors(`Specify mods name (HDDT or 72)`) as Response;
   };
 
+  if (mods == '') {
+    return { number: 0, name: '' } as any;
+  };
+
 
   if (typeof mods == 'number') {
     const name = ModsToName(mods, order);
