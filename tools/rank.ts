@@ -27,7 +27,7 @@ type Response = RankResponse & IError;
 
 
 /**
- * Calculate total passed objects
+ * Calculate rank from play hits
  *
  * &nbsp;
  *
