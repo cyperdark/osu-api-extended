@@ -5,28 +5,28 @@
 
 # osu-api-extended
 
-quick links: [Features](#features) [Usage](#usage) &#8203; / &#8203; [Install](#installation) &#8203; / &#8203; [V1 Api](#api-v1) &#8203; / &#8203; [V2 Api](#api-v2)
+quick links: [Features](#features) [Usage](#usage) &#8203; / &#8203; [Install](#installation) &#8203; / &#8203; [Quickstart](#quickstart) &#8203; / &#8203; [Tools](#tools)
 
-<br>
 <br>
 
 ## Features
-- Api
-  - osu api v1: [official documentation](https://github.com/ppy/osu-api/wiki)
-  - osu api v2: [official documentation](https://osu.ppy.sh/docs/index.html)
-- **Auto** session refresh
-- You need to login only once on application start (preferable in main server file)
-- Built-in **Tools**
-  - `tools.build_url` - Create link for `user`, `score`, `editor_timing` and others
-  - `tools.calculate_accuracy` - Calculate accuracy from play hits
-  - `tools.calculate_hits` - Calculate hits if play was an FC
-  - `tools.calculate_mods` - Calculate mods Number/Name from Number/Name
-  - `tools.calculate_net_pp` - Calculate how much pp would you gain from a play
-  - `tools.calculate_pp` - Create link for `user`, `score`, `editor_timing` and others
-  - `tools.calculate_rank` - Calculate rank from play hits
-  - `tools.calculate_total_passed_objects` - Calculate total passed objects
-  - `tools.country_details` - Get country name and code by providing country name/code
-  - `tools.download_beatmaps` - Downloads a beatmap or beatmap set by given ID. (Supports different hosts)
+- [ ] Api
+  - [ ] osu api v1: [official documentation](https://github.com/ppy/osu-api/wiki)
+  - [ ] osu api v2: [official documentation](https://osu.ppy.sh/docs/index.html)
+- [ ] **Auto** session refresh
+- [ ] You need to login only once on application start (preferable in main server file)
+- [ ] Built-in **Tools**
+  - [ ] `tools.build_url` - Create link for `user`, `score`, `editor_timing` and others
+  - [ ] `tools.calculate_accuracy` - Calculate accuracy from play hits
+  - [ ] `tools.calculate_hits` - Calculate hits if play was an FC
+  - [ ] `tools.calculate_mods` - Calculate mods Number/Name from Number/Name
+  - [ ] `tools.calculate_net_pp` - Calculate how much pp would you gain from a play
+  - [ ] `tools.calculate_pp` - Create link for `user`, `score`, `editor_timing` and others
+  - [ ] `tools.calculate_rank` - Calculate rank from play hits
+  - [ ] `tools.calculate_total_passed_objects` - Calculate total passed objects
+  - [ ] `tools.country_details` - Get country name and code by providing country name/code
+  - [ ] `tools.download_beatmaps` - Downloads a beatmap or beatmap set by given ID. (Supports different hosts)
+- [ ] Setting to prevent throw, [instead send .error](#prevent-throw-errors)
 
 <br>
 <br>
@@ -56,7 +56,7 @@ bun install osu-api-extended
 
 Links: [create your client here](https://osu.ppy.sh/home/account/edit#oauth 'https://osu.ppy.sh/home/account/edit#oauth') &#8203; / &#8203; [get your api key here](https://osu.ppy.sh/p/api 'https://osu.ppy.sh/p/api')
 
-quick links: [v2 - client auth](#client-auth) &#8203; / &#8203; [v2 - lazer auth](#lazer-auth) &#8203; / &#8203; [v2 - cli auth](#lazer-auth)
+quick links: [v2 - client auth](#client-auth) &#8203; / &#8203; [v2 - lazer auth](#lazer-auth) &#8203; / &#8203; [v2 - cli auth](#cli-auth) &#8203; / &#8203; [v2 - Discord Verify](#discord-verify) &#8203; / &#8203; [v2 - Website login](#website-login) &#8203; / &#8203; [v1 usage](#v1-usage) &#8203; / &#8203; [v2 - prevent throw errors](#prevent-throw-errors)
 
 <br> 
 
@@ -258,7 +258,70 @@ export default defineEventHandler(async event => {
 ```
 
 <br>
+
+### V1 usage
+
+```js
+import { auth, v1 } from 'osu-api-extended';
+
+
+async function main() {
+  try {
+    auth.login({
+      type: 'v1',
+      api_key: API_KEY,
+    });
+
+
+    const beatmap = await v1.beatmap.diff(3798013);
+    console.log(beatmap);
+    
+  } catch (error) {
+    console.log(error);
+  };
+};
+
+main();
+```
+
+
+### Prevent throw errors
+
+```js
+import { auth } from 'osu-api-extended';
+
+auth.settings.throwErrors = false;
+
+
+async function main() {
+  try {
+    await auth.login({
+      type: 'v2',
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
+    });
+
+    const result = await v2.beatmaps.events.list({ types: ['approve'] });
+    if (result.error instanceof Error) {
+    // or
+    if (result.error != null) {
+      console.log(result.error);
+      return;
+    };
+
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  };
+};
+
+
+main();
+```
+
 <br>
+<br>
+
 
 ## Tools
 
@@ -436,7 +499,7 @@ function calculate_net_pp() {
 };
 ```
 
-# Dependencies
+## Dependencies
 
 zero
 
