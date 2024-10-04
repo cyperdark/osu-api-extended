@@ -95,11 +95,11 @@ const name: types = async (id) => {
     method: 'GET',
     params: params,
   });
-  if (data.error) return handleErrors(data.error) as Response;
+  if (data.error) return handleErrors(new Error(data.error)) as Response;
 
 
   if (data.match == 0 || !data.match) {
-    return handleErrors('Match not found') as Response;
+    return handleErrors(new Error('Match not found')) as Response;
   };
 
   const format: response = form(data);

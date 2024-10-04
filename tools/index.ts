@@ -11,7 +11,7 @@ export { calculate_net_pp } from "./net-pp";
 
 
 export const calculate_pp = () => {
-  return handleErrors('Use rosu-pp-js instead');
+  return handleErrors(new Error('Use rosu-pp-js instead'));
 };
 
 /**

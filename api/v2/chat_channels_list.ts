@@ -11,7 +11,7 @@ export const chat_channels_list = async (addons?: IDefaultParams): Promise<chatC
     addons,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
   return data;
 };

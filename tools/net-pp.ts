@@ -50,11 +50,11 @@ type Response = {
  */
 export const calculate_net_pp = (scores: ScoresListUserBestResponse[] | number[], pp: number): Response => {
   if (!Array.isArray(scores)) {
-    return handleErrors(`Provide array of scores or plays pp`) as Response;
+    return handleErrors(new Error(`Provide array of scores or plays pp`)) as Response;
   };
 
   if (!isFinite(pp) || pp == null) {
-    return handleErrors(`Specify play pp`) as Response;
+    return handleErrors(new Error(`Specify play pp`)) as Response;
   };
 
 

@@ -12,11 +12,11 @@ export const changelogs_details = async (params: {
   build_version: string;
 }, addons?: IDefaultParams): Promise<Response> => {
   if (params?.stream_name == null) {
-    return handleErrors(`Specify stream name`) as Response;
+    return handleErrors(new Error(`Specify stream name`)) as Response;
   };
 
   if (params?.build_version == null) {
-    return handleErrors(`Specify build version`) as Response;
+    return handleErrors(new Error(`Specify build version`)) as Response;
   };
 
 
@@ -25,7 +25,7 @@ export const changelogs_details = async (params: {
     addons,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
   return data;
 };

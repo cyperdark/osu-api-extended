@@ -12,7 +12,7 @@ export const assets_dataFiles = async (): Promise<Response> => {
     method: 'GET',
   });
 
-  if (data.error) return handleErrors(data.error) as Response;
+  if (data.error) return handleErrors(new Error(data.error)) as Response;
 
 
   const array = data.split('\n')

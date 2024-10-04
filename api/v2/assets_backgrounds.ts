@@ -30,7 +30,7 @@ export const assets_backgrounds = <T extends params>(params: T, addons?: IDefaul
 
   if (params?.type == 'beatmapset') {
     if (params.set_id == null) {
-      return handleErrors('Specify beatmapset id') as Response<T['type']>;
+      return handleErrors(new Error('Specify beatmapset id')) as Response<T['type']>;
     };
 
 
@@ -49,5 +49,5 @@ export const assets_backgrounds = <T extends params>(params: T, addons?: IDefaul
   };
 
 
-  return handleErrors(`Unsupported type: ${(params as any)?.type}`) as Response<T['type']>;
+  return handleErrors(new Error(`Unsupported type: ${(params as any)?.type}`)) as Response<T['type']>;
 };

@@ -189,7 +189,7 @@ const name: types = async (id, obj = {}) => {
     a: obj.converted,
     h: obj.hash,
     since: obj.since,
-    mods: calculate_mods(obj.mods || '').number,
+    mods: calculate_mods(obj.mods).number,
     limit: obj.limit,
   };
   if (params.m == -1) delete params.m;
@@ -199,9 +199,9 @@ const name: types = async (id, obj = {}) => {
     method: 'GET',
     params: params,
   });
-  if (data.error) return handleErrors(data.error) as Response;
+  if (data.error) return handleErrors(new Error(data.error)) as Response;
+  if (data.length == 0) return handleErrors(new Error('Beatmap not found')) as Response;
 
-  if (data.length == 0) return handleErrors('Beatmap not found') as Response;
 
   const format = form(data);
   return format;

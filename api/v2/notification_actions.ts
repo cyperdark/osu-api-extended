@@ -41,7 +41,7 @@ export const notification_actions = async <T extends params>(params: T, addons?:
       method = 'POST';
 
       if (!Array.isArray(params.notifications) && !Array.isArray(params.identities)) {
-        return handleErrors(`Missing on of parameters`) as Response<T['type']>;
+        return handleErrors(new Error(`Missing on of parameters`)) as Response<T['type']>;
       };
 
       // params.ids.forEach((r, index) => object[`identities[${index}][id]`] = r);
@@ -56,7 +56,7 @@ export const notification_actions = async <T extends params>(params: T, addons?:
       break;
 
     default:
-      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
+      return handleErrors(new Error(`Unsupported type: ${(params as any).type}`)) as Response<T['type']>;
   };
 
 
@@ -66,7 +66,7 @@ export const notification_actions = async <T extends params>(params: T, addons?:
     addons,
   });
 
-  if (data.error) return handleErrors(data.error) as Response<T['type']>;
+  if (data.error) return handleErrors(new Error(data.error)) as Response<T['type']>;
 
 
   return data as Response<T['type']>;

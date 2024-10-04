@@ -198,7 +198,7 @@ const name: types = async (id, obj = {}) => {
     params: params,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
 
   if (data.length == 0) return [];

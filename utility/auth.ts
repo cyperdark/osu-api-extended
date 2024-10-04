@@ -75,7 +75,7 @@ type ResponseLogin<T extends auth_params['type']> =
 
 export const login = <T extends auth_params>(params: auth_params): ResponseLogin<T['type']> => {
   if (params?.type == null) {
-    return handleErrors('Specify login type');
+    return handleErrors(new Error('Specify login type'));
   };
 
   credentials.type = params.type;
@@ -183,7 +183,7 @@ const client_login = async (client_id: number | string, client_secret: string, s
     })
   });
 
-  if (response.error) return handleErrors(response.error);
+  if (response.error) return handleErrors(new Error(response.error));
 
 
   cache.v2 = response.access_token;
@@ -217,7 +217,7 @@ const lazer_login = async (login: string, password: string): Promise<lazer_auth_
     })
   });
 
-  if (response.error) return handleErrors(response.error);
+  if (response.error) return handleErrors(new Error(response.error));
 
 
   cache.v2 = response.access_token;
@@ -260,7 +260,7 @@ const authorize_cli = async (client_id: number | string, client_secret: string, 
     })
   });
 
-  if (response.error) return handleErrors(response.error);
+  if (response.error) return handleErrors(new Error(response.error));
 
 
   cache.v2 = response.access_token;
@@ -302,19 +302,19 @@ export const authorize = async (params: {
   redirect_url: string;
 }): Promise<UserAuth> => {
   if (params?.client_id == null) {
-    return handleErrors(`Specify client_id`);
+    return handleErrors(new Error(`Specify client_id`));
   };
 
   if (params?.client_secret == null) {
-    return handleErrors(`Specify client_secret`);
+    return handleErrors(new Error(`Specify client_secret`));
   };
 
   if (params?.redirect_url == null) {
-    return handleErrors(`Specify redirect_url`);
+    return handleErrors(new Error(`Specify redirect_url`));
   };
 
   if (params?.code == null) {
-    return handleErrors(`Specify code`);
+    return handleErrors(new Error(`Specify code`));
   };
 
 
@@ -333,7 +333,7 @@ export const authorize = async (params: {
     })
   });
 
-  if (response.error) return handleErrors(response.error);
+  if (response.error) return handleErrors(new Error(response.error));
 
 
   let url = 'https://osu.ppy.sh/api/v2/me';
@@ -344,7 +344,7 @@ export const authorize = async (params: {
     addons: { authKey: response.access_token, ignoreSessionRefresh: true }
   });
 
-  if (user.error) return handleErrors(user.error);
+  if (user.error) return handleErrors(new Error(user.error));
 
 
   user.access_token = response.access_token;
@@ -365,19 +365,19 @@ export const refresh_session = async (params: {
   redirect_url: string;
 }): Promise<UserAuth> => {
   if (params?.client_id == null) {
-    return handleErrors(`Specify client_id`);
+    return handleErrors(new Error(`Specify client_id`));
   };
 
   if (params?.client_secret == null) {
-    return handleErrors(`Specify client_secret`);
+    return handleErrors(new Error(`Specify client_secret`));
   };
 
   if (params?.redirect_url == null) {
-    return handleErrors(`Specify redirect_url`);
+    return handleErrors(new Error(`Specify redirect_url`));
   };
 
   if (params?.refresh_token == null) {
-    return handleErrors(`Specify refresh_token`);
+    return handleErrors(new Error(`Specify refresh_token`));
   };
 
 
@@ -396,7 +396,7 @@ export const refresh_session = async (params: {
     })
   });
 
-  if (response.error) return handleErrors(response.error);
+  if (response.error) return handleErrors(new Error(response.error));
 
 
   let url = 'https://osu.ppy.sh/api/v2/me';
@@ -407,7 +407,7 @@ export const refresh_session = async (params: {
     addons: { authKey: response.access_token, ignoreSessionRefresh: true }
   });
 
-  if (user.error) return handleErrors(user.error);
+  if (user.error) return handleErrors(new Error(user.error));
 
 
   user.access_token = response.access_token;

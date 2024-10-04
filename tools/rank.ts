@@ -69,7 +69,7 @@ type Response = RankResponse & IError;
  */
 export const calculate_rank = (hits: Hits, mods: Mod[] | string | number = 0, mode: GamemodeEnum | string | number): Response => {
   if (Object.keys(hits).length == 0) {
-    return handleErrors('Provide hits (300, 100, 50, etc)') as Response;
+    return handleErrors(new Error('Provide hits (300, 100, 50, etc)')) as Response;
   };
 
 

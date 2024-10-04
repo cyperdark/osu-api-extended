@@ -71,7 +71,7 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
   switch (params?.type) {
     case 'leaderboard':
       if (params.beatmap_id == null) {
-        return handleErrors(`Specify beatmap id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify beatmap id`)) as Response<T['type']>;
       };
 
 
@@ -85,11 +85,11 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
 
     case 'user_beatmap_best':
       if (params.beatmap_id == null) {
-        return handleErrors(`Specify beatmap id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify beatmap id`)) as Response<T['type']>;
       };
 
       if (params.user_id == null) {
-        return handleErrors(`Specify user id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify user id`)) as Response<T['type']>;
       };
 
 
@@ -102,11 +102,11 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
 
     case 'user_beatmap_all':
       if (params.beatmap_id == null) {
-        return handleErrors(`Specify beatmap id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify beatmap id`)) as Response<T['type']>;
       };
 
       if (params.user_id == null) {
-        return handleErrors(`Specify user id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify user id`)) as Response<T['type']>;
       };
 
 
@@ -121,7 +121,7 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
     case 'user_recent':
     case 'user_pinned':
       if (params.user_id == null) {
-        return handleErrors(`Specify user id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify user id`)) as Response<T['type']>;
       };
 
 
@@ -136,7 +136,7 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
 
     case 'solo_scores':
       if (params.beatmap_id == null) {
-        return handleErrors(`Specify beatmap id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify beatmap id`)) as Response<T['type']>;
       };
 
 
@@ -149,7 +149,7 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
       break;
 
     default:
-      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
+      return handleErrors(new Error(`Unsupported type: ${(params as any).type}`)) as Response<T['type']>;
   };
 
 
@@ -159,7 +159,7 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
     addons,
   });
 
-  if (data.error) return handleErrors(data.error) as Response<T['type']>;
+  if (data.error) return handleErrors(new Error(data.error)) as Response<T['type']>;
 
 
   if (['leaderboard', 'user_beatmap_all'].includes(params.type)) {

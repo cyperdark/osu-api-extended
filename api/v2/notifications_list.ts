@@ -13,7 +13,7 @@ export const notifications_list = async (params: {
   unread_only: boolean;
 }, addons?: IDefaultParams): Promise<Response> => {
   if (credentials.type != 'lazer') {
-    return handleErrors(`Login via lazer to use this endpoint`) as Response
+    return handleErrors(new Error(`Login via lazer to use this endpoint`)) as Response
   };
 
 
@@ -24,7 +24,7 @@ export const notifications_list = async (params: {
     },
     addons,
   });
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
 
   if (params?.unread_only == true && !('error' in data))

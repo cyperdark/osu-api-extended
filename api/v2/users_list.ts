@@ -9,11 +9,11 @@ type Response = UsersLisResponse[] & IError;
 
 export const users_list = async (params: { ids: number[], include_variants?: boolean }, addons?: IDefaultParams): Promise<Response> => {
   if ((params?.ids || [])?.length == 0) {
-    return handleErrors(`Specify at least one user id`) as Response;
+    return handleErrors(new Error(`Specify at least one user id`)) as Response;
   };
 
   if (params.ids.length > 50) {
-    return handleErrors("No more than 50 users can be requested at once.") as Response;
+    return handleErrors(new Error("No more than 50 users can be requested at once.")) as Response;
   }
 
   const data = await request(`https://osu.ppy.sh/api/v2/users`, {
@@ -25,7 +25,7 @@ export const users_list = async (params: { ids: number[], include_variants?: boo
     addons
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
 
   if (data.users) return data.users;

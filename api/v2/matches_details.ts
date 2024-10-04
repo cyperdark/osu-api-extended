@@ -9,7 +9,7 @@ type Response = MatchesDetailsResponse & IError;
 
 export const matches_details = async (params: { match_id: number }, addons?: IDefaultParams): Promise<Response> => {
   if (params?.match_id == null) {
-    return handleErrors(`Specify match id`) as Response;
+    return handleErrors(new Error('Specify match id')) as Response;
   };
 
 
@@ -18,7 +18,7 @@ export const matches_details = async (params: { match_id: number }, addons?: IDe
     addons,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
 
   return data;

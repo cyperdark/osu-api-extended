@@ -40,11 +40,11 @@ type Response<T extends params['type']> =
 
 export const chat_channels_actions = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
   if (credentials.type != 'lazer' && credentials.type != 'cli') {
-    return handleErrors(`Login via lazer or cli to use this endpoint`) as Response<T['type']>;
+    return handleErrors(new Error(`Login via lazer or cli to use this endpoint`)) as Response<T['type']>;
   };
 
   if (credentials.type == 'cli' && !credentials.scopes.includes('chat.write')) {
-    return handleErrors(`Requires "chat.read" scope`) as Response<T['type']>;
+    return handleErrors(new Error(`Requires "chat.read" scope`)) as Response<T['type']>;
   };
 
 
@@ -56,7 +56,7 @@ export const chat_channels_actions = async <T extends params>(params: T, addons?
   switch (params?.type) {
     case 'send':
       if (params?.channel_id == null || params?.message == null || params?.is_action == null) {
-        return handleErrors(`Missing required parameters`) as Response<T['type']>;
+        return handleErrors(new Error(`Missing required parameters`)) as Response<T['type']>;
       };
 
 
@@ -68,7 +68,7 @@ export const chat_channels_actions = async <T extends params>(params: T, addons?
 
     case 'join':
       if (params?.channel_id == null || params?.user_id == null) {
-        return handleErrors(`Missing required parameters`) as Response<T['type']>;
+        return handleErrors(new Error(`Missing required parameters`)) as Response<T['type']>;
       };
 
 
@@ -78,7 +78,7 @@ export const chat_channels_actions = async <T extends params>(params: T, addons?
 
     case 'leave':
       if (params?.channel_id == null || params?.user_id == null) {
-        return handleErrors(`Missing required parameters`) as Response<T['type']>;
+        return handleErrors(new Error(`Missing required parameters`)) as Response<T['type']>;
       };
 
 
@@ -88,7 +88,7 @@ export const chat_channels_actions = async <T extends params>(params: T, addons?
 
     case 'read':
       if (params?.channel_id == null || params?.message_id == null) {
-        return handleErrors(`Missing required parameters`) as Response<T['type']>;
+        return handleErrors(new Error(`Missing required parameters`)) as Response<T['type']>;
       };
 
 
@@ -97,7 +97,7 @@ export const chat_channels_actions = async <T extends params>(params: T, addons?
       break;
 
     default:
-      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
+      return handleErrors(new Error(`Unsupported type: ${(params as any).type}`)) as Response<T['type']>;
   };
 
 
@@ -107,7 +107,7 @@ export const chat_channels_actions = async <T extends params>(params: T, addons?
     addons,
   });
 
-  if (data.error) return handleErrors(data.error) as Response<T['type']>;
+  if (data.error) return handleErrors(new Error(data.error)) as Response<T['type']>;
 
 
   return data as Response<T['type']>;

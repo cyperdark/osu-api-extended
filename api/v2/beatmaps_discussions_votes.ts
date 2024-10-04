@@ -29,7 +29,7 @@ export const beatmaps_discussions_votes = async (params: {
     addons
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
   return data;
 };

@@ -20,7 +20,7 @@ export const rooms_list = async (params: {
   cursor_string?: string;
 }, addons?: IDefaultParams): Promise<Response> => {
   if (credentials.type != 'lazer' && credentials.type != 'cli') {
-    return handleErrors(`Login via lazer or cli to use this endpoint`) as Response
+    return handleErrors(new Error(`Login via lazer or cli to use this endpoint`)) as Response
   };
 
   if (addons == null)
@@ -39,7 +39,7 @@ export const rooms_list = async (params: {
     addons,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
   if (params?.query && !('error' in data)) {
     if (data.rooms) data.rooms = data.rooms.filter((r: any) => r.name.toLowerCase().includes(params?.query.trim().toLowerCase()))

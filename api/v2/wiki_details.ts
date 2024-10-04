@@ -12,11 +12,11 @@ export const wiki_details = async (params: {
   path_name: string;
 }, addons?: IDefaultParams): Promise<Response> => {
   if (params?.locale == null) {
-    return handleErrors(`Specify locale code. Example: en`) as Response;
+    return handleErrors(new Error(`Specify locale code. Example: en`)) as Response;
   };
 
   if (params?.path_name == null) {
-    return handleErrors(`Specify wiki page path`) as Response;
+    return handleErrors(new Error(`Specify wiki page path`)) as Response;
   };
 
 
@@ -25,7 +25,7 @@ export const wiki_details = async (params: {
     addons,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
 
   return data;

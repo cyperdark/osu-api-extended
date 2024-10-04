@@ -61,11 +61,11 @@ type Response<T extends params['type']> =
 
 export const forums_topics_actions = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
   if (credentials.type != 'lazer' && credentials.type != 'cli') {
-    return handleErrors(`Login via lazer or cli to use this endpoint`) as Response<T['type']>;
+    return handleErrors(new Error(`Login via lazer or cli to use this endpoint`)) as Response<T['type']>;
   };
 
   if (credentials.type == 'cli' && !credentials.scopes.includes('forum.write')) {
-    return handleErrors(`Requires "forum.write" scope`) as Response<T['type']>;
+    return handleErrors(new Error(`Requires "forum.write" scope`)) as Response<T['type']>;
   };
 
 
@@ -80,15 +80,15 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
   switch (params.type) {
     case 'create':
       if (params?.forum_id == null) {
-        return handleErrors(`Specify forum id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify forum id`)) as Response<T['type']>;
       };
 
       if (params?.title == null) {
-        return handleErrors(`Specify title`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify title`)) as Response<T['type']>;
       };
 
       if (params?.message == null) {
-        return handleErrors(`Specify message`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify message`)) as Response<T['type']>;
       };
 
 
@@ -122,11 +122,11 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
 
     case 'reply':
       if (params?.post_id == null) {
-        return handleErrors(`Specify post id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify post id`)) as Response<T['type']>;
       };
 
       if (params?.message == null || params?.message?.trim() == '') {
-        return handleErrors(`Specify message`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify message`)) as Response<T['type']>;
       };
 
 
@@ -140,11 +140,11 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
 
     case 'edit_post':
       if (params?.post_id == null) {
-        return handleErrors(`Specify post id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify post id`)) as Response<T['type']>;
       };
 
       if (params?.message == null) {
-        return handleErrors(`Specify message`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify message`)) as Response<T['type']>;
       };
 
 
@@ -159,11 +159,11 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
     case 'edit_topic':
       if (params?.topic_id && (params?.title != null && params?.title != '')) {
         if (params?.topic_id == null) {
-          return handleErrors(`Specify topic id`) as Response<T['type']>;
+          return handleErrors(new Error(`Specify topic id`)) as Response<T['type']>;
         };
 
         if (params?.title == null || params?.title?.trim() == '') {
-          return handleErrors(`Specify title`) as Response<T['type']>;
+          return handleErrors(new Error(`Specify title`)) as Response<T['type']>;
         };
 
 
@@ -185,11 +185,11 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
 
       if (params?.post_id && (params?.message != null && params?.message != '')) {
         if (params?.post_id == null) {
-          return handleErrors(`Specify post id`) as Response<T['type']>;
+          return handleErrors(new Error(`Specify post id`)) as Response<T['type']>;
         };
 
         if (params?.message == null) {
-          return handleErrors(`Specify message`) as Response<T['type']>;
+          return handleErrors(new Error(`Specify message`)) as Response<T['type']>;
         };
 
 
@@ -206,7 +206,7 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
       break;
 
     default:
-      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
+      return handleErrors(new Error(`Unsupported type: ${(params as any).type}`)) as Response<T['type']>;
   };
 
 
@@ -223,7 +223,7 @@ export const forums_topics_actions = async <T extends params>(params: T, addons?
     });
 
     if (data.error) {
-      results.push(handleErrors(data.error) as Response<T['type']>);
+      results.push(handleErrors(new Error(data.error)) as Response<T['type']>);
       continue;
     };
 

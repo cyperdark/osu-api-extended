@@ -24,7 +24,7 @@ type Response<T extends params['type']> =
 
 export const beatmaps_details = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
   if (params.id == null) {
-    return handleErrors(`Specify ${params.type} id`) as Response<T['type']>;
+    return handleErrors(new Error(`Specify ${params.type} id`)) as Response<T['type']>;
   };
 
 
@@ -43,7 +43,7 @@ export const beatmaps_details = async <T extends params>(params: T, addons?: IDe
       break;
 
     default:
-      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
+      return handleErrors(new Error(`Unsupported type: ${(params as any).type}`)) as Response<T['type']>;
   };
 
 
@@ -53,7 +53,7 @@ export const beatmaps_details = async <T extends params>(params: T, addons?: IDe
     addons
   });
   
-  if (data.error) return handleErrors(data.error) as Response<T['type']>;
+  if (data.error) return handleErrors(new Error(data.error)) as Response<T['type']>;
 
 
   return data as Response<T['type']>;

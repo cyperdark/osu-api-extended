@@ -10,7 +10,7 @@ type Response = MeDetailsResponse & IError;
 
 export const me_details = async (params: { mode: Modes_names }, addons?: IDefaultParams): Promise<Response> => {
   if (credentials.type != 'lazer' && credentials.type != 'cli') {
-    return handleErrors(`Login via lazer or cli to use this endpoint`) as Response
+    return handleErrors(new Error('Login via lazer or cli to use this endpoint')) as Response
   };
 
 
@@ -22,7 +22,7 @@ export const me_details = async (params: { mode: Modes_names }, addons?: IDefaul
     addons,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
 
   return data;

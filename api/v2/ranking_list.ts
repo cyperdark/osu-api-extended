@@ -56,7 +56,7 @@ type Response<T extends params['type']> =
 
 export const ranking_list = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
   if (params?.type != 'kudosu' && params?.mode == null) {
-    return handleErrors('Gamemode not specified') as Response<T['type']>;
+    return handleErrors(new Error('Gamemode not specified')) as Response<T['type']>;
   };
 
 
@@ -105,7 +105,7 @@ export const ranking_list = async <T extends params>(params: T, addons?: IDefaul
       break;
 
     default:
-      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
+      return handleErrors(new Error(`Unsupported type: ${(params as any).type}`)) as Response<T['type']>;
   };
 
 
@@ -115,7 +115,7 @@ export const ranking_list = async <T extends params>(params: T, addons?: IDefaul
     addons,
   });
 
-  if (data.error) return handleErrors(data.error) as Response<T['type']>;
+  if (data.error) return handleErrors(new Error(data.error)) as Response<T['type']>;
 
 
   if (params.type == 'kudosu') return data.ranking as Response<T['type']>;

@@ -12,7 +12,7 @@ export const scores_details = async (params: {
   mode?: Modes_names;
 }, addons?: IDefaultParams): Promise<Response> => {
   if (params?.id == null) {
-    return handleErrors(`Specify score id`) as Response;
+    return handleErrors(new Error('Specify score id')) as Response;
   };
 
 
@@ -23,7 +23,7 @@ export const scores_details = async (params: {
     addons,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
 
   return data;

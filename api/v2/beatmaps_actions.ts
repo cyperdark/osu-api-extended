@@ -21,7 +21,7 @@ type Response<T extends params['type']> =
 
 // FIX
 const name = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
-  return handleErrors('TEMPORARY NOT WORKING, have no clue why') as Response<T['type']>;
+  return handleErrors(new Error('TEMPORARY NOT WORKING, have no clue why')) as Response<T['type']>;
   // if (params.type == null)
   //   return {
   //     error: 'Type not specified',

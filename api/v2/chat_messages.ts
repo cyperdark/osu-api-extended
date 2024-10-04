@@ -16,15 +16,15 @@ export const chat_messages = async (params: {
   return_object?: boolean;
 }, addons?: IDefaultParams): Promise<Response> => {
   if (credentials.type != 'lazer' && credentials.type != 'cli') {
-    return handleErrors(`Login via lazer or cli to use this endpoint`) as Response
+    return handleErrors(new Error(`Login via lazer or cli to use this endpoint`)) as Response;
   };
 
   if (credentials.type == 'cli' && !credentials.scopes.includes('chat.read')) {
-    return handleErrors(`Requires "chat.read" scope`) as Response
+    return handleErrors(new Error(`Requires "chat.read" scope`)) as Response;
   };
 
   if (params?.channel_id == null) {
-    return handleErrors(`Specify channel id`) as Response;
+    return handleErrors(new Error(`Specify channel id`)) as Response;
   };
 
 
@@ -34,7 +34,7 @@ export const chat_messages = async (params: {
     addons,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
   return data;
 };

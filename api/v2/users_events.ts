@@ -18,11 +18,11 @@ export const users_events = async ({ sort, cursor_string, type }: {
     addons,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
 
   if (type != null && !Array.isArray(type)) {
-    return handleErrors(`Events Type must be an Array of types. Example: ['achievement', 'rank']`) as Response;
+    return handleErrors(new Error(`Events Type must be an Array of types. Example: ['achievement', 'rank']`)) as Response;
   };
 
 

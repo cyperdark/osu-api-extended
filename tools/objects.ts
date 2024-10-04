@@ -72,7 +72,7 @@ type Response = TotalObjectsResponse & IError;
  */
 export const calculate_total_passed_objects = (hits: Hits, mode: GamemodeEnum | string | number): Response => {
   if (Object.keys(hits).length == 0) {
-    return handleErrors('Provide hits (300, 100, 50, etc)') as Response;
+    return handleErrors(new Error('Provide hits (300, 100, 50, etc)')) as Response;
   };
 
 
@@ -108,7 +108,7 @@ export const calculate_total_passed_objects = (hits: Hits, mode: GamemodeEnum | 
       break;
 
     default:
-      return handleErrors(`Unsupported gamemode: ${mode}}`) as Response;
+      return handleErrors(new Error(`Unsupported gamemode: ${mode}}`)) as Response;
   };
 
 
@@ -173,7 +173,7 @@ type ResponseConvert = ConvertHitsResponse & IError;
  */
 export const calculate_hits = (hits: Hits, mode: GamemodeEnum | string | number): ResponseConvert => {
   if (Object.keys(hits).length == 0) {
-    return handleErrors('Provide hits (300, 100, 50, etc)') as ResponseConvert;
+    return handleErrors(new Error('Provide hits (300, 100, 50, etc)')) as ResponseConvert;
   };
 
 
@@ -218,7 +218,7 @@ export const calculate_hits = (hits: Hits, mode: GamemodeEnum | string | number)
       break;
 
     default:
-      return handleErrors(`Unsupported gamemode: ${mode}}`) as ResponseConvert;
+      return handleErrors(new Error(`Unsupported gamemode: ${mode}}`)) as ResponseConvert;
   };
 
 

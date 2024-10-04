@@ -42,14 +42,14 @@ type Response = CountryResponse & IError;
  */
 export const country_details = (name: string): Response => {
   if (name == null || name == '') {
-    return handleErrors('Specify country code or country name') as Response;
+    return handleErrors(new Error('Specify country code or country name')) as Response;
   };
 
 
   if (name.length == 2) {
     const find = (CountryNames as any)[name.toUpperCase()];
     if (find == null) {
-      return handleErrors('Country not found') as Response;
+      return handleErrors(new Error('Country not found')) as Response;
     };
 
 
@@ -62,7 +62,7 @@ export const country_details = (name: string): Response => {
 
   const find = (CountryCodes as any)[name];
   if (find == null) {
-    return handleErrors('Country not found') as Response;
+    return handleErrors(new Error('Country not found')) as Response;
   };
 
 

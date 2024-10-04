@@ -16,7 +16,7 @@ export const chat_list = async (params: {
     addons
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
 
   if (params?.sort == 'date_asc')

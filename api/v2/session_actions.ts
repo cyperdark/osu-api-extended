@@ -36,11 +36,11 @@ export const session_actions = async <T extends params>(params: T, addons?: IDef
   switch (params?.type) {
     case 'verify':
       if (credentials.type != 'lazer') {
-        return handleErrors(`Login via lazer to use this endpoint`);
+        return handleErrors(new Error(`Login via lazer to use this endpoint`)) as Response<T['type']>;
       };
 
       if (params?.code == null) {
-        return handleErrors(`Specify verification code`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify verification code`)) as Response<T['type']>;
       };
 
       url += `/session/verify`;
@@ -58,7 +58,7 @@ export const session_actions = async <T extends params>(params: T, addons?: IDef
 
     case 'reissue':
       if (credentials.type != 'lazer') {
-        return handleErrors(`Login via lazer to use this endpoint`);
+        return handleErrors(new Error(`Login via lazer to use this endpoint`)) as Response<T['type']>;
       };
 
       url += `/session/verify/reissue`;
@@ -80,7 +80,7 @@ export const session_actions = async <T extends params>(params: T, addons?: IDef
     addons,
   });
 
-  if (data.error) return handleErrors(data.error) as Response<T['type']>;
+  if (data.error) return handleErrors(new Error(data.error)) as Response<T['type']>;
 
 
   return data as Response<T['type']>;

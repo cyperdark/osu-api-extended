@@ -12,7 +12,7 @@ export const news_details = async (params: {
   key: 'id' | 'slug' | null;
 }, addons?: IDefaultParams): Promise<Response> => {
   if (params.news_id == null) {
-    return handleErrors(`Specify a query`) as Response
+    return handleErrors(new Error('Specify a query')) as Response
   };
 
 
@@ -22,7 +22,7 @@ export const news_details = async (params: {
     addons,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
   return data;
 };

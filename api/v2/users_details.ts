@@ -13,7 +13,7 @@ export const users_details = async (params: {
   key?: 'id' | 'username' | '@';
 }, addons?: IDefaultParams): Promise<Response> => {
   if (params?.user == null) {
-    return handleErrors(`Specify user id or name`) as Response;
+    return handleErrors(new Error('Specify user id or name')) as Response;
   };
 
   let key = params?.key;
@@ -26,7 +26,7 @@ export const users_details = async (params: {
     addons,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
   return data;
 };

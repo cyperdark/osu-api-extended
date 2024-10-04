@@ -13,7 +13,7 @@ export const spotlights_list = async (addons?: IDefaultParams): Promise<Response
     addons,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
 
   return data.spotlights;

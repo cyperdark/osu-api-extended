@@ -14,11 +14,11 @@ export const scores_download = async (params: {
   file_path?: string;
 }): Promise<Response> => {
   if (credentials.type != 'lazer' && credentials.type != 'cli') {
-    return handleErrors(`Login via lazer or cli to use this endpoint`) as Response
+    return handleErrors(new Error(`Login via lazer or cli to use this endpoint`)) as Response;
   };
 
   if (params?.id == null) {
-    return handleErrors(`Specify score id`) as Response;
+    return handleErrors(new Error(`Specify score id`)) as Response;
   };
 
 
@@ -28,7 +28,7 @@ export const scores_download = async (params: {
     _callback: false,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
 
   return data;

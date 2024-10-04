@@ -93,7 +93,7 @@ type Response = ModsResponse & IError;
  */
 export const calculate_mods = (mods: Mod[] | string | number, order?: boolean): Response => {
   if (mods == null) {
-    return handleErrors(`Specify mods name (HDDT or 72)`) as Response;
+    return handleErrors(new Error(`Specify mods name (HDDT or 72)`)) as Response;
   };
 
   if (mods == '') {
@@ -125,7 +125,7 @@ export const calculate_mods = (mods: Mod[] | string | number, order?: boolean): 
 
 
   if (!Array.isArray(ModsArray)) {
-    return handleErrors(`Can't convert mods (${mods}) to array of mods`) as Response;
+    return handleErrors(new Error(`Can't convert mods (${mods}) to array of mods`)) as Response;
   };
 
 

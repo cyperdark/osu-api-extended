@@ -72,7 +72,7 @@ type Response = AccuracyResponse & IError;
  */
 export const calculate_accuracy = (hits: Hits, mode: GamemodeEnum | string | number): Response => {
   if (Object.keys(hits).length == 0) {
-    return handleErrors('Provide hits (300, 100, 50, etc)') as Response;
+    return handleErrors(new Error('Provide hits (300, 100, 50, etc)')) as Response;
   };
 
 
@@ -118,7 +118,7 @@ export const calculate_accuracy = (hits: Hits, mode: GamemodeEnum | string | num
       break;
 
     default:
-      return handleErrors(`Unsupported gamemode: ${mode}}`) as Response;
+      return handleErrors(new Error(`Unsupported gamemode: ${mode}}`)) as Response;
   };
 
 

@@ -44,7 +44,7 @@ type Response<T extends params['type']> =
 
 export const rooms_scores = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
   if (credentials.type != 'lazer' && credentials.type != 'cli') {
-    return handleErrors(`Login via lazer or cli to use this endpoint`) as Response<T['type']>;
+    return handleErrors(new Error(`Login via lazer or cli to use this endpoint`)) as Response<T['type']>;
   };
 
 
@@ -54,11 +54,11 @@ export const rooms_scores = async <T extends params>(params: T, addons?: IDefaul
 
 
   if (params?.id == null) {
-    return handleErrors(`Specify room id`) as Response<T['type']>;
+    return handleErrors(new Error(`Specify room id`)) as Response<T['type']>;
   };
 
   if (params?.playlist_id == null) {
-    return handleErrors(`Specify playlist id`) as Response<T['type']>;
+    return handleErrors(new Error(`Specify playlist id`)) as Response<T['type']>;
   };
 
 
@@ -82,7 +82,7 @@ export const rooms_scores = async <T extends params>(params: T, addons?: IDefaul
       break;
 
     default:
-      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
+      return handleErrors(new Error(`Unsupported type: ${(params as any).type}`)) as Response<T['type']>;
   };
 
 
@@ -92,7 +92,7 @@ export const rooms_scores = async <T extends params>(params: T, addons?: IDefaul
     addons,
   });
 
-  if (data.error) return handleErrors(data.error) as Response<T['type']>;
+  if (data.error) return handleErrors(new Error(data.error)) as Response<T['type']>;
 
 
   return data as Response<T['type']>;

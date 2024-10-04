@@ -61,15 +61,15 @@ export const comments_actions = async <T extends params>(params: T, addons?: IDe
       url += `/comments`;
 
       if (params.id == null) {
-        return handleErrors(`Specify news id or beatmap set id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify news id or beatmap set id`)) as Response<T['type']>;
       };
 
       if (params.commentable_type == null) {
-        return handleErrors(`Specify commentable_type`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify commentable_type`)) as Response<T['type']>;
       };
 
       if (params.message == null) {
-        return handleErrors(`You forgot to provide message`) as Response<T['type']>;
+        return handleErrors(new Error(`You forgot to provide message`)) as Response<T['type']>;
       };
 
 
@@ -81,11 +81,11 @@ export const comments_actions = async <T extends params>(params: T, addons?: IDe
 
     case 'edit':
       if (params.id == null) {
-        return handleErrors(`Specify comment id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify comment id`)) as Response<T['type']>;
       };
 
       if (params.message == null) {
-        return handleErrors(`You forgot to provide message`) as Response<T['type']>;
+        return handleErrors(new Error(`You forgot to provide message`)) as Response<T['type']>;
       };
 
 
@@ -97,7 +97,7 @@ export const comments_actions = async <T extends params>(params: T, addons?: IDe
 
     case 'delete':
       if (params.id == null) {
-        return handleErrors(`Specify comment id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify comment id`)) as Response<T['type']>;
       };
 
 
@@ -108,7 +108,7 @@ export const comments_actions = async <T extends params>(params: T, addons?: IDe
 
     case 'vote':
       if (params.id == null) {
-        return handleErrors(`Specify comment id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify comment id`)) as Response<T['type']>;
       };
 
 
@@ -119,7 +119,7 @@ export const comments_actions = async <T extends params>(params: T, addons?: IDe
 
     case 'unvote':
       if (params.id == null) {
-        return handleErrors(`Specify comment id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify comment id`)) as Response<T['type']>;
       };
 
 
@@ -129,7 +129,7 @@ export const comments_actions = async <T extends params>(params: T, addons?: IDe
       break;
 
     default:
-      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
+      return handleErrors(new Error(`Unsupported type: ${(params as any).type}`)) as Response<T['type']>;
   };
 
 
@@ -139,7 +139,7 @@ export const comments_actions = async <T extends params>(params: T, addons?: IDe
     addons,
   });
 
-  if (data.error) return handleErrors(data.error) as Response<T['type']>;
+  if (data.error) return handleErrors(new Error(data.error)) as Response<T['type']>;
 
 
   return data as Response<T['type']>;

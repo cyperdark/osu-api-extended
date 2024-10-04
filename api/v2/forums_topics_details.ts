@@ -19,7 +19,7 @@ export const forums_topics_details = async (params: {
   cursor_string?: string,
 }, addons?: IDefaultParams): Promise<Response> => {
   if (params?.id == null) {
-    return handleErrors(`Specify topic id`) as Response
+    return handleErrors(new Error('Specify topic id')) as Response
   };
 
 
@@ -37,7 +37,7 @@ export const forums_topics_details = async (params: {
     addons,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
 
   return data;

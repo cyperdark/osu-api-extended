@@ -13,7 +13,7 @@ export const users_activity = async (params: {
   offset?: number;
 }, addons?: IDefaultParams): Promise<Response> => {
   if (params?.id == null) {
-    return handleErrors(`Specify user id`) as Response;
+    return handleErrors(new Error(`Specify user id`)) as Response;
   };
 
 
@@ -26,7 +26,7 @@ export const users_activity = async (params: {
     addons,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
 
   return data;

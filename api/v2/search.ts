@@ -84,7 +84,7 @@ export const search_all = async <T extends params>(params: T, addons?: IDefaultP
     addons
   });
 
-  if (data.error) return handleErrors(data.error) as Response<T['type']>;
+  if (data.error) return handleErrors(new Error(data.error)) as Response<T['type']>;
 
 
   return data as Response<T['type']>;

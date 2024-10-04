@@ -10,7 +10,7 @@ type Response = MedownloadquotaResponse & IError;
 
 export const me_download_quota = async (addons?: IDefaultParams): Promise<Response> => {
   if (credentials.type != 'lazer') {
-    return handleErrors(`Login via lazer to use this endpoint`) as Response
+    return handleErrors(new Error('Login via lazer to use this endpoint')) as Response
   };
 
 
@@ -19,7 +19,7 @@ export const me_download_quota = async (addons?: IDefaultParams): Promise<Respon
     addons,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
   return data;
 };

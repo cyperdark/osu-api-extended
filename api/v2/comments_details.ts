@@ -9,7 +9,7 @@ type Response = CommentsDetailsResponse & IError;
 
 export const comments_details = async (comment_id: string, addons?: IDefaultParams): Promise<Response> => {
   if (comment_id == null) {
-    return handleErrors(`Specify comment id`) as Response;
+    return handleErrors(new Error(`Specify comment id`)) as Response;
   };
 
 
@@ -18,7 +18,7 @@ export const comments_details = async (comment_id: string, addons?: IDefaultPara
     addons,
   });
 
-  if (data.error) return handleErrors(data.error);
+  if (data.error) return handleErrors(new Error(data.error));
 
 
   return data;

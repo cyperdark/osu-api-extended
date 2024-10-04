@@ -188,11 +188,11 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
 
       case 'osu':
         if (credentials.type != 'lazer') {
-          return handleErrors(`Login via lazer to use this endpoint`) as Response
+          return handleErrors(new Error(`Login via lazer to use this endpoint`)) as Response;
         };
 
         if ((addons?.authKey || cache.v2) == null) {
-          return handleErrors('osu is not authorized') as Response;
+          return handleErrors(new Error('osu is not authorized')) as Response;
         };
 
 
@@ -201,7 +201,7 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
         break;
 
       default:
-        return handleErrors(`Unsupported host: ${(params as any).host}`) as Response;
+        return handleErrors(new Error(`Unsupported host: ${(params as any).host}`)) as Response;
     };
 
 
@@ -212,7 +212,7 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
       callback: progress_track,
     });
 
-    if (data.error) return handleErrors(data.error);
+    if (data.error) return handleErrors(new Error(data.error));
 
 
     return data;
@@ -243,12 +243,12 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
       callback: progress_track,
     });
 
-    if (data.error) return handleErrors(data.error);
+    if (data.error) return handleErrors(new Error(data.error));
 
 
     return data;
   };
 
 
-  return handleErrors(`Unsupported type: ${(params as any).type}`) as Response;
+  return handleErrors(new Error(`Unsupported type: ${(params as any).type}`)) as Response;
 };

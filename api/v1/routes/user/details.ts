@@ -121,9 +121,9 @@ const name: types = async (user, obj = {}) => {
     method: 'GET',
     params: params,
   });
-  if (data.error) return handleErrors(data.error) as Response;
+  if (data.error) return handleErrors(new Error(data.error)) as Response;
+  if (data.length == 0) return handleErrors(new Error('User not found')) as Response;
 
-  if (data.length == 0) return handleErrors('User not found') as Response;
 
   const format = form(data);
   return format;

@@ -53,7 +53,7 @@ export const changelogs_list = async <T extends params>(params: T, addons?: IDef
       url += `/changelog/${params.changelog}`;
 
       if (params?.changelog != null == null) {
-        return handleErrors(`Specify changelog stream`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify changelog stream`)) as Response<T['type']>;
       };
 
 
@@ -62,7 +62,7 @@ export const changelogs_list = async <T extends params>(params: T, addons?: IDef
       break;
 
     default:
-      return handleErrors(`Unsupported type: ${(params as any)?.type}`) as Response<T['type']>;
+      return handleErrors(new Error(`Unsupported type: ${(params as any)?.type}`)) as Response<T['type']>;
   };
 
 
@@ -72,7 +72,7 @@ export const changelogs_list = async <T extends params>(params: T, addons?: IDef
     addons
   });
 
-  if (data.error) return handleErrors(data.error) as Response<T['type']>;
+  if (data.error) return handleErrors(new Error(data.error)) as Response<T['type']>;
 
 
   return data as Response<T['type']>;

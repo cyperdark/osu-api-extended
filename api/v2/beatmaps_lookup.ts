@@ -50,7 +50,7 @@ export const beatmaps_lookup = async <T extends params>(params: T, addons?: IDef
       url += '/beatmaps/lookup';
 
       if (params.id == null && params.checksum && params.filename) {
-        return handleErrors(`Specify at least one parameter`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify at least one parameter`)) as Response<T['type']>;
       };
 
       object.id = params.id;
@@ -63,7 +63,7 @@ export const beatmaps_lookup = async <T extends params>(params: T, addons?: IDef
       url += '/beatmapsets/lookup';
 
       if (params.id == null) {
-        return handleErrors(`Specify beatmap set id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify beatmap set id`)) as Response<T['type']>;
       };
 
       object.beatmap_id = params.id;
@@ -75,7 +75,7 @@ export const beatmaps_lookup = async <T extends params>(params: T, addons?: IDef
       method = 'POST';
 
       if (params.id == null) {
-        return handleErrors(`Specify beatmap id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify beatmap id`)) as Response<T['type']>;
       };
 
       object.mods = params.mods;
@@ -90,13 +90,13 @@ export const beatmaps_lookup = async <T extends params>(params: T, addons?: IDef
 
       if (Array.isArray(params.ids)) object['ids[]'] = params.ids;
       else {
-        return handleErrors(`Specify at least one beatmap id`) as Response<T['type']>;
+        return handleErrors(new Error(`Specify at least one beatmap id`)) as Response<T['type']>;
       };
 
       break;
 
     default:
-      return handleErrors(`Unsupported type: ${(params as any).type}`) as Response<T['type']>;
+      return handleErrors(new Error(`Unsupported type: ${(params as any).type}`)) as Response<T['type']>;
   };
 
 
@@ -106,7 +106,7 @@ export const beatmaps_lookup = async <T extends params>(params: T, addons?: IDef
     addons,
   });
 
-  if (data.error) return handleErrors(data.error) as Response<T['type']>;
+  if (data.error) return handleErrors(new Error(data.error)) as Response<T['type']>;
 
 
   if (params.type == 'attributes') return data.attributes as Response<T['type']>;
