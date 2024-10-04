@@ -226,6 +226,12 @@ const lazer_login = async (login: string, password: string): Promise<lazer_auth_
 
 
 const authorize_cli = async (client_id: number | string, client_secret: string, redirect_url: string, scopes: auth_scopes, state?: string): Promise<auth_response> => {
+  if (cache.v2 == '' && credentials.cachedTokenPath != '') {
+    const is = token_exists();
+    if (is) return;
+  };
+
+
   const cl = readln.createInterface(process.stdin, process.stdout);
   const question = (q: string) => new Promise((res, rej) => cl.question(q + ': ', (answer: string) => res(answer)));
 
@@ -255,6 +261,9 @@ const authorize_cli = async (client_id: number | string, client_secret: string, 
 
 
   cache.v2 = response.access_token;
+  save_token(response);
+
+
   return response;
 };
 
