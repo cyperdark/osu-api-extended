@@ -292,15 +292,32 @@ export const build_url = ({ client_id, redirect_url, scopes, state }: {
 };
 
 
-export const authorize = async ({ code, mode, client_id, client_secret, redirect_url }: {
+export const authorize = async (params: {
   code: string;
-  mode: Modes_names;
+  mode?: Modes_names;
 
   client_id: number | string;
   client_secret: string;
 
   redirect_url: string;
 }): Promise<UserAuth> => {
+  if (params?.client_id == null) {
+    return handleErrors(`Specify client_id`);
+  };
+
+  if (params?.client_secret == null) {
+    return handleErrors(`Specify client_secret`);
+  };
+
+  if (params?.redirect_url == null) {
+    return handleErrors(`Specify redirect_url`);
+  };
+
+  if (params?.code == null) {
+    return handleErrors(`Specify code`);
+  };
+
+
   const response = await request('https://osu.ppy.sh/oauth/token', {
     method: 'POST',
     headers: {
@@ -309,17 +326,20 @@ export const authorize = async ({ code, mode, client_id, client_secret, redirect
     },
     data: JSON.stringify({
       grant_type: 'authorization_code',
-      client_id: client_id,
-      client_secret: client_secret,
-      redirect_uri: redirect_url,
-      code,
+      client_id: params.client_id,
+      client_secret: params.client_secret,
+      redirect_uri: params.redirect_url,
+      code: params.code,
     })
   });
 
   if (response.error) return handleErrors(response.error);
 
 
-  const user = await request(`https://osu.ppy.sh/api/v2/me/${mode}`, {
+  let url = 'https://osu.ppy.sh/api/v2/me';
+  if (params?.mode) url += `/${params.mode}`;
+
+  const user = await request(url, {
     method: 'GET',
     addons: { authKey: response.access_token, ignoreSessionRefresh: true }
   });
@@ -335,15 +355,32 @@ export const authorize = async ({ code, mode, client_id, client_secret, redirect
 };
 
 
-export const refresh_session = async ({ refresh_token, mode, client_id, client_secret, redirect_url }: {
+export const refresh_session = async (params: {
   refresh_token: string;
-  mode: Modes_names;
+  mode?: Modes_names;
 
   client_id: number | string;
   client_secret: string;
 
   redirect_url: string;
 }): Promise<UserAuth> => {
+  if (params?.client_id == null) {
+    return handleErrors(`Specify client_id`);
+  };
+
+  if (params?.client_secret == null) {
+    return handleErrors(`Specify client_secret`);
+  };
+
+  if (params?.redirect_url == null) {
+    return handleErrors(`Specify redirect_url`);
+  };
+
+  if (params?.refresh_token == null) {
+    return handleErrors(`Specify refresh_token`);
+  };
+
+
   const response = await request('https://osu.ppy.sh/oauth/token', {
     method: 'POST',
     headers: {
@@ -352,17 +389,20 @@ export const refresh_session = async ({ refresh_token, mode, client_id, client_s
     },
     data: JSON.stringify({
       grant_type: 'refresh_token',
-      client_id: client_id,
-      client_secret: client_secret,
-      redirect_uri: redirect_url,
-      refresh_token,
+      client_id: params.client_id,
+      client_secret: params.client_secret,
+      redirect_uri: params.redirect_url,
+      refresh_token: params.refresh_token,
     })
   });
 
   if (response.error) return handleErrors(response.error);
 
 
-  const user = await request(`https://osu.ppy.sh/api/v2/me/${mode}`, {
+  let url = 'https://osu.ppy.sh/api/v2/me';
+  if (params?.mode) url += `/${params.mode}`;
+
+  const user = await request(url, {
     method: 'GET',
     addons: { authKey: response.access_token, ignoreSessionRefresh: true }
   });
