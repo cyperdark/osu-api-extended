@@ -14,6 +14,7 @@ export interface AccuracyResponse {
 };
 
 export interface RankResponse {
+  accuracy: number;
   rank: string;
 };
 

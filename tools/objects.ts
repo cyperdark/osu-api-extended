@@ -19,19 +19,58 @@ type Hits = {
   meh?: any;
   miss?: any;
 
-  count_100?: any;
-  count_300?: any;
-  count_50?: any;
   count_geki?: any;
+  count_300?: any;
   count_katu?: any;
+  count_100?: any;
+  count_50?: any;
   count_miss?: any;
 };
 
 type Response = TotalObjectsResponse & IError;
 
 
-
-export const calculate_total_objects = (hits: Hits, mode: GamemodeEnum | string | number): Response => {
+/**
+ * Calculate total passed objects
+ *
+ * &nbsp;
+ *
+ * ### Parameters
+ * - `hits.geki` or `hits.perfect` or `hits.count_geki` - Amount of geki's
+ * - `hits[300]` or `hits.great` or `hits.count_300` - Amount of 300's
+ * - `hits.katu` or `hits.good` or `hits.count_katu` - Amount of katu's
+ * - `hits[100]` or `hits.ok` or `hits.count_100` - Amount of 100's
+ * - `hits[50]` or `hits.meh` or `hits.count_50` - Amount of 50's
+ * - `hits[0]` or `hits.miss` or `hits.count_miss` - Amount of misses
+ * 
+ * - `mode` - Number/Name of the gamemode
+ *
+ * &nbsp;
+ *
+ * ### Usage Example
+ * ```js
+ * const { tools } = require('osu-api-extended');
+ * 
+ * function main() {
+ *   try {
+ *     const hits = { 300: 123, 100: 12, 50: 1, 0: 1 };
+ *     const result = tools.calculate_total_passed_objects(hits, 'osu');
+ *     if (result.error != null) {
+ *       console.log(result.error);
+ *       return;
+ *     };
+ * 
+ * 
+ *     console.log(result);
+ *   } catch (error) {
+ *     console.log(error);
+ *   };
+ * };
+ * 
+ * main();
+ * ```
+ */
+export const calculate_total_passed_objects = (hits: Hits, mode: GamemodeEnum | string | number): Response => {
   if (Object.keys(hits).length == 0) {
     return handleErrors('Provide hits (300, 100, 50, etc)') as Response;
   };
@@ -92,7 +131,47 @@ export const calculate_total_objects = (hits: Hits, mode: GamemodeEnum | string 
 type ResponseConvert = ConvertHitsResponse & IError;
 
 
-export const convert_hits = (hits: Hits, mode: GamemodeEnum | string | number): ResponseConvert => {
+/**
+ * Calculate hits if play was an FC
+ *
+ * &nbsp;
+ *
+ * ### Parameters
+ * - `hits.geki` or `hits.perfect` or `hits.count_geki` - Amount of geki's
+ * - `hits[300]` or `hits.great` or `hits.count_300` - Amount of 300's
+ * - `hits.katu` or `hits.good` or `hits.count_katu` - Amount of katu's
+ * - `hits[100]` or `hits.ok` or `hits.count_100` - Amount of 100's
+ * - `hits[50]` or `hits.meh` or `hits.count_50` - Amount of 50's
+ * - `hits[0]` or `hits.miss` or `hits.count_miss` - Amount of misses
+ * 
+ * - `mode` - Number/Name of the gamemode
+ *
+ * &nbsp;
+ *
+ * ### Usage Example
+ * ```js
+ * const { tools } = require('osu-api-extended');
+ * 
+ * function main() {
+ *   try {
+ *     const hits = { 300: 123, 100: 12, 50: 1, 0: 1 };
+ *     const result = tools.calculate_hits(hits, 'osu');
+ *     if (result.error != null) {
+ *       console.log(result.error);
+ *       return;
+ *     };
+ * 
+ * 
+ *     console.log(result);
+ *   } catch (error) {
+ *     console.log(error);
+ *   };
+ * };
+ * 
+ * main();
+ * ```
+ */
+export const calculate_hits = (hits: Hits, mode: GamemodeEnum | string | number): ResponseConvert => {
   if (Object.keys(hits).length == 0) {
     return handleErrors('Provide hits (300, 100, 50, etc)') as ResponseConvert;
   };

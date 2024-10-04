@@ -11,21 +11,54 @@ type Response = {
 } & IError;
 
 
-export const calculate_net_pp = (params: {
-  scores: ScoresListUserBestResponse[] | number[];
-  pp_value: number;
-  gamemode?: Modes_names;
-}): Response => {
-  if (!Array.isArray(params.scores)) {
-    return handleErrors(`Provide array of scores or numbers`) as Response;
+/**
+ * Calculate how much pp would you gain from a play
+ *
+ * &nbsp;
+ *
+ * ### Parameters
+ * - `scores` - Plays pp or Array of scores
+ * - `pp` - Amount of play pp
+ *
+ * &nbsp;
+ *
+ * ### Usage Example
+ * ```js
+ * const { tools } = require('osu-api-extended');
+ * 
+ * function main() {
+ *   try {
+ *     const plays = [1000, 900, 800, 700];
+ *     const scores = [{ id: 123, pp: 1000 }, { id: 123, pp: 555 }, { id: 123, pp: 234 }, { id: 123, pp: 100 }];
+ *     const result = tools.calculate_net_pp(plays, 400);
+ *     // or 
+ *     const result = tools.calculate_net_pp(scores, 400);
+ *     if (result.error != null) {
+ *       console.log(result.error);
+ *       return;
+ *     };
+ * 
+ * 
+ *     console.log(result);
+ *   } catch (error) {
+ *     console.log(error);
+ *   };
+ * };
+ * 
+ * main();
+ * ```
+ */
+export const calculate_net_pp = (scores: ScoresListUserBestResponse[] | number[], pp: number): Response => {
+  if (!Array.isArray(scores)) {
+    return handleErrors(`Provide array of scores or plays pp`) as Response;
   };
 
-  if (!isFinite(params.pp_value) || params.pp_value == null) {
-    return handleErrors(`Specify pp`) as Response;
+  if (!isFinite(pp) || pp == null) {
+    return handleErrors(`Specify play pp`) as Response;
   };
 
 
-  const pp_values = typeof params.scores[0] == 'number' ? params.scores : (params.scores as any[]).map(r => r.pp);
+  const pp_values = typeof scores[0] == 'number' ? scores : (scores as any[]).map(r => r.pp);
   pp_values.sort((a, b) => b - a);
 
   // weight the user's current scores. (see https://osu.ppy.sh/wiki/en/Performance_points/Weighting_system)
@@ -34,7 +67,7 @@ export const calculate_net_pp = (params: {
   const total_pp_old = weighted_before.reduce((a, b) => a + b, 0);
 
 
-  if (params.pp_value < Math.min(pp_values[pp_values.length - 1]))
+  if (pp_values.length >= 100 && pp < Math.min(pp_values[pp_values.length - 1]))
     return {
       pp: 0,
       totalNow: total_pp_old,
@@ -42,8 +75,8 @@ export const calculate_net_pp = (params: {
     } as Response;
 
 
-  // Push new pp_value
-  pp_values.push(params.pp_value);
+  // Push new pp
+  pp_values.push(pp);
   pp_values.sort((a, b) => b - a);
 
 

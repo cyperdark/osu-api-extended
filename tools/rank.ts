@@ -1,5 +1,6 @@
 import { IError } from "../types";
 import { GamemodeEnum } from "../types/enums";
+import { Mod } from "../types/mods";
 import { RankResponse } from "../types/tools";
 import { handleErrors } from "../utility/handleErrors";
 import { calculate_accuracy } from "./accuracy";
@@ -25,8 +26,48 @@ type Hits = {
 type Response = RankResponse & IError;
 
 
-
-export const calculate_rank = (hits: Hits, mods: string | number = 0, mode: GamemodeEnum | string | number): Response => {
+/**
+ * Calculate total passed objects
+ *
+ * &nbsp;
+ *
+ * ### Parameters
+ * - `hits.geki` or `hits.perfect` or `hits.count_geki` - Amount of geki's
+ * - `hits[300]` or `hits.great` or `hits.count_300` - Amount of 300's
+ * - `hits.katu` or `hits.good` or `hits.count_katu` - Amount of katu's
+ * - `hits[100]` or `hits.ok` or `hits.count_100` - Amount of 100's
+ * - `hits[50]` or `hits.meh` or `hits.count_50` - Amount of 50's
+ * - `hits[0]` or `hits.miss` or `hits.count_miss` - Amount of misses
+ * 
+ * - `mods` - Number / Name / Array of { acronym: "EZ" }
+ * - `mode` - Number/Name of the gamemode
+ *
+ * &nbsp;
+ *
+ * ### Usage Example
+ * ```js
+ * const { tools } = require('osu-api-extended');
+ * 
+ * function main() {
+ *   try {
+ *     const hits = { 300: 123, 100: 12, 50: 1, 0: 1 };
+ *     const result = tools.calculate_rank(hits, 72, 'osu');
+ *     if (result.error != null) {
+ *       console.log(result.error);
+ *       return;
+ *     };
+ * 
+ * 
+ *     console.log(result);
+ *   } catch (error) {
+ *     console.log(error);
+ *   };
+ * };
+ * 
+ * main();
+ * ```
+ */
+export const calculate_rank = (hits: Hits, mods: Mod[] | string | number = 0, mode: GamemodeEnum | string | number): Response => {
   if (Object.keys(hits).length == 0) {
     return handleErrors('Provide hits (300, 100, 50, etc)') as Response;
   };
@@ -122,5 +163,6 @@ export const calculate_rank = (hits: Hits, mods: string | number = 0, mode: Game
 
   return {
     rank,
+    accuracy,
   } as Response;
 };

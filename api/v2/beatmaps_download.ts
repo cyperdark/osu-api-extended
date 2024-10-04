@@ -41,6 +41,81 @@ type Response = {
 } & IError;
 
 
+/**
+ * `async` Downloads a beatmap or beatmap set by given ID. (Supports different hosts)
+ *
+ * &nbsp;
+ *
+ * ### Available hosts
+ * - `type:'difficulty'`: osu, osu_direct_mirror, catboy
+ * - `type:'set'`: osu, beatconnect, nerinyan, osu_direct_mirror, sayobot, gatari, ripple, catboy
+ *
+ * &nbsp;
+ *
+ * ### Global Parameters
+ * - `params.type` - Type of the beatmap.
+ * - `params.id` - ID of the beatmap or beatmap set.
+ * - `params.host` - Host of the download source.
+ * - `params.file_path` - Path to the save location.
+ * - `params.overwrite` - Whether to overwrite the file if it already exists.
+ *
+ * &nbsp;
+ *
+ * ### Parameters for `params.type:'set'`
+ * - `params.no_video?` - Whether to include video in the download.
+ *
+ * &nbsp;
+ *
+ * ### Usage Example
+ * ```js
+ * const { auth, v2, tools } = require('osu-api-extended');
+ * 
+ * async function main() {
+ *   try {
+ *     // only for downloading sets from osu host
+ *     await auth.login({
+ *       type: 'lazer',
+ *       login: login,
+ *       password: password,
+ *       tokenPath: './test.json' // please use for caching
+ *     });
+ * 
+ * 
+ *     const progress_update = (...args) => {
+ *       console.log(args);
+ *     };
+ *     const set_id = 320118;
+ * 
+ * 
+ *     const result = await v2.beatmaps.download({
+ *       type: 'set',
+ *       host: 'gatari',
+ *       id: set_id,
+ *       file_path: `./cache/${set_id}.osz`,
+ *       progress_track_fn: progress_update
+ *     });
+ *     // or
+ *     const result = await tools.download_beatmaps({
+ *       type: 'set',
+ *       host: 'gatari',
+ *       id: set_id,
+ *       file_path: `./cache/${set_id}.osz`,
+ *       progress_track_fn: progress_update
+ *     });
+ * 
+ *     console.log(result);
+ *   } catch (error) {
+ *     console.log(error);
+ *   };
+ * };
+ * 
+ * main();
+ * ```
+ *
+ * &nbsp;
+ *
+ * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2beatmapsetsbeatmapsetdownload)
+ */
 export const beatmaps_download = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response> => {
   const { dir } = path.parse(params.file_path);
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });

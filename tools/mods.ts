@@ -54,17 +54,53 @@ export const ModsToName = (modsNumber: number, order?: boolean): string => {
 type Response = ModsResponse & IError;
 
 
-// SWITCH STATEMENT CREATED ON PURPOSE BECAUSE IT'S WAY FASTER
-export const calculate_mods = (ModsName: Mod[] | string | number, order?: boolean): Response => {
-  if (ModsName == null) {
+/**
+ * Calculate mods number/name from number/name
+ *
+ * &nbsp;
+ *
+ * ### Parameters
+ * - `mods` - Number / Name / Array of { acronym: "EZ" }
+ * - `order?` - Transform mods from DTHD to HDDT
+ *
+ * &nbsp;
+ *
+ * ### Usage Example
+ * ```js
+ * const { tools } = require('osu-api-extended');
+ * 
+ * function main() {
+ *   try {
+ *     const result = tools.calculate_mods('HDDT');
+ *     // or
+ *     const result = tools.calculate_mods(72);
+ *     // or
+ *     const result = tools.calculate_mods([{ acronym: "EZ" }]);
+ *     if (result.error != null) {
+ *       console.log(result.error);
+ *       return;
+ *     };
+ * 
+ * 
+ *     console.log(result);
+ *   } catch (error) {
+ *     console.log(error);
+ *   };
+ * };
+ * 
+ * main();
+ * ```
+ */
+export const calculate_mods = (mods: Mod[] | string | number, order?: boolean): Response => {
+  if (mods == null) {
     return handleErrors(`Specify mods name (HDDT or 72)`) as Response;
   };
 
 
-  if (typeof ModsName == 'number') {
-    const name = ModsToName(ModsName, order);
+  if (typeof mods == 'number') {
+    const name = ModsToName(mods, order);
     return {
-      number: ModsName,
+      number: mods,
       name: name,
     } as any;
   };
@@ -75,20 +111,21 @@ export const calculate_mods = (ModsName: Mod[] | string | number, order?: boolea
 
 
   let ModsArray = [];
-  if (Array.isArray(ModsName)) {
-    ModsArray = ModsName.map(r => r.acronym.toLowerCase());
+  if (Array.isArray(mods)) {
+    ModsArray = mods.map(r => r.acronym.toLowerCase());
   }
 
   else {
-    ModsArray = ModsName.toLowerCase().match(/.{1,2}/g);
+    ModsArray = mods.toLowerCase().match(/.{1,2}/g);
   };
 
 
   if (!Array.isArray(ModsArray)) {
-    return handleErrors(`Can't convert mods (${ModsName}) to array of mods`) as Response;
+    return handleErrors(`Can't convert mods (${mods}) to array of mods`) as Response;
   };
 
 
+  // SWITCH STATEMENT CREATED ON PURPOSE BECAUSE IT'S WAY FASTER
   for (let i = 0; i < ModsArray.length; i++) {
     const mod_name = ModsArray[i];
     switch (mod_name) {
