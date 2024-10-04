@@ -77,7 +77,7 @@ type Response = {
  *       type: 'lazer',
  *       login: login,
  *       password: password,
- *       tokenPath: './test.json' // please use for caching
+ *       cachedTokenPath: './test.json' // please use for caching
  *     });
  * 
  * 

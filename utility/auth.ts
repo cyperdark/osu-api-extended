@@ -30,7 +30,7 @@ export const credentials: {
   redirect_url: string;
   state: string;
 
-  tokenPath: string;
+  cachedTokenPath: string;
 
   scopes: auth_scopes;
 } = {
@@ -47,7 +47,7 @@ export const credentials: {
   redirect_url: '',
   state: '',
 
-  tokenPath: '',
+  cachedTokenPath: '',
 
   scopes: ['public'],
 };
@@ -80,7 +80,7 @@ export const login = <T extends auth_params>(params: auth_params): ResponseLogin
 
   credentials.type = params.type;
 
-  if (params.tokenPath) credentials.tokenPath = params.tokenPath;
+  if (params.cachedTokenPath) credentials.cachedTokenPath = params.cachedTokenPath;
   if (params.timeout) settings.timeout = params.timeout;
 
 
@@ -134,10 +134,10 @@ export const refresh_token = async () => {
 
 
 const token_exists = () => {
-  if (!fs.existsSync(credentials.tokenPath)) return false;
+  if (!fs.existsSync(credentials.cachedTokenPath)) return false;
 
   try {
-    const authData: auth_response = JSON.parse(fs.readFileSync(credentials.tokenPath, 'utf8'));
+    const authData: auth_response = JSON.parse(fs.readFileSync(credentials.cachedTokenPath, 'utf8'));
     set_v2(authData.access_token);
 
     return true;
@@ -148,18 +148,18 @@ const token_exists = () => {
 
 
 const save_token = (response: auth_response) => {
-  if (!credentials.tokenPath) return;
+  if (!credentials.cachedTokenPath) return;
 
-  const { dir } = path.parse(credentials.tokenPath);
+  const { dir } = path.parse(credentials.cachedTokenPath);
   if (fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
-  fs.writeFileSync(credentials.tokenPath, JSON.stringify(response), 'utf8');
+  fs.writeFileSync(credentials.cachedTokenPath, JSON.stringify(response), 'utf8');
 };
 
 
 
 const client_login = async (client_id: number | string, client_secret: string, scopes: auth_scopes): Promise<auth_response> => {
-  if (cache.v2 == '' && credentials.tokenPath != '') {
+  if (cache.v2 == '' && credentials.cachedTokenPath != '') {
     const is = token_exists();
     if (is) return;
   };
@@ -192,7 +192,7 @@ const client_login = async (client_id: number | string, client_secret: string, s
 
 
 const lazer_login = async (login: string, password: string): Promise<lazer_auth_response> => {
-  if (cache.v2 == '' && credentials.tokenPath != '') {
+  if (cache.v2 == '' && credentials.cachedTokenPath != '') {
     const is = token_exists();
     if (is) return;
   };

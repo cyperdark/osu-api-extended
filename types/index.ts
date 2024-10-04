@@ -51,7 +51,7 @@ export type auth_params = ({
   client_secret: string;
 
   timeout?: number;
-  tokenPath?: string;
+  cachedTokenPath?: string;
 
   scopes: auth_scopes;
 } | {
@@ -60,7 +60,7 @@ export type auth_params = ({
   api_key: string;
 
   timeout?: number;
-  tokenPath?: string;
+  cachedTokenPath?: string;
 } | {
   type: 'lazer';
 
@@ -68,7 +68,7 @@ export type auth_params = ({
   password: string;
 
   timeout?: number;
-  tokenPath?: string;
+  cachedTokenPath?: string;
 } | {
   type: 'cli';
 
@@ -79,7 +79,7 @@ export type auth_params = ({
   state: string;
 
   timeout?: number;
-  tokenPath?: string;
+  cachedTokenPath?: string;
 
   scopes: auth_scopes;
 });
