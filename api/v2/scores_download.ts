@@ -13,8 +13,8 @@ export const scores_download = async (params: {
   mode?: Modes_names;
   file_path?: string;
 }): Promise<Response> => {
-  if (credentials.type != 'lazer') {
-    return handleErrors(`Login via lazer to use this endpoint`) as Response
+  if (credentials.type != 'lazer' && credentials.type != 'cli') {
+    return handleErrors(`Login via lazer or cli to use this endpoint`) as Response
   };
 
   if (params?.id == null) {

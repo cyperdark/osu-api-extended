@@ -60,8 +60,12 @@ type Response<T extends params['type']> =
 
 
 export const forums_topics_actions = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
-  if (credentials.type != 'lazer') {
-    return handleErrors(`Login via lazer to use this endpoint`) as Response<T['type']>;
+  if (credentials.type != 'lazer' && credentials.type != 'cli') {
+    return handleErrors(`Login via lazer or cli to use this endpoint`) as Response<T['type']>;
+  };
+
+  if (credentials.type == 'cli' && !credentials.scopes.includes('forum.write')) {
+    return handleErrors(`Requires "forum.write" scope`) as Response<T['type']>;
   };
 
 

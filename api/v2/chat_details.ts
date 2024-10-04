@@ -9,8 +9,12 @@ type Response = ChatDetailsResponse & IError;
 
 
 export const chat_details = async (params: { channel_id: number }, addons?: IDefaultParams): Promise<Response> => {
-  if (credentials.type != 'lazer') {
-    return handleErrors(`Login via lazer to use this endpoint`) as Response
+  if (credentials.type != 'lazer' && credentials.type != 'cli') {
+    return handleErrors(`Login via lazer or cli to use this endpoint`) as Response
+  };
+
+  if (credentials.type == 'cli' && !credentials.scopes.includes('chat.read')) {
+    return handleErrors(`Requires "chat.read" scope`) as Response
   };
 
   if (params?.channel_id == null) {

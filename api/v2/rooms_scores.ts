@@ -43,8 +43,8 @@ type Response<T extends params['type']> =
 
 
 export const rooms_scores = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']>> => {
-  if (credentials.type != 'lazer') {
-    return handleErrors(`Login via lazer to use this endpoint`) as Response<T['type']>;
+  if (credentials.type != 'lazer' && credentials.type != 'cli') {
+    return handleErrors(`Login via lazer or cli to use this endpoint`) as Response<T['type']>;
   };
 
 

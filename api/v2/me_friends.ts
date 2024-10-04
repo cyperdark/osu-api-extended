@@ -9,8 +9,12 @@ type Response = MeFriendsResponse[] & IError;
 
 
 export const me_friends = async (addons?: IDefaultParams): Promise<Response> => {
-  if (credentials.type != 'lazer') {
-    return handleErrors(`Login via lazer to use this endpoint`) as Response
+  if (credentials.type != 'lazer' && credentials.type != 'cli') {
+    return handleErrors(`Login via lazer or cli to use this endpoint`) as Response
+  };
+
+  if (credentials.type == 'cli' && !credentials.scopes.includes('friends.read')) {
+    return handleErrors(`Requires "friends.read" scope`) as Response
   };
 
 

@@ -89,6 +89,8 @@ export type auth_response = {
   token_type: string;
   access_token: string;
   expires_in: number;
+
+  scopes?: auth_scopes;
 };
 
 export interface lazer_auth_response extends auth_response {

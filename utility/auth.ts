@@ -140,6 +140,8 @@ const token_exists = () => {
     const authData: auth_response = JSON.parse(fs.readFileSync(credentials.cachedTokenPath, 'utf8'));
     set_v2(authData.access_token);
 
+    if (Array.isArray(authData.scopes)) credentials.scopes = authData.scopes;
+
     return true;
   } catch (error) {
     return false;
@@ -152,6 +154,7 @@ const save_token = (response: auth_response) => {
 
   const { dir } = path.parse(credentials.cachedTokenPath);
   if (fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  response.scopes = credentials.scopes;
 
   fs.writeFileSync(credentials.cachedTokenPath, JSON.stringify(response), 'utf8');
 };
