@@ -15,7 +15,7 @@ export const calculate_pp = () => {
 };
 
 /**
- * Create link for `user`, `score`, `editor_timing` and others
+ * Builder that returns a link an 'user', a score, a beatmap, etc.
  *
  * &nbsp;
  *

@@ -55,7 +55,7 @@ type Response = ModsResponse & IError;
 
 
 /**
- * Calculate mods number/name from number/name
+ * Get mods short name or mods number by giving one of them
  *
  * &nbsp;
  *

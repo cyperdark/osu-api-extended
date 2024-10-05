@@ -16,7 +16,7 @@ type params = ({
   file_path: string;
   overwrite?: boolean;
 
-  progress_track_fn?: (host: string, progress: number) => void;
+  progress_log_fn?: (host: string, progress: number) => void;
 } | {
   type: 'set';
 
@@ -27,7 +27,7 @@ type params = ({
   no_video?: boolean;
   overwrite?: boolean;
 
-  progress_track_fn?: (host: string, progress: number) => void;
+  progress_log_fn?: (host: string, progress: number) => void;
 });
 
 
@@ -47,8 +47,8 @@ type Response = {
  * &nbsp;
  *
  * ### Available hosts
- * - `type:'difficulty'`: osu, osu_direct_mirror, catboy
- * - `type:'set'`: osu, beatconnect, nerinyan, osu_direct_mirror, sayobot, gatari, ripple, catboy
+ * - For `type:'difficulty'`: osu, osu_direct_mirror, catboy
+ * - For `type:'set'`: osu, beatconnect, nerinyan, osu_direct_mirror, sayobot, gatari, ripple, catboy
  *
  * &nbsp;
  *
@@ -63,6 +63,7 @@ type Response = {
  *
  * ### Parameters for `params.type:'set'`
  * - `params.no_video?` - Whether to include video in the download.
+ * - `params.progress_log_fn?` - Callback function to send progress.
  *
  * &nbsp;
  *
@@ -92,7 +93,7 @@ type Response = {
  *       host: 'gatari',
  *       id: set_id,
  *       file_path: `./cache/${set_id}.osz`,
- *       progress_track_fn: progress_update
+ *       progress_log_fn: progress_update
  *     });
  *     // or
  *     const result = await tools.download_beatmaps({
@@ -100,7 +101,7 @@ type Response = {
  *       host: 'gatari',
  *       id: set_id,
  *       file_path: `./cache/${set_id}.osz`,
- *       progress_track_fn: progress_update
+ *       progress_log_fn: progress_update
  *     });
  * 
  *     console.log(result);
@@ -127,7 +128,7 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
 
 
   const progress_track = (progress: number) => {
-    params.progress_track_fn(params.host, progress);
+    params.progress_log_fn(params.host, progress);
   };
 
 
@@ -206,7 +207,7 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
 
 
     const data = await download(url, params.file_path, {
-      _callback: params.progress_track_fn != null,
+      _callback: params.progress_log_fn != null,
       headers,
       addons: addons,
       callback: progress_track,
@@ -237,7 +238,7 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
 
 
     const data = await download(url, params.file_path, {
-      _callback: params.progress_track_fn != null,
+      _callback: params.progress_log_fn != null,
       headers,
       addons: addons,
       callback: progress_track,

@@ -7,7 +7,7 @@ import { handleErrors } from "../utility/handleErrors";
 type Response = CountryResponse & IError;
 
 /**
- * Get country name and code by providing country name/code
+ * Get more information about the country by providing an name/code.
  *
  * &nbsp;
  *

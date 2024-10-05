@@ -76,12 +76,12 @@ export const calculate_total_passed_objects = (hits: Hits, mode: GamemodeEnum | 
   };
 
 
-  const geki = parseInt(hits?.geki || hits.count_geki || hits.perfect || '0');
-  const h300 = parseInt(hits?.[300] || hits.count_300 || hits.great || '0');
-  const katu = parseInt(hits?.katu || hits.count_katu || hits.good || '0');
-  const h100 = parseInt(hits?.[100] || hits.count_100 || hits.ok || '0');
-  const h50 = parseInt(hits?.[50] || hits.count_50 || hits.meh || '0');
-  const h0 = parseInt(hits?.[0] || hits.count_miss || hits.miss || '0');
+  const geki = parseInt(hits.perfect || hits.count_geki || hits?.geki || '0');
+  const h300 = parseInt(hits.great || hits.count_300 || hits?.[300] || '0');
+  const katu = parseInt(hits.good || hits.count_katu || hits?.katu || '0');
+  const h100 = parseInt(hits.ok || hits.count_100 || hits?.[100] || '0');
+  const h50 = parseInt(hits.meh || hits.count_50 || hits?.[50] || '0');
+  const h0 = parseInt(hits.miss || hits.count_miss || hits?.[0] || '0');
 
 
   let total_objects = 0;
@@ -132,7 +132,7 @@ type ResponseConvert = ConvertHitsResponse & IError;
 
 
 /**
- * Calculate hits if play was an FC
+ * Calculate a play as an FC with the given hits.
  *
  * &nbsp;
  *
@@ -177,19 +177,19 @@ export const calculate_hits = (hits: Hits, mode: GamemodeEnum | string | number)
   };
 
 
-  const geki = parseInt(hits?.geki || hits.count_geki || hits.perfect || '0');
-  const h300 = parseInt(hits?.[300] || hits.count_300 || hits.great || '0');
-  const katu = parseInt(hits?.katu || hits.count_katu || hits.good || '0');
-  const h100 = parseInt(hits?.[100] || hits.count_100 || hits.ok || '0');
-  const h50 = parseInt(hits?.[50] || hits.count_50 || hits.meh || '0');
-  const h0 = parseInt(hits?.[0] || hits.count_miss || hits.miss || '0');
+  const geki = parseInt(hits.perfect || hits.count_geki || hits?.geki || '0');
+  const h300 = parseInt(hits.great || hits.count_300 || hits?.[300] || '0');
+  const katu = parseInt(hits.good || hits.count_katu || hits?.katu || '0');
+  const h100 = parseInt(hits.ok || hits.count_100 || hits?.[100] || '0');
+  const h50 = parseInt(hits.meh || hits.count_50 || hits?.[50] || '0');
+  const h0 = parseInt(hits.miss || hits.count_miss || hits?.[0] || '0');
 
-  let geki_fc = parseInt(hits?.geki || hits.count_geki || hits.perfect || '0');
-  let h300_fc = parseInt(hits?.[300] || hits.count_300 || hits.great || '0');
-  let katu_fc = parseInt(hits?.katu || hits.count_katu || hits.good || '0');
-  let h100_fc = parseInt(hits?.[100] || hits.count_100 || hits.ok || '0');
-  let h50_fc = parseInt(hits?.[50] || hits.count_50 || hits.meh || '0');
-  let h0_fc = parseInt(hits?.[0] || hits.count_miss || hits.miss || '0');
+  let geki_fc = parseInt(hits.perfect || hits.count_geki || hits?.geki || '0');
+  let h300_fc = parseInt(hits.great || hits.count_300 || hits?.[300] || '0');
+  let katu_fc = parseInt(hits.good || hits.count_katu || hits?.katu || '0');
+  let h100_fc = parseInt(hits.ok || hits.count_100 || hits?.[100] || '0');
+  let h50_fc = parseInt(hits.meh || hits.count_50 || hits?.[50] || '0');
+  let h0_fc = parseInt(hits.miss || hits.count_miss || hits?.[0] || '0');
 
 
   switch (mode) {

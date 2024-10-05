@@ -16,16 +16,16 @@ quick links: [Features](#features) [Usage](#usage) &#8203; / &#8203; [Install](#
 - [x] **Auto** session refresh
 - [x] You need to login only once on application start (preferable in main server file)
 - [x] Built-in **Tools**
-  - [x] `tools.build_url` - Create link for `user`, `score`, `editor_timing` and others
-  - [x] `tools.calculate_accuracy` - Calculate accuracy from play hits
-  - [x] `tools.calculate_hits` - Calculate hits if play was an FC
-  - [x] `tools.calculate_mods` - Calculate mods Number/Name from Number/Name
-  - [x] `tools.calculate_net_pp` - Calculate how much pp would you gain from a play
-  - [x] `tools.calculate_pp` - Create link for `user`, `score`, `editor_timing` and others
-  - [x] `tools.calculate_rank` - Calculate rank from play hits
-  - [x] `tools.calculate_total_passed_objects` - Calculate total passed objects
-  - [x] `tools.country_details` - Get country name and code by providing country name/code
-  - [x] `tools.download_beatmaps` - Downloads a beatmap or beatmap set by given ID. (Supports different hosts)
+  - `tools.build_url` - Create link for `user`, `score`, `editor_timing` and others
+  - `tools.calculate_accuracy` - Calculate accuracy from play hits
+  - `tools.calculate_hits` - Calculate hits if play was an FC
+  - `tools.calculate_mods` - Calculate mods Number/Name from Number/Name
+  - `tools.calculate_net_pp` - Calculate how much pp would you gain from a play
+  - `tools.calculate_pp` - Create link for `user`, `score`, `editor_timing` and others
+  - `tools.calculate_rank` - Calculate rank from play hits
+  - `tools.calculate_total_passed_objects` - Calculate total passed objects
+  - `tools.country_details` - Get country name and code by providing country name/code
+  - `tools.download_beatmaps` - Downloads a beatmap or beatmap set by given ID. (Supports different hosts)
 - [x] Setting to prevent throw, [instead send .error](#prevent-throw-errors)
 
 <br>
@@ -358,7 +358,7 @@ function download_beatmaps() {
       host: 'gatari',
       id: set_id,
       file_path: `./cache/${set_id}.osz`,
-      progress_track_fn: progress_update
+      progress_log_fn: progress_update
     });
     if (result.error != null) {
       console.log(result.error);

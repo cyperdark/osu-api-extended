@@ -21,6 +21,13 @@ type Hits = {
   ok?: any;
   meh?: any;
   miss?: any;
+
+  count_geki?: any;
+  count_300?: any;
+  count_katu?: any;
+  count_100?: any;
+  count_50?: any;
+  count_miss?: any;
 };
 
 type Response = RankResponse & IError;
@@ -76,12 +83,12 @@ export const calculate_rank = (hits: Hits, mods: Mod[] | string | number = 0, mo
   const { name: modsName } = calculate_mods(mods);;
   const { accuracy } = calculate_accuracy(hits, mode);
 
-  const geki = parseInt(hits?.geki || hits.perfect || '0');
-  const h300 = parseInt(hits?.[300] || hits.great || '0');
-  const katu = parseInt(hits?.katu || hits.good || '0');
-  const h100 = parseInt(hits?.[100] || hits.ok || '0');
-  const h50 = parseInt(hits?.[50] || hits.meh || '0');
-  const h0 = parseInt(hits?.[0] || hits.miss || '0');
+  const geki = parseInt(hits.perfect || hits.count_geki || hits?.geki || '0');
+  const h300 = parseInt(hits.great || hits.count_300 || hits?.[300] || '0');
+  const katu = parseInt(hits.good || hits.count_katu || hits?.katu || '0');
+  const h100 = parseInt(hits.ok || hits.count_100 || hits?.[100] || '0');
+  const h50 = parseInt(hits.meh || hits.count_50 || hits?.[50] || '0');
+  const h0 = parseInt(hits.miss || hits.count_miss || hits?.[0] || '0');
 
   const is_silver = /hd|fl/i.test(modsName);
 

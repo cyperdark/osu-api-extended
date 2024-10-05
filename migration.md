@@ -107,7 +107,7 @@ Migration from `v2` to `v3`
 
 ```diff
 -v2.beatmap.set.download(beatmapset, file_path, host_name, no_video, callback?);
-+v2.beatmaps.download({ type: 'set'; id; host; file_path; no_video?; overwrite?; progress_track_fn?; });
++v2.beatmaps.download({ type: 'set'; id; host; file_path; no_video?; overwrite?; progress_log_fn?; });
 ```
 
 ```diff

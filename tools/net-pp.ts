@@ -12,7 +12,7 @@ type Response = {
 
 
 /**
- * Calculate how much pp would you gain from a play
+ * Calculate how much raw pp you would gain from a play
  *
  * &nbsp;
  *

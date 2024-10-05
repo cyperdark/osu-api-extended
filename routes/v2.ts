@@ -295,8 +295,8 @@ export const beatmaps = {
    * &nbsp;
    *
    * ### Available hosts
-   * - `type:'difficulty'`: osu, osu_direct_mirror, catboy
-   * - `type:'set'`: osu, beatconnect, nerinyan, osu_direct_mirror, sayobot, gatari, ripple, catboy
+   * - For `type:'difficulty'`: osu, osu_direct_mirror, catboy
+   * - For `type:'set'`: osu, beatconnect, nerinyan, osu_direct_mirror, sayobot, gatari, ripple, catboy
    *
    * &nbsp;
    *
@@ -311,6 +311,7 @@ export const beatmaps = {
    *
    * ### Parameters for `params.type:'set'`
    * - `params.no_video?` - Whether to include video in the download.
+   * - `params.progress_log_fn?` - Callback function to send progress.
    *
    * &nbsp;
    *
@@ -340,7 +341,7 @@ export const beatmaps = {
    *       host: 'gatari',
    *       id: set_id,
    *       file_path: `./cache/${set_id}.osz`,
-   *       progress_track_fn: progress_update
+   *       progress_log_fn: progress_update
    *     });
    * 
    *     console.log(result);
