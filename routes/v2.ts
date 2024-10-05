@@ -2861,6 +2861,7 @@ export const rooms = {
 
 
 import { groups_details } from "../api/v2/groups_details";
+import { groups_history } from "../api/v2/groups_history";
 
 /**
  * ##### Description
@@ -2907,4 +2908,46 @@ export const groups = {
    * [Check return types](../types/v2/groups_details.ts)
    */
   details: groups_details,
+  /**
+   * ### `GET` /groups/history
+   * `async` Retrieves a groups history
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.user?` - User id or name
+   * - `params.group?` - Group indentifier
+   * - `params.sort?` - id_asc or id_desc
+   * - `params.max_date?` - Max date in ISOString format
+   * - `params.min_date?` - Min date in ISOString format
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * const { v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     const result = await v2.groups.history();
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
+   * ```
+   *
+   * &nbsp;
+   *
+   * [Check return types](../types/v2/groups_details.ts)
+   */
+  history: groups_history,
 }
