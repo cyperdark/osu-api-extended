@@ -11,28 +11,28 @@ import { handleErrors } from "../../utility/handleErrors";
 type params = ({
   type: 'new';
 
-  commentable_type?: 'news_post' | 'beatmapset';
-  id?: number;
+  commentable_type: 'news_post' | 'beatmapset';
+  id: number;
   parent_id?: string;
 
-  message?: string;
+  message: string;
 } | {
   type: 'edit';
 
-  id?: number;
-  message?: string;
+  id: number;
+  message: string;
 } | {
   type: 'delete';
 
-  id?: number;
+  id: number;
 } | {
   type: 'vote';
 
-  id?: number;
+  id: number;
 } | {
   type: 'unvote';
 
-  id?: number;
+  id: number;
 });
 
 

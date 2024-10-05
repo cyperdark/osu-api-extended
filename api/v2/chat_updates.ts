@@ -9,9 +9,9 @@ type Response = ChatUpdatesResponse & IError;
 
 
 export const chat_updates = async (params: {
-  after_id: number;
-  includes: ('presence' | 'silences' | 'messages')[];
-  history_since: number;
+  after_id?: number;
+  includes?: ('presence' | 'silences' | 'messages')[];
+  history_since?: number;
 }, addons?: IDefaultParams): Promise<Response> => {
   if (credentials.type != 'lazer') {
     return handleErrors(new Error(`Login via lazer to use this endpoint`)) as Response

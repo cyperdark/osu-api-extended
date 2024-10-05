@@ -10,17 +10,17 @@ import { handleErrors } from "../../utility/handleErrors";
 
 type params = ({
   type: 'difficulty';
-  id: number;
-  checksum: string;
-  filename: string;
+  id?: number;
+  checksum?: string;
+  filename?: string;
 } | {
   type: 'set';
   id: number;
 } | {
   type: 'attributes';
   id: number;
-  mods: number;
-  mode: Modes_names
+  mods?: number;
+  mode?: Modes_names
 } | {
   type: 'difficulties';
   ids: number[];
@@ -49,7 +49,7 @@ export const beatmaps_lookup = async <T extends params>(params: T, addons?: IDef
     case 'difficulty':
       url += '/beatmaps/lookup';
 
-      if (params.id == null && params.checksum && params.filename) {
+      if (params.id == null && params.checksum == null && params.filename == null) {
         return handleErrors(new Error(`Specify at least one parameter`)) as Response<T['type']>;
       };
 
