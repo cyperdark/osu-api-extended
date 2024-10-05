@@ -2857,3 +2857,54 @@ export const rooms = {
    */
   leaderboard: rooms_leaderboard,
 };
+
+
+
+import { groups_details } from "../api/v2/groups_details";
+
+/**
+ * ##### Description
+ * Retrieve data from the groups API.
+ */
+export const groups = {
+  /**
+   * ### `GET` /groups/{id}
+   * `async` Retrieves a list of users by given group id.
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.id` - Group id.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * const { v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     const result = await v2.groups.details({
+   *       id: '32'
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
+   * ```
+   *
+   * &nbsp;
+   *
+   * [Check return types](../types/v2/groups_details.ts)
+   */
+  details: groups_details,
+}
