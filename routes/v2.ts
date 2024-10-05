@@ -146,7 +146,48 @@ export const beatmaps = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *     });
+   * 
+   *     const result = await v2.beatmaps.lookup({
+   *       type: 'attributes',
+   *       id: 3798013,
+   *     });
+   *     // or
+   *     const result = await v2.beatmaps.lookup({
+   *       type: 'difficulties',
+   *       ids: [4233769, 3798013]
+   *     });
+   *     // or
+   *     const result = await v2.beatmaps.lookup({
+   *       type: 'difficulty',
+   *       id: 4233769,
+   *     });
+   *     // or
+   *     const result = await v2.beatmaps.lookup({
+   *       type: 'set',
+   *       id: 2246377,
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;
