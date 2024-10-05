@@ -5,16 +5,16 @@
 
 # osu-api-extended
 
-quick links: [Features](#features) [Usage](#usage) &#8203; / &#8203; [Install](#installation) &#8203; / &#8203; [Quickstart](#quickstart) &#8203; / &#8203; [Tools](#tools)
+Quick Links: [Features](#features) &#8203; / &#8203; [Usage](#usage) &#8203; / &#8203; [Install](#installation) &#8203; / &#8203; [Quickstart](#quickstart) &#8203; / &#8203; [Tools](#tools)
 
 <br>
 
 ## Features
 - [x] Api
-  - [x] osu api v1: [official documentation](https://github.com/ppy/osu-api/wiki)
-  - [x] osu api v2 (81+ api routes): [official documentation](https://osu.ppy.sh/docs/index.html)
+  - [x] osu api v1: [See official documentation](https://github.com/ppy/osu-api/wiki)
+  - [x] osu api v2 (81+ api routes): [See official documentation](https://osu.ppy.sh/docs/index.html)
 - [x] **Auto** session refresh
-- [x] You need to login only once on application start (preferable in main server file)
+- [x] Does not require you to login for each action
 - [x] Built-in **Tools**
   - `tools.build_url` - Create link for `user`, `score`, `editor_timing` and others
   - `tools.calculate_accuracy` - Calculate accuracy from play hits
@@ -56,7 +56,7 @@ bun install osu-api-extended
 
 Links: [create your client here](https://osu.ppy.sh/home/account/edit#oauth 'https://osu.ppy.sh/home/account/edit#oauth') &#8203; / &#8203; [get your api key here](https://osu.ppy.sh/p/api 'https://osu.ppy.sh/p/api')
 
-quick links: [v2 - client auth](#client-auth) &#8203; / &#8203; [v2 - lazer auth](#lazer-auth) &#8203; / &#8203; [v2 - cli auth](#cli-auth) &#8203; / &#8203; [v2 - Discord Verify](#discord-verify) &#8203; / &#8203; [v2 - Website login](#website-login) &#8203; / &#8203; [v1 usage](#v1-usage) &#8203; / &#8203; [v2 - prevent throw errors](#prevent-throw-errors)
+Quick Links: [v2 - client auth](#client-auth) &#8203; / &#8203; [v2 - lazer auth](#lazer-auth) &#8203; / &#8203; [v2 - cli auth](#cli-auth) &#8203; / &#8203; [v2 - Discord Verify](#discord-verify) &#8203; / &#8203; [v2 - Website login](#website-login) &#8203; / &#8203; [v1 usage](#v1-usage) &#8203; / &#8203; [v2 - prevent throw errors](#prevent-throw-errors)
 
 <br> 
 
@@ -72,7 +72,7 @@ async function main() {
       type: 'v2',
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-      cachedTokenPath: './client.json' // path to a file where will be stored auth token to prevent spam auth to osu
+      cachedTokenPath: './client.json' // path to the file your auth token will be saved (to prevent osu!api spam)
     });
 
     const result = await v2.users.details({ user: 'mrekk', mode: 'osu', key: '@' });
@@ -107,7 +107,7 @@ async function main() {
       type: 'v2',
       login: LOGIN,
       password: PASSWORD,
-      cachedTokenPath: './lazer.json' // path to a file where will be stored auth token to prevent spam auth to osu
+      cachedTokenPath: './lazer.json' // path to the file your auth token will be saved (to prevent osu!api spam)
     });
 
     const result = await v2.me.details();
@@ -142,7 +142,7 @@ async function main() {
       client_secret: CLIENT_SECRET,
       redirect_url: REDIRECT_URL,
       scopes: ['public'],
-      cachedTokenPath: './cli.json' // path to a file where will be stored auth token to prevent spam auth to osu
+      cachedTokenPath: './cli.json' // path to the file your auth token will be saved (to prevent osu!api spam)
     });
 
     const result = await v2.me.details();
@@ -502,5 +502,10 @@ function calculate_net_pp() {
 ## Dependencies
 
 zero
+
+<br>
+<br>
+
+## Credits
 
 - `request.ts` by [AqilCont](https://github.com/AqilCont 'https://github.com/AqilCont')

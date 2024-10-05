@@ -326,7 +326,7 @@ export const beatmaps = {
    *       type: 'lazer',
    *       login: login,
    *       password: password,
-   *       cachedTokenPath: './test.json' // please use for caching
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    * 
@@ -1239,7 +1239,7 @@ export const scores = {
    *       type: 'lazer',
    *       login: login,
    *       password: password,
-   *       cachedTokenPath: './test.json' // please use for caching
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.scores.download({
@@ -1391,7 +1391,7 @@ export const forums = {
      *       type: 'lazer',
      *       login: login,
      *       password: password,
-     *       cachedTokenPath: './test.json' // please use for caching
+     *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
      * 
      *     const result = await v2.forums.topics.actions({
@@ -1772,7 +1772,7 @@ export const notifications = {
    *       type: 'lazer',
    *       login: login,
    *       password: password,
-   *       cachedTokenPath: './test.json' // please use for caching
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.notifications.list();
@@ -2065,7 +2065,7 @@ export const me = {
    *       type: 'lazer',
    *       login,
    *       password
-   *       cachedTokenPath: './test.json' // please use for caching
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.me.download_quota();
@@ -2109,7 +2109,7 @@ export const me = {
    *       type: 'lazer',
    *       login,
    *       password
-   *       cachedTokenPath: './test.json' // please use for caching
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.me.friends();
@@ -2392,7 +2392,7 @@ export const chat = {
      *       type: 'lazer',
      *       login,
      *       password
-     *       cachedTokenPath: './test.json' // please use for caching
+     *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
      * 
      *     const result = await v2.chat.channels.actions({
@@ -2469,7 +2469,7 @@ export const chat = {
    *       type: 'lazer',
    *       login,
    *       password
-   *       cachedTokenPath: './test.json' // please use for caching
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.chat.messages({ id: 24594482 });
@@ -2516,7 +2516,7 @@ export const chat = {
    *       type: 'lazer',
    *       login,
    *       password
-   *       cachedTokenPath: './test.json' // please use for caching
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.chat.updates({
@@ -2563,7 +2563,7 @@ export const chat = {
    *       type: 'lazer',
    *       login,
    *       password
-   *       cachedTokenPath: './test.json' // please use for caching
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.chat.details({ channel_id: 24594482 });
@@ -2623,7 +2623,7 @@ export const session = {
    *       type: 'lazer',
    *       login,
    *       password,
-   *       cachedTokenPath: './test.json' // please use for caching
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.session.actions({
@@ -2698,7 +2698,7 @@ export const rooms = {
    *       type: 'lazer',
    *       login,
    *       password,
-   *       cachedTokenPath: './test.json'
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.rooms.list({
@@ -2759,7 +2759,7 @@ export const rooms = {
    *       type: 'lazer',
    *       login,
    *       password,
-   *       cachedTokenPath: './test.json'
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.rooms.scores({
@@ -2825,7 +2825,7 @@ export const rooms = {
    *       type: 'lazer',
    *       login,
    *       password,
-   *       cachedTokenPath: './test.json'
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.rooms.details({
@@ -2873,7 +2873,7 @@ export const rooms = {
    *       type: 'lazer',
    *       login,
    *       password,
-   *       cachedTokenPath: './test.json'
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.rooms.leaderboard({

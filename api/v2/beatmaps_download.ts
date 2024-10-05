@@ -78,7 +78,7 @@ type Response = {
  *       type: 'lazer',
  *       login: login,
  *       password: password,
- *       cachedTokenPath: './test.json' // please use for caching
+ *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
  *     });
  * 
  * 

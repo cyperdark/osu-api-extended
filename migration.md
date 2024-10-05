@@ -327,3 +327,33 @@ Migration from `v2` to `v3`
 -v2.chat.channels.messages.markAsReaded(channel_id?, message_id?);
 +v2.chat.channels.actions({ type: 'read'; channel_id; message; });
 ```
+
+```diff
+-tools.accuracy({ 300; 100; 50; 0; geki; katu; }, mode);
++tools.calculate_accuracy({ 300?; 100?; 50?; 0?; geki?; katu?; }, mode);
+```
+
+```diff
+-tools.country(flag);
++tools.country_details(CodeOrName);
+```
+
+```diff
+-tools.download.difficulty(diff_id, path, name, overwrite?);
++tools.download_beatmaps({ type: 'difficulty'; id; host; file_path; overwrite?; progress_log_fn?; });
+```
+
+```diff
+-tools.pp.calculate(id, mods?, combo?, miss?, acc?);
+```
+deadge, use [rosu-pp](https://www.npmjs.com/package/rosu-pp-js)
+
+```diff
+-tools.rank({ 300; 100; 50; 0; geki; katu; }, mods, mode);
++calculate_rank({ 300?; 100?; 50?; 0?; geki?; katu?; }, mods, mode);
+```
+
+```diff
+-tools.total_objects({ 300; 100; 50; 0; geki; katu; }, mode);
++calculate_total_passed_objects({ 300?; 100?; 50?; 0?; geki?; katu?; }, mode);
+```
