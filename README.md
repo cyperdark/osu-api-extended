@@ -12,7 +12,7 @@ quick links: [Features](#features) [Usage](#usage) &#8203; / &#8203; [Install](#
 ## Features
 - [x] Api
   - [x] osu api v1: [official documentation](https://github.com/ppy/osu-api/wiki)
-  - [x] osu api v2: [official documentation](https://osu.ppy.sh/docs/index.html)
+  - [x] osu api v2 (81+ api routes): [official documentation](https://osu.ppy.sh/docs/index.html)
 - [x] **Auto** session refresh
 - [x] You need to login only once on application start (preferable in main server file)
 - [x] Built-in **Tools**
