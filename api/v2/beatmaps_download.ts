@@ -107,7 +107,7 @@ type params = ({
  *
  * &nbsp;
  *
- * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2beatmapsetsbeatmapsetdownload)
+ * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.beatmaps.download_v3)
  */
 export const beatmaps_download = async <T extends params>(params: T, addons?: IDefaultParams): Promise<BeatmapsDownloadResponse> => {
   const { dir } = path.parse(params.file_path);

@@ -62,7 +62,7 @@ export const beatmaps = {
      *
      * &nbsp;
      *
-     * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmap-packs) | [Check return types](../types/v2/beatmaps_packs_list.ts)
+     * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.beatmaps.packs.list_v3) | [Check return types](../types/v2/beatmaps_packs_list.ts)
      */
     list: beatmaps_packs_list,
     /**
@@ -102,7 +102,7 @@ export const beatmaps = {
      *
      * &nbsp;
      *
-     * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmap-pack) | [Check return types](../types/v2/beatmaps_packs_details.ts)
+     * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.beatmaps.packs.details_v3) | [Check return types](../types/v2/beatmaps_packs_details.ts)
      */
     details: beatmap_packs_details,
   },
@@ -192,7 +192,7 @@ export const beatmaps = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#lookup-beatmap) | [Check return types](../types/v2/beatmaps_lookup.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.beatmaps.lookup_v3) | [Check return types](../types/v2/beatmaps_lookup.ts)
    */
   lookup: beatmaps_lookup,
   /**
@@ -237,7 +237,7 @@ export const beatmaps = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmap) | [Check return types](../types/v2/beatmaps_details_set.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.beatmaps.details_v3) | [Check return types](../types/v2/beatmaps_details_set.ts)
    */
   details: beatmaps_details,
   /**
@@ -285,7 +285,7 @@ export const beatmaps = {
      *
      * &nbsp;
      *
-     * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2beatmapsetsevents) | [Check return types](../types/v2/beatmaps_events_list.ts)
+     * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.beatmaps.events.list_v3) | [Check return types](../types/v2/beatmaps_events_list.ts)
      */
     list: beatmaps_events_list,
   },
@@ -355,7 +355,7 @@ export const beatmaps = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2beatmapsetsbeatmapsetdownload)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.beatmaps.download_v3)
    */
   download: beatmaps_download,
   /**
@@ -408,7 +408,7 @@ export const beatmaps = {
      *
      * &nbsp;
      *
-     * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmapset-discussions) | [Check return types](../types/v2/beatmaps_discussions_list.ts)
+     * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.beatmaps.discussions.list_v3) | [Check return types](../types/v2/beatmaps_discussions_list.ts)
      */
     list: beatmaps_discussions_list,
     /**
@@ -452,7 +452,7 @@ export const beatmaps = {
      *
      * &nbsp;
      *
-     * [See documentation](https://osu.ppy.sh/docs/index.html#beatmapset-discussions) | [Check return types](../types/v2/beatmaps_discussions_posts.ts)
+     * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.beatmaps.discussions.posts_v3) | [Check return types](../types/v2/beatmaps_discussions_posts.ts)
      */
     posts: beatmaps_discussions_posts,
     /**
@@ -498,7 +498,7 @@ export const beatmaps = {
      *
      * &nbsp;
      *
-     * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmapset-discussion-votes) | [Check return types](../types/v2/beatmaps_discussions_votes.ts)
+     * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.beatmaps.discussions.votes_v3) | [Check return types](../types/v2/beatmaps_discussions_votes.ts)
      */
     votes: beatmaps_discussions_votes,
   },
@@ -574,7 +574,7 @@ export const changelogs = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-changelog-listing) | [Check return types](../types/v2/changelogs_list_all.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.changelogs.list_v3) | [Check return types](../types/v2/changelogs_list_all.ts)
    */
   list: changelogs_list,
   /**
@@ -616,7 +616,7 @@ export const changelogs = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-changelog-build) | [Check return types](../types/v2/changelogs_details.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.changelogs.details_v3) | [Check return types](../types/v2/changelogs_details.ts)
    */
   details: changelogs_details,
 };
@@ -678,7 +678,7 @@ export const comments = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-comments-listing) | [Check return types](../types/v2/comments_list.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.comments.list_v3) | [Check return types](../types/v2/comments_list.ts)
    */
   list: comments_list,
   /**
@@ -717,7 +717,7 @@ export const comments = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-a-comment) | [Check return types](../types/v2/comments_details.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.comments.details_v3) | [Check return types](../types/v2/comments_details.ts)
    */
   details: comments_details,
   /**
@@ -757,7 +757,7 @@ export const comments = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#post-a-new-comment) | [Check return types](../types/v2/comments_actions.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.comments.actions_v3) | [Check return types](../types/v2/comments_actions.ts)
    */
   actions: comments_actions,
 };
@@ -821,7 +821,7 @@ export const users = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-users) | [Check return types](../types/v2/users_list.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.users.list_v3) | [Check return types](../types/v2/users_list.ts)
    */
   list: users_list,
   /**
@@ -867,7 +867,7 @@ export const users = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-user-kudosu) | [Check return types](../types/v2/users_kudosu.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.users.kudosu_v3) | [Check return types](../types/v2/users_kudosu.ts)
    */
   kudosu: users_kudosu,
   /**
@@ -913,7 +913,7 @@ export const users = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-events) | [Check return types](../types/v2/users_events.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.users.events_v3) | [Check return types](../types/v2/users_events.ts)
    */
   events: users_events,
   /**
@@ -959,7 +959,7 @@ export const users = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-user) | [Check return types](../types/v2/users_details.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.users.details_v3) | [Check return types](../types/v2/users_details.ts)
    */
   details: users_details,
   /**
@@ -1006,7 +1006,7 @@ export const users = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-user-beatmaps) | [Check return types](../types/v2/users_beatmaps.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.users.beatmaps_v3) | [Check return types](../types/v2/users_beatmaps.ts)
    */
   beatmaps: users_beatmaps,
   /**
@@ -1052,7 +1052,7 @@ export const users = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-user-recent-activity) | [Check return types](../types/v2/users_activity.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.users.activity_v3) | [Check return types](../types/v2/users_activity.ts)
    */
   activity: users_activity,
 };
@@ -1164,7 +1164,7 @@ export const scores = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmap-scores) | [Check return types](../types/v2/scores_list_user_recent.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.scores.list_v3) | [Check return types](../types/v2/scores_list_user_recent.ts)
    *
    */
   list: scores_list,
@@ -1212,7 +1212,7 @@ export const scores = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2scoresrulesetorscorescore) | [Check return types](../types/v2/scores_details.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.scores.details_v3) | [Check return types](../types/v2/scores_details.ts)
    *
    */
   details: scores_details,
@@ -1262,7 +1262,7 @@ export const scores = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2scoresrulesetorscorescoredownload) | [Check return types](../types/v2/scores_download.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.scores.download_v3) | [Check return types](../types/v2/scores_download.ts)
    */
   download: scores_download,
 };
@@ -1331,7 +1331,7 @@ export const forums = {
      *
      * &nbsp;
      *
-     * [See documentation](https://osu.ppy.sh/docs/index.html#get-beatmap-packs) | [Check return types](../types/v2/forums_topics_details.ts)
+     * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.forums.topics.details_v3) | [Check return types](../types/v2/forums_topics_details.ts)
      */
     details: forums_topics_details,
     /**
@@ -1443,7 +1443,7 @@ export const forums = {
      * &nbsp;
      *
      *
-     * [See documentation](https://osu.ppy.sh/docs/index.html#forum) | [Check return types](../types/v2/forums_topics_actions_reply.ts)
+     * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.forums.topics.actions_v3) | [Check return types](../types/v2/forums_topics_actions_reply.ts)
      */
     actions: forums_topics_actions,
   },
@@ -1525,7 +1525,7 @@ import { search_all } from '../api/v2/search';
  *
  * &nbsp;
  *
- * [See documentation](https://osu.ppy.sh/docs/index.html#search) | [Check return types](../types/v2/search_all.ts)
+ * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.search_v3) | [Check return types](../types/v2/search_all.ts)
  *
  */
 export const search = search_all;
@@ -1588,7 +1588,7 @@ export const assets = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2seasonal-backgrounds) | [Check return types](../types/v2/assets_backgrounds.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.assets.backgrounds_v3) | [Check return types](../types/v2/assets_backgrounds.ts)
    */
   backgrounds: assets_backgrounds,
   /**
@@ -1626,7 +1626,7 @@ export const assets = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2seasonal-backgrounds) | [Check return types](../types/v2/assets_datafiles.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.assets.datafiles_v3) | [Check return types](../types/v2/assets_datafiles.ts)
    */
   dataFiles: assets_dataFiles
 };
@@ -1685,7 +1685,7 @@ export const news = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-news-listing) | [Check return types](../types/v2/news_list.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.news.list_v3) | [Check return types](../types/v2/news_list.ts)
    */
   list: news_list,
   /**
@@ -1733,7 +1733,7 @@ export const news = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-news-post) | [Check return types](../types/v2/news_details.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.news.details_v3) | [Check return types](../types/v2/news_details.ts)
    */
   details: news_details,
 };
@@ -1792,7 +1792,7 @@ export const notifications = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-notifications) | [Check return types](../types/v2/notifications_list.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.notifications.list_v3) | [Check return types](../types/v2/notifications_list.ts)
    */
   list: notifications_list,
   /**
@@ -1918,7 +1918,7 @@ export const ranking = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-ranking) | [Check return types](../types/v2/ranking_list_performance.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.ranking.list_v3) | [Check return types](../types/v2/ranking_list_performance.ts)
    */
   list: ranking_list,
 };
@@ -1973,7 +1973,7 @@ export const spotlights = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-spotlights) | [Check return types](../types/v2/spotlights_list.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.spotlights.list_v3) | [Check return types](../types/v2/spotlights_list.ts)
    */
   list: spotlights_list,
 };
@@ -2027,7 +2027,7 @@ export const wiki = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-wiki-page) | [Check return types](../types/v2/wiki_details.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.wiki.details_v3) | [Check return types](../types/v2/wiki_details.ts)
    */
   details: wiki_details,
 };
@@ -2085,7 +2085,7 @@ export const me = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2medownload-quota-check) | [Check return types](../types/v2/me_download_quota.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.me.download_quota_v3) | [Check return types](../types/v2/me_download_quota.ts)
    */
   download_quota: me_download_quota,
   /**
@@ -2129,7 +2129,7 @@ export const me = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2friends) | [Check return types](../types/v2/me_friends.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.me.friends_v3) | [Check return types](../types/v2/me_friends.ts)
    */
   friends: me_friends,
   /**
@@ -2173,7 +2173,7 @@ export const me = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-own-data) | [Check return types](../types/v2/me_details.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.me.details_v3) | [Check return types](../types/v2/me_details.ts)
    */
   details: me_details,
 };
@@ -2235,7 +2235,7 @@ export const matches = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2matches) | [Check return types](../types/v2/matches_list.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.matches.list_v3) | [Check return types](../types/v2/matches_list.ts)
    */
   list: matches_list,
   /**
@@ -2279,7 +2279,7 @@ export const matches = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2matchesmatch) | [Check return types](../types/v2/matches_details.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.matches.details_v3) | [Check return types](../types/v2/matches_details.ts)
    */
   details: matches_details,
 };
@@ -2345,7 +2345,7 @@ export const chat = {
      *
      * &nbsp;
      *
-     * [See documentation](https://osu.ppy.sh/docs/index.html#get-channel-list) | [Check return types](../types/v2/chat_channels_list.ts)
+     * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.chat.channels.list_v3) | [Check return types](../types/v2/chat_channels_list.ts)
      */
     list: chat_channels_list,
     /**
@@ -2439,7 +2439,7 @@ export const chat = {
      *
      * &nbsp;
      *
-     * [See documentation](https://osu.ppy.sh/docs/index.html#send-message-to-channel)
+     * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.chat.channels.actions_v3)
      */
     actions: chat_channels_actions,
   },
@@ -2489,7 +2489,7 @@ export const chat = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-channel-messages) | [Check return types](../types/v2/chat_messages.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.chat.messages_v3) | [Check return types](../types/v2/chat_messages.ts)
    */
   messages: chat_messages,
   /**
@@ -2539,7 +2539,7 @@ export const chat = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-updates) | [Check return types](../types/v2/chat_updates.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.chat.updates_v3) | [Check return types](../types/v2/chat_updates.ts)
    */
   updates: chat_updates,
   /**
@@ -2583,7 +2583,7 @@ export const chat = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-channel) | [Check return types](../types/v2/chat_details.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.chat.details_v3) | [Check return types](../types/v2/chat_details.ts)
    */
   details: chat_details,
   actions: chat_actions,
@@ -2654,7 +2654,7 @@ export const session = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#post-apiv2sessionverify)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.session.actions_v3)
    */
   actions: session_actions,
 };
@@ -2726,7 +2726,7 @@ export const rooms = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-multiplayer-rooms) | [Check return types](../types/v2/rooms_list.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.rooms.list_v3) | [Check return types](../types/v2/rooms_list.ts)
    */
   list: rooms_list,
   /**
@@ -2800,7 +2800,7 @@ export const rooms = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-scores) | [Check return types](../types/v2/rooms_scores_all.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.rooms.scores_v3) | [Check return types](../types/v2/rooms_scores_all.ts)
    */
   scores: rooms_scores,
   /**
@@ -2847,7 +2847,7 @@ export const rooms = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2roomsroom) | [Check return types](../types/v2/rooms_details.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.rooms.details_v3) | [Check return types](../types/v2/rooms_details.ts)
    */
   details: rooms_details,
   /**
@@ -2895,7 +2895,7 @@ export const rooms = {
    *
    * &nbsp;
    *
-   * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2roomsroomleaderboard) | [Check return types](../types/v2/rooms_leaderboard.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.rooms.leaderboard_v3) | [Check return types](../types/v2/rooms_leaderboard.ts)
    */
   leaderboard: rooms_leaderboard,
 };
@@ -2947,7 +2947,7 @@ export const groups = {
    *
    * &nbsp;
    *
-   * [Check return types](../types/v2/groups_details.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.groups.details_v3) | [Check return types](../types/v2/groups_details.ts)
    */
   details: groups_details,
   /**
@@ -2989,7 +2989,7 @@ export const groups = {
    *
    * &nbsp;
    *
-   * [Check return types](../types/v2/groups_details.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.groups.history_v3) | [Check return types](../types/v2/groups_history.ts)
    */
   history: groups_history,
 }
