@@ -29,7 +29,7 @@ type Response<T extends params['type']> =
   : IError;
 
 
-export const notification_actions = async <T extends params>(params: T, addons?: IDefaultParams): Promise<any> => {
+export const notifications_actions = async <T extends params>(params: T, addons?: IDefaultParams): Promise<any> => {
   const object: any = {};
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'GET';

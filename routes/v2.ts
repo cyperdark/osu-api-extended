@@ -1807,7 +1807,7 @@ export const news = {
 
 
 import { notifications_list } from '../api/v2/notifications_list';
-import { notification_actions } from '../api/v2/notification_actions';
+import { notifications_actions } from '../api/v2/notifications_actions';
 
 
 /**
@@ -1891,7 +1891,7 @@ export const notifications = {
    *
    * [See documentation](https://osu.ppy.sh/docs/index.html#mark-notifications-as-read)
    */
-  actions: notification_actions,
+  actions: notifications_actions,
 };
 
 
