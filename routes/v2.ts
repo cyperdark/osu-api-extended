@@ -870,6 +870,7 @@ export const comments = {
 
 
 import { users_list } from "../api/v2/users_list";
+import { users_lookup } from "../api/v2/users_lookup";
 import { users_events } from "../api/v2/users_events";
 import { users_details } from "../api/v2/users_details";
 import { users_activity } from "../api/v2/users_activity";
@@ -929,6 +930,53 @@ export const users = {
    * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.users.list_v3) | [Check return types](../types/v2/users_list.ts)
    */
   list: users_list,
+  /**
+   * ### `GET` [/v2/users/lookup](https://osu.ppy.sh/docs/index.html#get-apiv2userslookup)
+   * `async` Retrieves a list of users by their id or name.
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.ids` - List of user ids or names to retrieve.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
+   *     });
+   * 
+   *     const result = await v2.users.lookup({
+   *       ids: [2, 8928855, 7562902, 'mrekk', 'whitecat'],
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.users.lookup_v3) | [Check return types](../types/v2/users_list.ts)
+   */
+  lookup: users_lookup,
   /**
    * ### `GET` [/v2/users/{user}/kudosu](https://osu.ppy.sh/docs/index.html#get-user-kudosu)
    * `async` Retrieves the kudosu history of a given user.
