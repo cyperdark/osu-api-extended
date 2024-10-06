@@ -45,11 +45,17 @@ export const beatmaps = {
       *      type: 'v2',
       *      client_id: CLIENT_ID,
       *      client_secret: CLIENT_SECRET,
+      *      cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
       *    });
       * 
       *     const result = await v2.beatmaps.packs.list({
       *       type: 'loved'
       *     });
+      *     if (result.error != null) {
+      *       console.log(result.error);
+      *       return;
+      *     };
+      * 
       * 
       *     console.log(result);
       *   } catch (error) {
@@ -87,9 +93,15 @@ export const beatmaps = {
      *       type: 'v2',
      *       client_id: CLIENT_ID,
      *       client_secret: CLIENT_SECRET,
+     *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
      * 
      *     const result = await v2.beatmaps.packs.details('ST265');
+     *     if (result.error != null) {
+     *       console.log(result.error);
+     *       return;
+     *     };
+     * 
      * 
      *     console.log(result);
      *   } catch (error) {
@@ -154,6 +166,7 @@ export const beatmaps = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.beatmaps.lookup({
@@ -218,12 +231,17 @@ export const beatmaps = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.beatmaps.details({
    *       type: 'set',
    *       id: 2182218
    *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
    * 
    * 
    *     console.log(result);
@@ -270,9 +288,15 @@ export const beatmaps = {
      *       type: 'v2',
      *       client_id: CLIENT_ID,
      *       client_secret: CLIENT_SECRET,
+     *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
      * 
      *     const result = await v2.beatmaps.events.list({ types: ['approve'] });
+     *     if (result.error != null) {
+     *       console.log(result.error);
+     *       return;
+     *     };
+     * 
      * 
      *     console.log(result);
      *   } catch (error) {
@@ -343,6 +367,11 @@ export const beatmaps = {
    *       file_path: `./cache/${set_id}.osz`,
    *       progress_log_fn: progress_update
    *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
    * 
    *     console.log(result);
    *   } catch (error) {
@@ -393,9 +422,15 @@ export const beatmaps = {
      *       type: 'v2',
      *       client_id: CLIENT_ID,
      *       client_secret: CLIENT_SECRET,
+     *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
      * 
      *     const result = await v2.beatmaps.discussions.list({ beatmapset_id: 2084849 });
+     *     if (result.error != null) {
+     *       console.log(result.error);
+     *       return;
+     *     };
+     * 
      * 
      *     console.log(result);
      *   } catch (error) {
@@ -437,9 +472,15 @@ export const beatmaps = {
      *       type: 'v2',
      *       client_id: CLIENT_ID,
      *       client_secret: CLIENT_SECRET,
+     *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
      * 
      *     const result = await v2.beatmaps.discussions.posts();
+     *     if (result.error != null) {
+     *       console.log(result.error);
+     *       return;
+     *     };
+     * 
      * 
      *     console.log(result);
      *   } catch (error) {
@@ -483,9 +524,15 @@ export const beatmaps = {
      *       type: 'v2',
      *       client_id: CLIENT_ID,
      *       client_secret: CLIENT_SECRET,
+     *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
      * 
      *     const result = await v2.beatmaps.discussions.votes({ discussion_id: 4533908 });
+     *     if (result.error != null) {
+     *       console.log(result.error);
+     *       return;
+     *     };
+     * 
      * 
      *     console.log(result);
      *   } catch (error) {
@@ -562,6 +609,11 @@ export const changelogs = {
    *       type: 'lookup',
    *       changelog: 'lazer'
    *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
    * 
    *     console.log(result);
    *   } catch (error) {
@@ -699,7 +751,7 @@ export const comments = {
    * 
    * async function main() {
    *   try {
-   *     const result = const result = await v2.comments.details(3035523);
+   *     const result = await v2.comments.details(3035523);
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
@@ -799,6 +851,7 @@ export const users = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.users.list({
@@ -848,6 +901,7 @@ export const users = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.users.kudosu({ id: 4830261 });
@@ -894,6 +948,7 @@ export const users = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.users.events()
@@ -940,6 +995,7 @@ export const users = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.users.details({ user: 9893708, mode: 'osu', key: 'id' });
@@ -987,6 +1043,7 @@ export const users = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.users.beatmaps({ type: 'ranked', id: 4378277 });
@@ -1033,6 +1090,7 @@ export const users = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.users.activity({ id: 11367222 });
@@ -1123,6 +1181,7 @@ export const scores = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.scores.list({
@@ -1191,6 +1250,7 @@ export const scores = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.scores.details({
@@ -1309,6 +1369,7 @@ export const forums = {
      *       type: 'v2',
      *       client_id: CLIENT_ID,
      *       client_secret: CLIENT_SECRET,
+     *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
      * 
      *     const result = await v2.forums.topics.details({
@@ -1497,6 +1558,7 @@ import { search_all } from '../api/v2/search';
  *       type: 'v2',
  *       client_id: CLIENT_ID,
  *       client_secret: CLIENT_SECRET,
+ *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
  *     });
  * 
  *     const result = await v2.search({
@@ -1607,6 +1669,7 @@ export const assets = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.assets.dataFiles();
@@ -1666,6 +1729,7 @@ export const news = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.news.list();
@@ -1711,6 +1775,7 @@ export const news = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.news.details({
@@ -1890,6 +1955,7 @@ export const ranking = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.ranking.list({
@@ -1954,6 +2020,7 @@ export const spotlights = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.spotlights.list();
@@ -2154,6 +2221,7 @@ export const me = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.me.details();
@@ -2213,6 +2281,7 @@ export const matches = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     const result = await v2.matches.list({
@@ -2260,6 +2329,7 @@ export const matches = {
    *       type: 'v2',
    *       client_id: CLIENT_ID,
    *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
    * 
    *     await v2.matches.details({ match_id: 16155689 });
@@ -2325,6 +2395,7 @@ export const chat = {
      *       type: 'v2',
      *       client_id: CLIENT_ID,
      *       client_secret: CLIENT_SECRET,
+     *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
      * 
      *     const result = await v2.chat.channels.list();
