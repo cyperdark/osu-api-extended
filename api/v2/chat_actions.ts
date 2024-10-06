@@ -9,7 +9,7 @@ import { credentials } from "../../utility/auth";
 
 
 type params = ({
-  type: 'new';
+  type: 'send_pm';
 
   is_action: boolean;
 
@@ -18,12 +18,20 @@ type params = ({
 
   uuid?: string;
 } | {
-  type: 'send';
+  type: 'send_channel';
 
   is_action: boolean;
 
   channel_id: number;
   message: string;
+} | {
+  type: 'send_announce';
+
+  users_ids: number[];
+  message: string;
+
+  channel_name: string;
+  channel_description: string;
 } | {
   type: 'join' | 'leave';
 
@@ -70,7 +78,7 @@ export const chat_actions = async <T extends params>(params: T, addons?: IDefaul
 
 
   switch (params?.type) {
-    case 'new':
+    case 'send_pm':
       if (credentials.type == 'cli' && !credentials.scopes.includes('chat.write')) {
         return handleErrors(new Error(`Requires "chat.write" scope`)) as Response<T['type']>;
       };
@@ -90,7 +98,7 @@ export const chat_actions = async <T extends params>(params: T, addons?: IDefaul
       if (params?.uuid) object['uuid'] = params.uuid;
       break;
 
-    case 'send':
+    case 'send_channel':
       if (credentials.type == 'cli' && !credentials.scopes.includes('chat.write')) {
         return handleErrors(new Error(`Requires "chat.write" scope`)) as Response<T['type']>;
       };
@@ -105,6 +113,38 @@ export const chat_actions = async <T extends params>(params: T, addons?: IDefaul
 
       if (params?.message != null) object['message'] = params.message;
       if (params?.is_action != null) object['is_action'] = params.is_action;
+      break;
+
+    case 'send_announce':
+      if (credentials.type == 'cli' && !credentials.scopes.includes('chat.write_manage')) {
+        return handleErrors(new Error(`Requires "chat.write_manage" scope`)) as Response<T['type']>;
+      };
+
+      if (!Array.isArray(params?.users_ids)) {
+        return handleErrors(new Error(`User ids should be array`)) as Response<T['type']>;
+      };
+
+      if (params?.channel_name == null) {
+        return handleErrors(new Error(`Specify channel_name`)) as Response<T['type']>;
+      };
+
+      if (params?.message == null) {
+        return handleErrors(new Error(`Specify message`)) as Response<T['type']>;
+      };
+
+
+      url += `/chat/channels`;
+      method = 'POST';
+
+      object['type'] = 'ANNOUNCE';
+
+      object['target_ids'] = params.users_ids;
+      object['message'] = params.message;
+
+      object['channel'] = {};
+
+      object['channel']['name'] = params.channel_name;
+      object['channel']['description'] = params.channel_description;
       break;
 
     case 'join':

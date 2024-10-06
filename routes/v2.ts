@@ -2631,7 +2631,7 @@ export const chat = {
    *
    * &nbsp;
    *
-   * ### Parameters for `params.type: 'new'`
+   * ### Parameters for `params.type: 'send_pm'`
    * - `params.is_action` - Whether the message is an action
    * - `params.user_id` - The ID of the user.
    * - `params.message` - The message to send.
@@ -2639,10 +2639,18 @@ export const chat = {
    * 
    * &nbsp;
    *
-   * ### Parameters for `params.type: 'send'`
-   * - `params.id` - The ID of the channel to send to.
+   * ### Parameters for `params.type: 'send_channel'`
+   * - `params.id` - The IDs of the channel to send to.
    * - `params.message` - The message to send.
    * - `params.is_action` - Whether the message is an action.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type: 'send_announce'`
+   * - `params.users_ids[]` - The IDs of the users.
+   * - `params.message` - The message to send.
+   * - `params.channel_name` - Channel name.
+   * - `params.channel_description` - Description of the channel.
    *
    * &nbsp;
    *
@@ -2688,30 +2696,34 @@ export const chat = {
    * 
    * 
    *     const result = await v2.chat.actions({
-   *       type: 'new',
+   *       type: 'send_pm',
    *       is_action: false,
    *       user_id: 2070907,
-   *       message: 'hello',
+   *       message: '/np',
    *     });
    *     // or
    *     const result = await v2.chat.actions({
-   *       type: 'keepalive',
-   *       since: 3769165698,
-   *     });
-   *     // or
-   *     const result = await v2.chat.actions({
-   *       type: 'send',
+   *       type: 'send_channel',
    * 
-   *       channel_id: 24594482,
    *       is_action: false,
+   *       channel_id: 24594482,
    *       message: '.'
+   *     });
+   *     // or
+   *     const result = await v2.chat.actions({
+   *       type: 'send_announce',
+   * 
+   *       ids: [17063658],
+   *       channel_name: 'test api',
+   *       channel_description: 'a description for test',
+   *       message: 'hello, testing api lib'
    *     });
    *     // or
    *     const result = await v2.chat.actions({
    *       type: 'join',
    * 
    *       channel_id: 55,
-   *       user_id: 9893708, // your id
+   *       user_id: 9893708,
    *     });
    *     // or
    *     const result = await v2.chat.actions({
@@ -2724,7 +2736,11 @@ export const chat = {
    *     const result = await v2.chat.actions({
    *       type: 'read',
    *       channel_id: 56888139,
-   *       message_id: 3758748555,
+   *     });
+   *     // or
+   *     const result = await v2.chat.actions({
+   *       type: 'keepalive',
+   *       since: 3769165698,
    *     });
    *     if (result.error != null) {
    *       console.log(result.error);
