@@ -1,4 +1,4 @@
-import { BeatmapsEvents } from "../../types/v2/beatmaps_events";
+import { BeatmapsEvents } from "../../types/v2/beatmaps_events_list";
 import { IDefaultParams, IError, beatmap_events_types } from "../../types";
 import { request } from "../../utility/request";
 import { handleErrors } from "../../utility/handleErrors";

@@ -285,7 +285,7 @@ export const beatmaps = {
      *
      * &nbsp;
      *
-     * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2beatmapsetsevents) | [Check return types](../types/v2/beatmaps_events.ts)
+     * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2beatmapsetsevents) | [Check return types](../types/v2/beatmaps_events_list.ts)
      */
     list: beatmaps_events_list,
   },
@@ -364,7 +364,7 @@ export const beatmaps = {
    */
   discussions: {
     /**
-     * ### `GET` [/v2/beatmapsets/discussions`](https://osu.ppy.sh/docs/index.html#get-beatmapset-discussions)
+     * ### `GET` [/v2/beatmapsets/discussions](https://osu.ppy.sh/docs/index.html#get-beatmapset-discussions)
      * `async` Retrieves a list of beatmap set discussions.
      *
      * &nbsp;

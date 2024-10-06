@@ -1,9 +1,10 @@
-import { IDefaultParams, IError } from "../../types";
+import { IDefaultParams } from "../../types";
 import { download } from "../../utility/request";
 import { cache, credentials } from "../../utility/auth";
 import path from "path";
 import fs from "fs";
 import { handleErrors } from "../../utility/handleErrors";
+import { BeatmapsDownloadResponse } from "../../types/v2/beatmaps_download";
 
 
 
@@ -30,15 +31,6 @@ type params = ({
   progress_log_fn?: (host: string, progress: number) => void;
 });
 
-
-type Response = {
-  status: string,
-  destination?: string,
-  /**
-   * Time in milliseconds
-   */
-  elapsed_time?: number
-} & IError;
 
 
 /**
@@ -117,13 +109,13 @@ type Response = {
  *
  * [See documentation](https://osu.ppy.sh/docs/index.html#get-apiv2beatmapsetsbeatmapsetdownload)
  */
-export const beatmaps_download = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response> => {
+export const beatmaps_download = async <T extends params>(params: T, addons?: IDefaultParams): Promise<BeatmapsDownloadResponse> => {
   const { dir } = path.parse(params.file_path);
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
 
   if (fs.existsSync(params.file_path) && params.overwrite != true) {
-    return { status: 'File already exists' } as Response;
+    return { status: 'File already exists' } as BeatmapsDownloadResponse;
   };
 
 
@@ -189,11 +181,11 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
 
       case 'osu':
         if (credentials.type != 'lazer') {
-          return handleErrors(new Error(`Login via lazer to use this endpoint`)) as Response;
+          return handleErrors(new Error(`Login via lazer to use this endpoint`)) as BeatmapsDownloadResponse;
         };
 
         if ((addons?.authKey || cache.v2) == null) {
-          return handleErrors(new Error('osu is not authorized')) as Response;
+          return handleErrors(new Error('osu is not authorized')) as BeatmapsDownloadResponse;
         };
 
 
@@ -202,7 +194,7 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
         break;
 
       default:
-        return handleErrors(new Error(`Unsupported host: ${(params as any).host}`)) as Response;
+        return handleErrors(new Error(`Unsupported host: ${(params as any).host}`)) as BeatmapsDownloadResponse;
     };
 
 
@@ -251,5 +243,5 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
   };
 
 
-  return handleErrors(new Error(`Unsupported type: ${(params as any).type}`)) as Response;
+  return handleErrors(new Error(`Unsupported type: ${(params as any).type}`)) as BeatmapsDownloadResponse;
 };
