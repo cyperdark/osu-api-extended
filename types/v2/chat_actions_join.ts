@@ -1,4 +1,4 @@
-export interface chatChannelsActionsJoinResponse {
+export interface chatActionsJoinResponse {
   channel_id: number
   description: string
   icon: any

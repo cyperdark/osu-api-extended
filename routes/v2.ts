@@ -2287,7 +2287,6 @@ export const matches = {
 
 
 import { chat_channels_list } from "../api/v2/chat_channels_list";
-import { chat_channels_actions } from "../api/v2/chat_channels_actions";
 
 import { chat_messages } from "../api/v2/chat_messages";
 import { chat_updates } from "../api/v2/chat_updates";
@@ -2348,100 +2347,6 @@ export const chat = {
      * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.chat.channels.list_v3) | [Check return types](../types/v2/chat_channels_list.ts)
      */
     list: chat_channels_list,
-    /**
-     * ### `POST` [/v2/chat/channels/{channel}/messages](https://osu.ppy.sh/docs/index.html#send-message-to-channel)
-     * ### `PUT` [/v2/chat/channels/{channel}/users/{user}](https://osu.ppy.sh/docs/index.html#join-channel)
-     * ### `DELETE` [/v2/chat/channels/{channel}/users/{user}](https://osu.ppy.sh/docs/index.html#leave-channel)
-     * ### `PUT` [/v2/chat/channels/{channel}/mark-as-read/{message}](https://osu.ppy.sh/docs/index.html#mark-channel-as-read)
-     * `async` Performs a set of actions on a list of channels. (Requires lazer authentication)
-     *
-     * &nbsp;
-     *
-     * ### Global Parameters
-     * - `params.type` - Type of action to perform.
-     * - `addons?` - Additional parameters to include in the request.
-     *
-     * &nbsp;
-     *
-     * ### Parameters for `params.type: 'send'`
-     * - `params.id` - The ID of the channel to send to.
-     * - `params.message` - The message to send.
-     * - `params.is_action` - Whether the message is an action.
-     *
-     * &nbsp;
-     *
-     * ### Parameters for `params.type: 'join' | 'leave'`
-     * - `params.id` - The ID of the channel.
-     * - `params.user_id` - The ID of the user.
-     *
-     * &nbsp;
-     *
-     * ### Parameters for `params.type: 'read'`
-     * - `params.channel_id` - The ID of the channel.
-     * - `params.message_id` - The ID of the user.
-     *
-     * &nbsp;
-     *
-     * ### Usage Example
-     * ```js
-     * const { auth, v2 } = require('osu-api-extended');
-     * 
-     * async function main() {
-     *   try {
-     *     await auth.login({
-     *       type: 'lazer',
-     *       login,
-     *       password
-     *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
-     *     });
-     * 
-     *     const result = await v2.chat.channels.actions({
-     *       type: 'send',
-     * 
-     *       id: 5,
-     *       is_action: false,
-     *       message: '.'
-     *     });
-     *     // or
-     *     const result = await v2.chat.channels.actions({
-     *       type: 'join',
-     * 
-     *       id: 6,
-     *       user_id: 9893708,
-     *     });
-     *     // or
-     *     const result = await v2.chat.channels.actions({
-     *       type: 'leave',
-     * 
-     *       id: 6,
-     *       user_id: 9893708,
-     *     });
-     *     // or
-     *     const result = await v2.chat.channels.actions({
-     *       type: 'readed',
-     * 
-     *       channel_id: 45145743,
-     *       message_id: 3626657177,
-     *     });
-     *     if (result.error != null) {
-     *       console.log(result.error);
-     *       return;
-     *     };
-     * 
-     *     console.log(result);
-     *   } catch (error) {
-     *     console.log(error);
-     *   };
-     * };
-     * 
-     * main();
-     * ```
-     *
-     * &nbsp;
-     *
-     * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.chat.channels.actions_v3)
-     */
-    actions: chat_channels_actions,
   },
   /**
    * ### `GET [/v2/chat/channels/{channel}/messages](https://osu.ppy.sh/docs/index.html#get-channel-messages)

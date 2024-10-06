@@ -1,4 +1,4 @@
-export interface chatChannelsActionsSendResponse {
+export interface chatActionsSendResponse {
   channel_id: number
   content: string
   is_action: boolean
