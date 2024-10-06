@@ -13,10 +13,10 @@ Quick Links: [Features](#features) &#8203; / &#8203; [Usage](#usage) &#8203; / &
 ## Features
 - [x] Api
   - [x] osu api v1:
-     - [See documentation](wiki/_api_v1_v2)
+     - [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/_api_v1_v2)
      - [See official documentation](https://github.com/ppy/osu-api/wiki)
   - [x] osu api v2 (82+ api routes):
-     - [See documentation](wiki/_api_v2_v3)
+     - [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/_api_v2_v3)
      - [See official documentation](https://osu.ppy.sh/docs/index.html)
 - [x] **Auto** session refresh
 - [x] Does not require you to login for each action
@@ -31,7 +31,7 @@ Quick Links: [Features](#features) &#8203; / &#8203; [Usage](#usage) &#8203; / &
   - `tools.calculate_total_passed_objects` - Calculate total passed objects
   - `tools.country_details` - Get country name and code by providing country name/code
   - `tools.download_beatmaps` - Downloads a beatmap or beatmap set by given ID. (Supports different hosts)
-  - [See documentation](wiki/_tools_v3)
+  - [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/_tools_v3)
 - [x] Setting to prevent throw, [instead send .error](#prevent-throw-errors)
 
 <br>
