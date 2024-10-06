@@ -9,6 +9,11 @@ Quick Links: [Features](#features) &#8203; / &#8203; [Usage](#usage) &#8203; / &
 
 <br>
 
+## See detailed documentation: [here](https://github.com/cyperdark/osu-api-extended/wiki)
+
+<br>
+<br>
+
 ## Features
 - [x] Api
   - [x] osu api v1: [See official documentation](https://github.com/ppy/osu-api/wiki)
