@@ -2617,6 +2617,7 @@ export const chat = {
   /**
    * ### `POST` [/v2/chat/new](https://osu.ppy.sh/docs/index.html#create-new-pm)
    * ### `POST` [/v2/chat/ack](https://osu.ppy.sh/docs/index.html#chat-keepalive)
+   * ### `POST` [/v2/chat/channels](https://osu.ppy.sh/docs/index.html#create-channel)
    * ### `POST` [/v2/chat/channels/{channel}/messages](https://osu.ppy.sh/docs/index.html#send-message-to-channel)
    * ### `PUT` [/v2/chat/channels/{channel}/users/{user}](https://osu.ppy.sh/docs/index.html#join-channel)
    * ### `DELETE` [/v2/chat/channels/{channel}/users/{user}](https://osu.ppy.sh/docs/index.html#leave-channel)
