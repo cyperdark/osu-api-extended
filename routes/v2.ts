@@ -804,7 +804,59 @@ export const comments = {
    *
    * ### Usage Example
    * ```js
-   * // TBA
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'lazer',
+   *       login: login,
+   *       password: password,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
+   *     });
+   * 
+   *     const result = await v2.comments.actions({
+   *       type: 'new',
+   * 
+   *       commentable_type: 'beatmapset',
+   *       id: 1378401,
+   *       message: 'hello from api'
+   *     });
+   *     // or
+   *     const result = await v2.comments.actions({
+   *       type: 'edit',
+   * 
+   *       id: 3058002,
+   *       message: 'hello from api (edited)'
+   *     });
+   *     // or 
+   *     const result = await v2.comments.actions({
+   *       type: 'vote',
+   *       id: 3058002,
+   *     });
+   *     // or 
+   *     const result = await v2.comments.actions({
+   *       type: 'unvote',
+   *       id: 3058002,
+   *     });
+   *     // or 
+   *     const result = await v2.comments.actions({
+   *       type: 'delete',
+   *       id: 3058002,
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
    * ```
    *
    * &nbsp;

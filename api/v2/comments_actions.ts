@@ -6,6 +6,7 @@ import { CommentsActionsDeleteResponse } from "../../types/v2/comments_actions_d
 import { CommentsActionsVoteResponse } from "../../types/v2/comments_actions_vote";
 import { CommentsActionsUnvoteResponse } from "../../types/v2/comments_actions_unvote";
 import { handleErrors } from "../../utility/handleErrors";
+import { credentials } from "../../utility/auth";
 
 
 type params = ({
@@ -51,6 +52,11 @@ type Response<T extends params['type']> =
 
 
 export const comments_actions = async <T extends params>(params: T, addons?: IDefaultParams): Promise<Response<T['type']> | { error: string }> => {
+  if (credentials.type != 'lazer') {
+    return handleErrors(new Error(`Login via lazer to use this endpoint`)) as Response<T['type']>;
+  };
+
+
   const object: any = {};
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'POST';
