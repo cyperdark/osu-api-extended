@@ -2491,6 +2491,136 @@ export const chat = {
    * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.chat.details_v3) | [Check return types](../types/v2/chat_details.ts)
    */
   details: chat_details,
+  /**
+   * ### `POST` [/v2/chat/new](https://osu.ppy.sh/docs/index.html#create-new-pm)
+   * ### `POST` [/v2/chat/ack](https://osu.ppy.sh/docs/index.html#chat-keepalive)
+   * ### `POST` [/v2/chat/channels/{channel}/messages](https://osu.ppy.sh/docs/index.html#send-message-to-channel)
+   * ### `PUT` [/v2/chat/channels/{channel}/users/{user}](https://osu.ppy.sh/docs/index.html#join-channel)
+   * ### `DELETE` [/v2/chat/channels/{channel}/users/{user}](https://osu.ppy.sh/docs/index.html#leave-channel)
+   * ### `PUT` [/v2/chat/channels/{channel}/mark-as-read/{message}](https://osu.ppy.sh/docs/index.html#mark-channel-as-read)
+   * `async` Performs a set of actions on channels pr PM's. (Requires lazer or cli authentication)
+   *
+   * &nbsp;
+   *
+   * ### Global Parameters
+   * - `params.type` - Type of action to perform.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type: 'new'`
+   * - `params.is_action` - Whether the message is an action
+   * - `params.user_id` - The ID of the user.
+   * - `params.message` - The message to send.
+   * - `params.uuid` - client-side message identifier which will be sent back in response and websocket json.
+   * 
+   * &nbsp;
+   *
+   * ### Parameters for `params.type: 'send'`
+   * - `params.id` - The ID of the channel to send to.
+   * - `params.message` - The message to send.
+   * - `params.is_action` - Whether the message is an action.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type: 'join' | 'leave'`
+   * - `params.id` - The ID of the channel.
+   * - `params.user_id` - The ID of the user.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type: 'read'`
+   * - `params.channel_id` - The ID of the channel.
+   * - `params.message_id` - The ID of the user.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type: 'keepalive'`
+   * - `params.history_since` - The ID of the message to return `UserSilences`.
+   * - `params.since` - The ID of the message to return `UserSilences`.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'lazer',
+   *       login: login,
+   *       password: password,
+   *       cachedTokenPath: './lazer.json' // path to the file your auth token will be saved (to prevent osu!api spam)
+   *     });
+   *     // or
+   *     await auth.login({
+   *       type: 'cli',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *       redirect_url: REDIRECT_URL,
+   *       scopes: ['public', 'chat.read', 'chat.write', 'chat.write_manage'],
+   *       cachedTokenPath: './cli.json' // path to a file where will be stored auth token to prevent spam auth to osu
+   *     });
+   * 
+   * 
+   *     const result = await v2.chat.actions({
+   *       type: 'new',
+   *       is_action: false,
+   *       user_id: 2070907,
+   *       message: 'hello',
+   *     });
+   *     // or
+   *     const result = await v2.chat.actions({
+   *       type: 'keepalive',
+   *       since: 3769165698,
+   *     });
+   *     // or
+   *     const result = await v2.chat.actions({
+   *       type: 'send',
+   * 
+   *       channel_id: 24594482,
+   *       is_action: false,
+   *       message: '.'
+   *     });
+   *     // or
+   *     const result = await v2.chat.actions({
+   *       type: 'join',
+   * 
+   *       channel_id: 55,
+   *       user_id: 9893708, // your id
+   *     });
+   *     // or
+   *     const result = await v2.chat.actions({
+   *       type: 'leave',
+   * 
+   *       channel_id: 55,
+   *       user_id: 9893708,
+   *     });
+   *     // or
+   *     const result = await v2.chat.actions({
+   *       type: 'read',
+   *       channel_id: 56888139,
+   *       message_id: 3758748555,
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.chat.channels.actions_v3)
+   */
   actions: chat_actions,
 };
 

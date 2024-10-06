@@ -9,7 +9,7 @@ type Response = ChatUpdatesResponse & IError;
 
 
 export const chat_updates = async (params: {
-  after_id?: number;
+  after_id: number;
   includes?: ('presence' | 'silences' | 'messages')[];
   history_since?: number;
 }, addons?: IDefaultParams): Promise<Response> => {
@@ -17,18 +17,24 @@ export const chat_updates = async (params: {
     return handleErrors(new Error(`Login via lazer to use this endpoint`)) as Response
   };
 
+  if (params?.after_id == null) {
+    return handleErrors(new Error(`Specify after_id`)) as Response
+  };
+
+
+  const obj: any = {};
+  if (params?.history_since) obj['history_since'] = params.history_since;
+  if (params?.includes) obj['includes[]'] = params.includes;
+  if (params?.after_id) obj['since'] = params.after_id;
+
 
   const data = await request(`https://osu.ppy.sh/api/v2/chat/updates`, {
     method: 'GET',
-    params: {
-      'history_since': params?.history_since,
-      'includes[]': params?.includes,
-      'since': params?.after_id,
-    },
+    params: obj,
     addons,
   });
 
-  if (data.error) return handleErrors(new Error(data.error));
 
+  if (data.error) return handleErrors(new Error(data.error));
   return data;
 };
