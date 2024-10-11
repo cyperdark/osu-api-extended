@@ -1,15 +1,15 @@
-interface EZ {
+export interface EZ {
   acronym: "EZ";
   settings?: {
     retries: number;
   };
 }
 
-interface NF {
+export interface NF {
   acronym: "NF";
 }
 
-interface HT {
+export interface HT {
   acronym: "HT";
   settings?: {
     speed_change?: number;
@@ -17,32 +17,32 @@ interface HT {
   };
 }
 
-interface DC {
+export interface DC {
   acronym: "DC";
   settings?: {
     speed_change: number;
   };
 }
 
-interface HR {
+export interface HR {
   acronym: "HR";
 }
 
-interface SD {
+export interface SD {
   acronym: "SD";
   settings?: {
     restart: boolean;
   };
 }
 
-interface PF {
+export interface PF {
   acronym: "PF";
   settings?: {
     restart: boolean;
   };
 }
 
-interface DT {
+export interface DT {
   acronym: "DT";
   settings?: {
     speed_change?: number;
@@ -50,21 +50,21 @@ interface DT {
   };
 }
 
-interface NC {
+export interface NC {
   acronym: "NC";
   settings?: {
     speed_change: number;
   };
 }
 
-interface HD {
+export interface HD {
   acronym: "HD";
   settings?: {
     only_fade_approach_circles: boolean;
   };
 }
 
-interface FL {
+export interface FL {
   acronym: "FL";
   settings?: {
     follow_delay?: number;
@@ -73,15 +73,15 @@ interface FL {
   };
 }
 
-interface BL {
+export interface BL {
   acronym: "BL";
 }
 
-interface ST {
+export interface ST {
   acronym: "ST";
 }
 
-interface AC {
+export interface AC {
   acronym: "AC";
   settings?: {
     minimum_accuracy?: number;
@@ -90,7 +90,7 @@ interface AC {
   };
 }
 
-interface TP {
+export interface TP {
   acronym: "TP";
   settings?: {
     seed?: number;
@@ -98,7 +98,7 @@ interface TP {
   };
 }
 
-interface DA {
+export interface DA {
   acronym: "DA";
   settings?: {
     circle_size?: number;
@@ -109,7 +109,7 @@ interface DA {
   };
 }
 
-interface CL {
+export interface CL {
   acronym: "CL";
   settings?: {
     no_slider_head_accuracy?: boolean;
@@ -120,7 +120,7 @@ interface CL {
   };
 }
 
-interface RD {
+export interface RD {
   acronym: "RD";
   settings?: {
     angle_sharpness?: number;
@@ -128,75 +128,75 @@ interface RD {
   };
 }
 
-interface ManiaKeys {
+export interface ManiaKeys {
   acronym: '1K' | '2K' | '3K' | '4K' | '5K' | '6K' | '7K' | '8K' | '9K' | '10K';
 }
 
-interface MR {
+export interface MR {
   acronym: "MR";
   settings?: {
     reflection: string;
   };
 }
 
-interface AL {
+export interface AL {
   acronym: "AL";
 }
 
-interface SG {
+export interface SG {
   acronym: "SG";
 }
 
-interface AT {
+export interface AT {
   acronym: "AT";
 }
 
-interface CN {
+export interface CN {
   acronym: "CN";
 }
 
-interface RX {
+export interface RX {
   acronym: "RX";
 }
 
-interface AP {
+export interface AP {
   acronym: "AP";
 }
 
-interface SO {
+export interface SO {
   acronym: "SO";
 }
 
-interface TR {
+export interface TR {
   acronym: "TR";
 }
 
-interface WG {
+export interface WG {
   acronym: "WG";
   settings?: {
     strength: number;
   };
 }
 
-interface SI {
+export interface SI {
   acronym: "SI";
 }
 
-interface GR {
+export interface GR {
   acronym: "GR";
   settings?: {
     start_scale: number;
   };
 }
 
-interface DF {
+export interface DF {
   acronym: "DF";
   settings?: {
     start_scale: number;
   };
 }
 
-interface WU {
+export interface WU {
   acronym: "WU";
   settings?: {
     initial_rate?: number;
@@ -205,7 +205,7 @@ interface WU {
   };
 }
 
-interface WD {
+export interface WD {
   acronym: "WD";
   settings?: {
     initial_rate?: number;
@@ -214,11 +214,11 @@ interface WD {
   };
 }
 
-interface TC {
+export interface TC {
   acronym: "TC";
 }
 
-interface BR {
+export interface BR {
   acronym: "BR";
   settings?: {
     spin_speed?: number;
@@ -226,7 +226,7 @@ interface BR {
   };
 }
 
-interface AD {
+export interface AD {
   acronym: "AD";
   settings?: {
     scale?: number;
@@ -234,7 +234,7 @@ interface AD {
   };
 }
 
-interface MU {
+export interface MU {
   acronym: "MU";
   settings?: {
     inverse_muting?: boolean;
@@ -244,28 +244,28 @@ interface MU {
   };
 }
 
-interface NS {
+export interface NS {
   acronym: "NS";
   settings?: {
     hidden_combo_count: number;
   };
 }
 
-interface MG {
+export interface MG {
   acronym: "MG";
   settings?: {
     attraction_strength: number;
   };
 }
 
-interface RP {
+export interface RP {
   acronym: "RP";
   settings?: {
     repulsion_strength: number;
   };
 }
 
-interface AS {
+export interface AS {
   acronym: "AS";
   settings?: {
     initial_rate?: number;
@@ -273,19 +273,19 @@ interface AS {
   };
 }
 
-interface FR {
+export interface FR {
   acronym: "FR";
 }
 
-interface BU {
+export interface BU {
   acronym: "BU";
 }
 
-interface SY {
+export interface SY {
   acronym: "SY";
 }
 
-interface DP {
+export interface DP {
   acronym: "DP";
   settings?: {
     max_depth?: number;
@@ -293,47 +293,47 @@ interface DP {
   };
 }
 
-interface TD {
+export interface TD {
   acronym: "TD";
 }
 
-interface SV2 {
+export interface SV2 {
   acronym: "SV2";
 }
 
-interface HO {
+export interface HO {
   acronym: "HO";
 }
 
-interface CS {
+export interface CS {
   acronym: "CS";
 }
 
-interface IN {
+export interface IN {
   acronym: "IN";
 }
 
-interface DS {
+export interface DS {
   acronym: "DS";
 }
 
-interface CO {
+export interface CO {
   acronym: "CO";
 }
 
-interface FI {
+export interface FI {
   acronym: "FI";
 }
 
-interface NR {
+export interface NR {
   acronym: "NR";
 }
 
-interface FF {
+export interface FF {
   acronym: "FF";
 }
 
-interface SW {
+export interface SW {
   acronym: "SW";
 }
 
