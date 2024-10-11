@@ -128,6 +128,10 @@ interface RD {
   };
 }
 
+interface ManiaKeys {
+  acronym: '1K' | '2K' | '3K' | '4K' | '5K' | '6K' | '7K' | '8K' | '9K' | '10K';
+}
+
 interface MR {
   acronym: "MR";
   settings?: {
@@ -297,6 +301,42 @@ interface SV2 {
   acronym: "SV2";
 }
 
+interface HO {
+  acronym: "HO";
+}
+
+interface CS {
+  acronym: "CS";
+}
+
+interface IN {
+  acronym: "IN";
+}
+
+interface DS {
+  acronym: "DS";
+}
+
+interface CO {
+  acronym: "CO";
+}
+
+interface FI {
+  acronym: "FI";
+}
+
+interface NR {
+  acronym: "NR";
+}
+
+interface FF {
+  acronym: "FF";
+}
+
+interface SW {
+  acronym: "SW";
+}
+
 export type Mod =
   | EZ
   | NF
@@ -344,4 +384,14 @@ export type Mod =
   | SY
   | DP
   | TD
-  | SV2;
+  | SV2 
+  | ManiaKeys
+  | HO
+  | CS
+  | IN
+  | DS
+  | CO
+  | FI
+  | NR
+  | FF
+  | SW;
