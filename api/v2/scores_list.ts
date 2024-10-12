@@ -1,13 +1,13 @@
 import { request } from "../../utility/request";
 import { IDefaultParams, IError, Modes_names } from "../../types";
-import { ScoresListLeaderboardResponse } from "../../types/v2/scores_list_leaderboard";
-import { ScoresListSoloScoresResponse } from "../../types/v2/scores_list_solo_scores";
-import { ScoresListBeatmapBestResponse } from "../../types/v2/scores_list_beatmap_best";
-import { ScoresListBeatmapAllResponse } from "../../types/v2/scores_list_beatmap_all";
-import { ScoresListUserBestResponse } from "../../types/v2/scores_list_user_best";
-import { ScoresListUserFirstsResponse } from "../../types/v2/scores_list_user_firsts";
-import { ScoresListUserRecentResponse } from "../../types/v2/scores_list_user_recent";
-import { ScoresListUserPinnedResponse } from "../../types/v2/scores_list_user_pinned";
+import { scores_list_leaderboard_response } from "../../types/v2/scores_list_leaderboard";
+import { scores_list_solo_scores_response } from "../../types/v2/scores_list_solo_scores";
+import { scores_list_user_beatmap_best_response } from "../../types/v2/scores_list_user_beatmap_best";
+import { scores_list_user_beatmap_all_response } from "../../types/v2/scores_list_user_beatmap_all";
+import { scores_list_user_user_best_response } from "../../types/v2/scores_list_user_best";
+import { scores_list_user_user_firsts_response } from "../../types/v2/scores_list_user_firsts";
+import { scores_list_user_recent_response } from "../../types/v2/scores_list_user_recent";
+import { scores_list_user_user_pinned_response } from "../../types/v2/scores_list_user_pinned";
 import { handleErrors } from "../../utility/handleErrors";
 
 
@@ -44,21 +44,21 @@ type params = {
 
 type Response<T extends params['type']> =
   T extends 'leaderboard'
-  ? ScoresListLeaderboardResponse[] & IError
+  ? scores_list_leaderboard_response[] & IError
   : T extends 'solo_scores'
-  ? ScoresListSoloScoresResponse[] & IError
+  ? scores_list_solo_scores_response[] & IError
   : T extends 'beatmap_best'
-  ? ScoresListBeatmapBestResponse[] & IError
+  ? scores_list_user_beatmap_best_response[] & IError
   : T extends 'beatmap_all'
-  ? ScoresListBeatmapAllResponse[] & IError
+  ? scores_list_user_beatmap_all_response[] & IError
   : T extends 'user_best'
-  ? ScoresListUserBestResponse[] & IError
+  ? scores_list_user_user_best_response[] & IError
   : T extends 'user_firsts'
-  ? ScoresListUserFirstsResponse[] & IError
+  ? scores_list_user_user_firsts_response[] & IError
   : T extends 'user_recent'
-  ? ScoresListUserRecentResponse[] & IError
+  ? scores_list_user_recent_response[] & IError
   : T extends 'user_pinned'
-  ? ScoresListUserPinnedResponse[] & IError
+  ? scores_list_user_user_pinned_response[] & IError
   : IError;
 
 
@@ -162,7 +162,7 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
   if (data.error) return handleErrors(new Error(data.error)) as Response<T['type']>;
 
 
-  if (['leaderboard', 'user_beatmap_all'].includes(params.type)) {
+  if ('scores' in data) {
     data.scores.forEach((r: any, index: number) => r.index = index);
     return data.scores as Response<T['type']>;
   };

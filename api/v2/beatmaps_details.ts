@@ -1,6 +1,6 @@
 import { IDefaultParams, IError } from "../../types";
-import { BeamapsDetailsDifficulty } from "../../types/v2/beatmaps_details_difficulty";
-import { BeamapsDetailsSet } from "../../types/v2/beatmaps_details_set";
+import { beatmaps_details_difficulty_response } from "../../types/v2/beatmaps_details_difficulty";
+import { beatmaps_details_set_response } from "../../types/v2/beatmaps_details_set";
 import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
@@ -16,9 +16,9 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'difficulty'
-  ? BeamapsDetailsDifficulty & IError
+  ? beatmaps_details_difficulty_response & IError
   : T extends 'set'
-  ? BeamapsDetailsSet & IError
+  ? beatmaps_details_set_response & IError
   : IError;
 
 

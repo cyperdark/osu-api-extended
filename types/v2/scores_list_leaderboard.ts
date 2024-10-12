@@ -1,60 +1,37 @@
 import { Mod } from "../mods"
 
-export interface ScoresListLeaderboardResponse {
-  ranked: boolean
+export interface scores_list_leaderboard_response {
+  classic_total_score: number
   preserve: boolean
   processed: boolean
-  maximum_statistics: MaximumStatistics
+  ranked: boolean
+  maximum_statistics: Statistics
   mods: Mod[]
   statistics: Statistics
   beatmap_id: number
-  best_id: any
+  best_id: null
   id: number
   rank: string
   type: string
   user_id: number
   accuracy: number
-  build_id?: number
+  build_id: null
   ended_at: string
   has_replay: boolean
   is_perfect_combo: boolean
   legacy_perfect: boolean
-  legacy_score_id?: number
+  legacy_score_id: number
   legacy_total_score: number
   max_combo: number
   passed: boolean
-  pp?: number
+  pp: null
   ruleset_id: number
-  started_at?: string
+  started_at: null
   total_score: number
   replay: boolean
-  current_user_attributes: CurrentUserAttributes
+  current_user_attributes: Currentuserattributes
   user: User
   index: number
-}
-
-export interface MaximumStatistics {
-  great: number
-  legacy_combo_increase?: number
-  ignore_hit?: number
-  slider_tail_hit?: number
-}
-
-
-export interface Statistics {
-  perfect?: number
-  good?: number
-  ok?: number
-  great?: number
-  meh?: number
-  miss?: number
-  ignore_hit?: number
-  ignore_miss?: number
-  slider_tail_hit?: number
-}
-
-export interface CurrentUserAttributes {
-  pin: any
 }
 
 export interface User {
@@ -67,12 +44,18 @@ export interface User {
   is_deleted: boolean
   is_online: boolean
   is_supporter: boolean
-  last_visit?: string
+  last_visit: null | string
   pm_friends_only: boolean
-  profile_colour: any
+  profile_colour: null
   username: string
   country: Country
   cover: Cover
+}
+
+export interface Cover {
+  custom_url: null | string
+  url: string
+  id: null | string
 }
 
 export interface Country {
@@ -80,8 +63,25 @@ export interface Country {
   name: string
 }
 
-export interface Cover {
-  custom_url?: string
-  url: string
-  id?: string
+export interface Currentuserattributes {
+  pin: null
+}
+
+export interface Statistics {
+  perfect?: number
+  good?: number
+  ok?: number
+  great?: number
+  meh?: number
+  miss?: number
+
+  ignore_hit?: number
+  ignore_miss?: number
+  large_bonus?: number
+  large_tick_hit?: number
+  large_tick_miss?: number
+  legacy_combo_increase?: number
+  small_bonus?: number
+  small_tick_hit?: number
+  small_tick_miss?: number
 }

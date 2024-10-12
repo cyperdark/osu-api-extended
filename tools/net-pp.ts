@@ -1,7 +1,7 @@
 import type { IError, Modes_names } from "../types";
 import { handleErrors } from "../utility/handleErrors";
 
-import { ScoresListUserBestResponse } from "../types/v2/scores_list_user_best";
+import { scores_list_user_user_best_response } from "../types/v2/scores_list_user_best";
 
 
 type Response = {
@@ -48,7 +48,7 @@ type Response = {
  * main();
  * ```
  */
-export const calculate_net_pp = (scores: ScoresListUserBestResponse[] | number[], pp: number): Response => {
+export const calculate_net_pp = (scores: scores_list_user_user_best_response[] | number[], pp: number): Response => {
   if (!Array.isArray(scores)) {
     return handleErrors(new Error(`Provide array of scores or plays pp`)) as Response;
   };

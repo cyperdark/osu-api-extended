@@ -1,63 +1,103 @@
 import { Mod } from "../mods"
 
-export interface ScoresDetailsResponse {
-  ranked: boolean
+export interface scores_details_response {
+  classic_total_score: number
   preserve: boolean
   processed: boolean
-  maximum_statistics: MaximumStatistics
+  ranked: boolean
+  maximum_statistics: Statistics
   mods: Mod[]
   statistics: Statistics
+  total_score_without_mods: number
   beatmap_id: number
-  best_id: any
+  best_id: null
   id: number
   rank: string
   type: string
   user_id: number
   accuracy: number
-  build_id?: number
+  build_id: number
   ended_at: string
   has_replay: boolean
   is_perfect_combo: boolean
   legacy_perfect: boolean
-  legacy_score_id?: number
+  legacy_score_id: null
   legacy_total_score: number
   max_combo: number
   passed: boolean
   pp: number
   ruleset_id: number
-  started_at?: string
+  started_at: string
   total_score: number
   replay: boolean
-  current_user_attributes: CurrentUserAttributes
+  current_user_attributes: Currentuserattributes
   beatmap: Beatmap
   beatmapset: Beatmapset
   rank_global: number
   user: User2
 }
 
-export interface MaximumStatistics {
-  great: number
-  legacy_combo_increase?: number
-  ignore_hit?: number
-  large_tick_hit?: number
-  slider_tail_hit?: number
+export interface User2 {
+  avatar_url: string
+  country_code: string
+  default_group: string
+  id: number
+  is_active: boolean
+  is_bot: boolean
+  is_deleted: boolean
+  is_online: boolean
+  is_supporter: boolean
+  last_visit: string
+  pm_friends_only: boolean
+  profile_colour: null
+  username: string
+  country: Country
+  cover: Cover
+  groups: any[]
 }
 
-
-export interface Statistics {
-  perfect?: number
-  good?: number
-  ok?: number
-  great?: number
-  meh?: number
-  miss?: number
-  ignore_hit?: number
-  large_tick_hit?: number
-  slider_tail_hit?: number
+export interface Cover {
+  custom_url: string
+  url: string
+  id: string
 }
 
-export interface CurrentUserAttributes {
-  pin: any
+export interface Country {
+  code: string
+  name: string
+}
+
+export interface Beatmapset {
+  artist: string
+  artist_unicode: string
+  covers: Covers
+  creator: string
+  favourite_count: number
+  hype: null
+  id: number
+  nsfw: boolean
+  offset: number
+  play_count: number
+  preview_url: string
+  source: string
+  spotlight: boolean
+  status: string
+  title: string
+  title_unicode: string
+  track_id: null
+  user_id: number
+  video: boolean
+}
+
+export interface Covers {
+  cover: string
+  'cover@2x': string
+  card: string
+  'card@2x': string
+  list: string
+  'list@2x': string
+  slimcover: string
+  'slimcover@2x': string
 }
 
 export interface Beatmap {
@@ -77,7 +117,7 @@ export interface Beatmap {
   count_sliders: number
   count_spinners: number
   cs: number
-  deleted_at: any
+  deleted_at: null
   drain: number
   hit_length: number
   is_scoreable: boolean
@@ -102,71 +142,31 @@ export interface User {
   is_deleted: boolean
   is_online: boolean
   is_supporter: boolean
-  last_visit: any
+  last_visit: null
   pm_friends_only: boolean
-  profile_colour: any
+  profile_colour: null
   username: string
 }
 
-export interface Beatmapset {
-  artist: string
-  artist_unicode: string
-  covers: Covers
-  creator: string
-  favourite_count: number
-  hype: any
-  id: number
-  nsfw: boolean
-  offset: number
-  play_count: number
-  preview_url: string
-  source: string
-  spotlight: boolean
-  status: string
-  title: string
-  title_unicode: string
-  track_id: any
-  user_id: number
-  video: boolean
+export interface Currentuserattributes {
+  pin: null
 }
 
-export interface Covers {
-  cover: string
-  "cover@2x": string
-  card: string
-  "card@2x": string
-  list: string
-  "list@2x": string
-  slimcover: string
-  "slimcover@2x": string
-}
+export interface Statistics {
+  perfect?: number
+  good?: number
+  ok?: number
+  great?: number
+  meh?: number
+  miss?: number
 
-export interface User2 {
-  avatar_url: string
-  country_code: string
-  default_group: string
-  id: number
-  is_active: boolean
-  is_bot: boolean
-  is_deleted: boolean
-  is_online: boolean
-  is_supporter: boolean
-  last_visit: string
-  pm_friends_only: boolean
-  profile_colour: any
-  username: string
-  country: Country
-  cover: Cover
-  groups: any[]
-}
-
-export interface Country {
-  code: string
-  name: string
-}
-
-export interface Cover {
-  custom_url?: string
-  url: string
-  id?: string
+  ignore_hit?: number
+  ignore_miss?: number
+  large_bonus?: number
+  large_tick_hit?: number
+  large_tick_miss?: number
+  legacy_combo_increase?: number
+  small_bonus?: number
+  small_tick_hit?: number
+  small_tick_miss?: number
 }

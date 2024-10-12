@@ -1,10 +1,10 @@
 import { IDefaultParams, IError, Modes_names } from "../../types";
-import { ScoresDetailsResponse } from "../../types/v2/scores_details";
+import { scores_details_response } from "../../types/v2/scores_details";
 import { handleErrors } from "../../utility/handleErrors";
 import { request } from "../../utility/request";
 
 
-type Response = ScoresDetailsResponse & IError;
+type Response = scores_details_response & IError;
 
 
 export const scores_details = async (params: {

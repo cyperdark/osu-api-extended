@@ -1,6 +1,11 @@
 import { Mod } from "../mods"
 
-export interface scores_list_user_recent_response {
+export interface scores_list_user_beatmap_best_response {
+  position: number
+  score: Score
+}
+
+export interface Score {
   classic_total_score: number
   preserve: boolean
   processed: boolean
@@ -8,7 +13,6 @@ export interface scores_list_user_recent_response {
   maximum_statistics: Statistics
   mods: Mod[]
   statistics: Statistics
-  total_score_without_mods: number
   beatmap_id: number
   best_id: null
   id: number
@@ -16,25 +20,23 @@ export interface scores_list_user_recent_response {
   type: string
   user_id: number
   accuracy: number
-  build_id: number
+  build_id: null
   ended_at: string
   has_replay: boolean
   is_perfect_combo: boolean
   legacy_perfect: boolean
-  legacy_score_id: null
+  legacy_score_id: number
   legacy_total_score: number
   max_combo: number
   passed: boolean
   pp: null
   ruleset_id: number
-  started_at: string
+  started_at: null
   total_score: number
   replay: boolean
   current_user_attributes: Currentuserattributes
   beatmap: Beatmap
-  beatmapset: Beatmapset
   user: User
-  index: number
 }
 
 export interface User {
@@ -51,39 +53,19 @@ export interface User {
   pm_friends_only: boolean
   profile_colour: null
   username: string
+  country: Country
+  cover: Cover
 }
 
-export interface Beatmapset {
-  artist: string
-  artist_unicode: string
-  covers: Covers
-  creator: string
-  favourite_count: number
-  hype: null
-  id: number
-  nsfw: boolean
-  offset: number
-  play_count: number
-  preview_url: string
-  source: string
-  spotlight: boolean
-  status: string
-  title: string
-  title_unicode: string
-  track_id: null
-  user_id: number
-  video: boolean
+export interface Cover {
+  custom_url: string
+  url: string
+  id: string
 }
 
-export interface Covers {
-  cover: string
-  'cover@2x': string
-  card: string
-  'card@2x': string
-  list: string
-  'list@2x': string
-  slimcover: string
-  'slimcover@2x': string
+export interface Country {
+  code: string
+  name: string
 }
 
 export interface Beatmap {
