@@ -28,6 +28,16 @@ type Hits = {
   count_100?: any;
   count_50?: any;
   count_miss?: any;
+
+  ignore_hit?: any;
+  ignore_miss?: any;
+  large_bonus?: any;
+  large_tick_hit?: any;
+  large_tick_miss?: any;
+  legacy_combo_increase?: any;
+  small_bonus?: any;
+  small_tick_hit?: any;
+  small_tick_miss?: any;
 };
 
 type Response = RankResponse & IError;
@@ -80,14 +90,15 @@ export const calculate_rank = (hits: Hits, mods: Mod[] | string | number = 0, mo
   };
 
 
-  const { name: modsName } = calculate_mods(mods);;
-  const { accuracy } = calculate_accuracy(hits, mode);
+  const { name: modsName } = calculate_mods(mods);
+  const calc_acc = calculate_accuracy(hits, mode);
+  const accuracy = calc_acc.accuracy / 100;
 
   const geki = parseInt(hits.perfect || hits.count_geki || hits?.geki || '0');
   const h300 = parseInt(hits.great || hits.count_300 || hits?.[300] || '0');
-  const katu = parseInt(hits.good || hits.count_katu || hits?.katu || '0');
-  const h100 = parseInt(hits.ok || hits.count_100 || hits?.[100] || '0');
-  const h50 = parseInt(hits.meh || hits.count_50 || hits?.[50] || '0');
+  const katu = parseInt(hits.small_tick_miss || hits.good || hits.count_katu || hits?.katu || '0');
+  const h100 = parseInt(hits.large_tick_hit || hits.ok || hits.count_100 || hits?.[100] || '0');
+  const h50 = parseInt(hits.small_tick_hit || hits.meh || hits.count_50 || hits?.[50] || '0');
   const h0 = parseInt(hits.miss || hits.count_miss || hits?.[0] || '0');
 
   const is_silver = /hd|fl/i.test(modsName);
