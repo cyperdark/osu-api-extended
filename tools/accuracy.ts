@@ -141,11 +141,13 @@ export function calculate_accuracy(hits: Hits, p2: MaxHits | GamemodeEnum | stri
     case 'osu':
     case GamemodeEnum.osu:
       if (lazer) {
-        accuracy = (300 * h300 + 100 * h100 + 50 * h50 + 150 * slider_end_hits + 30 * slider_tick_hits) / (300 * h300 + 300 * h100 + 300 * h50 + 300 * h0 + 150 * max_slider_end_hits + 30 * max_slider_tick_hits);
+        accuracy =
+          (300 * h300 + 100 * h100 + 50 * h50 + 150 * slider_end_hits + 30 * slider_tick_hits) /
+          (300 * h300 + 300 * h100 + 300 * h50 + 300 * h0 + 150 * max_slider_end_hits + 30 * max_slider_tick_hits);
 
         fc_accuracy =
           (300 * (h300 + h0) + 100 * h100 + 50 * h50 + 150 * slider_end_hits + 30 * slider_tick_hits) /
-          (300 * (h300 + h0) + 100 * h100 + 50 * h50 + 300 * 0 + 150 * max_slider_end_hits + 30 * max_slider_tick_hits)
+          (300 * (h300 + h0) + 300 * h100 + 300 * h50 + 300 * 0 + 150 * max_slider_end_hits + 30 * max_slider_tick_hits);
       }
       else {
         accuracy = (6 * h300 + 2 * h100 + h50) / (6 * (h300 + h100 + h50 + h0));
@@ -156,9 +158,13 @@ export function calculate_accuracy(hits: Hits, p2: MaxHits | GamemodeEnum | stri
 
     case 'taiko':
     case GamemodeEnum.taiko:
-      accuracy = (2 * h300 + h100) / (2 * (h300 + h100 + h0));
+      accuracy =
+        (2 * h300 + h100) /
+        (2 * (h300 + h100 + h0));
 
-      fc_accuracy = (2 * (h300 + h0) + h100) / (2 * ((h300 + h0) + h100 + 0));
+      fc_accuracy =
+        (2 * (h300 + h0) + h100) /
+        (2 * ((h300 + h0) + h100 + 0));
       break;
 
     case 'fruits':
@@ -167,17 +173,25 @@ export function calculate_accuracy(hits: Hits, p2: MaxHits | GamemodeEnum | stri
       if (hits.large_tick_hit) h100 = parseInt(hits.large_tick_hit);
       if (hits.small_tick_hit) h50 = parseInt(hits.small_tick_hit);
 
-      accuracy = (h300 + h100 + h50) / ((h300 + h100 + h50) + katu + h0);
+      accuracy =
+        (h300 + h100 + h50) /
+        ((h300 + h100 + h50) + katu + h0);
 
-      fc_accuracy = ((h300 + h0) + h100 + h50) / (((h300 + h0) + h100 + h50) + katu + 0);
+      fc_accuracy =
+        ((h300 + h0) + h100 + h50) /
+        (((h300 + h0) + h100 + h50) + katu + 0);
       break;
 
     case 'mania':
     case GamemodeEnum.mania:
-      accuracy = (6 * (geki + h300) + 4 * katu + 2 * h100 + h50) / (6 * (geki + h300 + katu + h100 + h50 + h0))
+      accuracy =
+        (6 * (geki + h300) + 4 * katu + 2 * h100 + h50) /
+        (6 * (geki + h300 + katu + h100 + h50 + h0))
 
       // IT'S NOT CORRECT PLEASE SOMEONE FIX IT
-      fc_accuracy = (6 * (geki + h0) + 6 * h300 + 4 * katu + 2 * h100 + h50) / (6 * (h50 + h100 + h300 + 0 + (geki + h0) + katu));
+      fc_accuracy =
+        (6 * (geki + h0) + 6 * h300 + 4 * katu + 2 * h100 + h50) /
+        (6 * (h50 + h100 + h300 + 0 + (geki + h0) + katu));
       break;
 
     default:
