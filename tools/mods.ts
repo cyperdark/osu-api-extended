@@ -31,7 +31,7 @@ export const ModsToName = (modsNumber: number, order?: boolean): string => {
 
     convertedParts.sort((a, b) => ModsOrder[a.toLowerCase()] - ModsOrder[b.toLowerCase()]);
 
-    const converted = convertedParts.join('');
+    const converted = convertedParts.join('').replace('DTNC', 'NC');
     return converted;
   };
 
