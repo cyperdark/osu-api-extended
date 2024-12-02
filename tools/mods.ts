@@ -31,7 +31,10 @@ export const ModsToName = (modsNumber: number, order?: boolean): string => {
 
     convertedParts.sort((a, b) => ModsOrder[a.toLowerCase()] - ModsOrder[b.toLowerCase()]);
 
-    const converted = convertedParts.join('').replace('DTNC', 'NC');
+    const converted = convertedParts.join('')
+      .replace('DTNC', 'NC')
+      .replace('SDPF', 'PF')
+      .replace('ATCN', 'CN');
     return converted;
   };
 
@@ -47,7 +50,10 @@ export const ModsToName = (modsNumber: number, order?: boolean): string => {
     if (bit == 0) break;
   };
 
-  return convertedParts;
+  return convertedParts
+    .replace('DTNC', 'NC')
+    .replace('SDPF', 'PF')
+    .replace('ATCN', 'CN');
 };
 
 
@@ -268,6 +274,9 @@ export const calculate_mods = (mods: Mod[] | string | number, order?: boolean): 
 
   return {
     number: mods_id,
-    name: convertedParts.join(''),
+    name: convertedParts.join('')
+      .replace('DTNC', 'NC')
+      .replace('SDPF', 'PF')
+      .replace('ATCN', 'CN'),
   } as Response;
 };
