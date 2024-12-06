@@ -1232,6 +1232,7 @@ export const scores = {
    * ### `GET` [/v2/beatmaps/{beatmap}/scores/users/{user}](https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-score)
    * ### `GET` [/v2/beatmaps/{beatmap}/scores/users/{user}/all](https://osu.ppy.sh/docs/index.html#get-a-user-beatmap-scores)
    * ### `GET` [/v2/beatmaps/{beatmap}/solo-scores](https://osu.ppy.sh/docs/index.html#get-beatmap-scores-non-legacy)
+   * ### `GET` /v2/scores
    * `async` Retrieves a list of scores by given parameters.
    *
    * &nbsp;
@@ -1271,6 +1272,11 @@ export const scores = {
    *
    * &nbsp;
    *
+   * ### Parameters for `params.type:'latest_ranked'`
+   * - `params.cursor_string?` - [Cursor string for pagination.](https://osu.ppy.sh/docs/index.html#cursorstring)
+   *
+   * &nbsp;
+   *
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
@@ -1306,6 +1312,10 @@ export const scores = {
    *       // or
    *       type: 'user_recent',
    *       user_id: 7562902,
+   *     });
+   *     // or
+   *     const result = await v2.scores.list({
+   *       type: 'latest_ranked',
    *     });
    *     if (result.error != null) {
    *       console.log(result.error);

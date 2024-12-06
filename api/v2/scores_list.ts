@@ -8,6 +8,7 @@ import { scores_list_user_user_best_response } from "../../types/v2/scores_list_
 import { scores_list_user_user_firsts_response } from "../../types/v2/scores_list_user_firsts";
 import { scores_list_user_recent_response } from "../../types/v2/scores_list_user_recent";
 import { scores_list_user_user_pinned_response } from "../../types/v2/scores_list_user_pinned";
+import { scores_list_latest_ranked_response } from "../../types/v2/scores_list_latest_ranked";
 import { handleErrors } from "../../utility/handleErrors";
 
 
@@ -39,6 +40,11 @@ type params = {
 
   offset?: number;
   limit?: number;
+} | {
+  type: 'latest_ranked';
+
+  mode: Modes_names;
+  cursor_string?: string;
 });
 
 
@@ -59,6 +65,8 @@ type Response<T extends params['type']> =
   ? scores_list_user_recent_response[] & IError
   : T extends 'user_pinned'
   ? scores_list_user_user_pinned_response[] & IError
+  : T extends 'latest_ranked'
+  ? scores_list_latest_ranked_response & IError
   : IError;
 
 
@@ -66,6 +74,7 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
   const object: any = {};
   let url = 'https://osu.ppy.sh/api/v2';
   let method = 'GET';
+  let bypass_flat = false;
 
 
   switch (params?.type) {
@@ -148,6 +157,20 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
       if (Array.isArray(params?.mods)) object['mods[]'] = params.mods;
       break;
 
+    case 'latest_ranked':
+      if (params.mode == null) {
+        return handleErrors(new Error(`Specify gamemode`)) as Response<T['type']>;
+      };
+
+
+      url += `/scores`;
+      bypass_flat = true;
+
+
+      if (params?.mode) object['ruleset'] = params.mode;
+      if (params?.cursor_string) object['cursor_string'] = params.cursor_string;
+      break;
+
     default:
       return handleErrors(new Error(`Unsupported type: ${(params as any).type}`)) as Response<T['type']>;
   };
@@ -162,11 +185,11 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
   if (data.error) return handleErrors(new Error(data.error)) as Response<T['type']>;
 
 
-  if ('scores' in data) {
+  if ('scores' in data && bypass_flat != true) {
     data.scores.forEach((r: any, index: number) => r.index = index);
     return data.scores as Response<T['type']>;
   };
 
-  if (params.type != 'user_beatmap_best') data.forEach((r: any, index: number) => r.index = index);
+  if (params.type != 'user_beatmap_best' && Array.isArray(data)) data.forEach((r: any, index: number) => r.index = index);
   return data as Response<T['type']>;
 };
