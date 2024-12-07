@@ -42,11 +42,11 @@ export interface beatmaps_details_set_response {
   pack_tags: string[]
   ratings: number[]
   recent_favourites: Recentfavourite[]
-  related_users: Recentfavourite[]
-  user: User
+  related_users: Relateduser[]
+  user: Recentfavourite
 }
 
-export interface User {
+export interface Relateduser {
   avatar_url: string
   country_code: string
   default_group: string
@@ -56,9 +56,9 @@ export interface User {
   is_deleted: boolean
   is_online: boolean
   is_supporter: boolean
-  last_visit: null
+  last_visit: null | string
   pm_friends_only: boolean
-  profile_colour: null
+  profile_colour: null | string
   username: string
 }
 
@@ -123,6 +123,7 @@ export interface Convert {
   url: string
   checksum: string
   failtimes: Failtimes
+  owners: Owner[]
 }
 
 export interface Beatmap {
@@ -155,6 +156,12 @@ export interface Beatmap {
   checksum: string
   failtimes: Failtimes
   max_combo: number
+  owners: Owner[]
+}
+
+export interface Owner {
+  id: number
+  username: string
 }
 
 export interface Failtimes {
