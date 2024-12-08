@@ -211,7 +211,7 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
       if (location) {
         download(location, dest, { _callback, headers, data, params, callback })
           .then(resolve)
-          .catch(error => ({ error: error }));
+          .catch(error => ({ error: error.message }));
         return;
       };
 
@@ -252,7 +252,7 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
 
       file.on('error', error => {
         fs.unlinkSync(dest);
-        resolve({ error: error.name });
+        resolve({ error: error.message });
       });
 
       file.on('finish', () => {
@@ -282,7 +282,7 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
 
     // send error
     req.on('error', (error) => {
-      resolve({ error: error.name });
+      resolve({ error: error.message });
     });
 
 
