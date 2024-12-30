@@ -13,16 +13,12 @@ export const matches_details = async (
     return handleErrors(new Error("Specify match id")) as Response;
   }
 
-  if (params?.limit < 1 || params?.limit > 101) {
-    return handleErrors(new Error("Limit must be between 1 and 101")) as Response;
-  }
-
   const data = await request(`https://osu.ppy.sh/api/v2/matches/${params.match_id}`, {
     method: "GET",
     params: {
       before: params.before,
       after: params.after,
-      limit: params.limit,
+      limit: params.limit != null ? Math.max(101, params.limit) : undefined,
     },
     addons,
   });
