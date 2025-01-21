@@ -57,7 +57,7 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
     params.k = addons.authKey || auth.cache.v1;
 
     if (params.k == null) {
-      return resolve({ error: 'v1 api key not specified', });
+      return resolve({ error: 'v1 api key not specified' });
     };
   };
 
@@ -70,10 +70,6 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
     if (!headers.Accept) headers.Accept = `application/json`;
     if (!headers['Content-Type']) headers['Content-Type'] = `application/json`;
     headers['x-api-version'] = addons.apiVersion == '' ? null : addons.apiVersion || '20240130';
-
-    if ((addons.authKey || auth.cache.v2) == null) {
-      return resolve({ error: 'v2 not authorized' });
-    };
   };
 
 
@@ -113,14 +109,17 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
     // handle response events
     response.on('data', (chunk: any) => chunks.push(chunk));
     response.on('end', async () => {
-      const data = Buffer.concat(chunks).toString();
+      const chunks_data = Buffer.concat(chunks).toString();
 
       if (/^application\/json/.test(response.headers['content-type'])) {
         try {
-          const parse = JSON.parse(data);
-          if (parse.authentication === 'basic' && total_retries < 3 && addons.ignoreSessionRefresh != true) {
-            total_retries++;
+          const parse = JSON.parse(chunks_data);
+          if (parse.authentication === 'basic' && addons.ignoreSessionRefresh != true) {
+            if (total_retries > 3) {
+              return resolve({ error: 'Unnable to refresh session attempted 3 times, double check your credentials (or report to package author)' });
+            };
 
+            total_retries++;
 
             const refresh = await auth.refresh_token();
             if (refresh == null) {
@@ -143,11 +142,6 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
           };
 
 
-          if (parse.authentication === 'basic') {
-            return resolve({ error: 'Unauthorized (double check credentials)' });
-          };
-
-
           total_retries = 0;
           return resolve(parse);
         } catch (error) {
@@ -156,7 +150,7 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
       };
 
 
-      resolve(data);
+      resolve(chunks_data);
     });
   });
 

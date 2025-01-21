@@ -30,7 +30,7 @@ export const credentials: {
   redirect_url: string;
   state: string;
 
-  cachedTokenPath: string;
+  cached_token_path: string;
 
   scopes: auth_scopes;
 } = {
@@ -47,7 +47,7 @@ export const credentials: {
   redirect_url: '',
   state: '',
 
-  cachedTokenPath: '',
+  cached_token_path: '',
 
   scopes: ['public'],
 };
@@ -73,14 +73,14 @@ type ResponseLogin<T extends auth_params['type']> =
   : null;
 
 
-export const login = <T extends auth_params>(params: auth_params): ResponseLogin<T['type']> => {
+export function login<T extends auth_params>(params: auth_params): ResponseLogin<T['type']> {
   if (params?.type == null) {
     return handleErrors(new Error('Specify login type'));
   };
 
   credentials.type = params.type;
 
-  if (params.cachedTokenPath) credentials.cachedTokenPath = params.cachedTokenPath;
+  if (params.cached_token_path || params.cachedTokenPath) credentials.cached_token_path = params.cached_token_path || params.cachedTokenPath;
   if (params.timeout) settings.timeout = params.timeout;
 
 
@@ -125,46 +125,58 @@ export const login = <T extends auth_params>(params: auth_params): ResponseLogin
 };
 
 
-export const set_v2 = (token: string) => cache.v2 = token;
+export function set_v2(token: string) {
+  return cache.v2 = token;
+};
 
-export const refresh_token = async () => {
+
+export async function refresh_token() {
+  if (credentials.type == 'v1') return;
+
+
   const refresh = await login(credentials);
   return refresh;
 };
 
 
-const token_exists = () => {
-  if (!fs.existsSync(credentials.cachedTokenPath)) return false;
-
+function read_token(): 'refresh' | any | Error {
   try {
-    const authData: auth_response = JSON.parse(fs.readFileSync(credentials.cachedTokenPath, 'utf8'));
-    set_v2(authData.access_token);
+    const auth_data: auth_response = JSON.parse(fs.readFileSync(credentials.cached_token_path, 'utf8'));
+    if (auth_data?.created_at != null && Date.now() > auth_data.created_at + (auth_data.expires_in * 1000)) {
+      return 'refresh';
+    };
 
-    if (Array.isArray(authData.scopes)) credentials.scopes = authData.scopes;
 
-    return true;
+    if (Array.isArray(auth_data.scopes)) credentials.scopes = auth_data.scopes;
+    set_v2(auth_data.access_token);
+
+    return auth_data;
   } catch (error) {
-    return false;
+    return error as Error;
   };
 };
 
 
-const save_token = (response: auth_response) => {
-  if (!credentials.cachedTokenPath) return;
+function save_token(response: auth_response) {
+  if (!credentials.cached_token_path) return;
 
-  const { dir } = path.parse(credentials.cachedTokenPath);
+  const { dir } = path.parse(credentials.cached_token_path);
   if (fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+
   response.scopes = credentials.scopes;
+  response.created_at = Date.now();
 
-  fs.writeFileSync(credentials.cachedTokenPath, JSON.stringify(response), 'utf8');
+  cache.v2 = response.access_token;
+
+  fs.writeFileSync(credentials.cached_token_path, JSON.stringify(response), 'utf8');
 };
 
 
 
-const client_login = async (client_id: number | string, client_secret: string, scopes: auth_scopes): Promise<auth_response> => {
-  if (cache.v2 == '' && credentials.cachedTokenPath != '') {
-    const is = token_exists();
-    if (is) return;
+async function client_login(client_id: number | string, client_secret: string, scopes: auth_scopes): Promise<auth_response | Error> {
+  if (cache.v2 == '' && credentials.cached_token_path != '' && fs.existsSync(credentials.cached_token_path)) {
+    const token = read_token();
+    if (token != 'refresh') return read_token();
   };
 
 
@@ -172,21 +184,13 @@ const client_login = async (client_id: number | string, client_secret: string, s
     method: 'POST',
     headers: {
       "Accept": "application/json",
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
-    data: JSON.stringify({
-      grant_type: 'client_credentials',
-      client_id: client_id,
-      client_secret: client_secret,
-      scope: scopes.join(' '),
-      code: 'code',
-    })
+    data: `client_id=${client_id}&client_secret=${client_secret}&grant_type=client_credentials&scope=${scopes.join(' ')}`,
   });
 
+
   if (response.error) return handleErrors(new Error(response.error));
-
-
-  cache.v2 = response.access_token;
   save_token(response);
 
 
@@ -194,10 +198,10 @@ const client_login = async (client_id: number | string, client_secret: string, s
 };
 
 
-const lazer_login = async (login: string, password: string): Promise<lazer_auth_response> => {
-  if (cache.v2 == '' && credentials.cachedTokenPath != '') {
-    const is = token_exists();
-    if (is) return;
+async function lazer_login(login: string, password: string): Promise<lazer_auth_response | Error> {
+  if (cache.v2 == '' && credentials.cached_token_path != '' && fs.existsSync(credentials.cached_token_path)) {
+    const token = read_token();
+    if (token != 'refresh') return read_token();
   };
 
 
@@ -205,22 +209,13 @@ const lazer_login = async (login: string, password: string): Promise<lazer_auth_
     method: 'POST',
     headers: {
       "Accept": "application/json",
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
-    data: JSON.stringify({
-      username: login,
-      password: password,
-      grant_type: "password",
-      client_id: 5,
-      client_secret: 'FGc9GAtyHzeQDshWP5Ah7dega8hJACAJpQtw6OXk',
-      scope: "*"
-    })
+    data: `username=${login}&password=${password}&grant_type=password&client_id=5&client_secret=FGc9GAtyHzeQDshWP5Ah7dega8hJACAJpQtw6OXk&scope=*`,
   });
 
+
   if (response.error) return handleErrors(new Error(response.error));
-
-
-  cache.v2 = response.access_token;
   save_token(response);
 
 
@@ -228,10 +223,10 @@ const lazer_login = async (login: string, password: string): Promise<lazer_auth_
 };
 
 
-const authorize_cli = async (client_id: number | string, client_secret: string, redirect_url: string, scopes: auth_scopes, state?: string): Promise<auth_response> => {
-  if (cache.v2 == '' && credentials.cachedTokenPath != '') {
-    const is = token_exists();
-    if (is) return;
+async function authorize_cli(client_id: number | string, client_secret: string, redirect_url: string, scopes: auth_scopes, state?: string): Promise<auth_response | Error> {
+  if (cache.v2 == '' && credentials.cached_token_path != '' && fs.existsSync(credentials.cached_token_path)) {
+    const token = read_token();
+    if (token != 'refresh') return read_token();
   };
 
 
@@ -249,21 +244,13 @@ const authorize_cli = async (client_id: number | string, client_secret: string, 
     method: 'POST',
     headers: {
       "Accept": "application/json",
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
-    data: JSON.stringify({
-      grant_type: 'authorization_code',
-      client_id: client_id,
-      client_secret: client_secret,
-      redirect_uri: redirect_url,
-      code,
-    })
+    data: `grant_type=authorization_code&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=${redirect_url}&code=${code}`,
   });
 
+
   if (response.error) return handleErrors(new Error(response.error));
-
-
-  cache.v2 = response.access_token;
   save_token(response);
 
 
@@ -271,12 +258,12 @@ const authorize_cli = async (client_id: number | string, client_secret: string, 
 };
 
 
-export const build_url = ({ client_id, redirect_url, scopes, state }: {
-  client_id: number | string,
-  redirect_url: string,
-  scopes: auth_scopes,
-  state?: string
-}): string => {
+export function build_url({ client_id, redirect_url, scopes, state }: {
+  client_id: number | string;
+  redirect_url: string;
+  scopes: auth_scopes;
+  state?: string;
+}): string {
   const url = new URL('https://osu.ppy.sh/oauth/authorize');
   const params: any = {
     client_id: client_id,
@@ -292,7 +279,7 @@ export const build_url = ({ client_id, redirect_url, scopes, state }: {
 };
 
 
-export const authorize = async (params: {
+export async function authorize(params: {
   code: string;
   mode?: Modes_names;
 
@@ -300,7 +287,7 @@ export const authorize = async (params: {
   client_secret: string;
 
   redirect_url: string;
-}): Promise<UserAuth> => {
+}): Promise<UserAuth> {
   if (params?.client_id == null) {
     return handleErrors(new Error(`Specify client_id`));
   };
@@ -322,15 +309,9 @@ export const authorize = async (params: {
     method: 'POST',
     headers: {
       "Accept": "application/json",
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
-    data: JSON.stringify({
-      grant_type: 'authorization_code',
-      client_id: params.client_id,
-      client_secret: params.client_secret,
-      redirect_uri: params.redirect_url,
-      code: params.code,
-    })
+    data: `grant_type=authorization_code&client_id=${params.client_id}&client_secret=${params.client_secret}&redirect_uri=${params.redirect_url}&code=${params.code}`,
   });
 
   if (response.error) return handleErrors(new Error(response.error));
@@ -355,15 +336,14 @@ export const authorize = async (params: {
 };
 
 
-export const refresh_session = async (params: {
-  refresh_token: string;
-  mode?: Modes_names;
-
+export async function refresh_session(params: {
   client_id: number | string;
   client_secret: string;
 
-  redirect_url: string;
-}): Promise<UserAuth> => {
+  mode?: Modes_names;
+  refresh_token: string;
+  scopes?: auth_scopes;
+}): Promise<UserAuth> {
   if (params?.client_id == null) {
     return handleErrors(new Error(`Specify client_id`));
   };
@@ -372,10 +352,8 @@ export const refresh_session = async (params: {
     return handleErrors(new Error(`Specify client_secret`));
   };
 
-  if (params?.redirect_url == null) {
-    return handleErrors(new Error(`Specify redirect_url`));
-  };
 
+  const scopes = params.scopes || ['public'];
   if (params?.refresh_token == null) {
     return handleErrors(new Error(`Specify refresh_token`));
   };
@@ -385,15 +363,9 @@ export const refresh_session = async (params: {
     method: 'POST',
     headers: {
       "Accept": "application/json",
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
-    data: JSON.stringify({
-      grant_type: 'refresh_token',
-      client_id: params.client_id,
-      client_secret: params.client_secret,
-      redirect_uri: params.redirect_url,
-      refresh_token: params.refresh_token,
-    })
+    data: `grant_type=refresh_token&client_id=${params.client_id}&client_secret=${params.client_secret}&refresh_token=${params?.refresh_token}&scope=${scopes.join(' ')}`
   });
 
   if (response.error) return handleErrors(new Error(response.error));

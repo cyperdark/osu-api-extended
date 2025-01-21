@@ -51,7 +51,12 @@ export type auth_params = ({
   client_secret: string;
 
   timeout?: number;
+
+  /**
+ * @deprecated use `cached_token_path`
+ */
   cachedTokenPath?: string;
+  cached_token_path?: string;
 
   scopes: auth_scopes;
 } | {
@@ -60,7 +65,12 @@ export type auth_params = ({
   api_key: string;
 
   timeout?: number;
+
+  /**
+ * @deprecated use `cached_token_path`
+ */
   cachedTokenPath?: string;
+  cached_token_path?: string;
 } | {
   type: 'lazer';
 
@@ -68,7 +78,12 @@ export type auth_params = ({
   password: string;
 
   timeout?: number;
+
+  /**
+ * @deprecated use `cached_token_path`
+ */
   cachedTokenPath?: string;
+  cached_token_path?: string;
 } | {
   type: 'cli';
 
@@ -79,7 +94,12 @@ export type auth_params = ({
   state: string;
 
   timeout?: number;
+
+  /**
+ * @deprecated use `cached_token_path`
+ */
   cachedTokenPath?: string;
+  cached_token_path?: string;
 
   scopes: auth_scopes;
 });
@@ -91,6 +111,7 @@ export type auth_response = {
   expires_in: number;
 
   scopes?: auth_scopes;
+  created_at?: number;
 };
 
 export interface lazer_auth_response extends auth_response {
