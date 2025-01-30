@@ -76,7 +76,7 @@ export interface Beatmapset {
   status: string
   title: string
   title_unicode: string
-  track_id: null
+  track_id: null | number
   user_id: number
   video: boolean
 }

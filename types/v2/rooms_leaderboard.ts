@@ -24,7 +24,7 @@ export interface User {
   is_deleted: boolean
   is_online: boolean
   is_supporter: boolean
-  last_visit: string
+  last_visit: null | string
   pm_friends_only: boolean
   profile_colour: any
   username: string

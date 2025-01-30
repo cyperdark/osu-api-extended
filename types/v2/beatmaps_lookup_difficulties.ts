@@ -1,4 +1,4 @@
-export interface BeatmapsLookupDifficultiesResponse {
+export interface beatmaps_lookup_difficulties_response {
   beatmapset_id: number
   difficulty_rating: number
   id: number
@@ -15,7 +15,7 @@ export interface BeatmapsLookupDifficultiesResponse {
   count_sliders: number
   count_spinners: number
   cs: number
-  deleted_at: any
+  deleted_at: null
   drain: number
   hit_length: number
   is_scoreable: boolean
@@ -29,6 +29,17 @@ export interface BeatmapsLookupDifficultiesResponse {
   beatmapset: Beatmapset
   failtimes: Failtimes
   max_combo: number
+  owners: Owner[]
+}
+
+export interface Owner {
+  id: number
+  username: string
+}
+
+export interface Failtimes {
+  fail: number[]
+  exit: number[]
 }
 
 export interface Beatmapset {
@@ -37,7 +48,7 @@ export interface Beatmapset {
   covers: Covers
   creator: string
   favourite_count: number
-  hype: any
+  hype: null
   id: number
   nsfw: boolean
   offset: number
@@ -48,18 +59,18 @@ export interface Beatmapset {
   status: string
   title: string
   title_unicode: string
-  track_id: number
+  track_id: null
   user_id: number
   video: boolean
   bpm: number
   can_be_hyped: boolean
-  deleted_at: any
+  deleted_at: null
   discussion_enabled: boolean
   discussion_locked: boolean
   is_scoreable: boolean
   last_updated: string
   legacy_thread_url: string
-  nominations_summary: NominationsSummary
+  nominations_summary: Nominationssummary
   ranked: number
   ranked_date: string
   storyboard: boolean
@@ -69,28 +80,29 @@ export interface Beatmapset {
   ratings: number[]
 }
 
-export interface Covers {
-  cover: string
-  "cover@2x": string
-  card: string
-  "card@2x": string
-  list: string
-  "list@2x": string
-  slimcover: string
-  "slimcover@2x": string
-}
-
-export interface NominationsSummary {
-  current: number
-  required: number
-}
-
 export interface Availability {
   download_disabled: boolean
-  more_information: any
+  more_information: null
 }
 
-export interface Failtimes {
-  fail: number[]
-  exit: number[]
+export interface Nominationssummary {
+  current: number
+  eligible_main_rulesets: string[]
+  required_meta: Requiredmeta
+}
+
+export interface Requiredmeta {
+  main_ruleset: number
+  non_main_ruleset: number
+}
+
+export interface Covers {
+  cover: string
+  'cover@2x': string
+  card: string
+  'card@2x': string
+  list: string
+  'list@2x': string
+  slimcover: string
+  'slimcover@2x': string
 }

@@ -41,28 +41,13 @@ export interface beatmaps_details_set_response {
   language: Genre
   pack_tags: string[]
   ratings: number[]
-  recent_favourites: Recentfavourite[]
+  recent_favourites: Relateduser[]
   related_users: Relateduser[]
-  user: Recentfavourite
+  related_tags: any[]
+  user: Relateduser
 }
 
 export interface Relateduser {
-  avatar_url: string
-  country_code: string
-  default_group: string
-  id: number
-  is_active: boolean
-  is_bot: boolean
-  is_deleted: boolean
-  is_online: boolean
-  is_supporter: boolean
-  last_visit: null | string
-  pm_friends_only: boolean
-  profile_colour: null | string
-  username: string
-}
-
-export interface Recentfavourite {
   avatar_url: string
   country_code: string
   default_group: string
@@ -157,6 +142,7 @@ export interface Beatmap {
   failtimes: Failtimes
   max_combo: number
   owners: Owner[]
+  top_tag_ids: any[]
 }
 
 export interface Owner {

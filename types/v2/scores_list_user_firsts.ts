@@ -8,6 +8,7 @@ export interface scores_list_user_user_firsts_response {
   maximum_statistics: Statistics
   mods: Mod[]
   statistics: Statistics
+  total_score_without_mods: number
   beatmap_id: number
   best_id: null
   id: number

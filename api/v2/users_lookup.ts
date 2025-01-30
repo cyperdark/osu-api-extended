@@ -29,5 +29,5 @@ export const users_lookup = async (params: {
 
 
   if (data.error) return handleErrors(new Error(data.error));
-  return data;
+  return data?.users || data;
 };

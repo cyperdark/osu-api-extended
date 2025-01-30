@@ -1,11 +1,16 @@
 import { Mod } from "../mods"
 
 export interface scores_list_latest_ranked_response {
-  scores: Scores[];
-  cursor_string: string;
+  scores: Score[]
+  cursor: Cursor
+  cursor_string: string
 }
 
-export interface Scores {
+export interface Cursor {
+  id: number
+}
+
+export interface Score {
   classic_total_score: number
   preserve: boolean
   processed: boolean

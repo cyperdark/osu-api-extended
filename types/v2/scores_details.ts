@@ -54,12 +54,13 @@ export interface User2 {
   country: Country
   cover: Cover
   groups: any[]
+  team: null
 }
 
 export interface Cover {
   custom_url: string
   url: string
-  id: string
+  id: null | string
 }
 
 export interface Country {
@@ -129,6 +130,7 @@ export interface Beatmap {
   url: string
   checksum: string
   max_combo: number
+  owners: Owner[]
   user: User
 }
 
@@ -142,9 +144,14 @@ export interface User {
   is_deleted: boolean
   is_online: boolean
   is_supporter: boolean
-  last_visit: null
+  last_visit: string
   pm_friends_only: boolean
   profile_colour: null
+  username: string
+}
+
+export interface Owner {
+  id: number
   username: string
 }
 

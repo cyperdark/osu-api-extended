@@ -1,10 +1,10 @@
 import { BeatmapsLookupAttributes } from "../../types/v2/beatmaps_lookup_attributes";
-import { BeatmapsLookupDifficulty } from "../../types/v2/beatmaps_lookup_difficulty";
-import { BeatmapsLookupSet } from "../../types/v2/beatmaps_lookup_set";
+import { beatmaps_lookup_difficulty_response } from "../../types/v2/beatmaps_lookup_difficulty";
+import { beatmaps_lookup_set_response } from "../../types/v2/beatmaps_lookup_set";
 import { GamemodeEnum } from "../../types/enums";
 import { request } from "../../utility/request";
 import { IDefaultParams, IError, Modes_names } from "../../types";
-import { BeatmapsLookupDifficultiesResponse } from "../../types/v2/beatmaps_lookup_difficulties";
+import { beatmaps_lookup_difficulties_response } from "../../types/v2/beatmaps_lookup_difficulties";
 import { handleErrors } from "../../utility/handleErrors";
 
 
@@ -29,13 +29,13 @@ type params = ({
 
 type Response<T extends params['type']> =
   T extends 'difficulty'
-  ? BeatmapsLookupDifficulty & IError
+  ? beatmaps_lookup_difficulty_response & IError
   : T extends 'set'
-  ? BeatmapsLookupSet & IError
+  ? beatmaps_lookup_set_response & IError
   : T extends 'attributes'
   ? BeatmapsLookupAttributes & IError
   : T extends 'difficulties'
-  ? BeatmapsLookupDifficultiesResponse[] & IError
+  ? beatmaps_lookup_difficulties_response[] & IError
   : IError;
 
 

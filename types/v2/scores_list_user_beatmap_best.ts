@@ -55,6 +55,7 @@ export interface User {
   username: string
   country: Country
   cover: Cover
+  team: null
 }
 
 export interface Cover {
@@ -96,6 +97,12 @@ export interface Beatmap {
   ranked: number
   url: string
   checksum: string
+  owners: Owner[]
+}
+
+export interface Owner {
+  id: number
+  username: string
 }
 
 export interface Currentuserattributes {

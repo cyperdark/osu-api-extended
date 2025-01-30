@@ -32,6 +32,7 @@ export interface scores_list_leaderboard_response {
   current_user_attributes: Currentuserattributes
   user: User
   index: number
+  total_score_without_mods?: number
 }
 
 export interface User {
@@ -50,6 +51,7 @@ export interface User {
   username: string
   country: Country
   cover: Cover
+  team: null
 }
 
 export interface Cover {

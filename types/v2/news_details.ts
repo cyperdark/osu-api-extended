@@ -3,6 +3,7 @@ export interface NewsDetailsResponse {
   author: string
   edit_url: string
   first_image: string
+  'first_image@2x': string
   published_at: string
   updated_at: string
   slug: string
@@ -32,6 +33,7 @@ export interface Older {
   author: string
   edit_url: string
   first_image: string
+  'first_image@2x': string
   published_at: string
   updated_at: string
   slug: string

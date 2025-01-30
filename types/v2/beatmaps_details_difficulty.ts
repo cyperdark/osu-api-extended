@@ -29,6 +29,12 @@ export interface beatmaps_details_difficulty_response {
   beatmapset: Beatmapset
   failtimes: Failtimes
   max_combo: number
+  owners: Owner[]
+}
+
+export interface Owner {
+  id: number
+  username: string
 }
 
 export interface Failtimes {
