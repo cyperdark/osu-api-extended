@@ -1439,8 +1439,11 @@ export const scores = {
 
 
 
+import { forums_topics_list } from '../api/v2/forums_topics_list';
 import { forums_topics_details } from '../api/v2/forums_topics_details';
 import { forums_topics_actions } from '../api/v2/forums_topics_actions';
+import { forums_list } from '../api/v2/forums_list';
+import { forums_details } from '../api/v2/forums_details';
 
 /**
  * ##### Description
@@ -1453,8 +1456,54 @@ export const forums = {
    */
   topics: {
     /**
+     * ### `GET` [/v2//forums/topics](https://osu.ppy.sh/docs/index.html#get-topic-listing)
+     * `async` Retrieves a list of topics.
+     *
+     * &nbsp;
+     *
+     * ### Parameters
+     * - `params.id` - ID of the forum/subforum to retrieve.
+     *
+     * &nbsp;
+     *
+     * ### Usage Example
+     * ```js
+     * const { auth, v2 } = require('osu-api-extended');
+     * 
+     * async function main() {
+     *   try {
+     *     await auth.login({
+     *       type: 'v2',
+     *       client_id: CLIENT_ID,
+     *       client_secret: CLIENT_SECRET,
+     *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
+     *     });
+     * 
+     * 
+     *     const result = await v2.forums.topics.list({ id: 15, sort: 'new' });
+     *     if (result.error != null) {
+     *       console.log(result.error);
+     *       return;
+     *     };
+     * 
+     * 
+     *     console.log(result);
+     *   } catch (error) {
+     *     console.log(error);
+     *   };
+     * };
+     * 
+     * main();
+     * ```
+     *
+     * &nbsp;
+     *
+     * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.forums.topics.list_v3) | [Check return types](../types/v2/forums_topics_list.ts)
+     */
+    list: forums_topics_list,
+    /**
      * ### `GET` [/v2/forums/topics](https://osu.ppy.sh/docs/index.html#get-topic-and-posts)
-     * `async` Retrieves a list of forum topics by given parameters.
+     * `async` Retrieves a information about topic with list of posts by given parameters.
      *
      * &nbsp;
      *
@@ -1618,6 +1667,93 @@ export const forums = {
      */
     actions: forums_topics_actions,
   },
+  /**
+   * ### `GET` [/v2/forums](https://osu.ppy.sh/docs/index.html#get-forum-listing)
+   * `async` Retrieves a list of forums and subforums.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
+   *     });
+   * 
+   * 
+   *     const result = await v2.forums.list();
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.forums.list_v3) | [Check return types](../types/v2/forums_list.ts)
+   */
+  list: forums_list,
+  /**
+   * ### `GET` [/v2/forums/{id}](https://osu.ppy.sh/docs/index.html#get-forum-and-topics)
+   * `async` Retrieves information about forum with subforums and list of recent, pinned topics.
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.id` - ID of the forum/subforum to retrieve.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * const { auth, v2 } = require('osu-api-extended');
+   * 
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
+   *     });
+   * 
+   * 
+   *     const result = await v2.forums.details({ id: 15 });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   * 
+   * 
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   * 
+   * main();
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.forums.details_v3) | [Check return types](../types/v2/forums_details.ts)
+   */
+  details: forums_details,
 };
 
 
