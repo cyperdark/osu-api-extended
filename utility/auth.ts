@@ -158,7 +158,11 @@ function read_token(): 'refresh' | any | Error {
 
 
 function save_token(response: auth_response) {
-  if (!credentials.cached_token_path) return;
+  if (!credentials.cached_token_path) {
+    cache.v2 = response.access_token;
+    return;
+  };
+
 
   const { dir } = path.parse(credentials.cached_token_path);
   if (fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
