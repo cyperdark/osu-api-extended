@@ -387,7 +387,7 @@ export async function refresh_session(params: {
 
 
   user.access_token = response.access_token;
-  user.refresh_token = response.refresh_token_new;
+  user.refresh_token = response.refresh_token;
   user.expires_in = response.expires_in;
 
   return user;
