@@ -8,8 +8,8 @@ import { handleErrors } from "../../utility/handleErrors";
 type Response = MeDetailsResponse & IError;
 
 
-export const me_details = async (params: { mode: Modes_names }, addons?: IDefaultParams): Promise<Response> => {
-  if (credentials.type != 'lazer' && credentials.type != 'cli') {
+export const me_details = async (params?: { mode?: Modes_names }, addons?: IDefaultParams): Promise<Response> => {
+  if (credentials.type != 'lazer' && credentials.type != 'cli' && (addons?.authKey == null && addons?.authKey == '')) {
     return handleErrors(new Error('Login via lazer or cli to use this endpoint')) as Response
   };
 
