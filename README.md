@@ -104,13 +104,13 @@ main();
 Authorization though your account
 
 ```js
-import { auth } from 'osu-api-extended';
+import { auth, v2 } from 'osu-api-extended';
 
 
 async function main() {
   try {
     await auth.login({
-      type: 'v2',
+      type: 'lazer',
       login: LOGIN,
       password: PASSWORD,
       cachedTokenPath: './lazer.json' // path to the file your auth token will be saved (to prevent osu!api spam)
