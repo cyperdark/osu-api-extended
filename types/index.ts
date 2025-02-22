@@ -40,7 +40,8 @@ export type auth_scopes = (
   'forum.write' |
   'friends.read' |
   'identify' |
-  'public'
+  'public' |
+  '*'
 )[];
 
 
