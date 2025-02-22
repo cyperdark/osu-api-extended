@@ -215,7 +215,7 @@ export const beatmaps_download = async <T extends params>(params: T, addons?: ID
   if (params.type == 'difficulty') {
     switch (params.host) {
       case 'osu_direct_mirror':
-        url = `https://api.osu.direct/osu/${params.id}?raw=true`
+        url = `https://osu.direct/api/osu/${params.id}/raw`
         break;
 
       case 'catboy':
