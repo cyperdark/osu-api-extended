@@ -104,6 +104,7 @@ export function login<T extends auth_params>(params: auth_params): ResponseLogin
   if (params.type == 'lazer') {
     credentials.login = params.login;
     credentials.password = params.password;
+    credentials.scopes = ["*"];
 
     return lazer_login(params.login, params.password) as ResponseLogin<T['type']>;
   };
