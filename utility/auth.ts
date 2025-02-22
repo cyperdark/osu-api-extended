@@ -5,7 +5,7 @@ import path from "path";
 import fs from "fs";
 
 
-import { auth_params, auth_response, auth_scopes, IError, lazer_auth_response, Modes_names } from '../types/index';
+import { auth_cache, auth_params, auth_response, auth_scopes, IError, lazer_auth_response, Modes_names } from '../types/index';
 import { UserAuth } from '../types/v2/users_details';
 import { handleErrors } from './handleErrors';
 
@@ -141,7 +141,7 @@ export async function refresh_token() {
 
 function read_token(): 'refresh' | any | Error {
   try {
-    const auth_data: auth_response = JSON.parse(fs.readFileSync(credentials.cached_token_path, 'utf8'));
+    const auth_data: auth_cache = JSON.parse(fs.readFileSync(credentials.cached_token_path, 'utf8'));
     if (auth_data?.created_at != null && Date.now() > auth_data.created_at + (auth_data.expires_in * 1000)) {
       return 'refresh';
     };
@@ -150,7 +150,11 @@ function read_token(): 'refresh' | any | Error {
     if (Array.isArray(auth_data.scopes)) credentials.scopes = auth_data.scopes;
     set_v2(auth_data.access_token);
 
-    return auth_data;
+    return {
+      token_type: auth_data.token_type,
+      access_token: auth_data.access_token,
+      expires_in: auth_data.expires_in,
+    };
   } catch (error) {
     return error as Error;
   };
@@ -164,15 +168,20 @@ function save_token(response: auth_response) {
   };
 
 
+  const data = {
+    token_type: response.token_type,
+    access_token: response.access_token,
+    expires_in: response.expires_in,
+    scopes: credentials.scopes,
+    created_at: Date.now(),
+  };
+
   const { dir } = path.parse(credentials.cached_token_path);
   if (fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
-  response.scopes = credentials.scopes;
-  response.created_at = Date.now();
+  cache.v2 = data.access_token;
 
-  cache.v2 = response.access_token;
-
-  fs.writeFileSync(credentials.cached_token_path, JSON.stringify(response), 'utf8');
+  fs.writeFileSync(credentials.cached_token_path, JSON.stringify(data), 'utf8');
 };
 
 

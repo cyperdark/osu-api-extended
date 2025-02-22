@@ -203,7 +203,7 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
       // console.log(url, response.headers['content-type'], response.headers); // debug too
 
       if (location) {
-        download(location, dest, { _callback, headers, data, params, callback })
+        download(location, dest, { _callback, headers, data, params, callback, addons })
           .then(resolve)
           .catch(error => ({ error: error.message }));
         return;
@@ -223,17 +223,33 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
         response.on('end', async () => {
           const data = Buffer.concat(chunks).toString();
           try {
-            const json = JSON.parse(data);
+            const parse = JSON.parse(data);
+            if (parse.authentication === 'basic' && addons.ignoreSessionRefresh != true) {
+              if (total_retries > 3) {
+                return resolve({ error: 'Unnable to refresh session attempted 3 times, double check your credentials (or report to package author)' });
+              };
+
+              total_retries++;
+
+              const refresh = await auth.refresh_token();
+              if (refresh == null) {
+                return resolve({ error: 'Cannot refresh session, double check your credentials (or report to package author)' });
+              };
 
 
-            if ('error' in json && json.error == null) {
+              const retry_request = await download(url, dest, { _callback, headers, data, params, callback, addons });
+              return resolve(retry_request);
+            };
+
+
+            if ('error' in parse && parse.error == null) {
               return resolve({ error: 'osu returned empty error (download)' });
             };
 
 
-            return resolve(json);
+            return resolve(parse);
           } catch (error) {
-            return resolve({ error: `Unable to download file: ${data} (${url})` });
+            return resolve({ error: `Unable to download file: ${data} (${url}): ${(error as any)?.message}` });
           };
         });
 

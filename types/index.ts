@@ -109,7 +109,9 @@ export type auth_response = {
   token_type: string;
   access_token: string;
   expires_in: number;
+};
 
+export interface auth_cache extends auth_response {
   scopes?: auth_scopes;
   created_at?: number;
 };
