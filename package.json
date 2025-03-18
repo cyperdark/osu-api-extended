@@ -1,6 +1,6 @@
 {
   "name": "osu-api-extended",
-  "version": "3.0.17",
+  "version": "3.0.18",
   "description": "Advanced osu! api wrapper cover all V2 and V1 endpoints, and provide useful tools",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

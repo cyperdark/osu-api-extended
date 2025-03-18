@@ -143,6 +143,8 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
 
 
           total_retries = 0;
+
+          if (response.statusCode != 200) return resolve({ error: `${response.statusCode}: ${response.statusMessage}` });
           return resolve(parse);
         } catch (error) {
           return resolve({ error: (error as any).name });
@@ -150,7 +152,8 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
       };
 
 
-      resolve(chunks_data);
+      if (response.statusCode != 200) return resolve({ error: `${response.statusCode}: ${response.statusMessage}` });
+      return resolve(chunks_data);
     });
   });
 
