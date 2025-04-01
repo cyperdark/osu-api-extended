@@ -1,17 +1,5 @@
 import { Modes_names } from "../index";
 
-export enum ActionType {
-  Rank = 'rank',
-  Achievement = 'achievement',
-  BeatmapsetUpload = 'beatmapsetUpload',
-  BeatmapsetUpdate = 'beatmapsetUpdate',
-  UsernameChange = 'usernameChange',
-  UserSupportFirst = 'userSupportFirst',
-  UserSupportAgain = 'userSupportAgain',
-  BeatmapsetRevive = 'beatmapsetRevive',
-  BeatmapsetApprove = 'beatmapsetApprove',
-}
-
 export interface UsersEventsResponse {
   events: Event[];
   cursor: Cursor;
@@ -26,7 +14,7 @@ export interface Event {
   created_at: string;
   createdAt: string;
   id: number;
-  type: 'achievement' | 'beatmapPlaycount' | 'beatmapsetApprove' | 'beatmapsetDelete' | 'beatmapsetRevive' | 'beatmapsetUpdate' | 'beatmapsetUpload' | 'rank' | 'userSupportAgain' | 'userSupportFirst' | 'userSupportGift' | 'usernameChange';
+  type: 'achievement' | 'beatmapsetApprove' | 'beatmapsetDelete' | 'beatmapsetRevive' | 'beatmapsetUpdate' | 'beatmapsetUpload' | 'rank' | 'rankLost' | 'userSupportAgain' | 'userSupportFirst' | 'userSupportGift' | 'usernameChange';
   scoreRank?: string;
   rank?: number;
   mode?: Modes_names;

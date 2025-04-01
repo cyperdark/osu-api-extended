@@ -8,7 +8,7 @@ type Response = UsersEventsResponse & IError;
 
 
 export const users_events = async ({ sort, cursor_string, type }: {
-  type?: ('achievement' | 'beatmapPlaycount' | 'beatmapsetApprove' | 'beatmapsetDelete' | 'beatmapsetRevive' | 'beatmapsetUpdate' | 'beatmapsetUpload' | 'rank' | 'userSupportAgain' | 'userSupportFirst' | 'userSupportGift' | 'usernameChange')[]
+  type?: ('achievement'  | 'beatmapsetApprove' | 'beatmapsetDelete' | 'beatmapsetRevive' | 'beatmapsetUpdate' | 'beatmapsetUpload' | 'rank' | 'rankLost' | 'userSupportAgain' | 'userSupportFirst' | 'userSupportGift' | 'usernameChange')[]
   sort?: 'id_desc' | 'id_asc',
   cursor_string?: string;
 } = {}, addons?: IDefaultParams): Promise<Response> => {
