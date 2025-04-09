@@ -17,10 +17,11 @@ export const users_details = async (params: {
   };
 
   let key = params?.key;
-  if (key == 'username') key = '@';
+  let user = params.user;
+  if (key == '@') user = `@${user}`;
 
 
-  const data = await request(`https://osu.ppy.sh/api/v2/users/${params.user}${params.mode ? `/${params.mode}` : ''}`, {
+  const data = await request(`https://osu.ppy.sh/api/v2/users/${user}${params.mode ? `/${params.mode}` : ''}`, {
     method: 'GET',
     params: { key: key },
     addons,
