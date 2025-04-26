@@ -1244,7 +1244,7 @@ export const scores = {
    *
    * &nbsp;
    *
-   * ### Parameters for `params.type: 'leaderboard' | 'solo_scores'`
+   * ### Parameters for `params.type: 'leaderboard'`
    * - `params.leaderboard_type?: Type of leaderboard to retrieve.`
    * - `params.beatmap_id` - ID of the beatmap to retrieve data from.
    * - `params.mods?` - Retrieve scores for specific mods.

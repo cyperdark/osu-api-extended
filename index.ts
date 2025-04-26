@@ -82,7 +82,6 @@ export * as v2_scores_download from './types/v2/scores_download';
 export * as v2_scores_list_beatmap_all from './types/v2/scores_list_user_beatmap_all';
 export * as v2_scores_list_beatmap_best from './types/v2/scores_list_user_beatmap_best';
 export * as v2_scores_list_leaderboard from './types/v2/scores_list_leaderboard';
-export * as v2_scores_list_solo_scores from './types/v2/scores_list_solo_scores';
 export * as v2_scores_list_user_best from './types/v2/scores_list_user_best';
 export * as v2_scores_list_user_firsts from './types/v2/scores_list_user_firsts';
 export * as v2_scores_list_user_pinned from './types/v2/scores_list_user_pinned';

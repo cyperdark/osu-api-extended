@@ -1,7 +1,6 @@
 import { request } from "../../utility/request";
 import { IDefaultParams, IError, Modes_names } from "../../types";
 import { scores_list_leaderboard_response } from "../../types/v2/scores_list_leaderboard";
-import { scores_list_solo_scores_response } from "../../types/v2/scores_list_solo_scores";
 import { scores_list_user_beatmap_best_response } from "../../types/v2/scores_list_user_beatmap_best";
 import { scores_list_user_beatmap_all_response } from "../../types/v2/scores_list_user_beatmap_all";
 import { scores_list_user_user_best_response } from "../../types/v2/scores_list_user_best";
@@ -15,7 +14,7 @@ import { handleErrors } from "../../utility/handleErrors";
 type params = {
   mode?: Modes_names;
 } & ({
-  type: 'leaderboard' | 'solo_scores';
+  type: 'leaderboard';
 
   leaderboard_type?: 'global' | 'country' | 'friend',
   beatmap_id: number;
@@ -51,8 +50,6 @@ type params = {
 type Response<T extends params['type']> =
   T extends 'leaderboard'
   ? scores_list_leaderboard_response[] & IError
-  : T extends 'solo_scores'
-  ? scores_list_solo_scores_response[] & IError
   : T extends 'beatmap_best'
   ? scores_list_user_beatmap_best_response[] & IError
   : T extends 'beatmap_all'
@@ -141,20 +138,6 @@ export const scores_list = async <T extends params>(params: T, addons?: IDefault
       if (params?.limit != null) object['limit'] = params.limit;
       if (params?.offset != null) object['offset'] = params.offset;
       if (params?.include_fails != null) object['include_fails'] = params.include_fails == true ? 1 : params.include_fails == false ? 0 : undefined;
-      break;
-
-    case 'solo_scores':
-      if (params.beatmap_id == null) {
-        return handleErrors(new Error(`Specify beatmap id`)) as Response<T['type']>;
-      };
-
-
-      url += `/beatmaps/${params.beatmap_id}/solo-scores`;
-
-
-      if (params?.leaderboard_type) object['type'] = params.leaderboard_type;
-      if (params?.mode) object['mode'] = params.mode;
-      if (Array.isArray(params?.mods)) object['mods[]'] = params.mods;
       break;
 
     case 'latest_ranked':
