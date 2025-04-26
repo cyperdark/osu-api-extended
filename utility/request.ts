@@ -6,6 +6,8 @@ import fs from 'fs';
 
 // CREDENTIALS
 import * as auth from "./auth";
+import { callbacks } from './listeners';
+
 import { IDefaultParams, IError } from '../types';
 
 
@@ -173,6 +175,8 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
   // write body to request, if specified
   if (data) req.write(data);
   req.end();
+
+  if (typeof callbacks.on_request == 'function') callbacks.on_request(url);
 });
 
 
