@@ -112,6 +112,8 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
     response.on('data', (chunk: any) => chunks.push(chunk));
     response.on('end', async () => {
       const chunks_data = Buffer.concat(chunks).toString();
+      if (typeof callbacks.on_request == 'function') callbacks.on_request(url, chunks_data.length);
+
 
       if (/^application\/json/.test(response.headers['content-type'])) {
         try {
@@ -175,8 +177,6 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
   // write body to request, if specified
   if (data) req.write(data);
   req.end();
-
-  if (typeof callbacks.on_request == 'function') callbacks.on_request(url);
 });
 
 
