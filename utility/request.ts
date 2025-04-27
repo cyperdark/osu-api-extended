@@ -232,6 +232,8 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
         response.on('end', async () => {
           const data = Buffer.concat(chunks).toString();
           try {
+            if (typeof callbacks.on_request == 'function') callbacks.on_request(url, data.length);
+
             const parse = JSON.parse(data);
             if (parse.authentication === 'basic' && addons.ignoreSessionRefresh != true) {
               if (total_retries > 3) {
