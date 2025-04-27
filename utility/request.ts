@@ -114,6 +114,8 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
       const chunks_data = Buffer.concat(chunks).toString();
       if (typeof callbacks.on_request == 'function') callbacks.on_request(url, chunks_data.length);
 
+      if (chunks_data.includes('error code: 1106')) return resolve({ error: 'error code: 1106 (probably got banned by ip)' });
+
 
       if (/^application\/json/.test(response.headers['content-type'])) {
         try {
