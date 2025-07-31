@@ -141,7 +141,10 @@ export async function refresh_token() {
 
 function read_token(): 'refresh' | any | Error {
   try {
-    const auth_data: auth_cache = JSON.parse(fs.readFileSync(credentials.cached_token_path, 'utf8'));
+    const content = fs.readFileSync(credentials.cached_token_path, 'utf8');
+    if (!content?.trim()) return 'refresh';
+
+    const auth_data: auth_cache = JSON.parse(content);
     if (auth_data?.created_at != null && Date.now() > auth_data.created_at + (auth_data.expires_in * 1000)) {
       return 'refresh';
     };
@@ -156,6 +159,7 @@ function read_token(): 'refresh' | any | Error {
       expires_in: auth_data.expires_in,
     };
   } catch (error) {
+    if ((error as Error).message.includes('JSON Parse error')) return 'refresh';
     return error as Error;
   };
 };
