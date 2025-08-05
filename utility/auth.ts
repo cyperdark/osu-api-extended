@@ -159,8 +159,7 @@ function read_token(): 'refresh' | any | Error {
       expires_in: auth_data.expires_in,
     };
   } catch (error) {
-    if ((error as Error).message.includes('JSON Parse error')) return 'refresh';
-    return error as Error;
+    throw error as Error;
   };
 };
 
