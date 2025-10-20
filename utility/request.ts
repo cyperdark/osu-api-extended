@@ -11,7 +11,6 @@ import { callbacks } from './listeners';
 import { IDefaultParams, IError } from '../types';
 
 
-// TYPES
 export interface RequestType {
   (url: string, params: {
     method: string,
@@ -23,8 +22,9 @@ export interface RequestType {
 };
 
 
-// VALUES
 let total_retries = 0;
+let rate_limited = false;
+let reset_at = 0;
 
 
 const sanitize_query = (obj: object): string => {
@@ -44,6 +44,22 @@ const sanitize_query = (obj: object): string => {
 
 
 export const request: RequestType = (url, { method, headers, data, params = {}, addons = {} }) => new Promise((resolve, reject) => {
+  if (rate_limited) {
+    rate_limited = reset_at > Date.now();
+
+    if (rate_limited == true) return resolve({ error: 'rate limited' });
+    auth.cache['ratelimit-remaining'] = 101;
+  };
+
+
+  if (auth.cache['ratelimit-remaining'] <= 20 && !rate_limited) {
+    rate_limited = true;
+    reset_at = auth.cache['ratelimit-reset_at'] = Date.now() + (60 * 1000);
+
+    if (rate_limited == true) return resolve({ error: 'rate limited' });
+  };
+
+
   // check required args
   if (url == null) {
     return resolve({ error: 'URL not specified', });
@@ -56,7 +72,7 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
 
   // V1 add credentials
   if (url.includes('https://osu.ppy.sh/api/') && !url.includes('https://osu.ppy.sh/api/v2')) {
-    params.k = addons.authKey || auth.cache.v1;
+    params.k = addons.auth_key || addons.authKey || auth.cache.v1;
 
     if (params.k == null) {
       return resolve({ error: 'v1 api key not specified' });
@@ -68,10 +84,10 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
   if (url.includes('https://osu.ppy.sh/api/v2')) {
     if (!headers) headers = {};
 
-    headers.Authorization = `Bearer ${addons.authKey || auth.cache.v2}`;
+    headers.Authorization = `Bearer ${addons.auth_key || addons.authKey || auth.cache.v2}`;
     if (!headers.Accept) headers.Accept = `application/json`;
     if (!headers['Content-Type']) headers['Content-Type'] = `application/json`;
-    headers['x-api-version'] = addons.apiVersion == '' ? null : addons.apiVersion || '20240130';
+    headers['x-api-version'] = (addons.api_version || addons.apiVersion) == '' ? null : (addons.api_version || addons.apiVersion) || '20240130';
   };
 
 
@@ -117,10 +133,10 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
       if (chunks_data.includes('error code: 1106')) return resolve({ error: 'error code: 1106 (probably got banned by ip)' });
 
 
-      if (/^application\/json/.test(response.headers['content-type'])) {
+      if (response.headers['content-type'].startsWith('application/json')) {
         try {
           const parse = JSON.parse(chunks_data);
-          if (parse.authentication === 'basic' && addons.ignoreSessionRefresh != true) {
+          if (parse.authentication === 'basic' && (addons.ignore_session_refresh || addons.ignoreSessionRefresh) != true) {
             if (total_retries > 3) {
               return resolve({ error: 'Unnable to refresh session attempted 3 times, double check your credentials (or report to package author)' });
             };
@@ -196,7 +212,7 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
   addons?: IDefaultParams;
   callback?: Function;
 }): Promise<any & IError> => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const start_time = performance.now();
     if (url.includes('https://osu.ppy.sh/api/v2')) headers['Authorization'] = `Bearer ${params?.v2 || auth.cache.v2}`;
 
@@ -235,7 +251,7 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
             if (typeof callbacks.on_request == 'function') callbacks.on_request(url, data.length);
 
             const parse = JSON.parse(data);
-            if (parse.authentication === 'basic' && addons.ignoreSessionRefresh != true) {
+            if (parse.authentication === 'basic' && (addons.ignore_session_refresh || addons.ignoreSessionRefresh) != true) {
               if (total_retries > 3) {
                 return resolve({ error: 'Unnable to refresh session attempted 3 times, double check your credentials (or report to package author)' });
               };

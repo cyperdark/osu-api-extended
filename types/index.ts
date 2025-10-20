@@ -1,15 +1,21 @@
 export type IDefaultParams = {
   legacy_only?: boolean;
+  api_version?: '20240130' | '99999999' | null | '';
+  /** @deprecated use api_version */
   apiVersion?: '20240130' | '99999999' | null | '';
   /**
    * Only use it if you want to use user authKey to perform requests on their behave
    */
+  auth_key?: string;
+  /** @deprecated use authKey */
   authKey?: string;
   timeout_ms?: number;
 
   /**
    * If request returns `authentication: 'basic', it wont try to refresh session
    */
+  ignore_session_refresh?: boolean
+  /** @deprecated use ignore_session_refresh */
   ignoreSessionRefresh?: boolean
 };
 
