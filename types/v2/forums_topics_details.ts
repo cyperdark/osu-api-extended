@@ -41,6 +41,7 @@ export interface Topic {
   type: string
   updated_at: string
   user_id: number
+  views: number
   poll: any
 }
 
