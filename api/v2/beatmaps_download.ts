@@ -7,7 +7,8 @@ import { handleErrors } from "../../utility/handleErrors";
 import { BeatmapsDownloadResponse } from "../../types/v2/beatmaps_download";
 
 
-type params = 
+
+type params =
   | {
     type: 'difficulty';
     id: number;
@@ -18,42 +19,31 @@ type params =
     overwrite?: boolean;
     progress_log_fn?: (host: string, progress: number) => void;
   }
-  // Both video and no video
-  | {
+  | ({
+    // Both video and no video
+
     type: 'set';
     id: number;
 
-    host: 'osu' | 'nerinyan' | 'sayobot',
+    file_path: string;
+    overwrite?: boolean;
+
+    progress_log_fn?: (host: string, progress: number) => void;
+  } & ({
+    host: 'osu' | 'nerinyan' | 'sayobot';
     no_video?: boolean;
+  } | {
+    // Video only
 
-    file_path: string;
-    overwrite?: boolean;
-    progress_log_fn?: (host: string, progress: number) => void;
-  }
-  // Video only
-  | {
-    type: 'set';
-    id: number;
+    host: 'beatconnect' | 'osu_direct_mirror' | 'ripple' | 'catboy' | 'mino' | 'akatsuki';
+    no_video?: false;
+  } | {
+    // NO video only
 
-    host: 'beatconnect' | 'osu_direct_mirror' | 'ripple' | 'catboy' | 'mino' | 'akatsuki',
-    no_video?: never | false;
-
-    file_path: string;
-    overwrite?: boolean;
-    progress_log_fn?: (host: string, progress: number) => void;
-  }
-  // NO video only
-  | {
-    type: 'set';
-    id: number;
-
-    host: 'gatari',
+    host: 'gatari';
     no_video: true;
+  }));
 
-    file_path: string;
-    overwrite?: boolean;
-    progress_log_fn?: (host: string, progress: number) => void;
-  };
 
 
 /**
@@ -85,7 +75,7 @@ type params =
  * ### Usage Example
  * ```js
  * const { auth, v2, tools } = require('osu-api-extended');
- * 
+ *
  * async function main() {
  *   try {
  *     // only for downloading sets from osu host
@@ -95,14 +85,14 @@ type params =
  *       password: password,
  *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
  *     });
- * 
- * 
+ *
+ *
  *     const progress_update = (...args) => {
  *       console.log(args);
  *     };
  *     const set_id = 320118;
- * 
- * 
+ *
+ *
  *     const result = await v2.beatmaps.download({
  *       type: 'set',
  *       host: 'gatari',
@@ -118,13 +108,13 @@ type params =
  *       file_path: `./cache/${set_id}.osz`,
  *       progress_log_fn: progress_update
  *     });
- * 
+ *
  *     console.log(result);
  *   } catch (error) {
  *     console.log(error);
  *   };
  * };
- * 
+ *
  * main();
  * ```
  *
