@@ -1,4 +1,4 @@
-import { IDefaultParams } from "../../types";
+import { IDefauааltParams } from "../../types";
 import { download } from "../../utility/request";
 import { cache, credentials } from "../../utility/auth";
 import path from "path";
@@ -7,32 +7,55 @@ import { handleErrors } from "../../utility/handleErrors";
 import { BeatmapsDownloadResponse } from "../../types/v2/beatmaps_download";
 
 
+type params = 
+  | {
+    type: 'difficulty';
+    id: number;
 
-type params = ({
-  type: 'difficulty';
+    host: 'osu' | 'osu_direct_mirror' | 'catboy';
 
-  id: number;
-  host: 'osu' | 'osu_direct_mirror' | 'catboy';
+    file_path: string;
+    overwrite?: boolean;
+    progress_log_fn?: (host: string, progress: number) => void;
+  }
+  // Both video and no video
+  | {
+    type: 'set';
+    id: number;
 
-  file_path: string;
-  overwrite?: boolean;
+    host: 'osu' | 'nerinyan' | 'sayobot',
+    no_video?: boolean;
 
-  progress_log_fn?: (host: string, progress: number) => void;
-} | {
-  type: 'set';
+    file_path: string;
+    overwrite?: boolean;
+    progress_log_fn?: (host: string, progress: number) => void;
+  }
+  // Video only
+  | {
+    type: 'set';
+    id: number;
 
-  id: number;
-  host: 'osu' | 'beatconnect' | 'nerinyan' | 'osu_direct_mirror' | 'sayobot' | 'gatari' | 'ripple' | 'catboy' | 'mino' | 'akatsuki',
+    host: 'beatconnect' | 'osu_direct_mirror' | 'ripple' | 'catboy' | 'mino' | 'akatsuki',
+    no_video?: never | false;
 
-  file_path: string;
-  no_video?: boolean;
-  overwrite?: boolean;
+    file_path: string;
+    overwrite?: boolean;
+    progress_log_fn?: (host: string, progress: number) => void;
+  }
+  // NO video only
+  | {
+    type: 'set';
+    id: number;
 
-  progress_log_fn?: (host: string, progress: number) => void;
-});
+    host: 'gatari',
+    no_video: true;
 
+    file_path: string;
+    overwrite?: boolean;
+    progress_log_fn?: (host: string, progress: number) => void;
+  };
 
-
+  
 /**
  * `async` Downloads a beatmap or beatmap set by given ID. (Supports different hosts)
  *
