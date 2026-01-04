@@ -1,4 +1,4 @@
-import { IDefauааltParams } from "../../types";
+import { IDefaultParams } from "../../types";
 import { download } from "../../utility/request";
 import { cache, credentials } from "../../utility/auth";
 import path from "path";
@@ -55,7 +55,7 @@ type params =
     progress_log_fn?: (host: string, progress: number) => void;
   };
 
-  
+
 /**
  * `async` Downloads a beatmap or beatmap set by given ID. (Supports different hosts)
  *
