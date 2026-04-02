@@ -181,7 +181,7 @@ function save_token(response: auth_response) {
   };
 
   const { dir } = path.parse(credentials.cached_token_path);
-  if (fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
   cache.v2 = data.access_token;
 
