@@ -128,7 +128,7 @@ export const request: RequestType = (url, { method, headers, data, params = {}, 
     response.on('data', (chunk: any) => chunks.push(chunk));
     response.on('end', async () => {
       const chunks_data = Buffer.concat(chunks).toString();
-      if (typeof callbacks.on_request == 'function') callbacks.on_request(url, chunks_data.length);
+      if (typeof callbacks.on_request == 'function') callbacks.on_request(url, chunks_data.length, params);
 
       if (chunks_data.includes('error code: 1106')) return resolve({ error: 'error code: 1106 (probably got banned by ip)' });
 
@@ -248,7 +248,7 @@ export const download = (url: string, dest: string, { _callback, headers = {}, d
         response.on('end', async () => {
           const data = Buffer.concat(chunks).toString();
           try {
-            if (typeof callbacks.on_request == 'function') callbacks.on_request(url, data.length);
+            if (typeof callbacks.on_request == 'function') callbacks.on_request(url, data.length, params);
 
             const parse = JSON.parse(data);
             if (parse.authentication === 'basic' && (addons.ignore_session_refresh || addons.ignoreSessionRefresh) != true) {
