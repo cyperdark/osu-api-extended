@@ -50,9 +50,9 @@ type params = {
 type Response<T extends params['type']> =
   T extends 'leaderboard'
   ? scores_list_leaderboard_response[] & IError
-  : T extends 'beatmap_best'
-  ? scores_list_user_beatmap_best_response[] & IError
-  : T extends 'beatmap_all'
+  : T extends 'user_beatmap_best'
+  ? scores_list_user_beatmap_best_response & IError
+  : T extends 'user_beatmap_all'
   ? scores_list_user_beatmap_all_response[] & IError
   : T extends 'user_best'
   ? scores_list_user_user_best_response[] & IError
