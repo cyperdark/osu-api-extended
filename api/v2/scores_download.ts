@@ -1,6 +1,5 @@
 import { IError, Modes_names } from "../../types";
 import { ScoresDownloadResponse } from "../../types/v2/scores_download";
-import { credentials } from "../../utility/auth";
 import { handleErrors } from "../../utility/handleErrors";
 import { download } from "../../utility/request";
 
@@ -13,10 +12,6 @@ export const scores_download = async (params: {
   mode?: Modes_names;
   file_path: string;
 }): Promise<Response> => {
-  if (credentials.type != 'lazer' && credentials.type != 'cli') {
-    return handleErrors(new Error(`Login via lazer or cli to use this endpoint`)) as Response;
-  };
-
   if (params?.id == null) {
     return handleErrors(new Error(`Specify score id`)) as Response;
   };
