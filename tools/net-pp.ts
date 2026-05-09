@@ -25,30 +25,30 @@ type Response = {
  * ### Usage Example
  * ```js
  * const { tools } = require('osu-api-extended');
- * 
+ *
  * function main() {
  *   try {
  *     const plays = [1000, 900, 800, 700];
  *     const scores = [{ id: 123, pp: 1000 }, { id: 123, pp: 555 }, { id: 123, pp: 234 }, { id: 123, pp: 100 }];
  *     const result = tools.calculate_net_pp(plays, 400);
- *     // or 
+ *     // or
  *     const result = tools.calculate_net_pp(scores, 400);
  *     if (result.error != null) {
  *       console.log(result.error);
  *       return;
  *     };
- * 
- * 
+ *
+ *
  *     console.log(result);
  *   } catch (error) {
  *     console.log(error);
  *   };
  * };
- * 
+ *
  * main();
  * ```
  */
-export const calculate_net_pp = (scores: scores_list_user_user_best_response[] | number[], pp: number): Response => {
+export const calculate_net_pp = (scores: { pp: number }[] | number[], pp: number): Response => {
   if (!Array.isArray(scores)) {
     return handleErrors(new Error(`Provide array of scores or plays pp`)) as Response;
   };
