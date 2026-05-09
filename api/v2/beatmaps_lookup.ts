@@ -88,7 +88,7 @@ export const beatmaps_lookup = async <T extends params>(params: T, addons?: IDef
     case 'difficulties':
       url += `/beatmaps`;
 
-      if (Array.isArray(params.ids)) object['ids[]'] = params.ids;
+      if (Array.isArray(params.ids)) object['ids[]'] = Array.from(new Set(params.ids));
       else {
         return handleErrors(new Error(`Specify at least one beatmap id`)) as Response<T['type']>;
       };

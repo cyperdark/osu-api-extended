@@ -19,7 +19,7 @@ export const users_list = async (params: { ids: number[], include_variants?: boo
   const data = await request(`https://osu.ppy.sh/api/v2/users`, {
     method: 'GET',
     params: {
-      'ids[]': params.ids,
+      'ids[]': Array.from(new Set(params.ids)),
       include_variant_statistics: params.include_variants,
     },
     addons

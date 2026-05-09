@@ -138,7 +138,7 @@ export const chat_actions = async <T extends params>(params: T, addons?: IDefaul
 
       object['type'] = 'ANNOUNCE';
 
-      object['target_ids'] = params.users_ids;
+      object['target_ids'] = Array.from(new Set(params.users_ids));
       object['message'] = params.message;
 
       object['channel'] = {};
