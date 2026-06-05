@@ -1505,7 +1505,7 @@ export const scores = {
    *
    * &nbsp;
    *
-   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.comments.actions_v3) | [Check return types](../types/v2/comments_actions.ts)
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.scores.actions_v3) | [Check return types](../types/v2/scores_actions.ts)
    */
   actions: scores_actions,
 };
@@ -3434,4 +3434,63 @@ export const groups = {
    * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.groups.history_v3) | [Check return types](../types/v2/groups_history.ts)
    */
   history: groups_history,
-}
+};
+
+
+import { teams_details } from "../api/v2/teams_details.js";
+
+
+/**
+ * ##### Description
+ * Retrieve data from the groups API.
+ */
+export const teams = {
+  /**
+   * ### `GET` [/v2/teams/{team}/{ruleset?}](https://osu.ppy.sh/docs/index.html#teams)
+   * `async` Retrieve details about a team.
+   *
+   * &nbsp;
+   *
+   * ### Parameters
+   * - `params.team` - ID or @\CODE of the team.
+   * - `params.mode` - ID or name of ruleset.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * const { auth, v2 } = require('osu-api-extended');
+   *
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'v2',
+   *       client_id: CLIENT_ID,
+   *       client_secret: CLIENT_SECRET,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
+   *     });
+   *
+   *     const result = await v2.teams.details({
+   *       id: 5118,
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   *
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   *
+   * main();
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.teams.details_v3) | [Check return types](../types/v2/teams_details.ts)
+   */
+  details: teams_details,
+};
