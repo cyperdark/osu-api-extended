@@ -58,7 +58,7 @@ export const beatmaps_actions = async <T extends params>(params: T, addons?: IDe
   //     url += `/beatmaps/${params.id}/tags/${params.name}`;
   //     method = params.status == true ? 'PUT' : 'DELETE';
   //     break;
-  //   }
+  //   };
 
   //   default:
   //     return handleErrors(new Error(`Unsupported type: ${(params as any).type}`)) as Response<T['type']>;
