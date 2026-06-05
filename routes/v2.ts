@@ -1221,6 +1221,7 @@ export const users = {
 import { scores_list } from "../api/v2/scores_list";
 import { scores_details } from "../api/v2/scores_details";
 import { scores_download } from "../api/v2/scores_download";
+import { scores_actions } from "../api/v2/scores_actions.js";
 
 /**
  * ##### Description
@@ -1435,6 +1436,78 @@ export const scores = {
    * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.scores.download_v3) | [Check return types](../types/v2/scores_download.ts)
    */
   download: scores_download,
+  /**
+   * ### `POST` [/v2/score-pins/{score}/reorder](https://osu.ppy.sh/docs/index.html#reorder-pinned-score)
+   * ### `PUT` [/v2/score-pins/{score}](https://osu.ppy.sh/docs/index.html#unpin-score)
+   * ### `DELETE` [/v2/score-pins/{score}](https://osu.ppy.sh/docs/index.html#pin-score)
+   * `async` Perform scores actions via endpoint.
+   *
+   * &nbsp;
+   *
+   * ### Global Parameters
+   * - `params.id` - ID of the score to perform the action on.
+   * - `params.type` - Type of the action to perform.
+   * - `addons?` - Additional parameters to include in the request.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type:'pin'`
+   * - `params.status` - true to pin, false to unpin.
+   *
+   * &nbsp;
+   *
+   * ### Parameters for `params.type:'reorder'`
+   * - `params.before_id?` - The id of Score ot move before.
+   * - `params.after_id?` - The id of Score ot move after.
+   *
+   * &nbsp;
+   *
+   * ### Usage Example
+   * ```js
+   * const { auth, v2 } = require('osu-api-extended');
+   *
+   * async function main() {
+   *   try {
+   *     await auth.login({
+   *       type: 'lazer',
+   *       login: login,
+   *       password: password,
+   *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
+   *     });
+   *
+   *     const result = await v2.scores.actions({
+   *       type: 'pin',
+   *
+   *       id: 1185212527,
+   *       status: true
+   *     });
+   *     // or
+   *     const result = await v2.scores.actions({
+   *       type: 'reorder',
+   *
+   *       id: 1185212527,
+   *       before_id: 1348681077,
+   *     });
+   *     if (result.error != null) {
+   *       console.log(result.error);
+   *       return;
+   *     };
+   *
+   *
+   *     console.log(result);
+   *   } catch (error) {
+   *     console.log(error);
+   *   };
+   * };
+   *
+   * main();
+   * ```
+   *
+   * &nbsp;
+   *
+   * [See documentation](https://github.com/cyperdark/osu-api-extended/wiki/v2.comments.actions_v3) | [Check return types](../types/v2/comments_actions.ts)
+   */
+  actions: scores_actions,
 };
 
 
@@ -3273,7 +3346,6 @@ export const rooms = {
 
 import { groups_details } from "../api/v2/groups_details";
 import { groups_history } from "../api/v2/groups_history";
-import { scores_actions } from "../api/v2/scores_actions.js";
 
 /**
  * ##### Description
