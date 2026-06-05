@@ -38,7 +38,7 @@ export const beatmaps = {
      * ### Usage Example
       * ```js
       * const { auth, v2 } = require('osu-api-extended');
-      * 
+      *
       * async function main() {
       *   try {
       *    await auth.login({
@@ -47,7 +47,7 @@ export const beatmaps = {
       *      client_secret: CLIENT_SECRET,
       *      cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
       *    });
-      * 
+      *
       *     const result = await v2.beatmaps.packs.list({
       *       type: 'loved'
       *     });
@@ -55,14 +55,14 @@ export const beatmaps = {
       *       console.log(result.error);
       *       return;
       *     };
-      * 
-      * 
+      *
+      *
       *     console.log(result);
       *   } catch (error) {
       *     console.log(error);
       *   };
       * };
-      * 
+      *
       * main();
       * ```
      *
@@ -86,7 +86,7 @@ export const beatmaps = {
      * ### Usage Example
      * ```js
      * const { auth, v2 } = require('osu-api-extended');
-     * 
+     *
      * async function main() {
      *   try {
      *     await auth.login({
@@ -95,20 +95,20 @@ export const beatmaps = {
      *       client_secret: CLIENT_SECRET,
      *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
-     * 
+     *
      *     const result = await v2.beatmaps.packs.details('ST265');
      *     if (result.error != null) {
      *       console.log(result.error);
      *       return;
      *     };
-     * 
-     * 
+     *
+     *
      *     console.log(result);
      *   } catch (error) {
      *     console.log(error);
      *   };
      * };
-     * 
+     *
      * main();
      * ```
      *
@@ -159,7 +159,7 @@ export const beatmaps = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -168,7 +168,7 @@ export const beatmaps = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.beatmaps.lookup({
    *       type: 'attributes',
    *       id: 3798013,
@@ -192,14 +192,14 @@ export const beatmaps = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
-   * 
+   *
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -224,7 +224,7 @@ export const beatmaps = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -233,7 +233,7 @@ export const beatmaps = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.beatmaps.details({
    *       type: 'set',
    *       id: 2182218
@@ -242,14 +242,14 @@ export const beatmaps = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
-   * 
+   *
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -281,7 +281,7 @@ export const beatmaps = {
      * ### Usage Example
      * ```js
      * const { auth, v2 } = require('osu-api-extended');
-     * 
+     *
      * async function main() {
      *   try {
      *     await auth.login({
@@ -290,20 +290,20 @@ export const beatmaps = {
      *       client_secret: CLIENT_SECRET,
      *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
-     * 
+     *
      *     const result = await v2.beatmaps.events.list({ types: ['approve'] });
      *     if (result.error != null) {
      *       console.log(result.error);
      *       return;
      *     };
-     * 
-     * 
+     *
+     *
      *     console.log(result);
      *   } catch (error) {
      *     console.log(error);
      *   };
      * };
-     * 
+     *
      * main();
      * ```
      *
@@ -342,7 +342,7 @@ export const beatmaps = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     // only for downloading sets from osu host
@@ -352,14 +352,14 @@ export const beatmaps = {
    *       password: password,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
-   * 
+   *
+   *
    *     const progress_update = (...args) => {
    *       console.log(args);
    *     };
    *     const set_id = 320118;
-   * 
-   * 
+   *
+   *
    *     const result = await v2.beatmaps.download({
    *       type: 'set',
    *       host: 'gatari',
@@ -371,14 +371,14 @@ export const beatmaps = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
-   * 
+   *
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -415,7 +415,7 @@ export const beatmaps = {
      * ### Usage Example
      * ```js
      * const { auth, v2 } = require('osu-api-extended');
-     * 
+     *
      * async function main() {
      *   try {
      *     await auth.login({
@@ -424,20 +424,20 @@ export const beatmaps = {
      *       client_secret: CLIENT_SECRET,
      *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
-     * 
+     *
      *     const result = await v2.beatmaps.discussions.list({ beatmapset_id: 2084849 });
      *     if (result.error != null) {
      *       console.log(result.error);
      *       return;
      *     };
-     * 
-     * 
+     *
+     *
      *     console.log(result);
      *   } catch (error) {
      *     console.log(error);
      *   };
      * };
-     * 
+     *
      * main();
      * ```
      *
@@ -465,7 +465,7 @@ export const beatmaps = {
      *
      * ```js
      * const { auth, v2 } = require('osu-api-extended');
-     * 
+     *
      * async function main() {
      *   try {
      *     await auth.login({
@@ -474,20 +474,20 @@ export const beatmaps = {
      *       client_secret: CLIENT_SECRET,
      *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
-     * 
+     *
      *     const result = await v2.beatmaps.discussions.posts();
      *     if (result.error != null) {
      *       console.log(result.error);
      *       return;
      *     };
-     * 
-     * 
+     *
+     *
      *     console.log(result);
      *   } catch (error) {
      *     console.log(error);
      *   };
      * };
-     * 
+     *
      * main();
      * ```
      *
@@ -517,7 +517,7 @@ export const beatmaps = {
      * ### Usage Example
      * ```js
      * const { auth, v2 } = require('osu-api-extended');
-     * 
+     *
      * async function main() {
      *   try {
      *     await auth.login({
@@ -526,20 +526,20 @@ export const beatmaps = {
      *       client_secret: CLIENT_SECRET,
      *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
-     * 
+     *
      *     const result = await v2.beatmaps.discussions.votes({ discussion_id: 4533908 });
      *     if (result.error != null) {
      *       console.log(result.error);
      *       return;
      *     };
-     * 
-     * 
+     *
+     *
      *     console.log(result);
      *   } catch (error) {
      *     console.log(error);
      *   };
      * };
-     * 
+     *
      * main();
      * ```
      *
@@ -597,7 +597,7 @@ export const changelogs = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     const result = await v2.changelogs.list({
@@ -613,14 +613,14 @@ export const changelogs = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
-   * 
+   *
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -645,7 +645,7 @@ export const changelogs = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     const result = await v2.changelogs.details({
@@ -656,13 +656,13 @@ export const changelogs = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -706,7 +706,7 @@ export const comments = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     const result = await v2.comments.list({
@@ -717,14 +717,14 @@ export const comments = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
-   * 
+   *
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -748,7 +748,7 @@ export const comments = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     const result = await v2.comments.details(3035523);
@@ -756,14 +756,14 @@ export const comments = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
-   * 
+   *
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -805,7 +805,7 @@ export const comments = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -814,10 +814,10 @@ export const comments = {
    *       password: password,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.comments.actions({
    *       type: 'new',
-   * 
+   *
    *       commentable_type: 'beatmapset',
    *       id: 1378401,
    *       message: 'hello from api'
@@ -825,21 +825,21 @@ export const comments = {
    *     // or
    *     const result = await v2.comments.actions({
    *       type: 'edit',
-   * 
+   *
    *       id: 3058002,
    *       message: 'hello from api (edited)'
    *     });
-   *     // or 
+   *     // or
    *     const result = await v2.comments.actions({
    *       type: 'vote',
    *       id: 3058002,
    *     });
-   *     // or 
+   *     // or
    *     const result = await v2.comments.actions({
    *       type: 'unvote',
    *       id: 3058002,
    *     });
-   *     // or 
+   *     // or
    *     const result = await v2.comments.actions({
    *       type: 'delete',
    *       id: 3058002,
@@ -848,14 +848,14 @@ export const comments = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
-   * 
+   *
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -897,7 +897,7 @@ export const users = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -906,7 +906,7 @@ export const users = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.users.list({
    *       ids: [2, 8928855, 7562902, 10083439],
    *       include_variants: true
@@ -915,13 +915,13 @@ export const users = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -945,7 +945,7 @@ export const users = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -954,7 +954,7 @@ export const users = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.users.lookup({
    *       ids: [2, 8928855, 7562902, 'mrekk', 'whitecat'],
    *     });
@@ -962,13 +962,13 @@ export const users = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -994,7 +994,7 @@ export const users = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -1003,19 +1003,19 @@ export const users = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.users.kudosu({ id: 4830261 });
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -1041,7 +1041,7 @@ export const users = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -1050,19 +1050,19 @@ export const users = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.users.events()
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -1088,7 +1088,7 @@ export const users = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -1097,19 +1097,19 @@ export const users = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.users.details({ user: 9893708, mode: 'osu', key: 'id' });
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -1136,7 +1136,7 @@ export const users = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -1145,19 +1145,19 @@ export const users = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.users.beatmaps({ type: 'ranked', id: 4378277 });
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -1183,7 +1183,7 @@ export const users = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -1192,19 +1192,19 @@ export const users = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.users.activity({ id: 11367222 });
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -1280,7 +1280,7 @@ export const scores = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -1289,7 +1289,7 @@ export const scores = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.scores.list({
    *       type: 'user_beatmap_all',
    *       // or
@@ -1321,13 +1321,13 @@ export const scores = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -1353,7 +1353,7 @@ export const scores = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -1362,7 +1362,7 @@ export const scores = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.scores.details({
    *       id: 3321956713,
    *     });
@@ -1370,13 +1370,13 @@ export const scores = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -1402,7 +1402,7 @@ export const scores = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -1411,7 +1411,7 @@ export const scores = {
    *       password: password,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.scores.download({
    *       id: 3427873257,
    *       file_path: './cache/replay.osr'
@@ -1420,13 +1420,13 @@ export const scores = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -1469,7 +1469,7 @@ export const forums = {
      * ### Usage Example
      * ```js
      * const { auth, v2 } = require('osu-api-extended');
-     * 
+     *
      * async function main() {
      *   try {
      *     await auth.login({
@@ -1478,21 +1478,21 @@ export const forums = {
      *       client_secret: CLIENT_SECRET,
      *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
-     * 
-     * 
+     *
+     *
      *     const result = await v2.forums.topics.list({ id: 15, sort: 'new' });
      *     if (result.error != null) {
      *       console.log(result.error);
      *       return;
      *     };
-     * 
-     * 
+     *
+     *
      *     console.log(result);
      *   } catch (error) {
      *     console.log(error);
      *   };
      * };
-     * 
+     *
      * main();
      * ```
      *
@@ -1521,7 +1521,7 @@ export const forums = {
      * ### Usage Example
      * ```js
      * const { auth, v2 } = require('osu-api-extended');
-     * 
+     *
      * async function main() {
      *   try {
      *     await auth.login({
@@ -1530,22 +1530,22 @@ export const forums = {
      *       client_secret: CLIENT_SECRET,
      *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
-     * 
+     *
      *     const result = await v2.forums.topics.details({
      *       id: 881367
      *     });
-     * 
+     *
      *     if (result.error != null) {
      *       console.log(result.error);
      *       return;
      *     };
-     * 
+     *
      *     console.log(result);
      *   } catch (error) {
      *     console.log(error);
      *   };
      * };
-     * 
+     *
      * main();
      * ```
      *
@@ -1604,7 +1604,7 @@ export const forums = {
      * ### Usage Example
      * ```js
      * const { auth, v2 } = require('osu-api-extended');
-     * 
+     *
      * async function main() {
      *   try {
      *     await auth.login({
@@ -1613,12 +1613,12 @@ export const forums = {
      *       password: password,
      *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
-     * 
+     *
      *     const result = await v2.forums.topics.actions({
      *       type: 'create',
-     * 
+     *
      *       forum_id: 52,
-     * 
+     *
      *       title: 'hi',
      *       message: 'test',
      *     });
@@ -1631,10 +1631,10 @@ export const forums = {
      *     //or
      *     const result = await v2.forums.topics.actions({
      *       type: 'edit_topic',
-     * 
+     *
      *       topic_id: 986201,
      *       title: 'New title',
-     * 
+     *
      *       post_id: 7270325,
      *       message: 'edited body/message',
 
@@ -1642,7 +1642,7 @@ export const forums = {
      *     // or
      *     const result = await v2.forums.topics.actions({
      *       type: 'edit_post',
-     * 
+     *
      *       post_id: 9500788,
      *       message: 'asdsadsada',
      *     });
@@ -1650,13 +1650,13 @@ export const forums = {
      *       console.log(result.error);
      *       return;
      *     };
-     * 
+     *
      *     console.log(result);
      *   } catch (error) {
      *     console.log(error);
      *   };
      * };
-     * 
+     *
      * main();
      * ```
      *
@@ -1676,7 +1676,7 @@ export const forums = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -1685,21 +1685,21 @@ export const forums = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
-   * 
+   *
+   *
    *     const result = await v2.forums.list();
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
-   * 
+   *
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -1722,7 +1722,7 @@ export const forums = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -1731,21 +1731,21 @@ export const forums = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
-   * 
+   *
+   *
    *     const result = await v2.forums.details({ id: 15 });
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
-   * 
+   *
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -1797,7 +1797,7 @@ import { search_all } from '../api/v2/search';
  * ### Usage Example
  * ```js
  * const { auth, v2 } = require('osu-api-extended');
- * 
+ *
  * async function main() {
  *   try {
  *     await auth.login({
@@ -1806,7 +1806,7 @@ import { search_all } from '../api/v2/search';
  *       client_secret: CLIENT_SECRET,
  *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
  *     });
- * 
+ *
  *     const result = await v2.search({
  *       type: 'site',
  *       mode: 'all',
@@ -1821,13 +1821,13 @@ import { search_all } from '../api/v2/search';
  *       console.log(result.error);
  *       return;
  *     };
- * 
+ *
  *     console.log(result);
  *   } catch (error) {
  *     console.log(error);
  *   };
  * };
- * 
+ *
  * main();
  * ```
  *
@@ -1869,7 +1869,7 @@ export const assets = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     const result = await v2.assets.backgrounds({
@@ -1884,13 +1884,13 @@ export const assets = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -1908,7 +1908,7 @@ export const assets = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -1917,19 +1917,19 @@ export const assets = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.assets.dataFiles();
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -1968,7 +1968,7 @@ export const news = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -1977,19 +1977,19 @@ export const news = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.news.list();
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -2014,7 +2014,7 @@ export const news = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -2023,7 +2023,7 @@ export const news = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.news.details({
    *       news_id: 1440,
    *       key: 'id'
@@ -2032,13 +2032,13 @@ export const news = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -2076,7 +2076,7 @@ export const notifications = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -2085,19 +2085,19 @@ export const notifications = {
    *       password: password,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.notifications.list();
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -2194,7 +2194,7 @@ export const ranking = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -2203,7 +2203,7 @@ export const ranking = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.ranking.list({
    *       type: 'performance',
    *       // or
@@ -2218,13 +2218,13 @@ export const ranking = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -2259,7 +2259,7 @@ export const spotlights = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -2268,19 +2268,19 @@ export const spotlights = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.spotlights.list();
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -2317,7 +2317,7 @@ export const wiki = {
    * #### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     const result = await v2.wiki.details({
@@ -2328,13 +2328,13 @@ export const wiki = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -2371,7 +2371,7 @@ export const me = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -2380,19 +2380,19 @@ export const me = {
    *       password
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.me.download_quota();
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -2415,7 +2415,7 @@ export const me = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -2424,19 +2424,19 @@ export const me = {
    *       password
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.me.friends();
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -2460,7 +2460,7 @@ export const me = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -2469,19 +2469,19 @@ export const me = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.me.details();
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -2520,7 +2520,7 @@ export const matches = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -2529,7 +2529,7 @@ export const matches = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.matches.list({
    *       limit: 10,
    *       sort: 'id_asc'
@@ -2538,13 +2538,13 @@ export const matches = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -2568,7 +2568,7 @@ export const matches = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -2577,19 +2577,19 @@ export const matches = {
    *       client_secret: CLIENT_SECRET,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     await v2.matches.details({ match_id: 16155689 });
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -2634,7 +2634,7 @@ export const chat = {
      * ### Usage Example
      * ```js
      * const { auth, v2 } = require('osu-api-extended');
-     * 
+     *
      * async function main() {
      *   try {
      *     await auth.login({
@@ -2643,19 +2643,19 @@ export const chat = {
      *       client_secret: CLIENT_SECRET,
      *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
      *     });
-     * 
+     *
      *     const result = await v2.chat.channels.list();
      *     if (result.error != null) {
      *       console.log(result.error);
      *       return;
      *     };
-     * 
+     *
      *     console.log(result);
      *   } catch (error) {
      *     console.log(error);
      *   };
      * };
-     * 
+     *
      * main();
      * ```
      *
@@ -2684,7 +2684,7 @@ export const chat = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -2693,19 +2693,19 @@ export const chat = {
    *       password
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.chat.messages({ id: 24594482 });
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -2731,7 +2731,7 @@ export const chat = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -2740,7 +2740,7 @@ export const chat = {
    *       password
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.chat.updates({
    *       after_id: 3641891943,
    *       includes: ['presence', 'silences']
@@ -2749,13 +2749,13 @@ export const chat = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -2778,7 +2778,7 @@ export const chat = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -2787,19 +2787,19 @@ export const chat = {
    *       password
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.chat.details({ channel_id: 24594482 });
    *     if (result.error != null) {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -2831,7 +2831,7 @@ export const chat = {
    * - `params.user_id` - The ID of the user.
    * - `params.message` - The message to send.
    * - `params.uuid` - client-side message identifier which will be sent back in response and websocket json.
-   * 
+   *
    * &nbsp;
    *
    * ### Parameters for `params.type: 'send_channel'`
@@ -2870,7 +2870,7 @@ export const chat = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -2888,8 +2888,8 @@ export const chat = {
    *       scopes: ['public', 'chat.read', 'chat.write', 'chat.write_manage'],
    *       cachedTokenPath: './cli.json' // path to a file where will be stored auth token to prevent spam auth to osu
    *     });
-   * 
-   * 
+   *
+   *
    *     const result = await v2.chat.actions({
    *       type: 'send_pm',
    *       is_action: false,
@@ -2899,7 +2899,7 @@ export const chat = {
    *     // or
    *     const result = await v2.chat.actions({
    *       type: 'send_channel',
-   * 
+   *
    *       is_action: false,
    *       channel_id: 24594482,
    *       message: '.'
@@ -2907,7 +2907,7 @@ export const chat = {
    *     // or
    *     const result = await v2.chat.actions({
    *       type: 'send_announce',
-   * 
+   *
    *       ids: [17063658],
    *       channel_name: 'test api',
    *       channel_description: 'a description for test',
@@ -2916,14 +2916,14 @@ export const chat = {
    *     // or
    *     const result = await v2.chat.actions({
    *       type: 'join',
-   * 
+   *
    *       channel_id: 55,
    *       user_id: 9893708,
    *     });
    *     // or
    *     const result = await v2.chat.actions({
    *       type: 'leave',
-   * 
+   *
    *       channel_id: 55,
    *       user_id: 9893708,
    *     });
@@ -2941,13 +2941,13 @@ export const chat = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -2985,7 +2985,7 @@ export const session = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -2994,7 +2994,7 @@ export const session = {
    *       password,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.session.actions({
    *       type: 'verify',
    *       code: '7aah1f7e'
@@ -3011,13 +3011,13 @@ export const session = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -3060,7 +3060,7 @@ export const rooms = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -3069,7 +3069,7 @@ export const rooms = {
    *       password,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.rooms.list({
    *       type: 'realtime',
    *       query: 'te',
@@ -3083,13 +3083,13 @@ export const rooms = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -3121,7 +3121,7 @@ export const rooms = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -3130,17 +3130,17 @@ export const rooms = {
    *       password,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.rooms.scores({
    *       type: 'all',
-   * 
+   *
    *       id: 582709,
    *       playlist_id: 5302678,
    *     });
    *     // or
    *     const result = await v2.rooms.scores({
    *       type: 'single',
-   * 
+   *
    *       id: 582709,
    *       playlist_id: 5302678,
    *       score_id: 2414452489,
@@ -3148,7 +3148,7 @@ export const rooms = {
    *     // or
    *     const result = await v2.rooms.scores({
    *       type: 'user_highest',
-   * 
+   *
    *       id: 582709,
    *       playlist_id: 5302678,
    *       user_id: 35015585,
@@ -3157,13 +3157,13 @@ export const rooms = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -3187,7 +3187,7 @@ export const rooms = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -3196,7 +3196,7 @@ export const rooms = {
    *       password,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.rooms.details({
    *       id: 582709,
    *     });
@@ -3204,13 +3204,13 @@ export const rooms = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -3235,7 +3235,7 @@ export const rooms = {
    * ### Usage Example
    * ```js
    * const { auth, v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     await auth.login({
@@ -3244,7 +3244,7 @@ export const rooms = {
    *       password,
    *       cachedTokenPath: './test.json' // path to the file your auth token will be saved (to prevent osu!api spam)
    *     });
-   * 
+   *
    *     const result = await v2.rooms.leaderboard({
    *       id: 582265,
    *     });
@@ -3252,13 +3252,13 @@ export const rooms = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -3273,6 +3273,7 @@ export const rooms = {
 
 import { groups_details } from "../api/v2/groups_details";
 import { groups_history } from "../api/v2/groups_history";
+import { scores_actions } from "../api/v2/scores_actions.js";
 
 /**
  * ##### Description
@@ -3294,7 +3295,7 @@ export const groups = {
    * ### Usage Example
    * ```js
    * const { v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     const result = await v2.groups.details({
@@ -3304,13 +3305,13 @@ export const groups = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *
@@ -3338,7 +3339,7 @@ export const groups = {
    * ### Usage Example
    * ```js
    * const { v2 } = require('osu-api-extended');
-   * 
+   *
    * async function main() {
    *   try {
    *     const result = await v2.groups.history();
@@ -3346,13 +3347,13 @@ export const groups = {
    *       console.log(result.error);
    *       return;
    *     };
-   * 
+   *
    *     console.log(result);
    *   } catch (error) {
    *     console.log(error);
    *   };
    * };
-   * 
+   *
    * main();
    * ```
    *

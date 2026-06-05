@@ -35,7 +35,7 @@ export interface beatmaps_lookup_set_response {
   availability: Availability
   beatmaps: Beatmap[]
   converts: any[]
-  current_nominations: any[]
+  current_nominations: Currentnomination[] | null
   description: Description
   genre: Genre
   language: Genre
@@ -70,6 +70,13 @@ export interface Genre {
 
 export interface Description {
   description: string
+}
+
+export interface Currentnomination {
+  beatmapset_id: number
+  rulesets: string[]
+  reset: boolean
+  user_id: number
 }
 
 export interface Beatmap {

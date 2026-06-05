@@ -35,7 +35,7 @@ export interface beatmaps_details_set_response {
   availability: Availability
   beatmaps: Beatmap[]
   converts: Convert[]
-  current_nominations: Currentnomination[]
+  current_nominations: Currentnomination[] | null
   description: Description
   genre: Genre
   language: Genre
