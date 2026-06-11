@@ -5,21 +5,6 @@ import form from "../form/match";
 
 
 
-export const description: any = {
-  auth: 1,
-  title: __filename,
-  method: 'GET',
-  description: 'Return match details',
-  params: [
-    {
-      type: 'string',
-      name: 'id',
-      optional: false,
-      description: 'id of the user',
-    },
-  ],
-};
-
 type Response = response & IError;
 
 export interface types {

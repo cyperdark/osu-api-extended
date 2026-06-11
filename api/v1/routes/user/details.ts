@@ -11,40 +11,6 @@ const _mode = [
   'mania',
 ];
 
-
-export const description: any = {
-  auth: 1,
-  title: __filename,
-  method: 'GET',
-  description: 'Return user details',
-  params: [
-    {
-      type: 'string',
-      name: 'user',
-      optional: false,
-      description: 'id of the user',
-    },
-    {
-      type: 'string',
-      name: 'mode',
-      optional: true,
-      description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
-    },
-    {
-      type: 'string',
-      name: 'type',
-      optional: true,
-      description: '\`\`\`u\`\`\` is a user_id or a username. Use string for usernames or \`\`\`id\`\`\` for user_ids',
-    },
-    {
-      type: 'string',
-      name: 'event_days',
-      optional: true,
-      description: 'Max number of days between now and last event date. Range of 1-31. Optional, default value is 1',
-    },
-  ],
-};
-
 type Response = response[] & IError;
 
 export interface types {

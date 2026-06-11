@@ -12,58 +12,6 @@ const _mode = [
   'mania',
 ];
 
-
-export const description: any = {
-  auth: 2,
-  title: __filename,
-  method: 'GET',
-  description: 'Return list of beatmaps for specified user',
-  params: [
-    {
-      type: 'number',
-      name: 'id',
-      optional: false,
-      description: 'id of the user',
-    },
-    {
-      type: 'string',
-      name: 'mode',
-      optional: true,
-      description: '\`\`\`osu\`\`\` or \`\`\`fruits\`\`\` or \`\`\`mania\`\`\` or \`\`\`taiko\`\`\`',
-    },
-    {
-      type: 'string',
-      name: 'converted',
-      optional: true,
-      description: '\`\`\`0\`\`\` or \`\`\`1\`\`\`',
-    },
-    {
-      type: 'string',
-      name: 'hash',
-      optional: true,
-      description: 'beatmap file hash',
-    },
-    {
-      type: 'string',
-      name: 'limit',
-      optional: true,
-      description: 'Maximum number of results',
-    },
-    {
-      type: 'string/number',
-      name: 'mods',
-      optional: true,
-      description: 'Name of the mods \`\`\`HDDT\`\`\` or mods number \`\`\`72\`\`\`',
-    },
-    {
-      type: 'string',
-      name: 'since',
-      optional: true,
-      description: 'Return all beatmaps ranked or loved since this date. Must be a MySQL date. In UTC',
-    },
-  ],
-};
-
 export interface types {
   (id: number, obj?: {
     mode?: 'osu' | 'fruits' | 'mania' | 'taiko',
